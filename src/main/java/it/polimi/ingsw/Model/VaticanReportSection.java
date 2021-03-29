@@ -1,0 +1,38 @@
+package it.polimi.ingsw.Model;
+
+import static it.polimi.ingsw.Model.StateFavorTiles.*;
+
+public class VaticanReportSection {
+    private int popeFavorTiles;
+    private final int popeSpace;
+    private int startSpace;
+    private StateFavorTiles state;
+
+    public VaticanReportSection(int startSpace, int popeSpace, int popeFavorTiles){
+        this.startSpace = startSpace;
+        this.popeSpace = popeSpace;
+        this.popeFavorTiles = popeFavorTiles;
+        this.state = FACEDOWN;
+    }
+
+    public boolean isPopeSpace(int pos){
+        if(pos == this.popeSpace) return true;
+        return false;
+    }
+
+    public int getPopeSpace() {
+        return popeSpace;
+    }
+
+    public void setValidFavorTiles(StateFavorTiles state){
+        this.state = state;
+    }
+
+    public StateFavorTiles getState() {
+        return state;
+    }
+
+    public int getStartSpace() {
+        return startSpace;
+    }
+}
