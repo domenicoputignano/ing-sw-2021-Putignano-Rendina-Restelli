@@ -1,4 +1,7 @@
-package it.polimi.ingsw.Model;
+package it.polimi.ingsw.Model.Card;
+
+import it.polimi.ingsw.Model.ProductionRule;
+import it.polimi.ingsw.Model.ResourceType;
 
 import java.util.EnumMap;
 import java.util.Map;

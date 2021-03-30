@@ -1,4 +1,6 @@
-package it.polimi.ingsw.Model;
+package it.polimi.ingsw.Model.Card;
+
+
 
 public class CardType {
     private int level;

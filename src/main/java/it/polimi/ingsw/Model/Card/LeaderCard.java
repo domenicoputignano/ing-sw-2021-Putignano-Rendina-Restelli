@@ -1,4 +1,6 @@
-package it.polimi.ingsw.Model;
+package it.polimi.ingsw.Model.Card;
+
+import it.polimi.ingsw.Model.ResourceType;
 
 import java.util.Map;
 
