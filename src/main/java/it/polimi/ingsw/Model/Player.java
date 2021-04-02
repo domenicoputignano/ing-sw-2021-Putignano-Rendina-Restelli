@@ -34,4 +34,11 @@ public class Player {
 
     }
 
+    public String getUsername() {
+        return username;
+    }
+
+    public List<LeaderCard> getLeaderCards() {
+        return leaderCards;
+    }
 }

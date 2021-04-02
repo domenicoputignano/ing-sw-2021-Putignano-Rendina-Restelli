@@ -12,7 +12,7 @@ public class DevelopmentCard {
     private int victoryPoints;
     private ProductionRule trade;
 
-    public DevelopmentCard(Map<ResourceType, Integer> cost, int level, ColorCard color, int victoryPoints, ProductionRule trade){
+    private DevelopmentCard(Map<ResourceType, Integer> cost, int level, ColorCard color, int victoryPoints, ProductionRule trade){
         this.cost = new EnumMap<ResourceType, Integer>(cost);
         this.type = new CardType(level, color);
         this.victoryPoints = victoryPoints;

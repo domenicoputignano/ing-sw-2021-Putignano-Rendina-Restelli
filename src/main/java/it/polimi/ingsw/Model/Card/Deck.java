@@ -24,4 +24,7 @@ public class Deck {
         return this.cards.peek();
     }
 
+    public Stack<DevelopmentCard> getCards() {
+        return cards;
+    }
 }

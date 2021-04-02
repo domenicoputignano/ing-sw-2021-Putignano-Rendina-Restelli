@@ -1,0 +1,1442 @@
+[
+  {
+    "cardType" : {
+      "color" : "green",
+      "level" : 1
+    },
+    "cards" :   [
+      {
+        "cost": {
+          "shield": 2,
+          "coin": 0,
+          "servant": 0,
+          "stone": 0
+        },
+        "victoryPoints": 1,
+        "type": {
+          "color": "green",
+          "level": 1
+        },
+        "trade": {
+          "inputResources": {
+            "shield": 0,
+            "coin": 1,
+            "servant": 0,
+            "stone": 0
+          },
+          "outputResources": {
+            "shield": 2,
+            "coin": 0,
+            "servant": 0,
+            "stone": 0
+          },
+          "outputFaith": 1
+        }
+      },
+      {
+        "cost": {
+          "shield": 1,
+          "coin": 0,
+          "servant": 1,
+          "stone": 1
+        },
+        "victoryPoints": 2,
+        "type": {
+          "color": "green",
+          "level": 1
+        },
+        "trade": {
+          "inputResources": {
+            "shield": 0,
+            "coin": 0,
+            "servant": 0,
+            "stone": 1
+          },
+          "outputResources": {
+            "shield": 0,
+            "coin": 0,
+            "servant": 1,
+            "stone": 0
+          },
+          "outputFaith": 0
+        }
+      },
+      {
+        "cost": {
+          "shield": 3,
+          "coin": 0,
+          "servant": 0,
+          "stone": 0
+        },
+        "victoryPoints": 3,
+        "type": {
+          "color": "green",
+          "level": 1
+        },
+        "trade": {
+          "inputResources": {
+            "shield": 0,
+            "coin": 0,
+            "servant": 2,
+            "stone": 0
+          },
+          "outputResources": {
+            "shield": 1,
+            "coin": 1,
+            "servant": 0,
+            "stone": 1
+          },
+          "outputFaith": 0
+        }
+      },
+      {
+        "cost": {
+          "shield": 2,
+          "coin": 2,
+          "servant": 0,
+          "stone": 0
+        },
+        "victoryPoints": 4,
+        "type": {
+          "color": "green",
+          "level": 1
+        },
+        "trade": {
+          "inputResources": {
+            "shield": 0,
+            "coin": 0,
+            "servant": 1,
+            "stone": 1
+          },
+          "outputResources": {
+            "shield": 0,
+            "coin": 2,
+            "servant": 0,
+            "stone": 0
+          },
+          "outputFaith": 1
+        }
+      }
+    ]
+  },
+  {
+    "cardType" : {
+      "color": "purple",
+      "level": 1
+    },
+    "cards" : [
+      {
+        "cost": {
+          "shield": 0,
+          "coin": 0,
+          "servant": 2,
+          "stone": 0
+        },
+        "victoryPoints": 1,
+        "type": {
+          "color": "purple",
+          "level": 1
+        },
+        "trade": {
+          "inputResources": {
+            "shield": 0,
+            "coin": 0,
+            "servant": 0,
+            "stone": 1
+          },
+          "outputResources": {
+            "shield": 0,
+            "coin": 0,
+            "servant": 0,
+            "stone": 0
+          },
+          "outputFaith": 1
+        }
+      },
+      {
+        "cost": {
+          "shield": 1,
+          "coin": 1,
+          "servant": 1,
+          "stone": 0
+        },
+        "victoryPoints": 2,
+        "type": {
+          "color": "purple",
+          "level": 1
+        },
+        "trade": {
+          "inputResources": {
+            "shield": 0,
+            "coin": 1,
+            "servant": 0,
+            "stone": 0
+          },
+          "outputResources": {
+            "shield": 1,
+            "coin": 0,
+            "servant": 0,
+            "stone": 0
+          },
+          "outputFaith": 0
+        }
+      },
+      {
+        "cost": {
+          "shield": 0,
+          "coin": 0,
+          "servant": 3,
+          "stone": 0
+        },
+        "victoryPoints": 3,
+        "type": {
+          "color": "purple",
+          "level": 1
+        },
+        "trade": {
+          "inputResources": {
+            "shield": 0,
+            "coin": 2,
+            "servant": 0,
+            "stone": 0
+          },
+          "outputResources": {
+            "shield": 1,
+            "coin": 0,
+            "servant": 1,
+            "stone": 1
+          },
+          "outputFaith": 0
+        }
+      },
+      {
+        "cost": {
+          "shield": 0,
+          "coin": 0,
+          "servant": 2,
+          "stone": 2
+        },
+        "victoryPoints": 4,
+        "type": {
+          "color": "purple",
+          "level": 1
+        },
+        "trade": {
+          "inputResources": {
+            "shield": 1,
+            "coin": 1,
+            "servant": 0,
+            "stone": 0
+          },
+          "outputResources": {
+            "shield": 0,
+            "coin": 0,
+            "servant": 0,
+            "stone": 2
+          },
+          "outputFaith": 1
+        }
+      }
+    ]
+  },
+  {
+    "cardType" : {
+      "color" : "blue",
+      "level" : 1
+    },
+    "cards" : [
+      {
+        "cost" : {
+          "shield" : 0,
+          "coin" : 2,
+          "servant" : 0,
+          "stone" : 0
+        },
+        "victoryPoints" : 1,
+        "type" : {
+          "color" : "blue",
+          "level" : 1
+        },
+        "trade" : {
+          "inputResources" : {
+            "shield" : 1,
+            "coin" : 0,
+            "servant" : 0,
+            "stone" : 0
+          },
+          "outputResources" : {
+            "shield" : 0,
+            "coin" : 0,
+            "servant" : 0,
+            "stone" : 0
+          },
+          "outputFaith" : 1
+        }
+      },
+      {
+        "cost" : {
+          "shield" : 0,
+          "coin" : 1,
+          "servant" : 1,
+          "stone" : 1
+        },
+        "victoryPoints" : 2,
+        "type" : {
+          "color" : "blue",
+          "level" : 1
+        },
+        "trade" : {
+          "inputResources" : {
+            "shield" : 0,
+            "coin" : 0,
+            "servant" : 1,
+            "stone" : 0
+          },
+          "outputResources" : {
+            "shield" : 0,
+            "coin" : 0,
+            "servant" : 0,
+            "stone" : 1
+          },
+          "outputFaith" : 0
+        }
+      },
+      {
+        "cost" : {
+          "shield" : 0,
+          "coin" : 3,
+          "servant" : 0,
+          "stone" : 0
+        },
+        "victoryPoints" : 3,
+        "type" : {
+          "color" : "blue",
+          "level" : 1
+        },
+        "trade" : {
+          "inputResources" : {
+            "shield" : 0,
+            "coin" : 0,
+            "servant" : 0,
+            "stone" : 2
+          },
+          "outputResources" : {
+            "shield" : 1,
+            "coin" : 1,
+            "servant" : 1,
+            "stone" : 0
+          },
+          "outputFaith" : 0
+        }
+      },
+      {
+        "cost" : {
+          "shield" : 0,
+          "coin" : 2,
+          "servant" : 2,
+          "stone" : 0
+        },
+        "victoryPoints" : 4,
+        "type" : {
+          "color" : "blue",
+          "level" : 1
+        },
+        "trade" : {
+          "inputResources" : {
+            "shield" : 1,
+            "coin" : 0,
+            "servant" : 0,
+            "stone" : 1
+          },
+          "outputResources" : {
+            "shield" : 0,
+            "coin" : 0,
+            "servant" : 2,
+            "stone" : 0
+          },
+          "outputFaith" : 1
+        }
+      }
+    ]
+  },
+  {
+    "cardType" : {
+      "color" : "yellow",
+      "level" : 1
+    },
+    "cards": [
+      {
+        "cost": {
+          "shield": 0,
+          "coin": 0,
+          "servant": 0,
+          "stone": 2
+        },
+        "victoryPoints": 1,
+        "type": {
+          "color": "yellow",
+          "level": 1
+        },
+        "trade": {
+          "inputResources": {
+            "shield": 0,
+            "coin": 0,
+            "servant": 1,
+            "stone": 0
+          },
+          "outputResources": {
+            "shield": 0,
+            "coin": 0,
+            "servant": 0,
+            "stone": 0
+          },
+          "outputFaith": 1
+        }
+      },
+      {
+        "cost": {
+          "shield": 1,
+          "coin": 1,
+          "servant": 0,
+          "stone": 1
+        },
+        "victoryPoints": 2,
+        "type": {
+          "color": "yellow",
+          "level": 1
+        },
+        "trade": {
+          "inputResources": {
+            "shield": 1,
+            "coin": 0,
+            "servant": 0,
+            "stone": 0
+          },
+          "outputResources": {
+            "shield": 0,
+            "coin": 1,
+            "servant": 0,
+            "stone": 0
+          },
+          "outputFaith": 0
+        }
+      },
+      {
+        "cost": {
+          "shield": 0,
+          "coin": 0,
+          "servant": 0,
+          "stone": 3
+        },
+        "victoryPoints": 3,
+        "type": {
+          "color": "yellow",
+          "level": 1
+        },
+        "trade": {
+          "inputResources": {
+            "shield": 2,
+            "coin": 0,
+            "servant": 0,
+            "stone": 0
+          },
+          "outputResources": {
+            "shield": 0,
+            "coin": 1,
+            "servant": 1,
+            "stone": 1
+          },
+          "outputFaith": 0
+        }
+      },
+      {
+        "cost": {
+          "shield": 2,
+          "coin": 0,
+          "servant": 0,
+          "stone": 2
+        },
+        "victoryPoints": 4,
+        "type": {
+          "color": "yellow",
+          "level": 1
+        },
+        "trade": {
+          "inputResources": {
+            "shield": 0,
+            "coin": 1,
+            "servant": 1,
+            "stone": 0
+          },
+          "outputResources": {
+            "shield": 2,
+            "coin": 0,
+            "servant": 0,
+            "stone": 0
+          },
+          "outputFaith": 1
+        }
+      }
+    ]
+  },
+  {
+    "cardType" : {
+      "color" : "green",
+      "level" : 2
+    },
+    "cards": [
+      {
+        "cost": {
+          "shield": 4,
+          "coin": 0,
+          "servant": 0,
+          "stone": 0
+        },
+        "victoryPoints": 5,
+        "type": {
+          "color": "green",
+          "level": 2
+        },
+        "trade": {
+          "inputResources": {
+            "shield": 0,
+            "coin": 0,
+            "servant": 0,
+            "stone": 1
+          },
+          "outputResources": {
+            "shield": 0,
+            "coin": 0,
+            "servant": 0,
+            "stone": 0
+          },
+          "outputFaith": 2
+        }
+      },
+      {
+        "cost": {
+          "shield": 3,
+          "coin": 0,
+          "servant": 2,
+          "stone": 0
+        },
+        "victoryPoints": 6,
+        "type": {
+          "color": "green",
+          "level": 2
+        },
+        "trade": {
+          "inputResources": {
+            "shield": 1,
+            "coin": 0,
+            "servant": 1,
+            "stone": 0
+          },
+          "outputResources": {
+            "shield": 0,
+            "coin": 0,
+            "servant": 0,
+            "stone": 3
+          },
+          "outputFaith": 0
+        }
+      },
+      {
+        "cost": {
+          "shield": 5,
+          "coin": 0,
+          "servant": 0,
+          "stone": 0
+        },
+        "victoryPoints": 7,
+        "type": {
+          "color": "green",
+          "level": 2
+        },
+        "trade": {
+          "inputResources": {
+            "shield": 0,
+            "coin": 2,
+            "servant": 0,
+            "stone": 0
+          },
+          "outputResources": {
+            "shield": 0,
+            "coin": 0,
+            "servant": 0,
+            "stone": 2
+          },
+          "outputFaith": 2
+        }
+      },
+      {
+        "cost": {
+          "shield": 3,
+          "coin": 3,
+          "servant": 0,
+          "stone": 0
+        },
+        "victoryPoints": 8,
+        "type": {
+          "color": "green",
+          "level": 2
+        },
+        "trade": {
+          "inputResources": {
+            "shield": 0,
+            "coin": 1,
+            "servant": 0,
+            "stone": 0
+          },
+          "outputResources": {
+            "shield": 2,
+            "coin": 0,
+            "servant": 0,
+            "stone": 0
+          },
+          "outputFaith": 1
+        }
+      }
+    ]
+  },
+  {
+    "cardType" : {
+      "color" : "purple",
+      "level" : 2
+    },
+    "cards": [
+      {
+        "cost": {
+          "shield": 0,
+          "coin": 0,
+          "servant": 4,
+          "stone": 0
+        },
+        "victoryPoints": 5,
+        "type": {
+          "color": "purple",
+          "level": 2
+        },
+        "trade": {
+          "inputResources": {
+            "shield": 0,
+            "coin": 1,
+            "servant": 0,
+            "stone": 0
+          },
+          "outputResources": {
+            "shield": 0,
+            "coin": 0,
+            "servant": 0,
+            "stone": 0
+          },
+          "outputFaith": 2
+        }
+      },
+      {
+        "cost": {
+          "shield": 0,
+          "coin": 2,
+          "servant": 3,
+          "stone": 0
+        },
+        "victoryPoints": 6,
+        "type": {
+          "color": "purple",
+          "level": 2
+        },
+        "trade": {
+          "inputResources": {
+            "shield": 0,
+            "coin": 1,
+            "servant": 1,
+            "stone": 0
+          },
+          "outputResources": {
+            "shield": 3,
+            "coin": 0,
+            "servant": 0,
+            "stone": 0
+          },
+          "outputFaith": 0
+        }
+      },
+      {
+        "cost": {
+          "shield": 0,
+          "coin": 0,
+          "servant": 5,
+          "stone": 0
+        },
+        "victoryPoints": 7,
+        "type": {
+          "color": "purple",
+          "level": 2
+        },
+        "trade": {
+          "inputResources": {
+            "shield": 0,
+            "coin": 0,
+            "servant": 0,
+            "stone": 2
+          },
+          "outputResources": {
+            "shield": 0,
+            "coin": 2,
+            "servant": 0,
+            "stone": 0
+          },
+          "outputFaith": 2
+        }
+      },
+      {
+        "cost": {
+          "shield": 3,
+          "coin": 0,
+          "servant": 3,
+          "stone": 0
+        },
+        "victoryPoints": 8,
+        "type": {
+          "color": "purple",
+          "level": 2
+        },
+        "trade": {
+          "inputResources": {
+            "shield": 0,
+            "coin": 0,
+            "servant": 0,
+            "stone": 1
+          },
+          "outputResources": {
+            "shield": 0,
+            "coin": 0,
+            "servant": 2,
+            "stone": 0
+          },
+          "outputFaith": 1
+        }
+      }
+    ]
+  },
+  {
+    "cardType" : {
+      "color" : "blue",
+      "level" : 2
+    },
+    "cards": [
+      {
+        "cost": {
+          "shield": 0,
+          "coin": 4,
+          "servant": 0,
+          "stone": 0
+        },
+        "victoryPoints": 5,
+        "type": {
+          "color": "blue",
+          "level": 2
+        },
+        "trade": {
+          "inputResources": {
+            "shield": 0,
+            "coin": 0,
+            "servant": 1,
+            "stone": 0
+          },
+          "outputResources": {
+            "shield": 0,
+            "coin": 0,
+            "servant": 0,
+            "stone": 0
+          },
+          "outputFaith": 2
+        }
+      },
+      {
+        "cost": {
+          "shield": 0,
+          "coin": 3,
+          "servant": 0,
+          "stone": 2
+        },
+        "victoryPoints": 6,
+        "type": {
+          "color": "blue",
+          "level": 2
+        },
+        "trade": {
+          "inputResources": {
+            "shield": 0,
+            "coin": 1,
+            "servant": 0,
+            "stone": 1
+          },
+          "outputResources": {
+            "shield": 0,
+            "coin": 0,
+            "servant": 3,
+            "stone": 0
+          },
+          "outputFaith": 0
+        }
+      },
+      {
+        "cost": {
+          "shield": 0,
+          "coin": 5,
+          "servant": 0,
+          "stone": 0
+        },
+        "victoryPoints": 7,
+        "type": {
+          "color": "blue",
+          "level": 2
+        },
+        "trade": {
+          "inputResources": {
+            "shield": 0,
+            "coin": 0,
+            "servant": 2,
+            "stone": 0
+          },
+          "outputResources": {
+            "shield": 2,
+            "coin": 0,
+            "servant": 0,
+            "stone": 0
+          },
+          "outputFaith": 2
+        }
+      },
+      {
+        "cost": {
+          "shield": 0,
+          "coin": 3,
+          "servant": 3,
+          "stone": 0
+        },
+        "victoryPoints": 8,
+        "type": {
+          "color": "blue",
+          "level": 2
+        },
+        "trade": {
+          "inputResources": {
+            "shield": 0,
+            "coin": 0,
+            "servant": 1,
+            "stone": 0
+          },
+          "outputResources": {
+            "shield": 0,
+            "coin": 0,
+            "servant": 0,
+            "stone": 2
+          },
+          "outputFaith": 1
+        }
+      }
+    ]
+  },
+  {
+    "cardType" : {
+      "color" : "yellow",
+      "level" : 2
+    },
+    "cards": [
+      {
+        "cost": {
+          "shield": 0,
+          "coin": 0,
+          "servant": 0,
+          "stone": 4
+        },
+        "victoryPoints": 5,
+        "type": {
+          "color": "yellow",
+          "level": 2
+        },
+        "trade": {
+          "inputResources": {
+            "shield": 1,
+            "coin": 0,
+            "servant": 0,
+            "stone": 0
+          },
+          "outputResources": {
+            "shield": 0,
+            "coin": 0,
+            "servant": 0,
+            "stone": 0
+          },
+          "outputFaith": 2
+        }
+      },
+      {
+        "cost": {
+          "shield": 2,
+          "coin": 0,
+          "servant": 0,
+          "stone": 3
+        },
+        "victoryPoints": 6,
+        "type": {
+          "color": "yellow",
+          "level": 2
+        },
+        "trade": {
+          "inputResources": {
+            "shield": 1,
+            "coin": 0,
+            "servant": 0,
+            "stone": 1
+          },
+          "outputResources": {
+            "shield": 0,
+            "coin": 3,
+            "servant": 0,
+            "stone": 0
+          },
+          "outputFaith": 0
+        }
+      },
+      {
+        "cost": {
+          "shield": 0,
+          "coin": 0,
+          "servant": 0,
+          "stone": 5
+        },
+        "victoryPoints": 7,
+        "type": {
+          "color": "yellow",
+          "level": 2
+        },
+        "trade": {
+          "inputResources": {
+            "shield": 2,
+            "coin": 0,
+            "servant": 0,
+            "stone": 0
+          },
+          "outputResources": {
+            "shield": 0,
+            "coin": 0,
+            "servant": 2,
+            "stone": 0
+          },
+          "outputFaith": 2
+        }
+      },
+      {
+        "cost": {
+          "shield": 0,
+          "coin": 0,
+          "servant": 3,
+          "stone": 3
+        },
+        "victoryPoints": 8,
+        "type": {
+          "color": "yellow",
+          "level": 2
+        },
+        "trade": {
+          "inputResources": {
+            "shield": 1,
+            "coin": 0,
+            "servant": 0,
+            "stone": 0
+          },
+          "outputResources": {
+            "shield": 0,
+            "coin": 2,
+            "servant": 0,
+            "stone": 0
+          },
+          "outputFaith": 1
+        }
+      }
+    ]
+  },
+  {
+    "cardType" : {
+      "color" : "green",
+      "level" : 3
+    },
+    "cards": [
+      {
+        "cost": {
+          "shield": 6,
+          "coin": 0,
+          "servant": 0,
+          "stone": 0
+        },
+        "victoryPoints": 9,
+        "type": {
+          "color": "green",
+          "level": 3
+        },
+        "trade": {
+          "inputResources": {
+            "shield": 0,
+            "coin": 2,
+            "servant": 0,
+            "stone": 0
+          },
+          "outputResources": {
+            "shield": 0,
+            "coin": 0,
+            "servant": 0,
+            "stone": 3
+          },
+          "outputFaith": 2
+        }
+      },
+      {
+        "cost": {
+          "shield": 5,
+          "coin": 0,
+          "servant": 2,
+          "stone": 0
+        },
+        "victoryPoints": 10,
+        "type": {
+          "color": "green",
+          "level": 3
+        },
+        "trade": {
+          "inputResources": {
+            "shield": 0,
+            "coin": 1,
+            "servant": 1,
+            "stone": 0
+          },
+          "outputResources": {
+            "shield": 2,
+            "coin": 0,
+            "servant": 0,
+            "stone": 2
+          },
+          "outputFaith": 1
+        }
+      },
+      {
+        "cost": {
+          "shield": 7,
+          "coin": 0,
+          "servant": 0,
+          "stone": 0
+        },
+        "victoryPoints": 11,
+        "type": {
+          "color": "green",
+          "level": 3
+        },
+        "trade": {
+          "inputResources": {
+            "shield": 0,
+            "coin": 0,
+            "servant": 1,
+            "stone": 0
+          },
+          "outputResources": {
+            "shield": 0,
+            "coin": 1,
+            "servant": 0,
+            "stone": 0
+          },
+          "outputFaith": 3
+        }
+      },
+      {
+        "cost": {
+          "shield": 4,
+          "coin": 4,
+          "servant": 0,
+          "stone": 0
+        },
+        "victoryPoints": 12,
+        "type": {
+          "color": "green",
+          "level": 3
+        },
+        "trade": {
+          "inputResources": {
+            "shield": 0,
+            "coin": 0,
+            "servant": 0,
+            "stone": 1
+          },
+          "outputResources": {
+            "shield": 1,
+            "coin": 3,
+            "servant": 0,
+            "stone": 0
+          },
+          "outputFaith": 0
+        }
+      }
+    ]
+  },
+  {
+    "cardType" : {
+      "color" : "purple",
+      "level" : 3
+    },
+    "cards": [
+      {
+        "cost": {
+          "shield": 0,
+          "coin": 0,
+          "servant": 6,
+          "stone": 0
+        },
+        "victoryPoints": 9,
+        "type": {
+          "color": "purple",
+          "level": 3
+        },
+        "trade": {
+          "inputResources": {
+            "shield": 0,
+            "coin": 0,
+            "servant": 0,
+            "stone": 2
+          },
+          "outputResources": {
+            "shield": 0,
+            "coin": 3,
+            "servant": 0,
+            "stone": 0
+          },
+          "outputFaith": 2
+        }
+      },
+      {
+        "cost": {
+          "shield": 0,
+          "coin": 2,
+          "servant": 5,
+          "stone": 0
+        },
+        "victoryPoints": 10,
+        "type": {
+          "color": "purple",
+          "level": 3
+        },
+        "trade": {
+          "inputResources": {
+            "shield": 1,
+            "coin": 0,
+            "servant": 0,
+            "stone": 1
+          },
+          "outputResources": {
+            "shield": 0,
+            "coin": 2,
+            "servant": 2,
+            "stone": 0
+          },
+          "outputFaith": 1
+        }
+      },
+      {
+        "cost": {
+          "shield": 0,
+          "coin": 0,
+          "servant": 7,
+          "stone": 0
+        },
+        "victoryPoints": 11,
+        "type": {
+          "color": "purple",
+          "level": 3
+        },
+        "trade": {
+          "inputResources": {
+            "shield": 0,
+            "coin": 1,
+            "servant": 0,
+            "stone": 0
+          },
+          "outputResources": {
+            "shield": 0,
+            "coin": 0,
+            "servant": 0,
+            "stone": 1
+          },
+          "outputFaith": 3
+        }
+      },
+      {
+        "cost": {
+          "shield": 4,
+          "coin": 0,
+          "servant": 4,
+          "stone": 0
+        },
+        "victoryPoints": 12,
+        "type": {
+          "color": "purple",
+          "level": 3
+        },
+        "trade": {
+          "inputResources": {
+            "shield": 0,
+            "coin": 1,
+            "servant": 0,
+            "stone": 0
+          },
+          "outputResources": {
+            "shield": 0,
+            "coin": 0,
+            "servant": 1,
+            "stone": 3
+          },
+          "outputFaith": 0
+        }
+      }
+    ]
+  },
+  {
+    "cardType": {
+      "color" : "blue",
+      "level" : 3
+    },
+    "cards": [
+      {
+        "cost": {
+          "shield": 0,
+          "coin": 6,
+          "servant": 0,
+          "stone": 0
+        },
+        "victoryPoints": 9,
+        "type": {
+          "color": "blue",
+          "level": 3
+        },
+        "trade": {
+          "inputResources": {
+            "shield": 0,
+            "coin": 0,
+            "servant": 2,
+            "stone": 0
+          },
+          "outputResources": {
+            "shield": 3,
+            "coin": 0,
+            "servant": 0,
+            "stone": 0
+          },
+          "outputFaith": 2
+        }
+      },
+      {
+        "cost": {
+          "shield": 0,
+          "coin": 5,
+          "servant": 0,
+          "stone": 2
+        },
+        "victoryPoints": 10,
+        "type": {
+          "color": "blue",
+          "level": 3
+        },
+        "trade": {
+          "inputResources": {
+            "shield": 1,
+            "coin": 1,
+            "servant": 0,
+            "stone": 0
+          },
+          "outputResources": {
+            "shield": 0,
+            "coin": 0,
+            "servant": 2,
+            "stone": 2
+          },
+          "outputFaith": 1
+        }
+      },
+      {
+        "cost": {
+          "shield": 0,
+          "coin": 7,
+          "servant": 0,
+          "stone": 0
+        },
+        "victoryPoints": 11,
+        "type": {
+          "color": "blue",
+          "level": 3
+        },
+        "trade": {
+          "inputResources": {
+            "shield": 0,
+            "coin": 0,
+            "servant": 0,
+            "stone": 1
+          },
+          "outputResources": {
+            "shield": 1,
+            "coin": 0,
+            "servant": 0,
+            "stone": 0
+          },
+          "outputFaith": 3
+        }
+      },
+      {
+        "cost": {
+          "shield": 0,
+          "coin": 4,
+          "servant": 0,
+          "stone": 4
+        },
+        "victoryPoints": 12,
+        "type": {
+          "color": "blue",
+          "level": 3
+        },
+        "trade": {
+          "inputResources": {
+            "shield": 0,
+            "coin": 0,
+            "servant": 1,
+            "stone": 0
+          },
+          "outputResources": {
+            "shield": 3,
+            "coin": 1,
+            "servant": 0,
+            "stone": 0
+          },
+          "outputFaith": 0
+        }
+      }
+    ]
+  },
+  {
+    "cardType" : {
+      "color" : "yellow",
+      "level" : 3
+    },
+    "cards" : [
+      {
+        "cost" : {
+          "shield" : 0,
+          "coin" : 0,
+          "servant" : 0,
+          "stone" : 6
+        },
+        "victoryPoints" : 9,
+        "type" : {
+          "color" : "yellow",
+          "level" : 3
+        },
+        "trade" : {
+          "inputResources" : {
+            "shield" : 2,
+            "coin" : 0,
+            "servant" : 0,
+            "stone" : 0
+          },
+          "outputResources" : {
+            "shield" : 0,
+            "coin" : 0,
+            "servant" : 3,
+            "stone" : 0
+          },
+          "outputFaith" : 2
+        }
+      },
+      {
+        "cost" : {
+          "shield" : 0,
+          "coin" : 0,
+          "servant" : 2,
+          "stone" : 5
+        },
+        "victoryPoints" : 10,
+        "type" : {
+          "color" : "yellow",
+          "level" : 3
+        },
+        "trade" : {
+          "inputResources" : {
+            "shield" : 0,
+            "coin" : 0,
+            "servant" : 1,
+            "stone" : 1
+          },
+          "outputResources" : {
+            "shield" : 2,
+            "coin" : 2,
+            "servant" : 0,
+            "stone" : 0
+          },
+          "outputFaith" : 1
+        }
+      },
+      {
+        "cost" : {
+          "shield" : 0,
+          "coin" : 0,
+          "servant" : 0,
+          "stone" : 7
+        },
+        "victoryPoints" : 11,
+        "type" : {
+          "color" : "yellow",
+          "level" : 3
+        },
+        "trade" : {
+          "inputResources" : {
+            "shield" : 1,
+            "coin" : 0,
+            "servant" : 0,
+            "stone" : 0
+          },
+          "outputResources" : {
+            "shield" : 0,
+            "coin" : 0,
+            "servant" : 1,
+            "stone" : 0
+          },
+          "outputFaith" : 3
+        }
+      },
+      {
+        "cost" : {
+          "shield" : 0,
+          "coin" : 0,
+          "servant" : 4,
+          "stone" : 4
+        },
+        "victoryPoints" : 12,
+        "type" : {
+          "color" : "yellow",
+          "level" : 3
+        },
+        "trade" : {
+          "inputResources" : {
+            "shield" : 1,
+            "coin" : 0,
+            "servant" : 0,
+            "stone" : 0
+          },
+          "outputResources" : {
+            "shield" : 0,
+            "coin" : 0,
+            "servant" : 3,
+            "stone" : 1
+          },
+          "outputFaith" : 0
+        }
+      }
+    ]
+  }
+]
