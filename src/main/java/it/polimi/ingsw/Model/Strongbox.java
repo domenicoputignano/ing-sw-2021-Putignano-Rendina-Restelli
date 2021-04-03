@@ -7,7 +7,7 @@ import java.util.Map;
 public class Strongbox {
     private Map<ResourceType,Integer> resources;
 
-    public Strongbox(Map<ResourceType, Integer> resources) {
+    public Strongbox(EnumMap<ResourceType, Integer> resources) {
         this.resources = resources;
     }
 
@@ -23,5 +23,9 @@ public class Strongbox {
         }
         }  );
         resources.forEach( (key,value)-> this.resources.merge(key,value,(v1,v2)-> v1-v2));
+    }
+
+    public EnumMap<ResourceType, Integer> getResources() {
+        return (EnumMap<ResourceType, Integer>) resources;
     }
 }

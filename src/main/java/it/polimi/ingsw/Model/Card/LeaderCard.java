@@ -2,12 +2,13 @@ package it.polimi.ingsw.Model.Card;
 
 import it.polimi.ingsw.Model.ResourceType;
 
+import java.util.List;
 import java.util.Map;
 
 public class LeaderCard {
     private LeaderEffect effect;
     private Map<ResourceType, Integer> requirementsResources;
-    private Map<CardType, Integer> requirementsCards;
+    private List<CardType> requirementsCards;
     private boolean isActive;
     private int victoryPoints;
 
@@ -19,7 +20,7 @@ public class LeaderCard {
         return requirementsResources;
     }
 
-    public Map<CardType, Integer> getRequirementsCards() {
+    public List<CardType> getRequirementsCards() {
         return requirementsCards;
     }
 

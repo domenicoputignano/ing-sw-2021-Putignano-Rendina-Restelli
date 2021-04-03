@@ -27,11 +27,11 @@ public class Player {
     }
 
     public void activateLeaderCard(LeaderCard card) {
-
+        // attualmente sostituita da equivalente metodo nel controller
     }
 
     public void throwLeaderCard(LeaderCard card) {
-
+        leaderCards.remove(card);
     }
 
     public String getUsername() {

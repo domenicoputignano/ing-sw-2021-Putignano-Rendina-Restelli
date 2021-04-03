@@ -2,9 +2,13 @@ package it.polimi.ingsw.Model.Card;
 
 import it.polimi.ingsw.Model.ResourceType;
 
-public enum LeaderEffect {
-    CMARBLE, SALES, EXTRADEPOT, EXTRAPRODUCTION;
+public class LeaderEffect {
+    private Effect effect;
     private ResourceType type;
+
+    public Effect getEffect() {
+        return effect;
+    }
 
     public ResourceType getType() {
         return type;
