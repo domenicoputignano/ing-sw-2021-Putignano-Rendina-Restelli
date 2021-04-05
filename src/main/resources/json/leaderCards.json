@@ -1,0 +1,358 @@
+[
+  {
+    "effect" : {
+      "effect" : "SALES",
+      "type" : "servant"
+    },
+    "requirementsResources" : {
+      "shield" : 0,
+      "coin" : 0,
+      "servant" : 0,
+      "stone" : 0
+    },
+    "requirementsCards" : [
+      {
+        "level" : 1,
+        "color" : "green"
+      },
+      {
+        "level" : 1,
+        "color" : "yellow"
+      }
+    ],
+    "isActive" : false,
+    "victoryPoints" : 2
+  },
+  {
+    "effect" : {
+      "effect" : "SALES",
+      "type" : "shield"
+    },
+    "requirementsResources" : {
+      "shield" : 0,
+      "coin" : 0,
+      "servant" : 0,
+      "stone" : 0
+    },
+    "requirementsCards" : [
+      {
+        "level" : 1,
+        "color" : "blue"
+      },
+      {
+        "level" : 1,
+        "color" : "purple"
+      }
+    ],
+    "isActive" : false,
+    "victoryPoints" : 2
+  },
+  {
+    "effect" : {
+      "effect" : "SALES",
+      "type" : "stone"
+    },
+    "requirementsResources" : {
+      "shield" : 0,
+      "coin" : 0,
+      "servant" : 0,
+      "stone" : 0
+    },
+    "requirementsCards" : [
+      {
+        "level" : 1,
+        "color" : "green"
+      },
+      {
+        "level" : 1,
+        "color" : "blue"
+      }
+    ],
+    "isActive" : false,
+    "victoryPoints" : 2
+  },
+  {
+    "effect" : {
+      "effect" : "SALES",
+      "type" : "coin"
+    },
+    "requirementsResources" : {
+      "shield" : 0,
+      "coin" : 0,
+      "servant" : 0,
+      "stone" : 0
+    },
+    "requirementsCards" : [
+      {
+        "level" : 1,
+        "color" : "yellow"
+      },
+      {
+        "level" : 1,
+        "color" : "purple"
+      }
+    ],
+    "isActive" : false,
+    "victoryPoints" : 2
+  },
+  {
+    "effect" : {
+      "effect" : "EXTRADEPOT",
+      "type" : "stone"
+    },
+    "requirementsResources" : {
+      "shield" : 0,
+      "coin" : 5,
+      "servant" : 0,
+      "stone" : 0
+    },
+    "requirementsCards" : [
+
+    ],
+    "isActive" : false,
+    "victoryPoints" : 3
+  },
+  {
+    "effect" : {
+      "effect" : "EXTRADEPOT",
+      "type" : "servant"
+    },
+    "requirementsResources" : {
+      "shield" : 0,
+      "coin" : 0,
+      "servant" : 0,
+      "stone" : 5
+    },
+    "requirementsCards" : [
+
+    ],
+    "isActive" : false,
+    "victoryPoints" : 3
+  },
+  {
+    "effect" : {
+      "effect" : "EXTRADEPOT",
+      "type" : "shield"
+    },
+    "requirementsResources" : {
+      "shield" : 0,
+      "coin" : 0,
+      "servant" : 5,
+      "stone" : 0
+    },
+    "requirementsCards" : [
+
+    ],
+    "isActive" : false,
+    "victoryPoints" : 3
+  },
+  {
+    "effect" : {
+      "effect" : "EXTRADEPOT",
+      "type" : "coin"
+    },
+    "requirementsResources" : {
+      "shield" : 5,
+      "coin" : 0,
+      "servant" : 0,
+      "stone" : 0
+    },
+    "requirementsCards" : [
+
+    ],
+    "isActive" : false,
+    "victoryPoints" : 3
+  },
+  {
+    "effect" : {
+      "effect" : "CMARBLE",
+      "type" : "servant"
+    },
+    "requirementsResources" : {
+      "shield" : 0,
+      "coin" : 0,
+      "servant" : 0,
+      "stone" : 0
+    },
+    "requirementsCards" : [
+      {
+        "level" : 1,
+        "color" : "yellow"
+      },
+      {
+        "level" : 1,
+        "color" : "yellow"
+      },
+      {
+        "level" : 1,
+        "color" : "blue"
+      }
+    ],
+    "isActive" : false,
+    "victoryPoints" : 5
+  },
+  {
+    "effect" : {
+      "effect" : "CMARBLE",
+      "type" : "shield"
+    },
+    "requirementsResources" : {
+      "shield" : 0,
+      "coin" : 0,
+      "servant" : 0,
+      "stone" : 0
+    },
+    "requirementsCards" : [
+      {
+        "level" : 1,
+        "color" : "green"
+      },
+      {
+        "level" : 1,
+        "color" : "green"
+      },
+      {
+        "level" : 1,
+        "color" : "purple"
+      }
+    ],
+    "isActive" : false,
+    "victoryPoints" : 5
+  },
+  {
+    "effect" : {
+      "effect" : "CMARBLE",
+      "type" : "stone"
+    },
+    "requirementsResources" : {
+      "shield" : 0,
+      "coin" : 0,
+      "servant" : 0,
+      "stone" : 0
+    },
+    "requirementsCards" : [
+      {
+        "level" : 1,
+        "color" : "blue"
+      },
+      {
+        "level" : 1,
+        "color" : "blue"
+      },
+      {
+        "level" : 1,
+        "color" : "yellow"
+      }
+    ],
+    "isActive" : false,
+    "victoryPoints" : 5
+  },
+  {
+    "effect" : {
+      "effect" : "CMARBLE",
+      "type" : "coin"
+    },
+    "requirementsResources" : {
+      "shield" : 0,
+      "coin" : 0,
+      "servant" : 0,
+      "stone" : 0
+    },
+    "requirementsCards" : [
+      {
+        "level" : 1,
+        "color" : "purple"
+      },
+      {
+        "level" : 1,
+        "color" : "purple"
+      },
+      {
+        "level" : 1,
+        "color" : "green"
+      }
+    ],
+    "isActive" : false,
+    "victoryPoints" : 5
+  },
+  {
+    "effect" : {
+      "effect" : "EXTRAPRODUCTION",
+      "type" : "shield"
+    },
+    "requirementsResources" : {
+      "shield" : 0,
+      "coin" : 0,
+      "servant" : 0,
+      "stone" : 0
+    },
+    "requirementsCards" : [
+      {
+        "level" : 2,
+        "color" : "yellow"
+      }
+    ],
+    "isActive" : false,
+    "victoryPoints" : 4
+  },
+  {
+    "effect" : {
+      "effect" : "EXTRAPRODUCTION",
+      "type" : "servant"
+    },
+    "requirementsResources" : {
+      "shield" : 0,
+      "coin" : 0,
+      "servant" : 0,
+      "stone" : 0
+    },
+    "requirementsCards" : [
+      {
+        "level" : 2,
+        "color" : "blue"
+      }
+    ],
+    "isActive" : false,
+    "victoryPoints" : 4
+  },
+  {
+    "effect" : {
+      "effect" : "EXTRAPRODUCTION",
+      "type" : "stone"
+    },
+    "requirementsResources" : {
+      "shield" : 0,
+      "coin" : 0,
+      "servant" : 0,
+      "stone" : 0
+    },
+    "requirementsCards" : [
+      {
+        "level" : 2,
+        "color" : "purple"
+      }
+    ],
+    "isActive" : false,
+    "victoryPoints" : 4
+  },
+  {
+    "effect" : {
+      "effect" : "EXTRAPRODUCTION",
+      "type" : "coin"
+    },
+    "requirementsResources" : {
+      "shield" : 0,
+      "coin" : 0,
+      "servant" : 0,
+      "stone" : 0
+    },
+    "requirementsCards" : [
+      {
+        "level" : 2,
+        "color" : "green"
+      }
+    ],
+    "isActive" : false,
+    "victoryPoints" : 4
+  }
+]
