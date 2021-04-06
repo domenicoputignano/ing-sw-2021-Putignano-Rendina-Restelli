@@ -8,6 +8,12 @@ public class ProductionRule {
     private Map<ResourceType, Integer> outputResources;
     private int outputFaith;
 
+    public ProductionRule(){
+        this.inputResources = null;
+        this.outputResources = null;
+        this.outputFaith = 0;
+    }
+
     public ProductionRule(Map<ResourceType, Integer> inputResources, Map<ResourceType, Integer> outputResources, int outputFaith) {
         this.inputResources = inputResources;
         this.outputResources = outputResources;

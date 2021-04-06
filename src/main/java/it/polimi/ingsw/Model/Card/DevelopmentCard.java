@@ -17,7 +17,6 @@ public class DevelopmentCard {
         this.type = new CardType(level, color);
         this.victoryPoints = victoryPoints;
         this.trade = trade;
-        // COSTRUTTORE DA FARE !!!
     }
 
     public Map<ResourceType, Integer> getCost() {
