@@ -19,7 +19,6 @@ public class Player {
     }
 
     public void buyDevCard(Deck deck, int slot) {
-
     }
 
     public void startActiveProduction(ActiveProductions mask) {

@@ -1,5 +1,7 @@
 package it.polimi.ingsw.Model;
 
+import it.polimi.ingsw.Exceptions.DepotOutOfBoundsException;
+
 public class NormalDepot implements Depot {
     private int occ;
     private ResourceType type;
@@ -10,15 +12,17 @@ public class NormalDepot implements Depot {
         this.type = type;
         this.size = size;
     }
-
-    public void add(int num)
+    public NormalDepot(int size)
     {
-        // if(occ+num > this.size) eccezione
+        this.occ=0;
+        this.size=size;
+    }
+    public void add(int num) throws DepotOutOfBoundsException {
+        if(occ+num > this.size) throw new DepotOutOfBoundsException();
         this.occ+=num;
     }
-    public void take(int num)
-    {
-        // if(occ-num < 0) eccezione
+    public void take(int num) throws DepotOutOfBoundsException {
+        if(occ-num < 0) throw new DepotOutOfBoundsException();
         this.occ-=num;
     }
 

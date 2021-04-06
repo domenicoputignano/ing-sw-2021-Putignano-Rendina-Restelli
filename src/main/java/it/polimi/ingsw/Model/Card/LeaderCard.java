@@ -6,14 +6,14 @@ import java.util.List;
 import java.util.Map;
 
 public class LeaderCard {
-    private LeaderEffect effect;
+    private LeaderEffect leaderEffect;
     private Map<ResourceType, Integer> requirementsResources;
     private List<CardType> requirementsCards;
     private boolean isActive;
     private int victoryPoints;
 
-    public LeaderEffect getEffect() {
-        return effect;
+    public LeaderEffect getLeaderEffect() {
+        return leaderEffect;
     }
 
     public Map<ResourceType, Integer> getRequirementsResources() {

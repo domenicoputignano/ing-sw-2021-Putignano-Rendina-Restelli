@@ -7,8 +7,12 @@ import java.util.Map;
 public class Strongbox {
     private Map<ResourceType,Integer> resources;
 
-    public Strongbox(EnumMap<ResourceType, Integer> resources) {
-        this.resources = resources;
+    public Strongbox() {
+        this.resources = new EnumMap<ResourceType, Integer>(ResourceType.class);
+        this.resources.put(ResourceType.coin,0);
+        this.resources.put(ResourceType.shield,0);
+        this.resources.put(ResourceType.servant,0);
+        this.resources.put(ResourceType.stone,0);
     }
 
     public void addResources(Map<ResourceType,Integer> resources) throws InvalidParameterException
