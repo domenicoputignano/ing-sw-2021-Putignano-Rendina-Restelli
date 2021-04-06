@@ -72,4 +72,11 @@ public class MarketTray {
         }
     }
 
+    public Marble[][] getAvailableMarbles() {
+        return availableMarbles;
+    }
+
+    public Marble getSlidingMarble() {
+        return slidingMarble;
+    }
 }
