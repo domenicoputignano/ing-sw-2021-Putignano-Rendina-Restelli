@@ -79,8 +79,7 @@ public class Game implements Observer<Integer> {
         try {
             JsonReader reader = new JsonReader(new FileReader(path));
 
-            Type listType = new TypeToken<List<LeaderCard>>() {
-            }.getType();
+            Type listType = new TypeToken<List<LeaderCard>>() {}.getType();
             cards = gson.fromJson(reader, listType);
             return cards;
         } catch (FileNotFoundException e) {
@@ -101,8 +100,7 @@ public class Game implements Observer<Integer> {
         }
     }
 
-    private void activateVaticanReport(int vatican_index)
-    {
+    private void activateVaticanReport(int vatican_index) {
         int start = currPlayer.getPersonalBoard().getFaithTrack().getSections()[vatican_index].getStartSpace();
 
         for(Player p: playerList)

@@ -4,8 +4,8 @@ import static it.polimi.ingsw.Model.StateFavorTiles.*;
 
 public class VaticanReportSection {
     private int popeFavorTiles;
-    private final int popeSpace;
     private int startSpace;
+    private final int popeSpace;
     private StateFavorTiles state;
 
     public VaticanReportSection(int startSpace, int popeSpace, int popeFavorTiles){
