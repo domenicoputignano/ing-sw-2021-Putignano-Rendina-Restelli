@@ -10,7 +10,7 @@ import java.util.List;
 public class Player {
     private String username;
     private int position;
-
+    private PersonalBoard personalBoard;
     private List<LeaderCard> leaderCards;
     private List<LeaderEffect> activeEffects;
 
@@ -39,5 +39,13 @@ public class Player {
 
     public List<LeaderCard> getLeaderCards() {
         return leaderCards;
+    }
+
+    public int getPosition() {
+        return position;
+    }
+
+    public PersonalBoard getPersonalBoard() {
+        return personalBoard;
     }
 }

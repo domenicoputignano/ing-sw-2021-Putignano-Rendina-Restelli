@@ -1,9 +1,6 @@
 package it.polimi.ingsw.Model;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.EnumMap;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Warehouse {
@@ -19,6 +16,20 @@ public class Warehouse {
         this.strongbox = strongbox;
     }
 
+    public Warehouse()
+    {
+        this.avaiableResources = new EnumMap<ResourceType, Integer>(ResourceType.class);
+        this.avaiableResources.put(ResourceType.servant,0);
+        this.avaiableResources.put(ResourceType.coin,0);
+        this.avaiableResources.put(ResourceType.shield,0);
+        this.avaiableResources.put(ResourceType.stone,0);
+        this.normalDepots = new NormalDepot[3];
+        this.normalDepots[0] = new NormalDepot(1);
+        this.normalDepots[1] = new NormalDepot(2);
+        this.normalDepots[2] = new NormalDepot(3);
+        this.extraDepots = new ExtraDepot[2];
+        this.strongbox = new Strongbox();
+    }
     public boolean checkResources(Map<ResourceType,Integer> neededResources)
     {
         return neededResources.keySet().stream().allMatch((key) -> (neededResources.get(key) < this.avaiableResources.get(key)));
@@ -31,10 +42,11 @@ public class Warehouse {
     public void addResourcesToStrongbox(Map<ResourceType,Integer> resources)
     {
         strongbox.addResources(resources);
-        // UPDATE AVAIABLE RESOURCES
+        this.updateAvailableResources();
     }
     public void addResourcesToDepot(ResourceType type,int n)
     {
+        this.updateAvailableResources();
         // TODO
     }
     public void move(int depotInput,int depotOutput,int num)
@@ -46,14 +58,32 @@ public class Warehouse {
         // TODO
     }
 
-    public void updateAvaiableResources(){
+    public void updateAvailableResources(){
         EnumMap<ResourceType, Integer> local = strongbox.getResources().clone();
         for(NormalDepot d : normalDepots){
             local.put(d.getType(), local.get(d.getType())+d.getOcc());
         }
-        local.forEach(
-                (key,value)-> Arrays.stream(extraDepots).filter(x->x!=null).collect(Collectors.toMap(x -> x.getType(), x -> x.getOcc())).merge(key,value,Integer::sum));
+        for(ExtraDepot e : extraDepots){
+            if(e!=null)
+            local.put(e.getType(), local.get(e.getType())+e.getOcc());
+        }
         this.avaiableResources = local;
+
     }
 
+    public Map<ResourceType, Integer> getAvaiableResources() {
+        return avaiableResources;
+    }
+
+    public NormalDepot[] getNormalDepots() {
+        return normalDepots;
+    }
+
+    public ExtraDepot[] getExtraDepots() {
+        return extraDepots;
+    }
+
+    public Strongbox getStrongbox() {
+        return strongbox;
+    }
 }
