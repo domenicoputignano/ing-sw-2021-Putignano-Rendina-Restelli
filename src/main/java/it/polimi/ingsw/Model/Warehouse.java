@@ -1,7 +1,11 @@
 package it.polimi.ingsw.Model;
 
+import it.polimi.ingsw.Exceptions.DepotNotFoundException;
+import it.polimi.ingsw.Exceptions.DepotOutOfBoundsException;
+
 import java.util.*;
 import java.util.stream.Collectors;
+
 
 public class Warehouse {
     private Map<ResourceType,Integer> avaiableResources;
@@ -44,13 +48,25 @@ public class Warehouse {
         strongbox.addResources(resources);
         this.updateAvailableResources();
     }
-    public void addResourcesToDepot(ResourceType type,int n)
-    {
+
+
+    public void addResourcesToDepot(ResourceType type, int num) throws DepotNotFoundException, DepotOutOfBoundsException {
+        List<NormalDepot> depot = Arrays.stream(normalDepots).filter(x -> x.getType()!=null&&x.getType()==type).collect(Collectors.toList());
+        if(depot.size() == 0) throw new DepotNotFoundException();
+        else depot.get(0).add(num);
         this.updateAvailableResources();
-        // TODO
     }
-    public void move(int depotInput,int depotOutput,int num)
-    {
+
+
+    public void addResourcesToExtraDepot(ResourceType type, int num) throws DepotOutOfBoundsException, DepotNotFoundException {
+        List<ExtraDepot> extradepot = Arrays.stream(extraDepots).filter(x -> x!=null&&x.getType()==type).collect(Collectors.toList());
+        if(extradepot.size() == 0) throw new DepotNotFoundException();
+        else extradepot.get(0).add(num);
+        this.updateAvailableResources();
+    }
+
+
+    public void move(Depot from, Depot to,int num) throws DepotOutOfBoundsException {
         // TODO
     }
     public void editWarehouse(Map<ResourceType,Integer> input,Map<ResourceType,Integer> output)
@@ -58,7 +74,7 @@ public class Warehouse {
         // TODO
     }
 
-    public void updateAvailableResources(){
+    private void updateAvailableResources(){
         EnumMap<ResourceType, Integer> local = strongbox.getResources().clone();
         for(NormalDepot d : normalDepots){
             local.put(d.getType(), local.get(d.getType())+d.getOcc());
