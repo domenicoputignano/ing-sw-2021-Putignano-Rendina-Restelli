@@ -69,10 +69,7 @@ public class Warehouse {
     public void move(Depot from, Depot to,int num) throws DepotOutOfBoundsException {
         // TODO
     }
-    public void editWarehouse(Map<ResourceType,Integer> input,Map<ResourceType,Integer> output)
-    {
-        // TODO
-    }
+
 
     private void updateAvailableResources(){
         EnumMap<ResourceType, Integer> local = strongbox.getResources().clone();

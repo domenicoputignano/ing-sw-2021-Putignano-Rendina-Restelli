@@ -2,11 +2,15 @@ package it.polimi.ingsw.Model;
 
 import it.polimi.ingsw.Exceptions.DepotOutOfBoundsException;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
+
+import java.util.Random;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class NormalDepotTest {
-    int size=3;
+    int size= 3;
     NormalDepot depot = new NormalDepot(size);
     NormalDepot depot1 = new NormalDepot(2,ResourceType.coin,size);
 
@@ -31,6 +35,21 @@ class NormalDepotTest {
     void addException() throws DepotOutOfBoundsException {
         NormalDepot depotClone = new NormalDepot(depot.getOcc(),depot.getType(),depot.getSize());
         assertThrows(DepotOutOfBoundsException.class,()->depot.add(4));
+    }
+
+    @ParameterizedTest
+    @ValueSource(ints = {0,1,2,3})
+    void parametrizedtake(int size) throws DepotOutOfBoundsException {
+        Random r = new Random();
+        int toadd = r.nextInt(size+1);
+        int totake = r.nextInt(size+1);
+        NormalDepot depot = new NormalDepot(0,ResourceType.servant,size);
+        depot.add(toadd);
+        NormalDepot depotclone = new NormalDepot(depot.getOcc(), depot.getType(), depot.getSize());
+        if(toadd>=totake) {
+            depot.take(totake);
+            assertEquals(depotclone.getOcc()-totake, depot.getOcc());
+        }
     }
 
     @Test
