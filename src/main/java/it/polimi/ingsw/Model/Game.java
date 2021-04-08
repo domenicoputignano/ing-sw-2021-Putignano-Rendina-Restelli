@@ -5,7 +5,6 @@ import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
 import it.polimi.ingsw.Model.Card.Deck;
 import it.polimi.ingsw.Model.Card.LeaderCard;
-import it.polimi.ingsw.Observable;
 import it.polimi.ingsw.Observer;
 
 import java.io.FileNotFoundException;
@@ -29,7 +28,7 @@ public class Game implements Observer<Integer> {
         this.playerList = playerList;
         this.currPlayer = currPlayer;
         this.numOfPlayers = numOfPlayers;
-        this.factoryDecksDevCards();
+        this.initializeDecksDevCards();
     }
 
 
@@ -51,7 +50,7 @@ public class Game implements Observer<Integer> {
         return playerList;
     }
 
-    private void factoryDecksDevCards() throws FileNotFoundException {
+    private void initializeDecksDevCards() throws FileNotFoundException {
         String path = "src/main/resources/json/devCards.json";
         decks = new ArrayList<>();
 
@@ -71,7 +70,7 @@ public class Game implements Observer<Integer> {
         }
     }
 
-    private List<LeaderCard> factoryDeckLeaderCards() {
+    private List<LeaderCard> initializeDeckLeaderCards() {
         String path = "src/main/resources/json/leaderCards.json";
         List<LeaderCard> cards = new ArrayList<>();
 
@@ -89,7 +88,7 @@ public class Game implements Observer<Integer> {
     }
 
     public void dealLeaderCards() {
-        List<LeaderCard> cards = factoryDeckLeaderCards();
+        List<LeaderCard> cards = initializeDeckLeaderCards();
         Random rand = new Random();
         for (Player p : playerList) {
             for (int i = 0; i < 4; i++) {

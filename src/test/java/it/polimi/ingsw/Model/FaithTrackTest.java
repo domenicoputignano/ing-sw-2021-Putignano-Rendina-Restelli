@@ -11,6 +11,7 @@ class FaithTrackTest {
     PersonalBoard personalBoard = new PersonalBoard();
     FaithTrack faithTrack = personalBoard.getFaithTrack();
 
+
     @Test
     void initialization(){
         assertEquals(0, faithTrack.getFaithMarker());
@@ -21,13 +22,20 @@ class FaithTrackTest {
 
     @Test
     void moveMarker() {
+        int start = faithTrack.getFaithMarker();
+        faithTrack.moveMarker(23);
+        assertEquals(start + 23,faithTrack.getFaithMarker());
+        assertEquals(2, faithTrack.getPassedSection());
     }
 
     @Test
     void calcVictoryPoints() {
+        faithTrack.moveMarker(22);
+        assertEquals(16, faithTrack.calcVictoryPoints());
     }
 
     @Test
     void activeVaticanReport() {
+
     }
 }

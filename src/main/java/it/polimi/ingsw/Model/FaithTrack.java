@@ -15,8 +15,9 @@ public class FaithTrack extends Observable<Integer> {
             if(sections[passedSection].isPopeSpace(this.faithMarker)){
                 this.activeVaticanReport(passedSection);// attiva rapporto in vaticano
             }
-            if(this.faithMarker >= sections[passedSection].getPopeSpace()){ // controllo se ho sorpassato la vaticanReportSection attuale
-                this.passedSection++;
+            if(this.faithMarker >= sections[passedSection].getPopeSpace()){
+                if(passedSection < 2)// controllo se ho sorpassato la vaticanReportSection attuale
+                   this.passedSection++;
             }
         }
     }

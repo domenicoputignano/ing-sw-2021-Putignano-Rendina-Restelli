@@ -24,6 +24,7 @@ public class NormalDepot implements Depot {
     public void take(int num) throws DepotOutOfBoundsException {
         if(occ-num < 0) throw new DepotOutOfBoundsException();
         this.occ-=num;
+        if(this.occ == 0) type = null;
     }
 
     public int getOcc() {

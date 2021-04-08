@@ -2,6 +2,7 @@ package it.polimi.ingsw.Model;
 
 import it.polimi.ingsw.Exceptions.DepotNotFoundException;
 import it.polimi.ingsw.Exceptions.DepotOutOfBoundsException;
+import it.polimi.ingsw.Exceptions.IncompatibleResourceTypeException;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -36,7 +37,7 @@ public class Warehouse {
     }
     public boolean checkResources(Map<ResourceType,Integer> neededResources)
     {
-        return neededResources.keySet().stream().allMatch((key) -> (neededResources.get(key) < this.avaiableResources.get(key)));
+        return neededResources.keySet().stream().allMatch((key) -> (neededResources.get(key) <= this.avaiableResources.get(key)));
     }
     public void takeResources(Map<ResourceType,Integer> resources)
     {
@@ -50,11 +51,29 @@ public class Warehouse {
     }
 
 
+    /*
     public void addResourcesToDepot(ResourceType type, int num) throws DepotNotFoundException, DepotOutOfBoundsException {
         List<NormalDepot> depot = Arrays.stream(normalDepots).filter(x -> x.getType()!=null&&x.getType()==type).collect(Collectors.toList());
         if(depot.size() == 0) throw new DepotNotFoundException();
         else depot.get(0).add(num);
         this.updateAvailableResources();
+    }*/
+
+
+    /* -1 perché gli indici dati dalla CLI partono da 1*/
+    public void addResourcesToDepot(int depotindex, ResourceType type, int num) throws DepotOutOfBoundsException, IncompatibleResourceTypeException {
+        NormalDepot d = getNormalDepots()[depotindex-1];
+        if(d.getOcc() == 0) {
+           d.setType(type);
+           d.add(num);
+       } else {
+           if(d.getType()==type) {
+               d.add(num);
+           } else {
+               throw new IncompatibleResourceTypeException();
+           }
+       }
+        updateAvailableResources();
     }
 
 
@@ -74,7 +93,8 @@ public class Warehouse {
     private void updateAvailableResources(){
         EnumMap<ResourceType, Integer> local = strongbox.getResources().clone();
         for(NormalDepot d : normalDepots){
-            local.put(d.getType(), local.get(d.getType())+d.getOcc());
+            if(d.getType()!=null)
+                local.put(d.getType(), local.get(d.getType())+d.getOcc());
         }
         for(ExtraDepot e : extraDepots){
             if(e!=null)

@@ -23,7 +23,7 @@ public class PersonalBoard {
         this.slots[1] = new Stack<DevelopmentCard>();
         this.slots[2] = new Stack<DevelopmentCard>();
         this.basicProductionPower = null;
-        factoryFaithTrack();
+        initializeFaithTrack();
     }
 
     public Stack<DevelopmentCard>[] getSlots() {
@@ -38,7 +38,7 @@ public class PersonalBoard {
         return faithTrack;
     }
 
-    private void factoryFaithTrack(){
+    private void initializeFaithTrack(){
         String path = "src/main/resources/json/faithTrack.json";
 
         Gson gson = new Gson();
@@ -50,6 +50,5 @@ public class PersonalBoard {
         catch (FileNotFoundException e){
             // mandare messaggio al client "file di configurazione faithTrack.json non trovato"
         }
-
     }
 }
