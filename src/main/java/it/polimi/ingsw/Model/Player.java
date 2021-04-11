@@ -48,4 +48,13 @@ public class Player {
     public PersonalBoard getPersonalBoard() {
         return personalBoard;
     }
+
+    public void initializePersonalBoard()
+    {
+        this.personalBoard = new PersonalBoard();
+    }
+
+    public void setPosition(int position) {
+        this.position = position;
+    }
 }

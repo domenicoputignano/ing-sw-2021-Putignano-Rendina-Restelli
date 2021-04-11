@@ -5,6 +5,7 @@ import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
 import it.polimi.ingsw.Model.Card.Deck;
 import it.polimi.ingsw.Model.Card.LeaderCard;
+import it.polimi.ingsw.Model.MarketTray.MarketTray;
 import it.polimi.ingsw.Observer;
 
 import java.io.FileNotFoundException;
@@ -18,27 +19,49 @@ public class Game implements Observer<Integer> {
     private Player currPlayer;
     private List<Deck> decks;
     private int numOfPlayers;
+    private GameState gameState;
+    private MarketTray marketTray;
 
     public void VaticanReport(int vaticanIndex) {
 
     }
 
-    public Game(Player inkwell, List<Player> playerList, Player currPlayer, int numOfPlayers) throws FileNotFoundException {
+    public Game(Player inkwell, List<Player> playerList, Player currPlayer, int numOfPlayers) {
         this.inkwell = inkwell;
         this.playerList = playerList;
         this.currPlayer = currPlayer;
         this.numOfPlayers = numOfPlayers;
-        this.initializeDecksDevCards();
+        this.gameState = GameState.SETUP;
     }
 
+    public void setup()
+    {
+        this.marketTray = new MarketTray();
+        this.initializeDecksDevCards();
+        this.dealLeaderCards();
+        for(Player p : this.playerList)
+           {
+               p.initializePersonalBoard();
+               p.setPosition(playerList.indexOf(p)+1);
+               if(p.getPosition()==3 || p.getPosition()==4)
+                   p.getPersonalBoard().getFaithTrack().moveMarker(1);
+           }
+    //DISTRIBUZIONE RISORSE A SCELTA E SCELTA CARTE LEADER PASSANDO IN RESOURCECHOICE E LEADER CHOICE
+        //Inviare notifica alle view interessate per le risorse a scelta
+    }
+
+    public void nextState(GameState state)
+    {
+        this.gameState = state;
+    }
 
     public Player getWinner() {
-        /*da implementare*/
+        //TODO
         return null;
     }
 
     public int calcVictoryPoints() {
-        /*da implementare*/
+        //TODO
         return 1;
     }
 
@@ -50,18 +73,21 @@ public class Game implements Observer<Integer> {
         return playerList;
     }
 
-    private void initializeDecksDevCards() throws FileNotFoundException {
-        String path = "src/main/resources/json/devCards.json";
-        decks = new ArrayList<>();
+    private void initializeDecksDevCards() {
+            String path = "src/main/resources/json/devCards.json";
+            decks = new ArrayList<>();
+            try{
+                Gson gson = new Gson();
 
-        Gson gson = new Gson();
+                JsonReader reader = new JsonReader(new FileReader(path));
 
-        JsonReader reader = new JsonReader(new FileReader(path));
-
-        Type listType = new TypeToken<List<Deck>>() {
-        }.getType();
-        decks = gson.fromJson(reader, listType);
-        shuffleDecksDevCards();
+                Type listType = new TypeToken<List<Deck>>() {
+                }.getType();
+                decks = gson.fromJson(reader, listType);
+                shuffleDecksDevCards();
+            } catch (FileNotFoundException e) {
+                // mandare messaggio al client "Configuration file not found"
+            }
     }
 
     private void shuffleDecksDevCards() {
