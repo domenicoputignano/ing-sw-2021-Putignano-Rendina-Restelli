@@ -113,6 +113,36 @@ public class Warehouse {
                 this.extraDepots[1] = new ExtraDepot(resourceType);
     }
 
+
+    // controller needs to know if he can perform moving action
+    public boolean checkPositioningNormalDepots(int depotFrom, int depotTo) {
+        if(normalDepots[depotFrom].getType() == null) {
+            return false;
+        }
+        else {
+            if(normalDepots[depotTo].getType() == null) {
+                if(normalDepots[depotTo].getSize() < normalDepots[depotFrom].getOcc()) return false;
+                else return true;
+            }
+            else
+            {
+                //caso in cui devo switchare le risorse tra i due depot
+                if(normalDepots[depotTo].getOcc() > normalDepots[depotFrom].getSize() ||
+                        normalDepots[depotFrom].getOcc() > normalDepots[depotTo].getSize()) return false;
+                else return true;
+            }
+        }
+    }
+
+    public void moveFromNormalDepotToNormalDepot(int depotFrom, int depotTo) {
+        ResourceType resourceTemp = normalDepots[depotTo].getType();
+        int occTemp = normalDepots[depotTo].getOcc();
+        int sizeTemp = normalDepots[depotTo].getSize();
+        int sizeTempFrom = normalDepots[depotFrom].getSize();
+        normalDepots[depotTo] = new NormalDepot(normalDepots[depotFrom].getOcc(),normalDepots[depotFrom].getType(),sizeTemp);
+        normalDepots[depotFrom] = new NormalDepot(occTemp, resourceTemp, sizeTempFrom);
+    }
+
     public Map<ResourceType, Integer> getAvaiableResources() {
         return avaiableResources;
     }

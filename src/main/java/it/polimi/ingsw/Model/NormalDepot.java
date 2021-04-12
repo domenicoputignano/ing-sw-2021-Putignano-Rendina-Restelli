@@ -2,6 +2,8 @@ package it.polimi.ingsw.Model;
 
 import it.polimi.ingsw.Exceptions.DepotOutOfBoundsException;
 
+import java.util.Objects;
+
 public class NormalDepot implements Depot {
     private int occ;
     private ResourceType type;
@@ -31,6 +33,11 @@ public class NormalDepot implements Depot {
         return occ;
     }
 
+    public void clear() {
+        this.occ = 0;
+        this.type = null;
+    }
+
     public ResourceType getType() {
         return type;
     }
@@ -42,4 +49,21 @@ public class NormalDepot implements Depot {
     public void setType(ResourceType type) {
         this.type = type;
     }
+
+
+    @Override
+    public String toString() {
+        return ("Resource = "+ type +" Occurences = "+ occ +" Size = "+size);
+    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        NormalDepot that = (NormalDepot) o;
+        return occ == that.occ && size == that.size && type == that.type;
+    }
+
+
 }
