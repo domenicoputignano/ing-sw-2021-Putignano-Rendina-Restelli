@@ -9,6 +9,7 @@ public class ExtraDepot implements Depot {
 
     public ExtraDepot(ResourceType type) {
         this.type = type;
+        this.occ = 0;
     }
 
     public ExtraDepot(int occ, ResourceType type){

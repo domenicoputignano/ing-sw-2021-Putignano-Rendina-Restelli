@@ -16,6 +16,7 @@ public class PersonalBoard {
     private Stack<DevelopmentCard>[] slots;
     private ProductionRule basicProductionPower;
     private FaithTrack faithTrack;
+    private Warehouse warehouse;
 
     public PersonalBoard() {
         this.slots = new Stack[3];
@@ -50,5 +51,9 @@ public class PersonalBoard {
         catch (FileNotFoundException e){
             // mandare messaggio al client "file di configurazione faithTrack.json non trovato"
         }
+    }
+
+    public Warehouse getWarehouse() {
+        return warehouse;
     }
 }

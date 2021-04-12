@@ -20,6 +20,7 @@ public class Game implements Observer<Integer> {
     private List<Deck> decks;
     private int numOfPlayers;
     private GameState gameState;
+    private Turn turn;
     private MarketTray marketTray;
 
     public void VaticanReport(int vaticanIndex) {
@@ -137,6 +138,15 @@ public class Game implements Observer<Integer> {
         }
 
     }
+
+    public Turn getTurn() {
+        return turn;
+    }
+
+    public MarketTray getMarketTray() {
+        return marketTray;
+    }
+
     @Override
     public void update(Integer message)
     {

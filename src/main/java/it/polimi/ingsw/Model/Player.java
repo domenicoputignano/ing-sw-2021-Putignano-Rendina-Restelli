@@ -1,6 +1,7 @@
 package it.polimi.ingsw.Model;
 
 import it.polimi.ingsw.Model.Card.Deck;
+import it.polimi.ingsw.Model.Card.Effect;
 import it.polimi.ingsw.Model.Card.LeaderCard;
 import it.polimi.ingsw.Model.Card.LeaderEffect;
 import java.util.List;
@@ -25,8 +26,14 @@ public class Player {
 
     }
 
-    public void activateLeaderCard(LeaderCard card) {
-        // attualmente sostituita da equivalente metodo nel controller
+    public void activateLeaderCard(int index) {
+        this.leaderCards.get(index).setIsActive();
+        if(leaderCards.get(index).getLeaderEffect().getEffect() == Effect.EXTRADEPOT)
+            this.personalBoard.getWarehouse().initializeExtraDepot(leaderCards.get(index).getLeaderEffect().getType());
+    }
+    public void discardLeaderCard(int index) {
+        this.leaderCards.remove(index);
+        this.personalBoard.getFaithTrack().moveMarker(1);
     }
 
     public void throwLeaderCard(LeaderCard card) {

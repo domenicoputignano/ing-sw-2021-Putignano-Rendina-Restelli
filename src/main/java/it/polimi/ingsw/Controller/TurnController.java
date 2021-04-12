@@ -10,4 +10,13 @@ public class TurnController {
     Game model;
     List<Player> playerList;
 
+    public TurnController(Game model, List<Player> players, Player firstPlayer)
+    {
+        this.model = model;
+        this.playerList = players;
+        this.currPlayer = firstPlayer;
+
+    }
+
+
 }

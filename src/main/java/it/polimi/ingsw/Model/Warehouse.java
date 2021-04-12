@@ -104,6 +104,15 @@ public class Warehouse {
 
     }
 
+    public void initializeExtraDepot(ResourceType resourceType)
+    {
+        if(this.extraDepots[0] == null)
+            this.extraDepots[0] = new ExtraDepot(resourceType);
+        else
+            if(this.extraDepots[1] == null)
+                this.extraDepots[1] = new ExtraDepot(resourceType);
+    }
+
     public Map<ResourceType, Integer> getAvaiableResources() {
         return avaiableResources;
     }

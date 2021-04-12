@@ -19,7 +19,7 @@ public class GameController {
         Collections.shuffle(players);
         this.playerList = players;
         this.model = new Game(players.get(0),players,players.get(0),players.size());
-        this.turnController = new TurnController();
+        this.turnController = new TurnController(this.model, players,players.get(0));
         gameSetup();
     }
 
