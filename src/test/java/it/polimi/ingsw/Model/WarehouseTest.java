@@ -63,11 +63,19 @@ class WarehouseTest {
         expected.add(new NormalDepot(2,ResourceType.servant,3));
         if(warehouse.checkPositioningNormalDepots(1,2)) {
             warehouse.moveFromNormalDepotToNormalDepot(1,2);
-            for(int i = 0; i < 3; i++)
-            System.out.println(warehouse.getNormalDepots()[i]);
             assertEquals(Arrays.stream(warehouse.getNormalDepots()).collect(Collectors.toList()), expected);
         }
     }
+
+    @Test
+    void nullMoveFromNormalDepotToNormalDepot() throws DepotOutOfBoundsException, IncompatibleResourceTypeException {
+        warehouse.addResourcesToDepot(1, ResourceType.shield, 1);
+        warehouse.addResourcesToDepot(2, ResourceType.servant, 2);
+        warehouse.moveFromNormalDepotToNormalDepot(1,2);
+        for(int i = 0; i < 3; i++)
+        System.out.println(warehouse.getNormalDepots()[i]);
+    }
+
 
 
 
