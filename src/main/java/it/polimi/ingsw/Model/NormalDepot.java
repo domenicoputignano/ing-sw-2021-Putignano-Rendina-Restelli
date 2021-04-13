@@ -2,17 +2,27 @@ package it.polimi.ingsw.Model;
 
 import it.polimi.ingsw.Exceptions.DepotOutOfBoundsException;
 
+import java.security.InvalidParameterException;
 import java.util.Objects;
 
 public class NormalDepot implements Depot {
     private int occ;
     private ResourceType type;
-    private final int size;
+    private int size;
 
     public NormalDepot(int occ, ResourceType type, int size) {
-        this.occ = occ;
-        this.type = type;
-        this.size = size;
+        try {
+            if(occ > size)
+                throw new InvalidParameterException();
+            this.occ = occ;
+            this.type = type;
+            this.size = size;
+        }
+        catch (InvalidParameterException e)
+        {
+           //ERRORE interno al server
+        }
+
     }
     public NormalDepot(int size)
     {

@@ -12,11 +12,6 @@ public class ExtraDepot implements Depot {
         this.occ = 0;
     }
 
-    public ExtraDepot(int occ, ResourceType type){
-        this.occ=occ;
-        this.type=type;
-    }
-
     public void add(int num)throws DepotOutOfBoundsException {
         if(occ+num > this.size) throw new DepotOutOfBoundsException();
         this.occ+=num;

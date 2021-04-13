@@ -62,6 +62,8 @@ public class Warehouse {
 
     /* -1 perché gli indici dati dalla CLI partono da 1*/
     public void addResourcesToDepot(int depotindex, ResourceType type, int num) throws DepotOutOfBoundsException, IncompatibleResourceTypeException {
+        if(!isValidEditing(type))
+            throw new IncompatibleResourceTypeException();
         NormalDepot d = getNormalDepots()[depotindex-1];
         if(d.getOcc() == 0) {
            d.setType(type);
@@ -83,12 +85,6 @@ public class Warehouse {
         else extradepot.get(0).add(num);
         this.updateAvailableResources();
     }
-
-
-    public void move(Depot from, Depot to,int num) throws DepotOutOfBoundsException {
-        // TODO
-    }
-
 
     private void updateAvailableResources(){
         EnumMap<ResourceType, Integer> local = strongbox.getResources().clone();
@@ -115,7 +111,7 @@ public class Warehouse {
 
 
     // controller needs to know if he can perform moving action
-    public boolean checkPositioningNormalDepots(int depotFrom, int depotTo) {
+    public boolean checkMoveFromNormalDepotToNormalDepot(int depotFrom, int depotTo) {
         if(normalDepots[depotFrom].getType() == null) {
             return false;
         }
@@ -141,6 +137,48 @@ public class Warehouse {
         int sizeTempFrom = normalDepots[depotFrom].getSize();
         normalDepots[depotTo] = new NormalDepot(normalDepots[depotFrom].getOcc(),normalDepots[depotFrom].getType(),sizeTemp);
         normalDepots[depotFrom] = new NormalDepot(occTemp, resourceTemp, sizeTempFrom);
+    }
+
+    public boolean checkMoveFromNormalDepotToExtraDepot(int depotFrom,int occ, int extraDepotTo) {
+        if(extraDepots[extraDepotTo-1] != null)
+            if(normalDepots[depotFrom-1].getType() == extraDepots[extraDepotTo-1].getType()
+                    && occ+extraDepots[extraDepotTo-1].getOcc()<=2
+                    && normalDepots[depotFrom-1].getOcc()>=occ)
+                return true;
+        return false;
+    }
+
+    public void moveFromNormalDepotToExtraDepot(int depotFrom,int occ, int extraDepotTo) throws DepotOutOfBoundsException {
+        normalDepots[depotFrom-1].take(occ);
+        extraDepots[extraDepotTo-1].add(occ);
+    }
+
+    public boolean checkMoveFromExtraDepotToNormalDepot(int extraDepotFrom,int occ, int depotTo) throws IncompatibleResourceTypeException {
+        if(extraDepots[extraDepotFrom-1] != null) {
+            if (!isValidEditing(extraDepots[extraDepotFrom - 1].getType()))
+                throw new IncompatibleResourceTypeException();
+            if ((normalDepots[depotTo - 1].getType() == extraDepots[extraDepotFrom - 1].getType()
+                    || normalDepots[depotTo - 1].getType() == null)
+                    && normalDepots[depotTo].getOcc() + occ <= normalDepots[depotTo - 1].getSize()
+                    && extraDepots[extraDepotFrom - 1].getOcc() >= occ)
+                return true;
+            }
+        return false;
+    }
+
+    public void moveFromExtraDepotToNormalDepot(int extraDepotFrom,int occ, int depotTo) throws DepotOutOfBoundsException {
+        extraDepots[extraDepotFrom-1].take(occ);
+        if(normalDepots[depotTo-1].getType() == null)
+            normalDepots[depotTo-1].setType(extraDepots[extraDepotFrom-1].getType());
+        normalDepots[depotTo-1].add(occ);
+    }
+
+    private boolean isValidEditing(ResourceType resourceType)
+    {
+        for(NormalDepot depots: normalDepots)
+            if(resourceType == depots.getType())
+                return false;
+        return true;
     }
 
     public Map<ResourceType, Integer> getAvaiableResources() {
