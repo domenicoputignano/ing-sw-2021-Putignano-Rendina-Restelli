@@ -2,6 +2,7 @@ package it.polimi.ingsw.Model;
 
 import it.polimi.ingsw.Exceptions.DepotOutOfBoundsException;
 
+
 public class ExtraDepot implements Depot {
     private int occ;
     private final ResourceType type;
@@ -10,6 +11,11 @@ public class ExtraDepot implements Depot {
     public ExtraDepot(ResourceType type) {
         this.type = type;
         this.occ = 0;
+    }
+
+    public ExtraDepot(int occ, ResourceType type) {
+        this.occ = occ;
+        this.type = type;
     }
 
     public void add(int num)throws DepotOutOfBoundsException {

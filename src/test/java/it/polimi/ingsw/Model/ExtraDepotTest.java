@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class ExtraDepotTest {
 
     ExtraDepot depot = new ExtraDepot(ResourceType.shield);
-    ExtraDepot depot1 = new ExtraDepot(2, ResourceType.shield);
+    ExtraDepot depot1 = new ExtraDepot(2,ResourceType.shield);
 
     @Test
     void initialize() {
@@ -35,7 +35,7 @@ class ExtraDepotTest {
     @Test
     void take() throws DepotOutOfBoundsException {
         depot.add(2);
-        ExtraDepot depotClone = new ExtraDepot(depot.getOcc(), depot.getType());
+        ExtraDepot depotClone = new ExtraDepot(2,depot.getType());
         depot.take(1);
         assertEquals(depotClone.getOcc()-1,depot.getOcc());
     }
