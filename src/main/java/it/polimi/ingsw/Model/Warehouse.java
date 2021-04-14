@@ -3,6 +3,7 @@ package it.polimi.ingsw.Model;
 import it.polimi.ingsw.Exceptions.DepotNotFoundException;
 import it.polimi.ingsw.Exceptions.DepotOutOfBoundsException;
 import it.polimi.ingsw.Exceptions.IncompatibleResourceTypeException;
+import it.polimi.ingsw.Exceptions.StrongboxOutOfBoundException;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -35,29 +36,25 @@ public class Warehouse {
         this.extraDepots = new ExtraDepot[2];
         this.strongbox = new Strongbox();
     }
-    public boolean checkResources(Map<ResourceType,Integer> neededResources)
-    {
-        return neededResources.keySet().stream().allMatch((key) -> (neededResources.get(key) <= this.avaiableResources.get(key)));
-    }
-    public void takeResources(Map<ResourceType,Integer> resources)
-    {
-        // prendere risorse dal mercato o dallo strongbox
 
+
+    public void initializeExtraDepot(ResourceType resourceType)
+    {
+        if(this.extraDepots[0] == null)
+            this.extraDepots[0] = new ExtraDepot(resourceType);
+        else
+        if(this.extraDepots[1] == null)
+            this.extraDepots[1] = new ExtraDepot(resourceType);
     }
+
+
+
     public void addResourcesToStrongbox(Map<ResourceType,Integer> resources)
     {
         strongbox.addResources(resources);
         this.updateAvailableResources();
     }
 
-
-    /*
-    public void addResourcesToDepot(ResourceType type, int num) throws DepotNotFoundException, DepotOutOfBoundsException {
-        List<NormalDepot> depot = Arrays.stream(normalDepots).filter(x -> x.getType()!=null&&x.getType()==type).collect(Collectors.toList());
-        if(depot.size() == 0) throw new DepotNotFoundException();
-        else depot.get(0).add(num);
-        this.updateAvailableResources();
-    }*/
 
 
     /* -1 perché gli indici dati dalla CLI partono da 1*/
@@ -86,27 +83,57 @@ public class Warehouse {
         this.updateAvailableResources();
     }
 
-    private void updateAvailableResources(){
-        EnumMap<ResourceType, Integer> local = strongbox.getResources().clone();
-        for(NormalDepot d : normalDepots){
-            if(d.getType()!=null)
-                local.put(d.getType(), local.get(d.getType())+d.getOcc());
-        }
-        for(ExtraDepot e : extraDepots){
-            if(e!=null)
-            local.put(e.getType(), local.get(e.getType())+e.getOcc());
-        }
-        this.avaiableResources = local;
 
+    public void takeResourcesFromNormalDepot(ResourceType type, int occ) throws DepotNotFoundException, DepotOutOfBoundsException {
+        int i = findNormalDepotByResourceType(type);
+        normalDepots[i].take(occ);
     }
 
-    public void initializeExtraDepot(ResourceType resourceType)
+    public void takeResourcesFromStrongbox(Map<ResourceType, Integer> occurences) {
+        try {
+            strongbox.takeResources(occurences);
+        } catch (StrongboxOutOfBoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    public boolean checkResources(Map<ResourceType,Integer> neededResources)
     {
-        if(this.extraDepots[0] == null)
-            this.extraDepots[0] = new ExtraDepot(resourceType);
-        else
-            if(this.extraDepots[1] == null)
-                this.extraDepots[1] = new ExtraDepot(resourceType);
+        return neededResources.keySet().stream().allMatch((key) -> (neededResources.get(key) <= this.avaiableResources.get(key)));
+    }
+
+    public boolean checkResourceFromNormalDepot(ResourceType type, int occ) {
+        try {
+            int i = findNormalDepotByResourceType(type);
+            if(occ <= normalDepots[i].getOcc()) return true;
+            else return false;
+        } catch (DepotNotFoundException e) { return false; }
+    }
+
+
+    public boolean checkResourceFromStrongBox(ResourceType type, int occ) {
+        return strongbox.getResources().get(type) <= occ;
+    }
+
+    public boolean checkResourceFromExtraDepot(ResourceType type, int occ) {
+        try {
+            int i = findExtraDepotByResourceType(type);
+            if(occ <= extraDepots[i].getOcc()) return true;
+            else return false;
+        } catch(DepotNotFoundException e) { return false; }
+    }
+
+
+
+
+    public void moveFromNormalDepotToNormalDepot(int depotFrom, int depotTo) {
+        ResourceType resourceTemp = normalDepots[depotTo].getType();
+        int occTemp = normalDepots[depotTo].getOcc();
+        int sizeTemp = normalDepots[depotTo].getSize();
+        int sizeTempFrom = normalDepots[depotFrom].getSize();
+        normalDepots[depotTo] = new NormalDepot(normalDepots[depotFrom].getOcc(),normalDepots[depotFrom].getType(),sizeTemp);
+        normalDepots[depotFrom] = new NormalDepot(occTemp, resourceTemp, sizeTempFrom);
     }
 
 
@@ -130,14 +157,6 @@ public class Warehouse {
         }
     }
 
-    public void moveFromNormalDepotToNormalDepot(int depotFrom, int depotTo) {
-        ResourceType resourceTemp = normalDepots[depotTo].getType();
-        int occTemp = normalDepots[depotTo].getOcc();
-        int sizeTemp = normalDepots[depotTo].getSize();
-        int sizeTempFrom = normalDepots[depotFrom].getSize();
-        normalDepots[depotTo] = new NormalDepot(normalDepots[depotFrom].getOcc(),normalDepots[depotFrom].getType(),sizeTemp);
-        normalDepots[depotFrom] = new NormalDepot(occTemp, resourceTemp, sizeTempFrom);
-    }
 
     public boolean checkMoveFromNormalDepotToExtraDepot(int depotFrom,int occ, int extraDepotTo) {
         if(extraDepots[extraDepotTo-1] != null)
@@ -148,10 +167,7 @@ public class Warehouse {
         return false;
     }
 
-    public void moveFromNormalDepotToExtraDepot(int depotFrom,int occ, int extraDepotTo) throws DepotOutOfBoundsException {
-        normalDepots[depotFrom-1].take(occ);
-        extraDepots[extraDepotTo-1].add(occ);
-    }
+
 
     public boolean checkMoveFromExtraDepotToNormalDepot(int extraDepotFrom, int occ, int depotTo) throws IncompatibleResourceTypeException {
         if(extraDepots[extraDepotFrom-1] != null) {
@@ -166,12 +182,37 @@ public class Warehouse {
         return false;
     }
 
+    public void moveFromNormalDepotToExtraDepot(int depotFrom,int occ, int extraDepotTo) throws DepotOutOfBoundsException {
+        normalDepots[depotFrom-1].take(occ);
+        extraDepots[extraDepotTo-1].add(occ);
+    }
+
     public void moveFromExtraDepotToNormalDepot(int extraDepotFrom, int occ, int depotTo) throws DepotOutOfBoundsException {
         extraDepots[extraDepotFrom-1].take(occ);
         if(normalDepots[depotTo-1].getType() == null)
             normalDepots[depotTo-1].setType(extraDepots[extraDepotFrom-1].getType());
         normalDepots[depotTo-1].add(occ);
     }
+
+
+
+    public int findNormalDepotByResourceType(ResourceType type) throws DepotNotFoundException {
+        for(int i = 0; i < normalDepots.length; i++) {
+            if (normalDepots[i].getType() == type) return i;
+        }
+        throw new DepotNotFoundException();
+    }
+
+    public int findExtraDepotByResourceType(ResourceType type) throws DepotNotFoundException {
+        for(int i = 0; i < extraDepots.length; i++) {
+            if(extraDepots[i]!=null) {
+               if(extraDepots[i].getType() == type) return i;
+            }
+        }
+        throw new DepotNotFoundException();
+    }
+
+
 
     private boolean isValidEditing(ResourceType resourceType, int depotTo)
     {
@@ -180,6 +221,20 @@ public class Warehouse {
                 return false;
         return true;
     }
+
+    private void updateAvailableResources(){
+        EnumMap<ResourceType, Integer> local = strongbox.getResources().clone();
+        for(NormalDepot d : normalDepots){
+            if(d.getType()!=null)
+                local.put(d.getType(), local.get(d.getType())+d.getOcc());
+        }
+        for(ExtraDepot e : extraDepots){
+            if(e!=null)
+                local.put(e.getType(), local.get(e.getType())+e.getOcc());
+        }
+        this.avaiableResources = local;
+    }
+
 
     public Map<ResourceType, Integer> getAvaiableResources() {
         return avaiableResources;

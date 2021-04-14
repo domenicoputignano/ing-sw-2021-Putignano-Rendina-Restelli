@@ -1,5 +1,7 @@
 package it.polimi.ingsw.Model;
 
+import it.polimi.ingsw.Exceptions.StrongboxOutOfBoundException;
+
 import java.security.InvalidParameterException;
 import java.util.EnumMap;
 import java.util.Map;
@@ -19,15 +21,15 @@ public class Strongbox {
     {
         resources.forEach( (key,value)-> this.resources.merge(key,value,Integer::sum));
     }
-    public void takeResources(Map<ResourceType,Integer> resources)
+
+
+    public void takeResources(Map<ResourceType,Integer> resources) throws StrongboxOutOfBoundException
     {
-        resources.forEach( (key,value)-> {
-        if (this.resources.get(key) < resources.get(key)) {
-            throw new InvalidParameterException(); //eventualmente definire diversa eccezione
-        }
-        }  );
+        if(resources.entrySet().stream().anyMatch( (key) -> resources.get(key) > this.resources.get(key))) throw new
+                StrongboxOutOfBoundException();
         resources.forEach( (key,value)-> this.resources.merge(key,value,(v1,v2)-> v1-v2));
     }
+
 
     public EnumMap<ResourceType, Integer> getResources() {
         return (EnumMap<ResourceType, Integer>) resources;

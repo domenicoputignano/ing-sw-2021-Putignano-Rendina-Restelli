@@ -5,7 +5,7 @@ import it.polimi.ingsw.Model.Card.Effect;
 import it.polimi.ingsw.Model.Card.LeaderCard;
 import it.polimi.ingsw.Model.Card.LeaderEffect;
 import java.util.List;
-
+import java.util.stream.Collectors;
 
 
 public class Player {
@@ -13,7 +13,7 @@ public class Player {
     private int position;
     private PersonalBoard personalBoard;
     private List<LeaderCard> leaderCards;
-    private List<LeaderEffect> activeEffects;
+
 
     public void takeResourcesFromMarket() {
 
@@ -64,4 +64,12 @@ public class Player {
     public void setPosition(int position) {
         this.position = position;
     }
+
+
+    public List<LeaderEffect> getActiveEffects () {
+        return leaderCards.stream().filter(x -> x.isActive()).map(x -> x.getLeaderEffect()).collect(Collectors.toList());
+    }
+
+
+
 }

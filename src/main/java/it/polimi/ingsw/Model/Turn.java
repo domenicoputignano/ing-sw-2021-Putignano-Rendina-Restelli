@@ -6,7 +6,7 @@ public class Turn {
     private Player player;
     private boolean doneNormalAction;
 
-    private void setTurnState(TurnState turnState)
+    public void setTurnState(TurnState turnState)
     {
         this.turnState = turnState;
     }
@@ -22,4 +22,6 @@ public class Turn {
     public Game getGame() {
         return game;
     }
+
+
 }

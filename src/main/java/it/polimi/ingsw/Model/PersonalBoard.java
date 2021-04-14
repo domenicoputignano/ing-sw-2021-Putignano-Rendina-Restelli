@@ -9,6 +9,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.EmptyStackException;
 import java.util.List;
 import java.util.Stack;
 
@@ -56,4 +57,20 @@ public class PersonalBoard {
     public Warehouse getWarehouse() {
         return warehouse;
     }
+
+
+    public boolean isCompatibleSlot(int level, int slotIndex) {
+        if(level == 1) {
+            if(slots[slotIndex - 1].size()!=0) return false;
+            else return true;
+        }
+        else {
+            if(slots[slotIndex - 1].size() == 0) return false;
+            else {
+                if (slots[slotIndex - 1].peek().getType().getLevel() != level - 1)  return false;
+                else return true;
+            }
+        }
+    }
+
 }

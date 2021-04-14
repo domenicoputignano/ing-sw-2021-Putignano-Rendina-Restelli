@@ -23,9 +23,7 @@ public class Game implements Observer<Integer> {
     private Turn turn;
     private MarketTray marketTray;
 
-    public void VaticanReport(int vaticanIndex) {
 
-    }
 
     public Game(Player inkwell, List<Player> playerList, Player currPlayer, int numOfPlayers) {
         this.inkwell = inkwell;
@@ -56,6 +54,8 @@ public class Game implements Observer<Integer> {
         this.gameState = state;
     }
 
+
+    /*
     public Player getWinner() {
         //TODO
         return null;
@@ -64,7 +64,8 @@ public class Game implements Observer<Integer> {
     public int calcVictoryPoints() {
         //TODO
         return 1;
-    }
+
+    }*/
 
     public Player getCurrPlayer() {
         return currPlayer;
@@ -91,6 +92,20 @@ public class Game implements Observer<Integer> {
             }
     }
 
+
+    public void dealLeaderCards() {
+        List<LeaderCard> cards = initializeDeckLeaderCards();
+        Random rand = new Random();
+        for (Player p : playerList) {
+            for (int i = 0; i < 4; i++) {
+                int randNum = rand.nextInt(cards.size());
+                LeaderCard card = cards.remove(randNum);
+                p.getLeaderCards().add(card);
+            }
+        }
+    }
+
+
     private void shuffleDecksDevCards() {
         for (Deck d : decks) {
             Collections.shuffle(d.getCards());
@@ -114,17 +129,6 @@ public class Game implements Observer<Integer> {
         }
     }
 
-    public void dealLeaderCards() {
-        List<LeaderCard> cards = initializeDeckLeaderCards();
-        Random rand = new Random();
-        for (Player p : playerList) {
-            for (int i = 0; i < 4; i++) {
-                int randNum = rand.nextInt(cards.size());
-                LeaderCard card = cards.remove(randNum);
-                p.getLeaderCards().add(card);
-            }
-        }
-    }
 
     private void activateVaticanReport(int vatican_index) {
         int start = currPlayer.getPersonalBoard().getFaithTrack().getSections()[vatican_index].getStartSpace();
@@ -147,10 +151,16 @@ public class Game implements Observer<Integer> {
         return marketTray;
     }
 
+    public List<Deck> getDecks() {
+        return decks;
+    }
+
     @Override
     public void update(Integer message)
     {
         activateVaticanReport(message);
     }
+
+
 }
 
