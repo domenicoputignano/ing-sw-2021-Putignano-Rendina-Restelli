@@ -84,17 +84,18 @@ public class Warehouse {
     }
 
 
-    public void takeResourcesFromNormalDepot(ResourceType type, int occ) throws DepotNotFoundException, DepotOutOfBoundsException {
+    public void takeResourceFromNormalDepot(ResourceType type, int occ) throws DepotNotFoundException, DepotOutOfBoundsException {
         int i = findNormalDepotByResourceType(type);
         normalDepots[i].take(occ);
     }
 
-    public void takeResourcesFromStrongbox(Map<ResourceType, Integer> occurences) {
-        try {
-            strongbox.takeResources(occurences);
-        } catch (StrongboxOutOfBoundException e) {
-            e.printStackTrace();
-        }
+    public void takeResourcesFromStrongbox(Map<ResourceType, Integer> occurences) throws StrongboxOutOfBoundException {
+        strongbox.takeResources(occurences);
+    }
+
+    public void takeResourceFromExtraDepot(ResourceType type, int occ) throws DepotNotFoundException, DepotOutOfBoundsException {
+        int i = findExtraDepotByResourceType(type);
+        extraDepots[i].take(occ);
     }
 
 

@@ -10,7 +10,7 @@ import java.util.Map;
 public class BuyDevCardMessage {
     private CardType type;
     private Map<String, EnumMap<ResourceType, Integer>> howToTakeResources = new HashMap<>();
-    private int destionationSlot;
+    private int destinationSlot;
 
 
     public CardType getType() {
@@ -21,7 +21,7 @@ public class BuyDevCardMessage {
         return howToTakeResources;
     }
 
-    public int getDestionationSlot() {
-        return destionationSlot;
+    public int getDestinationSlot() {
+        return destinationSlot;
     }
 }
