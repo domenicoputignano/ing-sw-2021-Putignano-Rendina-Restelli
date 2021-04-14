@@ -1,4 +1,4 @@
 package it.polimi.ingsw.Model;
 
-public class BuyDevCard implements AbstractTurnPhase{
+public class BuyDevCard implements AbstractTurnPhase {
 }

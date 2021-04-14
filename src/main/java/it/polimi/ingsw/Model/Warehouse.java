@@ -62,9 +62,9 @@ public class Warehouse {
 
     /* -1 perché gli indici dati dalla CLI partono da 1*/
     public void addResourcesToDepot(int depotindex, ResourceType type, int num) throws DepotOutOfBoundsException, IncompatibleResourceTypeException {
-        if(!isValidEditing(type))
+        if(!isValidEditing(type,depotindex))
             throw new IncompatibleResourceTypeException();
-        NormalDepot d = getNormalDepots()[depotindex-1];
+        NormalDepot d = getNormalDepots()[depotindex - 1];
         if(d.getOcc() == 0) {
            d.setType(type);
            d.add(num);
@@ -153,30 +153,30 @@ public class Warehouse {
         extraDepots[extraDepotTo-1].add(occ);
     }
 
-    public boolean checkMoveFromExtraDepotToNormalDepot(int extraDepotFrom,int occ, int depotTo) throws IncompatibleResourceTypeException {
+    public boolean checkMoveFromExtraDepotToNormalDepot(int extraDepotFrom, int occ, int depotTo) throws IncompatibleResourceTypeException {
         if(extraDepots[extraDepotFrom-1] != null) {
-            if (!isValidEditing(extraDepots[extraDepotFrom - 1].getType()))
+            if (!isValidEditing(extraDepots[extraDepotFrom - 1].getType(),depotTo))
                 throw new IncompatibleResourceTypeException();
             if ((normalDepots[depotTo - 1].getType() == extraDepots[extraDepotFrom - 1].getType()
                     || normalDepots[depotTo - 1].getType() == null)
-                    && normalDepots[depotTo].getOcc() + occ <= normalDepots[depotTo - 1].getSize()
+                    && normalDepots[depotTo - 1].getOcc() + occ <= normalDepots[depotTo - 1].getSize()
                     && extraDepots[extraDepotFrom - 1].getOcc() >= occ)
                 return true;
             }
         return false;
     }
 
-    public void moveFromExtraDepotToNormalDepot(int extraDepotFrom,int occ, int depotTo) throws DepotOutOfBoundsException {
+    public void moveFromExtraDepotToNormalDepot(int extraDepotFrom, int occ, int depotTo) throws DepotOutOfBoundsException {
         extraDepots[extraDepotFrom-1].take(occ);
         if(normalDepots[depotTo-1].getType() == null)
             normalDepots[depotTo-1].setType(extraDepots[extraDepotFrom-1].getType());
         normalDepots[depotTo-1].add(occ);
     }
 
-    private boolean isValidEditing(ResourceType resourceType)
+    private boolean isValidEditing(ResourceType resourceType, int depotTo)
     {
         for(NormalDepot depots: normalDepots)
-            if(resourceType == depots.getType())
+            if(resourceType == depots.getType() && depots!=normalDepots[depotTo-1])
                 return false;
         return true;
     }

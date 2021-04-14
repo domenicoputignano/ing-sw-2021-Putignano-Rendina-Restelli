@@ -3,7 +3,7 @@ package it.polimi.ingsw.Model;
 import it.polimi.ingsw.Exceptions.DepotOutOfBoundsException;
 
 import java.security.InvalidParameterException;
-import java.util.Objects;
+
 
 public class NormalDepot implements Depot {
     private int occ;
@@ -43,10 +43,13 @@ public class NormalDepot implements Depot {
         return occ;
     }
 
+
     public void clear() {
         this.occ = 0;
         this.type = null;
     }
+
+
 
     public ResourceType getType() {
         return type;
@@ -59,6 +62,9 @@ public class NormalDepot implements Depot {
     public void setType(ResourceType type) {
         this.type = type;
     }
+
+
+
 
 
     @Override

@@ -41,6 +41,7 @@ class WarehouseTest {
     }
 
 
+
     @ParameterizedTest
     @ValueSource (ints = {0,1,2})
     void checkNormalDepotPositioning(int index) throws DepotOutOfBoundsException, IncompatibleResourceTypeException {
@@ -78,6 +79,33 @@ class WarehouseTest {
     }
 
 
+    @ParameterizedTest
+    @EnumSource(ResourceType.class)
+    void checkMoveFromNormalDepotToExtraDepot(ResourceType type) throws DepotOutOfBoundsException, IncompatibleResourceTypeException {
+        //create an instance of an empty ExtraDepot
+        warehouse.getExtraDepots()[0] = new ExtraDepot(type);
+        warehouse.addResourcesToDepot(1,ResourceType.stone,1);
+        if(type == ResourceType.stone)
+            assertTrue(warehouse.checkMoveFromNormalDepotToExtraDepot(1,1,1));
+        else
+            assertFalse(warehouse.checkMoveFromNormalDepotToExtraDepot(1,1,1));
+    }
+
+    @ParameterizedTest
+    @EnumSource(ResourceType.class)
+    void checkMoveFromExtraDepotToNormalDepot(ResourceType type) throws DepotOutOfBoundsException, IncompatibleResourceTypeException, DepotNotFoundException {
+        //create an instance of an empty ExtraDepot
+        warehouse.getExtraDepots()[0] = new ExtraDepot(type);
+        warehouse.addResourcesToExtraDepot(type, 2);
+        warehouse.addResourcesToDepot(2, type, 1);
+        assertFalse(warehouse.checkMoveFromExtraDepotToNormalDepot(2,2,1));
+        assertThrows(IncompatibleResourceTypeException.class, () ->warehouse.checkMoveFromExtraDepotToNormalDepot(1,2,1));
+        assertFalse(warehouse.checkMoveFromExtraDepotToNormalDepot(1,2,2));
+        assertThrows(IncompatibleResourceTypeException.class, () ->warehouse.checkMoveFromExtraDepotToNormalDepot(1,2,3));
+        assertThrows(IncompatibleResourceTypeException.class,()->warehouse.checkMoveFromExtraDepotToNormalDepot(1,1,1));
+        assertTrue(warehouse.checkMoveFromExtraDepotToNormalDepot(1,1,2));
+
+    }
 
 
     @ParameterizedTest
@@ -97,6 +125,12 @@ class WarehouseTest {
                 assertTrue(warehouse.getExtraDepots()[0].getOcc() == occ);
         }
     }
+
+    @Test
+    void checkIsValidEditing() {
+
+    }
+
 
 
 
