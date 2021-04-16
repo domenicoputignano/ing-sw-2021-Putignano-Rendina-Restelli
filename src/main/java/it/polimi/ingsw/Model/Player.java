@@ -4,6 +4,8 @@ import it.polimi.ingsw.Model.Card.Deck;
 import it.polimi.ingsw.Model.Card.Effect;
 import it.polimi.ingsw.Model.Card.LeaderCard;
 import it.polimi.ingsw.Model.Card.LeaderEffect;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -12,8 +14,12 @@ public class Player {
     private String username;
     private int position;
     private PersonalBoard personalBoard;
-    private List<LeaderCard> leaderCards;
+    private List<LeaderCard> leaderCards = new ArrayList<>();
 
+
+    public Player(String username) {
+        this.username = username;
+    }
 
     public void takeResourcesFromMarket() {
 

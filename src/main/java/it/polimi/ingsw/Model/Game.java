@@ -42,6 +42,10 @@ public class Game implements Observer<Integer> {
            {
                p.initializePersonalBoard();
                p.setPosition(playerList.indexOf(p)+1);
+
+               /*aggiungo Game alla lista di Observer di faithtrack per la vatican report section*/
+               p.getPersonalBoard().getFaithTrack().addObserver(this);
+
                if(p.getPosition()==3 || p.getPosition()==4)
                    p.getPersonalBoard().getFaithTrack().moveMarker(1);
            }

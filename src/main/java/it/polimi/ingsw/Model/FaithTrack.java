@@ -2,12 +2,14 @@ package it.polimi.ingsw.Model;
 
 
 import it.polimi.ingsw.Observable;
+import it.polimi.ingsw.Observer;
 
 public class FaithTrack extends Observable<Integer> {
     private int faithMarker;
     private int passedSection;
     private final int victoryPoints[] = new int[25];
     private VaticanReportSection[] sections = new VaticanReportSection[3];
+
 
     public void moveMarker(int pos){
         for(int i=0; i<pos; i++){
@@ -39,6 +41,8 @@ public class FaithTrack extends Observable<Integer> {
         if (this.sections[vatican_index].getState() == StateFavorTiles.FACEDOWN)
             notify(vatican_index);
     }
+
+    
 
     public int[] getVictoryPoints() {
         return victoryPoints;

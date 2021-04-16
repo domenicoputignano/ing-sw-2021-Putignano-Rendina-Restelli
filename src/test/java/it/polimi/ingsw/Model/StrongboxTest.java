@@ -1,5 +1,6 @@
 package it.polimi.ingsw.Model;
 
+import it.polimi.ingsw.Exceptions.StrongboxOutOfBoundException;
 import org.junit.jupiter.api.Test;
 
 import java.security.InvalidParameterException;
@@ -27,8 +28,7 @@ public class StrongboxTest {
         assertTrue(strongbox.getResources().keySet().stream().allMatch((key) -> resources.get(key)+resourcesToAdd.get(key)==strongbox.getResources().get(key)));
     }
     @Test
-    void takeResources()
-    {
+    void takeResources() throws StrongboxOutOfBoundException {
         EnumMap<ResourceType,Integer> resourcesToAdd = new EnumMap<ResourceType, Integer>(ResourceType.class);
         resourcesToAdd.put(ResourceType.shield,2);
         resourcesToAdd.put(ResourceType.stone,3);
