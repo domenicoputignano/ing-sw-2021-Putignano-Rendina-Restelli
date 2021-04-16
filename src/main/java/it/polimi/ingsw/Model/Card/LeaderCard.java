@@ -12,6 +12,14 @@ public class LeaderCard {
     private boolean isActive;
     private int victoryPoints;
 
+    public LeaderCard(LeaderEffect leaderEffect, Map<ResourceType, Integer> requirementsResources, List<CardType> requirementsCards, int victoryPoints) {
+        this.leaderEffect = leaderEffect;
+        this.requirementsResources = requirementsResources;
+        this.requirementsCards = requirementsCards;
+        this.isActive = false;
+        this.victoryPoints = victoryPoints;
+    }
+
     public LeaderEffect getLeaderEffect() {
         return leaderEffect;
     }

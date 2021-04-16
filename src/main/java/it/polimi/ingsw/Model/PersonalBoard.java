@@ -25,6 +25,7 @@ public class PersonalBoard {
         this.slots[1] = new Stack<DevelopmentCard>();
         this.slots[2] = new Stack<DevelopmentCard>();
         this.basicProductionPower = null;
+        this.warehouse = new Warehouse();
         initializeFaithTrack();
     }
 
