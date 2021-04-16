@@ -13,6 +13,7 @@ import java.util.stream.Collectors;
 
 public class BuyDevCard implements AbstractTurnPhase, PaymentHandler {
 
+
     private Map<ResourceType, Integer> actualCost = null;
 
 

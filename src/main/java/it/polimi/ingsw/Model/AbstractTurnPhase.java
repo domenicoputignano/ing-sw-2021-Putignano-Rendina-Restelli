@@ -16,7 +16,8 @@ public interface AbstractTurnPhase {
         throw new InvalidActionException();
     }
 
-    default void activateProduction(Turn turn) throws InvalidActionException {
+
+    default void activateProduction(Turn turn, ActiveProductions activeProductions) throws InvalidActionException {
         throw new InvalidActionException();
     }
 

@@ -14,17 +14,19 @@ import java.util.List;
 import java.util.Stack;
 
 public class PersonalBoard {
+    private Player owner;
     private Stack<DevelopmentCard>[] slots;
     private ProductionRule basicProductionPower;
     private FaithTrack faithTrack;
     private Warehouse warehouse;
 
-    public PersonalBoard() {
+    public PersonalBoard(Player owner) {
+        this.owner = owner;
         this.slots = new Stack[3];
         this.slots[0] = new Stack<DevelopmentCard>();
         this.slots[1] = new Stack<DevelopmentCard>();
         this.slots[2] = new Stack<DevelopmentCard>();
-        this.basicProductionPower = null;
+        this.basicProductionPower = new ProductionRule();
         initializeFaithTrack();
     }
 
@@ -54,9 +56,6 @@ public class PersonalBoard {
         }
     }
 
-    public Warehouse getWarehouse() {
-        return warehouse;
-    }
 
 
     public boolean isCompatibleSlot(int level, int slotIndex) {
@@ -71,6 +70,19 @@ public class PersonalBoard {
                 else return true;
             }
         }
+    }
+
+    public boolean isValidRequestedProduction(ActiveProductions requestedProductions) {
+        if (requestedProductions.isSlot1()&&!(slots[0].size()>0)) return false;
+            if(requestedProductions.isSlot2()&&!(slots[1].size()>0)) return false;
+                if(requestedProductions.isSlot3()&&!(slots[2].size()>0)) return false;
+                    if(requestedProductions.isExtraSlot1()&& !(owner.getActiveEffects().stream().filter(x -> x.getEffect() == Effect.EXTRAPRODUCTION).count() > 0)) return false;
+                        if(requestedProductions.isExtraSlot1()&& !(owner.getActiveEffects().stream().filter(x -> x.getEffect() == Effect.EXTRAPRODUCTION).count() == 2)) return false;
+                        return true;
+    }
+
+    public Warehouse getWarehouse() {
+        return warehouse;
     }
 
 }

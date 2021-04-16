@@ -9,6 +9,8 @@ import java.util.Map;
 
 public interface PaymentHandler {
 
+
+
     default boolean checkResourcesFromNormalDepots(Warehouse warehouse, Map<ResourceType,Integer> resources) {
         for(ResourceType resourceType : resources.keySet()) {
             if(!warehouse.checkResourceFromNormalDepot(resourceType,resources.get(resourceType))) return false;

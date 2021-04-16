@@ -14,5 +14,34 @@ public class ActivateProductionMessage {
     private ResourceType output;
     private ResourceType outputExtra1;
     private ResourceType outputExtra2;
-    private Map<String, EnumMap<ResourceType,Integer>> neededResources = new HashMap<>();
+    private Map<String, EnumMap<ResourceType,Integer>> howToTakeResources = new HashMap<>();
+
+    public ActiveProductions getProductions() {
+        return productions;
+    }
+
+    public ResourceType getInput1() {
+        return input1;
+    }
+
+    public ResourceType getInput2() {
+        return input2;
+    }
+
+    public ResourceType getOutput() {
+        return output;
+    }
+
+    public ResourceType getOutputExtra1() {
+        return outputExtra1;
+    }
+
+    public ResourceType getOutputExtra2() {
+        return outputExtra2;
+    }
+
+    public Map<String, EnumMap<ResourceType, Integer>> getHowToTakeResources() {
+        return howToTakeResources;
+    }
+
 }

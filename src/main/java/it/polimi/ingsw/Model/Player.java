@@ -64,7 +64,7 @@ public class Player {
 
     public void initializePersonalBoard()
     {
-        this.personalBoard = new PersonalBoard();
+        this.personalBoard = new PersonalBoard(this);
     }
 
     public void setPosition(int position) {

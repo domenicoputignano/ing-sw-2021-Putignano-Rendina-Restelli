@@ -8,7 +8,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class FaithTrackTest {
 
-    PersonalBoard personalBoard = new PersonalBoard();
+    Player owner = new Player("Proprietario");
+    PersonalBoard personalBoard = new PersonalBoard(owner);
     FaithTrack faithTrack = personalBoard.getFaithTrack();
 
 

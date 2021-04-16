@@ -5,8 +5,8 @@ public class ActiveProductions {
     private boolean slot2;
     private boolean slot3;
     private boolean basic;
-    private boolean extraslot1;
-    private boolean extraslot2;
+    private boolean extraSlot1;
+    private boolean extraSlot2;
 
 
     public void setDefault() {
@@ -14,8 +14,8 @@ public class ActiveProductions {
         this.slot2 = false;
         this.slot3 = false;
         this.basic = false;
-        this.extraslot1 = false;
-        this.extraslot2 = false;
+        this.extraSlot1 = false;
+        this.extraSlot2 = false;
     }
 
 
@@ -35,12 +35,12 @@ public class ActiveProductions {
         this.basic = basic;
     }
 
-    public void setExtraslot1(boolean extraslot1) {
-        this.extraslot1 = extraslot1;
+    public void setExtraSlot1(boolean extraSlot1) {
+        this.extraSlot1 = extraSlot1;
     }
 
-    public void setExtraslot2(boolean extraslot2) {
-        this.extraslot2 = extraslot2;
+    public void setExtraSlot2(boolean extraSlot2) {
+        this.extraSlot2 = extraSlot2;
     }
 
     public boolean isSlot1() {
@@ -59,11 +59,11 @@ public class ActiveProductions {
         return basic;
     }
 
-    public boolean isExtraslot1() {
-        return extraslot1;
+    public boolean isExtraSlot1() {
+        return extraSlot1;
     }
 
-    public boolean isExtraslot2() {
-        return extraslot2;
+    public boolean isExtraSlot2() {
+        return extraSlot2;
     }
 }
