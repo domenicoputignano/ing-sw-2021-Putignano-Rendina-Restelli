@@ -16,8 +16,7 @@ public class Player {
     private PersonalBoard personalBoard;
     private List<LeaderCard> leaderCards = new ArrayList<>();
 
-
-    public Player(String username) {
+    public Player(String username){
         this.username = username;
     }
 
@@ -73,7 +72,7 @@ public class Player {
 
 
     public List<LeaderEffect> getActiveEffects () {
-        return leaderCards.stream().filter(x -> x.isActive()).map(x -> x.getLeaderEffect()).collect(Collectors.toList());
+        return leaderCards.stream().filter(LeaderCard::isActive).map(LeaderCard::getLeaderEffect).collect(Collectors.toList());
     }
 
 

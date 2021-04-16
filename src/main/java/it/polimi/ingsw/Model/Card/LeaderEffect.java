@@ -6,6 +6,11 @@ public class LeaderEffect {
     private Effect effect;
     private ResourceType type;
 
+    public LeaderEffect(Effect effect, ResourceType type){
+        this.effect = effect;
+        this.type = type;
+    }
+
     public Effect getEffect() {
         return effect;
     }
