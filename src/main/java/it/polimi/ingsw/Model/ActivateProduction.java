@@ -9,7 +9,7 @@ import java.util.Map;
 import java.util.Stack;
 import java.util.stream.Collectors;
 
-public class ActivateProduction implements AbstractTurnPhase, PaymentHandler {
+public class ActivateProduction implements AbstractTurnPhase {
 
     private ActivateProductionMessage activateProductionMessage;
     private Map<ResourceType, Integer> inputResources = new EnumMap<ResourceType, Integer>(ResourceType.class);
@@ -21,6 +21,9 @@ public class ActivateProduction implements AbstractTurnPhase, PaymentHandler {
         calculateResources(turn, activateProductionMessage.getProductions());
         if(turn.getPlayer().getPersonalBoard().getWarehouse().checkResources(inputResources)) {
 
+            Warehouse warehouse = turn.getPlayer().getPersonalBoard().getWarehouse();
+
+            // PaymentHandler
         } else {
             /*model in uno stato di errore e notifica il client*/
         }

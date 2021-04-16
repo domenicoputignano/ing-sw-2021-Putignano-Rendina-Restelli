@@ -19,10 +19,10 @@ class PlayerTest {
     void initialization(){
 
         player.initializePersonalBoard();
-        Map<ResourceType, Integer> requirementsResources1 = new EnumMap<ResourceType, Integer>(ResourceType.class);
-        Map<ResourceType, Integer> requirementsResources2 = new EnumMap<ResourceType, Integer>(ResourceType.class);
-        List<CardType> requirementsCards1 = new ArrayList<CardType>();
-        List<CardType> requirementsCards2 = new ArrayList<CardType>();
+        Map<ResourceType, Integer> requirementsResources1 = new EnumMap<>(ResourceType.class);
+        Map<ResourceType, Integer> requirementsResources2 = new EnumMap<>(ResourceType.class);
+        List<CardType> requirementsCards1 = new ArrayList<>();
+        List<CardType> requirementsCards2 = new ArrayList<>();
         requirementsCards2.add(new CardType(2, ColorCard.yellow));
         requirementsResources1.put(ResourceType.coin, 2);
         LeaderCard leaderCard1 = new LeaderCard(new LeaderEffect(Effect.EXTRADEPOT, ResourceType.coin), requirementsResources1, requirementsCards1, 5);

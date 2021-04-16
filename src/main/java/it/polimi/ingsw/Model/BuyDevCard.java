@@ -11,7 +11,7 @@ import it.polimi.ingsw.Utils.BuyDevCardMessage;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class BuyDevCard implements AbstractTurnPhase, PaymentHandler {
+public class BuyDevCard implements AbstractTurnPhase {
 
 
     private Map<ResourceType, Integer> actualCost = null;
@@ -29,43 +29,13 @@ public class BuyDevCard implements AbstractTurnPhase, PaymentHandler {
         }
         if (turn.getPlayer().getPersonalBoard().getWarehouse().checkResources(actualCost)) {
 
-            EnumMap<ResourceType, Integer> toTakeFromNormalDepot = message.getHowToTakeResources().get("Depot").clone();
-            EnumMap<ResourceType, Integer> toTakeFromStrongBox = message.getHowToTakeResources().get("Strongbox").clone();
-            EnumMap<ResourceType, Integer> toTakeFromExtraDepot = message.getHowToTakeResources().get("ExtraDepot").clone();
+                Warehouse playerWarehouse = turn.getPlayer().getPersonalBoard().getWarehouse();
+                PaymentHandler.performPayment(playerWarehouse, message.getHowToTakeResources(), turn);
 
-            Warehouse playerWarehouse = turn.getPlayer().getPersonalBoard().getWarehouse();
-
-            boolean normalDepotsCheck = checkResourcesFromNormalDepots(playerWarehouse,toTakeFromNormalDepot);
-            boolean extraDepotsCheck = checkResourcesFromExtraDepots(playerWarehouse,toTakeFromExtraDepot);
-            boolean strongboxCheck = checkResourcesFromStrongBox(playerWarehouse,toTakeFromStrongBox);
-            if(normalDepotsCheck && extraDepotsCheck && strongboxCheck) {
-                try {
-                    takeResourcesFromNormalDepots(playerWarehouse,toTakeFromNormalDepot);
-                } catch (DepotNotFoundException e) {
-                    e.printStackTrace();
-                } catch (DepotOutOfBoundsException e) {
-                    e.printStackTrace();
-                }
-                try {
-                    takeResourcesFromExtraDepots(playerWarehouse, toTakeFromExtraDepot);
-                } catch (DepotOutOfBoundsException e) {
-                    e.printStackTrace();
-                } catch (DepotNotFoundException e) {
-                    e.printStackTrace();
-                }
-                try {
-                    takeResourcesFromStrongbox(playerWarehouse,toTakeFromStrongBox);
-                } catch (StrongboxOutOfBoundException e) {
-                    e.printStackTrace();
-                }
                 performPurchasingCard(d.get().draw(),turn.getPlayer().getPersonalBoard(), message.getDestinationSlot());
             }
-            else {
-                /*settare il model in uno stato di errore e inviare al client gli errori relativi alle mappe corrispondenti*/
-            }
-        }
         else {
-
+                /*settare il model in uno stato di errore e inviare al client gli errori relativi alle mappe corrispondenti*/
         }
     }
 
