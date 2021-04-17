@@ -21,14 +21,16 @@ public class TakeResourcesFromMarket implements AbstractTurnPhase{
     @Override
     public void takeResourcesFromMarket(Turn turn, TakeResourcesFromMarketMessage takeResourcesFromMarketMessage)
     {
+        convertWhiteMarbles(turn,takeResourcesFromMarketMessage.getWhereToPutMarbles(),takeResourcesFromMarketMessage);
+        convertMarblesToResources(takeResourcesFromMarketMessage.getWhereToPutMarbles());
     }
 
     private void convertWhiteMarbles(Turn turn, List<Pair<Marble, MarbleDestination>> pairList, TakeResourcesFromMarketMessage takeResourcesFromMarketMessage) {
         List<ResourceType> whiteMarbleEffects = turn.getPlayer().getActiveEffects().stream().filter(x -> x.getEffect()==Effect.CMARBLE).
                 map(x -> x.getType()).collect(Collectors.toList());
         List<Marble> marbles = pairList.stream().map(Pair::getKey).collect(Collectors.toList());
+        int i = 0;
         for(Marble m : marbles) {
-            int i = 0;
             if(m.getColor()==Color.WHITE) {
                 if(whiteMarbleEffects.size()==1) {
                     WhiteMarble y = (WhiteMarble) m;
@@ -44,9 +46,8 @@ public class TakeResourcesFromMarket implements AbstractTurnPhase{
 
     private void convertMarblesToResources(List<Pair<Marble,MarbleDestination>> marbles) {
         for(Pair<Marble,MarbleDestination> p : marbles) {
-            if(p.getKey().getColor() == Color.RED)
+            if (p.getKey().getColor() == Color.RED)
                 faith++;
-            marbles.remove(p);
         }
         ResourceType resourceType;
         for(Pair<Marble,MarbleDestination> p : marbles) {
@@ -64,5 +65,13 @@ public class TakeResourcesFromMarket implements AbstractTurnPhase{
         if(type == ResourceType.shield) return new Shield();
         if(type == ResourceType.stone) return new Stone();
         else return null;
+    }
+
+    public List<Pair<ResourceType, MarbleDestination>> getWhereToPutResources() {
+        return whereToPutResources;
+    }
+
+    public int getFaith() {
+        return faith;
     }
 }

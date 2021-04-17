@@ -13,4 +13,10 @@ public abstract class Marble {
 
     public Color getColor() { return color; }
 
+    @Override
+    public String toString() {
+        return "Marble{" +
+                "color=" + color +
+                '}';
+    }
 }

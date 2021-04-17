@@ -49,6 +49,7 @@ public class Game implements Observer<Integer> {
                if(p.getPosition()==3 || p.getPosition()==4)
                    p.getPersonalBoard().getFaithTrack().moveMarker(1);
            }
+        this.turn = new Turn(this,inkwell);
     //DISTRIBUZIONE RISORSE A SCELTA E SCELTA CARTE LEADER PASSANDO IN RESOURCECHOICE E LEADER CHOICE
         //Inviare notifica alle view interessate per le risorse a scelta
     }
@@ -145,6 +146,10 @@ public class Game implements Observer<Integer> {
             else p.getPersonalBoard().getFaithTrack().getSections()[vatican_index].setValidFavorTiles(StateFavorTiles.DISCARDED);
         }
 
+    }
+
+    public void setTurn(Turn turn) {
+        this.turn = turn;
     }
 
     public Turn getTurn() {

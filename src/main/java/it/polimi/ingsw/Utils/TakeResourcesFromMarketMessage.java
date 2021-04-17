@@ -8,9 +8,10 @@ import java.util.List;
 import java.util.Optional;
 
 public class TakeResourcesFromMarketMessage {
-    List<Pair<Marble, MarbleDestination>> whereToPutMarbles = new ArrayList<>();
-    MarketChoice playerChoice;
-    List<Integer> whiteEffects = new ArrayList<>();
+    private List<Pair<Marble, MarbleDestination>> whereToPutMarbles = new ArrayList<>();
+    private MarketChoice playerChoice;
+    private int index;
+    private List<Integer> whiteEffects = new ArrayList<>();
 
 
     public List<Pair<Marble, MarbleDestination>> getWhereToPutMarbles() {
@@ -23,5 +24,18 @@ public class TakeResourcesFromMarketMessage {
 
     public List<Integer> getWhiteEffects() {
         return whiteEffects;
+    }
+
+    public void setWhereToPutMarbles(List<Pair<Marble, MarbleDestination>> whereToPutMarbles) {
+        this.whereToPutMarbles = whereToPutMarbles;
+    }
+
+    public void setPlayerChoice(MarketChoice playerChoice, int index) {
+        this.playerChoice = playerChoice;
+        this.index = index;
+    }
+
+    public void setWhiteEffects(List<Integer> whiteEffects) {
+        this.whiteEffects = whiteEffects;
     }
 }
