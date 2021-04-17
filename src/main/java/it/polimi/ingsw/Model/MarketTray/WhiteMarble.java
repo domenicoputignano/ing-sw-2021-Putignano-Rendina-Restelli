@@ -1,5 +1,6 @@
 package it.polimi.ingsw.Model.MarketTray;
 
+import it.polimi.ingsw.Exceptions.NoSuchResourceTypeException;
 import it.polimi.ingsw.Model.ResourceType;
 
 public class WhiteMarble extends Marble {
@@ -14,8 +15,10 @@ public class WhiteMarble extends Marble {
         this.effect = effect;
     }
 
-    public ResourceType addResources() {
-        return effect.add();
+
+    public ResourceType addResources() throws NoSuchResourceTypeException {
+        if(effect!=null) return effect.add();
+        return super.addResources();
     }
 
     public WhiteMarbleEffect getEffect() {

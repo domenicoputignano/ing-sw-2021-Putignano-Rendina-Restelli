@@ -10,13 +10,13 @@ import java.util.stream.Collectors;
 
 
 public class Warehouse {
-    private Map<ResourceType,Integer> avaiableResources;
+    private Map<ResourceType,Integer> availableResources;
     private NormalDepot[] normalDepots;
     private ExtraDepot[] extraDepots;
     private Strongbox strongbox;
 
     public Warehouse(Map<ResourceType, Integer> avaiableResources, NormalDepot[] normalDepot, ExtraDepot[] extraDepot, Strongbox strongbox) {
-        this.avaiableResources = avaiableResources;
+        this.availableResources = avaiableResources;
         this.normalDepots = normalDepot;
         this.extraDepots = extraDepot;
         this.strongbox = strongbox;
@@ -24,11 +24,11 @@ public class Warehouse {
 
     public Warehouse()
     {
-        this.avaiableResources = new EnumMap<ResourceType, Integer>(ResourceType.class);
-        this.avaiableResources.put(ResourceType.servant,0);
-        this.avaiableResources.put(ResourceType.coin,0);
-        this.avaiableResources.put(ResourceType.shield,0);
-        this.avaiableResources.put(ResourceType.stone,0);
+        this.availableResources = new EnumMap<ResourceType, Integer>(ResourceType.class);
+        this.availableResources.put(ResourceType.servant,0);
+        this.availableResources.put(ResourceType.coin,0);
+        this.availableResources.put(ResourceType.shield,0);
+        this.availableResources.put(ResourceType.stone,0);
         this.normalDepots = new NormalDepot[3];
         this.normalDepots[0] = new NormalDepot(1);
         this.normalDepots[1] = new NormalDepot(2);
@@ -101,7 +101,7 @@ public class Warehouse {
 
     public boolean checkResources(Map<ResourceType,Integer> neededResources)
     {
-        return neededResources.keySet().stream().allMatch((key) -> (neededResources.get(key) <= this.avaiableResources.get(key)));
+        return neededResources.keySet().stream().allMatch((key) -> (neededResources.get(key) <= this.availableResources.get(key)));
     }
 
     public boolean checkResourceFromNormalDepot(ResourceType type, int occ) {
@@ -233,12 +233,12 @@ public class Warehouse {
             if(e!=null)
                 local.put(e.getType(), local.get(e.getType())+e.getOcc());
         }
-        this.avaiableResources = local;
+        this.availableResources = local;
     }
 
 
-    public Map<ResourceType, Integer> getAvaiableResources() {
-        return avaiableResources;
+    public Map<ResourceType, Integer> getAvailableResources() {
+        return availableResources;
     }
 
     public NormalDepot[] getNormalDepots() {

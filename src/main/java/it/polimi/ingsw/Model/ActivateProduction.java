@@ -21,9 +21,11 @@ public class ActivateProduction implements AbstractTurnPhase {
         calculateResources(turn, activateProductionMessage.getProductions());
         if(turn.getPlayer().getPersonalBoard().getWarehouse().checkResources(inputResources)) {
 
-            Warehouse warehouse = turn.getPlayer().getPersonalBoard().getWarehouse();
+            Warehouse playerWarehouse = turn.getPlayer().getPersonalBoard().getWarehouse();
+            PaymentHandler.performPayment(playerWarehouse, activateProductionMessage.getHowToTakeResources(),turn);
+            playerWarehouse.addResourcesToStrongbox(outputResources);
+            turn.getPlayer().getPersonalBoard().getFaithTrack().moveMarker(faith);
 
-            // PaymentHandler
         } else {
             /*model in uno stato di errore e notifica il client*/
         }

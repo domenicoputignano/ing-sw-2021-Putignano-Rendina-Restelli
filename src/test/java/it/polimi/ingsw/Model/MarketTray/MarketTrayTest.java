@@ -1,5 +1,6 @@
 package it.polimi.ingsw.Model.MarketTray;
 
+import it.polimi.ingsw.Utils.MarketChoice;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -102,7 +103,7 @@ public class MarketTrayTest {
     }
     @Test
     void takeMarblesRow() {
-        marketTray.takeMarbles("row",1);
+        marketTray.takeMarbles(MarketChoice.ROW,1);
         blueMarblesNumber();
         whiteMarblesNumber();
         purpleMarblesNumber();
@@ -113,7 +114,7 @@ public class MarketTrayTest {
     }
     @Test
     void takeMarblesColumn() {
-        marketTray.takeMarbles("column",2);
+        marketTray.takeMarbles(MarketChoice.COLUMN,2);
         blueMarblesNumber();
         whiteMarblesNumber();
         purpleMarblesNumber();
@@ -126,7 +127,7 @@ public class MarketTrayTest {
     void checkReturnValueRow()
     {
         Marble a[] = marketTray.getAvailableMarbles()[1].clone();
-        assertArrayEquals(a,marketTray.takeMarbles("row",1).toArray());
+        assertArrayEquals(a,marketTray.takeMarbles(MarketChoice.ROW,1).toArray());
     }
     @Test
     void checkReturnValueColumn()
@@ -135,14 +136,14 @@ public class MarketTrayTest {
         a[0] = marketTray.getAvailableMarbles()[0][2];
         a[1] = marketTray.getAvailableMarbles()[1][2];
         a[2] = marketTray.getAvailableMarbles()[2][2];
-        assertArrayEquals(a,marketTray.takeMarbles("column",2).toArray());
+        assertArrayEquals(a,marketTray.takeMarbles(MarketChoice.COLUMN,2).toArray());
     }
     @Test
     void checkSlidingRow()
     {
         Marble sliding = marketTray.getSlidingMarble();
         Marble a[] = marketTray.getAvailableMarbles()[1].clone();
-        marketTray.takeMarbles("row",1);
+        marketTray.takeMarbles(MarketChoice.ROW,1);
         assertEquals(marketTray.getAvailableMarbles()[1][3],sliding);
         assertEquals(a[0],marketTray.getSlidingMarble());
         assertEquals(marketTray.getAvailableMarbles()[1][0],a[1]);
@@ -157,7 +158,7 @@ public class MarketTrayTest {
         a[0] = marketTray.getAvailableMarbles()[0][2];
         a[1] = marketTray.getAvailableMarbles()[1][2];
         a[2] = marketTray.getAvailableMarbles()[2][2];
-        marketTray.takeMarbles("column",2);
+        marketTray.takeMarbles(MarketChoice.COLUMN,2);
         assertEquals(marketTray.getAvailableMarbles()[2][2],sliding);
         assertEquals(a[0],marketTray.getSlidingMarble());
         assertEquals(marketTray.getAvailableMarbles()[0][2],a[1]);

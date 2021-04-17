@@ -28,10 +28,8 @@ public class BuyDevCard implements AbstractTurnPhase {
             }
         }
         if (turn.getPlayer().getPersonalBoard().getWarehouse().checkResources(actualCost)) {
-
                 Warehouse playerWarehouse = turn.getPlayer().getPersonalBoard().getWarehouse();
                 PaymentHandler.performPayment(playerWarehouse, message.getHowToTakeResources(), turn);
-
                 performPurchasingCard(d.get().draw(),turn.getPlayer().getPersonalBoard(), message.getDestinationSlot());
             }
         else {

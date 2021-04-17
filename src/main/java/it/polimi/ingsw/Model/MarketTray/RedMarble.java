@@ -1,14 +1,18 @@
 package it.polimi.ingsw.Model.MarketTray;
 
+import it.polimi.ingsw.Exceptions.NoSuchResourceTypeException;
+import it.polimi.ingsw.Model.ResourceType;
+
 public class RedMarble extends Marble {
 
     public RedMarble() {
         this.color = Color.RED;
     }
 
-    public Integer addResources() {
-        /* ritornare un intero di tipo fede */
-        return 1;
+    @Override
+    public ResourceType addResources() throws NoSuchResourceTypeException {
+        return super.addResources();
     }
+
 
 }

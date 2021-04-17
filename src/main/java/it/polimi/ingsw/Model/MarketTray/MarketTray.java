@@ -1,6 +1,7 @@
 package it.polimi.ingsw.Model.MarketTray;
 
 import it.polimi.ingsw.Model.ResourceType;
+import it.polimi.ingsw.Utils.MarketChoice;
 
 import java.util.*;
 
@@ -37,8 +38,8 @@ public class MarketTray {
         }
     }
 
-    private void slideMarbles(String choice, int index) {
-        if(choice.equals("row")) {
+    private void slideMarbles(MarketChoice marketChoice, int index) {
+        if(marketChoice == MarketChoice.ROW) {
             Marble temp = availableMarbles[index][0];
             for(int i = 0; i < availableMarbles[index].length - 1; i++ ) {
                 availableMarbles[index][i] = availableMarbles[index][i+1];
@@ -55,19 +56,30 @@ public class MarketTray {
         }
     }
 
+    public List<Marble> peekMarbles(MarketChoice marketChoice, int index) {
+        List<Marble> marbles = new ArrayList<>();
+        if(marketChoice==MarketChoice.ROW) {
+            marbles.addAll(Arrays.asList(availableMarbles[index]));
+        } else {
+            for(int i = 0; i < availableMarbles.length; i++) {
+                marbles.add(availableMarbles[i][index]);
+            }
+        }
+        return marbles;
+    }
 
-    public List<Marble> takeMarbles(String choice, int index) {
-        if (choice.equals("row")) {
+    public List<Marble> takeMarbles(MarketChoice marketChoice, int index) {
+        if(marketChoice==MarketChoice.ROW) {
             List<Marble> marbles = new ArrayList<Marble>(4);
             marbles.addAll(Arrays.asList(availableMarbles[index]));
-            slideMarbles(choice, index);
+            slideMarbles(marketChoice, index);
             return marbles;
         } else {
             List<Marble> marbles = new ArrayList<Marble>(3);
             for (int i = 0; i < availableMarbles.length; i++) {
                 marbles.add(availableMarbles[i][index]);
             }
-            slideMarbles(choice, index);
+            slideMarbles(marketChoice, index);
             return marbles;
         }
     }
