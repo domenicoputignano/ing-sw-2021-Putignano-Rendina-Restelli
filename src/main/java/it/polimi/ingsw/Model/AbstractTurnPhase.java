@@ -22,4 +22,8 @@ public interface AbstractTurnPhase {
         throw new InvalidActionException();
     }
 
+    default void concludeTurnPhase(Turn turn) {
+        //TODO turn.getGame().handleConclusion();
+    }
+
 }

@@ -7,6 +7,7 @@ import it.polimi.ingsw.Model.Card.LeaderEffect;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 
@@ -76,5 +77,12 @@ public class Player {
     }
 
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Player player = (Player) o;
+        return position == player.position && username.equals(player.username) && personalBoard.equals(player.personalBoard) && leaderCards.equals(player.leaderCards);
+    }
 
 }

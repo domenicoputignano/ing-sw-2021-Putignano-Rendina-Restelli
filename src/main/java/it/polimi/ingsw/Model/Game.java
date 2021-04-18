@@ -148,6 +148,10 @@ public class Game implements Observer<Integer> {
 
     }
 
+    //TODO handleError method
+
+    //TODO handleConclusion method
+
     public void setTurn(Turn turn) {
         this.turn = turn;
     }

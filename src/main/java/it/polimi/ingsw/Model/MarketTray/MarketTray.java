@@ -84,6 +84,17 @@ public class MarketTray {
         }
     }
 
+    public void clearWhiteMarbleEffect() {
+        for (int i = 0; i < availableMarbles.length; i++) {
+            for(int j = 0; j < availableMarbles[i].length; j++) {
+                if(availableMarbles[i][j].getColor() == Color.WHITE) {
+                    WhiteMarble whiteMarble = (WhiteMarble)availableMarbles[i][j];
+                    whiteMarble.setEffect(null);
+                }
+            }
+        }
+    }
+
     public Marble[][] getAvailableMarbles() {
         return availableMarbles;
     }

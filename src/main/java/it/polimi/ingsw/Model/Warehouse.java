@@ -9,14 +9,14 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 
-public class Warehouse {
+public class Warehouse implements Cloneable {
     private Map<ResourceType,Integer> availableResources;
     private NormalDepot[] normalDepots;
     private ExtraDepot[] extraDepots;
     private Strongbox strongbox;
 
-    public Warehouse(Map<ResourceType, Integer> avaiableResources, NormalDepot[] normalDepot, ExtraDepot[] extraDepot, Strongbox strongbox) {
-        this.availableResources = avaiableResources;
+    public Warehouse(Map<ResourceType, Integer> availableResources, NormalDepot[] normalDepot, ExtraDepot[] extraDepot, Strongbox strongbox) {
+        this.availableResources = availableResources;
         this.normalDepots = normalDepot;
         this.extraDepots = extraDepot;
         this.strongbox = strongbox;
@@ -58,10 +58,10 @@ public class Warehouse {
 
 
     /* -1 perché gli indici dati dalla CLI partono da 1*/
-    public void addResourcesToDepot(int depotindex, ResourceType type, int num) throws DepotOutOfBoundsException, IncompatibleResourceTypeException {
-        if(!isValidEditing(type,depotindex))
+    public void addResourcesToDepot(int depotIndex, ResourceType type, int num) throws DepotOutOfBoundsException, IncompatibleResourceTypeException {
+        if(!isValidEditing(type,depotIndex))
             throw new IncompatibleResourceTypeException();
-        NormalDepot d = getNormalDepots()[depotindex - 1];
+        NormalDepot d = getNormalDepots()[depotIndex - 1];
         if(d.getOcc() == 0) {
            d.setType(type);
            d.add(num);
@@ -77,9 +77,9 @@ public class Warehouse {
 
 
     public void addResourcesToExtraDepot(ResourceType type, int num) throws DepotOutOfBoundsException, DepotNotFoundException {
-        List<ExtraDepot> extradepot = Arrays.stream(extraDepots).filter(x -> x!=null&&x.getType()==type).collect(Collectors.toList());
-        if(extradepot.size() == 0) throw new DepotNotFoundException();
-        else extradepot.get(0).add(num);
+        List<ExtraDepot> extraDepot = Arrays.stream(extraDepots).filter(x -> x!=null&&x.getType()==type).collect(Collectors.toList());
+        if(extraDepot.size() == 0) throw new DepotNotFoundException();
+        else extraDepot.get(0).add(num);
         this.updateAvailableResources();
     }
 
@@ -252,4 +252,7 @@ public class Warehouse {
     public Strongbox getStrongbox() {
         return strongbox;
     }
+
+
+
 }
