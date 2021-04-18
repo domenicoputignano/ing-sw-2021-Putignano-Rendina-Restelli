@@ -127,17 +127,6 @@ public class Warehouse implements Cloneable {
 
 
 
-
-    public void moveFromNormalDepotToNormalDepot(int depotFrom, int depotTo) {
-        ResourceType resourceTemp = normalDepots[depotTo].getType();
-        int occTemp = normalDepots[depotTo].getOcc();
-        int sizeTemp = normalDepots[depotTo].getSize();
-        int sizeTempFrom = normalDepots[depotFrom].getSize();
-        normalDepots[depotTo] = new NormalDepot(normalDepots[depotFrom].getOcc(),normalDepots[depotFrom].getType(),sizeTemp);
-        normalDepots[depotFrom] = new NormalDepot(occTemp, resourceTemp, sizeTempFrom);
-    }
-
-
     // controller needs to know if he can perform moving action
     public boolean checkMoveFromNormalDepotToNormalDepot(int depotFrom, int depotTo) {
         if(normalDepots[depotFrom].getType() == null) {
@@ -183,7 +172,18 @@ public class Warehouse implements Cloneable {
         return false;
     }
 
-    public void moveFromNormalDepotToExtraDepot(int depotFrom,int occ, int extraDepotTo) throws DepotOutOfBoundsException {
+
+    public void moveFromNormalDepotToNormalDepot(int depotFrom, int depotTo) {
+        ResourceType resourceTemp = normalDepots[depotTo].getType();
+        int occTemp = normalDepots[depotTo].getOcc();
+        int sizeTemp = normalDepots[depotTo].getSize();
+        int sizeTempFrom = normalDepots[depotFrom].getSize();
+        normalDepots[depotTo] = new NormalDepot(normalDepots[depotFrom].getOcc(),normalDepots[depotFrom].getType(),sizeTemp);
+        normalDepots[depotFrom] = new NormalDepot(occTemp, resourceTemp, sizeTempFrom);
+    }
+
+
+    public void moveFromNormalDepotToExtraDepot(int depotFrom, int occ, int extraDepotTo) throws DepotOutOfBoundsException {
         normalDepots[depotFrom-1].take(occ);
         extraDepots[extraDepotTo-1].add(occ);
     }
@@ -194,7 +194,6 @@ public class Warehouse implements Cloneable {
             normalDepots[depotTo-1].setType(extraDepots[extraDepotFrom-1].getType());
         normalDepots[depotTo-1].add(occ);
     }
-
 
 
     public int findNormalDepotByResourceType(ResourceType type) throws DepotNotFoundException {

@@ -1,13 +1,15 @@
 package it.polimi.ingsw.Model;
 
+import it.polimi.ingsw.Exceptions.DepotOutOfBoundsException;
+import it.polimi.ingsw.Exceptions.IncompatibleResourceTypeException;
 import it.polimi.ingsw.Model.Card.Deck;
 import it.polimi.ingsw.Model.Card.Effect;
 import it.polimi.ingsw.Model.Card.LeaderCard;
 import it.polimi.ingsw.Model.Card.LeaderEffect;
+import it.polimi.ingsw.Utils.MoveActionInterface;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.stream.Collectors;
 
 
@@ -21,16 +23,19 @@ public class Player {
         this.username = username;
     }
 
-    public void takeResourcesFromMarket() {
 
+    public void moveResources(List<MoveActionInterface> moves) {
+        for(MoveActionInterface move : moves) {
+            try {
+                move.handleMove(this.personalBoard.getWarehouse());
+            } catch (DepotOutOfBoundsException | IncompatibleResourceTypeException e) {
+                /*TODO interrompere la sequenza di move che sto eseguendo e notificare il client*/
+            } finally {
+
+            }
+        }
     }
 
-    public void buyDevCard(Deck deck, int slot) {
-    }
-
-    public void startActiveProduction(ActiveProductions mask) {
-
-    }
 
     public void activateLeaderCard(int index) {
         this.leaderCards.get(index).setIsActive();

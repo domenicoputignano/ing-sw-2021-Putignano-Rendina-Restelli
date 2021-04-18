@@ -112,7 +112,7 @@ public class TakeResourcesFromMarket implements AbstractTurnPhase {
                 p.getPersonalBoard().getFaithTrack().moveMarker(faith);
             }
         }
-
+        //TODO notificare il client per la fine dell'azione principale
     }
 
 
