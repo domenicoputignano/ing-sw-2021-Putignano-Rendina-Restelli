@@ -5,13 +5,10 @@ import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
 import it.polimi.ingsw.Model.Card.*;
 import it.polimi.ingsw.Utils.Pair;
-
-import javax.smartcardio.Card;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.lang.reflect.Type;
 import java.util.*;
-import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 public class PersonalBoard {
@@ -31,6 +28,7 @@ public class PersonalBoard {
         this.warehouse = new Warehouse();
         initializeFaithTrack();
     }
+
 
     public Stack<DevelopmentCard>[] getSlots() {
         return slots;

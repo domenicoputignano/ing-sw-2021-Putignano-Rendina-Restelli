@@ -1,6 +1,7 @@
 package it.polimi.ingsw.Model.Card;
 
 
+import java.util.Objects;
 
 public class CardType {
     private int level;
@@ -18,4 +19,13 @@ public class CardType {
     public ColorCard getColor() {
         return color;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        CardType cardType = (CardType) o;
+        return level == cardType.level && color == cardType.color;
+    }
+
 }
