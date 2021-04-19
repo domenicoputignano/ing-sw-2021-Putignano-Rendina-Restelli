@@ -4,14 +4,15 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
 import it.polimi.ingsw.Model.Card.*;
+import it.polimi.ingsw.Utils.Pair;
 
+import javax.smartcardio.Card;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.EmptyStackException;
-import java.util.List;
-import java.util.Stack;
+import java.util.*;
+import java.util.function.Supplier;
+import java.util.stream.Collectors;
 
 public class PersonalBoard {
     private Player owner;
@@ -80,6 +81,38 @@ public class PersonalBoard {
                     if(requestedProductions.isExtraSlot1()&& !(owner.getActiveEffects().stream().filter(x -> x.getEffect() == Effect.EXTRAPRODUCTION).count() > 0)) return false;
                         if(requestedProductions.isExtraSlot1()&& !(owner.getActiveEffects().stream().filter(x -> x.getEffect() == Effect.EXTRAPRODUCTION).count() == 2)) return false;
                         return true;
+    }
+
+    public boolean checkLeaderRequirements(LeaderCard leaderCard){
+        if(warehouse.checkResources(leaderCard.getRequirementsResources()) && checkSlotsCards(leaderCard.getRequirementsCards())){
+            return true;
+        }
+        return false;
+    }
+
+    private boolean checkSlotsCards(List<CardType> requirements){
+        List<CardType> activeCards = new ArrayList<>();
+        Arrays.asList(slots).stream().forEach(x -> activeCards.addAll(x.stream().map(DevelopmentCard::getType).collect(Collectors.toList())));
+        List<Pair<CardType, Integer>> activeCardTypes = convertToCardTypeOccurrences(activeCards);
+        List<Pair<CardType, Integer>> requirementsCard = convertToCardTypeOccurrences(requirements);
+        for(Pair<CardType, Integer> p : requirementsCard){
+            if(activeCardTypes.stream().anyMatch(x -> x.getKey().equals(p.getKey()))){
+                if(activeCardTypes.stream().filter(x -> x.getKey().equals(p.getKey())).findFirst().get().getValue() < p.getValue()) return false;
+            } else return false;
+        }
+        return true;
+    }
+
+    private List<Pair<CardType, Integer>> convertToCardTypeOccurrences(List<CardType> cardTypes){
+        List<Pair<CardType, Integer>> cardTypeOccurrences = new ArrayList<>();
+        for(CardType cardType : cardTypes){
+            if(cardTypeOccurrences.stream().anyMatch(x -> x.getKey().equals(cardType))){
+                cardTypeOccurrences.stream().filter(x -> x.getKey().equals(cardType)).forEach(x -> x.setValue(x.getValue()+1));
+            } else{
+                cardTypeOccurrences.add(new Pair<>(cardType, 1));
+            }
+        }
+        return cardTypeOccurrences;
     }
 
     public Warehouse getWarehouse() {
