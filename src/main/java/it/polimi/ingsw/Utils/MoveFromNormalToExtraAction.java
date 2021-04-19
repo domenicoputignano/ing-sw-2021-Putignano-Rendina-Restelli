@@ -1,6 +1,5 @@
 package it.polimi.ingsw.Utils;
 
-import it.polimi.ingsw.Exceptions.DepotOutOfBoundsException;
 import it.polimi.ingsw.Model.Warehouse;
 
 public class MoveFromNormalToExtraAction implements MoveActionInterface {
@@ -15,10 +14,12 @@ public class MoveFromNormalToExtraAction implements MoveActionInterface {
         this.extraDepotTo = extraDepotTo;
     }
 
-    public void handleMove(Warehouse warehouse) throws DepotOutOfBoundsException {
+    public boolean handleMove(Warehouse warehouse) {
         if(warehouse.checkMoveFromNormalDepotToExtraDepot(depotFrom, occ, extraDepotTo)) {
             warehouse.moveFromNormalDepotToExtraDepot(depotFrom, occ, extraDepotTo);
+            return true;
         }
+        return false;
     }
 
 

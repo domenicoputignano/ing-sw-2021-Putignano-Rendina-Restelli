@@ -1,7 +1,5 @@
 package it.polimi.ingsw.Utils;
 
-import it.polimi.ingsw.Exceptions.DepotOutOfBoundsException;
-import it.polimi.ingsw.Exceptions.IncompatibleResourceTypeException;
 import it.polimi.ingsw.Model.Warehouse;
 
 public class MoveFromExtraToNormalAction implements MoveActionInterface {
@@ -15,9 +13,11 @@ public class MoveFromExtraToNormalAction implements MoveActionInterface {
         this.depotTo = depotTo;
     }
 
-    public void handleMove(Warehouse warehouse) throws IncompatibleResourceTypeException, DepotOutOfBoundsException {
+    public boolean handleMove(Warehouse warehouse) {
         if(warehouse.checkMoveFromExtraDepotToNormalDepot(extraDepotFrom, occ, depotTo)) {
             warehouse.moveFromExtraDepotToNormalDepot(extraDepotFrom, occ, depotTo);
+            return true;
         }
+        return false;
     }
 }

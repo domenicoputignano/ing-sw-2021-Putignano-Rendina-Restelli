@@ -159,10 +159,8 @@ public class Warehouse implements Cloneable {
 
 
 
-    public boolean checkMoveFromExtraDepotToNormalDepot(int extraDepotFrom, int occ, int depotTo) throws IncompatibleResourceTypeException {
-        if(extraDepots[extraDepotFrom-1] != null) {
-            if (!isValidEditing(extraDepots[extraDepotFrom - 1].getType(),depotTo))
-                throw new IncompatibleResourceTypeException();
+    public boolean checkMoveFromExtraDepotToNormalDepot(int extraDepotFrom, int occ, int depotTo){
+        if(extraDepots[extraDepotFrom-1] != null && (isValidEditing(extraDepots[extraDepotFrom - 1].getType(),depotTo))) {
             if ((normalDepots[depotTo - 1].getType() == extraDepots[extraDepotFrom - 1].getType()
                     || normalDepots[depotTo - 1].getType() == null)
                     && normalDepots[depotTo - 1].getOcc() + occ <= normalDepots[depotTo - 1].getSize()

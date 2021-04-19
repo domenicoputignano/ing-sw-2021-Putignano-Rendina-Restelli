@@ -2,7 +2,6 @@ package it.polimi.ingsw.Model;
 
 import it.polimi.ingsw.Exceptions.DepotOutOfBoundsException;
 import it.polimi.ingsw.Exceptions.IncompatibleResourceTypeException;
-import it.polimi.ingsw.Model.Card.Deck;
 import it.polimi.ingsw.Model.Card.Effect;
 import it.polimi.ingsw.Model.Card.LeaderCard;
 import it.polimi.ingsw.Model.Card.LeaderEffect;
@@ -24,15 +23,12 @@ public class Player {
     }
 
 
-    public void moveResources(List<MoveActionInterface> moves) {
-        for(MoveActionInterface move : moves) {
-            try {
-                move.handleMove(this.personalBoard.getWarehouse());
-            } catch (DepotOutOfBoundsException | IncompatibleResourceTypeException e) {
-                /*TODO interrompere la sequenza di move che sto eseguendo e notificare il client*/
-            } finally {
-
-            }
+    public void moveResources(MoveActionInterface move) {
+        if(move.handleMove(this.personalBoard.getWarehouse())){
+            /*TODO notificare al client che la mossa di move è stata correttamente eseguita*/
+        }
+        else{
+            // TODO notificare al client che vi è stato un errore nell'esecuzione della move
         }
     }
 

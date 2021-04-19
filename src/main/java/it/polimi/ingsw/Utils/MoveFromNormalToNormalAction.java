@@ -12,9 +12,12 @@ public class MoveFromNormalToNormalAction implements MoveActionInterface {
     }
 
     @Override
-    public void handleMove(Warehouse warehouse) {
-        if(warehouse.checkMoveFromNormalDepotToNormalDepot(depotFrom, depotTo));
+    public boolean handleMove(Warehouse warehouse) {
+        if(warehouse.checkMoveFromNormalDepotToNormalDepot(depotFrom, depotTo)){
             warehouse.moveFromNormalDepotToNormalDepot(depotFrom, depotTo);
+            return true;
+        }
+        return false;
     }
 
 }
