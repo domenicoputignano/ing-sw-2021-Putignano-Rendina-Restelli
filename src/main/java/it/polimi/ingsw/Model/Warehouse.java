@@ -183,16 +183,23 @@ public class Warehouse implements Cloneable {
     }
 
 
-    public void moveFromNormalDepotToExtraDepot(int depotFrom, int occ, int extraDepotTo) throws DepotOutOfBoundsException {
-        normalDepots[depotFrom-1].take(occ);
-        extraDepots[extraDepotTo-1].add(occ);
+    public void moveFromNormalDepotToExtraDepot(int depotFrom, int occ, int extraDepotTo) {
+        NormalDepot normalDepot = normalDepots[depotFrom-1];
+        normalDepots[depotFrom-1] = new NormalDepot(normalDepot.getOcc()-occ, normalDepot.getType(), normalDepot.getSize());
+        if(normalDepots[depotFrom-1].getOcc() == 0) normalDepots[depotFrom-1].setType(null);
+        ExtraDepot extraDepot = extraDepots[extraDepotTo-1];
+        extraDepots[extraDepotTo-1] = new ExtraDepot(extraDepot.getOcc()+occ, extraDepot.getType());
     }
 
-    public void moveFromExtraDepotToNormalDepot(int extraDepotFrom, int occ, int depotTo) throws DepotOutOfBoundsException {
-        extraDepots[extraDepotFrom-1].take(occ);
-        if(normalDepots[depotTo-1].getType() == null)
-            normalDepots[depotTo-1].setType(extraDepots[extraDepotFrom-1].getType());
-        normalDepots[depotTo-1].add(occ);
+    public void moveFromExtraDepotToNormalDepot(int extraDepotFrom, int occ, int depotTo) {
+        ExtraDepot extraDepot = extraDepots[extraDepotFrom-1];
+        extraDepots[extraDepotFrom-1] = new ExtraDepot(extraDepot.getOcc()-occ, extraDepot.getType());
+        NormalDepot normalDepot = normalDepots[depotTo-1];
+        if(normalDepot.getType() == null){
+            normalDepots[depotTo-1] = new NormalDepot(normalDepot.getOcc()+occ, extraDepot.getType(), normalDepot.getSize());
+        } else{
+            normalDepots[depotTo-1] = new NormalDepot(normalDepot.getOcc()+occ, normalDepot.getType(), normalDepot.getSize());
+        }
     }
 
 

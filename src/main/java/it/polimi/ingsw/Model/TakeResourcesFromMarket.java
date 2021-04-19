@@ -23,8 +23,7 @@ public class TakeResourcesFromMarket implements AbstractTurnPhase {
     int discardedResources = 0;
 
     @Override
-    public void takeResourcesFromMarket(Turn turn, TakeResourcesFromMarketMessage takeResourcesFromMarketMessage)
-    {
+    public void takeResourcesFromMarket(Turn turn, TakeResourcesFromMarketMessage takeResourcesFromMarketMessage) {
         convertWhiteMarbles(turn,takeResourcesFromMarketMessage.getWhereToPutMarbles(),takeResourcesFromMarketMessage.getWhiteEffects());
         convertMarblesToResources(takeResourcesFromMarketMessage.getWhereToPutMarbles());
 
