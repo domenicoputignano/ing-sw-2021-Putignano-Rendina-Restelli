@@ -1,6 +1,7 @@
 package it.polimi.ingsw.Model;
 
 import java.util.Map;
+import java.util.Objects;
 
 public class ProductionRule {
 
@@ -43,4 +44,14 @@ public class ProductionRule {
     public void setOutputFaith(int outputFaith) {
         this.outputFaith = outputFaith;
     }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ProductionRule that = (ProductionRule) o;
+        return outputFaith == that.outputFaith && inputResources.equals(that.inputResources) && outputResources.equals(that.outputResources);
+    }
+
 }

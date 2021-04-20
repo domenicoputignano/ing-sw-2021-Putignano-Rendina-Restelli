@@ -37,4 +37,16 @@ public class BuyDevCardMessage {
             return false;
         return true;
     }
+
+    public void setType(CardType type) {
+        this.type = type;
+    }
+
+    public void setHowToTakeResources(Map<ResourceSource, EnumMap<ResourceType, Integer>> howToTakeResources) {
+        this.howToTakeResources = howToTakeResources;
+    }
+
+    public void setDestinationSlot(int destinationSlot) {
+        this.destinationSlot = destinationSlot;
+    }
 }

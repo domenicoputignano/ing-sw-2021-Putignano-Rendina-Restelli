@@ -53,4 +53,5 @@ public class BuyDevCard implements AbstractTurnPhase {
     private void performPurchasingCard(DevelopmentCard developmentCard, PersonalBoard personalBoard, int destinationSlot) {
         personalBoard.putCardOnTop(developmentCard,destinationSlot);
     }
+
 }

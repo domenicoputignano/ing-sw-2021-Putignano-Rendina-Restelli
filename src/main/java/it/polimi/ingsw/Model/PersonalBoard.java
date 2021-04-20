@@ -31,12 +31,14 @@ public class PersonalBoard {
 
 
     public DevelopmentCard peekTopCard(int slot) {
-        return this.slots[slot].peek();
+        if(this.slots[slot - 1].size() > 0)
+            return this.slots[slot - 1].peek();
+        else return null;
     }
 
     public void putCardOnTop(DevelopmentCard developmentCard,int slot)
     {
-        this.slots[slot].push(developmentCard);
+        this.slots[slot - 1].push(developmentCard);
     }
 
     public ProductionRule getBasicProductionPower() {

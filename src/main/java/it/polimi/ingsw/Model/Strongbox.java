@@ -25,7 +25,7 @@ public class Strongbox {
 
     public void takeResources(Map<ResourceType,Integer> resources) throws StrongboxOutOfBoundException
     {
-        if(resources.entrySet().stream().anyMatch( (key) -> resources.get(key) > this.resources.get(key))) throw new
+        if(resources.keySet().stream().anyMatch( (key) -> resources.get(key) > this.resources.get(key))) throw new
                 StrongboxOutOfBoundException();
         resources.forEach( (key,value)-> this.resources.merge(key,value,(v1,v2)-> v1-v2));
     }

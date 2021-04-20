@@ -87,15 +87,18 @@ public class Warehouse implements Cloneable {
     public void takeResourceFromNormalDepot(ResourceType type, int occ) throws DepotNotFoundException, DepotOutOfBoundsException {
         int i = findNormalDepotByResourceType(type);
         normalDepots[i].take(occ);
+        updateAvailableResources();
     }
 
     public void takeResourcesFromStrongbox(Map<ResourceType, Integer> occurences) throws StrongboxOutOfBoundException {
         strongbox.takeResources(occurences);
+        updateAvailableResources();
     }
 
     public void takeResourceFromExtraDepot(ResourceType type, int occ) throws DepotNotFoundException, DepotOutOfBoundsException {
         int i = findExtraDepotByResourceType(type);
         extraDepots[i].take(occ);
+        updateAvailableResources();
     }
 
 
@@ -252,6 +255,20 @@ public class Warehouse implements Cloneable {
         for(int i=0;i<this.extraDepots.length && this.extraDepots[i]!=null; i++)
             extraDepots.add(new ExtraDepot(this.extraDepots[i].getOcc(),this.extraDepots[i].getType()));
         return extraDepots;
+    }
+
+
+
+
+    //TODO rivedere questi metodi che servono per il testing
+
+    public Map<ResourceType, Integer> getAvailableResources() {
+        //TODO modificare in modo da esporre solo una copia
+        return availableResources;
+    }
+
+    public Strongbox getStrongbox() {
+        return strongbox;
     }
 
 }

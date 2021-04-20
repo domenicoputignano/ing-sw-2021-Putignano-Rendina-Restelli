@@ -5,6 +5,7 @@ import it.polimi.ingsw.Model.ResourceType;
 
 import java.util.EnumMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class DevelopmentCard {
     private Map<ResourceType, Integer> cost;
@@ -35,4 +36,14 @@ public class DevelopmentCard {
     public ProductionRule getTrade() {
         return trade;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        DevelopmentCard that = (DevelopmentCard) o;
+        return victoryPoints == that.victoryPoints && cost.equals(that.cost) && type.equals(that.type) && trade.equals(that.trade);
+    }
+
+
 }

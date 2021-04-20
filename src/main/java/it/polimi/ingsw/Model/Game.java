@@ -99,7 +99,7 @@ public class Game implements Observer<Integer> {
     }
 
 
-    public void dealLeaderCards() {
+    private void dealLeaderCards() {
         List<LeaderCard> cards = initializeDeckLeaderCards();
         Random rand = new Random();
         for (Player p : playerList) {
