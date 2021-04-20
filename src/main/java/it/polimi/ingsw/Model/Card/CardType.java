@@ -4,8 +4,8 @@ package it.polimi.ingsw.Model.Card;
 import java.util.Objects;
 
 public class CardType {
-    private int level;
-    private ColorCard color;
+    private final int level;
+    private final ColorCard color;
 
     public CardType(int level, ColorCard color) {
         this.level = level;

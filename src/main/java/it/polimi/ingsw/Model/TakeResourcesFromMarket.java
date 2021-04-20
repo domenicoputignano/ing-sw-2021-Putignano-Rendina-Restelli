@@ -1,9 +1,6 @@
 package it.polimi.ingsw.Model;
 
-import it.polimi.ingsw.Exceptions.DepotNotFoundException;
-import it.polimi.ingsw.Exceptions.DepotOutOfBoundsException;
-import it.polimi.ingsw.Exceptions.IncompatibleResourceTypeException;
-import it.polimi.ingsw.Exceptions.NoSuchResourceTypeException;
+import it.polimi.ingsw.Exceptions.*;
 import it.polimi.ingsw.Model.Card.Effect;
 import it.polimi.ingsw.Model.MarketTray.*;
 import it.polimi.ingsw.Utils.MarbleDestination;
@@ -23,7 +20,9 @@ public class TakeResourcesFromMarket implements AbstractTurnPhase {
     int discardedResources = 0;
 
     @Override
-    public void takeResourcesFromMarket(Turn turn, TakeResourcesFromMarketMessage takeResourcesFromMarketMessage) {
+    public void takeResourcesFromMarket(Turn turn, TakeResourcesFromMarketMessage takeResourcesFromMarketMessage) throws InvalidActionException {
+        if(turn.isDoneNormalAction())
+            throw new InvalidActionException();
         convertWhiteMarbles(turn,takeResourcesFromMarketMessage.getWhereToPutMarbles(),takeResourcesFromMarketMessage.getWhiteEffects());
         convertMarblesToResources(takeResourcesFromMarketMessage.getWhereToPutMarbles());
 

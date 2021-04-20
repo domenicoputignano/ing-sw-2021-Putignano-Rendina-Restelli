@@ -1,5 +1,9 @@
 package it.polimi.ingsw.Model;
 
+import it.polimi.ingsw.Exceptions.DepotNotFoundException;
+import it.polimi.ingsw.Exceptions.DepotOutOfBoundsException;
+import it.polimi.ingsw.Exceptions.InvalidActionException;
+import it.polimi.ingsw.Exceptions.StrongboxOutOfBoundException;
 import it.polimi.ingsw.Model.Card.DevelopmentCard;
 import it.polimi.ingsw.Model.Card.Effect;
 import it.polimi.ingsw.Utils.ActivateProductionMessage;
@@ -16,19 +20,32 @@ public class ActivateProduction implements AbstractTurnPhase {
     private Map<ResourceType, Integer> outputResources = new EnumMap<ResourceType, Integer>(ResourceType.class);
     private int faith = 0;
 
-    public void activateProduction(Turn turn, ActivateProductionMessage activateProductionMessage) {
+    public void activateProduction(Turn turn, ActivateProductionMessage activateProductionMessage) throws InvalidActionException {
+        if(turn.isDoneNormalAction())
+            throw new InvalidActionException();
         this.activateProductionMessage = activateProductionMessage;
         calculateResources(turn, activateProductionMessage.getProductions());
-        if(turn.getPlayer().getPersonalBoard().getWarehouse().checkResources(inputResources)) {
-
-            Warehouse playerWarehouse = turn.getPlayer().getPersonalBoard().getWarehouse();
-            PaymentHandler.performPayment(playerWarehouse, activateProductionMessage.getHowToTakeResources(),turn);
-            playerWarehouse.addResourcesToStrongbox(outputResources);
-            turn.getPlayer().getPersonalBoard().getFaithTrack().moveMarker(faith);
-
-        } else {
-            /*model in uno stato di errore e notifica il client*/
+        //check coerenza risorse da prendere e input indicati
+        if(PaymentHandler.checkCostCoherence(activateProductionMessage.getHowToTakeResources(),inputResources)) {
+            if (turn.getPlayer().getPersonalBoard().getWarehouse().checkResources(inputResources)) {
+                Warehouse playerWarehouse = turn.getPlayer().getPersonalBoard().getWarehouse();
+                try {
+                    PaymentHandler.performPayment(playerWarehouse, activateProductionMessage.getHowToTakeResources(), turn);
+                    playerWarehouse.addResourcesToStrongbox(outputResources);
+                    turn.getPlayer().getPersonalBoard().getFaithTrack().moveMarker(faith);
+                    turn.normalActionDone();
+                } catch (DepotOutOfBoundsException e) {
+                    //TODO HANDLEERROR (DEPOTOUTOFBOUND)
+                } catch (DepotNotFoundException e) {
+                    //TODO HANDLEERROR (DEPOTNOTFOUND)
+                } catch (StrongboxOutOfBoundException e) {
+                    //TODO HANDLEERROR (STRONGBOXOUTOFBOUND)
+                }
+            } else {
+                /*model in uno stato di errore e notifica il client*/
+            }
         }
+        // TODO: else HANDLEERROR(IncoherenceMessage) -> coerenza risorse da prendere e input indicati
     }
 
     private void calculateResources(Turn turn, ActiveProductions requestedProductions) {

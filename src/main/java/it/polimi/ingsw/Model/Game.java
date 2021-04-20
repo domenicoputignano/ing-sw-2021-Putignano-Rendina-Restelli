@@ -3,6 +3,7 @@ package it.polimi.ingsw.Model;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
+import it.polimi.ingsw.Model.Card.CardType;
 import it.polimi.ingsw.Model.Card.Deck;
 import it.polimi.ingsw.Model.Card.LeaderCard;
 import it.polimi.ingsw.Model.MarketTray.MarketTray;
@@ -12,6 +13,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.lang.reflect.Type;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class Game implements Observer<Integer> {
     private Player inkwell;
@@ -146,6 +148,10 @@ public class Game implements Observer<Integer> {
         }
 
     }
+    public boolean isEmptyDeck(CardType cardType)
+    {
+        return this.decks.stream().anyMatch(x -> x.getCardType().equals(cardType) && x.getSize()<=0);
+    }
 
     //TODO handleError method
 
@@ -165,6 +171,7 @@ public class Game implements Observer<Integer> {
 
     public List<Deck> getDecks() {
         return decks;
+        //TODO : DA MODIFICARE
     }
 
     @Override

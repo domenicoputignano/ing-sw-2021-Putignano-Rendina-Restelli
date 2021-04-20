@@ -14,7 +14,7 @@ public class ActivateProductionMessage {
     private ResourceType output;
     private ResourceType outputExtra1;
     private ResourceType outputExtra2;
-    private Map<String, EnumMap<ResourceType,Integer>> howToTakeResources = new HashMap<>();
+    private Map<ResourceSource, EnumMap<ResourceType,Integer>> howToTakeResources = new HashMap<>();
 
     public ActiveProductions getProductions() {
         return productions;
@@ -40,8 +40,20 @@ public class ActivateProductionMessage {
         return outputExtra2;
     }
 
-    public Map<String, EnumMap<ResourceType, Integer>> getHowToTakeResources() {
+    public Map<ResourceSource, EnumMap<ResourceType, Integer>> getHowToTakeResources() {
         return howToTakeResources;
     }
 
+    public boolean isValidMessage()
+    {
+        if(productions == null) return false;
+        if(productions.isBasic() && (input1 == null || input2 == null || output == null)) return false;
+        if(productions.isExtraSlot1() && (outputExtra1 == null)) return false;
+        if(productions.isExtraSlot2() && (outputExtra2 == null)) return false;
+        // TODO : fare metodo per evitare le duplicazioni
+        if(howToTakeResources.size() != 3 || howToTakeResources.keySet().stream().anyMatch(x -> howToTakeResources.get(x) == null) ||
+                howToTakeResources.keySet().stream().anyMatch(x -> howToTakeResources.get(x).keySet().stream().anyMatch(y -> howToTakeResources.get(x).get(y) < 0)))
+            return false;
+        return true;
+    }
 }

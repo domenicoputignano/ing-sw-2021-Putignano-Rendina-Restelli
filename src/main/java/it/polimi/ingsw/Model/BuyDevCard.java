@@ -2,6 +2,7 @@ package it.polimi.ingsw.Model;
 
 import it.polimi.ingsw.Exceptions.DepotNotFoundException;
 import it.polimi.ingsw.Exceptions.DepotOutOfBoundsException;
+import it.polimi.ingsw.Exceptions.InvalidActionException;
 import it.polimi.ingsw.Exceptions.StrongboxOutOfBoundException;
 import it.polimi.ingsw.Model.Card.Deck;
 import it.polimi.ingsw.Model.Card.DevelopmentCard;
@@ -17,7 +18,9 @@ public class BuyDevCard implements AbstractTurnPhase {
     private Map<ResourceType, Integer> actualCost = null;
 
 
-    public void buyDevCard(Turn turn, BuyDevCardMessage message) {
+    public void buyDevCard(Turn turn, BuyDevCardMessage message) throws InvalidActionException {
+        if(turn.isDoneNormalAction())
+            throw new InvalidActionException();
         Optional<Deck> d = turn.getGame().getDecks().stream().filter(x -> x.getCardType().equals(message.getType())).findFirst();
         if (d.isPresent()) actualCost = new EnumMap<ResourceType, Integer>(d.get().getTop().getCost());
         List<LeaderEffect> sales = turn.getPlayer().getActiveEffects().stream().filter(x -> x.getEffect() == Effect.SALES).collect(Collectors.toList());
@@ -29,12 +32,22 @@ public class BuyDevCard implements AbstractTurnPhase {
         }
         if (turn.getPlayer().getPersonalBoard().getWarehouse().checkResources(actualCost)) {
                 Warehouse playerWarehouse = turn.getPlayer().getPersonalBoard().getWarehouse();
-                PaymentHandler.performPayment(playerWarehouse, message.getHowToTakeResources(), turn);
-                performPurchasingCard(d.get().draw(),turn.getPlayer().getPersonalBoard(), message.getDestinationSlot());
+                try {
+                    PaymentHandler.performPayment(playerWarehouse, message.getHowToTakeResources(), turn);
+                    performPurchasingCard(d.get().draw(),turn.getPlayer().getPersonalBoard(), message.getDestinationSlot());
+                    turn.normalActionDone();
+                } catch (DepotOutOfBoundsException e) {
+                    //TODO HANDLEERROR (DEPOTOUTOFBOUND)
+                } catch (DepotNotFoundException e) {
+                    //TODO HANDLEERROR (DEPOTNOTFOUND)
+                } catch (StrongboxOutOfBoundException e) {
+                    //TODO HANDLEERROR (STRONGBOXOUTOFBOUND)
+                }
             }
         else {
                 /*settare il model in uno stato di errore e inviare al client gli errori relativi alle mappe corrispondenti*/
         }
+
     }
 
     private void performPurchasingCard(DevelopmentCard developmentCard, PersonalBoard personalBoard, int destinationSlot) {

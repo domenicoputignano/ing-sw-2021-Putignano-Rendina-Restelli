@@ -3,40 +3,25 @@ package it.polimi.ingsw.Model;
 import it.polimi.ingsw.Exceptions.DepotNotFoundException;
 import it.polimi.ingsw.Exceptions.DepotOutOfBoundsException;
 import it.polimi.ingsw.Exceptions.StrongboxOutOfBoundException;
+import it.polimi.ingsw.Utils.ResourceSource;
 
 import java.util.EnumMap;
 import java.util.Map;
 
 
 public final class PaymentHandler {
-    public static void performPayment(Warehouse warehouse, Map<String, EnumMap<ResourceType, Integer>> howToTakeResources, Turn turn) {
-        EnumMap<ResourceType, Integer> toTakeFromNormalDepot = howToTakeResources.get("Depot").clone();
-        EnumMap<ResourceType, Integer> toTakeFromStrongBox = howToTakeResources.get("Strongbox").clone();
-        EnumMap<ResourceType, Integer> toTakeFromExtraDepot = howToTakeResources.get("ExtraDepot").clone();
+    public static void performPayment(Warehouse warehouse, Map<ResourceSource, EnumMap<ResourceType, Integer>> howToTakeResources, Turn turn) throws DepotOutOfBoundsException, DepotNotFoundException, StrongboxOutOfBoundException {
+        EnumMap<ResourceType, Integer> toTakeFromNormalDepot = howToTakeResources.get(ResourceSource.DEPOT).clone();
+        EnumMap<ResourceType, Integer> toTakeFromStrongBox = howToTakeResources.get(ResourceSource.STRONGBOX).clone();
+        EnumMap<ResourceType, Integer> toTakeFromExtraDepot = howToTakeResources.get(ResourceSource.EXTRA).clone();
 
         boolean normalDepotsCheck = checkResourcesFromNormalDepots(warehouse,toTakeFromNormalDepot);
         boolean extraDepotsCheck = checkResourcesFromExtraDepots(warehouse,toTakeFromExtraDepot);
         boolean strongboxCheck = checkResourcesFromStrongBox(warehouse,toTakeFromStrongBox);
         if(normalDepotsCheck && extraDepotsCheck && strongboxCheck) {
-            try {
                 takeResourcesFromNormalDepots(warehouse,toTakeFromNormalDepot);
-            } catch (DepotNotFoundException e) {
-                e.printStackTrace();
-            } catch (DepotOutOfBoundsException e) {
-                e.printStackTrace();
-            }
-            try {
                 takeResourcesFromExtraDepots(warehouse, toTakeFromExtraDepot);
-            } catch (DepotOutOfBoundsException e) {
-                e.printStackTrace();
-            } catch (DepotNotFoundException e) {
-                e.printStackTrace();
-            }
-            try {
                 takeResourcesFromStrongbox(warehouse,toTakeFromStrongBox);
-            } catch (StrongboxOutOfBoundException e) {
-                e.printStackTrace();
-            }
         }
     }
 
@@ -76,6 +61,15 @@ public final class PaymentHandler {
         warehouse.takeResourcesFromStrongbox(resources);
     }
 
+    public static boolean checkCostCoherence(Map<ResourceSource,EnumMap<ResourceType,Integer>> howToTakeResources, Map<ResourceType,Integer> expectedCost)
+    {
+        return convertResource(howToTakeResources).equals(expectedCost);
+    }
 
+    private static Map<ResourceType, Integer> convertResource(Map<ResourceSource,EnumMap<ResourceType,Integer>> howToTakeResources) {
+        Map<ResourceType, Integer> resourcesToTake = new EnumMap<ResourceType, Integer>(ResourceType.class);
+        howToTakeResources.keySet().stream().forEach(x -> howToTakeResources.get(x).forEach((key, value) -> resourcesToTake.merge(key, value, Integer::sum)));
+        return resourcesToTake;
+    }
 }
 

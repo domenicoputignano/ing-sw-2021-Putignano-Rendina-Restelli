@@ -24,7 +24,13 @@ public class Deck {
         return this.cards.peek();
     }
 
+    public int getSize()
+    {
+        return this.cards.size();
+    }
+
     public Stack<DevelopmentCard> getCards() {
         return cards;
+        //TODO : DA MODIFICARE
     }
 }

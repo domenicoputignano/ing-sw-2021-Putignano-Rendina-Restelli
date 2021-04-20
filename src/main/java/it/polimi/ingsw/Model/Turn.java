@@ -28,6 +28,15 @@ public class Turn {
         return game;
     }
 
+    public void normalActionDone()
+    {
+        this.doneNormalAction = true;
+    }
+
+    public boolean isDoneNormalAction() {
+        return doneNormalAction;
+    }
+
     public void setPlayer(Player player) {
         this.player = player;
     }
