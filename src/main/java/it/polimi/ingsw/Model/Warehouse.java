@@ -129,19 +129,19 @@ public class Warehouse implements Cloneable {
 
     // controller needs to know if he can perform moving action
     public boolean checkMoveFromNormalDepotToNormalDepot(int depotFrom, int depotTo) {
-        if(normalDepots[depotFrom].getType() == null) {
+        if(normalDepots[depotFrom - 1].getType() == null) {
             return false;
         }
         else {
-            if(normalDepots[depotTo].getType() == null) {
-                if(normalDepots[depotTo].getSize() < normalDepots[depotFrom].getOcc()) return false;
+            if(normalDepots[depotTo - 1].getType() == null) {
+                if(normalDepots[depotTo - 1].getSize() < normalDepots[depotFrom - 1].getOcc()) return false;
                 else return true;
             }
             else
             {
                 //caso in cui devo switchare le risorse tra i due depot
-                if(normalDepots[depotTo].getOcc() > normalDepots[depotFrom].getSize() ||
-                        normalDepots[depotFrom].getOcc() > normalDepots[depotTo].getSize()) return false;
+                if(normalDepots[depotTo - 1].getOcc() > normalDepots[depotFrom - 1].getSize() ||
+                        normalDepots[depotFrom - 1].getOcc() > normalDepots[depotTo - 1].getSize()) return false;
                 else return true;
             }
         }
@@ -172,12 +172,12 @@ public class Warehouse implements Cloneable {
 
 
     public void moveFromNormalDepotToNormalDepot(int depotFrom, int depotTo) {
-        ResourceType resourceTemp = normalDepots[depotTo].getType();
-        int occTemp = normalDepots[depotTo].getOcc();
-        int sizeTemp = normalDepots[depotTo].getSize();
-        int sizeTempFrom = normalDepots[depotFrom].getSize();
-        normalDepots[depotTo] = new NormalDepot(normalDepots[depotFrom].getOcc(),normalDepots[depotFrom].getType(),sizeTemp);
-        normalDepots[depotFrom] = new NormalDepot(occTemp, resourceTemp, sizeTempFrom);
+        ResourceType resourceTemp = normalDepots[depotTo - 1].getType();
+        int occTemp = normalDepots[depotTo - 1].getOcc();
+        int sizeTemp = normalDepots[depotTo - 1].getSize();
+        int sizeTempFrom = normalDepots[depotFrom - 1].getSize();
+        normalDepots[depotTo - 1] = new NormalDepot(normalDepots[depotFrom - 1].getOcc(),normalDepots[depotFrom - 1].getType(),sizeTemp);
+        normalDepots[depotFrom - 1] = new NormalDepot(occTemp, resourceTemp, sizeTempFrom);
     }
 
 

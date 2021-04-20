@@ -39,4 +39,13 @@ public class ExtraDepot implements Depot {
     public int getSize() {
         return size;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ExtraDepot that = (ExtraDepot) o;
+        return occ == that.occ && size == that.size && type == that.type;
+    }
+
 }
