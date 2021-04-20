@@ -1,6 +1,7 @@
 package it.polimi.ingsw.Model;
 
 import it.polimi.ingsw.Exceptions.InvalidActionException;
+import it.polimi.ingsw.Utils.ActivateProductionMessage;
 import it.polimi.ingsw.Utils.BuyDevCardMessage;
 import it.polimi.ingsw.Utils.TakeResourcesFromMarketMessage;
 
@@ -18,7 +19,7 @@ public interface AbstractTurnPhase {
     }
 
 
-    default void activateProduction(Turn turn, ActiveProductions activeProductions) throws InvalidActionException {
+    default void activateProduction(Turn turn, ActivateProductionMessage message) throws InvalidActionException {
         throw new InvalidActionException();
     }
 

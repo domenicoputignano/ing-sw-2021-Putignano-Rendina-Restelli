@@ -39,7 +39,15 @@ public class TurnController {
 
     public void handleActivateProductionMessage(ActivateProductionMessage message) {
         if(message.isValidMessage()) {
-
+            if(currPlayer.getPersonalBoard().isValidRequestedProduction(message.getProductions())){
+                model.getTurn().setTurnState(TurnState.ACTIVATEPRODUCTION);
+                try{
+                    model.getTurn().getTurnState().getTurnPhase().activateProduction(model.getTurn(), message);
+                } catch (InvalidActionException e){
+                    // inviare messaggio "fase del turno non valida!"
+                }
+            }
+            // TODO else HANDLEERROR((ENUM) ERROR.ProductionNotPossibleMessage)
         }
         //TODO else HANDLEERROR((ENUM) ERROR.NotValidMessage)
     }

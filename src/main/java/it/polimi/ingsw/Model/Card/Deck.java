@@ -29,6 +29,7 @@ public class Deck {
         return this.cards.size();
     }
 
+    // TODO DA CAMBIARE, ESPONE L'IMPLEMENTAZIONE PRIVATA DELL'ATTRIBUTO
     public Stack<DevelopmentCard> getCards() {
         return cards;
         //TODO : DA MODIFICARE

@@ -2,6 +2,7 @@ package it.polimi.ingsw.Model.Card;
 
 import it.polimi.ingsw.Model.ResourceType;
 
+import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 
@@ -21,13 +22,15 @@ public class LeaderCard {
     }
 
     public LeaderEffect getLeaderEffect() {
-        return leaderEffect;
+        return new LeaderEffect(this.leaderEffect.getEffect(), this.leaderEffect.getType());
     }
 
+    // TODO DA CAMBIARE, ESPONE L'IMPLEMENTAZIONE
     public Map<ResourceType, Integer> getRequirementsResources() {
-        return requirementsResources;
+        return this.requirementsResources;
     }
 
+    // TODO DA CAMBIARE, ESPONE L'IMPLEMENTAZIONE
     public List<CardType> getRequirementsCards() {
         return requirementsCards;
     }

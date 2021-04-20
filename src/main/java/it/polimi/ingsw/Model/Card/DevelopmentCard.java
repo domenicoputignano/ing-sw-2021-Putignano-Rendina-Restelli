@@ -19,6 +19,7 @@ public class DevelopmentCard {
         this.trade = trade;
     }
 
+    // TODO DA CAMBIARE ESPONE L'IMPLEMENTAZIONE
     public Map<ResourceType, Integer> getCost() {
         return cost;
     }

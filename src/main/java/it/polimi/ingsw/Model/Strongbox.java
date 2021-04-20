@@ -31,6 +31,7 @@ public class Strongbox {
     }
 
 
+    //TODO DA CAMBIARE, ESPONE L'IMPLEMENTAZIONE
     public EnumMap<ResourceType, Integer> getResources() {
         return (EnumMap<ResourceType, Integer>) resources;
     }
