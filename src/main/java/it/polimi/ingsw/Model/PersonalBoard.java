@@ -36,7 +36,7 @@ public class PersonalBoard {
         else return null;
     }
 
-    public void putCardOnTop(DevelopmentCard developmentCard,int slot)
+    public void putCardOnTop(DevelopmentCard developmentCard, int slot)
     {
         this.slots[slot - 1].push(developmentCard);
     }

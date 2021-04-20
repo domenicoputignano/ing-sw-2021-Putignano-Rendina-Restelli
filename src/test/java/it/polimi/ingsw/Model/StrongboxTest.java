@@ -59,6 +59,6 @@ public class StrongboxTest {
         resourcesToTake.put(ResourceType.stone,3);
         resourcesToTake.put(ResourceType.coin,5);
         resourcesToTake.put(ResourceType.servant,1);
-        assertThrows(InvalidParameterException.class,()->strongbox.takeResources(resourcesToTake));
+        assertThrows(StrongboxOutOfBoundException.class,()->strongbox.takeResources(resourcesToTake));
     }
 }
