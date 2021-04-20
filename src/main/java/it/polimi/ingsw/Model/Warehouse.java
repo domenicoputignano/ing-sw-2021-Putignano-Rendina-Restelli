@@ -11,9 +11,9 @@ import java.util.stream.Collectors;
 
 public class Warehouse implements Cloneable {
     private Map<ResourceType,Integer> availableResources;
-    private NormalDepot[] normalDepots;
-    private ExtraDepot[] extraDepots;
-    private Strongbox strongbox;
+    private final NormalDepot[] normalDepots;
+    private final ExtraDepot[] extraDepots;
+    private final Strongbox strongbox;
 
     public Warehouse(Map<ResourceType, Integer> availableResources, NormalDepot[] normalDepot, ExtraDepot[] extraDepot, Strongbox strongbox) {
         this.availableResources = availableResources;
@@ -61,7 +61,7 @@ public class Warehouse implements Cloneable {
     public void addResourcesToDepot(int depotIndex, ResourceType type, int num) throws DepotOutOfBoundsException, IncompatibleResourceTypeException {
         if(!isValidEditing(type,depotIndex))
             throw new IncompatibleResourceTypeException();
-        NormalDepot d = getNormalDepots()[depotIndex - 1];
+        NormalDepot d = this.normalDepots[depotIndex - 1];
         if(d.getOcc() == 0) {
            d.setType(type);
            d.add(num);
@@ -240,23 +240,18 @@ public class Warehouse implements Cloneable {
         this.availableResources = local;
     }
 
-
-    public Map<ResourceType, Integer> getAvailableResources() {
-        return availableResources;
-    }
-
-    public NormalDepot[] getNormalDepots() {
+    public List<NormalDepot> getNormalDepots() {
+        List<NormalDepot> normalDepots = new ArrayList<>();
+        for(int i=0;i<this.normalDepots.length; i++)
+            normalDepots.add(new NormalDepot(this.normalDepots[i].getOcc(),this.normalDepots[i].getType(),this.normalDepots[i].getSize()));
         return normalDepots;
     }
 
-    public ExtraDepot[] getExtraDepots() {
+    public List<ExtraDepot> getExtraDepots() {
+        List<ExtraDepot> extraDepots = new ArrayList<>();
+        for(int i=0;i<this.extraDepots.length && this.extraDepots[i]!=null; i++)
+            extraDepots.add(new ExtraDepot(this.extraDepots[i].getOcc(),this.extraDepots[i].getType()));
         return extraDepots;
     }
-
-    public Strongbox getStrongbox() {
-        return strongbox;
-    }
-
-
 
 }

@@ -16,7 +16,7 @@ public class PersonalBoard {
     private Stack<DevelopmentCard>[] slots;
     private ProductionRule basicProductionPower;
     private FaithTrack faithTrack;
-    private Warehouse warehouse;
+    private final Warehouse warehouse;
 
     public PersonalBoard(Player owner) {
         this.owner = owner;
@@ -30,8 +30,13 @@ public class PersonalBoard {
     }
 
 
-    public Stack<DevelopmentCard>[] getSlots() {
-        return slots;
+    public DevelopmentCard peekTopCard(int slot) {
+        return this.slots[slot].peek();
+    }
+
+    public void putCardOnTop(DevelopmentCard developmentCard,int slot)
+    {
+        this.slots[slot].push(developmentCard);
     }
 
     public ProductionRule getBasicProductionPower() {
@@ -55,8 +60,6 @@ public class PersonalBoard {
             // mandare messaggio al client "file di configurazione faithTrack.json non trovato"
         }
     }
-
-
 
     public boolean isCompatibleSlot(int level, int slotIndex) {
         if(level == 1) {

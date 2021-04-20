@@ -18,7 +18,6 @@ class PlayerTest {
     @BeforeEach
     void initialization(){
 
-        player.initializePersonalBoard();
         Map<ResourceType, Integer> requirementsResources1 = new EnumMap<>(ResourceType.class);
         Map<ResourceType, Integer> requirementsResources2 = new EnumMap<>(ResourceType.class);
         List<CardType> requirementsCards1 = new ArrayList<>();
@@ -51,8 +50,8 @@ class PlayerTest {
         assertTrue(player.getLeaderCards().get(0).isActive());
         assertTrue(player.getLeaderCards().get(1).isActive());
 
-        assertNotNull(player.getPersonalBoard().getWarehouse().getExtraDepots()[0]);
-        assertNotNull(player.getPersonalBoard().getWarehouse().getExtraDepots()[0]);
+        assertNotNull(player.getPersonalBoard().getWarehouse().getExtraDepots().get(0));
+        assertNotNull(player.getPersonalBoard().getWarehouse().getExtraDepots().get(0));
     }
 
     @Test
@@ -102,7 +101,6 @@ class PlayerTest {
     @Test
     void initializePersonalBoard() {
         Player player3 = new Player("player3");
-        player3.initializePersonalBoard();
         assertNotNull(player3.getPersonalBoard());
     }
 

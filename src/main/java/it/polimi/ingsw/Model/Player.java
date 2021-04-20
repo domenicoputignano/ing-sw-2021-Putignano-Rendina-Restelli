@@ -20,6 +20,7 @@ public class Player {
 
     public Player(String username){
         this.username = username;
+        this.initializePersonalBoard();
     }
 
 
@@ -63,7 +64,7 @@ public class Player {
         return personalBoard;
     }
 
-    public void initializePersonalBoard()
+    private void initializePersonalBoard()
     {
         this.personalBoard = new PersonalBoard(this);
     }

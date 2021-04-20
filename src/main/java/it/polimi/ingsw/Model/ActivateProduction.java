@@ -32,22 +32,22 @@ public class ActivateProduction implements AbstractTurnPhase {
     }
 
     private void calculateResources(Turn turn, ActiveProductions requestedProductions) {
-        Stack<DevelopmentCard>[] playerSlots = turn.getPlayer().getPersonalBoard().getSlots();
+        PersonalBoard personalBoard = turn.getPlayer().getPersonalBoard();
 
         if(requestedProductions.isSlot1()) {
-            playerSlots[0].peek().getTrade().getInputResources().forEach((key, value) -> inputResources.merge(key,value,Integer::sum));
-            playerSlots[0].peek().getTrade().getOutputResources().forEach((key, value) -> outputResources.merge(key,value,Integer::sum));
-            faith += playerSlots[0].peek().getTrade().getOutputFaith();
+            personalBoard.peekTopCard(0).getTrade().getInputResources().forEach((key, value) -> inputResources.merge(key,value,Integer::sum));
+            personalBoard.peekTopCard(0).getTrade().getOutputResources().forEach((key, value) -> outputResources.merge(key,value,Integer::sum));
+            faith += personalBoard.peekTopCard(0).getTrade().getOutputFaith();
         }
         if(requestedProductions.isSlot2()) {
-            playerSlots[1].peek().getTrade().getInputResources().forEach((key, value) -> inputResources.merge(key,value,Integer::sum));
-            playerSlots[1].peek().getTrade().getOutputResources().forEach((key, value) -> outputResources.merge(key,value,Integer::sum));
-            faith += playerSlots[1].peek().getTrade().getOutputFaith();
+            personalBoard.peekTopCard(1).getTrade().getInputResources().forEach((key, value) -> inputResources.merge(key,value,Integer::sum));
+            personalBoard.peekTopCard(1).getTrade().getOutputResources().forEach((key, value) -> outputResources.merge(key,value,Integer::sum));
+            faith += personalBoard.peekTopCard(1).getTrade().getOutputFaith();
         }
         if(requestedProductions.isSlot3()) {
-            playerSlots[2].peek().getTrade().getInputResources().forEach((key, value) -> inputResources.merge(key,value,Integer::sum));
-            playerSlots[2].peek().getTrade().getOutputResources().forEach((key, value) -> outputResources.merge(key,value,Integer::sum));
-            faith += playerSlots[2].peek().getTrade().getOutputFaith();
+            personalBoard.peekTopCard(2).getTrade().getInputResources().forEach((key, value) -> inputResources.merge(key,value,Integer::sum));
+            personalBoard.peekTopCard(2).getTrade().getOutputResources().forEach((key, value) -> outputResources.merge(key,value,Integer::sum));
+            faith += personalBoard.peekTopCard(2).getTrade().getOutputFaith();
         }
         if(requestedProductions.isBasic()) {
             inputResources.put(activateProductionMessage.getInput1(), inputResources.get(activateProductionMessage.getInput1())+1);

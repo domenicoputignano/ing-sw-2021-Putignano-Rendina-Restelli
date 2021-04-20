@@ -40,7 +40,6 @@ public class Game implements Observer<Integer> {
         this.dealLeaderCards();
         for(Player p : this.playerList)
            {
-               p.initializePersonalBoard();
                p.setPosition(playerList.indexOf(p)+1);
 
                /*aggiungo Game alla lista di Observer di faithtrack per la vatican report section*/

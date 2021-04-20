@@ -26,7 +26,6 @@ class PersonalBoardTest {
 
     @Test
     void isCompatibleSlot() throws DepotOutOfBoundsException, IncompatibleResourceTypeException {
-        player.initializePersonalBoard();
         developmentCard1Cost.put(ResourceType.coin, 0);
         developmentCard1Cost.put(ResourceType.servant,0);
         developmentCard1Cost.put(ResourceType.shield, 0);
@@ -37,8 +36,8 @@ class PersonalBoardTest {
         Map<ResourceType, Integer> developmentCard2Cost = new EnumMap<ResourceType, Integer>(developmentCard1Cost);
         DevelopmentCard developmentCard1 = new DevelopmentCard(developmentCard1Cost,1, ColorCard.yellow,3,null);
         DevelopmentCard developmentCard2 = new DevelopmentCard(developmentCard2Cost,1, ColorCard.green,4,null);
-        player.getPersonalBoard().getSlots()[0].push(developmentCard1);
-        player.getPersonalBoard().getSlots()[1].push(developmentCard2);
+        player.getPersonalBoard().putCardOnTop(developmentCard1,0);
+        player.getPersonalBoard().putCardOnTop(developmentCard2,1);
         assertTrue(player.getPersonalBoard().isCompatibleSlot(1, 1));
     }
 
@@ -48,8 +47,6 @@ class PersonalBoardTest {
 
     @Test
     void checkLeaderRequirements() throws DepotOutOfBoundsException, IncompatibleResourceTypeException {
-        player.initializePersonalBoard();
-
         developmentCard1Cost.put(ResourceType.coin, 0);
         developmentCard1Cost.put(ResourceType.servant,0);
         developmentCard1Cost.put(ResourceType.shield, 0);
@@ -72,8 +69,8 @@ class PersonalBoardTest {
         DevelopmentCard developmentCard2 = new DevelopmentCard(developmentCard2Cost,1, ColorCard.green,4,null);
         player.getLeaderCards().add(leaderCard1);
         player.getLeaderCards().add(leaderCard2);
-        player.getPersonalBoard().getSlots()[0].push(developmentCard1);
-        player.getPersonalBoard().getSlots()[1].push(developmentCard2);
+        player.getPersonalBoard().putCardOnTop(developmentCard1,0);
+        player.getPersonalBoard().putCardOnTop(developmentCard2,1);
         player.getPersonalBoard().getWarehouse().addResourcesToDepot(3,ResourceType.stone,3);
         toAddToStrongbox.put(ResourceType.stone,2);
         player.getPersonalBoard().getWarehouse().addResourcesToStrongbox(toAddToStrongbox);

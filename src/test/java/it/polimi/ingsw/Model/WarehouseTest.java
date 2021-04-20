@@ -8,6 +8,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EnumSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import java.security.InvalidParameterException;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -65,7 +66,7 @@ class WarehouseTest {
         expected.add(new NormalDepot(2,ResourceType.servant,3));
         if(warehouse.checkMoveFromNormalDepotToNormalDepot(1,2)) {
             warehouse.moveFromNormalDepotToNormalDepot(1,2);
-            assertEquals(Arrays.stream(warehouse.getNormalDepots()).collect(Collectors.toList()), expected);
+            assertEquals(warehouse.getNormalDepots(), expected);
         }
     }
 
@@ -75,7 +76,7 @@ class WarehouseTest {
         warehouse.addResourcesToDepot(2, ResourceType.servant, 2);
         warehouse.moveFromNormalDepotToNormalDepot(1,2);
         for(int i = 0; i < 3; i++)
-        System.out.println(warehouse.getNormalDepots()[i]);
+        System.out.println(warehouse.getNormalDepots().get(i));
     }
 
 
@@ -83,7 +84,7 @@ class WarehouseTest {
     @EnumSource(ResourceType.class)
     void checkMoveFromNormalDepotToExtraDepot(ResourceType type) throws DepotOutOfBoundsException, IncompatibleResourceTypeException {
         //create an instance of an empty ExtraDepot
-        warehouse.getExtraDepots()[0] = new ExtraDepot(type);
+        warehouse.initializeExtraDepot(type);
         warehouse.addResourcesToDepot(1,ResourceType.stone,1);
         if(type == ResourceType.stone)
             assertTrue(warehouse.checkMoveFromNormalDepotToExtraDepot(1,1,1));
@@ -95,14 +96,14 @@ class WarehouseTest {
     @EnumSource(ResourceType.class)
     void checkMoveFromExtraDepotToNormalDepot(ResourceType type) throws DepotOutOfBoundsException, IncompatibleResourceTypeException, DepotNotFoundException {
         //create an instance of an empty ExtraDepot
-        warehouse.getExtraDepots()[0] = new ExtraDepot(type);
+        warehouse.initializeExtraDepot(type);
         warehouse.addResourcesToExtraDepot(type, 2);
         warehouse.addResourcesToDepot(2, type, 1);
         assertFalse(warehouse.checkMoveFromExtraDepotToNormalDepot(2,2,1));
-        assertThrows(IncompatibleResourceTypeException.class, () ->warehouse.checkMoveFromExtraDepotToNormalDepot(1,2,1));
+        assertFalse(warehouse.checkMoveFromExtraDepotToNormalDepot(1,2,1));
         assertFalse(warehouse.checkMoveFromExtraDepotToNormalDepot(1,2,2));
-        assertThrows(IncompatibleResourceTypeException.class, () ->warehouse.checkMoveFromExtraDepotToNormalDepot(1,2,3));
-        assertThrows(IncompatibleResourceTypeException.class,()->warehouse.checkMoveFromExtraDepotToNormalDepot(1,1,1));
+        assertFalse(warehouse.checkMoveFromExtraDepotToNormalDepot(1,2,3));
+        assertFalse(warehouse.checkMoveFromExtraDepotToNormalDepot(1,1,1));
         assertTrue(warehouse.checkMoveFromExtraDepotToNormalDepot(1,1,2));
 
     }
@@ -114,15 +115,15 @@ class WarehouseTest {
         Random r = new Random();
         int occ  = r.nextInt(4);
         System.out.println(occ);
-        warehouse.getExtraDepots()[0] = new ExtraDepot(ResourceType.coin);
-        if(warehouse.getExtraDepots()[0].getType()!= type)
+        warehouse.initializeExtraDepot(ResourceType.coin);
+        if(warehouse.getExtraDepots().get(0).getType()!= type)
             assertThrows(DepotNotFoundException.class, ()->warehouse.addResourcesToExtraDepot(type,occ));
         else {
-            if(warehouse.getExtraDepots()[0].getOcc() + occ > warehouse.getExtraDepots()[0].getSize())
+            if(warehouse.getExtraDepots().get(0).getOcc() + occ > warehouse.getExtraDepots().get(0).getSize())
                 assertThrows(DepotOutOfBoundsException.class, () -> warehouse.addResourcesToExtraDepot(type,occ));
             else
                 warehouse.addResourcesToExtraDepot(type,occ);
-                assertTrue(warehouse.getExtraDepots()[0].getOcc() == occ);
+                assertTrue(warehouse.getExtraDepots().get(0).getOcc() == occ);
         }
     }
 
