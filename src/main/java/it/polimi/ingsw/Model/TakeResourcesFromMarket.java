@@ -25,8 +25,10 @@ public class TakeResourcesFromMarket implements AbstractTurnPhase {
             throw new InvalidActionException();
         convertWhiteMarbles(turn,takeResourcesFromMarketMessage.getWhereToPutMarbles(),takeResourcesFromMarketMessage.getWhiteEffects());
         convertMarblesToResources(takeResourcesFromMarketMessage.getWhereToPutMarbles());
-
+        handlePositioning(turn.getPlayer().getPersonalBoard().getWarehouse());
         /*TODO: togliere gli effetti dalle whiteMarbles*/
+        //TODO : if(pendingResources.size()>0) HANDLEERROR(Risorse non correttamente posizionate)
+
         turn.getGame().getMarketTray().clearWhiteMarbleEffect();
 
     }

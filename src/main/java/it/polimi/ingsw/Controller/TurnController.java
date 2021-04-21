@@ -6,6 +6,8 @@ import it.polimi.ingsw.Model.Player;
 import it.polimi.ingsw.Model.TurnState;
 import it.polimi.ingsw.Utils.ActivateProductionMessage;
 import it.polimi.ingsw.Utils.BuyDevCardMessage;
+import it.polimi.ingsw.Utils.LeaderActionMessage;
+import it.polimi.ingsw.Utils.TakeResourcesFromMarketMessage;
 
 import java.util.List;
 
@@ -52,5 +54,30 @@ public class TurnController {
         //TODO else HANDLEERROR((ENUM) ERROR.NotValidMessage)
     }
 
+    public void handleTakeResourcesFromMarketMessage(TakeResourcesFromMarketMessage message) {
+        if (message.isValidMessage()) {
+            if (model.getMarketTray().checkRequestedMarbles(message.getRequestedMarbles(), message.getPlayerChoice(), message.getIndex())) {
+                model.getTurn().setTurnState(TurnState.TAKERESOURCESFROMMARKET);
+                try {
+                    model.getTurn().getTurnState().getTurnPhase().takeResourcesFromMarket(model.getTurn(), message);
+                } catch (InvalidActionException e) {
+                    // inviare messaggio "fase del turno non valida!"
+                }
+            }
+            // TODO else HANDLEERROR((ENUM) ERROR.TakeResourcesNotPossibleMessage)
+        }
+        //TODO else HANDLEERROR((ENUM) ERROR.NotValidMessage)
+    }
 
+    public void handleLeaderActionMessage(LeaderActionMessage message) {
+        if (message.isValidMessage()) {
+            model.getTurn().setTurnState(TurnState.LEADERACTION);
+            try {
+                model.getTurn().getTurnState().getTurnPhase().leaderAction(model.getTurn(), message);
+            } catch (InvalidActionException e) {
+                // inviare messaggio "fase del turno non valida!"
+            }
+        }
+        //TODO else HANDLEERROR((ENUM) ERROR.NotValidMessage)
+    }
 }

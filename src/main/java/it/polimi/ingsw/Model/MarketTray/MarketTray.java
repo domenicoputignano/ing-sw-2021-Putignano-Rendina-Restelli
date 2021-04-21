@@ -59,6 +59,7 @@ public class MarketTray {
     public List<Marble> peekMarbles(MarketChoice marketChoice, int index) {
         List<Marble> marbles = new ArrayList<>();
         if(marketChoice==MarketChoice.ROW) {
+            //TODO : MODIFICARE CON DELLE COPIE
             marbles.addAll(Arrays.asList(availableMarbles[index]));
         } else {
             for(int i = 0; i < availableMarbles.length; i++) {
@@ -68,20 +69,16 @@ public class MarketTray {
         return marbles;
     }
 
+    public boolean checkRequestedMarbles(List<Marble> marblesList,MarketChoice marketChoice, int index)
+    {
+        List<Marble> expectedMarbles = peekMarbles(marketChoice, index);
+        return expectedMarbles.containsAll(marblesList) && marblesList.containsAll(expectedMarbles);
+    }
+
     public List<Marble> takeMarbles(MarketChoice marketChoice, int index) {
-        if(marketChoice==MarketChoice.ROW) {
-            List<Marble> marbles = new ArrayList<Marble>(4);
-            marbles.addAll(Arrays.asList(availableMarbles[index]));
+            List<Marble> marbles = peekMarbles(marketChoice,index);
             slideMarbles(marketChoice, index);
             return marbles;
-        } else {
-            List<Marble> marbles = new ArrayList<Marble>(3);
-            for (int i = 0; i < availableMarbles.length; i++) {
-                marbles.add(availableMarbles[i][index]);
-            }
-            slideMarbles(marketChoice, index);
-            return marbles;
-        }
     }
 
     public void clearWhiteMarbleEffect() {

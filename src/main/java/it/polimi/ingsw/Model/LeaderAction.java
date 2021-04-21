@@ -1,18 +1,24 @@
 package it.polimi.ingsw.Model;
 
 import it.polimi.ingsw.Exceptions.InvalidActionException;
+import it.polimi.ingsw.Utils.LeaderActionMessage;
 
 public class LeaderAction implements AbstractTurnPhase{
 
     @Override
-    public void leaderAction(int index, boolean toDiscard, Turn turn) {
+    public void leaderAction(Turn turn, LeaderActionMessage message) {
         Player player = turn.getPlayer();
-        if(toDiscard)
-            player.discardLeaderCard(index - 1);
-        else
-            /*TODO: aggiungere da qualche parte check sui requirements della carta leader*/
-            player.activateLeaderCard(index-1);
-    }
+        if(player.checkLeaderStatus(message.getIndex()-1)) {
+            if (message.isToDiscard())
+                player.discardLeaderCard(message.getIndex() - 1);
+            else {
+                if (player.checkLeaderActivation(message.getIndex() - 1))
+                    player.activateLeaderCard(message.getIndex() - 1);
+                //else TODO: HANDLEERROR(REQUISITI CARTA LEADER NON SODDISFATTI)
+            }
+        }
+        //else TODO: HANDLEERROR(AZIONE LEADER NON PERFORMABILE)
 
+    }
 
 }

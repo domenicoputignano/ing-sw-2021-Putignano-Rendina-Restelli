@@ -1,7 +1,5 @@
 package it.polimi.ingsw.Model;
 
-import it.polimi.ingsw.Exceptions.DepotOutOfBoundsException;
-import it.polimi.ingsw.Exceptions.IncompatibleResourceTypeException;
 import it.polimi.ingsw.Model.Card.Effect;
 import it.polimi.ingsw.Model.Card.LeaderCard;
 import it.polimi.ingsw.Model.Card.LeaderEffect;
@@ -33,15 +31,30 @@ public class Player {
         }
     }
 
+    public boolean checkLeaderActivation(int index)
+    {
+        return personalBoard.checkLeaderRequirements(leaderCards.get(index));
+    }
+
+    public boolean checkLeaderStatus(int index)
+    {
+        if(index>=leaderCards.size()) return false;
+        if(this.leaderCards.get(index).isActive()) return false;
+        return true;
+    }
 
     public void activateLeaderCard(int index) {
-        this.leaderCards.get(index).setIsActive();
-        if(leaderCards.get(index).getLeaderEffect().getEffect() == Effect.EXTRADEPOT)
-            this.personalBoard.getWarehouse().initializeExtraDepot(leaderCards.get(index).getLeaderEffect().getType());
+            this.leaderCards.get(index).setIsActive();
+            if (leaderCards.get(index).getLeaderEffect().getEffect() == Effect.EXTRADEPOT)
+                this.personalBoard.getWarehouse().initializeExtraDepot(leaderCards.get(index).getLeaderEffect().getType());
     }
     public void discardLeaderCard(int index) {
-        this.leaderCards.remove(index);
-        this.personalBoard.getFaithTrack().moveMarker(1);
+        if (!this.leaderCards.get(index).isActive())
+        {
+            this.leaderCards.remove(index);
+            this.personalBoard.getFaithTrack().moveMarker(1);
+        }
+
     }
 
     public void throwLeaderCard(LeaderCard card) {

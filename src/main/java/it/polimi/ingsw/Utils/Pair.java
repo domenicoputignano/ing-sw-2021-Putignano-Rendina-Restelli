@@ -1,5 +1,7 @@
 package it.polimi.ingsw.Utils;
 
+import java.util.Objects;
+
 public class Pair<K,V> {
     private K key;
     private V value;
@@ -32,4 +34,5 @@ public class Pair<K,V> {
                 ", value=" + value +
                 '}';
     }
+
 }
