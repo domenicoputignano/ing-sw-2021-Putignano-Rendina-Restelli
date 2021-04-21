@@ -47,6 +47,9 @@ public class ActivateProductionMessage {
     public boolean isValidMessage()
     {
         if(productions == null) return false;
+
+        if(productions.noneSlotSelected()) return false;
+
         if(productions.isBasic() && (input1 == null || input2 == null || output == null)) return false;
         if(productions.isExtraSlot1() && (outputExtra1 == null)) return false;
         if(productions.isExtraSlot2() && (outputExtra2 == null)) return false;
@@ -55,5 +58,33 @@ public class ActivateProductionMessage {
                 howToTakeResources.keySet().stream().anyMatch(x -> howToTakeResources.get(x).keySet().stream().anyMatch(y -> howToTakeResources.get(x).get(y) < 0)))
             return false;
         return true;
+    }
+
+    public void setProductions(ActiveProductions productions) {
+        this.productions = productions;
+    }
+
+    public void setInput1(ResourceType input1) {
+        this.input1 = input1;
+    }
+
+    public void setInput2(ResourceType input2) {
+        this.input2 = input2;
+    }
+
+    public void setOutput(ResourceType output) {
+        this.output = output;
+    }
+
+    public void setOutputExtra1(ResourceType outputExtra1) {
+        this.outputExtra1 = outputExtra1;
+    }
+
+    public void setOutputExtra2(ResourceType outputExtra2) {
+        this.outputExtra2 = outputExtra2;
+    }
+
+    public void setHowToTakeResources(Map<ResourceSource, EnumMap<ResourceType, Integer>> howToTakeResources) {
+        this.howToTakeResources = howToTakeResources;
     }
 }

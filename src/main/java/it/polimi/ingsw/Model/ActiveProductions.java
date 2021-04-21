@@ -66,4 +66,15 @@ public class ActiveProductions {
     public boolean isExtraSlot2() {
         return extraSlot2;
     }
+
+    public boolean noneSlotSelected() {
+        return !slot1&&!slot2&&!slot3
+                &&!extraSlot1&&!extraSlot2&&!basic;
+    }
+
+    public String toString() {
+        return "Slot1 = " +slot1+" Slot2 = "+slot2+" Slot3 = "+slot3+
+                " Basic = "+basic+" ExtraSlot1 "+extraSlot1+" ExtraSlot2 "+extraSlot2;
+    }
+
 }
