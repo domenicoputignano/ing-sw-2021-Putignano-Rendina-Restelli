@@ -3,11 +3,9 @@ package it.polimi.ingsw.Controller;
 import it.polimi.ingsw.Exceptions.InvalidActionException;
 import it.polimi.ingsw.Model.Game;
 import it.polimi.ingsw.Model.Player;
+import it.polimi.ingsw.Model.TakeResourcesFromMarket;
 import it.polimi.ingsw.Model.TurnState;
-import it.polimi.ingsw.Utils.ActivateProductionMessage;
-import it.polimi.ingsw.Utils.BuyDevCardMessage;
-import it.polimi.ingsw.Utils.LeaderActionMessage;
-import it.polimi.ingsw.Utils.TakeResourcesFromMarketMessage;
+import it.polimi.ingsw.Utils.*;
 
 import java.util.List;
 
@@ -77,6 +75,29 @@ public class TurnController {
             } catch (InvalidActionException e) {
                 // inviare messaggio "fase del turno non valida!"
             }
+        }
+        //TODO else HANDLEERROR((ENUM) ERROR.NotValidMessage)
+    }
+    public void handleMoveMessage(MoveResourcesMessage message)
+    {
+        if (message.isValidMessage())
+            model.getCurrPlayer().moveResources(message.getMoveAction());
+    }
+    public void handlePositioningMessage(PositioningMessage message)
+    {
+        if (message.isValidMessage())
+        {
+            if(model.getTurn().getTurnState()==TurnState.TAKERESOURCESFROMMARKET) {
+                TakeResourcesFromMarket turnInstance = (TakeResourcesFromMarket) model.getTurn().getTurnState().getTurnPhase();
+                if (turnInstance.checkPendingResourcesPositioning(message.getResourcesToPut()))
+                {
+                    turnInstance.handlePositioning(model.getTurn().getPlayer().getPersonalBoard().getWarehouse(),message.getWhereToPutResources());
+                    //TODO: AGGIUNGERE CONCLUDETURNPHASE IN TUTTE LE ALTRE AZIONI DEL TURNO
+                    turnInstance.concludeTurnPhase(model.getTurn());
+                }
+                //TODO: else HANDLEERROR(MESSAGGIO NON COMPATIBILE)
+            }
+            //TODO : else HANDLEERROR(FASE DEL TURNO NON VALIDA)
         }
         //TODO else HANDLEERROR((ENUM) ERROR.NotValidMessage)
     }

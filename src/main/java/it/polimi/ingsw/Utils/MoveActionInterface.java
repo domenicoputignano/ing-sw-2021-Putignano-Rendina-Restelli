@@ -5,5 +5,5 @@ import it.polimi.ingsw.Model.Warehouse;
 public interface MoveActionInterface {
 
     public boolean handleMove(Warehouse warehouse);
-
+    public boolean isValidMove();
 }

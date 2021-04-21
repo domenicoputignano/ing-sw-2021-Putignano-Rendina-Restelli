@@ -20,4 +20,12 @@ public class MoveFromExtraToNormalAction implements MoveActionInterface {
         }
         return false;
     }
+
+    @Override
+    public boolean isValidMove() {
+        if(extraDepotFrom<=0 || extraDepotFrom>2) return false;
+        if(occ<0 || occ>2) return false;
+        if(depotTo<=0 || depotTo>3) return false;
+        return true;
+    }
 }

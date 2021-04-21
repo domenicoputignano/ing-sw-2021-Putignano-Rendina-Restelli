@@ -94,15 +94,18 @@ public class TakeResourcesFromMarket implements AbstractTurnPhase {
             try {
                 performPositioning(warehouse, i);
             } catch (DepotOutOfBoundsException | DepotNotFoundException | IncompatibleResourceTypeException e) {
-                //TODO: potenzialmente da togliere
-                pendingResources.remove(pairList.get(i).getKey());
                 discardedResources++;
             } finally {
                 i++;
             }
         }
+        pendingResources.clear();
     }
 
+    public boolean checkPendingResourcesPositioning(List<ResourceType> resourcesToPut)
+    {
+        return resourcesToPut.containsAll(pendingResources) && pendingResources.containsAll(resourcesToPut);
+    }
 
     public void concludeTurnPhase(Turn turn) {
         for(Player p : turn.getGame().getPlayerList()) {
