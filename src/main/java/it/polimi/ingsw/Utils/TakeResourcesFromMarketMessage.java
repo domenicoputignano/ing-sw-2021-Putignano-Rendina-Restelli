@@ -43,6 +43,7 @@ public class TakeResourcesFromMarketMessage {
     {
         return index;
     }
+
     public void setPlayerChoice(MarketChoice playerChoice, int index) {
         this.playerChoice = playerChoice;
         this.index = index;

@@ -46,4 +46,5 @@ public class LeaderCard {
     public void setIsActive(){
         this.isActive = true;
     }
+
 }
