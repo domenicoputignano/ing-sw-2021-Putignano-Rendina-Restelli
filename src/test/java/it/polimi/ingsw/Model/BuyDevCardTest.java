@@ -32,8 +32,6 @@ class BuyDevCardTest {
 
 
         CardType cardType = new CardType(1, ColorCard.green);
-        Stack<DevelopmentCard> cards = new Stack<>();
-
 
         EnumMap<ResourceType, Integer> devCard1Cost = new EnumMap<ResourceType, Integer>(ResourceType.class);
         EnumMap<ResourceType, Integer> devCard2Cost = new EnumMap<ResourceType, Integer>(ResourceType.class);

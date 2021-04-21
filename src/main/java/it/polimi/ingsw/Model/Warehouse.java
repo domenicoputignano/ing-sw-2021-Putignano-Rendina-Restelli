@@ -117,7 +117,8 @@ public class Warehouse implements Cloneable {
 
 
     public boolean checkResourceFromStrongBox(ResourceType type, int occ) {
-        return strongbox.getResources().get(type) <= occ;
+        if(strongbox.getResources().get(type) < occ) return false;
+        else return true;
     }
 
     public boolean checkResourceFromExtraDepot(ResourceType type, int occ) {

@@ -23,6 +23,9 @@ public final class PaymentHandler {
                 takeResourcesFromNormalDepots(warehouse,toTakeFromNormalDepot);
                 takeResourcesFromExtraDepots(warehouse, toTakeFromExtraDepot);
                 takeResourcesFromStrongbox(warehouse,toTakeFromStrongBox);
+        } else {
+            //TODO cambiare l'implementazione
+            System.out.println("Eccezione");
         }
     }
 
@@ -69,6 +72,10 @@ public final class PaymentHandler {
 
     private static Map<ResourceType, Integer> convertResource(Map<ResourceSource,EnumMap<ResourceType,Integer>> howToTakeResources) {
         Map<ResourceType, Integer> resourcesToTake = new EnumMap<ResourceType, Integer>(ResourceType.class);
+        resourcesToTake.put(ResourceType.coin,0);
+        resourcesToTake.put(ResourceType.servant,0);
+        resourcesToTake.put(ResourceType.shield,0);
+        resourcesToTake.put(ResourceType.stone,0);
         howToTakeResources.keySet().stream().forEach(x -> howToTakeResources.get(x).forEach((key, value) -> resourcesToTake.merge(key, value, Integer::sum)));
         return resourcesToTake;
     }
