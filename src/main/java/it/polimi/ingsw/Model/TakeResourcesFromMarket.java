@@ -23,29 +23,30 @@ public class TakeResourcesFromMarket implements AbstractTurnPhase {
     public void takeResourcesFromMarket(Turn turn, TakeResourcesFromMarketMessage takeResourcesFromMarketMessage) throws InvalidActionException {
         if(turn.isDoneNormalAction())
             throw new InvalidActionException();
-        convertWhiteMarbles(turn,takeResourcesFromMarketMessage.getWhereToPutMarbles(),takeResourcesFromMarketMessage.getWhiteEffects());
-        convertMarblesToResources(takeResourcesFromMarketMessage.getWhereToPutMarbles());
-        handlePositioning(turn.getPlayer().getPersonalBoard().getWarehouse());
-        /*TODO: togliere gli effetti dalle whiteMarbles*/
-        //TODO : if(pendingResources.size()>0) HANDLEERROR(Risorse non correttamente posizionate)
+        if(checkValidWhiteEffects(turn,takeResourcesFromMarketMessage.getWhiteEffects(),takeResourcesFromMarketMessage.getRequestedMarbles())) {
+            convertWhiteMarbles(turn, takeResourcesFromMarketMessage.getWhereToPutMarbles(), takeResourcesFromMarketMessage.getWhiteEffects());
+            convertMarblesToResources(takeResourcesFromMarketMessage.getWhereToPutMarbles());
+            handlePositioning(turn.getPlayer().getPersonalBoard().getWarehouse());
+            /*TODO: togliere gli effetti dalle whiteMarbles*/
+            //TODO : if(pendingResources.size()>0) HANDLEERROR(Risorse non correttamente posizionate)
 
-        turn.getGame().getMarketTray().clearWhiteMarbleEffect();
-
+            turn.getGame().getMarketTray().clearWhiteMarbleEffect();
+        }//TODO: else HANDLEERROR(Lista di conversione white marbles non compatibile)
     }
 
     private void convertWhiteMarbles(Turn turn, List<Pair<Marble, MarbleDestination>> pairList, List<Integer> whiteEffects) {
         List<ResourceType> whiteMarbleEffects = turn.getPlayer().getActiveEffects().stream().filter(x -> x.getEffect()==Effect.CMARBLE).
                 map(x -> x.getType()).collect(Collectors.toList());
-        List<Marble> marbles = pairList.stream().map(Pair::getKey).collect(Collectors.toList());
-        int i = 0;
-        for(Marble m : marbles) {
-            if(m.getColor()==Color.WHITE) {
-                if(whiteMarbleEffects.size()==1) {
-                    WhiteMarble y = (WhiteMarble) m;
-                    y.setEffect(convertTypeToMarbleEffect(whiteMarbleEffects.get(0)));
-                } else if(whiteMarbleEffects.size() == 2) {
-                    WhiteMarble y = (WhiteMarble) m;
-                    y.setEffect(convertTypeToMarbleEffect(whiteMarbleEffects.get(whiteEffects.get(i))));
+                 List<Marble> marbles = pairList.stream().map(Pair::getKey).collect(Collectors.toList());
+                    int i = 0;
+                    for(Marble m : marbles) {
+                        if(m.getColor()==Color.WHITE) {
+                            if(whiteMarbleEffects.size()==1) {
+                                WhiteMarble y = (WhiteMarble) m;
+                                y.setEffect(convertTypeToMarbleEffect(whiteMarbleEffects.get(0)));
+                            } else if(whiteMarbleEffects.size() == 2) {
+                                WhiteMarble y = (WhiteMarble) m;
+                                y.setEffect(convertTypeToMarbleEffect(whiteMarbleEffects.get(whiteEffects.get(i))));
                     i++;
                 }
             }
@@ -134,6 +135,17 @@ public class TakeResourcesFromMarket implements AbstractTurnPhase {
         }
     }
 
+    public boolean checkValidWhiteEffects(Turn turn, List<Integer> whiteEffects, List<Marble> requestedMarbles)
+    {
+        List<ResourceType> whiteMarbleEffects = turn.getPlayer().getActiveEffects().stream().filter(x -> x.getEffect()==Effect.CMARBLE).
+                map(x -> x.getType()).collect(Collectors.toList());
+        if(whiteMarbleEffects.size()==2)
+        {
+            if(whiteEffects.size()!=requestedMarbles.stream().filter(x -> x.getColor()==Color.WHITE).count())
+                return false;
+        }
+        return true;
+    }
 
 
 

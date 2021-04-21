@@ -31,6 +31,14 @@ public class TakeResourcesFromMarketMessage {
         this.whereToPutMarbles = whereToPutMarbles;
     }
 
+    public void setPlayerChoice(MarketChoice playerChoice) {
+        this.playerChoice = playerChoice;
+    }
+
+    public void setIndex(int index) {
+        this.index = index;
+    }
+
     public int getIndex()
     {
         return index;
