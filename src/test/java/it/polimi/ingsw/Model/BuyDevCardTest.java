@@ -25,10 +25,10 @@ class BuyDevCardTest {
         players.add(new Player("Piero"));
         players.add(new Player("Domenico"));
         players.add(new Player("Andrea"));
-        Game game = new Game(players.get(0), players, players.get(0), 4);
-        game.setup();
-        Turn turn = new Turn(game, players.get(0));
-        game.setTurn(turn);
+        MultiPlayerMode multiPlayerMode = new MultiPlayerMode(players.get(0), players, players.get(0), 4);
+        multiPlayerMode.setup();
+        Turn turn = new Turn(multiPlayerMode, players.get(0));
+        multiPlayerMode.setTurn(turn);
 
 
         CardType cardType = new CardType(1, ColorCard.green);
@@ -74,7 +74,7 @@ class BuyDevCardTest {
 
 
         //initialize of StrongBox resources with map
-        game.getPlayerList().get(0).getPersonalBoard().getWarehouse().addResourcesToStrongbox(map);
+        multiPlayerMode.getPlayerList().get(0).getPersonalBoard().getWarehouse().addResourcesToStrongbox(map);
 
         Map<ResourceSource,EnumMap<ResourceType, Integer>> howToTakeResources = new HashMap<>();
 
@@ -84,7 +84,7 @@ class BuyDevCardTest {
         EnumMap<ResourceType,Integer> extraDepot = new EnumMap<ResourceType, Integer>(ResourceType.class);
 
         try {
-            game.getPlayerList().get(0).getPersonalBoard().getWarehouse().addResourcesToDepot(1, ResourceType.coin,1);
+            multiPlayerMode.getPlayerList().get(0).getPersonalBoard().getWarehouse().addResourcesToDepot(1, ResourceType.coin,1);
         } catch (DepotOutOfBoundsException e) {
             e.printStackTrace();
         } catch (IncompatibleResourceTypeException e) {
@@ -110,9 +110,9 @@ class BuyDevCardTest {
 
         Map<ResourceType,Integer> expectedStrongBox = new EnumMap<ResourceType, Integer>(ResourceType.class);
 
-        DevelopmentCard card = game.getDecks().get(0).getTop();
+        DevelopmentCard card = multiPlayerMode.getDecks().get(0).getTop();
 
-        if(game.getDecks().get(0).getTop().equals(card1)) {
+        if(multiPlayerMode.getDecks().get(0).getTop().equals(card1)) {
             System.out.println(1);
             //TODO ricontrollare metodo dello strongbox
             turn.getTurnState().getTurnPhase().buyDevCard(turn, buyDevCardMessage);

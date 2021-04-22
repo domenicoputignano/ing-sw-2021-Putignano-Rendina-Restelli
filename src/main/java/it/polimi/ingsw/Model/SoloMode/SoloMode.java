@@ -1,12 +1,17 @@
 package it.polimi.ingsw.Model.SoloMode;
 
+import it.polimi.ingsw.Model.Game;
+import it.polimi.ingsw.Model.MultiPlayerMode;
+import it.polimi.ingsw.Model.Player;
+
 import java.util.Collections;
 import java.util.Stack;
 
-public class SoloMode {
+public class SoloMode extends Game {
     Stack<Token> tokens = new Stack<Token>();
 
-    public SoloMode(Stack<Token> tokens) {
+
+    public SoloMode(Player player,Stack<Token> tokens) {
         this.refreshTokens();
     }
 

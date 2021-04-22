@@ -6,7 +6,6 @@ import it.polimi.ingsw.Exceptions.InvalidActionException;
 import it.polimi.ingsw.Model.Card.ColorCard;
 import it.polimi.ingsw.Model.Card.DevelopmentCard;
 import it.polimi.ingsw.Utils.ActivateProductionMessage;
-import it.polimi.ingsw.Utils.PositioningMessage;
 import it.polimi.ingsw.Utils.ResourceSource;
 import org.junit.jupiter.api.Test;
 
@@ -24,10 +23,10 @@ class ActivateProductionTest {
         players.add(new Player("Piero"));
         players.add(new Player("Domenico"));
         players.add(new Player("Andrea"));
-        Game game = new Game(players.get(0), players, players.get(0), 4);
-        game.setup();
-        Turn turn = new Turn(game, players.get(0));
-        game.setTurn(turn);
+        MultiPlayerMode multiPlayerMode = new MultiPlayerMode(players.get(0), players, players.get(0), 4);
+        multiPlayerMode.setup();
+        Turn turn = new Turn(multiPlayerMode, players.get(0));
+        multiPlayerMode.setTurn(turn);
 
 
 

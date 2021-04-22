@@ -12,27 +12,19 @@ import it.polimi.ingsw.Observer;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.lang.reflect.Type;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Random;
 
-public class Game implements Observer<Integer> {
-    private Player inkwell;
-    private List<Player> playerList;
-    private Player currPlayer;
-    private List<Deck> decks;
-    private int numOfPlayers;
-    private GameState gameState;
-    private Turn turn;
-    private MarketTray marketTray;
-
-
-
-    public Game(Player inkwell, List<Player> playerList, Player currPlayer, int numOfPlayers) {
-        this.inkwell = inkwell;
-        this.playerList = playerList;
-        this.currPlayer = currPlayer;
-        this.numOfPlayers = numOfPlayers;
-        this.gameState = GameState.SETUP;
-    }
+public abstract class Game implements Observer<Integer> {
+    protected Player inkwell;
+    protected Player currPlayer;
+    protected List<Player> playerList;
+    protected List<Deck> decks;
+    protected GameState gameState;
+    protected Turn turn;
+    protected MarketTray marketTray;
 
     public void setup()
     {
@@ -40,63 +32,36 @@ public class Game implements Observer<Integer> {
         this.initializeDecksDevCards();
         this.dealLeaderCards();
         for(Player p : this.playerList)
-           {
-               p.setPosition(playerList.indexOf(p)+1);
+        {
+            p.setPosition(playerList.indexOf(p)+1);
 
-               /*aggiungo Game alla lista di Observer di faithtrack per la vatican report section*/
-               p.getPersonalBoard().getFaithTrack().addObserver(this);
+            /*aggiungo MultiPlayerMode alla lista di Observer di faithtrack per la vatican report section*/
+            p.getPersonalBoard().getFaithTrack().addObserver(this);
 
-               if(p.getPosition()==3 || p.getPosition()==4)
-                   p.getPersonalBoard().getFaithTrack().moveMarker(1);
-           }
+            if(p.getPosition()==3 || p.getPosition()==4)
+                p.getPersonalBoard().getFaithTrack().moveMarker(1);
+        }
         this.turn = new Turn(this,inkwell);
-    //DISTRIBUZIONE RISORSE A SCELTA E SCELTA CARTE LEADER PASSANDO IN RESOURCECHOICE E LEADER CHOICE
+        //DISTRIBUZIONE RISORSE A SCELTA E SCELTA CARTE LEADER PASSANDO IN RESOURCECHOICE E LEADER CHOICE
         //Inviare notifica alle view interessate per le risorse a scelta
     }
 
-    public void nextState(GameState state)
-    {
-        this.gameState = state;
-    }
-
-
-    /*
-    public Player getWinner() {
-        //TODO
-        return null;
-    }
-
-    public int calcVictoryPoints() {
-        //TODO
-        return 1;
-
-    }*/
-
-    public Player getCurrPlayer() {
-        return currPlayer;
-    }
-
-    public List<Player> getPlayerList() {
-        return playerList;
-    }
-
     private void initializeDecksDevCards() {
-            String path = "src/main/resources/json/devCards.json";
-            decks = new ArrayList<>();
-            try{
-                Gson gson = new Gson();
+        String path = "src/main/resources/json/devCards.json";
+        decks = new ArrayList<>();
+        try{
+            Gson gson = new Gson();
 
-                JsonReader reader = new JsonReader(new FileReader(path));
+            JsonReader reader = new JsonReader(new FileReader(path));
 
-                Type listType = new TypeToken<List<Deck>>() {
-                }.getType();
-                decks = gson.fromJson(reader, listType);
-                shuffleDecksDevCards();
-            } catch (FileNotFoundException e) {
-                // mandare messaggio al client "Configuration file not found"
-            }
+            Type listType = new TypeToken<List<Deck>>() {
+            }.getType();
+            decks = gson.fromJson(reader, listType);
+            shuffleDecksDevCards();
+        } catch (FileNotFoundException e) {
+            // mandare messaggio al client "Configuration file not found"
+        }
     }
-
 
     private void dealLeaderCards() {
         List<LeaderCard> cards = initializeDeckLeaderCards();
@@ -147,9 +112,24 @@ public class Game implements Observer<Integer> {
         }
 
     }
+
     public boolean isEmptyDeck(CardType cardType)
     {
         return this.decks.stream().anyMatch(x -> x.getCardType().equals(cardType) && x.getSize()<=0);
+    }
+
+    @Override
+    public void update(Integer message)
+    {
+        activateVaticanReport(message);
+    }
+
+    public Player getCurrPlayer() {
+        return currPlayer;
+    }
+
+    public List<Player> getPlayerList() {
+        return playerList;
     }
 
     //TODO handleError method
@@ -172,13 +152,4 @@ public class Game implements Observer<Integer> {
         return decks;
         //TODO : DA MODIFICARE
     }
-
-    @Override
-    public void update(Integer message)
-    {
-        activateVaticanReport(message);
-    }
-
-
 }
-

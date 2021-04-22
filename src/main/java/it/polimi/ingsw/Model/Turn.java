@@ -7,7 +7,7 @@ public class Turn {
     private boolean doneNormalAction;
 
     public Turn(Game game, Player player) {
-        this.game = game;
+        this.game = this.game;
         this.player = player;
     }
 
