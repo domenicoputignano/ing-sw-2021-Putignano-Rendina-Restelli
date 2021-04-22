@@ -153,4 +153,12 @@ public class TakeResourcesFromMarket implements AbstractTurnPhase {
     public int getFaith() {
         return faith;
     }
+
+    public List<ResourceType> getPendingResources() {
+        return pendingResources;
+    }
+
+    public int getDiscardedResources() {
+        return discardedResources;
+    }
 }
