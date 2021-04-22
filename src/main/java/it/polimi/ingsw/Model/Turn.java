@@ -1,13 +1,13 @@
 package it.polimi.ingsw.Model;
 
 public class Turn {
-    private Game game;
+    private final Game game;
     private TurnState turnState;
     private Player player;
     private boolean doneNormalAction;
 
     public Turn(Game game, Player player) {
-        this.game = this.game;
+        this.game = game;
         this.player = player;
     }
 

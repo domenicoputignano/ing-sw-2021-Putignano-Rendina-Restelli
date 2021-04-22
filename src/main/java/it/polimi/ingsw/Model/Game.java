@@ -152,4 +152,9 @@ public abstract class Game implements Observer<Integer> {
         return decks;
         //TODO : DA MODIFICARE
     }
+
+    public void nextState(GameState state)
+    {
+        this.gameState = state;
+    }
 }

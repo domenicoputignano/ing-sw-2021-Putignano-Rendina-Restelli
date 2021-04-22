@@ -25,13 +25,6 @@ public class MultiPlayerMode extends Game {
         this.gameState = GameState.SETUP;
     }
 
-
-    public void nextState(GameState state)
-    {
-        this.gameState = state;
-    }
-
-
     /*
     public Player getWinner() {
         //TODO

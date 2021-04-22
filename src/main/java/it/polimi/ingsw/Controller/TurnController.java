@@ -1,20 +1,17 @@
 package it.polimi.ingsw.Controller;
 
 import it.polimi.ingsw.Exceptions.InvalidActionException;
-import it.polimi.ingsw.Model.MultiPlayerMode;
-import it.polimi.ingsw.Model.Player;
-import it.polimi.ingsw.Model.TakeResourcesFromMarket;
-import it.polimi.ingsw.Model.TurnState;
+import it.polimi.ingsw.Model.*;
 import it.polimi.ingsw.Utils.*;
 
 import java.util.List;
 
 public class TurnController {
     Player currPlayer;
-    MultiPlayerMode model;
+    Game model;
     List<Player> playerList;
 
-    public TurnController(MultiPlayerMode model, List<Player> players, Player firstPlayer)
+    public TurnController(Game model, List<Player> players, Player firstPlayer)
     {
         this.model = model;
         this.playerList = players;
