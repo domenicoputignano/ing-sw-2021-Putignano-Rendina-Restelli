@@ -13,7 +13,6 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.lang.reflect.Type;
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class Game implements Observer<Integer> {
     private Player inkwell;
@@ -143,8 +142,8 @@ public class Game implements Observer<Integer> {
         {
             int position = p.getPersonalBoard().getFaithTrack().getFaithMarker();
             if(position >= start)
-                p.getPersonalBoard().getFaithTrack().getSections()[vatican_index].setValidFavorTiles(StateFavorTiles.FACEUP);
-            else p.getPersonalBoard().getFaithTrack().getSections()[vatican_index].setValidFavorTiles(StateFavorTiles.DISCARDED);
+                p.getPersonalBoard().getFaithTrack().setFavorTile(vatican_index,StateFavorTiles.FACEUP);
+            else p.getPersonalBoard().getFaithTrack().setFavorTile(vatican_index,StateFavorTiles.DISCARDED);
         }
 
     }

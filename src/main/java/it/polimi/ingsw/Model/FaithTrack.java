@@ -8,7 +8,7 @@ public class FaithTrack extends Observable<Integer> {
     private int faithMarker;
     private int passedSection;
     private final int victoryPoints[] = new int[25];
-    private VaticanReportSection[] sections = new VaticanReportSection[3];
+    private final VaticanReportSection[] sections = new VaticanReportSection[3];
 
 
     public void moveMarker(int pos){
@@ -42,8 +42,20 @@ public class FaithTrack extends Observable<Integer> {
             notify(vatican_index);
     }
 
-    
+    public void setFavorTile(int index, StateFavorTiles state)
+    {
+        this.sections[index].setValidFavorTiles(state);
+    }
 
+    public boolean isPopeSpace(int vatican_index, int marker){
+        if(sections[vatican_index].isPopeSpace(marker)) return true;
+        return false;
+    }
+
+    public int getPopeSpace(int passedSection)
+    {
+        return sections[passedSection].getPopeSpace();
+    }
     public int[] getVictoryPoints() {
         return victoryPoints;
     }

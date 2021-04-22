@@ -37,6 +37,7 @@ class GameTest {
 
     @Test
     void activateVaticanReport() {
+        //TODO: MODIFICARE SETTER
         playerList.add(new Player("Piero"));
         playerList.add(new Player("Domenico"));
         playerList.add(new Player("Andrea"));
