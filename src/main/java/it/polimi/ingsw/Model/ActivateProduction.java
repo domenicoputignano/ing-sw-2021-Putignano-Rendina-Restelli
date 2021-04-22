@@ -52,19 +52,19 @@ public class ActivateProduction implements AbstractTurnPhase {
         PersonalBoard personalBoard = turn.getPlayer().getPersonalBoard();
 
         if(requestedProductions.isSlot1()) {
-            personalBoard.peekTopCard(0).getTrade().getInputResources().forEach((key, value) -> inputResources.merge(key,value,Integer::sum));
-            personalBoard.peekTopCard(0).getTrade().getOutputResources().forEach((key, value) -> outputResources.merge(key,value,Integer::sum));
-            faith += personalBoard.peekTopCard(0).getTrade().getOutputFaith();
-        }
-        if(requestedProductions.isSlot2()) {
             personalBoard.peekTopCard(1).getTrade().getInputResources().forEach((key, value) -> inputResources.merge(key,value,Integer::sum));
             personalBoard.peekTopCard(1).getTrade().getOutputResources().forEach((key, value) -> outputResources.merge(key,value,Integer::sum));
             faith += personalBoard.peekTopCard(1).getTrade().getOutputFaith();
         }
-        if(requestedProductions.isSlot3()) {
+        if(requestedProductions.isSlot2()) {
             personalBoard.peekTopCard(2).getTrade().getInputResources().forEach((key, value) -> inputResources.merge(key,value,Integer::sum));
             personalBoard.peekTopCard(2).getTrade().getOutputResources().forEach((key, value) -> outputResources.merge(key,value,Integer::sum));
             faith += personalBoard.peekTopCard(2).getTrade().getOutputFaith();
+        }
+        if(requestedProductions.isSlot3()) {
+            personalBoard.peekTopCard(3).getTrade().getInputResources().forEach((key, value) -> inputResources.merge(key,value,Integer::sum));
+            personalBoard.peekTopCard(3).getTrade().getOutputResources().forEach((key, value) -> outputResources.merge(key,value,Integer::sum));
+            faith += personalBoard.peekTopCard(3).getTrade().getOutputFaith();
         }
         if(requestedProductions.isBasic()) {
             inputResources.put(activateProductionMessage.getInput1(), inputResources.get(activateProductionMessage.getInput1())+1);
