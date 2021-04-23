@@ -8,4 +8,6 @@ public abstract class ConclusionEvent {
     protected ConclusionEvent(Game game){
         this.game = game;
     }
+
+    public void handleConclusion(){}
 }

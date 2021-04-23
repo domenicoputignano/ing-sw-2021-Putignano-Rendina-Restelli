@@ -13,7 +13,7 @@ public class LorenzoIlMagnifico {
     private int blackCross = 0;
     private int passedSection = 0;
     private final FaithTrack faithTrack;
-    private SoloMode soloGame;
+    private final SoloMode soloGame;
 
     public LorenzoIlMagnifico(FaithTrack faithTrack, SoloMode soloGame)
     {
@@ -21,7 +21,7 @@ public class LorenzoIlMagnifico {
         this.soloGame = soloGame;
     }
 
-    public void moveBlackCross(int pos){
+    public void moveBlackCross(int pos) throws EndGameException {
         for(int i=0; i<pos; i++){
             this.blackCross++;
             if(faithTrack.isPopeSpace(passedSection,blackCross)){
@@ -34,7 +34,7 @@ public class LorenzoIlMagnifico {
         }
     }
 
-    public void throwDevCards(ColorCard color)
+    public void throwDevCards(ColorCard color) throws EndGameException
     {
         boolean toEndGame;
         for(int i=0;i<2;i++) {
