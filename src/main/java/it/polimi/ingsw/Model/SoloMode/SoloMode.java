@@ -31,4 +31,6 @@ public class SoloMode extends Game {
         tokens.push(new Token(new MoveBlackCrossByTwo()));
         Collections.shuffle(tokens);
     }
+
+
 }

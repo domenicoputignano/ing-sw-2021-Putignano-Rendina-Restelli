@@ -1,5 +1,6 @@
 package it.polimi.ingsw.Model.SoloMode;
 
+import it.polimi.ingsw.Exceptions.EndGameException;
 import it.polimi.ingsw.Model.Card.ColorCard;
 import it.polimi.ingsw.Model.Card.Deck;
 import it.polimi.ingsw.Model.FaithTrack;
@@ -35,7 +36,7 @@ public class LorenzoIlMagnifico {
 
     public void throwDevCards(ColorCard color)
     {
-        boolean toEndGame = false;
+        boolean toEndGame;
         for(int i=0;i<2;i++) {
                List<Deck> decksInvolved = this.soloGame.getDecks().stream().filter(x -> x.getCardType().getColor() == color).collect(Collectors.toList());
                Optional<Deck> deckInvolved = decksInvolved.stream().filter(x -> x.getCardType().getLevel()==1 && x.getSize()>0).findFirst();
@@ -51,14 +52,12 @@ public class LorenzoIlMagnifico {
                             if(deckInvolved.isPresent()) {
                                 deckInvolved.ifPresent(Deck::draw);
                                 if(this.soloGame.getDecks().stream().allMatch(x -> x.getCardType().getColor() == color && x.getSize()==0)) {
-                                    toEndGame = true;
-                                    break;
+                                   //TODO: throw new EndGameException(soloGame,new ConclusionEvent(...));
                                 }
                             }
                        }
                }
         }
-        //TODO :if(toEndGame)  TERMINARE LA PARTITA
     }
 
     public void moveAndShuffle()
