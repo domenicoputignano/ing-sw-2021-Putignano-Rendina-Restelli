@@ -123,13 +123,18 @@ public class TakeResourcesFromMarket implements AbstractTurnPhase {
         switch(whereToPutResources.get(i).getValue()) {
             case DEPOT1:
                     playerWarehouse.addResourcesToDepot(1, whereToPutResources.get(i).getKey(), 1);
+                    break;
             case DEPOT2:
                     playerWarehouse.addResourcesToDepot(2, whereToPutResources.get(i).getKey(), 1);
+                    break;
             case DEPOT3:
                     playerWarehouse.addResourcesToDepot(3, whereToPutResources.get(i).getKey(), 1);
+                    break;
             case EXTRA:
                     playerWarehouse.addResourcesToExtraDepot(whereToPutResources.get(i).getKey(),1);
+                    break;
             case DISCARD: discardedResources++;
+                break;
             default:
         }
     }
