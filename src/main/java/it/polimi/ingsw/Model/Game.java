@@ -6,6 +6,10 @@ import com.google.gson.stream.JsonReader;
 import it.polimi.ingsw.Model.Card.CardType;
 import it.polimi.ingsw.Model.Card.Deck;
 import it.polimi.ingsw.Model.Card.LeaderCard;
+import it.polimi.ingsw.Model.ConclusionEvents.BlackCrossHitLastSpace;
+import it.polimi.ingsw.Model.ConclusionEvents.DevCardColorEnded;
+import it.polimi.ingsw.Model.ConclusionEvents.HitLastSpace;
+import it.polimi.ingsw.Model.ConclusionEvents.SeventhDevCardBought;
 import it.polimi.ingsw.Model.MarketTray.MarketTray;
 import it.polimi.ingsw.Observer;
 
@@ -116,6 +120,22 @@ public abstract class Game implements Observer<Integer> {
     public boolean isEmptyDeck(CardType cardType)
     {
         return this.decks.stream().anyMatch(x -> x.getCardType().equals(cardType) && x.getSize()<=0);
+    }
+
+    public void endGame(HitLastSpace event){
+        //throw UnsupportedOperationException
+    }
+
+    public void endGame(DevCardColorEnded event){
+        //throw UnsupportedOperationException
+    }
+
+    public void endGame(SeventhDevCardBought event){
+        //throw UnsupportedOperationException
+    }
+
+    public void endGame(BlackCrossHitLastSpace event){
+        //throw UnsupportedOperationException
     }
 
     @Override

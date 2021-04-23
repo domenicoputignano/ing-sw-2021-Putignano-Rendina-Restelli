@@ -52,7 +52,7 @@ public class LorenzoIlMagnifico {
                             if(deckInvolved.isPresent()) {
                                 deckInvolved.ifPresent(Deck::draw);
                                 if(this.soloGame.getDecks().stream().allMatch(x -> x.getCardType().getColor() == color && x.getSize()==0)) {
-                                   //TODO: throw new EndGameException(soloGame,new ConclusionEvent(...));
+                                   //TODO: throw new EndGameException(soloGame,new FinishedCards(...));
                                 }
                             }
                        }

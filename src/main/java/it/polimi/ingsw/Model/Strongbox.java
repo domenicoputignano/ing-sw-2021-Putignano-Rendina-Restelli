@@ -30,7 +30,6 @@ public class Strongbox {
         resources.forEach( (key,value)-> this.resources.merge(key,value,(v1,v2)-> v1-v2));
     }
 
-
     //TODO DA CAMBIARE, ESPONE L'IMPLEMENTAZIONE
     public EnumMap<ResourceType, Integer> getResources() {
         return (EnumMap<ResourceType, Integer>) resources;

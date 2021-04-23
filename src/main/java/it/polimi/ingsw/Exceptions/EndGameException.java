@@ -1,7 +1,6 @@
 package it.polimi.ingsw.Exceptions;
 
-import it.polimi.ingsw.Model.ConclusionEvent;
-import it.polimi.ingsw.Model.Game;
+import it.polimi.ingsw.Model.ConclusionEvents.ConclusionEvent;
 
 public class EndGameException extends Exception{
     private ConclusionEvent conclusionEvent;
