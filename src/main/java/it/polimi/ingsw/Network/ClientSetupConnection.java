@@ -22,37 +22,53 @@ public class ClientSetupConnection implements Runnable {
         this.clientSocket = clientSocket;
     }
 
+
+    /*Method to initialize numOfPlayer and nickName*/
     public void run() {
         try {
             inputStream = new DataInputStream(clientSocket.getInputStream());
             outputStream = new DataOutputStream(clientSocket.getOutputStream());
             outputStream.writeUTF("Choose your nickname: ");
             outputStream.flush();
-            String nickname = inputStream.readUTF();
-
-            if(server.playerWithSameNicknameIsPlaying(nickname)) {
-                outputStream.writeUTF("Nickname not available, choose another one!");
-                LOGGER.log(Level.INFO, "Player has chosen an unavailable nickname, registration rejected");
-                nickname = inputStream.readUTF();
+            nicknameChoice();
+            if (server.inactivePlayerAlreadyRegistered(nickname)) {
+                //TODO recuperare i dati della partita associata a quel giocatore
             }
-            outputStream.writeUTF("Choose the number of players [2-4] : ");
-            numOfPlayers = inputStream.read();
-            isActive = true;
-            LOGGER.log(Level.INFO, "Client " + nickname + " connected and " + numOfPlayers + " players chosen");
-        } catch(IOException e) {
+            else {
+                numOfPlayersChoice();
+                isActive = true;
+                LOGGER.log(Level.INFO, "Client " + nickname + " connected and " + numOfPlayers + " players chosen");
+            }
+        } catch (IOException e) {
             LOGGER.log(Level.INFO, "Reset connection");
         }
-
     }
 
 
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
-    }
 
-    public boolean isActive() {
+    public boolean isActive(){
         return isActive;
     }
 
+    private void nicknameChoice() throws IOException {
+        String nickname;
+        boolean availableNickname = false;
+        do {
+            nickname = inputStream.readUTF();
+            if (server.playerWithSameNicknameIsPlaying(nickname)) {
+                outputStream.writeUTF("Nickname not available, choose another one!");
+                LOGGER.log(Level.INFO, "Player has chosen an unavailable nickname, connection refused");
+            } else availableNickname = true;
+        } while (!availableNickname);
+        this.nickname = nickname;
+    }
+
+    private void numOfPlayersChoice() throws IOException {
+        do {
+            outputStream.writeUTF("Choose the number of players [2-4] : ");
+            numOfPlayers = inputStream.read();
+        } while (numOfPlayers < 1 || numOfPlayers > 4);
+    }
 }
+
 

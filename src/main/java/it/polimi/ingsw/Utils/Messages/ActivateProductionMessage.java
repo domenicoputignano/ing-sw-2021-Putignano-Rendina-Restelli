@@ -1,13 +1,15 @@
-package it.polimi.ingsw.Utils;
+package it.polimi.ingsw.Utils.Messages;
 
 import it.polimi.ingsw.Model.ActiveProductions;
 import it.polimi.ingsw.Model.ResourceType;
+import it.polimi.ingsw.Utils.Messages.ClientMessage;
+import it.polimi.ingsw.Utils.ResourceSource;
 
 import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ActivateProductionMessage implements ClientMessage {
+public class ActivateProductionMessage {
     private ActiveProductions productions;
     private ResourceType input1;
     private ResourceType input2;

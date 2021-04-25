@@ -8,7 +8,7 @@ import it.polimi.ingsw.Model.Card.Deck;
 import it.polimi.ingsw.Model.Card.DevelopmentCard;
 import it.polimi.ingsw.Model.Card.Effect;
 import it.polimi.ingsw.Model.Card.LeaderEffect;
-import it.polimi.ingsw.Utils.BuyDevCardMessage;
+import it.polimi.ingsw.Utils.Messages.BuyDevCardMessage;
 import java.util.*;
 import java.util.stream.Collectors;
 

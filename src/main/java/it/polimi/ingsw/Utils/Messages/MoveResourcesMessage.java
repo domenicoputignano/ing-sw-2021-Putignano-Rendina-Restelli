@@ -1,4 +1,6 @@
-package it.polimi.ingsw.Utils;
+package it.polimi.ingsw.Utils.Messages;
+
+import it.polimi.ingsw.Utils.MoveActionInterface;
 
 public class MoveResourcesMessage {
 

@@ -6,7 +6,7 @@ import it.polimi.ingsw.Exceptions.InvalidActionException;
 import it.polimi.ingsw.Model.Card.CardType;
 import it.polimi.ingsw.Model.Card.ColorCard;
 import it.polimi.ingsw.Model.Card.DevelopmentCard;
-import it.polimi.ingsw.Utils.BuyDevCardMessage;
+import it.polimi.ingsw.Utils.Messages.BuyDevCardMessage;
 import it.polimi.ingsw.Utils.ResourceSource;
 import org.junit.jupiter.api.Test;
 

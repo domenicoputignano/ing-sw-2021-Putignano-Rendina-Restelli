@@ -1,6 +1,8 @@
-package it.polimi.ingsw.Utils;
+package it.polimi.ingsw.Utils.Messages;
 
-public class LeaderActionMessage implements ClientMessage {
+import it.polimi.ingsw.Utils.Messages.ClientMessage;
+
+public class LeaderActionMessage  {
     private int index;
     private boolean toDiscard;
 

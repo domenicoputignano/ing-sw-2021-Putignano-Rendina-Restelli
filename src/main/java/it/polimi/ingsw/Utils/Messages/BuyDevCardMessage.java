@@ -1,13 +1,16 @@
-package it.polimi.ingsw.Utils;
+package it.polimi.ingsw.Utils.Messages;
 
+import it.polimi.ingsw.Controller.GameController;
+import it.polimi.ingsw.Controller.TurnController;
 import it.polimi.ingsw.Model.Card.CardType;
 import it.polimi.ingsw.Model.ResourceType;
+import it.polimi.ingsw.Utils.ResourceSource;
 
 import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.Map;
 
-public class BuyDevCardMessage implements ClientMessage{
+public class BuyDevCardMessage {
     private CardType type;
     private Map<ResourceSource, EnumMap<ResourceType, Integer>> howToTakeResources = new HashMap<>();
     private int destinationSlot;
@@ -49,4 +52,15 @@ public class BuyDevCardMessage implements ClientMessage{
     public void setDestinationSlot(int destinationSlot) {
         this.destinationSlot = destinationSlot;
     }
+
+
+    /*TODO procedura da applicare a tutti i messaggi di tipo TurnControllerHandleable
+    public void handleMessage(TurnController turnController) {
+        turnController.handleBuyDevCardMessage(this);
+    }
+
+    public void handleMessage(GameController gameController) {
+        --> handleMessage(gameController.getTurnController());
+    }*/
+
 }

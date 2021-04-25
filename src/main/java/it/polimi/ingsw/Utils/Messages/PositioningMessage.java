@@ -1,12 +1,15 @@
-package it.polimi.ingsw.Utils;
+package it.polimi.ingsw.Utils.Messages;
 
 import it.polimi.ingsw.Model.ResourceType;
+import it.polimi.ingsw.Utils.MarbleDestination;
+import it.polimi.ingsw.Utils.Messages.ClientMessage;
+import it.polimi.ingsw.Utils.Pair;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class PositioningMessage implements ClientMessage {
+public class PositioningMessage {
     List<Pair<ResourceType, MarbleDestination>> whereToPutResources = new ArrayList<>();
 
     public List<Pair<ResourceType, MarbleDestination>> getWhereToPutResources() {

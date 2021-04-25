@@ -28,5 +28,9 @@ public class GameController {
         model.setup();
         model.nextState(GameState.RESOURCECHOICE);
     }
+
+    public TurnController getTurnController() {
+        return turnController;
+    }
 }
 

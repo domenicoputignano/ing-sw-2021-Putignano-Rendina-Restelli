@@ -1,7 +1,6 @@
 package it.polimi.ingsw.Model;
 
-import it.polimi.ingsw.Exceptions.InvalidActionException;
-import it.polimi.ingsw.Utils.LeaderActionMessage;
+import it.polimi.ingsw.Utils.Messages.LeaderActionMessage;
 
 public class LeaderAction implements AbstractTurnPhase{
 

@@ -5,7 +5,7 @@ import it.polimi.ingsw.Model.Card.Effect;
 import it.polimi.ingsw.Model.MarketTray.*;
 import it.polimi.ingsw.Utils.MarbleDestination;
 import it.polimi.ingsw.Utils.Pair;
-import it.polimi.ingsw.Utils.TakeResourcesFromMarketMessage;
+import it.polimi.ingsw.Utils.Messages.TakeResourcesFromMarketMessage;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;

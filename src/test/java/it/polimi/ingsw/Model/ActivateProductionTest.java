@@ -5,7 +5,7 @@ import it.polimi.ingsw.Exceptions.IncompatibleResourceTypeException;
 import it.polimi.ingsw.Exceptions.InvalidActionException;
 import it.polimi.ingsw.Model.Card.ColorCard;
 import it.polimi.ingsw.Model.Card.DevelopmentCard;
-import it.polimi.ingsw.Utils.ActivateProductionMessage;
+import it.polimi.ingsw.Utils.Messages.ActivateProductionMessage;
 import it.polimi.ingsw.Utils.ResourceSource;
 import org.junit.jupiter.api.Test;
 
