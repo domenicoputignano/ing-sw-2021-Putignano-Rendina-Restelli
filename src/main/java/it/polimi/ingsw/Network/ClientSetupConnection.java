@@ -69,6 +69,18 @@ public class ClientSetupConnection implements Runnable {
             numOfPlayers = inputStream.read();
         } while (numOfPlayers < 1 || numOfPlayers > 4);
     }
+
+    public int getNumOfPlayers() {
+        return numOfPlayers;
+    }
+
+    public String getNickname() {
+        return nickname;
+    }
+
+    public Socket getClientSocket() {
+        return clientSocket;
+    }
 }
 
 

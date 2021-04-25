@@ -1,19 +1,25 @@
 package it.polimi.ingsw.Network;
 
+import it.polimi.ingsw.Controller.GameController;
+import it.polimi.ingsw.Model.Game;
+import it.polimi.ingsw.Model.MultiPlayerMode;
+import it.polimi.ingsw.Model.Player;
+
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 public class Server {
     private final int PORT;
     private final ServerSocket serverSocket;
     private final Logger LOGGER = Logger.getLogger(Server.class.getName());
+    private final Set<ClientSetupConnection> waitingConnections = new HashSet<>();
 
     //Players involved in one match (connected or not)
     private final Map<String, ClientSetupConnection> accounts = new HashMap<>();
@@ -45,7 +51,11 @@ public class Server {
 
 
     public void lobby(ClientSetupConnection clientSetupConnection) {
+        waitingConnections.add(clientSetupConnection);
+        Set<ClientSetupConnection> suitableConnections = getSuitableConnections(clientSetupConnection.getNumOfPlayers());
+        if(suitableConnections.size() == clientSetupConnection.getNumOfPlayers()) {
 
+        }
     }
 
     //method to detect if a player with the same nickname is already playing
@@ -57,8 +67,25 @@ public class Server {
         return accounts.containsKey(nickname) && !accounts.get(nickname).isActive();
     }
 
-    public void registerClient() {
+    private Set<ClientSetupConnection> getSuitableConnections(int numOfPlayers) {
+        return waitingConnections.stream().filter(x -> x.getNumOfPlayers()==numOfPlayers).collect(Collectors.toSet());
+    }
 
+
+    private List<Player> initializePlayers(Set<ClientSetupConnection> clients) {
+        return clients.stream().map(x -> new Player(x.getNickname())).collect(Collectors.toList());
+    }
+
+    private Player getClientAsPlayer(ClientSetupConnection client) {
+        return new Player(client.getNickname());
+    }
+
+    private void initializeGame(Set<ClientSetupConnection> clients) {
+        GameController gameController = new GameController(initializePlayers(clients));
+        for(ClientSetupConnection client : clients) {
+            RemoteView remoteView = new RemoteView(getClientAsPlayer(client), gameController);
+            ClientStatus clientStatus = new ClientStatus(remoteView, client.getClientSocket());
+        }
     }
 
 }

@@ -13,10 +13,16 @@ public class RemoteView implements Observer<ClientMessage> {
     private GameController gameController;
 
 
+    public RemoteView(Player player, GameController gameController) {
+        this.player = player;
+        this.gameController = gameController;
+        this.game = gameController.getModel();
+    }
 
     @Override
     public void update(ClientMessage message) {
 
     }
+
 
 }

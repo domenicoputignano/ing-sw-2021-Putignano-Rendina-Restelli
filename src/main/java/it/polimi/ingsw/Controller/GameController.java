@@ -32,5 +32,9 @@ public class GameController {
     public TurnController getTurnController() {
         return turnController;
     }
+
+    public Game getModel() {
+        return model;
+    }
 }
 
