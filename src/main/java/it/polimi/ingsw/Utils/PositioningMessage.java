@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class PositioningMessage {
+public class PositioningMessage implements ClientMessage {
     List<Pair<ResourceType, MarbleDestination>> whereToPutResources = new ArrayList<>();
 
     public List<Pair<ResourceType, MarbleDestination>> getWhereToPutResources() {

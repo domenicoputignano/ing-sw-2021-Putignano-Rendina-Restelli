@@ -2,13 +2,14 @@ package it.polimi.ingsw.Utils;
 
 import it.polimi.ingsw.Model.Depot;
 import it.polimi.ingsw.Model.MarketTray.Marble;
+import it.polimi.ingsw.Network.Client;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-public class TakeResourcesFromMarketMessage {
+public class TakeResourcesFromMarketMessage implements ClientMessage {
     private List<Pair<Marble, MarbleDestination>> whereToPutMarbles = new ArrayList<>();
     private MarketChoice playerChoice;
     private int index;

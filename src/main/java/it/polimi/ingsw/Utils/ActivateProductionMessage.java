@@ -7,7 +7,7 @@ import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ActivateProductionMessage {
+public class ActivateProductionMessage implements ClientMessage {
     private ActiveProductions productions;
     private ResourceType input1;
     private ResourceType input2;

@@ -7,9 +7,9 @@ import it.polimi.ingsw.Utils.*;
 import java.util.List;
 
 public class TurnController {
-    Player currPlayer;
-    Game model;
-    List<Player> playerList;
+    private Player currPlayer;
+    private Game model;
+    private List<Player> playerList;
 
     public TurnController(Game model, List<Player> players, Player firstPlayer)
     {

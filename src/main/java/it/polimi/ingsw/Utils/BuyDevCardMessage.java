@@ -7,7 +7,7 @@ import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.Map;
 
-public class BuyDevCardMessage {
+public class BuyDevCardMessage implements ClientMessage{
     private CardType type;
     private Map<ResourceSource, EnumMap<ResourceType, Integer>> howToTakeResources = new HashMap<>();
     private int destinationSlot;

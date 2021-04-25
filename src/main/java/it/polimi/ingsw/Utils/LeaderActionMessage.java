@@ -1,6 +1,6 @@
 package it.polimi.ingsw.Utils;
 
-public class LeaderActionMessage {
+public class LeaderActionMessage implements ClientMessage {
     private int index;
     private boolean toDiscard;
 

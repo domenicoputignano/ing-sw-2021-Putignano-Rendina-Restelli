@@ -9,9 +9,9 @@ import java.util.Collections;
 import java.util.List;
 
 public class GameController {
-    Game model;
-    TurnController turnController;
-    List<Player> playerList;
+    private Game model;
+    private TurnController turnController;
+    private List<Player> playerList;
 
 
     public GameController(List<Player> players) {
