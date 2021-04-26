@@ -85,6 +85,7 @@ public class Server {
         List<Player> players = new ArrayList<>();
         for(ClientSetupConnection client : clients) {
             ClientStatus clientStatus = new ClientStatus(client.getClientSocket());
+            executors.submit(clientStatus);
             //registration of each player
             accounts.put(client.getNickname(), clientStatus);
             players.add(getClientAsPlayer(client));
