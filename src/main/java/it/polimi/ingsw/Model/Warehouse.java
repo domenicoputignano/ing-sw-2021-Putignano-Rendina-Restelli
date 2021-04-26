@@ -4,6 +4,7 @@ import it.polimi.ingsw.Exceptions.DepotNotFoundException;
 import it.polimi.ingsw.Exceptions.DepotOutOfBoundsException;
 import it.polimi.ingsw.Exceptions.IncompatibleResourceTypeException;
 import it.polimi.ingsw.Exceptions.StrongboxOutOfBoundException;
+import it.polimi.ingsw.Utils.Pair;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -268,8 +269,12 @@ public class Warehouse implements Cloneable {
         return availableResources;
     }
 
-    public Strongbox getStrongbox() {
-        return strongbox;
+
+
+    public List<Pair<ResourceType, Integer>> getResourcesInStrongbox() {
+        List<Pair<ResourceType,Integer>> result = new ArrayList<>(4);
+        strongbox.getResources().forEach((key,value) -> result.add(new Pair<>(key, value)));
+        return result;
     }
 
 }

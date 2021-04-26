@@ -6,6 +6,7 @@ import it.polimi.ingsw.Exceptions.InvalidActionException;
 import it.polimi.ingsw.Model.Card.ColorCard;
 import it.polimi.ingsw.Model.Card.DevelopmentCard;
 import it.polimi.ingsw.Utils.Messages.ActivateProductionMessage;
+import it.polimi.ingsw.Utils.Pair;
 import it.polimi.ingsw.Utils.ResourceSource;
 import org.junit.jupiter.api.Test;
 
@@ -121,9 +122,9 @@ class ActivateProductionTest {
 
         ActivateProduction action = (ActivateProduction)turn.getTurnState().getTurnPhase();
         System.out.println("Available resources"+turn.getPlayer().getPersonalBoard().getWarehouse().getAvailableResources());
+
+
         //Does concretely selected productions
-
-
         turn.getTurnState().getTurnPhase().activateProduction(turn, activateProductionMessage);
 
         System.out.println("Input resources "+action.getInputResources());
@@ -138,7 +139,11 @@ class ActivateProductionTest {
         assertEquals(emptyDepot3, turn.getPlayer().getPersonalBoard().getWarehouse().getNormalDepots().get(2));
 
         assertEquals(expected,turn.getPlayer().getPersonalBoard().getWarehouse().getAvailableResources());
-        assertEquals(expected, turn.getPlayer().getPersonalBoard().getWarehouse().getStrongbox().getResources());
+
+        List<Pair<ResourceType,Integer>> result = new ArrayList<>(4);
+        expected.forEach((key,value) -> result.add(new Pair<>(key, value)));
+
+        assertEquals(result, turn.getPlayer().getPersonalBoard().getWarehouse().getResourcesInStrongbox());
         assertEquals(1, turn.getPlayer().getPersonalBoard().getFaithTrack().getFaithMarker());
 
 
