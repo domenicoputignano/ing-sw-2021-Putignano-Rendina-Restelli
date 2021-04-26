@@ -9,25 +9,15 @@ import java.util.Collections;
 import java.util.List;
 
 public class GameController {
-    private Game model;
-    private TurnController turnController;
-    private List<Player> playerList;
+    private final Game model;
+    private final TurnController turnController;
 
 
-    public GameController(List<Player> players) {
-        Collections.shuffle(players);
-        this.playerList = players;
-        //TODO : DA MODIFICARE IN BASE AL TIPO DI PARTITA
-        this.model = new MultiPlayerMode(players.get(0),players,players.get(0),players.size());
-        this.turnController = new TurnController(this.model, players,players.get(0));
-        gameSetup();
+    public GameController(Game game) {
+        this.model = game;
+        this.turnController = new TurnController(this.model, model.getPlayerList(), model.getCurrPlayer());
     }
 
-    private void gameSetup()
-    {
-        model.setup();
-        model.nextState(GameState.RESOURCECHOICE);
-    }
 
     public TurnController getTurnController() {
         return turnController;

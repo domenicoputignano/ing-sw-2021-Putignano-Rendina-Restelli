@@ -8,6 +8,7 @@ import it.polimi.ingsw.Model.Card.Deck;
 import it.polimi.ingsw.Model.Card.LeaderCard;
 import it.polimi.ingsw.Model.MarketTray.MarketTray;
 import it.polimi.ingsw.Observer;
+import org.graalvm.compiler.core.common.type.ArithmeticOpTable;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -25,6 +26,14 @@ public class MultiPlayerMode extends Game {
         this.gameState = GameState.SETUP;
     }
 
+    public MultiPlayerMode(List<Player> playerList) {
+        Collections.shuffle(playerList);
+        this.playerList = playerList;
+        this.inkwell = playerList.get(0);
+        this.numOfPlayers = playerList.size();
+        this.currPlayer = inkwell;
+        gameSetup();
+    }
     /*
     public Player getWinner() {
         //TODO
@@ -37,6 +46,11 @@ public class MultiPlayerMode extends Game {
 
     }*/
 
+    private void gameSetup()
+    {
+        this.setup();
+        this.nextState(GameState.RESOURCECHOICE);
+    }
 
 
 

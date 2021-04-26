@@ -8,15 +8,16 @@ import it.polimi.ingsw.Utils.Messages.ClientMessage;
 
 public class RemoteView implements Observer<ClientMessage> {
 
-    private Player player;
-    private Game game;
-    private GameController gameController;
+    private final Player player;
+    private final Game game;
+    private final GameController gameController;
+    private final ClientStatus clientStatus;
 
-
-    public RemoteView(Player player, GameController gameController) {
+    public RemoteView(Player player, GameController gameController, ClientStatus clientStatus) {
         this.player = player;
         this.gameController = gameController;
         this.game = gameController.getModel();
+        this.clientStatus = clientStatus;
     }
 
     @Override

@@ -4,6 +4,7 @@ import it.polimi.ingsw.Controller.GameController;
 import it.polimi.ingsw.Model.Game;
 import it.polimi.ingsw.Model.MultiPlayerMode;
 import it.polimi.ingsw.Model.Player;
+import it.polimi.ingsw.Model.SoloMode.SoloMode;
 
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -22,7 +23,7 @@ public class Server {
     private final Set<ClientSetupConnection> waitingConnections = new HashSet<>();
 
     //Players involved in one match (connected or not)
-    private final Map<String, ClientSetupConnection> accounts = new HashMap<>();
+    private final Map<String, ClientStatus> accounts = new HashMap<>();
 
     private boolean active = false;
     private ExecutorService executors = Executors.newCachedThreadPool();
@@ -81,11 +82,29 @@ public class Server {
     }
 
     private void initializeGame(Set<ClientSetupConnection> clients) {
-        GameController gameController = new GameController(initializePlayers(clients));
+        List<Player> players = new ArrayList<>();
         for(ClientSetupConnection client : clients) {
-            RemoteView remoteView = new RemoteView(getClientAsPlayer(client), gameController);
-            ClientStatus clientStatus = new ClientStatus(remoteView, client.getClientSocket());
+            ClientStatus clientStatus = new ClientStatus(client.getClientSocket());
+            //registration of each player
+            accounts.put(client.getNickname(), clientStatus);
+            players.add(getClientAsPlayer(client));
+            //created players and players-connections binding
+        }
+        //Creation of model
+        MultiPlayerMode multiPlayerMode = new MultiPlayerMode(players);
+        GameController gameController = new GameController(multiPlayerMode);
+        for(Player p : players) {
+            RemoteView remoteView = new RemoteView(p, gameController, accounts.get(p.getUsername()));
+            accounts.get(p.getUsername()).bindRemoteView(remoteView);
         }
     }
 
+
+    private void initializeGame(ClientSetupConnection client) {
+
+    }
+
+    public Map<String, ClientStatus> getAccounts() {
+        return accounts;
+    }
 }

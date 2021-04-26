@@ -9,14 +9,20 @@ import java.net.Socket;
 
 public class ClientStatus extends Observable<ClientMessage> {
 
-    private final RemoteView remoteView;
+    private RemoteView remoteView;
+    private boolean isActive;
     private final Socket socket;
 
-    public ClientStatus(RemoteView remoteView, Socket socket) {
-        this.remoteView = remoteView;
+    public ClientStatus(Socket socket) {
         this.socket = socket;
+        this.isActive = true;
     }
 
+    public void bindRemoteView(RemoteView remoteView) {
+        this.remoteView = remoteView;
+    }
 
-
+    public boolean isActive() {
+        return isActive;
+    }
 }

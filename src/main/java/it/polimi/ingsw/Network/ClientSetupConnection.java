@@ -1,5 +1,8 @@
 package it.polimi.ingsw.Network;
 
+import it.polimi.ingsw.Model.Game;
+import it.polimi.ingsw.Utils.GameMode;
+
 import java.io.*;
 import java.net.Socket;
 import java.util.logging.Level;
@@ -10,8 +13,8 @@ public class ClientSetupConnection implements Runnable {
     private final Socket clientSocket;
     private final Server server;
     private String nickname;
+    private GameMode mode;
     private int numOfPlayers;
-    private boolean isActive = false;
     DataOutputStream outputStream;
     DataInputStream inputStream;
 
@@ -35,20 +38,22 @@ public class ClientSetupConnection implements Runnable {
                 //TODO recuperare i dati della partita associata a quel giocatore
             }
             else {
-                numOfPlayersChoice();
-                isActive = true;
-                LOGGER.log(Level.INFO, "Client " + nickname + " connected and " + numOfPlayers + " players chosen");
+                gameChoice();
+                if(mode == GameMode.SOLO) {
+
+                }
+                else {
+                    numOfPlayersChoice();
+
+                    LOGGER.log(Level.INFO, "Client " + nickname + " connected and " + numOfPlayers + " players chosen");
+                }
+
             }
         } catch (IOException e) {
             LOGGER.log(Level.INFO, "Reset connection");
         }
     }
 
-
-
-    public boolean isActive(){
-        return isActive;
-    }
 
     private void nicknameChoice() throws IOException {
         String nickname;
@@ -69,6 +74,19 @@ public class ClientSetupConnection implements Runnable {
             numOfPlayers = inputStream.read();
         } while (numOfPlayers < 1 || numOfPlayers > 4);
     }
+
+    private void gameChoice() throws IOException {
+        //TODO da cambiare con CLI/GUI
+        outputStream.writeUTF("Choose game mode: ");
+        String choice = inputStream.readUTF();
+        if(choice.equalsIgnoreCase("multiplayer")) mode = GameMode.MULTIPLAYER;
+        else {
+            if(choice.equalsIgnoreCase("solo")) mode = GameMode.SOLO;
+        }
+
+
+    }
+
 
     public int getNumOfPlayers() {
         return numOfPlayers;

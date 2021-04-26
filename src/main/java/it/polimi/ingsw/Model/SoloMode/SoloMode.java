@@ -7,19 +7,20 @@ import it.polimi.ingsw.Model.MultiPlayerMode;
 import it.polimi.ingsw.Model.Player;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Stack;
+import java.util.stream.Collectors;
 
 public class SoloMode extends Game {
     private Stack<Token> tokens = new Stack<Token>();
     private final LorenzoIlMagnifico lorenzoIlMagnifico;
 
     public SoloMode(Player player) {
-        this.playerList = new ArrayList<>();
-        playerList.add(player);
+        this.playerList = Collections.singletonList(player);
         this.inkwell = player;
         this.currPlayer = player;
-        this.gameState = GameState.SETUP;
+        this.gameState = GameState.LEADERCHOICE;
         lorenzoIlMagnifico = new LorenzoIlMagnifico(this.getCurrPlayer().getPersonalBoard().getFaithTrack(), this);
         this.refreshTokens();
     }
