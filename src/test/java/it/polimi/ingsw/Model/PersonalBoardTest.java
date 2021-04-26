@@ -74,8 +74,8 @@ class PersonalBoardTest {
         leaderCard2.setIsActive();
 
         player.getLeaderCards().add(leaderCard2);
-        player.getPersonalBoard().putCardOnTop(developmentCard1,0);
-        player.getPersonalBoard().putCardOnTop(developmentCard2,1);
+        player.getPersonalBoard().putCardOnTop(developmentCard1,1);
+        player.getPersonalBoard().putCardOnTop(developmentCard2,2);
 
         ActiveProductions activeProductions1 = new ActiveProductions();
         activeProductions1.setSlot1(true);
@@ -123,8 +123,8 @@ class PersonalBoardTest {
         DevelopmentCard developmentCard2 = new DevelopmentCard(developmentCard2Cost,1, ColorCard.green,4,null);
         player.getLeaderCards().add(leaderCard1);
         player.getLeaderCards().add(leaderCard2);
-        player.getPersonalBoard().putCardOnTop(developmentCard1,0);
-        player.getPersonalBoard().putCardOnTop(developmentCard2,1);
+        player.getPersonalBoard().putCardOnTop(developmentCard1,1);
+        player.getPersonalBoard().putCardOnTop(developmentCard2,2);
         player.getPersonalBoard().getWarehouse().addResourcesToDepot(3,ResourceType.stone,3);
         toAddToStrongbox.put(ResourceType.stone,2);
         player.getPersonalBoard().getWarehouse().addResourcesToStrongbox(toAddToStrongbox);
