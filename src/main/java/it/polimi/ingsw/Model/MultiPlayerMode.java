@@ -8,7 +8,6 @@ import it.polimi.ingsw.Model.Card.Deck;
 import it.polimi.ingsw.Model.Card.LeaderCard;
 import it.polimi.ingsw.Model.MarketTray.MarketTray;
 import it.polimi.ingsw.Observer;
-import org.graalvm.compiler.core.common.type.ArithmeticOpTable;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
