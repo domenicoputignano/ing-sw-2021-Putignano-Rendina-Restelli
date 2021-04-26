@@ -27,6 +27,9 @@ public class ClientStatus extends Observable<ClientMessage> implements Runnable{
 
     public void bindRemoteView(RemoteView remoteView) {
         this.remoteView = remoteView;
+
+        // adding observers of ClientMessage
+        addObserver(remoteView);
     }
 
     public boolean isActive() {
