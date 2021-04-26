@@ -95,5 +95,11 @@ public class ActivateProduction implements AbstractTurnPhase {
     }
 
 
+    public Map<ResourceType, Integer> getInputResources() {
+        return inputResources;
+    }
 
+    public Map<ResourceType, Integer> getOutputResources() {
+        return outputResources;
+    }
 }
