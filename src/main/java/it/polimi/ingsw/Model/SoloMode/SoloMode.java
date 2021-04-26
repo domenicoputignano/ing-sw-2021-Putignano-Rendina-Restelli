@@ -50,6 +50,11 @@ public class SoloMode extends Game {
         }
     }
 
+    public Token peekToken()
+    {
+        return tokens.peek();
+    }
+
     public Stack<Token> getTokens() {
         return tokens;
     }

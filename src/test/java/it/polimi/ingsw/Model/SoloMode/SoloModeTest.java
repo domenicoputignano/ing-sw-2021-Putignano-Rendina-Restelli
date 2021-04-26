@@ -1,5 +1,7 @@
 package it.polimi.ingsw.Model.SoloMode;
 
+import it.polimi.ingsw.Exceptions.DepotOutOfBoundsException;
+import it.polimi.ingsw.Exceptions.EndGameException;
 import it.polimi.ingsw.Model.MultiPlayerMode;
 import it.polimi.ingsw.Model.Player;
 import org.junit.jupiter.api.Test;
@@ -37,48 +39,69 @@ class SoloModeTest {
         SoloMode game = new SoloMode(playerList.get(0));
         game.setup();
         game.refreshTokens();
-        System.out.println(game.getTokens());
+        assertTrue(game.getTokens().size()==7);
     }
 
     @Test
-    void lorenzoPlaysBaseCase() {
+    void lorenzoPlaysBaseCase() throws EndGameException {
         playerList.add(new Player("Pippo"));
         SoloMode game = new SoloMode(playerList.get(0));
         game.setup();
         game.refreshTokens();
-        TokenEffect topTokenEffect = game.getTokens().get(6).getTokenEffect();
+        game.getLorenzoIlMagnifico().moveBlackCross(7);
+        int startBlackCross = game.getLorenzoIlMagnifico().getBlackCross();
+        int startPassedSection = game.getLorenzoIlMagnifico().getPassedSection();
+        TokenEffect topTokenEffect = game.peekToken().getTokenEffect();
         System.out.println(topTokenEffect);
         game.lorenzoPlays();
-        for(int i=0;i<game.getDecks().size();i++)
-            System.out.println((i+1)+": "+game.getDecks().get(i));
-        System.out.println("Black Cross: "+ game.getLorenzoIlMagnifico().getBlackCross());
-        System.out.println("Passed Section: "+ game.getLorenzoIlMagnifico().getPassedSection());
+        if(topTokenEffect instanceof DiscardTwoGreenCards) assertTrue(game.getDecks().get(0).getCards().size()==2);
+        else if(topTokenEffect instanceof DiscardTwoPurpleCards) assertTrue(game.getDecks().get(1).getCards().size()==2);
+        else if(topTokenEffect instanceof DiscardTwoBlueCards) assertTrue(game.getDecks().get(2).getCards().size()==2);
+        else if(topTokenEffect instanceof DiscardTwoYellowCards) assertTrue(game.getDecks().get(3).getCards().size()==2);
+        else if(topTokenEffect instanceof MoveBlackCrossAndShuffle)
+        {
+           assertEquals(game.getLorenzoIlMagnifico().getBlackCross(),startBlackCross+1);
+           assertEquals(game.getLorenzoIlMagnifico().getPassedSection(),startPassedSection+1);
+            assertTrue(game.getTokens().size()==7);
+        }
+        else{
+            assertEquals(game.getLorenzoIlMagnifico().getBlackCross(),startBlackCross+2);
+            assertEquals(game.getLorenzoIlMagnifico().getPassedSection(),startPassedSection+1);
+        }
+
     }
 
     @Test
-    void lorenzoPlays()
-    {
+    void lorenzoPlaysEndGameCase() throws EndGameException {
         playerList.add(new Player("Pippo"));
         SoloMode game = new SoloMode(playerList.get(0));
         game.setup();
         game.refreshTokens();
-        game.getDecks().get(0).draw();
-        game.getDecks().get(0).draw();
-        game.getDecks().get(0).draw();
-        game.getDecks().get(0).draw();
-        game.getDecks().get(4).draw();
-        game.getDecks().get(4).draw();
-        game.getDecks().get(4).draw();
-        game.getDecks().get(4).draw();
-        game.getDecks().get(8).draw();
-        game.getDecks().get(8).draw();
-        game.getDecks().get(8).draw();
-        TokenEffect topTokenEffect = game.getTokens().get(6).getTokenEffect();
+        for(int j=0;j<12;j++)
+            for(int i=0;i<4;i++) {
+                game.getDecks().get(j).draw();
+                if((j==8||j==9||j==10||j==11) && i==2)
+                    i=4;
+            }
+        game.getLorenzoIlMagnifico().moveBlackCross(7);
+        int startBlackCross = game.getLorenzoIlMagnifico().getBlackCross();
+        int startPassedSection = game.getLorenzoIlMagnifico().getPassedSection();
+        TokenEffect topTokenEffect = game.peekToken().getTokenEffect();
         System.out.println(topTokenEffect);
         game.lorenzoPlays();
-        for(int i=0;i<game.getDecks().size();i++)
-            System.out.println((i+1)+": "+game.getDecks().get(i));
-        System.out.println("Black Cross: "+ game.getLorenzoIlMagnifico().getBlackCross());
-        System.out.println("Passed Section: "+ game.getLorenzoIlMagnifico().getPassedSection());
+        if(topTokenEffect instanceof DiscardTwoGreenCards) assertTrue(game.getDecks().get(0).getCards().size()==0);
+        else if(topTokenEffect instanceof DiscardTwoPurpleCards) assertTrue(game.getDecks().get(1).getCards().size()==0);
+        else if(topTokenEffect instanceof DiscardTwoBlueCards) assertTrue(game.getDecks().get(2).getCards().size()==0);
+        else if(topTokenEffect instanceof DiscardTwoYellowCards) assertTrue(game.getDecks().get(3).getCards().size()==0);
+        else if(topTokenEffect instanceof MoveBlackCrossAndShuffle)
+        {
+            assertEquals(game.getLorenzoIlMagnifico().getBlackCross(),startBlackCross+1);
+            assertEquals(game.getLorenzoIlMagnifico().getPassedSection(),startPassedSection+1);
+            assertTrue(game.getTokens().size()==7);
+        }
+        else{
+            assertEquals(game.getLorenzoIlMagnifico().getBlackCross(),startBlackCross+2);
+            assertEquals(game.getLorenzoIlMagnifico().getPassedSection(),startPassedSection+1);
+        }
     }
 }

@@ -1,5 +1,6 @@
 package it.polimi.ingsw.Model.SoloMode;
 
+import it.polimi.ingsw.Exceptions.EndGameException;
 import it.polimi.ingsw.Model.FaithTrack;
 import it.polimi.ingsw.Model.Player;
 import org.junit.jupiter.api.BeforeEach;
@@ -25,18 +26,14 @@ class LorenzoIlMagnificoTest {
     }
 
     @Test
-    void throwDevCards() {
-
-    }
-
-    @Test
-    void moveAndShuffle() {
+    void moveAndShuffle() throws EndGameException {
         Player player = new Player("Pippo");
         SoloMode game = new SoloMode(player);
         game.setup();
         LorenzoIlMagnifico lorenzo = new LorenzoIlMagnifico(game.getCurrPlayer().getPersonalBoard().getFaithTrack(),game);
-        System.out.println(game.getTokens());
+        int startBlackCross = lorenzo.getBlackCross();
         lorenzo.moveAndShuffle();
-        System.out.println(game.getTokens());
+        assertEquals(lorenzo.getBlackCross(),startBlackCross+1);
+        assertTrue(game.getTokens().size()==7);
     }
 }
