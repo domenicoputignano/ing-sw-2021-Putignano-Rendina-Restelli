@@ -41,7 +41,7 @@ class SoloModeTest {
     }
 
     @Test
-    void lorenzoPlays() {
+    void lorenzoPlaysBaseCase() {
         playerList.add(new Player("Pippo"));
         SoloMode game = new SoloMode(playerList.get(0));
         game.setup();
@@ -49,10 +49,35 @@ class SoloModeTest {
         TokenEffect topTokenEffect = game.getTokens().get(6).getTokenEffect();
         System.out.println(topTokenEffect);
         game.lorenzoPlays();
-        System.out.println(game.getDecks().get(0));
-        System.out.println(game.getDecks().get(1));
-        System.out.println(game.getDecks().get(2));
-        System.out.println(game.getDecks().get(3));
+        for(int i=0;i<game.getDecks().size();i++)
+            System.out.println((i+1)+": "+game.getDecks().get(i));
+        System.out.println("Black Cross: "+ game.getLorenzoIlMagnifico().getBlackCross());
+        System.out.println("Passed Section: "+ game.getLorenzoIlMagnifico().getPassedSection());
+    }
+
+    @Test
+    void lorenzoPlays()
+    {
+        playerList.add(new Player("Pippo"));
+        SoloMode game = new SoloMode(playerList.get(0));
+        game.setup();
+        game.refreshTokens();
+        game.getDecks().get(0).draw();
+        game.getDecks().get(0).draw();
+        game.getDecks().get(0).draw();
+        game.getDecks().get(0).draw();
+        game.getDecks().get(4).draw();
+        game.getDecks().get(4).draw();
+        game.getDecks().get(4).draw();
+        game.getDecks().get(4).draw();
+        game.getDecks().get(8).draw();
+        game.getDecks().get(8).draw();
+        game.getDecks().get(8).draw();
+        TokenEffect topTokenEffect = game.getTokens().get(6).getTokenEffect();
+        System.out.println(topTokenEffect);
+        game.lorenzoPlays();
+        for(int i=0;i<game.getDecks().size();i++)
+            System.out.println((i+1)+": "+game.getDecks().get(i));
         System.out.println("Black Cross: "+ game.getLorenzoIlMagnifico().getBlackCross());
         System.out.println("Passed Section: "+ game.getLorenzoIlMagnifico().getPassedSection());
     }
