@@ -40,12 +40,12 @@ public class ClientSetupConnection implements Runnable {
             else {
                 gameChoice();
                 if(mode == GameMode.SOLO) {
-
+                    server.initializeGame(this);
                 }
                 else {
                     numOfPlayersChoice();
-
                     LOGGER.log(Level.INFO, "Client " + nickname + " connected and " + numOfPlayers + " players chosen");
+                    server.lobby(this);
                 }
 
             }
@@ -88,6 +88,7 @@ public class ClientSetupConnection implements Runnable {
     }
 
 
+
     public int getNumOfPlayers() {
         return numOfPlayers;
     }
@@ -99,6 +100,8 @@ public class ClientSetupConnection implements Runnable {
     public Socket getClientSocket() {
         return clientSocket;
     }
+
+
 }
 
 

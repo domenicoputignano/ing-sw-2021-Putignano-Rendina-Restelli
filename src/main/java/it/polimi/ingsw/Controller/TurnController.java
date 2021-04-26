@@ -8,8 +8,8 @@ import java.util.List;
 
 public class TurnController {
     private Player currPlayer;
-    private Game model;
-    private List<Player> playerList;
+    private final Game model;
+    private final List<Player> playerList;
 
     public TurnController(Game model, List<Player> players, Player firstPlayer)
     {

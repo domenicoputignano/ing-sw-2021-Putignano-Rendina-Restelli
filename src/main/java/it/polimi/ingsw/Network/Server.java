@@ -5,6 +5,7 @@ import it.polimi.ingsw.Model.Game;
 import it.polimi.ingsw.Model.MultiPlayerMode;
 import it.polimi.ingsw.Model.Player;
 import it.polimi.ingsw.Model.SoloMode.SoloMode;
+import it.polimi.ingsw.Utils.GameMode;
 
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -55,8 +56,10 @@ public class Server {
         waitingConnections.add(clientSetupConnection);
         Set<ClientSetupConnection> suitableConnections = getSuitableConnections(clientSetupConnection.getNumOfPlayers());
         if(suitableConnections.size() == clientSetupConnection.getNumOfPlayers()) {
-
+            initializeGame(suitableConnections);
+            waitingConnections.removeAll(suitableConnections);
         }
+
     }
 
     //method to detect if a player with the same nickname is already playing
@@ -73,15 +76,12 @@ public class Server {
     }
 
 
-    private List<Player> initializePlayers(Set<ClientSetupConnection> clients) {
-        return clients.stream().map(x -> new Player(x.getNickname())).collect(Collectors.toList());
-    }
 
     private Player getClientAsPlayer(ClientSetupConnection client) {
         return new Player(client.getNickname());
     }
 
-    private void initializeGame(Set<ClientSetupConnection> clients) {
+    public void initializeGame(Set<ClientSetupConnection> clients) {
         List<Player> players = new ArrayList<>();
         for(ClientSetupConnection client : clients) {
             ClientStatus clientStatus = new ClientStatus(client.getClientSocket());
@@ -100,8 +100,14 @@ public class Server {
     }
 
 
-    private void initializeGame(ClientSetupConnection client) {
-
+    public void initializeGame(ClientSetupConnection client) {
+        Player player = getClientAsPlayer(client);
+        ClientStatus clientStatus = new ClientStatus(client.getClientSocket());
+        accounts.put(client.getNickname(), clientStatus);
+        SoloMode soloMode = new SoloMode(player);
+        GameController gameController = new GameController(soloMode);
+        RemoteView remoteView = new RemoteView(player, gameController, clientStatus);
+        accounts.get(player.getUsername()).bindRemoteView(remoteView);
     }
 
     public Map<String, ClientStatus> getAccounts() {
