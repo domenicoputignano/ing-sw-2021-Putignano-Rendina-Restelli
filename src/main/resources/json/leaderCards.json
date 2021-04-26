@@ -1,6 +1,6 @@
 [
   {
-    "effect" : {
+    "leaderEffect" : {
       "effect" : "SALES",
       "type" : "servant"
     },
@@ -24,7 +24,7 @@
     "victoryPoints" : 2
   },
   {
-    "effect" : {
+    "leaderEffect" : {
       "effect" : "SALES",
       "type" : "shield"
     },
@@ -48,7 +48,7 @@
     "victoryPoints" : 2
   },
   {
-    "effect" : {
+    "leaderEffect" : {
       "effect" : "SALES",
       "type" : "stone"
     },
@@ -72,7 +72,7 @@
     "victoryPoints" : 2
   },
   {
-    "effect" : {
+    "leaderEffect" : {
       "effect" : "SALES",
       "type" : "coin"
     },
@@ -96,7 +96,7 @@
     "victoryPoints" : 2
   },
   {
-    "effect" : {
+    "leaderEffect" : {
       "effect" : "EXTRADEPOT",
       "type" : "stone"
     },
@@ -113,7 +113,7 @@
     "victoryPoints" : 3
   },
   {
-    "effect" : {
+    "leaderEffect" : {
       "effect" : "EXTRADEPOT",
       "type" : "servant"
     },
@@ -130,7 +130,7 @@
     "victoryPoints" : 3
   },
   {
-    "effect" : {
+    "leaderEffect" : {
       "effect" : "EXTRADEPOT",
       "type" : "shield"
     },
@@ -147,7 +147,7 @@
     "victoryPoints" : 3
   },
   {
-    "effect" : {
+    "leaderEffect" : {
       "effect" : "EXTRADEPOT",
       "type" : "coin"
     },
@@ -164,7 +164,7 @@
     "victoryPoints" : 3
   },
   {
-    "effect" : {
+    "leaderEffect" : {
       "effect" : "CMARBLE",
       "type" : "servant"
     },
@@ -192,7 +192,7 @@
     "victoryPoints" : 5
   },
   {
-    "effect" : {
+    "leaderEffect" : {
       "effect" : "CMARBLE",
       "type" : "shield"
     },
@@ -220,7 +220,7 @@
     "victoryPoints" : 5
   },
   {
-    "effect" : {
+    "leaderEffect" : {
       "effect" : "CMARBLE",
       "type" : "stone"
     },
@@ -248,7 +248,7 @@
     "victoryPoints" : 5
   },
   {
-    "effect" : {
+    "leaderEffect" : {
       "effect" : "CMARBLE",
       "type" : "coin"
     },
@@ -276,7 +276,7 @@
     "victoryPoints" : 5
   },
   {
-    "effect" : {
+    "leaderEffect" : {
       "effect" : "EXTRAPRODUCTION",
       "type" : "shield"
     },
@@ -296,7 +296,7 @@
     "victoryPoints" : 4
   },
   {
-    "effect" : {
+    "leaderEffect" : {
       "effect" : "EXTRAPRODUCTION",
       "type" : "servant"
     },
@@ -316,7 +316,7 @@
     "victoryPoints" : 4
   },
   {
-    "effect" : {
+    "leaderEffect" : {
       "effect" : "EXTRAPRODUCTION",
       "type" : "stone"
     },
@@ -336,7 +336,7 @@
     "victoryPoints" : 4
   },
   {
-    "effect" : {
+    "leaderEffect" : {
       "effect" : "EXTRAPRODUCTION",
       "type" : "coin"
     },

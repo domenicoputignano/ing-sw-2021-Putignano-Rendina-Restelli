@@ -47,4 +47,14 @@ public class LeaderCard {
         this.isActive = true;
     }
 
+    @Override
+    public String toString() {
+        return "LeaderCard{" +
+                "leaderEffect=" + leaderEffect +
+                ", requirementsResources=" + requirementsResources +
+                ", requirementsCards=" + requirementsCards +
+                ", isActive=" + isActive +
+                ", victoryPoints=" + victoryPoints +
+                '}';
+    }
 }
