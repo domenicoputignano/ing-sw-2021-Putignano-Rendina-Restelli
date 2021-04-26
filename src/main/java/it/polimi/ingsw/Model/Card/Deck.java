@@ -29,6 +29,14 @@ public class Deck {
         return this.cards.size();
     }
 
+    @Override
+    public String toString() {
+        return "Deck{" +
+                "cardType=" + cardType +
+                ", cards=" + cards +
+                '}';
+    }
+
     // TODO DA CAMBIARE, ESPONE L'IMPLEMENTAZIONE PRIVATA DELL'ATTRIBUTO
     public Stack<DevelopmentCard> getCards() {
         return cards;

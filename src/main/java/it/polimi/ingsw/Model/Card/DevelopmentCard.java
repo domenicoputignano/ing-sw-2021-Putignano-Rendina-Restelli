@@ -45,5 +45,13 @@ public class DevelopmentCard {
         return victoryPoints == that.victoryPoints && cost.equals(that.cost) && type.equals(that.type) && trade.equals(that.trade);
     }
 
-
+    @Override
+    public String toString() {
+        return "DevelopmentCard{" +
+                "cost=" + cost +
+                ", type=" + type +
+                ", victoryPoints=" + victoryPoints +
+                ", trade=" + trade +
+                '}';
+    }
 }

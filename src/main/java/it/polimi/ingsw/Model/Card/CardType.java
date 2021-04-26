@@ -28,4 +28,11 @@ public class CardType {
         return level == cardType.level && color == cardType.color;
     }
 
+    @Override
+    public String toString() {
+        return "{" +
+                "level=" + level +
+                ", color=" + color +
+                '}';
+    }
 }

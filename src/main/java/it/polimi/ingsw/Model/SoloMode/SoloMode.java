@@ -2,18 +2,25 @@ package it.polimi.ingsw.Model.SoloMode;
 
 import it.polimi.ingsw.Exceptions.EndGameException;
 import it.polimi.ingsw.Model.Game;
+import it.polimi.ingsw.Model.GameState;
 import it.polimi.ingsw.Model.MultiPlayerMode;
 import it.polimi.ingsw.Model.Player;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Stack;
 
 public class SoloMode extends Game {
     private Stack<Token> tokens = new Stack<Token>();
-    private final LorenzoIlMagnifico lorenzoIlMagnifico = new LorenzoIlMagnifico(this.getCurrPlayer().getPersonalBoard().getFaithTrack(), this);
+    private final LorenzoIlMagnifico lorenzoIlMagnifico;
 
-
-    public SoloMode(Player player,Stack<Token> tokens) {
+    public SoloMode(Player player) {
+        this.playerList = new ArrayList<>();
+        playerList.add(player);
+        this.inkwell = player;
+        this.currPlayer = player;
+        this.gameState = GameState.SETUP;
+        lorenzoIlMagnifico = new LorenzoIlMagnifico(this.getCurrPlayer().getPersonalBoard().getFaithTrack(), this);
         this.refreshTokens();
     }
 
@@ -25,6 +32,7 @@ public class SoloMode extends Game {
         tokens.push(new Token(new DiscardTwoGreenCards()));
         tokens.push(new Token(new DiscardTwoPurpleCards()));
         tokens.push(new Token(new MoveBlackCrossAndShuffle()));
+        tokens.push(new Token(new MoveBlackCrossByTwo()));
         tokens.push(new Token(new MoveBlackCrossByTwo()));
         Collections.shuffle(tokens);
     }
@@ -39,5 +47,13 @@ public class SoloMode extends Game {
         } catch(EndGameException e){
             e.getConclusionEvent().handleConclusion();
         }
+    }
+
+    public Stack<Token> getTokens() {
+        return tokens;
+    }
+
+    public LorenzoIlMagnifico getLorenzoIlMagnifico() {
+        return lorenzoIlMagnifico;
     }
 }

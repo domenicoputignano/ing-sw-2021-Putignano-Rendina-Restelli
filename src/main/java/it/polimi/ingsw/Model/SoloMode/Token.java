@@ -12,4 +12,14 @@ public class Token {
     public void performEffect(LorenzoIlMagnifico lorenzoIlMagnifico) throws EndGameException {
         tokenEffect.performTokenEffect(lorenzoIlMagnifico);
     }
+
+    @Override
+    public String toString() {
+        return  "{tokenEffect=" + tokenEffect +
+                '}';
+    }
+
+    public TokenEffect getTokenEffect() {
+        return tokenEffect;
+    }
 }
