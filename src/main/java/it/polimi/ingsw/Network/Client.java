@@ -34,9 +34,9 @@ public class Client {
                 socketOut.flush();
                 socketLine = socketIn.readUTF();
                 System.out.print(socketLine);
-                int numOfPlayers = stdin.nextInt();
-                socketOut.write(numOfPlayers);
-                socketOut.flush();
+                //int numOfPlayers = stdin.nextInt();
+                //socketOut.write(numOfPlayers);
+                //socketOut.flush();
             }
         } catch(NoSuchElementException e){
             System.out.println("Connection closed from the client side");

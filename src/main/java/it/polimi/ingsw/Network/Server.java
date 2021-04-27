@@ -86,8 +86,10 @@ public class Server {
         for(ClientSetupConnection client : clients) {
             ClientStatus clientStatus = new ClientStatus(client.getClientSocket());
             executors.submit(clientStatus);
+
             //registration of each player
             accounts.put(client.getNickname(), clientStatus);
+
             players.add(getClientAsPlayer(client));
             //created players and players-connections binding
         }
@@ -104,11 +106,17 @@ public class Server {
     public void initializeGame(ClientSetupConnection client) {
         Player player = getClientAsPlayer(client);
         ClientStatus clientStatus = new ClientStatus(client.getClientSocket());
+
+        // registration of the player
         accounts.put(client.getNickname(), clientStatus);
+        LOGGER.log(Level.INFO, "New account registered with nickname " + client.getNickname());
+
         SoloMode soloMode = new SoloMode(player);
         GameController gameController = new GameController(soloMode);
         RemoteView remoteView = new RemoteView(player, gameController, clientStatus);
         accounts.get(player.getUsername()).bindRemoteView(remoteView);
+
+        LOGGER.log(Level.INFO, "Starting a new SoloMode game...");
     }
 
     public Map<String, ClientStatus> getAccounts() {

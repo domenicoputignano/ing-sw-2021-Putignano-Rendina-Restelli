@@ -61,7 +61,7 @@ public class ClientSetupConnection implements Runnable {
         do {
             nickname = inputStream.readUTF();
             if (server.playerWithSameNicknameIsPlaying(nickname)) {
-                outputStream.writeUTF("Nickname not available, choose another one!");
+                outputStream.writeUTF("Nickname not available, choose another one: ");
                 LOGGER.log(Level.INFO, "Player has chosen an unavailable nickname, connection refused");
             } else availableNickname = true;
         } while (!availableNickname);
@@ -71,6 +71,7 @@ public class ClientSetupConnection implements Runnable {
     private void numOfPlayersChoice() throws IOException {
         do {
             outputStream.writeUTF("Choose the number of players [2-4] : ");
+            outputStream.flush();
             numOfPlayers = inputStream.read();
         } while (numOfPlayers < 1 || numOfPlayers > 4);
     }
@@ -82,9 +83,9 @@ public class ClientSetupConnection implements Runnable {
         if(choice.equalsIgnoreCase("multiplayer")) mode = GameMode.MULTIPLAYER;
         else {
             if(choice.equalsIgnoreCase("solo")) mode = GameMode.SOLO;
+            outputStream.writeUTF("The game will start soon...");
+            outputStream.flush();
         }
-
-
     }
 
 
