@@ -40,8 +40,8 @@ class LeaderActionTest {
         leaderActionMessage.setToDiscard(true);
         multiPlayerMode.getTurn().getPlayer().getPersonalBoard().getFaithTrack().moveMarker(8);
         int start = multiPlayerMode.getTurn().getPlayer().getPersonalBoard().getFaithTrack().getFaithMarker();
-        multiPlayerMode.getTurn().setTurnState(TurnState.LEADERACTION);
-        multiPlayerMode.getTurn().getTurnState().getTurnPhase().leaderAction(multiPlayerMode.getTurn(),leaderActionMessage);
+        multiPlayerMode.getTurn().setTurnState(TurnState.ActionType.LEADERACTION);
+        multiPlayerMode.getTurn().getTurnPhase().leaderAction(multiPlayerMode.getTurn(),leaderActionMessage);
         assertTrue(multiPlayerMode.getTurn().getPlayer().getLeaderCards().size()==1);
         assertEquals(start+1,multiPlayerMode.getTurn().getPlayer().getPersonalBoard().getFaithTrack().getFaithMarker());
     }
@@ -51,8 +51,8 @@ class LeaderActionTest {
         leaderActionMessage.setIndex(1);
         leaderActionMessage.setToDiscard(true);
         multiPlayerMode.getTurn().getPlayer().getLeaderCards().get(0).setIsActive();
-        multiPlayerMode.getTurn().setTurnState(TurnState.LEADERACTION);
-        multiPlayerMode.getTurn().getTurnState().getTurnPhase().leaderAction(multiPlayerMode.getTurn(),leaderActionMessage);
+        multiPlayerMode.getTurn().setTurnState(TurnState.ActionType.LEADERACTION);
+        multiPlayerMode.getTurn().getTurnPhase().leaderAction(multiPlayerMode.getTurn(),leaderActionMessage);
         assertEquals(multiPlayerMode.getTurn().getPlayer().getLeaderCards().size(),2);
         assertTrue(multiPlayerMode.getTurn().getPlayer().getLeaderCards().get(0).isActive());
     }
@@ -71,8 +71,8 @@ class LeaderActionTest {
         strongboxResources.put(ResourceType.stone,6);
         strongboxResources.put(ResourceType.shield,6);
         multiPlayerMode.getTurn().getPlayer().getPersonalBoard().getWarehouse().addResourcesToStrongbox(strongboxResources);
-        multiPlayerMode.getTurn().setTurnState(TurnState.LEADERACTION);
-        multiPlayerMode.getTurn().getTurnState().getTurnPhase().leaderAction(multiPlayerMode.getTurn(),leaderActionMessage);
+        multiPlayerMode.getTurn().setTurnState(TurnState.ActionType.LEADERACTION);
+        multiPlayerMode.getTurn().getTurnPhase().leaderAction(multiPlayerMode.getTurn(),leaderActionMessage);
         //assertTrue(multiPlayerMode.getTurn().getPlayer().getLeaderCards().get(0).isActive());
         assertFalse(multiPlayerMode.getTurn().getPlayer().getLeaderCards().get(1).isActive());
     }
@@ -82,8 +82,8 @@ class LeaderActionTest {
         leaderActionMessage.setIndex(1);
         leaderActionMessage.setToDiscard(false);
         multiPlayerMode.getTurn().getPlayer().getPersonalBoard().getWarehouse().addResourcesToDepot(1,ResourceType.coin,1);
-        multiPlayerMode.getTurn().setTurnState(TurnState.LEADERACTION);
-        multiPlayerMode.getTurn().getTurnState().getTurnPhase().leaderAction(multiPlayerMode.getTurn(),leaderActionMessage);
+        multiPlayerMode.getTurn().setTurnState(TurnState.ActionType.LEADERACTION);
+        multiPlayerMode.getTurn().getTurnPhase().leaderAction(multiPlayerMode.getTurn(),leaderActionMessage);
         assertFalse(multiPlayerMode.getTurn().getPlayer().getLeaderCards().get(0).isActive());
         assertFalse(multiPlayerMode.getTurn().getPlayer().getLeaderCards().get(1).isActive());
     }

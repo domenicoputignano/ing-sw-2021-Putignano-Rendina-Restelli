@@ -9,6 +9,8 @@ import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.Map;
 
+import static it.polimi.ingsw.Model.PaymentHandler.areValidInstructions;
+
 public class ActivateProductionMessage {
     private ActiveProductions productions;
     private ResourceType input1;
@@ -49,18 +51,15 @@ public class ActivateProductionMessage {
     public boolean isValidMessage()
     {
         if(productions == null) return false;
-
         if(productions.noneSlotSelected()) return false;
-
         if(productions.isBasic() && (input1 == null || input2 == null || output == null)) return false;
         if(productions.isExtraSlot1() && (outputExtra1 == null)) return false;
         if(productions.isExtraSlot2() && (outputExtra2 == null)) return false;
         // TODO : fare metodo per evitare le duplicazioni
-        if(howToTakeResources.size() != 3 || howToTakeResources.keySet().stream().anyMatch(x -> howToTakeResources.get(x) == null) ||
-                howToTakeResources.keySet().stream().anyMatch(x -> howToTakeResources.get(x).keySet().stream().anyMatch(y -> howToTakeResources.get(x).get(y) < 0)))
-            return false;
-        return true;
+        return areValidInstructions(howToTakeResources);
     }
+
+
 
     public void setProductions(ActiveProductions productions) {
         this.productions = productions;

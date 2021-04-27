@@ -99,7 +99,7 @@ class BuyDevCardTest {
         buyDevCardMessage.setType(cardType);
         buyDevCardMessage.setDestinationSlot(1);
         buyDevCardMessage.setHowToTakeResources(howToTakeResources);
-        turn.setTurnState(TurnState.BUYDEVCARD);
+        turn.setTurnState(TurnState.ActionType.BUYDEVCARD);
 
 
         Map<ResourceType, Integer> expected = new EnumMap<ResourceType, Integer>(ResourceType.class);
@@ -115,7 +115,7 @@ class BuyDevCardTest {
         if(multiPlayerMode.getDecks().get(0).getTop().equals(card1)) {
             System.out.println(1);
             //TODO ricontrollare metodo dello strongbox
-            turn.getTurnState().getTurnPhase().buyDevCard(turn, buyDevCardMessage);
+            turn.getTurnPhase().buyDevCard(turn, buyDevCardMessage);
             assertTrue(turn.isDoneNormalAction());
             assertEquals(turn.getPlayer().getPersonalBoard().peekTopCard(1), card1);
             assertEquals(expected,turn.getPlayer().getPersonalBoard().getWarehouse().getAvailableResources());

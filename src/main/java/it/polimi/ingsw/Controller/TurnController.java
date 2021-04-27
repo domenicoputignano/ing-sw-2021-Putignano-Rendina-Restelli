@@ -21,10 +21,10 @@ public class TurnController {
     public void handleBuyDevCardMessage(BuyDevCardMessage message) {
         if(message.isValidMessage()) {
             if (!model.isEmptyDeck(message.getType())) {
-                model.getTurn().setTurnState(TurnState.BUYDEVCARD);
+                model.getTurn().setTurnState(TurnState.ActionType.BUYDEVCARD);
                 currPlayer.getPersonalBoard().isCompatibleSlot(message.getType().getLevel(), message.getDestinationSlot());
                 try {
-                    model.getTurn().getTurnState().getTurnPhase().buyDevCard(model.getTurn(), message);
+                    model.getTurn().getTurnPhase().buyDevCard(model.getTurn(), message);
                 } catch (InvalidActionException e) {
                     //inviare messaggio "fase del turno non valida!"
                 }
@@ -37,9 +37,9 @@ public class TurnController {
     public void handleActivateProductionMessage(ActivateProductionMessage message) {
         if(message.isValidMessage()) {
             if(currPlayer.getPersonalBoard().isValidRequestedProduction(message.getProductions())){
-                model.getTurn().setTurnState(TurnState.ACTIVATEPRODUCTION);
+                model.getTurn().setTurnState(TurnState.ActionType.ACTIVATEPRODUCTION);
                 try{
-                    model.getTurn().getTurnState().getTurnPhase().activateProduction(model.getTurn(), message);
+                    model.getTurn().getTurnPhase().activateProduction(model.getTurn(), message);
                 } catch (InvalidActionException e){
                     // inviare messaggio "fase del turno non valida!"
                 }
@@ -52,9 +52,9 @@ public class TurnController {
     public void handleTakeResourcesFromMarketMessage(TakeResourcesFromMarketMessage message) {
         if (message.isValidMessage()) {
             if (model.getMarketTray().checkRequestedMarbles(message.getRequestedMarbles(), message.getPlayerChoice(), message.getIndex())) {
-                model.getTurn().setTurnState(TurnState.TAKERESOURCESFROMMARKET);
+                model.getTurn().setTurnState(TurnState.ActionType.TAKERESOURCESFROMMARKET);
                 try {
-                    model.getTurn().getTurnState().getTurnPhase().takeResourcesFromMarket(model.getTurn(), message);
+                    model.getTurn().getTurnPhase().takeResourcesFromMarket(model.getTurn(), message);
                 } catch (InvalidActionException e) {
                     // inviare messaggio "fase del turno non valida!"
                 }
@@ -66,9 +66,9 @@ public class TurnController {
 
     public void handleLeaderActionMessage(LeaderActionMessage message) {
         if (message.isValidMessage()) {
-            model.getTurn().setTurnState(TurnState.LEADERACTION);
+            model.getTurn().setTurnState(TurnState.ActionType.LEADERACTION);
             try {
-                model.getTurn().getTurnState().getTurnPhase().leaderAction(model.getTurn(), message);
+                model.getTurn().getTurnPhase().leaderAction(model.getTurn(), message);
             } catch (InvalidActionException e) {
                 // inviare messaggio "fase del turno non valida!"
             }
@@ -84,8 +84,8 @@ public class TurnController {
     {
         if (message.isValidMessage())
         {
-            if(model.getTurn().getTurnState()==TurnState.TAKERESOURCESFROMMARKET) {
-                TakeResourcesFromMarket turnInstance = (TakeResourcesFromMarket) model.getTurn().getTurnState().getTurnPhase();
+            if(model.getTurn().getActionType()==TurnState.ActionType.TAKERESOURCESFROMMARKET) {
+                TakeResourcesFromMarket turnInstance = (TakeResourcesFromMarket) model.getTurn().getTurnPhase();
                 if (turnInstance.checkPendingResourcesPositioning(message.getResourcesToPut()))
                 {
                     turnInstance.handlePositioning(model.getTurn().getPlayer().getPersonalBoard().getWarehouse(),message.getWhereToPutResources());

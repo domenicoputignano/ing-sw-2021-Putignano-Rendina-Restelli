@@ -9,16 +9,18 @@ public class Turn {
     public Turn(Game game, Player player) {
         this.game = game;
         this.player = player;
+        this.turnState = new TurnState();
     }
 
-    public void setTurnState(TurnState turnState)
-    {
-        this.turnState = turnState;
+    public void setTurnState(TurnState.ActionType actionType) {
+        this.turnState.setActionType(actionType);
     }
 
-    public TurnState getTurnState() {
-        return turnState;
-    }
+
+    public TurnState.ActionType getActionType() { return turnState.getActionType(); }
+
+    public AbstractTurnPhase getTurnPhase() { return turnState.getTurnPhase(); }
+
 
     public Player getPlayer() {
         return player;

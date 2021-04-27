@@ -78,9 +78,9 @@ class TakeResourcesFromMarketTest {
             pairList.add(new Pair<Marble, MarbleDestination>(m,MarbleDestination.DISCARD));
         }
         takeResourcesFromMarketMessage.setWhereToPutMarbles(pairList);
-        multiPlayerMode.getTurn().setTurnState(TurnState.TAKERESOURCESFROMMARKET);
-        multiPlayerMode.getTurn().getTurnState().getTurnPhase().takeResourcesFromMarket(multiPlayerMode.getTurn(),takeResourcesFromMarketMessage);
-        TakeResourcesFromMarket takeResourcesFromMarket = (TakeResourcesFromMarket) multiPlayerMode.getTurn().getTurnState().getTurnPhase();
+        multiPlayerMode.getTurn().setTurnState(TurnState.ActionType.TAKERESOURCESFROMMARKET);
+        multiPlayerMode.getTurn().getTurnPhase().takeResourcesFromMarket(multiPlayerMode.getTurn(),takeResourcesFromMarketMessage);
+        TakeResourcesFromMarket takeResourcesFromMarket = (TakeResourcesFromMarket) multiPlayerMode.getTurn().getTurnPhase();
         System.out.println("Actual: "+takeResourcesFromMarket.getWhereToPutResources());
         System.out.println("Expected: "+ expectedPairList);
         System.out.println("Faith " + takeResourcesFromMarket.getFaith());
@@ -95,8 +95,8 @@ class TakeResourcesFromMarketTest {
         TakeResourcesFromMarketMessage takeResourcesFromMarketMessage = new TakeResourcesFromMarketMessage();
         takeResourcesFromMarketMessage.setPlayerChoice(MarketChoice.ROW, 2);
         multiPlayerMode.getTurn().normalActionDone();
-        multiPlayerMode.getTurn().setTurnState(TurnState.TAKERESOURCESFROMMARKET);
-        assertThrows(InvalidActionException.class,()->multiPlayerMode.getTurn().getTurnState().getTurnPhase().takeResourcesFromMarket(multiPlayerMode.getTurn(),takeResourcesFromMarketMessage));
+        multiPlayerMode.getTurn().setTurnState(TurnState.ActionType.TAKERESOURCESFROMMARKET);
+        assertThrows(InvalidActionException.class,()->multiPlayerMode.getTurn().getTurnPhase().takeResourcesFromMarket(multiPlayerMode.getTurn(),takeResourcesFromMarketMessage));
     }
     @Test
     void checkValidWhiteEffectsok() throws InvalidActionException {
@@ -119,9 +119,9 @@ class TakeResourcesFromMarketTest {
         effects.add(2);
         message.setWhiteEffects(effects);
         message.setWhereToPutMarbles(wheretoPutMarbles);
-        multiPlayerMode.getTurn().setTurnState(TurnState.TAKERESOURCESFROMMARKET);
-        multiPlayerMode.getTurn().getTurnState().getTurnPhase().takeResourcesFromMarket(multiPlayerMode.getTurn(),message);
-        TakeResourcesFromMarket takeResourcesFromMarket = (TakeResourcesFromMarket) multiPlayerMode.getTurn().getTurnState().getTurnPhase();
+        multiPlayerMode.getTurn().setTurnState(TurnState.ActionType.TAKERESOURCESFROMMARKET);
+        multiPlayerMode.getTurn().getTurnPhase().takeResourcesFromMarket(multiPlayerMode.getTurn(),message);
+        TakeResourcesFromMarket takeResourcesFromMarket = (TakeResourcesFromMarket) multiPlayerMode.getTurn().getTurnPhase();
         assertTrue(takeResourcesFromMarket.checkValidWhiteEffects(multiPlayerMode.getTurn(), message.getWhiteEffects(),message.getRequestedMarbles()));
     }
 
@@ -143,9 +143,9 @@ class TakeResourcesFromMarketTest {
         effects.add(2);
         message.setWhiteEffects(effects);
         message.setWhereToPutMarbles(wheretoPutMarbles);
-        multiPlayerMode.getTurn().setTurnState(TurnState.TAKERESOURCESFROMMARKET);
-        multiPlayerMode.getTurn().getTurnState().getTurnPhase().takeResourcesFromMarket(multiPlayerMode.getTurn(),message);
-        TakeResourcesFromMarket takeResourcesFromMarket = (TakeResourcesFromMarket) multiPlayerMode.getTurn().getTurnState().getTurnPhase();
+        multiPlayerMode.getTurn().setTurnState(TurnState.ActionType.TAKERESOURCESFROMMARKET);
+        multiPlayerMode.getTurn().getTurnPhase().takeResourcesFromMarket(multiPlayerMode.getTurn(),message);
+        TakeResourcesFromMarket takeResourcesFromMarket = (TakeResourcesFromMarket) multiPlayerMode.getTurn().getTurnPhase();
         assertFalse(takeResourcesFromMarket.checkValidWhiteEffects(multiPlayerMode.getTurn(), message.getWhiteEffects(),message.getRequestedMarbles()));
     }
 
@@ -188,9 +188,9 @@ class TakeResourcesFromMarketTest {
                 else pairList.add(new Pair<Marble, MarbleDestination>(m,MarbleDestination.DISCARD));
         }
         takeResourcesFromMarketMessage.setWhereToPutMarbles(pairList);
-        multiPlayerMode.getTurn().setTurnState(TurnState.TAKERESOURCESFROMMARKET);
-        multiPlayerMode.getTurn().getTurnState().getTurnPhase().takeResourcesFromMarket(multiPlayerMode.getTurn(),takeResourcesFromMarketMessage);
-        TakeResourcesFromMarket takeResourcesFromMarket = (TakeResourcesFromMarket) multiPlayerMode.getTurn().getTurnState().getTurnPhase();
+        multiPlayerMode.getTurn().setTurnState(TurnState.ActionType.TAKERESOURCESFROMMARKET);
+        multiPlayerMode.getTurn().getTurnPhase().takeResourcesFromMarket(multiPlayerMode.getTurn(),takeResourcesFromMarketMessage);
+        TakeResourcesFromMarket takeResourcesFromMarket = (TakeResourcesFromMarket) multiPlayerMode.getTurn().getTurnPhase();
         System.out.println("PendingResources: "+takeResourcesFromMarket.getPendingResources());
         System.out.println("DiscardedResources: "+takeResourcesFromMarket.getDiscardedResources());
         System.out.println("Depot1: "+multiPlayerMode.getTurn().getPlayer().getPersonalBoard().getWarehouse().getNormalDepots().get(0).getOcc());

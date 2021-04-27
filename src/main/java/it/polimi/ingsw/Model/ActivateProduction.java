@@ -14,9 +14,18 @@ import java.util.stream.Collectors;
 public class ActivateProduction implements AbstractTurnPhase {
 
     private ActivateProductionMessage activateProductionMessage;
-    private Map<ResourceType, Integer> inputResources = new EnumMap<ResourceType, Integer>(ResourceType.class);
-    private Map<ResourceType, Integer> outputResources = new EnumMap<ResourceType, Integer>(ResourceType.class);
+    private Map<ResourceType, Integer> inputResources;
+    private Map<ResourceType, Integer> outputResources;
     private int faith = 0;
+
+    public ActivateProduction() {
+        inputResources = new EnumMap<>(ResourceType.class);
+        inputResources.put(ResourceType.coin, 0);
+        inputResources.put(ResourceType.servant, 0);
+        inputResources.put(ResourceType.shield, 0);
+        inputResources.put(ResourceType.stone, 0);
+        outputResources = new EnumMap<>(inputResources);
+    }
 
     public void activateProduction(Turn turn, ActivateProductionMessage activateProductionMessage) throws InvalidActionException {
         if(turn.isDoneNormalAction())
@@ -80,6 +89,8 @@ public class ActivateProduction implements AbstractTurnPhase {
             ResourceType extraType1 = turn.getPlayer().getActiveEffects().stream().filter(x -> x.getEffect() == Effect.EXTRAPRODUCTION).collect(Collectors.toList()).
                     get(0).getType();
             ResourceType extraOutput1 = activateProductionMessage.getOutputExtra1();
+
+            //TODO cambiare questa parte
             inputResources.put(extraType1, inputResources.get(extraType1)+1);
             outputResources.put(extraOutput1, outputResources.get(extraOutput1)+1);
             faith++;

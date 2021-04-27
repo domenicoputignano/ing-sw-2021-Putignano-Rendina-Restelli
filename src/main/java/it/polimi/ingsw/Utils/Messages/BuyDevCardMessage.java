@@ -10,6 +10,8 @@ import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.Map;
 
+import static it.polimi.ingsw.Model.PaymentHandler.areValidInstructions;
+
 public class BuyDevCardMessage {
     private CardType type;
     private Map<ResourceSource, EnumMap<ResourceType, Integer>> howToTakeResources = new HashMap<>();
@@ -35,15 +37,13 @@ public class BuyDevCardMessage {
             return false;
         if(destinationSlot <= 0 || destinationSlot > 3)
             return false;
-        if(howToTakeResources.size() != 3 || howToTakeResources.keySet().stream().anyMatch(x -> howToTakeResources.get(x) == null) ||
-                howToTakeResources.keySet().stream().anyMatch(x -> howToTakeResources.get(x).keySet().stream().anyMatch(y -> howToTakeResources.get(x).get(y) < 0)))
-            return false;
-        return true;
+        return areValidInstructions(howToTakeResources);
     }
 
     public void setType(CardType type) {
         this.type = type;
     }
+
 
     public void setHowToTakeResources(Map<ResourceSource, EnumMap<ResourceType, Integer>> howToTakeResources) {
         this.howToTakeResources = howToTakeResources;

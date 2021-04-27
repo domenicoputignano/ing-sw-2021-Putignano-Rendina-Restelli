@@ -1,8 +1,6 @@
 package it.polimi.ingsw.Network;
 
 
-import it.polimi.ingsw.Controller.TurnController;
-import it.polimi.ingsw.Model.Player;
 import it.polimi.ingsw.Observable;
 import it.polimi.ingsw.Utils.Messages.ClientMessage;
 
@@ -17,13 +15,14 @@ public class ClientStatus extends Observable<ClientMessage> implements Runnable{
     private RemoteView remoteView;
     private boolean isActive;
     private final Socket socket;
-
     private final Logger LOGGER = Logger.getLogger(ClientStatus.class.getName());
 
     public ClientStatus(Socket socket) {
         this.socket = socket;
         this.isActive = true;
     }
+
+
 
     public void bindRemoteView(RemoteView remoteView) {
         this.remoteView = remoteView;
@@ -52,4 +51,5 @@ public class ClientStatus extends Observable<ClientMessage> implements Runnable{
         }
 
     }
+
 }

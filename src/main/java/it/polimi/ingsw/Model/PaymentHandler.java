@@ -70,6 +70,15 @@ public final class PaymentHandler {
         return convertResource(howToTakeResources).equals(expectedCost);
     }
 
+
+
+    public static boolean areValidInstructions(Map<ResourceSource, EnumMap<ResourceType, Integer>> howToTakeResources) {
+        if(howToTakeResources.size() != 3 || howToTakeResources.keySet().stream().anyMatch(x -> howToTakeResources.get(x) == null) ||
+                howToTakeResources.keySet().stream().anyMatch(x -> howToTakeResources.get(x).keySet().stream().anyMatch(y -> howToTakeResources.get(x).get(y) < 0)))
+            return false;
+        return true;
+    }
+
     private static Map<ResourceType, Integer> convertResource(Map<ResourceSource,EnumMap<ResourceType,Integer>> howToTakeResources) {
         Map<ResourceType, Integer> resourcesToTake = new EnumMap<ResourceType, Integer>(ResourceType.class);
         resourcesToTake.put(ResourceType.coin,0);
