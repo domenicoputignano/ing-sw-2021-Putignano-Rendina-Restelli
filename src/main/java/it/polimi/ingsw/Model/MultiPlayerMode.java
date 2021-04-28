@@ -16,6 +16,7 @@ import java.util.*;
 
 public class MultiPlayerMode extends Game {
     private int numOfPlayers;
+    private int receivedInitialMessages;
 
     public MultiPlayerMode(Player inkwell, List<Player> playerList, Player currPlayer, int numOfPlayers) {
         this.inkwell = inkwell;
@@ -48,7 +49,7 @@ public class MultiPlayerMode extends Game {
     private void gameSetup()
     {
         this.setup();
-        this.nextState(GameState.RESOURCECHOICE);
+        this.nextState(GameState.LEADERCHOICE);
     }
 
 

@@ -34,7 +34,7 @@ public class PositioningMessage implements TurnControllerHandleable {
     }
 
     public void handleMessage(TurnController turnController, Player sender) {
-        turnController.handlePositioningMessage(this);
+        turnController.handlePositioningMessage(this,sender);
     }
 
     public void handleMessage(GameController gameController, Player sender) {

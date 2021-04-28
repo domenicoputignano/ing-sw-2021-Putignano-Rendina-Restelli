@@ -32,7 +32,7 @@ public class LeaderActionMessage  implements TurnControllerHandleable {
     }
 
     public void handleMessage(TurnController turnController, Player sender) {
-        turnController.handleLeaderActionMessage(this);
+        turnController.handleLeaderActionMessage(this,sender);
     }
 
     public void handleMessage(GameController gameController, Player sender) {

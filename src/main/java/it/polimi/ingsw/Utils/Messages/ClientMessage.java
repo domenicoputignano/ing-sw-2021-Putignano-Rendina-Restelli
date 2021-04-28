@@ -8,5 +8,6 @@ import it.polimi.ingsw.Model.Player;
 public interface ClientMessage {
 
     public void handleMessage(GameController gameController, Player sender);
+    public boolean isValidMessage();
 
 }

@@ -177,4 +177,8 @@ public abstract class Game implements Observer<Integer> {
     {
         this.gameState = state;
     }
+
+    public GameState getGameState() {
+        return gameState;
+    }
 }

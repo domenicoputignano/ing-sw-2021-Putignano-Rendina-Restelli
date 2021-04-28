@@ -75,7 +75,7 @@ public class TakeResourcesFromMarketMessage implements TurnControllerHandleable 
     }
 
     public void handleMessage(TurnController turnController, Player sender) {
-        turnController.handleTakeResourcesFromMarketMessage(this);
+        turnController.handleTakeResourcesFromMarketMessage(this,sender);
     }
 
     public void handleMessage(GameController gameController, Player sender) {

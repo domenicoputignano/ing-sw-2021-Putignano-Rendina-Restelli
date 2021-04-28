@@ -23,7 +23,7 @@ public class MoveResourcesMessage implements TurnControllerHandleable {
 
 
     public void handleMessage(TurnController turnController, Player sender) {
-        turnController.handleMoveMessage(this);
+        turnController.handleMoveMessage(this,sender);
     }
 
     public void handleMessage(GameController gameController, Player sender) {

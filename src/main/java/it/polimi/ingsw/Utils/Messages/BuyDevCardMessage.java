@@ -55,9 +55,8 @@ public class BuyDevCardMessage implements TurnControllerHandleable {
     }
 
 
-    //TODO procedura da applicare a tutti i messaggi di tipo TurnControllerHandleable
     public void handleMessage(TurnController turnController, Player sender) {
-        turnController.handleBuyDevCardMessage(this);
+        turnController.handleBuyDevCardMessage(this,sender);
     }
 
     public void handleMessage(GameController gameController, Player sender) {

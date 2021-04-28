@@ -94,7 +94,7 @@ public class ActivateProductionMessage implements TurnControllerHandleable {
 
 
     public void handleMessage(TurnController turnController, Player sender) {
-        turnController.handleActivateProductionMessage(this);
+        turnController.handleActivateProductionMessage(this,sender);
     }
 
     public void handleMessage(GameController gameController, Player sender) {
