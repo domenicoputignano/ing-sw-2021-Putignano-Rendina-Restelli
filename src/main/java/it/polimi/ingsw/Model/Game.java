@@ -188,4 +188,8 @@ public abstract class Game implements Observer<Integer> {
     public GameState getGameState() {
         return gameState;
     }
+
+    public int getNumOfPlayers(){
+        return playerList.size();
+    }
 }

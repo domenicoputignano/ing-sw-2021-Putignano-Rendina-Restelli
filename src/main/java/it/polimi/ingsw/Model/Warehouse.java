@@ -64,15 +64,15 @@ public class Warehouse implements Cloneable {
             throw new IncompatibleResourceTypeException();
         NormalDepot d = this.normalDepots[depotIndex - 1];
         if(d.getOcc() == 0) {
-           d.setType(type);
-           d.add(num);
-       } else {
-           if(d.getType()==type) {
-               d.add(num);
-           } else {
-               throw new IncompatibleResourceTypeException();
-           }
-       }
+            d.setType(type);
+            d.add(num);
+        } else {
+            if(d.getType()==type) {
+                d.add(num);
+            } else {
+                throw new IncompatibleResourceTypeException();
+            }
+        }
         updateAvailableResources();
     }
 
@@ -171,7 +171,7 @@ public class Warehouse implements Cloneable {
                     && normalDepots[depotTo - 1].getOcc() + occ <= normalDepots[depotTo - 1].getSize()
                     && extraDepots[extraDepotFrom - 1].getOcc() >= occ)
                 return true;
-            }
+        }
         return false;
     }
 
@@ -216,7 +216,7 @@ public class Warehouse implements Cloneable {
     public int findExtraDepotByResourceType(ResourceType type) throws DepotNotFoundException {
         for(int i = 0; i < extraDepots.length; i++) {
             if(extraDepots[i]!=null) {
-               if(extraDepots[i].getType() == type) return i;
+                if(extraDepots[i].getType() == type) return i;
             }
         }
         throw new DepotNotFoundException();

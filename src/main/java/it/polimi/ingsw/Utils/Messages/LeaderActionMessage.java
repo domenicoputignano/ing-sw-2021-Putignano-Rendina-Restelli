@@ -27,8 +27,7 @@ public class LeaderActionMessage  implements TurnControllerHandleable {
 
     public boolean isValidMessage()
     {
-        if(index<=0 || index>2) return false;
-        return true;
+        return index > 0 && index <= 2;
     }
 
     public void handleMessage(TurnController turnController, Player sender) {

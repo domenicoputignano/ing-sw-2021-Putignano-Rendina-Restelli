@@ -3,9 +3,9 @@ package it.polimi.ingsw.Model;
 import it.polimi.ingsw.Exceptions.DepotOutOfBoundsException;
 
 public interface Depot {
-    public void add(int num) throws DepotOutOfBoundsException;
-    public void take(int num) throws DepotOutOfBoundsException;
-    public ResourceType getType();
-    public int getOcc();
-    public int getSize();
+    void add(int num) throws DepotOutOfBoundsException;
+    void take(int num) throws DepotOutOfBoundsException;
+    ResourceType getType();
+    int getOcc();
+    int getSize();
 }

@@ -80,7 +80,7 @@ public final class PaymentHandler {
     }
 
     private static Map<ResourceType, Integer> convertResource(Map<ResourceSource,EnumMap<ResourceType,Integer>> howToTakeResources) {
-        Map<ResourceType, Integer> resourcesToTake = new EnumMap<ResourceType, Integer>(ResourceType.class);
+        Map<ResourceType, Integer> resourcesToTake = new EnumMap<>(ResourceType.class);
         resourcesToTake.put(ResourceType.coin,0);
         resourcesToTake.put(ResourceType.servant,0);
         resourcesToTake.put(ResourceType.shield,0);
