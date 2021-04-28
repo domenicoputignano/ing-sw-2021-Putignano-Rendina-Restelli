@@ -4,6 +4,7 @@ import it.polimi.ingsw.Model.Game;
 import it.polimi.ingsw.Model.MultiPlayerMode;
 import it.polimi.ingsw.Model.GameState;
 import it.polimi.ingsw.Model.Player;
+import it.polimi.ingsw.Utils.Messages.LeaderChoiceMessage;
 import it.polimi.ingsw.Utils.Messages.ResourceChoiceMessage;
 
 import java.util.Collections;
@@ -27,12 +28,21 @@ public class GameController {
         return model;
     }
 
-    public synchronized void handleResourceChoiceMessage(ResourceChoiceMessage message) throws InterruptedException {
+    public synchronized void handleResourceChoiceMessage(ResourceChoiceMessage message, Player sender) throws InterruptedException {
         while (model.getGameState() != GameState.RESOURCECHOICE) wait();
         if(message.isValidMessage()) {
 
         } else {
             //TODO notificare il client dell'errore
+        }
+    }
+
+    public synchronized void handleLeaderChoiceMessage(LeaderChoiceMessage message, Player sender) throws InterruptedException {
+        while (model.getGameState() != GameState.LEADERCHOICE) wait();
+        if(message.isValidMessage()) {
+            sender.performInitialLeaderChoice(message.getLeader1ToDiscard(), message.getLeader2ToDiscard());
+        } else {
+
         }
     }
 

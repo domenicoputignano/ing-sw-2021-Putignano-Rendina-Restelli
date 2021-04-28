@@ -72,13 +72,6 @@ class PlayerTest {
         assertEquals(initialPosition+2, player.getPersonalBoard().getFaithTrack().getFaithMarker());
     }
 
-    @Test
-    void throwLeaderCard() {
-        LeaderCard toThrow = player.getLeaderCards().get(0);
-        player.throwLeaderCard(toThrow);
-
-        assertFalse(player.getLeaderCards().contains(toThrow));
-    }
 
     @Test
     void getUsername() {

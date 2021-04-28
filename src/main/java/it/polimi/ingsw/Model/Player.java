@@ -1,16 +1,22 @@
 package it.polimi.ingsw.Model;
 
+import it.polimi.ingsw.Exceptions.DepotOutOfBoundsException;
+import it.polimi.ingsw.Exceptions.IncompatibleResourceTypeException;
 import it.polimi.ingsw.Model.Card.Effect;
 import it.polimi.ingsw.Model.Card.LeaderCard;
 import it.polimi.ingsw.Model.Card.LeaderEffect;
 import it.polimi.ingsw.Utils.MoveActionInterface;
+import it.polimi.ingsw.Utils.Pair;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 
 public class Player {
+    private Logger LOGGER = Logger.getLogger(Player.class.getName());
     private String username;
     private int position;
     private PersonalBoard personalBoard;
@@ -57,8 +63,24 @@ public class Player {
 
     }
 
-    public void throwLeaderCard(LeaderCard card) {
-        leaderCards.remove(card);
+    public void performInitialLeaderChoice(int firstLeader, int secondLeader) {
+        throwLeaderCard(firstLeader);
+        throwLeaderCard(secondLeader);
+    }
+
+    public void performInitialResourcesChoice(List<Pair<ResourceType,Integer>> chosenResources) {
+        chosenResources.forEach( x -> {
+                    try {
+                        getPersonalBoard().getWarehouse().addResourcesToDepot(x.getValue(), x.getKey(), 1);
+                    } catch (DepotOutOfBoundsException | IncompatibleResourceTypeException e) {
+                        LOGGER.log(Level.SEVERE, "Thrown an unexpected exception " + e);
+                    }
+                });
+    }
+
+
+    private void throwLeaderCard(int leader) {
+        leaderCards.remove(leader - 1);
     }
 
     public String getUsername() {
