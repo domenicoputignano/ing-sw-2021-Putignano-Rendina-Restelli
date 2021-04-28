@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
+import java.util.stream.Collectors;
 
 public abstract class Game implements Observer<Integer> {
     protected Player inkwell;
@@ -171,6 +172,12 @@ public abstract class Game implements Observer<Integer> {
     public List<Deck> getDecks() {
         return decks;
         //TODO : DA MODIFICARE
+    }
+
+    public Deck searchDeck(CardType type) {
+        if(getDecks().stream().anyMatch(x -> x.getCardType().equals(type)))
+            return decks.stream().filter(x -> x.getCardType().equals(type)).collect(Collectors.toList()).get(0);
+        else return null;
     }
 
     public void nextState(GameState state)

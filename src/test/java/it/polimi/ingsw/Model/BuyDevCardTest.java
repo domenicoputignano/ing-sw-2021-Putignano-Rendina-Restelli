@@ -85,9 +85,7 @@ class BuyDevCardTest {
 
         try {
             multiPlayerMode.getPlayerList().get(0).getPersonalBoard().getWarehouse().addResourcesToDepot(1, ResourceType.coin,1);
-        } catch (DepotOutOfBoundsException e) {
-            e.printStackTrace();
-        } catch (IncompatibleResourceTypeException e) {
+        } catch (DepotOutOfBoundsException | IncompatibleResourceTypeException e) {
             e.printStackTrace();
         }
 
