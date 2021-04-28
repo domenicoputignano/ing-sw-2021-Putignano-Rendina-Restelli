@@ -1,6 +1,9 @@
 package it.polimi.ingsw.Utils.Messages;
 
+import it.polimi.ingsw.Controller.GameController;
+import it.polimi.ingsw.Controller.TurnController;
 import it.polimi.ingsw.Model.ActiveProductions;
+import it.polimi.ingsw.Model.Player;
 import it.polimi.ingsw.Model.ResourceType;
 import it.polimi.ingsw.Utils.Messages.ClientMessage;
 import it.polimi.ingsw.Utils.ResourceSource;
@@ -11,7 +14,7 @@ import java.util.Map;
 
 import static it.polimi.ingsw.Model.PaymentHandler.areValidInstructions;
 
-public class ActivateProductionMessage {
+public class ActivateProductionMessage implements TurnControllerHandleable {
     private ActiveProductions productions;
     private ResourceType input1;
     private ResourceType input2;
@@ -87,5 +90,14 @@ public class ActivateProductionMessage {
 
     public void setHowToTakeResources(Map<ResourceSource, EnumMap<ResourceType, Integer>> howToTakeResources) {
         this.howToTakeResources = howToTakeResources;
+    }
+
+
+    public void handleMessage(TurnController turnController, Player sender) {
+        turnController.handleActivateProductionMessage(this);
+    }
+
+    public void handleMessage(GameController gameController, Player sender) {
+        handleMessage(gameController.getTurnController(), sender);
     }
 }

@@ -15,8 +15,8 @@ public class ClientSetupConnection implements Runnable {
     private String nickname;
     private GameMode mode;
     private int numOfPlayers;
-    DataOutputStream outputStream;
-    DataInputStream inputStream;
+    private DataOutputStream outputStream;
+    private DataInputStream inputStream;
 
 
 

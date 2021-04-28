@@ -18,6 +18,9 @@ public class GameController {
         this.turnController = new TurnController(this.model, model.getPlayerList(), model.getCurrPlayer());
     }
 
+    public TurnController getTurnController() {
+        return turnController;
+    }
 
     public Game getModel() {
         return model;

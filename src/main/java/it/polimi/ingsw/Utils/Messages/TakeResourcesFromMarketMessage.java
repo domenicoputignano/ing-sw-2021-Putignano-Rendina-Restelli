@@ -1,6 +1,9 @@
 package it.polimi.ingsw.Utils.Messages;
 
+import it.polimi.ingsw.Controller.GameController;
+import it.polimi.ingsw.Controller.TurnController;
 import it.polimi.ingsw.Model.MarketTray.Marble;
+import it.polimi.ingsw.Model.Player;
 import it.polimi.ingsw.Utils.MarbleDestination;
 import it.polimi.ingsw.Utils.MarketChoice;
 import it.polimi.ingsw.Utils.Messages.ClientMessage;
@@ -10,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class TakeResourcesFromMarketMessage {
+public class TakeResourcesFromMarketMessage implements TurnControllerHandleable {
     private List<Pair<Marble, MarbleDestination>> whereToPutMarbles = new ArrayList<>();
     private MarketChoice playerChoice;
     private int index;
@@ -67,8 +70,16 @@ public class TakeResourcesFromMarketMessage {
         return true;
     }
 
-    public List<Marble> getRequestedMarbles()
-    {
+    public List<Marble> getRequestedMarbles() {
         return whereToPutMarbles.stream().map(x -> x.getKey()).collect(Collectors.toList());
     }
+
+    public void handleMessage(TurnController turnController, Player sender) {
+        turnController.handleTakeResourcesFromMarketMessage(this);
+    }
+
+    public void handleMessage(GameController gameController, Player sender) {
+        handleMessage(gameController.getTurnController(), sender);
+    }
+
 }

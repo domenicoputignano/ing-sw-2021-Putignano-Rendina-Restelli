@@ -1,5 +1,8 @@
 package it.polimi.ingsw.Utils.Messages;
 
+import it.polimi.ingsw.Controller.GameController;
+import it.polimi.ingsw.Controller.TurnController;
+import it.polimi.ingsw.Model.Player;
 import it.polimi.ingsw.Model.ResourceType;
 import it.polimi.ingsw.Utils.MarbleDestination;
 import it.polimi.ingsw.Utils.Messages.ClientMessage;
@@ -9,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class PositioningMessage {
+public class PositioningMessage implements TurnControllerHandleable {
     List<Pair<ResourceType, MarbleDestination>> whereToPutResources = new ArrayList<>();
 
     public List<Pair<ResourceType, MarbleDestination>> getWhereToPutResources() {
@@ -29,4 +32,13 @@ public class PositioningMessage {
     {
         return whereToPutResources.stream().map(x -> x.getKey()).collect(Collectors.toList());
     }
+
+    public void handleMessage(TurnController turnController, Player sender) {
+        turnController.handlePositioningMessage(this);
+    }
+
+    public void handleMessage(GameController gameController, Player sender) {
+        handleMessage(gameController.getTurnController(), sender);
+    }
+
 }
