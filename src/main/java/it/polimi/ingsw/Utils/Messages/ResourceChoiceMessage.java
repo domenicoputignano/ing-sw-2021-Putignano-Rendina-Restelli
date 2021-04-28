@@ -14,7 +14,7 @@ public class ResourceChoiceMessage implements GameControllerHandleable {
     private List<Pair<ResourceType,Integer>> chosenResources = new ArrayList<>();
 
     public void handleMessage(GameController gameController, Player sender) {
-
+        gameController.handleResourceChoiceMessage(this, sender);
     }
 
 

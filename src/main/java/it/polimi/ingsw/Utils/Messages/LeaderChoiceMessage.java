@@ -1,6 +1,9 @@
 package it.polimi.ingsw.Utils.Messages;
 
-public class LeaderChoiceMessage {
+import it.polimi.ingsw.Controller.GameController;
+import it.polimi.ingsw.Model.Player;
+
+public class LeaderChoiceMessage implements GameControllerHandleable {
     private int leader1ToDiscard;
     private int leader2ToDiscard;
 
@@ -27,6 +30,9 @@ public class LeaderChoiceMessage {
         return leader2ToDiscard;
     }
 
+    public void handleMessage(GameController gameController, Player sender) {
+        gameController.handleLeaderChoiceMessage(this, sender);
+    }
 
 
     private void switchValue() {
