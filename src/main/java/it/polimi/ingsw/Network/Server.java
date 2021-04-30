@@ -106,6 +106,7 @@ public class Server {
     public void initializeGame(ClientSetupConnection client) {
         Player player = getClientAsPlayer(client);
         ClientStatus clientStatus = new ClientStatus(client.getClientSocket());
+        executors.submit(clientStatus);
 
         // registration of the player
         accounts.put(client.getNickname(), clientStatus);

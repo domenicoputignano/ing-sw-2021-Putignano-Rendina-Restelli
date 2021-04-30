@@ -1,14 +1,13 @@
 package it.polimi.ingsw.Model;
 
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
 import it.polimi.ingsw.Model.Card.*;
 import it.polimi.ingsw.Utils.Pair;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.lang.reflect.Type;
 import java.util.*;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.stream.Collectors;
 
 public class PersonalBoard {
@@ -81,7 +80,7 @@ public class PersonalBoard {
         if (requestedProductions.isSlot1()&&!(slots[0].size()>0)) return false;
             if(requestedProductions.isSlot2()&&!(slots[1].size()>0)) return false;
                 if(requestedProductions.isSlot3()&&!(slots[2].size()>0)) return false;
-                    if(requestedProductions.isExtraSlot1()&& !(owner.getActiveEffects().stream().filter(x -> x.getEffect() == Effect.EXTRAPRODUCTION).count() > 0)) return false;
+                    if(requestedProductions.isExtraSlot1()&& owner.getActiveEffects().stream().noneMatch(x -> x.getEffect() == Effect.EXTRAPRODUCTION)) return false;
                         if(requestedProductions.isExtraSlot1()&& !(owner.getActiveEffects().stream().filter(x -> x.getEffect() == Effect.EXTRAPRODUCTION).count() == 2)) return false;
                         return true;
     }
@@ -95,15 +94,19 @@ public class PersonalBoard {
 
     private boolean checkSlotsCards(List<CardType> requirements){
         List<CardType> activeCards = new ArrayList<>();
-        Arrays.asList(slots).stream().forEach(x -> activeCards.addAll(x.stream().map(DevelopmentCard::getType).collect(Collectors.toList())));
+        Arrays.stream(slots).forEach(x -> activeCards.addAll(x.stream().map(DevelopmentCard::getType).collect(Collectors.toList())));
         List<Pair<CardType, Integer>> activeCardTypes = convertToCardTypeOccurrences(activeCards);
         List<Pair<CardType, Integer>> requirementsCard = convertToCardTypeOccurrences(requirements);
+        AtomicBoolean result = new AtomicBoolean(true);
         for(Pair<CardType, Integer> p : requirementsCard){
-            if(activeCardTypes.stream().anyMatch(x -> x.getKey().equals(p.getKey()))){
+            activeCardTypes.stream().filter(x -> x.getKey().equals(p.getKey())).findFirst().ifPresentOrElse(x -> {
+                if(x.getValue() < p.getValue()) result.set(false);
+            }, ()->result.set(false));
+            /*if(activeCardTypes.stream().anyMatch(x -> x.getKey().equals(p.getKey()))){
                 if(activeCardTypes.stream().filter(x -> x.getKey().equals(p.getKey())).findFirst().get().getValue() < p.getValue()) return false;
-            } else return false;
+            } else return false;*/
         }
-        return true;
+        return result.get();
     }
 
     private List<Pair<CardType, Integer>> convertToCardTypeOccurrences(List<CardType> cardTypes){
