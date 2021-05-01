@@ -1,6 +1,6 @@
 package it.polimi.ingsw.Utils.Messages;
 
-public class MoveResourcesError {
+public class MoveResourcesError implements ErrorMessage {
     private final Trigger trigger;
     public enum Trigger
     {

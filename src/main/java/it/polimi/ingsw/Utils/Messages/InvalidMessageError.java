@@ -1,4 +1,4 @@
 package it.polimi.ingsw.Utils.Messages;
 
-public class InvalidMessageError {
+public class InvalidMessageError implements ErrorMessage {
 }

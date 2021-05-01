@@ -1,6 +1,6 @@
 package it.polimi.ingsw.Utils.Messages;
 
-public class ActivateProductionError {
+public class ActivateProductionError implements ErrorMessage {
     private final Trigger trigger;
     public enum Trigger
     {

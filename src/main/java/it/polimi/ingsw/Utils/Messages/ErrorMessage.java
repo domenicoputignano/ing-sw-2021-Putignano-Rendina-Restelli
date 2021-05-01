@@ -1,4 +1,5 @@
 package it.polimi.ingsw.Utils.Messages;
 
-public interface ErrorMessage {
+
+public interface ErrorMessage extends ServerMessage {
 }

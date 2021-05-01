@@ -1,4 +1,4 @@
 package it.polimi.ingsw.Utils.Messages;
 
-public class WrongTurnError {
+public class WrongTurnError implements ErrorMessage {
 }
