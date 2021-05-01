@@ -2,13 +2,11 @@ package it.polimi.ingsw.Utils;
 
 import it.polimi.ingsw.Model.MarketTray.*;
 import it.polimi.ingsw.Model.ResourceType;
-import it.polimi.ingsw.Utils.Messages.TakeResourcesFromMarketMessage;
+import it.polimi.ingsw.Utils.Messages.ClientMessages.*;
 import org.junit.jupiter.api.Test;
-
+import static org.junit.jupiter.api.Assertions.*;
 import java.util.ArrayList;
 import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class TakeResourcesFromMarketMessageTest {
     TakeResourcesFromMarketMessage message = new TakeResourcesFromMarketMessage();

@@ -2,7 +2,8 @@ package it.polimi.ingsw.Controller;
 
 import it.polimi.ingsw.Exceptions.InvalidActionException;
 import it.polimi.ingsw.Model.*;
-import it.polimi.ingsw.Utils.Messages.*;
+import it.polimi.ingsw.Utils.Messages.ServerMessages.*;
+import it.polimi.ingsw.Utils.Messages.ClientMessages.*;
 
 import java.util.List;
 

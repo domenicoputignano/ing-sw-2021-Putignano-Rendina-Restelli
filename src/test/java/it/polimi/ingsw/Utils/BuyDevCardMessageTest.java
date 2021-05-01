@@ -3,14 +3,12 @@ package it.polimi.ingsw.Utils;
 import it.polimi.ingsw.Model.Card.CardType;
 import it.polimi.ingsw.Model.Card.ColorCard;
 import it.polimi.ingsw.Model.ResourceType;
-import it.polimi.ingsw.Utils.Messages.BuyDevCardMessage;
+import it.polimi.ingsw.Utils.Messages.ClientMessages.*;
 import org.junit.jupiter.api.Test;
-
+import static org.junit.jupiter.api.Assertions.*;
 import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.Map;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class BuyDevCardMessageTest {
     BuyDevCardMessage buyDevCardMessage = new BuyDevCardMessage();

@@ -1,4 +1,4 @@
-package it.polimi.ingsw.Utils.Messages;
+package it.polimi.ingsw.Utils.Messages.ServerMessages;
 
 public class ActivateProductionError implements ErrorMessage {
     private final Trigger trigger;

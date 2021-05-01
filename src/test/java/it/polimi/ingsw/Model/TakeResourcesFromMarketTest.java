@@ -12,7 +12,7 @@ import it.polimi.ingsw.Model.MarketTray.WhiteMarble;
 import it.polimi.ingsw.Utils.MarbleDestination;
 import it.polimi.ingsw.Utils.MarketChoice;
 import it.polimi.ingsw.Utils.Pair;
-import it.polimi.ingsw.Utils.Messages.TakeResourcesFromMarketMessage;
+import it.polimi.ingsw.Utils.Messages.ClientMessages.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

@@ -1,10 +1,7 @@
 package it.polimi.ingsw.Model;
 
 import it.polimi.ingsw.Exceptions.InvalidActionException;
-import it.polimi.ingsw.Utils.Messages.ActivateProductionMessage;
-import it.polimi.ingsw.Utils.Messages.BuyDevCardMessage;
-import it.polimi.ingsw.Utils.Messages.LeaderActionMessage;
-import it.polimi.ingsw.Utils.Messages.TakeResourcesFromMarketMessage;
+import it.polimi.ingsw.Utils.Messages.ClientMessages.*;
 
 public interface AbstractTurnPhase {
     default void leaderAction(Turn turn, LeaderActionMessage message) throws InvalidActionException {

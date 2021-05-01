@@ -4,7 +4,7 @@ import it.polimi.ingsw.Controller.GameController;
 import it.polimi.ingsw.Model.Game;
 import it.polimi.ingsw.Model.Player;
 import it.polimi.ingsw.Observer;
-import it.polimi.ingsw.Utils.Messages.ClientMessage;
+import it.polimi.ingsw.Utils.Messages.ClientMessages.ClientMessage;
 
 public class RemoteView implements Observer<ClientMessage> {
 

@@ -1,10 +1,10 @@
-package it.polimi.ingsw.Utils.Messages;
+package it.polimi.ingsw.Utils.Messages.ServerMessages;
 
-public class PositioningError implements ErrorMessage {
+public class MoveResourcesError implements ErrorMessage {
     private final Trigger trigger;
     public enum Trigger
     {
-        DISCARDEDRESOURCES("Resources discarded because wrongly indicated positioning !");
+        MOVE("Error occurred while performing your move action !");
         private String description;
         private Trigger(String description)
         {
@@ -17,7 +17,7 @@ public class PositioningError implements ErrorMessage {
         }
     }
 
-    public PositioningError(Trigger trigger)
+    public MoveResourcesError(Trigger trigger)
     {
         this.trigger = trigger;
     }

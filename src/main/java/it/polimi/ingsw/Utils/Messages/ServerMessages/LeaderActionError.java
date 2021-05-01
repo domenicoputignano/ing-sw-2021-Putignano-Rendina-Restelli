@@ -1,11 +1,12 @@
-package it.polimi.ingsw.Utils.Messages;
+package it.polimi.ingsw.Utils.Messages.ServerMessages;
 
-public class TakeResourcesFromMarketError implements ErrorMessage {
+public class LeaderActionError implements ErrorMessage {
     private final Trigger trigger;
     public enum Trigger
     {
-        MARBLEMISMATCH("Selected marbles don't match marbles in Market Tray !"),
-        WHITEEFFECTMISMATCH("Mismatch in selected white marbles effects !");
+        REQUIREMENTS("Requirements not satisfied !"),
+        LEADERSTATUS("Not available action !"),
+        ;
         private String description;
         private Trigger(String description)
         {
@@ -18,7 +19,7 @@ public class TakeResourcesFromMarketError implements ErrorMessage {
         }
     }
 
-    public TakeResourcesFromMarketError(Trigger trigger)
+    public LeaderActionError(Trigger trigger)
     {
         this.trigger = trigger;
     }

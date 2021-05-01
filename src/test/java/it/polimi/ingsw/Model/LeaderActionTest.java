@@ -3,8 +3,7 @@ package it.polimi.ingsw.Model;
 import it.polimi.ingsw.Exceptions.DepotOutOfBoundsException;
 import it.polimi.ingsw.Exceptions.IncompatibleResourceTypeException;
 import it.polimi.ingsw.Exceptions.InvalidActionException;
-import it.polimi.ingsw.Utils.Messages.LeaderActionMessage;
-import it.polimi.ingsw.Utils.Messages.TakeResourcesFromMarketMessage;
+import it.polimi.ingsw.Utils.Messages.ClientMessages.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

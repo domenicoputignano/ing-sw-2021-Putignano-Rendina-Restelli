@@ -10,8 +10,7 @@ import it.polimi.ingsw.Model.MarketTray.Marble;
 import it.polimi.ingsw.Model.MarketTray.WhiteMarble;
 import it.polimi.ingsw.Utils.MarbleDestination;
 import it.polimi.ingsw.Utils.MarketChoice;
-import it.polimi.ingsw.Utils.Messages.LeaderActionMessage;
-import it.polimi.ingsw.Utils.Messages.TakeResourcesFromMarketMessage;
+import it.polimi.ingsw.Utils.Messages.ClientMessages.*;
 import it.polimi.ingsw.Utils.Pair;
 import org.junit.jupiter.api.Test;
 

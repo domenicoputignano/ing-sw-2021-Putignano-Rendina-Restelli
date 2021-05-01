@@ -1,6 +1,6 @@
 package it.polimi.ingsw.Model;
 
-import it.polimi.ingsw.Utils.Messages.LeaderActionMessage;
+import it.polimi.ingsw.Utils.Messages.ClientMessages.*;
 
 public class LeaderAction implements AbstractTurnPhase{
 

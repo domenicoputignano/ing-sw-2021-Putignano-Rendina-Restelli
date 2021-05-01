@@ -2,14 +2,12 @@ package it.polimi.ingsw.Utils;
 
 import it.polimi.ingsw.Model.ActiveProductions;
 import it.polimi.ingsw.Model.ResourceType;
-import it.polimi.ingsw.Utils.Messages.ActivateProductionMessage;
 import org.junit.jupiter.api.Test;
-
+import static org.junit.jupiter.api.Assertions.*;
+import it.polimi.ingsw.Utils.Messages.ClientMessages.*;
 import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.Map;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class ActivateProductionMessageTest {
 

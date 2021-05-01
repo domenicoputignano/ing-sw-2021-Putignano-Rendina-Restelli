@@ -1,11 +1,10 @@
-package it.polimi.ingsw.Utils.Messages;
+package it.polimi.ingsw.Utils.Messages.ClientMessages;
 
 import it.polimi.ingsw.Controller.GameController;
 import it.polimi.ingsw.Controller.TurnController;
 import it.polimi.ingsw.Model.Player;
 import it.polimi.ingsw.Model.ResourceType;
 import it.polimi.ingsw.Utils.MarbleDestination;
-import it.polimi.ingsw.Utils.Messages.ClientMessage;
 import it.polimi.ingsw.Utils.Pair;
 
 import java.util.ArrayList;
