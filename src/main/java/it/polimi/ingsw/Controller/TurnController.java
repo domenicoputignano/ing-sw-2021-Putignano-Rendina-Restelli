@@ -50,6 +50,8 @@ public class TurnController {
                     }
                 }
                 // TODO else HANDLEERROR((ENUM) ERROR.ProductionNotPossibleMessage)
+                ActivateProductionError error = new ActivateProductionError(ActivateProductionError.Trigger.INVALIDREQUEST);
+
             }
         }
             //TODO else HANDLEERROR((ENUM) ERROR.NotValidMessage)

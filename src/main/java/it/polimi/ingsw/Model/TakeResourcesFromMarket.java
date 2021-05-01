@@ -28,7 +28,7 @@ public class TakeResourcesFromMarket implements AbstractTurnPhase {
             convertMarblesToResources(takeResourcesFromMarketMessage.getWhereToPutMarbles());
             handlePositioning(turn.getPlayer().getPersonalBoard().getWarehouse());
             /*TODO: togliere gli effetti dalle whiteMarbles*/
-            //TODO : if(pendingResources.size()>0) HANDLEERROR(Risorse non correttamente posizionate)
+            //TODO : if(pendingResources.size()>0) UPDATE(Risorse non correttamente posizionate)
             turn.getGame().getMarketTray().clearWhiteMarbleEffect();
         }//TODO: else HANDLEERROR(Lista di conversione white marbles non compatibile)
     }
@@ -95,6 +95,7 @@ public class TakeResourcesFromMarket implements AbstractTurnPhase {
                 performPositioning(warehouse, i);
             } catch (DepotOutOfBoundsException | DepotNotFoundException | IncompatibleResourceTypeException e) {
                 discardedResources++;
+                //TODO HANDLEERROR(Risorse scartate perchè non correttamente posizionate)
             } finally {
                 i++;
             }
