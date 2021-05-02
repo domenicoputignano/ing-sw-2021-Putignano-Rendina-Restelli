@@ -1,7 +1,5 @@
 package it.polimi.ingsw.Model;
 
-
-
 public class TurnState {
     private ActionType actionType;
     private AbstractTurnPhase abstractTurnPhase;
@@ -16,7 +14,6 @@ public class TurnState {
     }
 
     public ActionType getActionType() { return actionType ; }
-
 
     public AbstractTurnPhase getTurnPhase()
     {
