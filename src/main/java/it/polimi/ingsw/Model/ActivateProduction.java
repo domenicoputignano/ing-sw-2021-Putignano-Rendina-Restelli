@@ -4,7 +4,7 @@ import it.polimi.ingsw.Exceptions.DepotNotFoundException;
 import it.polimi.ingsw.Exceptions.DepotOutOfBoundsException;
 import it.polimi.ingsw.Exceptions.InvalidActionException;
 import it.polimi.ingsw.Exceptions.StrongboxOutOfBoundException;
-import it.polimi.ingsw.Model.Card.Effect;
+import it.polimi.ingsw.Commons.Effect;
 import it.polimi.ingsw.Utils.Messages.ClientMessages.*;
 
 import java.util.EnumMap;

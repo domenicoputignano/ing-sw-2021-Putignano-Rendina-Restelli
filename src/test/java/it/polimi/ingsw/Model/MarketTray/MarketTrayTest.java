@@ -1,10 +1,8 @@
 package it.polimi.ingsw.Model.MarketTray;
 
+import it.polimi.ingsw.Commons.ColorMarble;
 import it.polimi.ingsw.Utils.MarketChoice;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-
-import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -24,10 +22,10 @@ public class MarketTrayTest {
         for(int i=0;i<3;i++)
             for(int j=0;j<4;j++)
             {
-                if(marketTray.getAvailableMarbles()[i][j].getColor()==Color.WHITE)
+                if(marketTray.getAvailableMarbles()[i][j].getColor()== ColorMarble.WHITE)
                     count++;
             }
-        if(marketTray.getSlidingMarble().getColor()==Color.WHITE)
+        if(marketTray.getSlidingMarble().getColor()== ColorMarble.WHITE)
             count++;
         assertEquals(4,count);
     }
@@ -38,10 +36,10 @@ public class MarketTrayTest {
         for(int i=0;i<3;i++)
             for(int j=0;j<4;j++)
             {
-                if(marketTray.getAvailableMarbles()[i][j].getColor()==Color.RED)
+                if(marketTray.getAvailableMarbles()[i][j].getColor()== ColorMarble.RED)
                     count++;
             }
-        if(marketTray.getSlidingMarble().getColor()==Color.RED)
+        if(marketTray.getSlidingMarble().getColor()== ColorMarble.RED)
             count++;
         assertEquals(1,count);
     }
@@ -52,10 +50,10 @@ public class MarketTrayTest {
         for(int i=0;i<3;i++)
             for(int j=0;j<4;j++)
             {
-                if(marketTray.getAvailableMarbles()[i][j].getColor()==Color.GREY)
+                if(marketTray.getAvailableMarbles()[i][j].getColor()== ColorMarble.GREY)
                     count++;
             }
-        if(marketTray.getSlidingMarble().getColor()==Color.GREY)
+        if(marketTray.getSlidingMarble().getColor()== ColorMarble.GREY)
             count++;
         assertEquals(2,count);
     }
@@ -66,10 +64,10 @@ public class MarketTrayTest {
         for(int i=0;i<3;i++)
             for(int j=0;j<4;j++)
             {
-                if(marketTray.getAvailableMarbles()[i][j].getColor()==Color.PURPLE)
+                if(marketTray.getAvailableMarbles()[i][j].getColor()== ColorMarble.PURPLE)
                     count++;
             }
-        if(marketTray.getSlidingMarble().getColor()==Color.PURPLE)
+        if(marketTray.getSlidingMarble().getColor()== ColorMarble.PURPLE)
             count++;
         assertEquals(2,count);
     }
@@ -80,10 +78,10 @@ public class MarketTrayTest {
         for(int i=0;i<3;i++)
             for(int j=0;j<4;j++)
             {
-                if(marketTray.getAvailableMarbles()[i][j].getColor()==Color.YELLOW)
+                if(marketTray.getAvailableMarbles()[i][j].getColor()== ColorMarble.YELLOW)
                     count++;
             }
-        if(marketTray.getSlidingMarble().getColor()==Color.YELLOW)
+        if(marketTray.getSlidingMarble().getColor()== ColorMarble.YELLOW)
             count++;
         assertEquals(2,count);
     }
@@ -94,10 +92,10 @@ public class MarketTrayTest {
         for(int i=0;i<3;i++)
             for(int j=0;j<4;j++)
             {
-                if(marketTray.getAvailableMarbles()[i][j].getColor()==Color.BLUE)
+                if(marketTray.getAvailableMarbles()[i][j].getColor()== ColorMarble.BLUE)
                     count++;
             }
-        if(marketTray.getSlidingMarble().getColor()==Color.BLUE)
+        if(marketTray.getSlidingMarble().getColor()== ColorMarble.BLUE)
             count++;
         assertEquals(2,count);
     }

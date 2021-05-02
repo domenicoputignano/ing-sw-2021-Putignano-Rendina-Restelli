@@ -1,5 +1,6 @@
 package it.polimi.ingsw.Model.MarketTray;
 
+import it.polimi.ingsw.Commons.ColorMarble;
 import it.polimi.ingsw.Exceptions.NoSuchResourceTypeException;
 import it.polimi.ingsw.Model.ResourceType;
 
@@ -10,7 +11,7 @@ public class WhiteMarble extends Marble {
     private WhiteMarbleEffect effect = null;
 
     public WhiteMarble() {
-        this.color = Color.WHITE;
+        this.colorMarble = ColorMarble.WHITE;
     }
 
     public void setEffect(WhiteMarbleEffect effect) {

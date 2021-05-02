@@ -1,5 +1,6 @@
 package it.polimi.ingsw.Model.MarketTray;
 
+import it.polimi.ingsw.Commons.ColorMarble;
 import it.polimi.ingsw.Model.ResourceType;
 import it.polimi.ingsw.Utils.MarketChoice;
 
@@ -17,14 +18,14 @@ public class MarketTray {
         marbles.add(new WhiteMarble());
         marbles.add(new WhiteMarble());
         marbles.add(new RedMarble());
-        marbles.add(new StandardMarble(Color.BLUE, ResourceType.shield));
-        marbles.add(new StandardMarble(Color.BLUE, ResourceType.shield));
-        marbles.add(new StandardMarble(Color.GREY, ResourceType.stone));
-        marbles.add(new StandardMarble(Color.GREY, ResourceType.stone));
-        marbles.add(new StandardMarble(Color.YELLOW, ResourceType.coin));
-        marbles.add(new StandardMarble(Color.YELLOW, ResourceType.coin));
-        marbles.add(new StandardMarble(Color.PURPLE, ResourceType.servant));
-        marbles.add(new StandardMarble(Color.PURPLE, ResourceType.servant));
+        marbles.add(new StandardMarble(ColorMarble.BLUE, ResourceType.shield));
+        marbles.add(new StandardMarble(ColorMarble.BLUE, ResourceType.shield));
+        marbles.add(new StandardMarble(ColorMarble.GREY, ResourceType.stone));
+        marbles.add(new StandardMarble(ColorMarble.GREY, ResourceType.stone));
+        marbles.add(new StandardMarble(ColorMarble.YELLOW, ResourceType.coin));
+        marbles.add(new StandardMarble(ColorMarble.YELLOW, ResourceType.coin));
+        marbles.add(new StandardMarble(ColorMarble.PURPLE, ResourceType.servant));
+        marbles.add(new StandardMarble(ColorMarble.PURPLE, ResourceType.servant));
 
         Random rand = new Random();
         int randNum = rand.nextInt(13);
@@ -84,7 +85,7 @@ public class MarketTray {
     public void clearWhiteMarbleEffect() {
         for (int i = 0; i < availableMarbles.length; i++) {
             for(int j = 0; j < availableMarbles[i].length; j++) {
-                if(availableMarbles[i][j].getColor() == Color.WHITE) {
+                if(availableMarbles[i][j].getColor() == ColorMarble.WHITE) {
                     WhiteMarble whiteMarble = (WhiteMarble)availableMarbles[i][j];
                     whiteMarble.setEffect(null);
                 }

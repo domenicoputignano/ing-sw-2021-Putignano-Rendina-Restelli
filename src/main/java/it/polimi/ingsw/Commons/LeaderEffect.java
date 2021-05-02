@@ -1,8 +1,6 @@
-package it.polimi.ingsw.Model.Card;
+package it.polimi.ingsw.Commons;
 
 import it.polimi.ingsw.Model.ResourceType;
-
-import java.util.Objects;
 
 public class LeaderEffect {
     private Effect effect;

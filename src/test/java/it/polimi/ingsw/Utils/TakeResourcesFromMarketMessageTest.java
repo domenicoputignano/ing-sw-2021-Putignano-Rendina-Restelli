@@ -1,5 +1,6 @@
 package it.polimi.ingsw.Utils;
 
+import it.polimi.ingsw.Commons.ColorMarble;
 import it.polimi.ingsw.Model.MarketTray.*;
 import it.polimi.ingsw.Model.ResourceType;
 import it.polimi.ingsw.Utils.Messages.ClientMessages.*;
@@ -17,9 +18,9 @@ class TakeResourcesFromMarketMessageTest {
         message.setIndex(2);
         List<Pair<Marble, MarbleDestination>> wheretoPutMarbles = new ArrayList<>();
         wheretoPutMarbles.add(new Pair<>(new RedMarble(),MarbleDestination.DEPOT1));
-        wheretoPutMarbles.add(new Pair<>(new StandardMarble(Color.YELLOW, ResourceType.coin),MarbleDestination.DEPOT2));
-        wheretoPutMarbles.add(new Pair<>(new StandardMarble(Color.BLUE, ResourceType.shield),MarbleDestination.DEPOT3));
-        wheretoPutMarbles.add(new Pair<>(new StandardMarble(Color.BLUE, ResourceType.shield),MarbleDestination.DEPOT3));
+        wheretoPutMarbles.add(new Pair<>(new StandardMarble(ColorMarble.YELLOW, ResourceType.coin),MarbleDestination.DEPOT2));
+        wheretoPutMarbles.add(new Pair<>(new StandardMarble(ColorMarble.BLUE, ResourceType.shield),MarbleDestination.DEPOT3));
+        wheretoPutMarbles.add(new Pair<>(new StandardMarble(ColorMarble.BLUE, ResourceType.shield),MarbleDestination.DEPOT3));
         message.setWhereToPutMarbles(wheretoPutMarbles);
         assertTrue(message.isValidMessage());
     }
@@ -30,8 +31,8 @@ class TakeResourcesFromMarketMessageTest {
         message.setIndex(2);
         List<Pair<Marble, MarbleDestination>> wheretoPutMarbles = new ArrayList<>();
         wheretoPutMarbles.add(new Pair<>(new RedMarble(),MarbleDestination.DEPOT1));
-        wheretoPutMarbles.add(new Pair<>(new StandardMarble(Color.YELLOW, ResourceType.coin),MarbleDestination.DEPOT2));
-        wheretoPutMarbles.add(new Pair<>(new StandardMarble(Color.BLUE, ResourceType.shield),MarbleDestination.DEPOT3));
+        wheretoPutMarbles.add(new Pair<>(new StandardMarble(ColorMarble.YELLOW, ResourceType.coin),MarbleDestination.DEPOT2));
+        wheretoPutMarbles.add(new Pair<>(new StandardMarble(ColorMarble.BLUE, ResourceType.shield),MarbleDestination.DEPOT3));
         message.setWhereToPutMarbles(wheretoPutMarbles);
         assertFalse(message.isValidMessage());
     }
@@ -62,8 +63,8 @@ class TakeResourcesFromMarketMessageTest {
         message.setIndex(2);
         List<Pair<Marble, MarbleDestination>> wheretoPutMarbles = new ArrayList<>();
         wheretoPutMarbles.add(new Pair<>(new RedMarble(),MarbleDestination.DEPOT1));
-        wheretoPutMarbles.add(new Pair<>(new StandardMarble(Color.YELLOW, ResourceType.coin),MarbleDestination.DEPOT2));
-        wheretoPutMarbles.add(new Pair<>(new StandardMarble(Color.BLUE, ResourceType.shield),MarbleDestination.DEPOT3));
+        wheretoPutMarbles.add(new Pair<>(new StandardMarble(ColorMarble.YELLOW, ResourceType.coin),MarbleDestination.DEPOT2));
+        wheretoPutMarbles.add(new Pair<>(new StandardMarble(ColorMarble.BLUE, ResourceType.shield),MarbleDestination.DEPOT3));
         message.setWhereToPutMarbles(wheretoPutMarbles);
         assertTrue(message.isValidMessage());
     }
@@ -74,9 +75,9 @@ class TakeResourcesFromMarketMessageTest {
         message.setIndex(2);
         List<Pair<Marble, MarbleDestination>> wheretoPutMarbles = new ArrayList<>();
         wheretoPutMarbles.add(new Pair<>(new RedMarble(),MarbleDestination.DEPOT1));
-        wheretoPutMarbles.add(new Pair<>(new StandardMarble(Color.YELLOW, ResourceType.coin),MarbleDestination.DEPOT2));
-        wheretoPutMarbles.add(new Pair<>(new StandardMarble(Color.BLUE, ResourceType.shield),MarbleDestination.DEPOT3));
-        wheretoPutMarbles.add(new Pair<>(new StandardMarble(Color.BLUE, ResourceType.shield),MarbleDestination.DEPOT3));
+        wheretoPutMarbles.add(new Pair<>(new StandardMarble(ColorMarble.YELLOW, ResourceType.coin),MarbleDestination.DEPOT2));
+        wheretoPutMarbles.add(new Pair<>(new StandardMarble(ColorMarble.BLUE, ResourceType.shield),MarbleDestination.DEPOT3));
+        wheretoPutMarbles.add(new Pair<>(new StandardMarble(ColorMarble.BLUE, ResourceType.shield),MarbleDestination.DEPOT3));
         message.setWhereToPutMarbles(wheretoPutMarbles);
         assertFalse(message.isValidMessage());
     }
@@ -86,9 +87,9 @@ class TakeResourcesFromMarketMessageTest {
         message.setIndex(4);
         List<Pair<Marble, MarbleDestination>> wheretoPutMarbles = new ArrayList<>();
         wheretoPutMarbles.add(new Pair<>(new RedMarble(),MarbleDestination.DEPOT1));
-        wheretoPutMarbles.add(new Pair<>(new StandardMarble(Color.YELLOW, ResourceType.coin),MarbleDestination.DEPOT2));
-        wheretoPutMarbles.add(new Pair<>(new StandardMarble(Color.BLUE, ResourceType.shield),MarbleDestination.DEPOT3));
-        wheretoPutMarbles.add(new Pair<>(new StandardMarble(Color.BLUE, ResourceType.shield),MarbleDestination.DEPOT3));
+        wheretoPutMarbles.add(new Pair<>(new StandardMarble(ColorMarble.YELLOW, ResourceType.coin),MarbleDestination.DEPOT2));
+        wheretoPutMarbles.add(new Pair<>(new StandardMarble(ColorMarble.BLUE, ResourceType.shield),MarbleDestination.DEPOT3));
+        wheretoPutMarbles.add(new Pair<>(new StandardMarble(ColorMarble.BLUE, ResourceType.shield),MarbleDestination.DEPOT3));
         message.setWhereToPutMarbles(wheretoPutMarbles);
         assertFalse(message.isValidMessage());
     }
@@ -98,8 +99,8 @@ class TakeResourcesFromMarketMessageTest {
         message.setIndex(5);
         List<Pair<Marble, MarbleDestination>> wheretoPutMarbles = new ArrayList<>();
         wheretoPutMarbles.add(new Pair<>(new RedMarble(),MarbleDestination.DEPOT1));
-        wheretoPutMarbles.add(new Pair<>(new StandardMarble(Color.YELLOW, ResourceType.coin),MarbleDestination.DEPOT2));
-        wheretoPutMarbles.add(new Pair<>(new StandardMarble(Color.BLUE, ResourceType.shield),MarbleDestination.DEPOT3));
+        wheretoPutMarbles.add(new Pair<>(new StandardMarble(ColorMarble.YELLOW, ResourceType.coin),MarbleDestination.DEPOT2));
+        wheretoPutMarbles.add(new Pair<>(new StandardMarble(ColorMarble.BLUE, ResourceType.shield),MarbleDestination.DEPOT3));
         message.setWhereToPutMarbles(wheretoPutMarbles);
         assertFalse(message.isValidMessage());
     }
@@ -128,8 +129,8 @@ class TakeResourcesFromMarketMessageTest {
         message.setIndex(2);
         List<Pair<Marble, MarbleDestination>> wheretoPutMarbles = new ArrayList<>();
         wheretoPutMarbles.add(new Pair<>(new RedMarble(),MarbleDestination.DEPOT1));
-        wheretoPutMarbles.add(new Pair<>(new StandardMarble(Color.YELLOW, ResourceType.coin),MarbleDestination.DEPOT2));
-        wheretoPutMarbles.add(new Pair<>(new StandardMarble(Color.BLUE, ResourceType.shield),MarbleDestination.DEPOT3));
+        wheretoPutMarbles.add(new Pair<>(new StandardMarble(ColorMarble.YELLOW, ResourceType.coin),MarbleDestination.DEPOT2));
+        wheretoPutMarbles.add(new Pair<>(new StandardMarble(ColorMarble.BLUE, ResourceType.shield),MarbleDestination.DEPOT3));
         wheretoPutMarbles.add(new Pair<>(null,MarbleDestination.DEPOT3));
         message.setWhereToPutMarbles(wheretoPutMarbles);
         assertFalse(message.isValidMessage());

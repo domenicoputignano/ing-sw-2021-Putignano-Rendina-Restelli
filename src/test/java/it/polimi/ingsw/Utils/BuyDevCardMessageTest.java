@@ -1,7 +1,7 @@
 package it.polimi.ingsw.Utils;
 
-import it.polimi.ingsw.Model.Card.CardType;
-import it.polimi.ingsw.Model.Card.ColorCard;
+import it.polimi.ingsw.Commons.CardType;
+import it.polimi.ingsw.Commons.ColorCard;
 import it.polimi.ingsw.Model.ResourceType;
 import it.polimi.ingsw.Utils.Messages.ClientMessages.*;
 import org.junit.jupiter.api.Test;

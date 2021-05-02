@@ -1,24 +1,23 @@
 package it.polimi.ingsw.Model.MarketTray;
 
+import it.polimi.ingsw.Commons.ColorMarble;
 import it.polimi.ingsw.Exceptions.NoSuchResourceTypeException;
 import it.polimi.ingsw.Model.ResourceType;
 
-import java.util.Objects;
-
 public abstract class Marble {
 
-    protected Color color;
+    protected ColorMarble colorMarble;
 
     public ResourceType addResources() throws NoSuchResourceTypeException {
         throw new NoSuchResourceTypeException();
     }
 
-    public Color getColor() { return color; }
+    public ColorMarble getColor() { return colorMarble; }
 
     @Override
     public String toString() {
         return "Marble{" +
-                "color=" + color +
+                "color=" + colorMarble +
                 '}';
     }
 
@@ -27,7 +26,7 @@ public abstract class Marble {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Marble marble = (Marble) o;
-        return color == marble.color;
+        return colorMarble == marble.colorMarble;
     }
 
 }

@@ -2,9 +2,9 @@ package it.polimi.ingsw.Model;
 
 import it.polimi.ingsw.Exceptions.DepotOutOfBoundsException;
 import it.polimi.ingsw.Exceptions.IncompatibleResourceTypeException;
-import it.polimi.ingsw.Model.Card.Effect;
-import it.polimi.ingsw.Model.Card.LeaderCard;
-import it.polimi.ingsw.Model.Card.LeaderEffect;
+import it.polimi.ingsw.Commons.Effect;
+import it.polimi.ingsw.Commons.LeaderCard;
+import it.polimi.ingsw.Commons.LeaderEffect;
 import it.polimi.ingsw.Utils.MoveActionInterface;
 import it.polimi.ingsw.Utils.Pair;
 

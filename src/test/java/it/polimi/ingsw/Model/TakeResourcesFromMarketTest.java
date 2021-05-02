@@ -3,10 +3,10 @@ package it.polimi.ingsw.Model;
 import it.polimi.ingsw.Exceptions.DepotOutOfBoundsException;
 import it.polimi.ingsw.Exceptions.IncompatibleResourceTypeException;
 import it.polimi.ingsw.Exceptions.InvalidActionException;
-import it.polimi.ingsw.Model.Card.Effect;
-import it.polimi.ingsw.Model.Card.LeaderCard;
-import it.polimi.ingsw.Model.Card.LeaderEffect;
-import it.polimi.ingsw.Model.MarketTray.Color;
+import it.polimi.ingsw.Commons.Effect;
+import it.polimi.ingsw.Commons.LeaderCard;
+import it.polimi.ingsw.Commons.LeaderEffect;
+import it.polimi.ingsw.Commons.ColorMarble;
 import it.polimi.ingsw.Model.MarketTray.Marble;
 import it.polimi.ingsw.Model.MarketTray.WhiteMarble;
 import it.polimi.ingsw.Utils.MarbleDestination;
@@ -59,7 +59,7 @@ class TakeResourcesFromMarketTest {
         List<Integer> effects = new ArrayList<>();
         for(Marble m: marbles)
         {
-            if(m.getColor()==Color.WHITE)
+            if(m.getColor()== ColorMarble.WHITE)
                 effects.add(1);
         }
         takeResourcesFromMarketMessage.setWhiteEffects(effects);
@@ -67,10 +67,10 @@ class TakeResourcesFromMarketTest {
         List<Pair<ResourceType, MarbleDestination>> expectedPairList = new ArrayList<>();
         for(Marble m: marbles)
         {
-            if(m.getColor()== Color.BLUE) expectedPairList.add(new Pair<ResourceType, MarbleDestination>(ResourceType.shield,MarbleDestination.DISCARD));
-            else if(m.getColor()==Color.GREY) expectedPairList.add(new Pair<ResourceType, MarbleDestination>(ResourceType.stone,MarbleDestination.DISCARD));
-            else if(m.getColor()==Color.PURPLE) expectedPairList.add(new Pair<ResourceType, MarbleDestination>(ResourceType.servant,MarbleDestination.DISCARD));
-            else if(m.getColor()==Color.YELLOW) expectedPairList.add(new Pair<ResourceType, MarbleDestination>(ResourceType.coin,MarbleDestination.DISCARD));
+            if(m.getColor()== ColorMarble.BLUE) expectedPairList.add(new Pair<ResourceType, MarbleDestination>(ResourceType.shield,MarbleDestination.DISCARD));
+            else if(m.getColor()== ColorMarble.GREY) expectedPairList.add(new Pair<ResourceType, MarbleDestination>(ResourceType.stone,MarbleDestination.DISCARD));
+            else if(m.getColor()== ColorMarble.PURPLE) expectedPairList.add(new Pair<ResourceType, MarbleDestination>(ResourceType.servant,MarbleDestination.DISCARD));
+            else if(m.getColor()== ColorMarble.YELLOW) expectedPairList.add(new Pair<ResourceType, MarbleDestination>(ResourceType.coin,MarbleDestination.DISCARD));
         }
         List<Pair<Marble, MarbleDestination>> pairList = new ArrayList<>();
         for(Marble m: marbles)
@@ -166,7 +166,7 @@ class TakeResourcesFromMarketTest {
         List<Integer> effects = new ArrayList<>();
         for(Marble m: marbles)
         {
-            if(m.getColor()==Color.WHITE)
+            if(m.getColor()== ColorMarble.WHITE)
                 effects.add(1);
         }
         takeResourcesFromMarketMessage.setWhiteEffects(effects);
@@ -174,16 +174,16 @@ class TakeResourcesFromMarketTest {
         List<Pair<Marble, MarbleDestination>> pairList = new ArrayList<>();
         for(Marble m: marbles)
         {
-            if(m.getColor()==Color.YELLOW)
+            if(m.getColor()== ColorMarble.YELLOW)
                 pairList.add(new Pair<Marble, MarbleDestination>(m,MarbleDestination.DEPOT1));
             else
-                if(m.getColor()==Color.GREY)
+                if(m.getColor()== ColorMarble.GREY)
                     pairList.add(new Pair<Marble, MarbleDestination>(m,MarbleDestination.DEPOT2));
                 else
-                if(m.getColor()==Color.PURPLE)
+                if(m.getColor()== ColorMarble.PURPLE)
                     pairList.add(new Pair<Marble, MarbleDestination>(m,MarbleDestination.DEPOT3));
                 else
-                if(m.getColor()==Color.WHITE)
+                if(m.getColor()== ColorMarble.WHITE)
                     pairList.add(new Pair<Marble, MarbleDestination>(m,MarbleDestination.DEPOT3));
                 else pairList.add(new Pair<Marble, MarbleDestination>(m,MarbleDestination.DISCARD));
         }

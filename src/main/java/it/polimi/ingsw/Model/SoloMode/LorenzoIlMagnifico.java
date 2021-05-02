@@ -1,8 +1,8 @@
 package it.polimi.ingsw.Model.SoloMode;
 
 import it.polimi.ingsw.Exceptions.EndGameException;
-import it.polimi.ingsw.Model.Card.ColorCard;
-import it.polimi.ingsw.Model.Card.Deck;
+import it.polimi.ingsw.Commons.ColorCard;
+import it.polimi.ingsw.Commons.Deck;
 import it.polimi.ingsw.Model.ConclusionEvents.DevCardColorEnded;
 import it.polimi.ingsw.Model.FaithTrack;
 

@@ -1,7 +1,8 @@
 package it.polimi.ingsw.Model;
 
+import it.polimi.ingsw.Commons.ColorMarble;
 import it.polimi.ingsw.Exceptions.*;
-import it.polimi.ingsw.Model.Card.Effect;
+import it.polimi.ingsw.Commons.Effect;
 import it.polimi.ingsw.Model.MarketTray.*;
 import it.polimi.ingsw.Utils.MarbleDestination;
 import it.polimi.ingsw.Utils.Pair;
@@ -39,7 +40,7 @@ public class TakeResourcesFromMarket implements AbstractTurnPhase {
                  List<Marble> marbles = pairList.stream().map(Pair::getKey).collect(Collectors.toList());
                     int i = 0;
                     for(Marble m : marbles) {
-                        if(m.getColor()==Color.WHITE) {
+                        if(m.getColor()== ColorMarble.WHITE) {
                             if(whiteMarbleEffects.size()==1) {
                                 WhiteMarble y = (WhiteMarble) m;
                                 y.setEffect(convertTypeToMarbleEffect(whiteMarbleEffects.get(0)));
@@ -54,7 +55,7 @@ public class TakeResourcesFromMarket implements AbstractTurnPhase {
 
     private void convertMarblesToResources(List<Pair<Marble,MarbleDestination>> marbles) {
         for(Pair<Marble,MarbleDestination> p : marbles) {
-            if (p.getKey().getColor() == Color.RED)
+            if (p.getKey().getColor() == ColorMarble.RED)
                 faith++;
         }
         ResourceType resourceType;
@@ -146,7 +147,7 @@ public class TakeResourcesFromMarket implements AbstractTurnPhase {
                 map(x -> x.getType()).collect(Collectors.toList());
         if(whiteMarbleEffects.size()==2)
         {
-            if(whiteEffects.size()!=requestedMarbles.stream().filter(x -> x.getColor()==Color.WHITE).count())
+            if(whiteEffects.size()!=requestedMarbles.stream().filter(x -> x.getColor()== ColorMarble.WHITE).count())
                 return false;
         }
         return true;

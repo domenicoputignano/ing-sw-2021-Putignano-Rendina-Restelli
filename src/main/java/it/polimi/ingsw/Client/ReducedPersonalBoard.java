@@ -1,6 +1,6 @@
 package it.polimi.ingsw.Client;
 
-import it.polimi.ingsw.Model.Card.DevelopmentCard;
+import it.polimi.ingsw.Commons.DevelopmentCard;
 
 import java.util.Stack;
 

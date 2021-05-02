@@ -2,7 +2,11 @@ package it.polimi.ingsw.Model;
 
 import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
-import it.polimi.ingsw.Model.Card.*;
+import it.polimi.ingsw.Commons.*;
+import it.polimi.ingsw.Commons.CardType;
+import it.polimi.ingsw.Commons.DevelopmentCard;
+import it.polimi.ingsw.Commons.Effect;
+import it.polimi.ingsw.Commons.LeaderCard;
 import it.polimi.ingsw.Utils.Pair;
 import java.io.FileNotFoundException;
 import java.io.FileReader;

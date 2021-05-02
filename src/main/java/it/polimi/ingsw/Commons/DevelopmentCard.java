@@ -1,11 +1,10 @@
-package it.polimi.ingsw.Model.Card;
+package it.polimi.ingsw.Commons;
 
 import it.polimi.ingsw.Model.ProductionRule;
 import it.polimi.ingsw.Model.ResourceType;
 
 import java.util.EnumMap;
 import java.util.Map;
-import java.util.Objects;
 
 public class DevelopmentCard {
     private Map<ResourceType, Integer> cost;

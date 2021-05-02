@@ -1,8 +1,7 @@
-package it.polimi.ingsw.Model.Card;
+package it.polimi.ingsw.Commons;
 
 import it.polimi.ingsw.Model.ResourceType;
 
-import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 
