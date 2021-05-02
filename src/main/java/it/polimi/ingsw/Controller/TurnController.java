@@ -2,10 +2,12 @@ package it.polimi.ingsw.Controller;
 
 import it.polimi.ingsw.Exceptions.InvalidActionException;
 import it.polimi.ingsw.Model.*;
+import it.polimi.ingsw.Network.RemoteView;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.*;
 import it.polimi.ingsw.Utils.Messages.ClientMessages.*;
-
 import java.util.List;
+
+
 
 public class TurnController {
     private Player currPlayer;
@@ -21,8 +23,8 @@ public class TurnController {
 
 
 
-    public void handleBuyDevCardMessage(BuyDevCardMessage message, Player sender) {
-        if (isSenderTurn(sender)) {
+    public void handleBuyDevCardMessage(BuyDevCardMessage message, RemoteView sender) {
+        if (isSenderTurn(sender.getPlayer())) {
             if (message.isValidMessage()) {
                 if (!model.isEmptyDeck(message.getType())) {
                     model.getTurn().setTurnState(TurnState.ActionType.BUYDEVCARD);
@@ -39,8 +41,8 @@ public class TurnController {
         //TODO else HANDLEERROR((ENUM) ERROR.NotValidMessage)
     }
 
-    public void handleActivateProductionMessage(ActivateProductionMessage message, Player sender) {
-        if(isSenderTurn(sender)) {
+    public void handleActivateProductionMessage(ActivateProductionMessage message, RemoteView sender) {
+        if(isSenderTurn(sender.getPlayer())) {
             if (message.isValidMessage()) {
                 if (currPlayer.getPersonalBoard().isValidRequestedProduction(message.getProductions())) {
                     model.getTurn().setTurnState(TurnState.ActionType.ACTIVATEPRODUCTION);
@@ -58,8 +60,8 @@ public class TurnController {
             //TODO else HANDLEERROR((ENUM) ERROR.NotValidMessage)
     }
 
-    public void handleTakeResourcesFromMarketMessage(TakeResourcesFromMarketMessage message, Player sender) {
-        if(isSenderTurn(sender)) {
+    public void handleTakeResourcesFromMarketMessage(TakeResourcesFromMarketMessage message, RemoteView sender) {
+        if(isSenderTurn(sender.getPlayer())) {
             if (message.isValidMessage()) {
                 if (model.getMarketTray().checkRequestedMarbles(message.getRequestedMarbles(), message.getPlayerChoice(), message.getIndex())) {
                     model.getTurn().setTurnState(TurnState.ActionType.TAKERESOURCESFROMMARKET);
@@ -75,8 +77,8 @@ public class TurnController {
         //TODO else HANDLEERROR((ENUM) ERROR.NotValidMessage)
     }
 
-    public void handleLeaderActionMessage(LeaderActionMessage message, Player sender) {
-        if(isSenderTurn(sender)) {
+    public void handleLeaderActionMessage(LeaderActionMessage message, RemoteView sender) {
+        if(isSenderTurn(sender.getPlayer())) {
             if (message.isValidMessage()) {
                 model.getTurn().setTurnState(TurnState.ActionType.LEADERACTION);
                 try {
@@ -88,15 +90,15 @@ public class TurnController {
         }
         //TODO else HANDLEERROR((ENUM) ERROR.NotValidMessage)
     }
-    public void handleMoveMessage(MoveResourcesMessage message, Player sender)
+    public void handleMoveMessage(MoveResourcesMessage message, RemoteView sender)
     {
-        if(isSenderTurn(sender)) {
+        if(isSenderTurn(sender.getPlayer())) {
             if (message.isValidMessage())
                 model.getCurrPlayer().moveResources(message.getMoveAction());
         }
     }
-    public void handlePositioningMessage(PositioningMessage message, Player sender) {
-        if(isSenderTurn(sender)) {
+    public void handlePositioningMessage(PositioningMessage message, RemoteView sender) {
+        if(isSenderTurn(sender.getPlayer())) {
             if (message.isValidMessage()) {
                 if (model.getTurn().getActionType() == TurnState.ActionType.TAKERESOURCESFROMMARKET) {
                     TakeResourcesFromMarket turnInstance = (TakeResourcesFromMarket) model.getTurn().getTurnPhase();

@@ -3,6 +3,7 @@ package it.polimi.ingsw.Controller;
 import it.polimi.ingsw.Model.Game;
 import it.polimi.ingsw.Model.GameState;
 import it.polimi.ingsw.Model.Player;
+import it.polimi.ingsw.Network.RemoteView;
 import it.polimi.ingsw.Utils.Messages.ClientMessages.*;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.logging.Level;
@@ -29,7 +30,7 @@ public class GameController {
         return model;
     }
 
-    public synchronized void handleResourceChoiceMessage(ResourceChoiceMessage message, Player sender) {
+    public synchronized void handleResourceChoiceMessage(ResourceChoiceMessage message, RemoteView sender) {
         while (model.getGameState() != GameState.RESOURCECHOICE) {
             try { wait(); }
             catch (InterruptedException e) {
@@ -37,8 +38,8 @@ public class GameController {
             }
         }
         if(message.isValidMessage()) {
-            if(checkPlayerResourceChoice(message, sender)){
-                sender.performInitialResourcesChoice(message.getChosenResources());
+            if(checkPlayerResourceChoice(message, sender.getPlayer())){
+                sender.getPlayer().performInitialResourcesChoice(message.getChosenResources());
                 receivedChoiceMessage.getAndIncrement();
                 checkAllResourceChoiceDone(receivedChoiceMessage);
             } else {
@@ -49,10 +50,10 @@ public class GameController {
         }
     }
 
-    public synchronized void handleLeaderChoiceMessage(LeaderChoiceMessage message, Player sender) {
+    public synchronized void handleLeaderChoiceMessage(LeaderChoiceMessage message, RemoteView sender) {
         if(model.getGameState() != GameState.LEADERCHOICE){
             if(message.isValidMessage()) {
-                sender.performInitialLeaderChoice(message.getLeader1ToDiscard(), message.getLeader2ToDiscard());
+                sender.getPlayer().performInitialLeaderChoice(message.getLeader1ToDiscard(), message.getLeader2ToDiscard());
                 receivedChoiceMessage.getAndIncrement();
                 checkAllLeaderChoicesDone(receivedChoiceMessage);
             } else {

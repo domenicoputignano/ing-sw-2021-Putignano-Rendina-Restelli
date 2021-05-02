@@ -1,7 +1,7 @@
 package it.polimi.ingsw.Utils.Messages.ClientMessages;
 
 import it.polimi.ingsw.Controller.GameController;
-import it.polimi.ingsw.Model.Player;
+import it.polimi.ingsw.Network.RemoteView;
 
 public class LeaderChoiceMessage implements GameControllerHandleable {
     private int leader1ToDiscard;
@@ -30,7 +30,7 @@ public class LeaderChoiceMessage implements GameControllerHandleable {
         return leader2ToDiscard;
     }
 
-    public void handleMessage(GameController gameController, Player sender) {
+    public void handleMessage(GameController gameController, RemoteView sender) {
         gameController.handleLeaderChoiceMessage(this, sender);
     }
 

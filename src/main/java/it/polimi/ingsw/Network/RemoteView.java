@@ -22,8 +22,11 @@ public class RemoteView implements Observer<ClientMessage> {
 
     @Override
     public void update(ClientMessage message) {
-        message.handleMessage(gameController, player);
+        message.handleMessage(gameController, this);
     }
 
 
+    public Player getPlayer() {
+        return player;
+    }
 }

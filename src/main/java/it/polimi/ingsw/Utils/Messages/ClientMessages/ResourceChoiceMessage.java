@@ -1,8 +1,8 @@
 package it.polimi.ingsw.Utils.Messages.ClientMessages;
 
 import it.polimi.ingsw.Controller.GameController;
-import it.polimi.ingsw.Model.Player;
 import it.polimi.ingsw.Model.ResourceType;
+import it.polimi.ingsw.Network.RemoteView;
 import it.polimi.ingsw.Utils.Pair;
 
 import java.util.ArrayList;
@@ -13,7 +13,7 @@ public class ResourceChoiceMessage implements GameControllerHandleable {
 
     private List<Pair<ResourceType,Integer>> chosenResources = new ArrayList<>();
 
-    public void handleMessage(GameController gameController, Player sender) {
+    public void handleMessage(GameController gameController, RemoteView sender) {
         gameController.handleResourceChoiceMessage(this, sender);
     }
 
