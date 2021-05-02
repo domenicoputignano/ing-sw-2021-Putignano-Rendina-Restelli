@@ -1,6 +1,8 @@
 package it.polimi.ingsw.Model;
 
-import static it.polimi.ingsw.Model.StateFavorTiles.*;
+import it.polimi.ingsw.Commons.StateFavorTiles;
+
+import static it.polimi.ingsw.Commons.StateFavorTiles.*;
 
 public class VaticanReportSection {
     private int popeFavorTiles;

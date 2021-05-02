@@ -1,8 +1,8 @@
 package it.polimi.ingsw.Model;
 
 
+import it.polimi.ingsw.Commons.StateFavorTiles;
 import it.polimi.ingsw.Observable;
-import it.polimi.ingsw.Observer;
 
 public class FaithTrack extends Observable<Integer> {
     private int faithMarker;

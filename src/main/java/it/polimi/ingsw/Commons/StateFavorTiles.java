@@ -1,4 +1,4 @@
-package it.polimi.ingsw.Model;
+package it.polimi.ingsw.Commons;
 
 public enum StateFavorTiles {
     FACEUP, FACEDOWN, DISCARDED;

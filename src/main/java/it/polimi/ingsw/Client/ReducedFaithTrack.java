@@ -1,6 +1,6 @@
 package it.polimi.ingsw.Client;
 
-import it.polimi.ingsw.Model.StateFavorTiles;
+import it.polimi.ingsw.Commons.StateFavorTiles;
 
 public class ReducedFaithTrack {
     private final int faithMarker;

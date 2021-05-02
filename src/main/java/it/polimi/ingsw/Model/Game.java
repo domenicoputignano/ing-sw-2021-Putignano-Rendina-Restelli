@@ -6,6 +6,7 @@ import com.google.gson.stream.JsonReader;
 import it.polimi.ingsw.Commons.CardType;
 import it.polimi.ingsw.Commons.Deck;
 import it.polimi.ingsw.Commons.LeaderCard;
+import it.polimi.ingsw.Commons.StateFavorTiles;
 import it.polimi.ingsw.Model.ConclusionEvents.BlackCrossHitLastSpace;
 import it.polimi.ingsw.Model.ConclusionEvents.DevCardColorEnded;
 import it.polimi.ingsw.Model.ConclusionEvents.HitLastSpace;
@@ -112,7 +113,7 @@ public abstract class Game implements Observer<Integer> {
         {
             int position = p.getPersonalBoard().getFaithTrack().getFaithMarker();
             if(position >= start)
-                p.getPersonalBoard().getFaithTrack().setFavorTile(vatican_index,StateFavorTiles.FACEUP);
+                p.getPersonalBoard().getFaithTrack().setFavorTile(vatican_index, StateFavorTiles.FACEUP);
             else p.getPersonalBoard().getFaithTrack().setFavorTile(vatican_index,StateFavorTiles.DISCARDED);
         }
 

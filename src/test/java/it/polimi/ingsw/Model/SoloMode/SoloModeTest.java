@@ -1,5 +1,6 @@
 package it.polimi.ingsw.Model.SoloMode;
 
+import it.polimi.ingsw.Commons.StateFavorTiles;
 import it.polimi.ingsw.Exceptions.EndGameException;
 import it.polimi.ingsw.Exceptions.InvalidActionException;
 import it.polimi.ingsw.Model.*;
