@@ -1,5 +1,5 @@
 package it.polimi.ingsw.Utils.Messages.ServerMessages;
 
-public interface UpdateMessage {
+public interface UpdateMessage extends ServerMessage {
 
 }
