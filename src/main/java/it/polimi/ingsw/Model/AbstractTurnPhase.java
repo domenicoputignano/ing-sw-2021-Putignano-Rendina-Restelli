@@ -7,8 +7,7 @@ import it.polimi.ingsw.Exceptions.PaymentErrorException;
 import it.polimi.ingsw.Utils.Messages.ClientMessages.*;
 
 public interface AbstractTurnPhase {
-    default void leaderAction(Turn turn, LeaderActionMessage message) throws InvalidActionException, LeaderStatusException, LeaderRequirementsException {
-        throw new InvalidActionException();
+    default void leaderAction(Turn turn, LeaderActionMessage message) throws LeaderStatusException, LeaderRequirementsException {
     }
 
     default void takeResourcesFromMarket(Turn turn, TakeResourcesFromMarketMessage takeResourcesFromMarketMessage) throws InvalidActionException {

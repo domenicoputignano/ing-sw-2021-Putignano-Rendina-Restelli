@@ -1,14 +1,10 @@
 package it.polimi.ingsw.Controller;
 
-import it.polimi.ingsw.Exceptions.InvalidActionException;
-import it.polimi.ingsw.Exceptions.LeaderRequirementsException;
-import it.polimi.ingsw.Exceptions.LeaderStatusException;
-import it.polimi.ingsw.Exceptions.PaymentErrorException;
+import it.polimi.ingsw.Exceptions.*;
 import it.polimi.ingsw.Model.*;
 import it.polimi.ingsw.Network.RemoteView;
 import it.polimi.ingsw.Utils.Messages.ClientMessages.*;
-import it.polimi.ingsw.Utils.Messages.ServerMessages.Errors.ActivateProductionError;
-
+import it.polimi.ingsw.Utils.Messages.ServerMessages.Errors.*;
 import java.util.List;
 
 
@@ -91,12 +87,10 @@ public class TurnController {
                 model.getTurn().setTurnState(TurnState.ActionType.LEADERACTION);
                 try {
                     model.getTurn().getTurnPhase().leaderAction(model.getTurn(), message);
-                } catch (InvalidActionException e) {
-                    // inviare messaggio "fase del turno non valida!"
                 } catch (LeaderStatusException e) {
-                    e.printStackTrace();
+                    sender.sendError(new LeaderActionError(LeaderActionError.Trigger.LEADERSTATUS));
                 } catch (LeaderRequirementsException e) {
-                    e.printStackTrace();
+                    sender.sendError(new LeaderActionError(LeaderActionError.Trigger.REQUIREMENTS));
                 }
             }
         }
@@ -114,17 +108,34 @@ public class TurnController {
             if (message.isValidMessage()) {
                 if (model.getTurn().getActionType() == TurnState.ActionType.TAKERESOURCESFROMMARKET) {
                     TakeResourcesFromMarket turnInstance = (TakeResourcesFromMarket) model.getTurn().getTurnPhase();
+
+                    //check if Resources contained in positioning Message match with left resources in TakeResourcesFromMarket
                     if (turnInstance.checkPendingResourcesPositioning(message.getResourcesToPut())) {
-                        turnInstance.handlePositioning(model.getTurn().getPlayer().getPersonalBoard().getWarehouse(), message.getWhereToPutResources());
+                        try {
+                            turnInstance.handlePositioning(model.getTurn().getPlayer().getPersonalBoard().getWarehouse(), message.getWhereToPutResources());
+                        } catch (PositioningException e) {
+                            //send Error to the client
+                            sender.sendError(new PositioningError(PositioningError.Trigger.DISCARDEDRESOURCES));
+                        }
                         //TODO: AGGIUNGERE CONCLUDETURNPHASE IN TUTTE LE ALTRE AZIONI DEL TURNO
                         turnInstance.concludeTurnPhase(model.getTurn());
+                    } else {
+                        //TODO: else HANDLEERROR(MESSAGGIO NON COMPATIBILE)
+                        sender.sendError(new InvalidMessageError());
                     }
-                    //TODO: else HANDLEERROR(MESSAGGIO NON COMPATIBILE)
+                } else {
+                    //TODO : else HANDLEERROR(FASE DEL TURNO NON VALIDA)
+                    sender.sendError(new ActionError(ActionError.Trigger.WRONGTURNPHASE));
                 }
-                //TODO : else HANDLEERROR(FASE DEL TURNO NON VALIDA)
+            } else {
+                //TODO else HANDLEERROR((ENUM) ERROR.NotValidMessage)
+                sender.sendError(new InvalidMessageError());
             }
         }
-        //TODO else HANDLEERROR((ENUM) ERROR.NotValidMessage)
+        else {
+            sender.sendError(new WrongTurnError());
+        }
+
     }
 
     private boolean isSenderTurn(Player sender) {

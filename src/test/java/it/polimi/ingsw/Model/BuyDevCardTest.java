@@ -6,6 +6,7 @@ import it.polimi.ingsw.Exceptions.InvalidActionException;
 import it.polimi.ingsw.Commons.CardType;
 import it.polimi.ingsw.Commons.ColorCard;
 import it.polimi.ingsw.Commons.DevelopmentCard;
+import it.polimi.ingsw.Exceptions.PaymentErrorException;
 import it.polimi.ingsw.Utils.Messages.ClientMessages.*;
 import it.polimi.ingsw.Utils.ResourceSource;
 import org.junit.jupiter.api.Test;
@@ -20,7 +21,7 @@ class BuyDevCardTest {
 
 
     @Test
-    void buyDevCard() throws InvalidActionException {
+    void buyDevCard() throws InvalidActionException, PaymentErrorException {
         List<Player> players = new ArrayList<Player>();
         players.add(new Player("Piero"));
         players.add(new Player("Domenico"));

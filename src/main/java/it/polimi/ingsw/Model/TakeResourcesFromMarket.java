@@ -1,6 +1,7 @@
 package it.polimi.ingsw.Model;
 
 import it.polimi.ingsw.Commons.ColorMarble;
+import it.polimi.ingsw.Commons.LeaderEffect;
 import it.polimi.ingsw.Exceptions.*;
 import it.polimi.ingsw.Commons.Effect;
 import it.polimi.ingsw.Model.MarketTray.*;
@@ -15,17 +16,19 @@ import java.util.stream.Collectors;
 
 public class TakeResourcesFromMarket implements AbstractTurnPhase {
 
-    List<Pair<ResourceType, MarbleDestination>> whereToPutResources = new ArrayList<>();
-    List<ResourceType> pendingResources = new ArrayList<>();
-    int faith = 0;
-    int discardedResources = 0;
+    private List<Pair<ResourceType, MarbleDestination>> whereToPutResources = new ArrayList<>();
+    private List<ResourceType> pendingResources = new ArrayList<>();
+    private int faith = 0;
+    private int discardedResources = 0;
 
     @Override
     public void takeResourcesFromMarket(Turn turn, TakeResourcesFromMarketMessage takeResourcesFromMarketMessage) throws InvalidActionException {
         if(turn.isDoneNormalAction())
             throw new InvalidActionException();
         if(checkValidWhiteEffects(turn,takeResourcesFromMarketMessage.getWhiteEffects(),takeResourcesFromMarketMessage.getRequestedMarbles())) {
+            //perform convert marble effect
             convertWhiteMarbles(turn, takeResourcesFromMarketMessage.getWhereToPutMarbles(), takeResourcesFromMarketMessage.getWhiteEffects());
+            //convert a List of Pair<Marble,MarbleDestination> in a List of Pari<ResourceType,MarbleDestination>
             convertMarblesToResources(takeResourcesFromMarketMessage.getWhereToPutMarbles());
             handlePositioning(turn.getPlayer().getPersonalBoard().getWarehouse());
             /*TODO: togliere gli effetti dalle whiteMarbles*/
@@ -90,18 +93,21 @@ public class TakeResourcesFromMarket implements AbstractTurnPhase {
 
 
     //metodo per gestire la seconda possibilità data al giocatore di posizionare le risorse nei depot
-    public void handlePositioning(Warehouse warehouse, List<Pair<ResourceType,MarbleDestination>> pairList) {
-        for(int i = 0; i < pairList.size(); ) {
+    public void handlePositioning(Warehouse warehouse, List<Pair<ResourceType,MarbleDestination>> pairList) throws PositioningException {
+        boolean foundProblemWhilePositioning = false;
+        whereToPutResources = pairList;
+        for(int i = 0; i < whereToPutResources.size(); ) {
             try {
                 performPositioning(warehouse, i);
             } catch (DepotOutOfBoundsException | DepotNotFoundException | IncompatibleResourceTypeException e) {
                 discardedResources++;
-                //TODO HANDLEERROR(Risorse scartate perchè non correttamente posizionate)
+                foundProblemWhilePositioning = true;
             } finally {
                 i++;
             }
         }
         pendingResources.clear();
+        if(foundProblemWhilePositioning) throw new PositioningException();
     }
 
     public boolean checkPendingResourcesPositioning(List<ResourceType> resourcesToPut)
@@ -144,7 +150,7 @@ public class TakeResourcesFromMarket implements AbstractTurnPhase {
     public boolean checkValidWhiteEffects(Turn turn, List<Integer> whiteEffects, List<Marble> requestedMarbles)
     {
         List<ResourceType> whiteMarbleEffects = turn.getPlayer().getActiveEffects().stream().filter(x -> x.getEffect()==Effect.CMARBLE).
-                map(x -> x.getType()).collect(Collectors.toList());
+                map(LeaderEffect::getType).collect(Collectors.toList());
         if(whiteMarbleEffects.size()==2)
         {
             if(whiteEffects.size()!=requestedMarbles.stream().filter(x -> x.getColor()== ColorMarble.WHITE).count())

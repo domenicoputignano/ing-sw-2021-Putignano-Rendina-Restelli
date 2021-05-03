@@ -5,6 +5,7 @@ import it.polimi.ingsw.Model.Game;
 import it.polimi.ingsw.Model.Player;
 import it.polimi.ingsw.Observer;
 import it.polimi.ingsw.Utils.Messages.ClientMessages.ClientMessage;
+import it.polimi.ingsw.Utils.Messages.ServerMessages.Errors.ErrorMessage;
 
 public class RemoteView implements Observer<ClientMessage> {
 
@@ -25,6 +26,11 @@ public class RemoteView implements Observer<ClientMessage> {
         message.handleMessage(gameController, this);
     }
 
+
+
+    public void sendError(ErrorMessage errorMessage) {
+        //TODO clientStatus.send(ServerMessage serverMessage)
+     }
 
     public Player getPlayer() {
         return player;

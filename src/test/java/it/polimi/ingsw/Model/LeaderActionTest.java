@@ -1,8 +1,6 @@
 package it.polimi.ingsw.Model;
 
-import it.polimi.ingsw.Exceptions.DepotOutOfBoundsException;
-import it.polimi.ingsw.Exceptions.IncompatibleResourceTypeException;
-import it.polimi.ingsw.Exceptions.InvalidActionException;
+import it.polimi.ingsw.Exceptions.*;
 import it.polimi.ingsw.Utils.Messages.ClientMessages.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -33,7 +31,7 @@ class LeaderActionTest {
         }
     }
     @Test
-    void leaderActionDiscardLeaderCard() throws InvalidActionException {
+    void leaderActionDiscardLeaderCard() throws InvalidActionException, LeaderStatusException, LeaderRequirementsException {
         LeaderActionMessage leaderActionMessage = new LeaderActionMessage();
         leaderActionMessage.setIndex(1);
         leaderActionMessage.setToDiscard(true);
@@ -41,23 +39,23 @@ class LeaderActionTest {
         int start = multiPlayerMode.getTurn().getPlayer().getPersonalBoard().getFaithTrack().getFaithMarker();
         multiPlayerMode.getTurn().setTurnState(TurnState.ActionType.LEADERACTION);
         multiPlayerMode.getTurn().getTurnPhase().leaderAction(multiPlayerMode.getTurn(),leaderActionMessage);
-        assertTrue(multiPlayerMode.getTurn().getPlayer().getLeaderCards().size()==1);
+        assertEquals(1, multiPlayerMode.getTurn().getPlayer().getLeaderCards().size());
         assertEquals(start+1,multiPlayerMode.getTurn().getPlayer().getPersonalBoard().getFaithTrack().getFaithMarker());
     }
     @Test
-    void leaderActionDiscardActiveLeaderCard() throws InvalidActionException {
+    void leaderActionDiscardActiveLeaderCard() throws LeaderStatusException, LeaderRequirementsException {
         LeaderActionMessage leaderActionMessage = new LeaderActionMessage();
         leaderActionMessage.setIndex(1);
         leaderActionMessage.setToDiscard(true);
         multiPlayerMode.getTurn().getPlayer().getLeaderCards().get(0).setIsActive();
         multiPlayerMode.getTurn().setTurnState(TurnState.ActionType.LEADERACTION);
-        multiPlayerMode.getTurn().getTurnPhase().leaderAction(multiPlayerMode.getTurn(),leaderActionMessage);
-        assertEquals(multiPlayerMode.getTurn().getPlayer().getLeaderCards().size(),2);
-        assertTrue(multiPlayerMode.getTurn().getPlayer().getLeaderCards().get(0).isActive());
+        assertThrows(LeaderStatusException.class,()-> multiPlayerMode.getTurn().getTurnPhase().leaderAction(multiPlayerMode.getTurn(),leaderActionMessage));
+        //assertEquals(multiPlayerMode.getTurn().getPlayer().getLeaderCards().size(),2);
+        //assertTrue(multiPlayerMode.getTurn().getPlayer().getLeaderCards().get(0).isActive());
     }
 
     @Test
-    void leaderActionOk() throws InvalidActionException, DepotOutOfBoundsException, IncompatibleResourceTypeException {
+    void leaderActionOk() throws DepotOutOfBoundsException, IncompatibleResourceTypeException, LeaderStatusException, LeaderRequirementsException {
         LeaderActionMessage leaderActionMessage = new LeaderActionMessage();
         leaderActionMessage.setIndex(1);
         leaderActionMessage.setToDiscard(false);
@@ -71,18 +69,18 @@ class LeaderActionTest {
         strongboxResources.put(ResourceType.shield,6);
         multiPlayerMode.getTurn().getPlayer().getPersonalBoard().getWarehouse().addResourcesToStrongbox(strongboxResources);
         multiPlayerMode.getTurn().setTurnState(TurnState.ActionType.LEADERACTION);
-        multiPlayerMode.getTurn().getTurnPhase().leaderAction(multiPlayerMode.getTurn(),leaderActionMessage);
+        assertThrows(LeaderRequirementsException.class,()-> multiPlayerMode.getTurn().getTurnPhase().leaderAction(multiPlayerMode.getTurn(),leaderActionMessage));
         //assertTrue(multiPlayerMode.getTurn().getPlayer().getLeaderCards().get(0).isActive());
         assertFalse(multiPlayerMode.getTurn().getPlayer().getLeaderCards().get(1).isActive());
     }
     @Test
-    void leaderActionKo() throws InvalidActionException, DepotOutOfBoundsException, IncompatibleResourceTypeException {
+    void leaderActionKo() throws DepotOutOfBoundsException, IncompatibleResourceTypeException, LeaderStatusException, LeaderRequirementsException {
         LeaderActionMessage leaderActionMessage = new LeaderActionMessage();
         leaderActionMessage.setIndex(1);
         leaderActionMessage.setToDiscard(false);
         multiPlayerMode.getTurn().getPlayer().getPersonalBoard().getWarehouse().addResourcesToDepot(1,ResourceType.coin,1);
         multiPlayerMode.getTurn().setTurnState(TurnState.ActionType.LEADERACTION);
-        multiPlayerMode.getTurn().getTurnPhase().leaderAction(multiPlayerMode.getTurn(),leaderActionMessage);
+        assertThrows(LeaderRequirementsException.class,() -> multiPlayerMode.getTurn().getTurnPhase().leaderAction(multiPlayerMode.getTurn(),leaderActionMessage));
         assertFalse(multiPlayerMode.getTurn().getPlayer().getLeaderCards().get(0).isActive());
         assertFalse(multiPlayerMode.getTurn().getPlayer().getLeaderCards().get(1).isActive());
     }
