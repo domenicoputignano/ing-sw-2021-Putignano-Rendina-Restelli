@@ -29,7 +29,7 @@ public class RemoteView implements Observer<ClientMessage> {
 
 
     public void sendError(ErrorMessage errorMessage) {
-        //TODO clientStatus.send(ServerMessage serverMessage)
+        clientStatus.send(errorMessage);
      }
 
     public Player getPlayer() {
