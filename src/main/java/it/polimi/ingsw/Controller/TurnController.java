@@ -14,8 +14,7 @@ public class TurnController {
     private final Game model;
     private final List<Player> playerList;
 
-    public TurnController(Game model, List<Player> players, Player firstPlayer)
-    {
+    public TurnController(Game model, List<Player> players, Player firstPlayer) {
         this.model = model;
         this.playerList = players;
         this.currPlayer = firstPlayer;
@@ -32,15 +31,17 @@ public class TurnController {
                     try {
                         model.getTurn().getTurnPhase().buyDevCard(model.getTurn(), message);
                     } catch (InvalidActionException e) {
-                        //inviare messaggio "fase del turno non valida!"
+                        sender.sendError(new ActionError(ActionError.Trigger.NORMALACTIONALREADYDONE));
+                    } catch (NotEnoughResourcesException e) {
+                        sender.sendError(new BuyDevCardError(BuyDevCardError.Trigger.NOTENOUGHRESOURCES));
+                    } catch (ResourceMismatchException e) {
+                        sender.sendError(new BuyDevCardError(BuyDevCardError.Trigger.RESOURCESMISMATCH));
                     } catch (PaymentErrorException e) {
-                        e.printStackTrace();
+                        sender.sendError(new BuyDevCardError(BuyDevCardError.Trigger.PAYMENTERROR));
                     }
-                }
-                //TODO else HANDLEERROR((ENUM) ERROR.EmptyDeckMessage)
-            }
-        }
-        //TODO else HANDLEERROR((ENUM) ERROR.NotValidMessage)
+                } else sender.sendError(new BuyDevCardError(BuyDevCardError.Trigger.EMPTYDECK));
+            } else sender.sendError(new InvalidMessageError());
+        } else sender.sendError(new WrongTurnError());
     }
 
     public void handleActivateProductionMessage(ActivateProductionMessage message, RemoteView sender) {
@@ -61,7 +62,7 @@ public class TurnController {
 
             }
         }
-            //TODO else HANDLEERROR((ENUM) ERROR.NotValidMessage)
+        //TODO else HANDLEERROR((ENUM) ERROR.NotValidMessage)
     }
 
     public void handleTakeResourcesFromMarketMessage(TakeResourcesFromMarketMessage message, RemoteView sender) {
@@ -96,13 +97,20 @@ public class TurnController {
         }
         //TODO else HANDLEERROR((ENUM) ERROR.NotValidMessage)
     }
-    public void handleMoveMessage(MoveResourcesMessage message, RemoteView sender)
-    {
+
+    public void handleMoveMessage(MoveResourcesMessage message, RemoteView sender) {
         if(isSenderTurn(sender.getPlayer())) {
-            if (message.isValidMessage())
-                model.getCurrPlayer().moveResources(message.getMoveAction());
-        }
+            if (message.isValidMessage()) {
+                try {
+                    model.getCurrPlayer().moveResources(message.getMoveAction());
+                } catch (MoveResourcesException e) {
+                    sender.sendError(new MoveResourcesError(MoveResourcesError.Trigger.MOVE));
+                }
+            }
+            else sender.sendError(new InvalidMessageError());
+        } else sender.sendError(new WrongTurnError());
     }
+
     public void handlePositioningMessage(PositioningMessage message, RemoteView sender) {
         if(isSenderTurn(sender.getPlayer())) {
             if (message.isValidMessage()) {

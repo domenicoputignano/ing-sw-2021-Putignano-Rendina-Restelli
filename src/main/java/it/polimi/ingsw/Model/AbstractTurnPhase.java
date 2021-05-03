@@ -1,9 +1,6 @@
 package it.polimi.ingsw.Model;
 
-import it.polimi.ingsw.Exceptions.InvalidActionException;
-import it.polimi.ingsw.Exceptions.LeaderRequirementsException;
-import it.polimi.ingsw.Exceptions.LeaderStatusException;
-import it.polimi.ingsw.Exceptions.PaymentErrorException;
+import it.polimi.ingsw.Exceptions.*;
 import it.polimi.ingsw.Utils.Messages.ClientMessages.*;
 
 public interface AbstractTurnPhase {
@@ -14,7 +11,7 @@ public interface AbstractTurnPhase {
         throw new InvalidActionException();
     }
 
-    default void buyDevCard(Turn turn, BuyDevCardMessage message) throws InvalidActionException, PaymentErrorException {
+    default void buyDevCard(Turn turn, BuyDevCardMessage message) throws InvalidActionException, PaymentErrorException, ResourceMismatchException, NotEnoughResourcesException {
         throw new InvalidActionException();
     }
 

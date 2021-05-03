@@ -12,16 +12,16 @@ import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 public class BuyDevCard implements AbstractTurnPhase {
-    private Logger LOGGER = Logger.getLogger(BuyDevCard.class.getName());
-    private Map<ResourceType, Integer> actualCost = new EnumMap<ResourceType, Integer>(ResourceType.class);
+    private final Logger LOGGER = Logger.getLogger(BuyDevCard.class.getName());
+    private Map<ResourceType, Integer> actualCost = new EnumMap<>(ResourceType.class);
 
 
-    public void buyDevCard(Turn turn, BuyDevCardMessage message) throws InvalidActionException, PaymentErrorException {
+    public void buyDevCard(Turn turn, BuyDevCardMessage message) throws InvalidActionException, PaymentErrorException, ResourceMismatchException, NotEnoughResourcesException {
         if(turn.isDoneNormalAction())
             throw new InvalidActionException();
         Deck requiredDeck = turn.getGame().searchDeck(message.getType());
         if(requiredDeck != null) {
-            actualCost = new EnumMap<ResourceType, Integer>(requiredDeck.getTop().getCost());
+            actualCost = new EnumMap<>(requiredDeck.getTop().getCost());
             List<LeaderEffect> sales = turn.getPlayer().getActiveEffects().stream().filter(x -> x.getEffect() == Effect.SALES).collect(Collectors.toList());
             for (LeaderEffect effect : sales) {
                 if (actualCost.get(effect.getType()) > 0) {
@@ -39,16 +39,9 @@ public class BuyDevCard implements AbstractTurnPhase {
                     } catch (DepotOutOfBoundsException | DepotNotFoundException | StrongboxOutOfBoundException e) {
                         LOGGER.log(Level.SEVERE, "Critical error detected: exception not expected thrown! ");
                     }
-                } else {
-
-                }
-            } else {
-                /*settare il model in uno stato di errore e inviare al client gli errori relativi alle mappe corrispondenti*/
-            }
-        } else {
-
+                } else throw new ResourceMismatchException();
+            } else throw new NotEnoughResourcesException();
         }
-
     }
 
     private void performPurchasingCard(DevelopmentCard developmentCard, PersonalBoard personalBoard, int destinationSlot) {

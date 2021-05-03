@@ -5,6 +5,7 @@ import it.polimi.ingsw.Exceptions.IncompatibleResourceTypeException;
 import it.polimi.ingsw.Commons.Effect;
 import it.polimi.ingsw.Commons.LeaderCard;
 import it.polimi.ingsw.Commons.LeaderEffect;
+import it.polimi.ingsw.Exceptions.MoveResourcesException;
 import it.polimi.ingsw.Utils.MoveActionInterface;
 import it.polimi.ingsw.Utils.Pair;
 
@@ -16,11 +17,11 @@ import java.util.stream.Collectors;
 
 
 public class Player {
-    private Logger LOGGER = Logger.getLogger(Player.class.getName());
-    private String username;
+    private final Logger LOGGER = Logger.getLogger(Player.class.getName());
+    private final String username;
     private int position;
-    private PersonalBoard personalBoard;
-    private List<LeaderCard> leaderCards = new ArrayList<>();
+    private final PersonalBoard personalBoard;
+    private final List<LeaderCard> leaderCards = new ArrayList<>();
 
     public Player(String username){
         this.username = username;
@@ -28,13 +29,11 @@ public class Player {
     }
 
 
-    public void moveResources(MoveActionInterface move) {
+    public void moveResources(MoveActionInterface move) throws MoveResourcesException {
         if(move.handleMove(this.personalBoard.getWarehouse())){
             /*TODO notificare al client che la mossa di move è stata correttamente eseguita*/
         }
-        else{
-            // TODO notificare al client che vi è stato un errore nell'esecuzione della move
-        }
+        else throw new MoveResourcesException();
     }
 
     public boolean checkLeaderActivation(int index)

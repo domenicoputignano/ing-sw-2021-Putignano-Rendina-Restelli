@@ -5,7 +5,8 @@ public class BuyDevCardError implements ErrorMessage {
     public enum Trigger {
         EMPTYDECK("Required deck is not available !"),
         NOTENOUGHRESOURCES("You don't have enough resources to buy the card !"),
-        RESOURCESMISMATCH("Selected resources don't match required resources !");
+        RESOURCESMISMATCH("Selected resources don't match required resources !"),
+        PAYMENTERROR("Error while performing payment, you wrongly selected resources from some between Depot(s), Strongbox or ExtraDepot(s) !");
 
         private String description;
         private Trigger(String description)
