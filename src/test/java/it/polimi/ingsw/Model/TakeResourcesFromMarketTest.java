@@ -7,6 +7,7 @@ import it.polimi.ingsw.Commons.Effect;
 import it.polimi.ingsw.Commons.LeaderCard;
 import it.polimi.ingsw.Commons.LeaderEffect;
 import it.polimi.ingsw.Commons.ColorMarble;
+import it.polimi.ingsw.Exceptions.WhiteEffectMismatchException;
 import it.polimi.ingsw.Model.MarketTray.Marble;
 import it.polimi.ingsw.Model.MarketTray.WhiteMarble;
 import it.polimi.ingsw.Utils.MarbleDestination;
@@ -40,7 +41,7 @@ class TakeResourcesFromMarketTest {
         }
     }
     @Test
-    void takeResourcesFromMarket() throws InvalidActionException {
+    void takeResourcesFromMarket() throws InvalidActionException, WhiteEffectMismatchException {
         List<Marble> marbles;
         TakeResourcesFromMarketMessage takeResourcesFromMarketMessage = new TakeResourcesFromMarketMessage();
         takeResourcesFromMarketMessage.setPlayerChoice(MarketChoice.ROW, 2);
@@ -99,7 +100,7 @@ class TakeResourcesFromMarketTest {
         assertThrows(InvalidActionException.class,()->multiPlayerMode.getTurn().getTurnPhase().takeResourcesFromMarket(multiPlayerMode.getTurn(),takeResourcesFromMarketMessage));
     }
     @Test
-    void checkValidWhiteEffectsok() throws InvalidActionException {
+    void checkValidWhiteEffectsok() throws InvalidActionException, WhiteEffectMismatchException {
         TakeResourcesFromMarketMessage message = new TakeResourcesFromMarketMessage();
         message.setPlayerChoice(MarketChoice.ROW, 2);
         multiPlayerMode.getTurn().getPlayer().getLeaderCards().clear();
@@ -126,7 +127,7 @@ class TakeResourcesFromMarketTest {
     }
 
     @Test
-    void checkValidWhiteEffectsko() throws InvalidActionException {
+    void checkValidWhiteEffectsKo() throws InvalidActionException, WhiteEffectMismatchException {
         TakeResourcesFromMarketMessage message = new TakeResourcesFromMarketMessage();
         message.setPlayerChoice(MarketChoice.ROW, 2);
         multiPlayerMode.getTurn().getPlayer().getLeaderCards().clear();
@@ -144,13 +145,13 @@ class TakeResourcesFromMarketTest {
         message.setWhiteEffects(effects);
         message.setWhereToPutMarbles(wheretoPutMarbles);
         multiPlayerMode.getTurn().setTurnState(TurnState.ActionType.TAKERESOURCESFROMMARKET);
-        multiPlayerMode.getTurn().getTurnPhase().takeResourcesFromMarket(multiPlayerMode.getTurn(),message);
+        assertThrows(WhiteEffectMismatchException.class,()->multiPlayerMode.getTurn().getTurnPhase().takeResourcesFromMarket(multiPlayerMode.getTurn(),message));
         TakeResourcesFromMarket takeResourcesFromMarket = (TakeResourcesFromMarket) multiPlayerMode.getTurn().getTurnPhase();
         assertFalse(takeResourcesFromMarket.checkValidWhiteEffects(multiPlayerMode.getTurn(), message.getWhiteEffects(),message.getRequestedMarbles()));
     }
 
     @Test
-    void handlePositioning() throws DepotOutOfBoundsException, IncompatibleResourceTypeException, InvalidActionException {
+    void handlePositioning() throws DepotOutOfBoundsException, IncompatibleResourceTypeException, InvalidActionException, WhiteEffectMismatchException {
         List<Marble> marbles;
         multiPlayerMode.getTurn().getPlayer().getPersonalBoard().getWarehouse().addResourcesToDepot(1,ResourceType.coin,1);
         multiPlayerMode.getTurn().getPlayer().getPersonalBoard().getWarehouse().addResourcesToDepot(2,ResourceType.shield,2);

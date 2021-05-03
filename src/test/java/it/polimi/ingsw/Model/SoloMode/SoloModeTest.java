@@ -1,10 +1,7 @@
 package it.polimi.ingsw.Model.SoloMode;
 
 import it.polimi.ingsw.Commons.StateFavorTiles;
-import it.polimi.ingsw.Exceptions.EndGameException;
-import it.polimi.ingsw.Exceptions.InvalidActionException;
-import it.polimi.ingsw.Exceptions.LeaderRequirementsException;
-import it.polimi.ingsw.Exceptions.LeaderStatusException;
+import it.polimi.ingsw.Exceptions.*;
 import it.polimi.ingsw.Model.*;
 import it.polimi.ingsw.Commons.Effect;
 import it.polimi.ingsw.Commons.LeaderCard;
@@ -138,7 +135,7 @@ class SoloModeTest {
     }
 
     @Test
-    void takeResourcesFromMarketGamePlay() throws InvalidActionException {
+    void takeResourcesFromMarketGamePlay() throws InvalidActionException, WhiteEffectMismatchException {
         playerList.add(new Player("Pippo"));
         SoloMode game = new SoloMode(playerList.get(0));
         game.setup();

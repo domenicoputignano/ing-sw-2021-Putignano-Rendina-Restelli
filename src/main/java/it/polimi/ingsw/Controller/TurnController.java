@@ -75,13 +75,13 @@ public class TurnController {
                     try {
                         model.getTurn().getTurnPhase().takeResourcesFromMarket(model.getTurn(), message);
                     } catch (InvalidActionException e) {
-                        // inviare messaggio "fase del turno non valida!"
+                        sender.sendError(new ActionError(ActionError.Trigger.NORMALACTIONALREADYDONE));
+                    } catch (WhiteEffectMismatchException e) {
+                        sender.sendError(new TakeResourcesFromMarketError(TakeResourcesFromMarketError.Trigger.WHITEEFFECTMISMATCH));
                     }
-                }
-                // TODO else HANDLEERROR((ENUM) ERROR.TakeResourcesNotPossibleMessage)
-            }
-        }
-        //TODO else HANDLEERROR((ENUM) ERROR.NotValidMessage)
+                } else sender.sendError(new TakeResourcesFromMarketError(TakeResourcesFromMarketError.Trigger.MARBLEMISMATCH));
+            } else sender.sendError(new InvalidMessageError());
+        } else sender.sendError(new WrongTurnError());
     }
 
     public void handleLeaderActionMessage(LeaderActionMessage message, RemoteView sender) {
@@ -95,9 +95,8 @@ public class TurnController {
                 } catch (LeaderRequirementsException e) {
                     sender.sendError(new LeaderActionError(LeaderActionError.Trigger.REQUIREMENTS));
                 }
-            }
-        }
-        //TODO else HANDLEERROR((ENUM) ERROR.NotValidMessage)
+            } else sender.sendError(new InvalidMessageError());
+        } else sender.sendError(new WrongTurnError());
     }
 
     public void handleMoveMessage(MoveResourcesMessage message, RemoteView sender) {
@@ -130,15 +129,12 @@ public class TurnController {
                         //TODO: AGGIUNGERE CONCLUDETURNPHASE IN TUTTE LE ALTRE AZIONI DEL TURNO
                         turnInstance.concludeTurnPhase(model.getTurn());
                     } else {
-                        //TODO: else HANDLEERROR(MESSAGGIO NON COMPATIBILE)
                         sender.sendError(new InvalidMessageError());
                     }
                 } else {
-                    //TODO : else HANDLEERROR(FASE DEL TURNO NON VALIDA)
                     sender.sendError(new ActionError(ActionError.Trigger.WRONGTURNPHASE));
                 }
             } else {
-                //TODO else HANDLEERROR((ENUM) ERROR.NotValidMessage)
                 sender.sendError(new InvalidMessageError());
             }
         }

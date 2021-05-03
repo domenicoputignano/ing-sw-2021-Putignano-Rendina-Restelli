@@ -22,7 +22,7 @@ public class TakeResourcesFromMarket implements AbstractTurnPhase {
     private int discardedResources = 0;
 
     @Override
-    public void takeResourcesFromMarket(Turn turn, TakeResourcesFromMarketMessage takeResourcesFromMarketMessage) throws InvalidActionException {
+    public void takeResourcesFromMarket(Turn turn, TakeResourcesFromMarketMessage takeResourcesFromMarketMessage) throws InvalidActionException, WhiteEffectMismatchException {
         if(turn.isDoneNormalAction())
             throw new InvalidActionException();
         if(checkValidWhiteEffects(turn,takeResourcesFromMarketMessage.getWhiteEffects(),takeResourcesFromMarketMessage.getRequestedMarbles())) {
@@ -31,10 +31,9 @@ public class TakeResourcesFromMarket implements AbstractTurnPhase {
             //convert a List of Pair<Marble,MarbleDestination> in a List of Pari<ResourceType,MarbleDestination>
             convertMarblesToResources(takeResourcesFromMarketMessage.getWhereToPutMarbles());
             handlePositioning(turn.getPlayer().getPersonalBoard().getWarehouse());
-            /*TODO: togliere gli effetti dalle whiteMarbles*/
             //TODO : if(pendingResources.size()>0) UPDATE(Risorse non correttamente posizionate)
             turn.getGame().getMarketTray().clearWhiteMarbleEffect();
-        }//TODO: else HANDLEERROR(Lista di conversione white marbles non compatibile)
+        } else throw new WhiteEffectMismatchException();
     }
 
     private void convertWhiteMarbles(Turn turn, List<Pair<Marble, MarbleDestination>> pairList, List<Integer> whiteEffects) {
