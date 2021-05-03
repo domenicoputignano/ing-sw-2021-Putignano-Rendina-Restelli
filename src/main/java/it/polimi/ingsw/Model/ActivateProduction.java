@@ -6,13 +6,15 @@ import it.polimi.ingsw.Utils.Messages.ClientMessages.*;
 
 import java.util.EnumMap;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 public class ActivateProduction implements AbstractTurnPhase {
-
+    private final Logger LOGGER = Logger.getLogger(ActivateProduction.class.getName());
     private ActivateProductionMessage activateProductionMessage;
-    private Map<ResourceType, Integer> inputResources;
-    private Map<ResourceType, Integer> outputResources;
+    private final Map<ResourceType, Integer> inputResources;
+    private final Map<ResourceType, Integer> outputResources;
     private int faith = 0;
 
     public ActivateProduction() {
@@ -24,7 +26,7 @@ public class ActivateProduction implements AbstractTurnPhase {
         outputResources = new EnumMap<>(inputResources);
     }
 
-    public void activateProduction(Turn turn, ActivateProductionMessage activateProductionMessage) throws InvalidActionException, PaymentErrorException {
+    public void activateProduction(Turn turn, ActivateProductionMessage activateProductionMessage) throws InvalidActionException, PaymentErrorException, NotEnoughResourcesException, ResourceMismatchException {
         if(turn.isDoneNormalAction())
             throw new InvalidActionException();
         this.activateProductionMessage = activateProductionMessage;
@@ -38,16 +40,14 @@ public class ActivateProduction implements AbstractTurnPhase {
                     playerWarehouse.addResourcesToStrongbox(outputResources);
                     turn.getPlayer().getPersonalBoard().getFaithTrack().moveMarker(faith);
                     turn.normalActionDone();
-                } catch (DepotOutOfBoundsException e) {
-                    //TODO HANDLEERROR (DEPOTOUTOFBOUND)
-                } catch (DepotNotFoundException e) {
-                    //TODO HANDLEERROR (DEPOTNOTFOUND)
-                } catch (StrongboxOutOfBoundException e) {
-                    //TODO HANDLEERROR (STRONGBOXOUTOFBOUND)
+                } catch (DepotOutOfBoundsException | DepotNotFoundException | StrongboxOutOfBoundException e) {
+                    LOGGER.log(Level.SEVERE, "Critical error detected: exception not expected thrown!");
                 }
             } else {
-                /*model in uno stato di errore e notifica il client*/
+                throw new NotEnoughResourcesException();
             }
+        } else {
+            throw new ResourceMismatchException();
         }
         // TODO: else HANDLEERROR(IncoherenceMessage) -> coerenza risorse da prendere e input indicati
     }

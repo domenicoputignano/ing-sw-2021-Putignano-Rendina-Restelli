@@ -69,7 +69,13 @@ class LeaderActionTest {
         strongboxResources.put(ResourceType.shield,6);
         multiPlayerMode.getTurn().getPlayer().getPersonalBoard().getWarehouse().addResourcesToStrongbox(strongboxResources);
         multiPlayerMode.getTurn().setTurnState(TurnState.ActionType.LEADERACTION);
-        assertThrows(LeaderRequirementsException.class,()-> multiPlayerMode.getTurn().getTurnPhase().leaderAction(multiPlayerMode.getTurn(),leaderActionMessage));
+        if(multiPlayerMode.getCurrPlayer().getLeaderCards().get(0).getRequirementsCards().size()>0)
+            assertThrows(LeaderRequirementsException.class,()-> multiPlayerMode.getTurn().getTurnPhase().leaderAction(multiPlayerMode.getTurn(),leaderActionMessage));
+        else {
+            multiPlayerMode.getTurn().getTurnPhase().leaderAction(multiPlayerMode.getTurn(),leaderActionMessage);
+            assertTrue(multiPlayerMode.getTurn().getPlayer().getLeaderCards().get(0).isActive());
+        }
+
         //assertTrue(multiPlayerMode.getTurn().getPlayer().getLeaderCards().get(0).isActive());
         assertFalse(multiPlayerMode.getTurn().getPlayer().getLeaderCards().get(1).isActive());
     }

@@ -1,12 +1,9 @@
 package it.polimi.ingsw.Model;
 
-import it.polimi.ingsw.Exceptions.DepotOutOfBoundsException;
-import it.polimi.ingsw.Exceptions.IncompatibleResourceTypeException;
-import it.polimi.ingsw.Exceptions.InvalidActionException;
+import it.polimi.ingsw.Exceptions.*;
 import it.polimi.ingsw.Commons.ColorCard;
 import it.polimi.ingsw.Commons.DevelopmentCard;
 import it.polimi.ingsw.Commons.Effect;
-import it.polimi.ingsw.Exceptions.PaymentErrorException;
 import it.polimi.ingsw.Utils.Messages.ClientMessages.*;
 import it.polimi.ingsw.Utils.Pair;
 import it.polimi.ingsw.Utils.ResourceSource;
@@ -54,7 +51,7 @@ class ActivateProductionTest {
     }
 
     @Test
-    void activateProduction() throws DepotOutOfBoundsException, IncompatibleResourceTypeException, InvalidActionException, PaymentErrorException {
+    void activateProduction() throws DepotOutOfBoundsException, IncompatibleResourceTypeException, InvalidActionException, PaymentErrorException, NotEnoughResourcesException, ResourceMismatchException {
 
         //Initialization of ActivateProductions: slot1, slot2 and basicProduction selected
         ActivateProductionMessage activateProductionMessage = new ActivateProductionMessage();
@@ -165,7 +162,7 @@ class ActivateProductionTest {
 
 
     @Test
-    void activateProductionLeaderEffect() throws DepotOutOfBoundsException, IncompatibleResourceTypeException, InvalidActionException, PaymentErrorException {
+    void activateProductionLeaderEffect() throws DepotOutOfBoundsException, IncompatibleResourceTypeException, InvalidActionException, PaymentErrorException, NotEnoughResourcesException, ResourceMismatchException {
 
         expected.put(ResourceType.coin,0);
         expected.put(ResourceType.servant,0);

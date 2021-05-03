@@ -52,17 +52,19 @@ public class TurnController {
                     try {
                         model.getTurn().getTurnPhase().activateProduction(model.getTurn(), message);
                     } catch (InvalidActionException e) {
-                        // inviare messaggio "fase del turno non valida!"
+                        sender.sendError(new ActionError(ActionError.Trigger.NORMALACTIONALREADYDONE));
                     } catch (PaymentErrorException e) {
-                        e.printStackTrace();
+                        sender.sendError(new ActivateProductionError(ActivateProductionError.Trigger.PAYMENTERROR));
+                    } catch (NotEnoughResourcesException e) {
+                        sender.sendError(new ActivateProductionError(ActivateProductionError.Trigger.NOTENOUGHRESOURCES));
+                    } catch (ResourceMismatchException e) {
+                        sender.sendError(new ActivateProductionError(ActivateProductionError.Trigger.RESOURCESMISMATCH));
                     }
                 }
-                // TODO else HANDLEERROR((ENUM) ERROR.ProductionNotPossibleMessage)
-                ActivateProductionError error = new ActivateProductionError(ActivateProductionError.Trigger.INVALIDREQUEST);
-
+                else sender.sendError(new ActivateProductionError(ActivateProductionError.Trigger.INVALIDREQUEST));
             }
-        }
-        //TODO else HANDLEERROR((ENUM) ERROR.NotValidMessage)
+            else sender.sendError(new InvalidMessageError());
+        } else sender.sendError(new WrongTurnError());
     }
 
     public void handleTakeResourcesFromMarketMessage(TakeResourcesFromMarketMessage message, RemoteView sender) {

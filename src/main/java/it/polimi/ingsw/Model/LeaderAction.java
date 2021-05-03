@@ -18,7 +18,6 @@ public class LeaderAction implements AbstractTurnPhase{
                 else throw new LeaderRequirementsException();
             }
         } else throw new LeaderStatusException();
-
     }
 
 }

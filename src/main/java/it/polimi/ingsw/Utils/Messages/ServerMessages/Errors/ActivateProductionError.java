@@ -5,20 +5,19 @@ public class ActivateProductionError implements ErrorMessage {
     public enum Trigger
     {
         INVALIDREQUEST("Invalid requested production !"),
-        DEPOTEMPTY("Not enough resources in depots !"),
-        DEPOTNOTFOUND("Selected resources not found in depot !"),
-        STRONGBOXEMPTY("Not enough resources in strongbox"),
-        RESOURCESMISMATCH("Selected resources don't match required resources !");
+        PAYMENTERROR("Error found while performing payment! You wrongly selected resources from some between Depot(s), Strongbox or Extradepot(s)"),
+        RESOURCESMISMATCH("Selected resources don't match required resources !"),
+        NOTENOUGHRESOURCES("You don't have enough resources to activate selected productions !");
         private String description;
         private Trigger(String description)
         {
             this.description = description;
         }
-
         public String toString()
         {
             return this.description;
         }
+
     }
 
     public ActivateProductionError(Trigger trigger)

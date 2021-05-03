@@ -16,7 +16,7 @@ public interface AbstractTurnPhase {
     }
 
 
-    default void activateProduction(Turn turn, ActivateProductionMessage message) throws InvalidActionException, PaymentErrorException {
+    default void activateProduction(Turn turn, ActivateProductionMessage message) throws InvalidActionException, PaymentErrorException, NotEnoughResourcesException, ResourceMismatchException {
         throw new InvalidActionException();
     }
 
