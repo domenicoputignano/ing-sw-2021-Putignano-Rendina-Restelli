@@ -1,9 +1,6 @@
 package it.polimi.ingsw.Model;
 
-import it.polimi.ingsw.Exceptions.DepotNotFoundException;
-import it.polimi.ingsw.Exceptions.DepotOutOfBoundsException;
-import it.polimi.ingsw.Exceptions.InvalidActionException;
-import it.polimi.ingsw.Exceptions.StrongboxOutOfBoundException;
+import it.polimi.ingsw.Exceptions.*;
 import it.polimi.ingsw.Commons.Deck;
 import it.polimi.ingsw.Commons.DevelopmentCard;
 import it.polimi.ingsw.Commons.Effect;
@@ -19,7 +16,7 @@ public class BuyDevCard implements AbstractTurnPhase {
     private Map<ResourceType, Integer> actualCost = new EnumMap<ResourceType, Integer>(ResourceType.class);
 
 
-    public void buyDevCard(Turn turn, BuyDevCardMessage message) throws InvalidActionException {
+    public void buyDevCard(Turn turn, BuyDevCardMessage message) throws InvalidActionException, PaymentErrorException {
         if(turn.isDoneNormalAction())
             throw new InvalidActionException();
         Deck requiredDeck = turn.getGame().searchDeck(message.getType());

@@ -1,6 +1,9 @@
 package it.polimi.ingsw.Controller;
 
 import it.polimi.ingsw.Exceptions.InvalidActionException;
+import it.polimi.ingsw.Exceptions.LeaderRequirementsException;
+import it.polimi.ingsw.Exceptions.LeaderStatusException;
+import it.polimi.ingsw.Exceptions.PaymentErrorException;
 import it.polimi.ingsw.Model.*;
 import it.polimi.ingsw.Network.RemoteView;
 import it.polimi.ingsw.Utils.Messages.ClientMessages.*;
@@ -34,6 +37,8 @@ public class TurnController {
                         model.getTurn().getTurnPhase().buyDevCard(model.getTurn(), message);
                     } catch (InvalidActionException e) {
                         //inviare messaggio "fase del turno non valida!"
+                    } catch (PaymentErrorException e) {
+                        e.printStackTrace();
                     }
                 }
                 //TODO else HANDLEERROR((ENUM) ERROR.EmptyDeckMessage)
@@ -51,6 +56,8 @@ public class TurnController {
                         model.getTurn().getTurnPhase().activateProduction(model.getTurn(), message);
                     } catch (InvalidActionException e) {
                         // inviare messaggio "fase del turno non valida!"
+                    } catch (PaymentErrorException e) {
+                        e.printStackTrace();
                     }
                 }
                 // TODO else HANDLEERROR((ENUM) ERROR.ProductionNotPossibleMessage)
@@ -86,6 +93,10 @@ public class TurnController {
                     model.getTurn().getTurnPhase().leaderAction(model.getTurn(), message);
                 } catch (InvalidActionException e) {
                     // inviare messaggio "fase del turno non valida!"
+                } catch (LeaderStatusException e) {
+                    e.printStackTrace();
+                } catch (LeaderRequirementsException e) {
+                    e.printStackTrace();
                 }
             }
         }

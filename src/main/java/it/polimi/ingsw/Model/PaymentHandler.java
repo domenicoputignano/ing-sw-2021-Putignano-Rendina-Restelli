@@ -2,6 +2,7 @@ package it.polimi.ingsw.Model;
 
 import it.polimi.ingsw.Exceptions.DepotNotFoundException;
 import it.polimi.ingsw.Exceptions.DepotOutOfBoundsException;
+import it.polimi.ingsw.Exceptions.PaymentErrorException;
 import it.polimi.ingsw.Exceptions.StrongboxOutOfBoundException;
 import it.polimi.ingsw.Utils.ResourceSource;
 
@@ -11,7 +12,7 @@ import java.util.Map;
 
 public final class PaymentHandler {
 
-    public static void performPayment(Warehouse warehouse, Map<ResourceSource, EnumMap<ResourceType, Integer>> howToTakeResources, Turn turn) throws DepotOutOfBoundsException, DepotNotFoundException, StrongboxOutOfBoundException {
+    public static void performPayment(Warehouse warehouse, Map<ResourceSource, EnumMap<ResourceType, Integer>> howToTakeResources, Turn turn) throws DepotOutOfBoundsException, DepotNotFoundException, StrongboxOutOfBoundException, PaymentErrorException {
         EnumMap<ResourceType, Integer> toTakeFromNormalDepot = howToTakeResources.get(ResourceSource.DEPOT).clone();
         EnumMap<ResourceType, Integer> toTakeFromStrongBox = howToTakeResources.get(ResourceSource.STRONGBOX).clone();
         EnumMap<ResourceType, Integer> toTakeFromExtraDepot = howToTakeResources.get(ResourceSource.EXTRA).clone();
@@ -24,8 +25,7 @@ public final class PaymentHandler {
                 takeResourcesFromExtraDepots(warehouse, toTakeFromExtraDepot);
                 takeResourcesFromStrongbox(warehouse,toTakeFromStrongBox);
         } else {
-            //TODO cambiare l'implementazione
-            System.out.println("Eccezione");
+            throw new PaymentErrorException();
         }
     }
 

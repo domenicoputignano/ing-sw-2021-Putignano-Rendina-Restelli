@@ -1,9 +1,6 @@
 package it.polimi.ingsw.Model;
 
-import it.polimi.ingsw.Exceptions.DepotNotFoundException;
-import it.polimi.ingsw.Exceptions.DepotOutOfBoundsException;
-import it.polimi.ingsw.Exceptions.InvalidActionException;
-import it.polimi.ingsw.Exceptions.StrongboxOutOfBoundException;
+import it.polimi.ingsw.Exceptions.*;
 import it.polimi.ingsw.Commons.Effect;
 import it.polimi.ingsw.Utils.Messages.ClientMessages.*;
 
@@ -27,7 +24,7 @@ public class ActivateProduction implements AbstractTurnPhase {
         outputResources = new EnumMap<>(inputResources);
     }
 
-    public void activateProduction(Turn turn, ActivateProductionMessage activateProductionMessage) throws InvalidActionException {
+    public void activateProduction(Turn turn, ActivateProductionMessage activateProductionMessage) throws InvalidActionException, PaymentErrorException {
         if(turn.isDoneNormalAction())
             throw new InvalidActionException();
         this.activateProductionMessage = activateProductionMessage;
