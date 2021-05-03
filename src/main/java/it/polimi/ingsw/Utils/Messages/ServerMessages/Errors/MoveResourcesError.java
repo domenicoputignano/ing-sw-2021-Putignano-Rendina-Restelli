@@ -1,11 +1,10 @@
-package it.polimi.ingsw.Utils.Messages.ServerMessages;
+package it.polimi.ingsw.Utils.Messages.ServerMessages.Errors;
 
-public class TakeResourcesFromMarketError implements ErrorMessage {
+public class MoveResourcesError implements ErrorMessage {
     private final Trigger trigger;
     public enum Trigger
     {
-        MARBLEMISMATCH("Selected marbles don't match marbles in Market Tray !"),
-        WHITEEFFECTMISMATCH("Mismatch in selected white marbles effects !");
+        MOVE("Error occurred while performing your move action !");
         private String description;
         private Trigger(String description)
         {
@@ -18,7 +17,7 @@ public class TakeResourcesFromMarketError implements ErrorMessage {
         }
     }
 
-    public TakeResourcesFromMarketError(Trigger trigger)
+    public MoveResourcesError(Trigger trigger)
     {
         this.trigger = trigger;
     }

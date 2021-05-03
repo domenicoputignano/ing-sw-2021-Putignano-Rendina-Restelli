@@ -1,4 +1,4 @@
-package it.polimi.ingsw.Utils.Messages.ServerMessages;
+package it.polimi.ingsw.Utils.Messages.ServerMessages.Errors;
 
 public class PositioningError implements ErrorMessage {
     private final Trigger trigger;
