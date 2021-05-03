@@ -10,11 +10,12 @@ import it.polimi.ingsw.Commons.Effect;
 import it.polimi.ingsw.Commons.LeaderEffect;
 import it.polimi.ingsw.Utils.Messages.ClientMessages.*;
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 public class BuyDevCard implements AbstractTurnPhase {
-
-
+    private Logger LOGGER = Logger.getLogger(BuyDevCard.class.getName());
     private Map<ResourceType, Integer> actualCost = new EnumMap<ResourceType, Integer>(ResourceType.class);
 
 
@@ -32,22 +33,23 @@ public class BuyDevCard implements AbstractTurnPhase {
                 }
             }
             if (turn.getPlayer().getPersonalBoard().getWarehouse().checkResources(actualCost)) {
-                Warehouse playerWarehouse = turn.getPlayer().getPersonalBoard().getWarehouse();
-                try {
-                    PaymentHandler.performPayment(playerWarehouse, message.getHowToTakeResources(), turn);
-                    performPurchasingCard(requiredDeck.draw(), turn.getPlayer().getPersonalBoard(), message.getDestinationSlot());
-                    turn.normalActionDone();
-                } catch (DepotOutOfBoundsException e) {
-                    //TODO HANDLEERROR (DEPOTOUTOFBOUND)
-                } catch (DepotNotFoundException e) {
-                    //TODO HANDLEERROR (DEPOTNOTFOUND)
-                } catch (StrongboxOutOfBoundException e) {
-                    //TODO HANDLEERROR (STRONGBOXOUTOFBOUND)
+                if(PaymentHandler.checkCostCoherence(message.getHowToTakeResources(),actualCost)) {
+                    Warehouse playerWarehouse = turn.getPlayer().getPersonalBoard().getWarehouse();
+                    try {
+                        PaymentHandler.performPayment(playerWarehouse, message.getHowToTakeResources(), turn);
+                        performPurchasingCard(requiredDeck.draw(), turn.getPlayer().getPersonalBoard(), message.getDestinationSlot());
+                        turn.normalActionDone();
+                    } catch (DepotOutOfBoundsException | DepotNotFoundException | StrongboxOutOfBoundException e) {
+                        LOGGER.log(Level.SEVERE, "Critical error detected: exception not expected thrown! ");
+                    }
+                } else {
+
                 }
-            }
-        }
-        else {
+            } else {
                 /*settare il model in uno stato di errore e inviare al client gli errori relativi alle mappe corrispondenti*/
+            }
+        } else {
+
         }
 
     }
