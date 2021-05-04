@@ -1,5 +1,6 @@
 package it.polimi.ingsw.Model.MarketTray;
 
+import it.polimi.ingsw.Client.ReducedMarble;
 import it.polimi.ingsw.Commons.ColorMarble;
 import it.polimi.ingsw.Exceptions.NoSuchResourceTypeException;
 import it.polimi.ingsw.Model.ResourceType;
@@ -27,6 +28,10 @@ public abstract class Marble {
         if (o == null || getClass() != o.getClass()) return false;
         Marble marble = (Marble) o;
         return colorMarble == marble.colorMarble;
+    }
+
+    public ReducedMarble getReducedVersion() {
+        return new ReducedMarble(colorMarble);
     }
 
 }

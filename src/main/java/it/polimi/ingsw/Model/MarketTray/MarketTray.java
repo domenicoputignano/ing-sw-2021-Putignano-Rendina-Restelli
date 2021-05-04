@@ -1,5 +1,7 @@
 package it.polimi.ingsw.Model.MarketTray;
 
+import it.polimi.ingsw.Client.ReducedMarble;
+import it.polimi.ingsw.Client.ReducedMarketTray;
 import it.polimi.ingsw.Commons.ColorMarble;
 import it.polimi.ingsw.Model.ResourceType;
 import it.polimi.ingsw.Utils.MarketChoice;
@@ -83,10 +85,10 @@ public class MarketTray {
     }
 
     public void clearWhiteMarbleEffect() {
-        for (int i = 0; i < availableMarbles.length; i++) {
-            for(int j = 0; j < availableMarbles[i].length; j++) {
-                if(availableMarbles[i][j].getColor() == ColorMarble.WHITE) {
-                    WhiteMarble whiteMarble = (WhiteMarble)availableMarbles[i][j];
+        for (Marble[] availableMarble : availableMarbles) {
+            for (Marble marble : availableMarble) {
+                if (marble.getColor() == ColorMarble.WHITE) {
+                    WhiteMarble whiteMarble = (WhiteMarble) marble;
                     whiteMarble.setEffect(null);
                 }
             }
@@ -99,5 +101,19 @@ public class MarketTray {
 
     public Marble getSlidingMarble() {
         return slidingMarble;
+    }
+
+    public ReducedMarketTray getReducedVersion() {
+        return new ReducedMarketTray(getReducedVersionOfMarbles(), slidingMarble.getReducedVersion());
+    }
+
+    private ReducedMarble[][] getReducedVersionOfMarbles() {
+        ReducedMarble[][] reducedMarbles = new ReducedMarble[3][4];
+        for(int i = 0; i < reducedMarbles.length; i++) {
+            for (int j = 0; j < reducedMarbles[i].length; j++) {
+                reducedMarbles[i][j] = new ReducedMarble(availableMarbles[i][j].getColor());
+            }
+        }
+        return reducedMarbles;
     }
 }
