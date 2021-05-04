@@ -50,12 +50,6 @@ class TakeResourcesFromMarketTest {
         multiPlayerMode.getTurn().getPlayer().getLeaderCards().add(new LeaderCard(new LeaderEffect(Effect.CMARBLE,ResourceType.coin),null,null,0));
         multiPlayerMode.getTurn().getPlayer().getLeaderCards().get(0).setIsActive();
         multiPlayerMode.getTurn().getPlayer().getLeaderCards().get(1).setIsActive();
-        for (int i = 0; i < 3; i++)
-        { for (int j = 0; j < 4; j++)
-            System.out.print(multiPlayerMode.getMarketTray().getAvailableMarbles()[i][j]);
-        System.out.println();
-        }
-        System.out.println();
         marbles = multiPlayerMode.getMarketTray().peekMarbles(MarketChoice.ROW, 2);
         List<Integer> effects = new ArrayList<>();
         for(Marble m: marbles)
@@ -64,7 +58,6 @@ class TakeResourcesFromMarketTest {
                 effects.add(1);
         }
         takeResourcesFromMarketMessage.setWhiteEffects(effects);
-        System.out.println(marbles);
         List<Pair<ResourceType, MarbleDestination>> expectedPairList = new ArrayList<>();
         for(Marble m: marbles)
         {
@@ -72,6 +65,7 @@ class TakeResourcesFromMarketTest {
             else if(m.getColor()== ColorMarble.GREY) expectedPairList.add(new Pair<ResourceType, MarbleDestination>(ResourceType.stone,MarbleDestination.DISCARD));
             else if(m.getColor()== ColorMarble.PURPLE) expectedPairList.add(new Pair<ResourceType, MarbleDestination>(ResourceType.servant,MarbleDestination.DISCARD));
             else if(m.getColor()== ColorMarble.YELLOW) expectedPairList.add(new Pair<ResourceType, MarbleDestination>(ResourceType.coin,MarbleDestination.DISCARD));
+            else if(m.getColor()== ColorMarble.WHITE) expectedPairList.add(new Pair<ResourceType, MarbleDestination>(ResourceType.shield,MarbleDestination.DISCARD));
         }
         List<Pair<Marble, MarbleDestination>> pairList = new ArrayList<>();
         for(Marble m: marbles)
@@ -82,12 +76,7 @@ class TakeResourcesFromMarketTest {
         multiPlayerMode.getTurn().setTurnState(TurnState.ActionType.TAKERESOURCESFROMMARKET);
         multiPlayerMode.getTurn().getTurnPhase().takeResourcesFromMarket(multiPlayerMode.getTurn(),takeResourcesFromMarketMessage);
         TakeResourcesFromMarket takeResourcesFromMarket = (TakeResourcesFromMarket) multiPlayerMode.getTurn().getTurnPhase();
-        System.out.println("Actual: "+takeResourcesFromMarket.getWhereToPutResources());
-        System.out.println("Expected: "+ expectedPairList);
-        System.out.println("Faith " + takeResourcesFromMarket.getFaith());
-        //Ritorna sempre false a causa della non definizione del metodo equals in Pair<T,K>
-        //assertTrue(expectedPairList.containsAll(takeResourcesFromMarket.getWhereToPutResources()) && takeResourcesFromMarket.getWhereToPutResources().containsAll(expectedPairList));
-
+        assertTrue(expectedPairList.containsAll(takeResourcesFromMarket.getWhereToPutResources()) && takeResourcesFromMarket.getWhereToPutResources().containsAll(expectedPairList));
     }
 
     @Test
@@ -171,33 +160,44 @@ class TakeResourcesFromMarketTest {
                 effects.add(1);
         }
         takeResourcesFromMarketMessage.setWhiteEffects(effects);
-        System.out.println("Marbles: "+marbles);
+        int pendingResources = 0;
+        boolean servant = false;
         List<Pair<Marble, MarbleDestination>> pairList = new ArrayList<>();
         for(Marble m: marbles)
         {
-            if(m.getColor()== ColorMarble.YELLOW)
-                pairList.add(new Pair<Marble, MarbleDestination>(m,MarbleDestination.DEPOT1));
+            if(m.getColor()== ColorMarble.YELLOW) {
+                pendingResources++;
+                pairList.add(new Pair<Marble, MarbleDestination>(m, MarbleDestination.DEPOT1));
+            }
             else
-                if(m.getColor()== ColorMarble.GREY)
+                if(m.getColor()== ColorMarble.GREY){
+                    pendingResources++;
                     pairList.add(new Pair<Marble, MarbleDestination>(m,MarbleDestination.DEPOT2));
+                }
                 else
                 if(m.getColor()== ColorMarble.PURPLE)
-                    pairList.add(new Pair<Marble, MarbleDestination>(m,MarbleDestination.DEPOT3));
+                {
+                    if (servant) pendingResources++;
+                    servant = true;
+                    pairList.add(new Pair<Marble, MarbleDestination>(m, MarbleDestination.DEPOT3));
+                }
                 else
-                if(m.getColor()== ColorMarble.WHITE)
-                    pairList.add(new Pair<Marble, MarbleDestination>(m,MarbleDestination.DEPOT3));
+                if(m.getColor()== ColorMarble.WHITE){
+                    pendingResources++;
+                    pairList.add(new Pair<Marble, MarbleDestination>(m,MarbleDestination.DEPOT3));}
                 else pairList.add(new Pair<Marble, MarbleDestination>(m,MarbleDestination.DISCARD));
         }
         takeResourcesFromMarketMessage.setWhereToPutMarbles(pairList);
         multiPlayerMode.getTurn().setTurnState(TurnState.ActionType.TAKERESOURCESFROMMARKET);
         multiPlayerMode.getTurn().getTurnPhase().takeResourcesFromMarket(multiPlayerMode.getTurn(),takeResourcesFromMarketMessage);
         TakeResourcesFromMarket takeResourcesFromMarket = (TakeResourcesFromMarket) multiPlayerMode.getTurn().getTurnPhase();
-        System.out.println("PendingResources: "+takeResourcesFromMarket.getPendingResources());
-        System.out.println("DiscardedResources: "+takeResourcesFromMarket.getDiscardedResources());
-        System.out.println("Depot1: "+multiPlayerMode.getTurn().getPlayer().getPersonalBoard().getWarehouse().getNormalDepots().get(0).getOcc());
-        System.out.println("Depot2: "+multiPlayerMode.getTurn().getPlayer().getPersonalBoard().getWarehouse().getNormalDepots().get(1).getOcc());
-        System.out.println("Depot3: "+multiPlayerMode.getTurn().getPlayer().getPersonalBoard().getWarehouse().getNormalDepots().get(2).getOcc());
-
+        assertEquals(multiPlayerMode.getTurn().getPlayer().getPersonalBoard().getWarehouse().getNormalDepots().get(0).getOcc(),1);
+        assertEquals(multiPlayerMode.getTurn().getPlayer().getPersonalBoard().getWarehouse().getNormalDepots().get(1).getOcc(),2);
+        if(servant)
+            assertEquals(multiPlayerMode.getTurn().getPlayer().getPersonalBoard().getWarehouse().getNormalDepots().get(2).getOcc(),3);
+        else
+            assertEquals(multiPlayerMode.getTurn().getPlayer().getPersonalBoard().getWarehouse().getNormalDepots().get(2).getOcc(),2);
+        assertEquals(pendingResources,takeResourcesFromMarket.getPendingResources().size());
     }
 
 }
