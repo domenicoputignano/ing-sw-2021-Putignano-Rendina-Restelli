@@ -17,6 +17,7 @@ import it.polimi.ingsw.Utils.Messages.ClientMessages.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -77,6 +78,35 @@ class TakeResourcesFromMarketTest {
         multiPlayerMode.getTurn().getTurnPhase().takeResourcesFromMarket(multiPlayerMode.getTurn(),takeResourcesFromMarketMessage);
         TakeResourcesFromMarket takeResourcesFromMarket = (TakeResourcesFromMarket) multiPlayerMode.getTurn().getTurnPhase();
         assertTrue(expectedPairList.containsAll(takeResourcesFromMarket.getWhereToPutResources()) && takeResourcesFromMarket.getWhereToPutResources().containsAll(expectedPairList));
+    }
+
+    @Test
+    void takeResourcesFromMarketWhiteEffectMismatchException() throws InvalidActionException, WhiteEffectMismatchException {
+        List<Marble> marbles;
+        TakeResourcesFromMarketMessage takeResourcesFromMarketMessage = new TakeResourcesFromMarketMessage();
+        takeResourcesFromMarketMessage.setPlayerChoice(MarketChoice.ROW, 2);
+        multiPlayerMode.getTurn().getPlayer().getLeaderCards().clear();
+        multiPlayerMode.getTurn().getPlayer().getLeaderCards().add(new LeaderCard(new LeaderEffect(Effect.CMARBLE,ResourceType.shield),null,null,0));
+        multiPlayerMode.getTurn().getPlayer().getLeaderCards().add(new LeaderCard(new LeaderEffect(Effect.CMARBLE,ResourceType.coin),null,null,0));
+        multiPlayerMode.getTurn().getPlayer().getLeaderCards().get(0).setIsActive();
+        multiPlayerMode.getTurn().getPlayer().getLeaderCards().get(1).setIsActive();
+        marbles = multiPlayerMode.getMarketTray().peekMarbles(MarketChoice.ROW, 2);
+        List<Integer> effects = new ArrayList<>();
+        effects.add(2);
+        for(Marble m: marbles)
+        {
+            if(m.getColor()== ColorMarble.WHITE)
+                effects.add(1);
+        }
+        takeResourcesFromMarketMessage.setWhiteEffects(effects);
+        List<Pair<Marble, MarbleDestination>> pairList = new ArrayList<>();
+        for(Marble m: marbles)
+        {
+            pairList.add(new Pair<Marble, MarbleDestination>(m,MarbleDestination.DISCARD));
+        }
+        takeResourcesFromMarketMessage.setWhereToPutMarbles(pairList);
+        multiPlayerMode.getTurn().setTurnState(TurnState.ActionType.TAKERESOURCESFROMMARKET);
+        assertThrows(WhiteEffectMismatchException.class,()->multiPlayerMode.getTurn().getTurnPhase().takeResourcesFromMarket(multiPlayerMode.getTurn(),takeResourcesFromMarketMessage));
     }
 
     @Test
