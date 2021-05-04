@@ -1,15 +1,14 @@
 package it.polimi.ingsw.Model;
 
+import it.polimi.ingsw.Client.ReducedDepot;
 import it.polimi.ingsw.Commons.*;
+import it.polimi.ingsw.Exceptions.DepotNotFoundException;
 import it.polimi.ingsw.Exceptions.DepotOutOfBoundsException;
 import it.polimi.ingsw.Exceptions.IncompatibleResourceTypeException;
-import it.polimi.ingsw.Commons.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import java.util.ArrayList;
-import java.util.EnumMap;
-import java.util.List;
-import java.util.Map;
+
+import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -19,6 +18,11 @@ class PersonalBoardTest {
     Map<ResourceType, Integer> developmentCard1Cost = new EnumMap<ResourceType, Integer>(ResourceType.class);
     List<CardType> requirementsCards1 = new ArrayList<>();
     List<CardType> requirementsCards2 = new ArrayList<>();
+    PersonalBoard personalBoard = new PersonalBoard(player);
+
+
+
+
 
     @BeforeEach
     void initialize() throws DepotOutOfBoundsException, IncompatibleResourceTypeException {
@@ -28,7 +32,7 @@ class PersonalBoardTest {
 
     @Test
     void peekTopCard(){
-        PersonalBoard personalBoard = new PersonalBoard(player);
+
         developmentCard1Cost.put(ResourceType.coin, 0);
         developmentCard1Cost.put(ResourceType.servant,0);
         developmentCard1Cost.put(ResourceType.shield, 2);
@@ -139,7 +143,55 @@ class PersonalBoardTest {
     }
 
     @Test
-    void getWarehouse() {
+    void getReducedVersionTest() throws DepotOutOfBoundsException, IncompatibleResourceTypeException, DepotNotFoundException {
+        Map<ResourceType,Integer> developmentCard2Cost = new EnumMap<ResourceType, Integer>(ResourceType.class);
+        developmentCard2Cost.put(ResourceType.coin, 2);
+        developmentCard2Cost.put(ResourceType.servant,1);
+        developmentCard2Cost.put(ResourceType.shield, 0);
+        developmentCard2Cost.put(ResourceType.stone, 0);
+
+        Map<ResourceType,Integer> developmentCard3Cost = new EnumMap<ResourceType, Integer>(ResourceType.class);
+        developmentCard3Cost.put(ResourceType.coin, 2);
+        developmentCard3Cost.put(ResourceType.servant,1);
+        developmentCard3Cost.put(ResourceType.shield, 0);
+        developmentCard3Cost.put(ResourceType.stone, 0);
+
+        DevelopmentCard developmentCard2 = new DevelopmentCard(developmentCard2Cost,1, ColorCard.yellow,4, null);
+        DevelopmentCard developmentCard3 = new DevelopmentCard(developmentCard3Cost, 1, ColorCard.green, 3, null);
+
+        personalBoard.putCardOnTop(developmentCard2, 2);
+        personalBoard.putCardOnTop(developmentCard3, 3);
+
+
+        Slot[] expectedSlots = new Slot[3];
+        expectedSlots[0] = new Slot();
+        expectedSlots[1] = new Slot();
+        expectedSlots[2] = new Slot();
+        expectedSlots[1].putCardOnTop(developmentCard2);
+        expectedSlots[2].putCardOnTop(developmentCard3);
+
+        ReducedDepot[] expectedReducedDepots = new ReducedDepot[3];
+        expectedReducedDepots[0] = new ReducedDepot(1, ResourceType.coin,1);
+        expectedReducedDepots[1] = new ReducedDepot(2, ResourceType.servant,2);
+        expectedReducedDepots[2] = new ReducedDepot(0, null, 3);
+
+        personalBoard.getWarehouse().addResourcesToDepot(1,ResourceType.coin,1);
+        personalBoard.getWarehouse().addResourcesToDepot(2, ResourceType.servant,2);
+
+        personalBoard.getWarehouse().getterUnsafeExtraDepots()[0] = new ExtraDepot(ResourceType.servant);
+        personalBoard.getWarehouse().addResourcesToExtraDepot(ResourceType.servant,1);
+
+        ReducedDepot reducedExtraDepotExpected = new ReducedDepot(1,ResourceType.servant,2);
+
+        assertTrue(Arrays.asList(expectedSlots).containsAll(Arrays.asList(personalBoard.getReducedVersion().getSlots())) &&
+                Arrays.asList(personalBoard.getReducedVersion().getSlots()).containsAll(Arrays.asList(expectedSlots)));
+
+        assertEquals(reducedExtraDepotExpected,personalBoard.getReducedVersion().getWarehouse().getExtraDepots()[0]);
+
+        for(int i = 0; i < expectedReducedDepots.length; i++)
+            assertEquals(expectedReducedDepots[i],personalBoard.getReducedVersion().getWarehouse().getNormalDepots()[i]);
+
+
     }
 
 }
