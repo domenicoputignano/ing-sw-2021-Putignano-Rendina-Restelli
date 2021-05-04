@@ -2,6 +2,7 @@ package it.polimi.ingsw.Model;
 
 import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
+import it.polimi.ingsw.Client.ReducedPersonalBoard;
 import it.polimi.ingsw.Commons.*;
 import it.polimi.ingsw.Commons.CardType;
 import it.polimi.ingsw.Commons.DevelopmentCard;

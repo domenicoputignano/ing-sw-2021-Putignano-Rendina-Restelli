@@ -1,5 +1,8 @@
 package it.polimi.ingsw.Model;
 
+import it.polimi.ingsw.Client.ReducedDepot;
+import it.polimi.ingsw.Client.ReducedStrongbox;
+import it.polimi.ingsw.Client.ReducedWarehouse;
 import it.polimi.ingsw.Exceptions.DepotNotFoundException;
 import it.polimi.ingsw.Exceptions.DepotOutOfBoundsException;
 import it.polimi.ingsw.Exceptions.IncompatibleResourceTypeException;
@@ -25,7 +28,7 @@ public class Warehouse implements Cloneable {
 
     public Warehouse()
     {
-        this.availableResources = new EnumMap<ResourceType, Integer>(ResourceType.class);
+        this.availableResources = new EnumMap<>(ResourceType.class);
         this.availableResources.put(ResourceType.servant,0);
         this.availableResources.put(ResourceType.coin,0);
         this.availableResources.put(ResourceType.shield,0);
@@ -233,7 +236,7 @@ public class Warehouse implements Cloneable {
     }
 
     private void updateAvailableResources(){
-        EnumMap<ResourceType, Integer> local = strongbox.getResources().clone();
+        EnumMap<ResourceType, Integer> local = ((EnumMap<ResourceType, Integer>) strongbox.getResources()).clone();
         for(NormalDepot d : normalDepots){
             if(d.getType()!=null)
                 local.put(d.getType(), local.get(d.getType())+d.getOcc());
@@ -247,8 +250,8 @@ public class Warehouse implements Cloneable {
 
     public List<NormalDepot> getNormalDepots() {
         List<NormalDepot> normalDepots = new ArrayList<>();
-        for(int i=0;i<this.normalDepots.length; i++)
-            normalDepots.add(new NormalDepot(this.normalDepots[i].getOcc(),this.normalDepots[i].getType(),this.normalDepots[i].getSize()));
+        for (NormalDepot normalDepot : this.normalDepots)
+            normalDepots.add(new NormalDepot(normalDepot.getOcc(), normalDepot.getType(), normalDepot.getSize()));
         return normalDepots;
     }
 
@@ -259,7 +262,12 @@ public class Warehouse implements Cloneable {
         return extraDepots;
     }
 
-
+    public ReducedWarehouse getReducedVersion(){
+        ReducedDepot[] reducedNormalDepots = Arrays.stream(normalDepots).map(NormalDepot::getReducedVersion).toArray(ReducedDepot[]::new);
+        ReducedDepot[] reducedExtraDepots = Arrays.stream(extraDepots).map(ExtraDepot::getReducedVersion).toArray(ReducedDepot[]::new);
+        ReducedStrongbox reducedStrongbox = strongbox.getReducedVersion();
+        return new ReducedWarehouse(reducedNormalDepots, reducedExtraDepots, reducedStrongbox);
+    }
 
 
     //TODO rivedere questi metodi che servono per il testing
@@ -268,8 +276,6 @@ public class Warehouse implements Cloneable {
         //TODO modificare in modo da esporre solo una copia
         return availableResources;
     }
-
-
 
     public List<Pair<ResourceType, Integer>> getResourcesInStrongbox() {
         List<Pair<ResourceType,Integer>> result = new ArrayList<>(4);

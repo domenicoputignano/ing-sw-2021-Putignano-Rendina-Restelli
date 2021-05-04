@@ -1,8 +1,11 @@
 package it.polimi.ingsw.Model;
 
 
+import it.polimi.ingsw.Client.ReducedFaithTrack;
 import it.polimi.ingsw.Commons.StateFavorTiles;
 import it.polimi.ingsw.Observable;
+
+import java.util.Arrays;
 
 public class FaithTrack extends Observable<Integer> {
     private int faithMarker;
@@ -70,5 +73,9 @@ public class FaithTrack extends Observable<Integer> {
 
     public VaticanReportSection[] getSections() {
         return sections;
+    }
+
+    public ReducedFaithTrack getReducedVersion(){
+        return new ReducedFaithTrack(this.faithMarker, Arrays.stream(sections).map(VaticanReportSection::getState).toArray(StateFavorTiles[]::new));
     }
 }

@@ -18,7 +18,7 @@ public class StrongboxTest {
     }
     @Test
     void addResources() {
-        EnumMap<ResourceType,Integer> resources = strongbox.getResources().clone();
+        EnumMap<ResourceType,Integer> resources = ((EnumMap<ResourceType, Integer>) strongbox.getResources()).clone();
         EnumMap<ResourceType,Integer> resourcesToAdd = new EnumMap<ResourceType, Integer>(ResourceType.class);
         resourcesToAdd.put(ResourceType.shield,1);
         resourcesToAdd.put(ResourceType.stone,2);
@@ -35,8 +35,8 @@ public class StrongboxTest {
         resourcesToAdd.put(ResourceType.coin,4);
         resourcesToAdd.put(ResourceType.servant,1);
         strongbox.addResources(resourcesToAdd);
-        EnumMap<ResourceType,Integer> resources = strongbox.getResources().clone();
-        EnumMap<ResourceType,Integer> resourcesToTake = new EnumMap<ResourceType, Integer>(ResourceType.class);
+        EnumMap<ResourceType,Integer> resources = ((EnumMap<ResourceType, Integer>) strongbox.getResources()).clone();
+        EnumMap<ResourceType,Integer> resourcesToTake = new EnumMap<>(ResourceType.class);
         resourcesToTake.put(ResourceType.shield,1);
         resourcesToTake.put(ResourceType.stone,2);
         resourcesToTake.put(ResourceType.coin,3);
@@ -53,7 +53,7 @@ public class StrongboxTest {
         resourcesToAdd.put(ResourceType.coin,4);
         resourcesToAdd.put(ResourceType.servant,1);
         strongbox.addResources(resourcesToAdd);
-        EnumMap<ResourceType,Integer> resources = strongbox.getResources().clone();
+        EnumMap<ResourceType,Integer> resources = ((EnumMap<ResourceType, Integer>) strongbox.getResources()).clone();
         EnumMap<ResourceType,Integer> resourcesToTake = new EnumMap<ResourceType, Integer>(ResourceType.class);
         resourcesToTake.put(ResourceType.shield,2);
         resourcesToTake.put(ResourceType.stone,3);

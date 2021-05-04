@@ -2,7 +2,9 @@ package it.polimi.ingsw.Client;
 
 import it.polimi.ingsw.Model.ResourceType;
 
-public class ReducedDepot {
+import java.io.Serializable;
+
+public class ReducedDepot implements Serializable {
     private final int occ;
     private final ResourceType type;
     private final int size;

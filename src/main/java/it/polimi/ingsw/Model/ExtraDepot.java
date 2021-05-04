@@ -1,5 +1,6 @@
 package it.polimi.ingsw.Model;
 
+import it.polimi.ingsw.Client.ReducedDepot;
 import it.polimi.ingsw.Exceptions.DepotOutOfBoundsException;
 
 
@@ -38,6 +39,10 @@ public class ExtraDepot implements Depot {
 
     public int getSize() {
         return size;
+    }
+
+    public ReducedDepot getReducedVersion(){
+        return new ReducedDepot(this.occ, this.type, this.size);
     }
 
     @Override

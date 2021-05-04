@@ -7,9 +7,9 @@ import java.util.Map;
 public class ReducedWarehouse {
     private final ReducedDepot[] normalDepots;
     private final ReducedDepot[] extraDepots;
-    private final Map<ResourceType, Integer> strongbox;
+    private final ReducedStrongbox strongbox;
 
-    public ReducedWarehouse(ReducedDepot[] normalDepots, ReducedDepot[] extraDepots, Map<ResourceType, Integer> strongbox){
+    public ReducedWarehouse(ReducedDepot[] normalDepots, ReducedDepot[] extraDepots, ReducedStrongbox strongbox){
         this.normalDepots = normalDepots;
         this.extraDepots = extraDepots;
         this.strongbox = strongbox;
@@ -23,7 +23,7 @@ public class ReducedWarehouse {
         return extraDepots;
     }
 
-    public Map<ResourceType, Integer> getStrongbox() {
+    public ReducedStrongbox getStrongbox() {
         return strongbox;
     }
 }
