@@ -2,11 +2,12 @@ package it.polimi.ingsw.Client;
 
 import it.polimi.ingsw.Utils.MarketChoice;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class ReducedMarketTray {
+public class ReducedMarketTray implements Serializable {
     private final ReducedMarble[][] availableMarbles;
     private final ReducedMarble slidingMarble;
 

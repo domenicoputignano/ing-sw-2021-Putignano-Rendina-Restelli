@@ -2,9 +2,10 @@ package it.polimi.ingsw.Client;
 
 import it.polimi.ingsw.Commons.DevelopmentCard;
 
+import java.io.Serializable;
 import java.util.Stack;
 
-public class ReducedPersonalBoard {
+public class ReducedPersonalBoard implements Serializable {
     private final ReducedFaithTrack faithTrack;
     private final ReducedWarehouse warehouse;
     private final Stack<DevelopmentCard>[] slots;

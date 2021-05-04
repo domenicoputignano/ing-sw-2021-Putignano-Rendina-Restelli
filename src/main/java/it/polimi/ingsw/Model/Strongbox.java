@@ -1,5 +1,6 @@
 package it.polimi.ingsw.Model;
 
+import it.polimi.ingsw.Client.ReducedStrongbox;
 import it.polimi.ingsw.Exceptions.StrongboxOutOfBoundException;
 
 import java.security.InvalidParameterException;
@@ -7,7 +8,7 @@ import java.util.EnumMap;
 import java.util.Map;
 
 public class Strongbox {
-    private Map<ResourceType,Integer> resources;
+    private EnumMap<ResourceType,Integer> resources;
 
     public Strongbox() {
         this.resources = new EnumMap<ResourceType, Integer>(ResourceType.class);
@@ -17,21 +18,22 @@ public class Strongbox {
         this.resources.put(ResourceType.stone,0);
     }
 
-    public void addResources(Map<ResourceType,Integer> resources) throws InvalidParameterException
-    {
+    public void addResources(Map<ResourceType,Integer> resources) throws InvalidParameterException {
         resources.forEach( (key,value)-> this.resources.merge(key,value,Integer::sum));
     }
 
 
-    public void takeResources(Map<ResourceType,Integer> resources) throws StrongboxOutOfBoundException
-    {
+    public void takeResources(Map<ResourceType,Integer> resources) throws StrongboxOutOfBoundException {
         if(resources.keySet().stream().anyMatch( (key) -> resources.get(key) > this.resources.get(key))) throw new
                 StrongboxOutOfBoundException();
         resources.forEach( (key,value)-> this.resources.merge(key,value,(v1,v2)-> v1-v2));
     }
 
-    //TODO DA CAMBIARE, ESPONE L'IMPLEMENTAZIONE
-    public EnumMap<ResourceType, Integer> getResources() {
-        return (EnumMap<ResourceType, Integer>) resources;
+    public ReducedStrongbox getReducedVersion(){
+        return new ReducedStrongbox(resources.clone());
+    }
+
+    public Map<ResourceType, Integer> getResources() {
+        return resources;
     }
 }
