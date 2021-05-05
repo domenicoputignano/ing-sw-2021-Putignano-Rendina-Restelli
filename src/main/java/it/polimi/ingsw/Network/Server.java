@@ -1,5 +1,6 @@
 package it.polimi.ingsw.Network;
 
+import it.polimi.ingsw.Commons.User;
 import it.polimi.ingsw.Controller.GameController;
 import it.polimi.ingsw.Model.MultiPlayerMode;
 import it.polimi.ingsw.Model.Player;
@@ -21,7 +22,7 @@ public class Server {
     private final Logger LOGGER = Logger.getLogger(Server.class.getName());
     private final Set<ClientSetupConnection> waitingConnections = new HashSet<>();
 
-    //Players involved in one match (connected or not)
+    //username of players involved in one match (connected or not)
     private final Map<String, ClientStatus> accounts = new HashMap<>();
 
     private boolean active = false;
@@ -95,7 +96,7 @@ public class Server {
         MultiPlayerMode multiPlayerMode = new MultiPlayerMode(players);
         GameController gameController = new GameController(multiPlayerMode);
         for(Player p : players) {
-            RemoteView remoteView = new RemoteView(p, gameController, accounts.get(p.getUser().getNickname()));
+            RemoteView remoteView = new RemoteView(p.getUser(), gameController, accounts.get(p.getUser().getNickname()));
             accounts.get(p.getUser().getNickname()).bindRemoteView(remoteView);
         }
     }
@@ -112,7 +113,7 @@ public class Server {
 
         SoloMode soloMode = new SoloMode(player);
         GameController gameController = new GameController(soloMode);
-        RemoteView remoteView = new RemoteView(player, gameController, clientStatus);
+        RemoteView remoteView = new RemoteView(player.getUser(), gameController, clientStatus);
         accounts.get(player.getUser().getNickname()).bindRemoteView(remoteView);
 
         LOGGER.log(Level.INFO, "Starting a new SoloMode game...");

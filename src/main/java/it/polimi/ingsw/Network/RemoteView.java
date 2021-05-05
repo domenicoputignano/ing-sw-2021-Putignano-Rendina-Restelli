@@ -1,5 +1,6 @@
 package it.polimi.ingsw.Network;
 
+import it.polimi.ingsw.Commons.User;
 import it.polimi.ingsw.Controller.GameController;
 import it.polimi.ingsw.Model.Game;
 import it.polimi.ingsw.Model.Player;
@@ -9,13 +10,13 @@ import it.polimi.ingsw.Utils.Messages.ServerMessages.Errors.ErrorMessage;
 
 public class RemoteView implements Observer<ClientMessage> {
 
-    private final Player player;
+    private final User user;
     private final Game game;
     private final GameController gameController;
     private final ClientStatus clientStatus;
 
-    public RemoteView(Player player, GameController gameController, ClientStatus clientStatus) {
-        this.player = player;
+    public RemoteView(User user, GameController gameController, ClientStatus clientStatus) {
+        this.user = user;
         this.gameController = gameController;
         this.game = gameController.getModel();
         this.clientStatus = clientStatus;
@@ -32,7 +33,11 @@ public class RemoteView implements Observer<ClientMessage> {
         clientStatus.send(errorMessage);
      }
 
+    public User getUser() {
+        return user;
+    }
+
     public Player getPlayer() {
-        return player;
+        return game.getPlayer(user);
     }
 }

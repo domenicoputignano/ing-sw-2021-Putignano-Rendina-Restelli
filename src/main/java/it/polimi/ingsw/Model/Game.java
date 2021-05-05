@@ -195,4 +195,9 @@ public abstract class Game extends Observable<UpdateMessage> implements Observer
     public int getNumOfPlayers(){
         return playerList.size();
     }
+
+    public Player getPlayer(User user) {
+        return users.get(user);
+    }
+
 }
