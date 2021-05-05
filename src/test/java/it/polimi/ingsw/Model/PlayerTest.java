@@ -1,7 +1,6 @@
 package it.polimi.ingsw.Model;
 
 import it.polimi.ingsw.Commons.*;
-import it.polimi.ingsw.Commons.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -35,7 +34,7 @@ class PlayerTest {
 
     @Test
     void initialize() {
-        assertEquals("pippo", player.getUsername());
+        assertEquals("pippo", player.getUser().getNickname());
     }
 
     @Test
@@ -77,7 +76,7 @@ class PlayerTest {
     @Test
     void getUsername() {
         Player playerFoo = new Player("foo");
-        assertEquals("foo", playerFoo.getUsername());
+        assertEquals("foo", playerFoo.getUser().getNickname());
     }
 
     @Test

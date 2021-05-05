@@ -3,30 +3,27 @@ package it.polimi.ingsw.Model;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
-import it.polimi.ingsw.Commons.CardType;
-import it.polimi.ingsw.Commons.Deck;
-import it.polimi.ingsw.Commons.LeaderCard;
-import it.polimi.ingsw.Commons.StateFavorTiles;
+import it.polimi.ingsw.Commons.*;
 import it.polimi.ingsw.Model.ConclusionEvents.BlackCrossHitLastSpace;
 import it.polimi.ingsw.Model.ConclusionEvents.DevCardColorEnded;
 import it.polimi.ingsw.Model.ConclusionEvents.HitLastSpace;
 import it.polimi.ingsw.Model.ConclusionEvents.SeventhDevCardBought;
 import it.polimi.ingsw.Model.MarketTray.MarketTray;
+import it.polimi.ingsw.Observable;
 import it.polimi.ingsw.Observer;
+import it.polimi.ingsw.Utils.Messages.ServerMessages.Updates.UpdateMessage;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 import java.util.stream.Collectors;
 
-public abstract class Game implements Observer<Integer> {
+public abstract class Game extends Observable<UpdateMessage> implements Observer<Integer> {
     protected Player inkwell;
     protected Player currPlayer;
     protected List<Player> playerList;
+    protected Map<User,Player> users;
     protected List<Deck> decks;
     protected GameState gameState;
     protected Turn turn;
@@ -35,12 +32,13 @@ public abstract class Game implements Observer<Integer> {
     public void setup()
     {
         this.marketTray = new MarketTray();
+        this.users = new HashMap<User, Player>();
         this.initializeDecksDevCards();
         this.dealLeaderCards();
         for(Player p : this.playerList)
         {
             p.setPosition(playerList.indexOf(p)+1);
-
+            users.put(p.getUser(), p);
             /*aggiungo MultiPlayerMode alla lista di Observer di faithtrack per la vatican report section*/
             p.getPersonalBoard().getFaithTrack().addObserver(this);
 
@@ -154,7 +152,11 @@ public abstract class Game implements Observer<Integer> {
         return playerList;
     }
 
-    //TODO handleError method
+
+    public void notifyUpdate(UpdateMessage message) {
+        notify(message);
+    }
+
 
     //TODO handleConclusion method
 

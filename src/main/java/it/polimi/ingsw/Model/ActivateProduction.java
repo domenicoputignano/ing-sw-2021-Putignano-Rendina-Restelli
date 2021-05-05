@@ -3,6 +3,7 @@ package it.polimi.ingsw.Model;
 import it.polimi.ingsw.Exceptions.*;
 import it.polimi.ingsw.Commons.Effect;
 import it.polimi.ingsw.Utils.Messages.ClientMessages.*;
+import it.polimi.ingsw.Utils.Messages.ServerMessages.BuyDevCardPerformedUpdate;
 
 import java.util.EnumMap;
 import java.util.Map;
@@ -43,13 +44,8 @@ public class ActivateProduction implements AbstractTurnPhase {
                 } catch (DepotOutOfBoundsException | DepotNotFoundException | StrongboxOutOfBoundException e) {
                     LOGGER.log(Level.SEVERE, "Critical error detected: exception not expected thrown!");
                 }
-            } else {
-                throw new NotEnoughResourcesException();
-            }
-        } else {
-            throw new ResourceMismatchException();
-        }
-        // TODO: else HANDLEERROR(IncoherenceMessage) -> coerenza risorse da prendere e input indicati
+            } else  throw new NotEnoughResourcesException();
+        } else  throw new ResourceMismatchException();
     }
 
     private void calculateResources(Turn turn, ActiveProductions requestedProductions) {

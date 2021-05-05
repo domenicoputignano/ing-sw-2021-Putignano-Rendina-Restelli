@@ -1,5 +1,6 @@
 package it.polimi.ingsw.Model;
 
+import it.polimi.ingsw.Commons.User;
 import it.polimi.ingsw.Exceptions.DepotOutOfBoundsException;
 import it.polimi.ingsw.Exceptions.IncompatibleResourceTypeException;
 import it.polimi.ingsw.Commons.Effect;
@@ -18,13 +19,14 @@ import java.util.stream.Collectors;
 
 public class Player {
     private final Logger LOGGER = Logger.getLogger(Player.class.getName());
-    private final String username;
+    private final User user;
     private int position;
     private final PersonalBoard personalBoard;
     private final List<LeaderCard> leaderCards = new ArrayList<>();
 
+
     public Player(String username){
-        this.username = username;
+        this.user = new User(username);
         this.personalBoard = new PersonalBoard(this);
     }
 
@@ -62,12 +64,14 @@ public class Player {
 
     }
 
-    public void performInitialLeaderChoice(int firstLeader, int secondLeader) {
+    public void performInitialLeaderChoice(Game game ,int firstLeader, int secondLeader) {
         throwLeaderCard(firstLeader);
         throwLeaderCard(secondLeader);
+        //TODO completare non appena creati i messaggi
+        //game.notifyUpdate(new() );
     }
 
-    public void performInitialResourcesChoice(List<Pair<ResourceType,Integer>> chosenResources) {
+    public void performInitialResourcesChoice(Game game,List<Pair<ResourceType,Integer>> chosenResources) {
         chosenResources.forEach( x -> {
                     try {
                         getPersonalBoard().getWarehouse().addResourcesToDepot(x.getValue(), x.getKey(), 1);
@@ -82,9 +86,7 @@ public class Player {
         leaderCards.remove(leader - 1);
     }
 
-    public String getUsername() {
-        return username;
-    }
+    public User getUser() { return this.user; }
 
     public List<LeaderCard> getLeaderCards() {
         return leaderCards;
@@ -114,7 +116,7 @@ public class Player {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Player player = (Player) o;
-        return position == player.position && username.equals(player.username) && personalBoard.equals(player.personalBoard) && leaderCards.equals(player.leaderCards);
+        return position == player.position && user.equals(player.user) && personalBoard.equals(player.personalBoard) && leaderCards.equals(player.leaderCards);
     }
 
 }

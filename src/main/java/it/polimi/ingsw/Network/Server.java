@@ -1,11 +1,9 @@
 package it.polimi.ingsw.Network;
 
 import it.polimi.ingsw.Controller.GameController;
-import it.polimi.ingsw.Model.Game;
 import it.polimi.ingsw.Model.MultiPlayerMode;
 import it.polimi.ingsw.Model.Player;
 import it.polimi.ingsw.Model.SoloMode.SoloMode;
-import it.polimi.ingsw.Utils.GameMode;
 
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -97,8 +95,8 @@ public class Server {
         MultiPlayerMode multiPlayerMode = new MultiPlayerMode(players);
         GameController gameController = new GameController(multiPlayerMode);
         for(Player p : players) {
-            RemoteView remoteView = new RemoteView(p, gameController, accounts.get(p.getUsername()));
-            accounts.get(p.getUsername()).bindRemoteView(remoteView);
+            RemoteView remoteView = new RemoteView(p, gameController, accounts.get(p.getUser().getNickname()));
+            accounts.get(p.getUser().getNickname()).bindRemoteView(remoteView);
         }
     }
 
@@ -115,7 +113,7 @@ public class Server {
         SoloMode soloMode = new SoloMode(player);
         GameController gameController = new GameController(soloMode);
         RemoteView remoteView = new RemoteView(player, gameController, clientStatus);
-        accounts.get(player.getUsername()).bindRemoteView(remoteView);
+        accounts.get(player.getUser().getNickname()).bindRemoteView(remoteView);
 
         LOGGER.log(Level.INFO, "Starting a new SoloMode game...");
     }

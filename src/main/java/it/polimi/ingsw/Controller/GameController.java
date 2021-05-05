@@ -39,7 +39,7 @@ public class GameController {
         }
         if(message.isValidMessage()) {
             if(checkPlayerResourceChoice(message, sender.getPlayer())){
-                sender.getPlayer().performInitialResourcesChoice(message.getChosenResources());
+                sender.getPlayer().performInitialResourcesChoice(model, message.getChosenResources());
                 receivedChoiceMessage.getAndIncrement();
                 checkAllResourceChoiceDone(receivedChoiceMessage);
             } else {
@@ -53,7 +53,7 @@ public class GameController {
     public synchronized void handleLeaderChoiceMessage(LeaderChoiceMessage message, RemoteView sender) {
         if(model.getGameState() != GameState.LEADERCHOICE){
             if(message.isValidMessage()) {
-                sender.getPlayer().performInitialLeaderChoice(message.getLeader1ToDiscard(), message.getLeader2ToDiscard());
+                sender.getPlayer().performInitialLeaderChoice(model,message.getLeader1ToDiscard(), message.getLeader2ToDiscard());
                 receivedChoiceMessage.getAndIncrement();
                 checkAllLeaderChoicesDone(receivedChoiceMessage);
             } else {
