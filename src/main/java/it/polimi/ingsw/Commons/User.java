@@ -1,13 +1,14 @@
 package it.polimi.ingsw.Commons;
 
 
+import java.io.Serializable;
 import java.util.Objects;
 
 /* This class provides a representation
  * of the player needed at network level, when player's methods defined
  * in model classes are not required.
  */
-public class User {
+public class User implements Serializable {
 
     private final String nickname;
 

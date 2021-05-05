@@ -127,7 +127,7 @@ public class PersonalBoard {
     public ReducedPersonalBoard getReducedVersion() {
         Slot[] slots = new Slot[3];
         for(int i = 0; i < slots.length; i++)  slots[i] = this.slots[i].clone();
-        return new ReducedPersonalBoard(faithTrack.getReducedVersion(), warehouse.getReducedVersion(), slots);
+        return new ReducedPersonalBoard(faithTrack.getReducedVersion(), warehouse.getReducedVersion(), slots, owner.getLeaderCards());
     }
 
 
