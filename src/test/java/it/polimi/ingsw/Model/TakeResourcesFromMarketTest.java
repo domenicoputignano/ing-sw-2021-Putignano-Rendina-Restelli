@@ -1,13 +1,10 @@
 package it.polimi.ingsw.Model;
 
-import it.polimi.ingsw.Exceptions.DepotOutOfBoundsException;
-import it.polimi.ingsw.Exceptions.IncompatibleResourceTypeException;
-import it.polimi.ingsw.Exceptions.InvalidActionException;
+import it.polimi.ingsw.Exceptions.*;
 import it.polimi.ingsw.Commons.Effect;
 import it.polimi.ingsw.Commons.LeaderCard;
 import it.polimi.ingsw.Commons.LeaderEffect;
 import it.polimi.ingsw.Commons.ColorMarble;
-import it.polimi.ingsw.Exceptions.WhiteEffectMismatchException;
 import it.polimi.ingsw.Model.MarketTray.Marble;
 import it.polimi.ingsw.Model.MarketTray.WhiteMarble;
 import it.polimi.ingsw.Utils.MarbleDestination;
@@ -42,7 +39,7 @@ class TakeResourcesFromMarketTest {
         }
     }
     @Test
-    void takeResourcesFromMarket() throws InvalidActionException, WhiteEffectMismatchException {
+    void takeResourcesFromMarket() throws InvalidActionException, WhiteEffectMismatchException, NeedPositioningException {
         List<Marble> marbles;
         TakeResourcesFromMarketMessage takeResourcesFromMarketMessage = new TakeResourcesFromMarketMessage();
         takeResourcesFromMarketMessage.setPlayerChoice(MarketChoice.ROW, 2);
@@ -119,7 +116,7 @@ class TakeResourcesFromMarketTest {
         assertThrows(InvalidActionException.class,()->multiPlayerMode.getTurn().getTurnPhase().takeResourcesFromMarket(multiPlayerMode.getTurn(),takeResourcesFromMarketMessage));
     }
     @Test
-    void checkValidWhiteEffectsok() throws InvalidActionException, WhiteEffectMismatchException {
+    void checkValidWhiteEffectsOk() throws InvalidActionException, WhiteEffectMismatchException, NeedPositioningException {
         TakeResourcesFromMarketMessage message = new TakeResourcesFromMarketMessage();
         message.setPlayerChoice(MarketChoice.ROW, 2);
         multiPlayerMode.getTurn().getPlayer().getLeaderCards().clear();
@@ -140,7 +137,7 @@ class TakeResourcesFromMarketTest {
         message.setWhiteEffects(effects);
         message.setWhereToPutMarbles(wheretoPutMarbles);
         multiPlayerMode.getTurn().setTurnState(TurnState.ActionType.TAKERESOURCESFROMMARKET);
-        multiPlayerMode.getTurn().getTurnPhase().takeResourcesFromMarket(multiPlayerMode.getTurn(),message);
+        assertThrows(NeedPositioningException.class,()->multiPlayerMode.getTurn().getTurnPhase().takeResourcesFromMarket(multiPlayerMode.getTurn(),message));
         TakeResourcesFromMarket takeResourcesFromMarket = (TakeResourcesFromMarket) multiPlayerMode.getTurn().getTurnPhase();
         assertTrue(takeResourcesFromMarket.checkValidWhiteEffects(multiPlayerMode.getTurn(), message.getWhiteEffects(),message.getRequestedMarbles()));
     }
@@ -170,7 +167,7 @@ class TakeResourcesFromMarketTest {
     }
 
     @Test
-    void handlePositioning() throws DepotOutOfBoundsException, IncompatibleResourceTypeException, InvalidActionException, WhiteEffectMismatchException {
+    void handlePositioning() throws DepotOutOfBoundsException, IncompatibleResourceTypeException, InvalidActionException, WhiteEffectMismatchException, NeedPositioningException {
         List<Marble> marbles;
         multiPlayerMode.getTurn().getPlayer().getPersonalBoard().getWarehouse().addResourcesToDepot(1,ResourceType.coin,1);
         multiPlayerMode.getTurn().getPlayer().getPersonalBoard().getWarehouse().addResourcesToDepot(2,ResourceType.shield,2);
@@ -219,7 +216,7 @@ class TakeResourcesFromMarketTest {
         }
         takeResourcesFromMarketMessage.setWhereToPutMarbles(pairList);
         multiPlayerMode.getTurn().setTurnState(TurnState.ActionType.TAKERESOURCESFROMMARKET);
-        multiPlayerMode.getTurn().getTurnPhase().takeResourcesFromMarket(multiPlayerMode.getTurn(),takeResourcesFromMarketMessage);
+        assertThrows(NeedPositioningException.class, ()->multiPlayerMode.getTurn().getTurnPhase().takeResourcesFromMarket(multiPlayerMode.getTurn(),takeResourcesFromMarketMessage));
         TakeResourcesFromMarket takeResourcesFromMarket = (TakeResourcesFromMarket) multiPlayerMode.getTurn().getTurnPhase();
         assertEquals(multiPlayerMode.getTurn().getPlayer().getPersonalBoard().getWarehouse().getNormalDepots().get(0).getOcc(),1);
         assertEquals(multiPlayerMode.getTurn().getPlayer().getPersonalBoard().getWarehouse().getNormalDepots().get(1).getOcc(),2);

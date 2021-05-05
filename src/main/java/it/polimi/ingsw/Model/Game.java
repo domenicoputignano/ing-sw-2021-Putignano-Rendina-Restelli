@@ -11,6 +11,7 @@ import it.polimi.ingsw.Model.ConclusionEvents.SeventhDevCardBought;
 import it.polimi.ingsw.Model.MarketTray.MarketTray;
 import it.polimi.ingsw.Observable;
 import it.polimi.ingsw.Observer;
+import it.polimi.ingsw.Utils.Messages.ServerMessages.Updates.ActivateVaticanReportUpdate;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.Updates.UpdateMessage;
 
 import java.io.FileNotFoundException;
@@ -113,6 +114,7 @@ public abstract class Game extends Observable<UpdateMessage> implements Observer
             if(position >= start)
                 p.getPersonalBoard().getFaithTrack().setFavorTile(vatican_index, StateFavorTiles.FACEUP);
             else p.getPersonalBoard().getFaithTrack().setFavorTile(vatican_index,StateFavorTiles.DISCARDED);
+
         }
 
     }
@@ -139,8 +141,7 @@ public abstract class Game extends Observable<UpdateMessage> implements Observer
     }
 
     @Override
-    public void update(Integer message)
-    {
+    public void update(Integer message) {
         activateVaticanReport(message);
     }
 

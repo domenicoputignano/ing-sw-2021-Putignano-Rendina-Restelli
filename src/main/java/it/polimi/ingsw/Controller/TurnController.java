@@ -5,6 +5,8 @@ import it.polimi.ingsw.Model.*;
 import it.polimi.ingsw.Network.RemoteView;
 import it.polimi.ingsw.Utils.Messages.ClientMessages.*;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.Errors.*;
+import it.polimi.ingsw.Utils.Messages.ServerMessages.Updates.ServerAsksForPositioning;
+
 import java.util.List;
 
 
@@ -73,7 +75,11 @@ public class TurnController {
                 if (model.getMarketTray().checkRequestedMarbles(message.getRequestedMarbles(), message.getPlayerChoice(), message.getIndex())) {
                     model.getTurn().setTurnState(TurnState.ActionType.TAKERESOURCESFROMMARKET);
                     try {
-                        model.getTurn().getTurnPhase().takeResourcesFromMarket(model.getTurn(), message);
+                        try {
+                            model.getTurn().getTurnPhase().takeResourcesFromMarket(model.getTurn(), message);
+                        } catch (NeedPositioningException e) {
+                            sender.update(new ServerAsksForPositioning());
+                        }
                     } catch (InvalidActionException e) {
                         sender.sendError(new ActionError(ActionError.Trigger.NORMALACTIONALREADYDONE));
                     } catch (WhiteEffectMismatchException e) {

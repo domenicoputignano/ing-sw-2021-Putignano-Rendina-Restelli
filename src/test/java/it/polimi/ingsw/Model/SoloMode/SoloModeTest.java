@@ -135,7 +135,7 @@ class SoloModeTest {
     }
 
     @Test
-    void takeResourcesFromMarketGamePlay() throws InvalidActionException, WhiteEffectMismatchException {
+    void takeResourcesFromMarketGamePlay() throws InvalidActionException, WhiteEffectMismatchException, NeedPositioningException {
         playerList.add(new Player("Pippo"));
         SoloMode game = new SoloMode(playerList.get(0));
         game.setup();
@@ -161,7 +161,7 @@ class SoloModeTest {
         message.setWhiteEffects(effects);
         message.setWhereToPutMarbles(wheretoPutMarbles);
         game.getTurn().setTurnState(TurnState.ActionType.TAKERESOURCESFROMMARKET);
-        game.getTurn().getTurnPhase().takeResourcesFromMarket(game.getTurn(),message);
+        assertThrows(NeedPositioningException.class,()->game.getTurn().getTurnPhase().takeResourcesFromMarket(game.getTurn(),message));
         TakeResourcesFromMarket takeResourcesFromMarket = (TakeResourcesFromMarket) game.getTurn().getTurnPhase();
         assertTrue(takeResourcesFromMarket.checkValidWhiteEffects(game.getTurn(), message.getWhiteEffects(),message.getRequestedMarbles()));
     }

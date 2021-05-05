@@ -6,7 +6,6 @@ import it.polimi.ingsw.Network.Client;
 
 public class InitialLeaderChoiceUpdate extends UpdateMessage {
 
-    private User user;
     private int leader1ToDiscard;
     private int leader2ToDiscard;
 

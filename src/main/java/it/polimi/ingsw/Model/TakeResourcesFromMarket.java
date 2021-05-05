@@ -22,7 +22,7 @@ public class TakeResourcesFromMarket implements AbstractTurnPhase {
     private int discardedResources = 0;
 
     @Override
-    public void takeResourcesFromMarket(Turn turn, TakeResourcesFromMarketMessage takeResourcesFromMarketMessage) throws InvalidActionException, WhiteEffectMismatchException {
+    public void takeResourcesFromMarket(Turn turn, TakeResourcesFromMarketMessage takeResourcesFromMarketMessage) throws InvalidActionException, WhiteEffectMismatchException, NeedPositioningException {
         if(turn.isDoneNormalAction())
             throw new InvalidActionException();
         if(checkValidWhiteEffects(turn,takeResourcesFromMarketMessage.getWhiteEffects(),takeResourcesFromMarketMessage.getRequestedMarbles())) {
@@ -33,12 +33,13 @@ public class TakeResourcesFromMarket implements AbstractTurnPhase {
             handlePositioning(turn.getPlayer().getPersonalBoard().getWarehouse());
             //TODO : if(pendingResources.size()>0) UPDATE(Risorse non correttamente posizionate)
             turn.getGame().getMarketTray().clearWhiteMarbleEffect();
+            if(pendingResources.size()>0) throw new NeedPositioningException(pendingResources);
         } else throw new WhiteEffectMismatchException();
     }
 
     private void convertWhiteMarbles(Turn turn, List<Pair<Marble, MarbleDestination>> pairList, List<Integer> whiteEffects) {
         List<ResourceType> whiteMarbleEffects = turn.getPlayer().getActiveEffects().stream().filter(x -> x.getEffect()==Effect.CMARBLE).
-                map(x -> x.getType()).collect(Collectors.toList());
+                map(LeaderEffect::getType).collect(Collectors.toList());
                  List<Marble> marbles = pairList.stream().map(Pair::getKey).collect(Collectors.toList());
                     int i = 0;
                     for(Marble m : marbles) {
