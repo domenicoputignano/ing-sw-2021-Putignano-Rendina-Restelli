@@ -3,6 +3,7 @@ package it.polimi.ingsw.Model;
 import it.polimi.ingsw.Exceptions.*;
 import it.polimi.ingsw.Commons.Effect;
 import it.polimi.ingsw.Utils.Messages.ClientMessages.*;
+import it.polimi.ingsw.Utils.Messages.ServerMessages.Updates.ActivateProductionUpdate;
 
 import java.util.EnumMap;
 import java.util.Map;
@@ -40,6 +41,9 @@ public class ActivateProduction implements AbstractTurnPhase {
                     playerWarehouse.addResourcesToStrongbox(outputResources);
                     turn.getPlayer().getPersonalBoard().getFaithTrack().moveMarker(faith);
                     turn.normalActionDone();
+                    turn.getGame().notifyUpdate(new ActivateProductionUpdate(turn.getPlayer().getUser(),
+                            turn.getPlayer().getPersonalBoard().getReducedVersion(),
+                            inputResources, outputResources));
                 } catch (DepotOutOfBoundsException | DepotNotFoundException | StrongboxOutOfBoundException e) {
                     LOGGER.log(Level.SEVERE, "Critical error detected: exception not expected thrown!");
                 }

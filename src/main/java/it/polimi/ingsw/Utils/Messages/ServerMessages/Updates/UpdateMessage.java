@@ -7,8 +7,8 @@ import it.polimi.ingsw.Utils.Messages.ServerMessages.ServerMessage;
 
 public abstract class UpdateMessage implements ServerMessage {
 
-    private User user;
-    private ReducedPersonalBoard userPersonalBoard;
+    protected User user;
+    protected ReducedPersonalBoard userPersonalBoard;
 
 
 

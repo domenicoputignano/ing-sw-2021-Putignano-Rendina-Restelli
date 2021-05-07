@@ -12,6 +12,7 @@ import it.polimi.ingsw.Model.MarketTray.MarketTray;
 import it.polimi.ingsw.Observable;
 import it.polimi.ingsw.Observer;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.Updates.ActivateVaticanReportUpdate;
+import it.polimi.ingsw.Utils.Messages.ServerMessages.Updates.GameSetupUpdate;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.Updates.UpdateMessage;
 
 import java.io.FileNotFoundException;
@@ -45,6 +46,8 @@ public abstract class Game extends Observable<UpdateMessage> implements Observer
 
             if(p.getPosition()==3 || p.getPosition()==4)
                 p.getPersonalBoard().getFaithTrack().moveMarker(1);
+
+            notifyUpdate(new GameSetupUpdate(p.getUser(),p.getPersonalBoard().getReducedVersion(),p.getPosition()));
         }
         this.turn = new Turn(this,inkwell);
         //DISTRIBUZIONE RISORSE A SCELTA E SCELTA CARTE LEADER PASSANDO IN RESOURCECHOICE E LEADER CHOICE

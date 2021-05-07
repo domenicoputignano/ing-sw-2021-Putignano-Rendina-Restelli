@@ -6,6 +6,8 @@ import it.polimi.ingsw.Commons.DevelopmentCard;
 import it.polimi.ingsw.Commons.Effect;
 import it.polimi.ingsw.Commons.LeaderEffect;
 import it.polimi.ingsw.Utils.Messages.ClientMessages.*;
+import it.polimi.ingsw.Utils.Messages.ServerMessages.Updates.BuyDevCardPerformedUpdate;
+
 import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -34,8 +36,12 @@ public class BuyDevCard implements AbstractTurnPhase {
                     Warehouse playerWarehouse = turn.getPlayer().getPersonalBoard().getWarehouse();
                     try {
                         PaymentHandler.performPayment(playerWarehouse, message.getHowToTakeResources(), turn);
-                        performPurchasingCard(requiredDeck.draw(), turn.getPlayer().getPersonalBoard(), message.getDestinationSlot());
+                        DevelopmentCard drawnCard = requiredDeck.draw();
+                        performPurchasingCard(drawnCard, turn.getPlayer().getPersonalBoard(), message.getDestinationSlot());
                         turn.normalActionDone();
+                        turn.getGame().notifyUpdate(new BuyDevCardPerformedUpdate(turn.getPlayer().getUser(),
+                                turn.getPlayer().getPersonalBoard().getReducedVersion(),
+                                turn.getGame().getDecks(),drawnCard));
                     } catch (DepotOutOfBoundsException | DepotNotFoundException | StrongboxOutOfBoundException e) {
                         LOGGER.log(Level.SEVERE, "Critical error detected: exception not expected thrown! ");
                     }

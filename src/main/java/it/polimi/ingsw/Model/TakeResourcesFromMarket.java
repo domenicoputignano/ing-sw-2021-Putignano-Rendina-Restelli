@@ -6,6 +6,7 @@ import it.polimi.ingsw.Exceptions.*;
 import it.polimi.ingsw.Commons.Effect;
 import it.polimi.ingsw.Model.MarketTray.*;
 import it.polimi.ingsw.Utils.MarbleDestination;
+import it.polimi.ingsw.Utils.Messages.ServerMessages.Updates.TakeResourcesFromMarketUpdate;
 import it.polimi.ingsw.Utils.Pair;
 import it.polimi.ingsw.Utils.Messages.ClientMessages.*;
 import java.util.ArrayList;
@@ -28,12 +29,17 @@ public class TakeResourcesFromMarket implements AbstractTurnPhase {
         if(checkValidWhiteEffects(turn,takeResourcesFromMarketMessage.getWhiteEffects(),takeResourcesFromMarketMessage.getRequestedMarbles())) {
             //perform convert marble effect
             convertWhiteMarbles(turn, takeResourcesFromMarketMessage.getWhereToPutMarbles(), takeResourcesFromMarketMessage.getWhiteEffects());
-            //convert a List of Pair<Marble,MarbleDestination> in a List of Pari<ResourceType,MarbleDestination>
+            //convert a List of Pair<Marble,MarbleDestination> in a List of Pair<ResourceType,MarbleDestination>
             convertMarblesToResources(takeResourcesFromMarketMessage.getWhereToPutMarbles());
             handlePositioning(turn.getPlayer().getPersonalBoard().getWarehouse());
-            //TODO : if(pendingResources.size()>0) UPDATE(Risorse non correttamente posizionate)
             turn.getGame().getMarketTray().clearWhiteMarbleEffect();
-            if(pendingResources.size()>0) throw new NeedPositioningException(pendingResources);
+            turn.normalActionDone();
+            if(pendingResources.size()>0)
+                throw new NeedPositioningException(pendingResources);
+            else turn.getGame().notifyUpdate(new TakeResourcesFromMarketUpdate(turn.getPlayer().getUser(),
+                    turn.getPlayer().getPersonalBoard().getReducedVersion(),
+                    turn.getGame().getMarketTray().getReducedVersion(),
+                    getEarnedResources()));
         } else throw new WhiteEffectMismatchException();
     }
 
@@ -107,6 +113,7 @@ public class TakeResourcesFromMarket implements AbstractTurnPhase {
             }
         }
         pendingResources.clear();
+
         if(foundProblemWhilePositioning) throw new PositioningException();
     }
 
@@ -145,6 +152,11 @@ public class TakeResourcesFromMarket implements AbstractTurnPhase {
                 break;
             default:
         }
+    }
+
+    private List<ResourceType> getEarnedResources()
+    {
+        return whereToPutResources.stream().map(Pair::getKey).collect(Collectors.toList());
     }
 
     public boolean checkValidWhiteEffects(Turn turn, List<Integer> whiteEffects, List<Marble> requestedMarbles)

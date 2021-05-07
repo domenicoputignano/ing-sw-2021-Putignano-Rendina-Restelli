@@ -2,18 +2,16 @@ package it.polimi.ingsw.Utils.Messages.ServerMessages.Updates;
 
 import it.polimi.ingsw.Client.ReducedPersonalBoard;
 import it.polimi.ingsw.Commons.User;
-import it.polimi.ingsw.Model.ResourceType;
 import it.polimi.ingsw.Network.Client;
-import java.util.List;
 
-public class ServerAsksForPositioning extends UpdateMessage {
-    private List<ResourceType> resourcesToSettle;
+public class GameSetupUpdate extends UpdateMessage{
+    private final int position;
 
-    public ServerAsksForPositioning(User user, ReducedPersonalBoard reducedPersonalBoard, List<ResourceType> pendingResources)
+    public GameSetupUpdate(User user, ReducedPersonalBoard reducedPersonalBoard, int position)
     {
         this.user = user;
         this.userPersonalBoard = reducedPersonalBoard;
-        this.resourcesToSettle = pendingResources;
+        this.position = position;
     }
 
     @Override

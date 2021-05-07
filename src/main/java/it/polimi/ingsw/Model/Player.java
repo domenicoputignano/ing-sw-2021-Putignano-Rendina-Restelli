@@ -55,13 +55,13 @@ public class Player {
             if (leaderCards.get(index).getLeaderEffect().getEffect() == Effect.EXTRADEPOT)
                 this.personalBoard.getWarehouse().initializeExtraDepot(leaderCards.get(index).getLeaderEffect().getType());
     }
-    public void discardLeaderCard(int index) {
+    public LeaderCard discardLeaderCard(int index) {
         if (!this.leaderCards.get(index).isActive())
         {
-            this.leaderCards.remove(index);
             this.personalBoard.getFaithTrack().moveMarker(1);
+            return this.leaderCards.remove(index);
         }
-
+        else return null;
     }
 
     public void performInitialLeaderChoice(Game game ,int firstLeader, int secondLeader) {
