@@ -1,7 +1,6 @@
 package it.polimi.ingsw.Network;
 
 
-import it.polimi.ingsw.Observable;
 import it.polimi.ingsw.Utils.Messages.ClientMessages.ClientMessage;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.ServerMessage;
 
@@ -12,36 +11,42 @@ import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class ClientStatus extends Observable<ClientMessage> implements Runnable{
+public class ClientStatus implements Runnable {
 
     private RemoteView remoteView;
     private boolean isActive;
+    private ObjectOutputStream outputStreamToClient;
     private final Socket socket;
     private final Logger LOGGER = Logger.getLogger(ClientStatus.class.getName());
 
     public ClientStatus(Socket socket) {
         this.socket = socket;
         this.isActive = true;
+        try {
+            this.outputStreamToClient = new ObjectOutputStream(socket.getOutputStream());
+        } catch (IOException e) {
+            LOGGER.log(Level.SEVERE, "Error occurred while creating client object stream ");
+        }
     }
 
     public void send(ServerMessage serverMessage) {
-        ObjectOutputStream outputStreamToClient;
         try {
-            outputStreamToClient = new ObjectOutputStream(socket.getOutputStream());
-            outputStreamToClient.writeObject(serverMessage);
-            outputStreamToClient.flush();
-        } catch (IOException e) {
-            //TODO modificare come se trovassimo una disconnessione
-            LOGGER.log(Level.SEVERE, "Disconnection detected!");
-        }
+            synchronized(outputStreamToClient) {
+                outputStreamToClient = new ObjectOutputStream(socket.getOutputStream());
+                outputStreamToClient.writeObject(serverMessage);
+                outputStreamToClient.flush();
+                }
+            } catch (IOException e) {
+                //TODO modificare come se trovassimo una disconnessione
+                LOGGER.log(Level.SEVERE, "Disconnection detected!");
+            }
     }
+
+
 
 
     public void bindRemoteView(RemoteView remoteView) {
         this.remoteView = remoteView;
-
-        // adding observers of ClientMessage
-        addObserver(remoteView);
     }
 
     public boolean isActive() {
@@ -56,7 +61,7 @@ public class ClientStatus extends Observable<ClientMessage> implements Runnable{
             while(isActive){
                 ClientMessage messageFromClient = (ClientMessage) inputFromClient.readObject();
                 LOGGER.log(Level.INFO, String.format("Received message %s", messageFromClient.getClass().getName()));
-                notify(messageFromClient);
+                remoteView.handleClientMessage(messageFromClient);
             }
 
         } catch (IOException | ClassNotFoundException e) {
