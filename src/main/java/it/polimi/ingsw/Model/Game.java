@@ -30,6 +30,7 @@ public abstract class Game extends Observable<UpdateMessage> implements Observer
     protected GameState gameState;
     protected Turn turn;
     protected MarketTray marketTray;
+    private Random rand = new Random();
 
     public void setup()
     {
@@ -47,7 +48,9 @@ public abstract class Game extends Observable<UpdateMessage> implements Observer
             if(p.getPosition()==3 || p.getPosition()==4)
                 p.getPersonalBoard().getFaithTrack().moveMarker(1);
 
-            notifyUpdate(new GameSetupUpdate(p.getUser(),p.getPersonalBoard().getReducedVersion(),p.getPosition()));
+            notifyUpdate(new GameSetupUpdate(p.getUser(),
+                    p.getPersonalBoard().getReducedVersion(),
+                    p.getPosition(), decks, marketTray.getReducedVersion()));
         }
         this.turn = new Turn(this,inkwell);
         //DISTRIBUZIONE RISORSE A SCELTA E SCELTA CARTE LEADER PASSANDO IN RESOURCECHOICE E LEADER CHOICE
@@ -73,7 +76,6 @@ public abstract class Game extends Observable<UpdateMessage> implements Observer
 
     private void dealLeaderCards() {
         List<LeaderCard> cards = initializeDeckLeaderCards();
-        Random rand = new Random();
         for (Player p : playerList) {
             for (int i = 0; i < 4; i++) {
                 int randNum = rand.nextInt(cards.size());
@@ -118,6 +120,9 @@ public abstract class Game extends Observable<UpdateMessage> implements Observer
                 p.getPersonalBoard().getFaithTrack().setFavorTile(vatican_index, StateFavorTiles.FACEUP);
             else p.getPersonalBoard().getFaithTrack().setFavorTile(vatican_index,StateFavorTiles.DISCARDED);
 
+            notifyUpdate(new ActivateVaticanReportUpdate(p.getUser(),
+                    p.getPersonalBoard().getReducedVersion(), currPlayer.getUser(),
+                    p.getPersonalBoard().getFaithTrack().getStateFavorTile(vatican_index), vatican_index));
         }
 
     }

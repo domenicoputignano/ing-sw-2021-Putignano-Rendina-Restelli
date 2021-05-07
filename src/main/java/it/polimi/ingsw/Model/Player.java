@@ -7,6 +7,9 @@ import it.polimi.ingsw.Commons.Effect;
 import it.polimi.ingsw.Commons.LeaderCard;
 import it.polimi.ingsw.Commons.LeaderEffect;
 import it.polimi.ingsw.Exceptions.MoveResourcesException;
+import it.polimi.ingsw.Utils.Messages.ServerMessages.Updates.InitialLeaderChoiceUpdate;
+import it.polimi.ingsw.Utils.Messages.ServerMessages.Updates.InitialResourceChoiceUpdate;
+import it.polimi.ingsw.Utils.Messages.ServerMessages.Updates.MoveUpdate;
 import it.polimi.ingsw.Utils.MoveActionInterface;
 import it.polimi.ingsw.Utils.Pair;
 
@@ -31,9 +34,9 @@ public class Player {
     }
 
 
-    public void moveResources(MoveActionInterface move) throws MoveResourcesException {
+    public void moveResources(Game game, MoveActionInterface move) throws MoveResourcesException {
         if(move.handleMove(this.personalBoard.getWarehouse())){
-            /*TODO notificare al client che la mossa di move è stata correttamente eseguita*/
+            game.notifyUpdate(new MoveUpdate(user, personalBoard.getReducedVersion()));
         }
         else throw new MoveResourcesException();
     }
@@ -67,8 +70,9 @@ public class Player {
     public void performInitialLeaderChoice(Game game ,int firstLeader, int secondLeader) {
         throwLeaderCard(firstLeader);
         throwLeaderCard(secondLeader);
-        //TODO completare non appena creati i messaggi
-        //game.notifyUpdate(new() );
+
+        game.notifyUpdate(new InitialLeaderChoiceUpdate(user, personalBoard.getReducedVersion(),
+                firstLeader, secondLeader));
     }
 
     public void performInitialResourcesChoice(Game game,List<Pair<ResourceType,Integer>> chosenResources) {
@@ -79,6 +83,13 @@ public class Player {
                         LOGGER.log(Level.SEVERE, "Thrown an unexpected exception " + e);
                     }
                 });
+
+        game.notifyUpdate(new InitialResourceChoiceUpdate(user, getPersonalBoard().getReducedVersion(),
+                getChosenResources(chosenResources)));
+    }
+
+    private List<ResourceType> getChosenResources(List<Pair<ResourceType,Integer>> chosenResources) {
+        return chosenResources.stream().map(Pair::getKey).collect(Collectors.toList());
     }
 
 

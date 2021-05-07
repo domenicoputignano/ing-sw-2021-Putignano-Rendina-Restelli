@@ -6,6 +6,7 @@ import it.polimi.ingsw.Exceptions.*;
 import it.polimi.ingsw.Commons.Effect;
 import it.polimi.ingsw.Model.MarketTray.*;
 import it.polimi.ingsw.Utils.MarbleDestination;
+import it.polimi.ingsw.Utils.Messages.ServerMessages.Updates.PositioningUpdate;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.Updates.TakeResourcesFromMarketUpdate;
 import it.polimi.ingsw.Utils.Pair;
 import it.polimi.ingsw.Utils.Messages.ClientMessages.*;
@@ -99,22 +100,26 @@ public class TakeResourcesFromMarket implements AbstractTurnPhase {
 
 
     //metodo per gestire la seconda possibilità data al giocatore di posizionare le risorse nei depot
-    public void handlePositioning(Warehouse warehouse, List<Pair<ResourceType,MarbleDestination>> pairList) throws PositioningException {
-        boolean foundProblemWhilePositioning = false;
+    public void handlePositioning(Turn turn, List<Pair<ResourceType,MarbleDestination>> pairList) throws PositioningException {
+        List<ResourceType> discardedResourcesList = new ArrayList<>();
+        Warehouse playerWarehouse = turn.getPlayer().getPersonalBoard().getWarehouse();
         whereToPutResources = pairList;
         for(int i = 0; i < whereToPutResources.size(); ) {
             try {
-                performPositioning(warehouse, i);
+                performPositioning(playerWarehouse, i);
             } catch (DepotOutOfBoundsException | DepotNotFoundException | IncompatibleResourceTypeException e) {
                 discardedResources++;
-                foundProblemWhilePositioning = true;
+                discardedResourcesList.add(whereToPutResources.get(i).getKey());
             } finally {
                 i++;
             }
         }
         pendingResources.clear();
 
-        if(foundProblemWhilePositioning) throw new PositioningException();
+        //if(foundProblemWhilePositioning) throw new PositioningException();
+
+        turn.getGame().notifyUpdate(new PositioningUpdate(turn.getPlayer().getUser(),
+                turn.getPlayer().getPersonalBoard().getReducedVersion(), discardedResourcesList));
     }
 
     public boolean checkPendingResourcesPositioning(List<ResourceType> resourcesToPut)

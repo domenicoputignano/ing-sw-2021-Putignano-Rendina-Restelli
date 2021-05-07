@@ -111,7 +111,7 @@ public class TurnController {
         if(isSenderTurn(sender.getPlayer())) {
             if (message.isValidMessage()) {
                 try {
-                    model.getCurrPlayer().moveResources(message.getMoveAction());
+                    model.getCurrPlayer().moveResources(model, message.getMoveAction());
                 } catch (MoveResourcesException e) {
                     sender.sendError(new MoveResourcesError(MoveResourcesError.Trigger.MOVE));
                 }
@@ -129,7 +129,7 @@ public class TurnController {
                     //check if Resources contained in positioning Message match with left resources in TakeResourcesFromMarket
                     if (turnInstance.checkPendingResourcesPositioning(message.getResourcesToPut())) {
                         try {
-                            turnInstance.handlePositioning(model.getTurn().getPlayer().getPersonalBoard().getWarehouse(), message.getWhereToPutResources());
+                            turnInstance.handlePositioning(model.getTurn(), message.getWhereToPutResources());
                         } catch (PositioningException e) {
                             //send Error to the client
                             sender.sendError(new PositioningError(PositioningError.Trigger.DISCARDEDRESOURCES));

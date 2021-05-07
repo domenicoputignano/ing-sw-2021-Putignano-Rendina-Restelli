@@ -5,17 +5,17 @@ import it.polimi.ingsw.Commons.User;
 import it.polimi.ingsw.Model.ResourceType;
 import it.polimi.ingsw.Network.Client;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class InitialResourceChoiceUpdate extends UpdateMessage {
-    private List<ResourceType> chosenResources = new ArrayList<>();
+public class PositioningUpdate extends UpdateMessage{
+    private final List<ResourceType> discardedResources;
 
-    public InitialResourceChoiceUpdate(User user, ReducedPersonalBoard reducedPersonalBoard, List<ResourceType> chosenResources) {
+    public PositioningUpdate(User user, ReducedPersonalBoard reducedPersonalBoard, List<ResourceType> discardedResources) {
         this.user = user;
         this.userPersonalBoard = reducedPersonalBoard;
-        this.chosenResources = chosenResources;
+        this.discardedResources = discardedResources;
     }
+
 
     @Override
     public void handleUpdateMessage(Client client) {

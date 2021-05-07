@@ -1,6 +1,7 @@
 package it.polimi.ingsw.Utils.Messages.ServerMessages.Updates;
 
 
+import it.polimi.ingsw.Client.ReducedPersonalBoard;
 import it.polimi.ingsw.Commons.StateFavorTiles;
 import it.polimi.ingsw.Commons.User;
 import it.polimi.ingsw.Network.Client;
@@ -14,6 +15,14 @@ public class ActivateVaticanReportUpdate extends UpdateMessage {
     private StateFavorTiles state;
 
     private int section;
+
+    public ActivateVaticanReportUpdate(User user, ReducedPersonalBoard reducedPersonalBoard, User triggeringUser, StateFavorTiles state, int section) {
+        this.user = user;
+        this.userPersonalBoard = reducedPersonalBoard;
+        this.triggeringUser = triggeringUser;
+        this.state = state;
+        this.section = section;
+    }
 
     @Override
     public void handleUpdateMessage(Client client) {

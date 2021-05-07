@@ -9,6 +9,13 @@ public class InitialLeaderChoiceUpdate extends UpdateMessage {
     private int leader1ToDiscard;
     private int leader2ToDiscard;
 
+    public InitialLeaderChoiceUpdate(User user, ReducedPersonalBoard reducedPersonalBoard, int leader1ToDiscard, int leader2ToDiscard) {
+        this.user = user;
+        this.userPersonalBoard = reducedPersonalBoard;
+        this.leader1ToDiscard = leader1ToDiscard;
+        this.leader2ToDiscard = leader2ToDiscard;
+    }
+
     @Override
     public void handleUpdateMessage(Client client) {
 

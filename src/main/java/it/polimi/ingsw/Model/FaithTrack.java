@@ -50,6 +50,8 @@ public class FaithTrack extends Observable<Integer> {
         this.sections[index].setValidFavorTiles(state);
     }
 
+    public StateFavorTiles getStateFavorTile(int index) { return this.sections[index].getState(); }
+
     public boolean isPopeSpace(int vatican_index, int marker){
         if(sections[vatican_index].isPopeSpace(marker)) return true;
         return false;
@@ -59,6 +61,7 @@ public class FaithTrack extends Observable<Integer> {
     {
         return sections[passedSection].getPopeSpace();
     }
+
     public int[] getVictoryPoints() {
         return victoryPoints;
     }
