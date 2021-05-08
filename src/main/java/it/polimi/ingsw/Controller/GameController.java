@@ -22,7 +22,7 @@ public class GameController {
 
     public GameController(Game game) {
         this.model = game;
-        this.turnController = new TurnController(this.model, model.getPlayerList(), model.getCurrPlayer());
+        this.turnController = new TurnController(this.model, model.getCurrPlayer());
     }
 
     public TurnController getTurnController() {

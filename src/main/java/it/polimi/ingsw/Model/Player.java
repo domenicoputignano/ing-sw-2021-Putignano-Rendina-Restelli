@@ -135,4 +135,11 @@ public class Player {
         return position == player.position && user.equals(player.user) && personalBoard.equals(player.personalBoard) && leaderCards.equals(player.leaderCards);
     }
 
+    @Override
+    public String toString() {
+        return "Player{" +
+                "username=" + user.getNickname() +
+                ", position=" + position +
+                '}';
+    }
 }

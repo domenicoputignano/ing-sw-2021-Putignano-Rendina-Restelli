@@ -85,6 +85,8 @@ public abstract class Game extends Observable<UpdateMessage> implements Observer
         }
     }
 
+    public abstract void nextTurn();
+
 
     private void shuffleDecksDevCards() {
         for (Deck d : decks) {

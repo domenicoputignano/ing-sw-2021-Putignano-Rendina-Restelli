@@ -40,7 +40,17 @@ public class MultiPlayerMode extends Game {
         this.nextState(GameState.LEADERCHOICE);
     }
 
+    public void nextTurn(){
+        this.currPlayer = nextPlayer(this.currPlayer);
+        this.turn = new Turn(turn.getGame(), currPlayer);
+    }
 
-
+    public Player nextPlayer(Player currPlayer)
+    {
+        Player nextPlayer = playerList.get((playerList.indexOf(currPlayer)+1) % playerList.size());
+        if(nextPlayer.getUser().isActive())
+            return nextPlayer;
+        else return nextPlayer(nextPlayer);
+    }
 }
 

@@ -11,9 +11,11 @@ import java.util.Objects;
 public class User implements Serializable {
 
     private final String nickname;
+    private boolean isActive;
 
     public User(String nickname) {
         this.nickname = nickname;
+        isActive = true;
     }
 
     @Override
@@ -31,5 +33,13 @@ public class User implements Serializable {
 
     public String getNickname() {
         return nickname;
+    }
+
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public void setActive(boolean active) {
+        isActive = active;
     }
 }

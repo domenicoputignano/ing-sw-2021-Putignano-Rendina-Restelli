@@ -53,4 +53,17 @@ class MultiPlayerModeTest {
         assertEquals(StateFavorTiles.DISCARDED, multiPlayerMode.getPlayerList().get(2).getPersonalBoard().getFaithTrack().getSections()[0].getState());
     }
 
+    @Test
+    void nextPlayer()
+    {
+        playerList.add(new Player("Piero"));
+        playerList.add(new Player("Domenico"));
+        playerList.add(new Player("Andrea"));
+        playerList.add(new Player("Pippo"));
+        MultiPlayerMode multiPlayerMode = new MultiPlayerMode(playerList.get(0),playerList,playerList.get(0),playerList.size());
+        multiPlayerMode.setup();
+        playerList.get(1).getUser().setActive(false);
+        playerList.get(2).getUser().setActive(false);
+        System.out.println(multiPlayerMode.nextPlayer(multiPlayerMode.getCurrPlayer()));
+    }
 }

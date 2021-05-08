@@ -7,18 +7,13 @@ import it.polimi.ingsw.Utils.Messages.ClientMessages.*;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.Errors.*;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.Updates.ServerAsksForPositioning;
 
-import java.util.List;
-
-
 
 public class TurnController {
     private Player currPlayer;
     private final Game model;
-    private final List<Player> playerList;
 
-    public TurnController(Game model, List<Player> players, Player firstPlayer) {
+    public TurnController(Game model, Player firstPlayer) {
         this.model = model;
-        this.playerList = players;
         this.currPlayer = firstPlayer;
     }
 
@@ -143,6 +138,15 @@ public class TurnController {
         else {
             sender.sendError(new WrongTurnError());
         }
+
+    }
+
+    public void handleEndTurnMessage(EndTurnMessage message, RemoteView sender) {
+        if(isSenderTurn(sender.getPlayer())) {
+            model.nextTurn();
+            this.currPlayer = model.getCurrPlayer();
+        }
+        else sender.sendError(new WrongTurnError());
 
     }
 
