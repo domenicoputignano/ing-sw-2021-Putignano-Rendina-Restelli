@@ -49,7 +49,7 @@ public abstract class Game extends Observable<UpdateMessage> implements Observer
                 p.getPersonalBoard().getFaithTrack().moveMarker(1);
 
             notifyUpdate(new GameSetupUpdate(p.getUser(),
-                    p.getPersonalBoard().getReducedVersion(),
+                    p.getReducedPersonalBoard(),
                     p.getPosition(), decks, marketTray.getReducedVersion()));
         }
         this.turn = new Turn(this,inkwell);
@@ -121,7 +121,7 @@ public abstract class Game extends Observable<UpdateMessage> implements Observer
             else p.getPersonalBoard().getFaithTrack().setFavorTile(vatican_index,StateFavorTiles.DISCARDED);
 
             notifyUpdate(new ActivateVaticanReportUpdate(p.getUser(),
-                    p.getPersonalBoard().getReducedVersion(), currPlayer.getUser(),
+                    p.getReducedPersonalBoard(), currPlayer.getUser(),
                     p.getPersonalBoard().getFaithTrack().getStateFavorTile(vatican_index), vatican_index));
         }
 

@@ -42,7 +42,7 @@ public class ActivateProduction implements AbstractTurnPhase {
                     turn.getPlayer().getPersonalBoard().getFaithTrack().moveMarker(faith);
                     turn.normalActionDone();
                     turn.getGame().notifyUpdate(new ActivateProductionUpdate(turn.getPlayer().getUser(),
-                            turn.getPlayer().getPersonalBoard().getReducedVersion(),
+                            turn.getPlayer().getReducedPersonalBoard(),
                             inputResources, outputResources));
                 } catch (DepotOutOfBoundsException | DepotNotFoundException | StrongboxOutOfBoundException e) {
                     LOGGER.log(Level.SEVERE, "Critical error detected: exception not expected thrown!");

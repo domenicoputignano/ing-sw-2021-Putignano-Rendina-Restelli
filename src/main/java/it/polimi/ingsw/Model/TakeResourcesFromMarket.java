@@ -6,6 +6,7 @@ import it.polimi.ingsw.Exceptions.*;
 import it.polimi.ingsw.Commons.Effect;
 import it.polimi.ingsw.Model.MarketTray.*;
 import it.polimi.ingsw.Utils.MarbleDestination;
+import it.polimi.ingsw.Utils.Messages.ServerMessages.Updates.FaithMarkerUpdate;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.Updates.PositioningUpdate;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.Updates.TakeResourcesFromMarketUpdate;
 import it.polimi.ingsw.Utils.Pair;
@@ -35,12 +36,16 @@ public class TakeResourcesFromMarket implements AbstractTurnPhase {
             handlePositioning(turn.getPlayer().getPersonalBoard().getWarehouse());
             turn.getGame().getMarketTray().clearWhiteMarbleEffect();
             turn.normalActionDone();
+            moveCurrPlayerMarker(turn);
             if(pendingResources.size()>0)
                 throw new NeedPositioningException(pendingResources);
-            else turn.getGame().notifyUpdate(new TakeResourcesFromMarketUpdate(turn.getPlayer().getUser(),
-                    turn.getPlayer().getPersonalBoard().getReducedVersion(),
-                    turn.getGame().getMarketTray().getReducedVersion(),
-                    getEarnedResources()));
+            else {
+                turn.getGame().notifyUpdate(new TakeResourcesFromMarketUpdate(turn.getPlayer().getUser(),
+                        turn.getPlayer().getReducedPersonalBoard(),
+                        turn.getGame().getMarketTray().getReducedVersion(),
+                        getEarnedResources()));
+                concludeTurnPhase(turn);
+            }
         } else throw new WhiteEffectMismatchException();
     }
 
@@ -100,7 +105,7 @@ public class TakeResourcesFromMarket implements AbstractTurnPhase {
 
 
     //metodo per gestire la seconda possibilità data al giocatore di posizionare le risorse nei depot
-    public void handlePositioning(Turn turn, List<Pair<ResourceType,MarbleDestination>> pairList) throws PositioningException {
+    public void handlePositioning(Turn turn, List<Pair<ResourceType,MarbleDestination>> pairList) {
         List<ResourceType> discardedResourcesList = new ArrayList<>();
         Warehouse playerWarehouse = turn.getPlayer().getPersonalBoard().getWarehouse();
         whereToPutResources = pairList;
@@ -115,11 +120,9 @@ public class TakeResourcesFromMarket implements AbstractTurnPhase {
             }
         }
         pendingResources.clear();
-
-        //if(foundProblemWhilePositioning) throw new PositioningException();
-
         turn.getGame().notifyUpdate(new PositioningUpdate(turn.getPlayer().getUser(),
-                turn.getPlayer().getPersonalBoard().getReducedVersion(), discardedResourcesList));
+                turn.getPlayer().getReducedPersonalBoard(), discardedResourcesList));
+        concludeTurnPhase(turn);
     }
 
     public boolean checkPendingResourcesPositioning(List<ResourceType> resourcesToPut)
@@ -127,15 +130,21 @@ public class TakeResourcesFromMarket implements AbstractTurnPhase {
         return resourcesToPut.containsAll(pendingResources) && pendingResources.containsAll(resourcesToPut);
     }
 
+    private void moveCurrPlayerMarker(Turn turn)
+    {
+        turn.getPlayer().getPersonalBoard().getFaithTrack().moveMarker(faith);
+    }
+
     public void concludeTurnPhase(Turn turn) {
-        for(Player p : turn.getGame().getPlayerList()) {
+        for(Player  p : turn.getGame().getPlayerList()) {
             if(!p.equals(turn.getPlayer())) {
                 p.getPersonalBoard().getFaithTrack().moveMarker(discardedResources);
-            } else {
-                p.getPersonalBoard().getFaithTrack().moveMarker(faith);
+                turn.getGame().notifyUpdate(new FaithMarkerUpdate(p.getUser(),
+                        p.getReducedPersonalBoard(),
+                        turn.getPlayer().getUser(),
+                        discardedResources));
             }
         }
-        //TODO notificare il client per la fine dell'azione principale
     }
 
 
@@ -186,9 +195,5 @@ public class TakeResourcesFromMarket implements AbstractTurnPhase {
 
     public List<ResourceType> getPendingResources() {
         return pendingResources;
-    }
-
-    public int getDiscardedResources() {
-        return discardedResources;
     }
 }

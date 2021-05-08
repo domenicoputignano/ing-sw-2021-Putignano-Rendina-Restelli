@@ -40,7 +40,7 @@ public class BuyDevCard implements AbstractTurnPhase {
                         performPurchasingCard(drawnCard, turn.getPlayer().getPersonalBoard(), message.getDestinationSlot());
                         turn.normalActionDone();
                         turn.getGame().notifyUpdate(new BuyDevCardPerformedUpdate(turn.getPlayer().getUser(),
-                                turn.getPlayer().getPersonalBoard().getReducedVersion(),
+                                turn.getPlayer().getReducedPersonalBoard(),
                                 turn.getGame().getDecks(),drawnCard));
                     } catch (DepotOutOfBoundsException | DepotNotFoundException | StrongboxOutOfBoundException e) {
                         LOGGER.log(Level.SEVERE, "Critical error detected: exception not expected thrown! ");

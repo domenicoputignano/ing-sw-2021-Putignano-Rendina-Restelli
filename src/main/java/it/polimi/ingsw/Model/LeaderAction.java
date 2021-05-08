@@ -22,7 +22,7 @@ public class LeaderAction implements AbstractTurnPhase{
                 if (player.checkLeaderActivation(message.getIndex() - 1)) {
                     player.activateLeaderCard(message.getIndex() - 1);
                     turn.getGame().notifyUpdate(new LeaderActionUpdate(turn.getPlayer().getUser(),
-                            player.getPersonalBoard().getReducedVersion(),
+                            player.getReducedPersonalBoard(),
                             player.getLeaderCards().get(message.getIndex() - 1),
                             message.getIndex(),false));
                 }

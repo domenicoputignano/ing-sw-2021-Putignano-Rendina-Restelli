@@ -1,5 +1,6 @@
 package it.polimi.ingsw.Model;
 
+import it.polimi.ingsw.Client.ReducedPersonalBoard;
 import it.polimi.ingsw.Commons.User;
 import it.polimi.ingsw.Exceptions.DepotOutOfBoundsException;
 import it.polimi.ingsw.Exceptions.IncompatibleResourceTypeException;
@@ -92,6 +93,10 @@ public class Player {
         return chosenResources.stream().map(Pair::getKey).collect(Collectors.toList());
     }
 
+    public ReducedPersonalBoard getReducedPersonalBoard()
+    {
+        return this.getPersonalBoard().getReducedVersion();
+    }
 
     private void throwLeaderCard(int leader) {
         leaderCards.remove(leader - 1);

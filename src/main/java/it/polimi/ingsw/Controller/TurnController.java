@@ -128,14 +128,8 @@ public class TurnController {
 
                     //check if Resources contained in positioning Message match with left resources in TakeResourcesFromMarket
                     if (turnInstance.checkPendingResourcesPositioning(message.getResourcesToPut())) {
-                        try {
                             turnInstance.handlePositioning(model.getTurn(), message.getWhereToPutResources());
-                        } catch (PositioningException e) {
-                            //send Error to the client
-                            sender.sendError(new PositioningError(PositioningError.Trigger.DISCARDEDRESOURCES));
-                        }
                         //TODO: AGGIUNGERE CONCLUDETURNPHASE IN TUTTE LE ALTRE AZIONI DEL TURNO
-                        turnInstance.concludeTurnPhase(model.getTurn());
                     } else {
                         sender.sendError(new InvalidMessageError());
                     }
