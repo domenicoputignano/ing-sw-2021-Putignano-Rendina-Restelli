@@ -5,6 +5,9 @@ import it.polimi.ingsw.Model.GameState;
 import it.polimi.ingsw.Model.Player;
 import it.polimi.ingsw.Network.RemoteView;
 import it.polimi.ingsw.Utils.Messages.ClientMessages.*;
+import it.polimi.ingsw.Utils.Messages.ServerMessages.Errors.ActionError;
+import it.polimi.ingsw.Utils.Messages.ServerMessages.Errors.InvalidMessageError;
+
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -43,10 +46,10 @@ public class GameController {
                 receivedChoiceMessage.getAndIncrement();
                 checkAllResourceChoiceDone(receivedChoiceMessage);
             } else {
-                // TODO HANDLEERROR("Numero di risorse scelte non compatibili")
+                sender.sendError(new ActionError(ActionError.Trigger.RESOURCECHOICEMISMATCH));
             }
         }else {
-            //TODO notificare il client dell'errore
+            sender.sendError(new InvalidMessageError());
         }
     }
 
@@ -57,10 +60,10 @@ public class GameController {
                 receivedChoiceMessage.getAndIncrement();
                 checkAllLeaderChoicesDone(receivedChoiceMessage);
             } else {
-                // TODO HANDLEERROR("Messaggio non valido")
+                sender.sendError(new InvalidMessageError());
             }
         } else {
-            // TODO HANDLEERROR("Fase del gioco già effettuata")
+            sender.sendError(new ActionError(ActionError.Trigger.WRONGGAMEPHASE));
         }
     }
 
