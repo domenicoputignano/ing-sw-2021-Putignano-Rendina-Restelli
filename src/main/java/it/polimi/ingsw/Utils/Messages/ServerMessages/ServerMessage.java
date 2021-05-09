@@ -5,6 +5,7 @@ import it.polimi.ingsw.Network.Client;
 import java.io.Serializable;
 
 public interface ServerMessage extends Serializable {
+
     public void handleMessage(Client handler);
 
 }

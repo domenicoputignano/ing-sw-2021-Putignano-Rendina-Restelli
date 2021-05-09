@@ -7,9 +7,10 @@ import it.polimi.ingsw.Model.Player;
 import it.polimi.ingsw.Observer;
 import it.polimi.ingsw.Utils.Messages.ClientMessages.ClientMessage;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.Errors.ErrorMessage;
+import it.polimi.ingsw.Utils.Messages.ServerMessages.ServerMessage;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.Updates.UpdateMessage;
 
-public class RemoteView implements Observer<UpdateMessage> {
+public class RemoteView implements Observer<ServerMessage> {
 
     private final User user;
     private final Game game;
@@ -21,6 +22,7 @@ public class RemoteView implements Observer<UpdateMessage> {
         this.gameController = gameController;
         this.game = gameController.getModel();
         this.clientStatus = clientStatus;
+        game.addObserver(this);
     }
 
 
@@ -31,7 +33,8 @@ public class RemoteView implements Observer<UpdateMessage> {
 
     public void handleClientMessage(ClientMessage message) {  message.handleMessage(gameController, this); }
 
-    public void update(UpdateMessage message) {
+
+    public void update(ServerMessage message) {
         clientStatus.send(message);
     }
 

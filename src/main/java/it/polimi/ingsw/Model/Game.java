@@ -11,8 +11,9 @@ import it.polimi.ingsw.Model.ConclusionEvents.SeventhDevCardBought;
 import it.polimi.ingsw.Model.MarketTray.MarketTray;
 import it.polimi.ingsw.Observable;
 import it.polimi.ingsw.Observer;
+import it.polimi.ingsw.Utils.Messages.ServerMessages.GameSetupMessage;
+import it.polimi.ingsw.Utils.Messages.ServerMessages.ServerMessage;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.Updates.ActivateVaticanReportUpdate;
-import it.polimi.ingsw.Utils.Messages.ServerMessages.Updates.GameSetupUpdate;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.Updates.UpdateMessage;
 
 import java.io.FileNotFoundException;
@@ -21,7 +22,7 @@ import java.lang.reflect.Type;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public abstract class Game extends Observable<UpdateMessage> implements Observer<Integer> {
+public abstract class Game extends Observable<ServerMessage> implements Observer<Integer> {
     protected Player inkwell;
     protected Player currPlayer;
     protected List<Player> playerList;
@@ -38,23 +39,23 @@ public abstract class Game extends Observable<UpdateMessage> implements Observer
         this.users = new HashMap<User, Player>();
         this.initializeDecksDevCards();
         this.dealLeaderCards();
-        for(Player p : this.playerList)
-        {
-            p.setPosition(playerList.indexOf(p)+1);
+        for(Player p : this.playerList) {
+            p.setPosition(playerList.indexOf(p) + 1);
             users.put(p.getUser(), p);
             /*aggiungo MultiPlayerMode alla lista di Observer di faithtrack per la vatican report section*/
             p.getPersonalBoard().getFaithTrack().addObserver(this);
-
-            if(p.getPosition()==3 || p.getPosition()==4)
+            if (p.getPosition() == 3 || p.getPosition() == 4)
                 p.getPersonalBoard().getFaithTrack().moveMarker(1);
-
-            notifyUpdate(new GameSetupUpdate(p.getUser(),
-                    p.getReducedPersonalBoard(),
-                    p.getPosition(), decks, marketTray.getReducedVersion()));
         }
+        notifyGameSetup();
         this.turn = new Turn(this,inkwell);
         //DISTRIBUZIONE RISORSE A SCELTA E SCELTA CARTE LEADER PASSANDO IN RESOURCECHOICE E LEADER CHOICE
         //Inviare notifica alle view interessate per le risorse a scelta
+    }
+
+    private void notifyGameSetup() {
+        notify(new GameSetupMessage(playerList.stream().map(Player::getReducedVersion).collect(Collectors.toList()),
+                decks, marketTray.getReducedVersion()));
     }
 
     private void initializeDecksDevCards() {

@@ -9,5 +9,11 @@ public class ReducedPlayer {
     private int position;
 
 
+    public ReducedPlayer(User nickname, ReducedPersonalBoard personalBoard, int position) {
+        this.nickname = nickname;
+        this.personalBoard = personalBoard;
+        this.position = position;
+    }
+
 
 }

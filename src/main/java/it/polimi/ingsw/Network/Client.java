@@ -1,6 +1,8 @@
 package it.polimi.ingsw.Network;
 
+import it.polimi.ingsw.Client.ReducedGame;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.ServerMessage;
+import it.polimi.ingsw.Utils.Messages.ServerMessages.GameSetupMessage;
 
 import java.io.*;
 import java.net.Socket;
@@ -14,6 +16,7 @@ public class Client {
     private String ip;
     private int port;
     private boolean isActive;
+    private ReducedGame game;
     private ObjectInputStream socketInObj ;
     private ObjectOutputStream socketOutObj ;
     private Logger LOGGER = Logger.getLogger(Client.class.getName());
@@ -61,6 +64,9 @@ public class Client {
     }
 
 
+    public void setupGame(GameSetupMessage message) {
+
+    }
 
 
     private Thread createListeningThread() {
