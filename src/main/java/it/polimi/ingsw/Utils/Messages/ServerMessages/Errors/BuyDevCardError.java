@@ -1,5 +1,7 @@
 package it.polimi.ingsw.Utils.Messages.ServerMessages.Errors;
 
+import it.polimi.ingsw.Network.Client;
+
 public class BuyDevCardError implements ErrorMessage {
     private final Trigger trigger;
     public enum Trigger {
@@ -28,4 +30,8 @@ public class BuyDevCardError implements ErrorMessage {
         return trigger;
     }
 
+    @Override
+    public void handleMessage(Client handler) {
+
+    }
 }

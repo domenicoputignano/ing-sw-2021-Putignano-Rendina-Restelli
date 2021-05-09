@@ -134,13 +134,13 @@ public abstract class Game extends Observable<UpdateMessage> implements Observer
         return this.decks.stream().anyMatch(x -> x.getCardType().equals(cardType) && x.getSize()<=0);
     }
 
-    public abstract void endGame(HitLastSpace event);
+    public void endGame(HitLastSpace event){};
 
-    public abstract void endGame(DevCardColorEnded event);
+    public void endGame(DevCardColorEnded event){};
 
-    public abstract void endGame(SeventhDevCardBought event);
+    public void endGame(SeventhDevCardBought event){};
 
-    public abstract void endGame(BlackCrossHitLastSpace event);
+    public void endGame(BlackCrossHitLastSpace event){};
 
     @Override
     public void update(Integer message) {

@@ -23,7 +23,7 @@ public class TakeResourcesFromMarketUpdate extends UpdateMessage {
         this.earnedResources = resources;
     }
     @Override
-    public void handleUpdateMessage(Client client) {
+    public void handleMessage(Client client) {
 
     }
 }

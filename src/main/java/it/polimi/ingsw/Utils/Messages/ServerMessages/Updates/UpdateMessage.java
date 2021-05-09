@@ -11,7 +11,4 @@ public abstract class UpdateMessage implements ServerMessage {
     protected ReducedPersonalBoard userPersonalBoard;
 
 
-
-    public abstract void handleUpdateMessage(Client client);
-
 }

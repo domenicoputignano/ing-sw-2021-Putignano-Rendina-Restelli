@@ -17,7 +17,7 @@ public class ServerAsksForPositioning extends UpdateMessage {
     }
 
     @Override
-    public void handleUpdateMessage(Client client) {
+    public void handleMessage(Client client) {
 
     }
 }

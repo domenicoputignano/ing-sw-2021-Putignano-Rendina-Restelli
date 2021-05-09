@@ -1,9 +1,17 @@
 package it.polimi.ingsw.Utils.Messages.ServerMessages.Errors;
 
-import javax.swing.*;
+import it.polimi.ingsw.Network.Client;
+
+
 
 public class ActionError implements ErrorMessage {
     private final Trigger trigger;
+
+    @Override
+    public void handleMessage(Client handler) {
+
+    }
+
     public enum Trigger {
         NORMALACTIONALREADYDONE("Normal action has been already done for this turn!"),
         WRONGTURNPHASE("Required action cannot be accomplished in this context!"),

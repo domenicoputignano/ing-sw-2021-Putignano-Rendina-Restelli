@@ -23,7 +23,7 @@ public class BuyDevCardPerformedUpdate extends UpdateMessage {
         this.resultingDecks = resultingDecks;
         this.boughtCard = card;
     }
-    public void handleUpdateMessage(Client client) {
+    public void handleMessage(Client client) {
         //TODO implementare
 
     }

@@ -11,7 +11,7 @@ import java.util.Objects;
 public class User implements Serializable {
 
     private final String nickname;
-    private boolean isActive;
+    private transient boolean isActive;
 
     public User(String nickname) {
         this.nickname = nickname;

@@ -20,7 +20,7 @@ public class LeaderActionUpdate extends UpdateMessage {
         this.toDiscard = toDiscard;
     }
     @Override
-    public void handleUpdateMessage(Client client) {
+    public void handleMessage(Client client) {
 
     }
 }
