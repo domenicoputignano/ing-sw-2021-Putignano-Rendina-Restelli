@@ -1,6 +1,10 @@
 package it.polimi.ingsw.Client;
 
+import it.polimi.ingsw.Commons.Effect;
+import it.polimi.ingsw.Commons.LeaderCard;
 import it.polimi.ingsw.Commons.User;
+
+import java.util.List;
 
 public class ReducedPlayer {
 
@@ -30,4 +34,9 @@ public class ReducedPlayer {
     public int getPosition() {
         return position;
     }
+
+    public List<LeaderCard> getCompatibleLeaderEffect(Effect effect) {
+        return personalBoard.findEffect(effect);
+    }
+
 }

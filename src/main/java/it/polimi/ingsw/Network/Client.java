@@ -21,6 +21,7 @@ public class Client {
     private ObjectOutputStream socketOutObj ;
     private Logger LOGGER = Logger.getLogger(Client.class.getName());
 
+
     public Client(String ip, int port){
         this.ip = ip;
         this.port = port;
