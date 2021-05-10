@@ -29,7 +29,7 @@ public abstract class ReducedGame {
     }
 
 
-
+    public abstract void nextTurn();
 
 
     private ReducedPlayer getPlayer(User user) {

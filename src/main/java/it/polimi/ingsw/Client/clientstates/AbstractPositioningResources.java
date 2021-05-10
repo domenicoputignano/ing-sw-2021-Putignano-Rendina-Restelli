@@ -1,4 +1,4 @@
 package it.polimi.ingsw.Client.clientstates;
 
-public abstract class AbstractPositioningResources implements AbstractClientStateInterface {
+public abstract class AbstractPositioningResources extends AbstractClientState {
 }

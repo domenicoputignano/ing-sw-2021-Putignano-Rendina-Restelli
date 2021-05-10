@@ -40,7 +40,7 @@ public class SoloMode extends Game {
 
     public void nextTurn(){
         lorenzoPlays();
-        //TODO notifyUpdate(new NextTurnUpdate(...))
+        //TODO notifyUpdate(new LorenzoPlayedUpdate(...))
     }
 
     public void lorenzoPlays(){

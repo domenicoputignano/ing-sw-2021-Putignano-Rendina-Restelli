@@ -1,5 +1,5 @@
 package it.polimi.ingsw.Client.clientstates;
 
-public abstract class AbstractInitialResourceChoice implements AbstractClientStateInterface {
+public abstract class AbstractInitialResourceChoice extends AbstractClientState {
 
 }

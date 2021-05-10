@@ -1,6 +1,7 @@
-package it.polimi.ingsw.Client.clientstates;
+package it.polimi.ingsw.Client.clientstates.cli;
 
 
+import it.polimi.ingsw.Client.clientstates.AbstractActivateProduction;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.ServerMessage;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.Updates.ActivateProductionUpdate;
 
@@ -14,5 +15,8 @@ public class ActivateProductionCLI extends AbstractActivateProduction {
     }
 
 
-
+    @Override
+    public void manageUserInteraction() {
+        System.out.println("Choose which productions you want to activate: ");
+    }
 }
