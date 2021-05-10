@@ -1,8 +1,9 @@
 package it.polimi.ingsw.Client.clientstates;
 
-public interface AbstractClientStateInterface {
+import it.polimi.ingsw.Utils.Messages.ServerMessages.ServerMessage;
 
-    public void manageUserInteraction();
+public interface AbstractClientStateInterface {
+    public void render(ServerMessage message);
 
 
 }

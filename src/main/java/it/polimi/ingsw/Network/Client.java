@@ -87,5 +87,8 @@ public class Client {
         return t;
     }
 
+    public ReducedGame getGame() {
+        return game;
+    }
 }
 

@@ -15,5 +15,19 @@ public class ReducedPlayer {
         this.position = position;
     }
 
+    public User getNickname() {
+        return nickname;
+    }
 
+    public ReducedPersonalBoard getPersonalBoard() {
+        return personalBoard;
+    }
+
+    public void updatePersonalBoard(ReducedPersonalBoard personalBoard) {
+        this.personalBoard = personalBoard;
+    }
+
+    public int getPosition() {
+        return position;
+    }
 }

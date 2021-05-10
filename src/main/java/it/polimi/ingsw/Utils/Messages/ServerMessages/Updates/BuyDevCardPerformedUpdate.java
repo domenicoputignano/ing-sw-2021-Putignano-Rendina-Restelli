@@ -16,15 +16,18 @@ public class BuyDevCardPerformedUpdate extends UpdateMessage {
     private List<Deck> resultingDecks = new ArrayList<>();
     private DevelopmentCard boughtCard;
 
-    public BuyDevCardPerformedUpdate(User user, ReducedPersonalBoard reducedPersonalBoard, List<Deck> resultingDecks, DevelopmentCard card)
-    {
+    public BuyDevCardPerformedUpdate(User user, ReducedPersonalBoard reducedPersonalBoard, List<Deck> resultingDecks, DevelopmentCard card) {
         this.user = user;
         this.userPersonalBoard = reducedPersonalBoard;
         this.resultingDecks = resultingDecks;
         this.boughtCard = card;
     }
-    public void handleMessage(Client client) {
-        //TODO implementare
 
+    public void handleMessage(Client client) {
+        client.getGame().performUpdate(this);
+    }
+
+    public List<Deck> getResultingDecks() {
+        return resultingDecks;
     }
 }

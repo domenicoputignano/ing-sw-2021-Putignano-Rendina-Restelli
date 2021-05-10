@@ -9,5 +9,11 @@ public abstract class UpdateMessage implements ServerMessage {
     protected User user;
     protected ReducedPersonalBoard userPersonalBoard;
 
+    public User getUser() {
+        return user;
+    }
 
+    public ReducedPersonalBoard getUserPersonalBoard() {
+        return userPersonalBoard;
+    }
 }
