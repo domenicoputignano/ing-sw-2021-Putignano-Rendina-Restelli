@@ -1,9 +1,9 @@
 package it.polimi.ingsw.Model;
 
+import it.polimi.ingsw.Commons.ResourceType;
 import it.polimi.ingsw.Exceptions.StrongboxOutOfBoundException;
 import org.junit.jupiter.api.Test;
 
-import java.security.InvalidParameterException;
 import java.util.EnumMap;
 
 import static org.junit.jupiter.api.Assertions.*;

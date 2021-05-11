@@ -1,7 +1,5 @@
 package it.polimi.ingsw.Commons;
 
-import it.polimi.ingsw.Model.ResourceType;
-
 public class LeaderEffect {
     private Effect effect;
     private ResourceType type;

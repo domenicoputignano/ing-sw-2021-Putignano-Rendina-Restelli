@@ -1,5 +1,6 @@
 package it.polimi.ingsw.Model;
 
+import it.polimi.ingsw.Commons.ResourceType;
 import it.polimi.ingsw.Exceptions.DepotNotFoundException;
 import it.polimi.ingsw.Exceptions.DepotOutOfBoundsException;
 import it.polimi.ingsw.Exceptions.PaymentErrorException;

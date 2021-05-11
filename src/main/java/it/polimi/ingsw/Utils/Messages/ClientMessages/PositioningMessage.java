@@ -2,7 +2,7 @@ package it.polimi.ingsw.Utils.Messages.ClientMessages;
 
 import it.polimi.ingsw.Controller.GameController;
 import it.polimi.ingsw.Controller.TurnController;
-import it.polimi.ingsw.Model.ResourceType;
+import it.polimi.ingsw.Commons.ResourceType;
 import it.polimi.ingsw.Network.RemoteView;
 import it.polimi.ingsw.Utils.MarbleDestination;
 import it.polimi.ingsw.Utils.Pair;

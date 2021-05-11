@@ -1,6 +1,7 @@
 package it.polimi.ingsw.Model;
 
 import it.polimi.ingsw.Client.ReducedStrongbox;
+import it.polimi.ingsw.Commons.ResourceType;
 import it.polimi.ingsw.Exceptions.StrongboxOutOfBoundException;
 
 import java.security.InvalidParameterException;

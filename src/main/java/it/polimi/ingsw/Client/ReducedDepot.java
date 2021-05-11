@@ -1,6 +1,6 @@
 package it.polimi.ingsw.Client;
 
-import it.polimi.ingsw.Model.ResourceType;
+import it.polimi.ingsw.Commons.ResourceType;
 
 import java.io.Serializable;
 import java.util.Objects;

@@ -1,7 +1,5 @@
 package it.polimi.ingsw.Commons;
 
-import it.polimi.ingsw.Model.ResourceType;
-
 import java.util.List;
 import java.util.Map;
 

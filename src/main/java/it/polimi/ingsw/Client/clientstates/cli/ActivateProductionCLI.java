@@ -3,8 +3,7 @@ package it.polimi.ingsw.Client.clientstates.cli;
 
 import it.polimi.ingsw.Client.clientstates.AbstractActivateProduction;
 import it.polimi.ingsw.Model.ActiveProductions;
-import it.polimi.ingsw.Model.ResourceType;
-import it.polimi.ingsw.Utils.Messages.ClientMessages.ActivateProductionMessage;
+import it.polimi.ingsw.Commons.ResourceType;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.ServerMessage;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.Updates.ActivateProductionUpdate;
 
@@ -15,8 +14,8 @@ public class ActivateProductionCLI extends AbstractActivateProduction {
 
     String answer;
     ActiveProductions requiredProduction = new ActiveProductions();
-
     Scanner input = new Scanner(System.in);
+
 
     public void render(ServerMessage message) {
         ActivateProductionUpdate update = (ActivateProductionUpdate) message;
@@ -43,8 +42,7 @@ public class ActivateProductionCLI extends AbstractActivateProduction {
         if(countExtraProductionEffect() == 1) {
             System.out.printf("One extra production of type %s available, do you want to activate it? (yes/no) ", getExtraProductionType(0));
             answer = input.nextLine();
-            if(answer.equalsIgnoreCase("yes")) requiredProduction.setExtraSlot1(true);
-            else requiredProduction.setExtraSlot1(false);
+            requiredProduction.setExtraSlot1(answer.equalsIgnoreCase("yes"));
             requiredProduction.setExtraSlot2(false);
         }
         if(countExtraProductionEffect() == 2) {

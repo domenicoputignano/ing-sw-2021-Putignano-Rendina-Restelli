@@ -1,9 +1,5 @@
 package it.polimi.ingsw.Client;
 
-import it.polimi.ingsw.Model.ResourceType;
-
-import java.util.Map;
-
 public class ReducedWarehouse {
     private final ReducedDepot[] normalDepots;
     private final ReducedDepot[] extraDepots;

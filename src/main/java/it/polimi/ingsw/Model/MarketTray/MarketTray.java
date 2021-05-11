@@ -3,7 +3,7 @@ package it.polimi.ingsw.Model.MarketTray;
 import it.polimi.ingsw.Client.ReducedMarble;
 import it.polimi.ingsw.Client.ReducedMarketTray;
 import it.polimi.ingsw.Commons.ColorMarble;
-import it.polimi.ingsw.Model.ResourceType;
+import it.polimi.ingsw.Commons.ResourceType;
 import it.polimi.ingsw.Utils.MarketChoice;
 
 import java.util.*;

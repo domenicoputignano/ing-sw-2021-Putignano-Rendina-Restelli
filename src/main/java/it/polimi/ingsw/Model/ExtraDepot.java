@@ -1,6 +1,7 @@
 package it.polimi.ingsw.Model;
 
 import it.polimi.ingsw.Client.ReducedDepot;
+import it.polimi.ingsw.Commons.ResourceType;
 import it.polimi.ingsw.Exceptions.DepotOutOfBoundsException;
 
 

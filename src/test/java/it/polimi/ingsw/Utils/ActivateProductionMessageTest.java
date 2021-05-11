@@ -1,7 +1,7 @@
 package it.polimi.ingsw.Utils;
 
 import it.polimi.ingsw.Model.ActiveProductions;
-import it.polimi.ingsw.Model.ResourceType;
+import it.polimi.ingsw.Commons.ResourceType;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 import it.polimi.ingsw.Utils.Messages.ClientMessages.*;

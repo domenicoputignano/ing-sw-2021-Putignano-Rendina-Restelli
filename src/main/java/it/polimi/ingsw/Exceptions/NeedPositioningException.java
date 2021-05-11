@@ -1,7 +1,7 @@
 package it.polimi.ingsw.Exceptions;
 
 
-import it.polimi.ingsw.Model.ResourceType;
+import it.polimi.ingsw.Commons.ResourceType;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -3,7 +3,6 @@ package it.polimi.ingsw.Client;
 import it.polimi.ingsw.Commons.Effect;
 import it.polimi.ingsw.Commons.LeaderCard;
 import it.polimi.ingsw.Commons.Slot;
-import it.polimi.ingsw.Model.ResourceType;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -37,5 +36,8 @@ public class ReducedPersonalBoard implements Serializable {
     public List<LeaderCard> findEffect(Effect effect) {
         return leaderCards.stream().filter(x -> x.getLeaderEffect().getEffect().equals(effect)&&x.isActive()).collect(Collectors.toList());
     }
+
+
+
 
 }

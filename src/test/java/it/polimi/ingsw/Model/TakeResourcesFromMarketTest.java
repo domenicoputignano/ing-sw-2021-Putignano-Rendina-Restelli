@@ -1,10 +1,7 @@
 package it.polimi.ingsw.Model;
 
+import it.polimi.ingsw.Commons.*;
 import it.polimi.ingsw.Exceptions.*;
-import it.polimi.ingsw.Commons.Effect;
-import it.polimi.ingsw.Commons.LeaderCard;
-import it.polimi.ingsw.Commons.LeaderEffect;
-import it.polimi.ingsw.Commons.ColorMarble;
 import it.polimi.ingsw.Model.MarketTray.Marble;
 import it.polimi.ingsw.Model.MarketTray.WhiteMarble;
 import it.polimi.ingsw.Utils.MarbleDestination;
@@ -14,7 +11,6 @@ import it.polimi.ingsw.Utils.Messages.ClientMessages.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,7 +40,7 @@ class TakeResourcesFromMarketTest {
         TakeResourcesFromMarketMessage takeResourcesFromMarketMessage = new TakeResourcesFromMarketMessage();
         takeResourcesFromMarketMessage.setPlayerChoice(MarketChoice.ROW, 2);
         multiPlayerMode.getTurn().getPlayer().getLeaderCards().clear();
-        multiPlayerMode.getTurn().getPlayer().getLeaderCards().add(new LeaderCard(new LeaderEffect(Effect.CMARBLE,ResourceType.shield),null,null,0));
+        multiPlayerMode.getTurn().getPlayer().getLeaderCards().add(new LeaderCard(new LeaderEffect(Effect.CMARBLE, ResourceType.shield),null,null,0));
         multiPlayerMode.getTurn().getPlayer().getLeaderCards().add(new LeaderCard(new LeaderEffect(Effect.CMARBLE,ResourceType.coin),null,null,0));
         multiPlayerMode.getTurn().getPlayer().getLeaderCards().get(0).setIsActive();
         multiPlayerMode.getTurn().getPlayer().getLeaderCards().get(1).setIsActive();

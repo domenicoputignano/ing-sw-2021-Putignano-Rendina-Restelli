@@ -1,6 +1,6 @@
 package it.polimi.ingsw.Model;
 
-import it.polimi.ingsw.Commons.CardType;
+import it.polimi.ingsw.Commons.ResourceType;
 import it.polimi.ingsw.Exceptions.*;
 import it.polimi.ingsw.Utils.Messages.ClientMessages.*;
 import org.junit.jupiter.api.BeforeEach;
@@ -63,7 +63,7 @@ class LeaderActionTest {
         LeaderActionMessage leaderActionMessage = new LeaderActionMessage();
         leaderActionMessage.setIndex(1);
         leaderActionMessage.setToDiscard(false);
-        multiPlayerMode.getTurn().getPlayer().getPersonalBoard().getWarehouse().addResourcesToDepot(1,ResourceType.coin,1);
+        multiPlayerMode.getTurn().getPlayer().getPersonalBoard().getWarehouse().addResourcesToDepot(1, ResourceType.coin,1);
         multiPlayerMode.getTurn().getPlayer().getPersonalBoard().getWarehouse().addResourcesToDepot(2,ResourceType.shield,2);
         multiPlayerMode.getTurn().getPlayer().getPersonalBoard().getWarehouse().addResourcesToDepot(3,ResourceType.servant,3);
         Map<ResourceType,Integer> strongboxResources = new EnumMap<ResourceType, Integer>(ResourceType.class);

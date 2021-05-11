@@ -2,12 +2,9 @@ package it.polimi.ingsw.Model;
 
 import it.polimi.ingsw.Client.ReducedPersonalBoard;
 import it.polimi.ingsw.Client.ReducedPlayer;
-import it.polimi.ingsw.Commons.User;
+import it.polimi.ingsw.Commons.*;
 import it.polimi.ingsw.Exceptions.DepotOutOfBoundsException;
 import it.polimi.ingsw.Exceptions.IncompatibleResourceTypeException;
-import it.polimi.ingsw.Commons.Effect;
-import it.polimi.ingsw.Commons.LeaderCard;
-import it.polimi.ingsw.Commons.LeaderEffect;
 import it.polimi.ingsw.Exceptions.MoveResourcesException;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.Updates.InitialLeaderChoiceUpdate;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.Updates.InitialResourceChoiceUpdate;

@@ -1,5 +1,6 @@
 package it.polimi.ingsw.Model;
 
+import it.polimi.ingsw.Commons.ResourceType;
 import org.junit.jupiter.api.Test;
 
 import java.util.EnumMap;

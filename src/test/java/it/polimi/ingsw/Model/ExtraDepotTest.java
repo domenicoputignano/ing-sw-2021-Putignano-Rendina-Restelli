@@ -1,5 +1,6 @@
 package it.polimi.ingsw.Model;
 
+import it.polimi.ingsw.Commons.ResourceType;
 import it.polimi.ingsw.Exceptions.DepotOutOfBoundsException;
 import org.junit.jupiter.api.Test;
 

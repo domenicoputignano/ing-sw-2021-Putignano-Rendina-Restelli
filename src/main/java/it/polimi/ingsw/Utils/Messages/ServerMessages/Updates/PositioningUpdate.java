@@ -2,7 +2,7 @@ package it.polimi.ingsw.Utils.Messages.ServerMessages.Updates;
 
 import it.polimi.ingsw.Client.ReducedPersonalBoard;
 import it.polimi.ingsw.Commons.User;
-import it.polimi.ingsw.Model.ResourceType;
+import it.polimi.ingsw.Commons.ResourceType;
 import it.polimi.ingsw.Network.Client;
 
 import java.util.List;

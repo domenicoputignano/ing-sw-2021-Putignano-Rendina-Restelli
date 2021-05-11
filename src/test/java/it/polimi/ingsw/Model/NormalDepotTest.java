@@ -1,5 +1,6 @@
 package it.polimi.ingsw.Model;
 
+import it.polimi.ingsw.Commons.ResourceType;
 import it.polimi.ingsw.Exceptions.DepotOutOfBoundsException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -12,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class NormalDepotTest {
     int size= 3;
     NormalDepot depot = new NormalDepot(size);
-    NormalDepot depot1 = new NormalDepot(2,ResourceType.coin,size);
+    NormalDepot depot1 = new NormalDepot(2, ResourceType.coin,size);
 
     @Test
     void initialize() {

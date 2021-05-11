@@ -1,10 +1,7 @@
 package it.polimi.ingsw.Model;
 
+import it.polimi.ingsw.Commons.*;
 import it.polimi.ingsw.Exceptions.*;
-import it.polimi.ingsw.Commons.Deck;
-import it.polimi.ingsw.Commons.DevelopmentCard;
-import it.polimi.ingsw.Commons.Effect;
-import it.polimi.ingsw.Commons.LeaderEffect;
 import it.polimi.ingsw.Utils.Messages.ClientMessages.*;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.Updates.BuyDevCardPerformedUpdate;
 
