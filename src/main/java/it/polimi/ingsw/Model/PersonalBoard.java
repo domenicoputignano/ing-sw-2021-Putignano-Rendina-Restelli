@@ -42,9 +42,6 @@ public class PersonalBoard {
 
     public void putCardOnTop(DevelopmentCard developmentCard, int slot) { this.slots[slot - 1].putCardOnTop(developmentCard); }
 
-    public ProductionRule getBasicProductionPower() {
-        return basicProductionPower;
-    }
 
     public FaithTrack getFaithTrack() {
         return faithTrack;
@@ -83,7 +80,8 @@ public class PersonalBoard {
             if(requestedProductions.isSlot2()&&!(slots[1].getNumOfStackedCards()>0)) return false;
                 if(requestedProductions.isSlot3()&&!(slots[2].getNumOfStackedCards()>0)) return false;
                     if(requestedProductions.isExtraSlot1()&& owner.getActiveEffects().stream().noneMatch(x -> x.getEffect() == Effect.EXTRAPRODUCTION)) return false;
-                        if(requestedProductions.isExtraSlot1()&& !(owner.getActiveEffects().stream().filter(x -> x.getEffect() == Effect.EXTRAPRODUCTION).count() == 2)) return false;
+                    //TODO verificare
+                        if(requestedProductions.isExtraSlot2()&& !(owner.getActiveEffects().stream().filter(x -> x.getEffect() == Effect.EXTRAPRODUCTION).count() == 2)) return false;
                         return true;
     }
 

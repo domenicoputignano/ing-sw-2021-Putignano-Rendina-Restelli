@@ -1,5 +1,6 @@
 package it.polimi.ingsw.Client;
 
+import it.polimi.ingsw.Commons.DevelopmentCard;
 import it.polimi.ingsw.Commons.Effect;
 import it.polimi.ingsw.Commons.LeaderCard;
 import it.polimi.ingsw.Commons.Slot;
@@ -29,6 +30,8 @@ public class ReducedPersonalBoard implements Serializable {
         return warehouse;
     }
 
+
+    //TODO cambiare
     public Slot[] getSlots() {
         return slots;
     }
@@ -37,6 +40,13 @@ public class ReducedPersonalBoard implements Serializable {
         return leaderCards.stream().filter(x -> x.getLeaderEffect().getEffect().equals(effect)&&x.isActive()).collect(Collectors.toList());
     }
 
+    public boolean isEmptySlot(int slotIndex) {
+        return slots[slotIndex].getNumOfStackedCards() == 0;
+    }
+
+    public DevelopmentCard peekTopCardInSlot(int slotIndex) {
+        return slots[slotIndex].peekTopCard();
+    }
 
 
 
