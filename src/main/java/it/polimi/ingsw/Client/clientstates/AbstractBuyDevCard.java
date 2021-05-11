@@ -11,20 +11,24 @@ import java.util.stream.Collectors;
 
 public abstract class AbstractBuyDevCard extends AbstractClientState{
     protected BuyDevCardMessage message = new BuyDevCardMessage();
+    protected Map<ResourceType, Integer> actualCost;
 
     protected boolean deckIsEmpty() {
         return takeDeckFromCardType(message.getType()).isEmpty();
     }
 
-    protected boolean checkCostRequiredCardType(Deck requiredDeck) {
+    protected boolean checkCostRequiredCardType(Map<ResourceType, Integer> cost) {
         ReducedPlayer player = client.getGame().getCurrPlayer();
-        Map<ResourceType,Integer> actualCost = new EnumMap<>(requiredDeck.getTop().getCost());
+        return Checker.checkResources(cost, player.getPersonalBoard());
+    }
+
+    protected void computeActualCost(Deck requiredDeck) {
+        ReducedPlayer player = client.getGame().getCurrPlayer();
+        actualCost = new EnumMap<>(requiredDeck.getTop().getCost());
 
         // Apply sales effects if present
         player.getCompatibleLeaderEffect(Effect.SALES).forEach(x ->
                 actualCost.put(x.getLeaderEffect().getType(), actualCost.get(x.getLeaderEffect().getType())-1));
-
-        return Checker.checkResources(actualCost, player.getPersonalBoard());
     }
 
     protected boolean canBuyCardOfLevel(int level) {

@@ -20,7 +20,8 @@ public class BuyDevCardCLI extends AbstractBuyDevCard {
         boolean doneSelection = false;
         do {
             chooseCardType();
-            if(checkCostRequiredCardType(takeDeckFromCardType(message.getType()))) {
+            computeActualCost(takeDeckFromCardType(message.getType()));
+            if(checkCostRequiredCardType(actualCost)) {
                 doneSelection = true;
             } else {
                 System.out.println("You don't have enough resources to buy this card! Choose another one.");
