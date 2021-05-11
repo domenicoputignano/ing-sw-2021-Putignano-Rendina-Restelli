@@ -278,7 +278,7 @@ public class Warehouse implements Cloneable {
                 reducedExtraDepots[i] = extraDepots[i].getReducedVersion();
 
         ReducedStrongbox reducedStrongbox = strongbox.getReducedVersion();
-        return new ReducedWarehouse(reducedNormalDepots, reducedExtraDepots, reducedStrongbox);
+        return new ReducedWarehouse(reducedNormalDepots, reducedExtraDepots, reducedStrongbox, availableResources);
     }
 
 

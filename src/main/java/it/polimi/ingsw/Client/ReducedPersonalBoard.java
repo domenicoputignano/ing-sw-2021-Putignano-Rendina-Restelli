@@ -1,13 +1,11 @@
 package it.polimi.ingsw.Client;
 
-import it.polimi.ingsw.Commons.DevelopmentCard;
-import it.polimi.ingsw.Commons.Effect;
-import it.polimi.ingsw.Commons.LeaderCard;
-import it.polimi.ingsw.Commons.Slot;
+import it.polimi.ingsw.Commons.*;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 
@@ -30,6 +28,9 @@ public class ReducedPersonalBoard implements Serializable {
         return warehouse;
     }
 
+    public Map<ResourceType, Integer> getAvailableResources() {
+        return warehouse.getAvailableResources();
+    }
 
     //TODO cambiare
     public Slot[] getSlots() {

@@ -11,11 +11,15 @@ import java.util.Map;
 
 public final class Checker {
 
-    public static boolean checkRequiredResources(Map<ResourceType,Integer> availableResources){
-        return false;
+
+
+    public static boolean checkRequiredResources(ActivateProductionMessage message, ReducedPersonalBoard playerBoard){
+        Map<ResourceType, Integer> neededResources = calculateInputResources(message, playerBoard);
+        Map<ResourceType, Integer> availableResources = playerBoard.getAvailableResources();
+        return neededResources.entrySet().stream().allMatch((entry) -> neededResources.get(entry.getKey()) <= availableResources.get(entry.getKey()));
     }
 
-    public static Map<ResourceType, Integer> calculateInputResources(ActivateProductionMessage message, ReducedPersonalBoard playerBoard) {
+    private static Map<ResourceType, Integer> calculateInputResources(ActivateProductionMessage message, ReducedPersonalBoard playerBoard) {
         EnumMap<ResourceType, Integer> result = new EnumMap<ResourceType, Integer>(ResourceType.class);
         result.put(ResourceType.coin,0);
         result.put(ResourceType.servant,0);
@@ -59,6 +63,8 @@ public final class Checker {
         if(requiredProductions.isExtraSlot2() && playerBoard.findEffect(Effect.EXTRAPRODUCTION).size() < 2) return false;
         return true;
     }
+
+
 
 
 
