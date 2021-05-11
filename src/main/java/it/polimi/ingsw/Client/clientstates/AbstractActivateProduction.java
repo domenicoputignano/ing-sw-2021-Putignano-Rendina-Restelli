@@ -6,16 +6,19 @@ import it.polimi.ingsw.Commons.Effect;
 import it.polimi.ingsw.Commons.ResourceType;
 import it.polimi.ingsw.Model.ActiveProductions;
 import it.polimi.ingsw.Utils.Messages.ClientMessages.ActivateProductionMessage;
+import it.polimi.ingsw.Utils.ResourceSource;
 
 import java.util.EnumMap;
+import java.util.HashMap;
 import java.util.Map;
 
 public abstract class AbstractActivateProduction extends AbstractClientState {
 
 
+
     protected ActivateProductionMessage messageToSend = new ActivateProductionMessage();
     protected ActiveProductions requiredProduction = new ActiveProductions();
-
+    protected Map<ResourceSource, EnumMap<ResourceType, Integer>> howToTakeResources = new HashMap<>();
 
     public boolean areValidRequestedProductions(){
         ReducedPersonalBoard playerBoard = client.getGame().getCurrPlayer().getPersonalBoard();
@@ -45,6 +48,10 @@ public abstract class AbstractActivateProduction extends AbstractClientState {
         result.put(ResourceType.servant,0);
         result.put(ResourceType.shield,0);
         result.put(ResourceType.stone,0);
+        if(messageToSend.getProductions().isBasic()) {
+            result.put(messageToSend.getInput1(), result.get(messageToSend.getInput1())+1);
+            result.put(messageToSend.getInput2(), result.get(messageToSend.getInput2())+2);
+        }
         if(messageToSend.getProductions().isSlot1()) Checker.mapMerging(retrieveCardInputResources(playerBoard,0), result);
         if(messageToSend.getProductions().isSlot2()) Checker.mapMerging(retrieveCardInputResources(playerBoard, 1), result);
         if(messageToSend.getProductions().isSlot3()) Checker.mapMerging(retrieveCardInputResources(playerBoard,2), result);
@@ -59,6 +66,7 @@ public abstract class AbstractActivateProduction extends AbstractClientState {
         return result;
     }
 
+
     private Map<ResourceType, Integer> retrieveCardInputResources(ReducedPersonalBoard playerBoard, int slotIndex) {
         return playerBoard.peekTopCardInSlot(slotIndex).getTrade().getInputResources();
     }
@@ -72,5 +80,7 @@ public abstract class AbstractActivateProduction extends AbstractClientState {
         Map<ResourceType, Integer> neededResources = calculateInputResources();
         return Checker.checkResources(neededResources, client.getGame().getCurrPlayer().getPersonalBoard());
     }
+
+
 
 }

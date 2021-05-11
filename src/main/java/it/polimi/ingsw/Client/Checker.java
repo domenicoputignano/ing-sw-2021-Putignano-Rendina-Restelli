@@ -1,12 +1,7 @@
 package it.polimi.ingsw.Client;
 
 
-import it.polimi.ingsw.Commons.Effect;
 import it.polimi.ingsw.Commons.ResourceType;
-import it.polimi.ingsw.Model.ActiveProductions;
-import it.polimi.ingsw.Utils.Messages.ClientMessages.ActivateProductionMessage;
-
-import java.util.EnumMap;
 import java.util.Map;
 
 public final class Checker {
@@ -21,5 +16,7 @@ public final class Checker {
         input1.forEach((key,value) -> result.merge(key, value, Integer::sum));
         return result;
     }
+
+
 
 }

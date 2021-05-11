@@ -1,6 +1,7 @@
 package it.polimi.ingsw.Client.clientstates.cli;
 
 import it.polimi.ingsw.Client.clientstates.AbstractActionChoice;
+import it.polimi.ingsw.Client.view.CLI;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.ServerMessage;
 
 import java.util.Scanner;
@@ -18,7 +19,7 @@ public class ActionChoiceCLI extends AbstractActionChoice {
         String choice = input.next();
         switch(choice) {
             case "A" : {
-                ActivateProductionCLI action = new ActivateProductionCLI();
+                ActivateProductionCLI action = new ActivateProductionCLI((CLI) client.getUI());
 
             }
             case "B" : {

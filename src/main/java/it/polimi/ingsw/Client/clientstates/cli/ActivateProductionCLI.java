@@ -1,20 +1,24 @@
 package it.polimi.ingsw.Client.clientstates.cli;
 
-
-import it.polimi.ingsw.Client.Checker;
 import it.polimi.ingsw.Client.clientstates.AbstractActivateProduction;
+import it.polimi.ingsw.Client.view.CLI;
 import it.polimi.ingsw.Commons.ResourceType;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.ServerMessage;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.Updates.ActivateProductionUpdate;
-
 import java.util.Scanner;
+
 
 
 public class ActivateProductionCLI extends AbstractActivateProduction {
 
-    String answer;
-    Scanner input = new Scanner(System.in);
+    private CLI cli;
+    private String answer;
+    private Scanner input = new Scanner(System.in);
 
+
+    public ActivateProductionCLI(CLI cli) {
+        this.cli = cli;
+    }
 
     public void render(ServerMessage message) {
         ActivateProductionUpdate update = (ActivateProductionUpdate) message;
@@ -28,17 +32,17 @@ public class ActivateProductionCLI extends AbstractActivateProduction {
         do {
             selectProductions();
             if(areValidRequestedProductions()){
-                doneSelection = true;
+                resourcesChoice();
+                if(checkRequiredResources()) {
+                    doneSelection = true;
+                }
+                else System.out.println("You cannot activate chosen production because you don't have enough resources");
             }
-            else System.out.println("Selected productions are not available, try again ");
+            else System.out.println("Selected productions are not available, try again");
         } while(!doneSelection);
-        doneSelection = false;
-        do {
-            resourcesChoice();
-        } while(!doneSelection);
-
 
     }
+
 
 
     private void selectProductions() {
@@ -90,7 +94,7 @@ public class ActivateProductionCLI extends AbstractActivateProduction {
         ResourceType resource = null;
         while(!done) {
             answer = input.nextLine();
-            resource = fromStringToResourceType(answer);
+            resource = cli.fromStringToResourceType(answer);
             if(resource!=null){
                 done = true;
             }
@@ -98,15 +102,9 @@ public class ActivateProductionCLI extends AbstractActivateProduction {
         return resource;
     }
 
-    private ResourceType fromStringToResourceType(String resource) {
-        if(resource.equalsIgnoreCase("C")) return ResourceType.coin;
-        if(resource.equalsIgnoreCase("SE")) return ResourceType.servant;
-        if(resource.equalsIgnoreCase("SH")) return ResourceType.shield;
-        if(resource.equalsIgnoreCase("ST")) return ResourceType.stone;
-        else {
-            System.out.println("Error detected, please select again ");
-            return null;
-        }
-    }
+
+
+
+
 
 }

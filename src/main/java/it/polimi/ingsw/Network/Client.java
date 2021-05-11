@@ -1,6 +1,7 @@
 package it.polimi.ingsw.Network;
 
 import it.polimi.ingsw.Client.ReducedGame;
+import it.polimi.ingsw.Client.view.UI;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.ServerMessage;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.GameSetupMessage;
 
@@ -20,7 +21,7 @@ public class Client {
     private ObjectInputStream socketInObj ;
     private ObjectOutputStream socketOutObj ;
     private Logger LOGGER = Logger.getLogger(Client.class.getName());
-
+    private UI ui;
 
     public Client(String ip, int port){
         this.ip = ip;
@@ -86,6 +87,11 @@ public class Client {
         });
         t.start();
         return t;
+    }
+
+
+    public UI getUI() {
+        return ui;
     }
 
     public ReducedGame getGame() {
