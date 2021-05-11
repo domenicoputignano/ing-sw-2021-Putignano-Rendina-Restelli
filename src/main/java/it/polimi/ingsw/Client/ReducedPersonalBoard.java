@@ -4,6 +4,7 @@ import it.polimi.ingsw.Commons.*;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -32,7 +33,6 @@ public class ReducedPersonalBoard implements Serializable {
         return warehouse.getAvailableResources();
     }
 
-    //TODO cambiare
     public Slot[] getSlots() {
         return slots;
     }
@@ -49,6 +49,12 @@ public class ReducedPersonalBoard implements Serializable {
         return slots[slotIndex].peekTopCard();
     }
 
+    public boolean canBuyCardOfLevel(int level) {
+        return level == 1 || Arrays.stream(slots).anyMatch(x -> x.peekTopCard().getType().getLevel() == (level - 1));
+    }
 
+    public Slot getSlot(int index) {
+        return slots[index];
+    }
 
 }

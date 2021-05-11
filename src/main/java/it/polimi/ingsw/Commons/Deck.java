@@ -29,6 +29,8 @@ public class Deck {
         return this.cards.size();
     }
 
+    public boolean isEmpty() { return cards.size()==0; }
+
     @Override
     public String toString() {
         return "Deck{" +

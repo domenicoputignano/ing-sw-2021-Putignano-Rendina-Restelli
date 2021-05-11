@@ -20,8 +20,13 @@ public class BuyDevCardCLI extends AbstractBuyDevCard {
         boolean doneSelection = false;
         do {
             chooseCardType();
+            if(checkCostRequiredCardType(takeDeckFromCardType(message.getType()))) {
+                doneSelection = true;
+            } else {
+                System.out.println("You don't have enough resources to buy this card! Choose another one.");
+            }
         } while(!doneSelection);
-        chooseCardType();
+        doneSelection = false;
         chooseSlotDestination();
     }
 
@@ -32,9 +37,12 @@ public class BuyDevCardCLI extends AbstractBuyDevCard {
         do {
             choice = input.nextInt();
             if(choice==1||choice==2||choice==3){
-                //TODO check se può veramente attivare una carta di quel tipo in quello slot
-                slotDestinationChoiceOK = true;
-                message.setDestinationSlot(choice);
+                if(canActivateCardOnThisSlot(choice)) {
+                    slotDestinationChoiceOK = true;
+                    message.setDestinationSlot(choice);
+                } else {
+                    System.out.println("You can't activate the card on this slot, choose another slot. [1-3]");
+                }
             } else {
                 System.out.println("Invalid choice, which slot do you want to put the card on? [1-3]");
             }
@@ -50,7 +58,16 @@ public class BuyDevCardCLI extends AbstractBuyDevCard {
             CardType typeChosen = parseChoiceCardType(choice);
             if(typeChosen!=null){
                 message.setType(typeChosen);
-                cardTypeChoiceOK = true;
+                if(deckIsEmpty()) {
+                    System.out.println("The deck of the card type you required is empty, please choose another card type. (level|color)");
+                } else {
+                    if(canBuyCardOfLevel(typeChosen.getLevel())){
+                        cardTypeChoiceOK = true;
+                    }
+                    else{
+                        System.out.println("You can't buy a card of this level because you don't have slots to put it on.");
+                    }
+                }
             } else {
                 System.out.println("Card type not available, please choose another one. (level|color)" );
             }
