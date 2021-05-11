@@ -27,7 +27,7 @@ public class ActivateProductionCLI extends AbstractActivateProduction {
         boolean doneSelection = false;
         do {
             selectProductions();
-            if(Checker.areValidRequestedProductions(client.getGame().getCurrPlayer().getPersonalBoard(), requiredProduction)){
+            if(areValidRequestedProductions()){
                 doneSelection = true;
             }
             else System.out.println("Selected productions are not available, try again ");

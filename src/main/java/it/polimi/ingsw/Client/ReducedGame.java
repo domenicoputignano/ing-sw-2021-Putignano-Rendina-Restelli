@@ -46,4 +46,8 @@ public abstract class ReducedGame {
     public ReducedPlayer getCurrPlayer() {
         return currPlayer;
     }
+
+    public List<Deck> getDecks() {
+        return decks;
+    }
 }
