@@ -1,6 +1,7 @@
 package it.polimi.ingsw.Client.clientstates.cli;
 
 
+import it.polimi.ingsw.Client.Checker;
 import it.polimi.ingsw.Client.clientstates.AbstractActivateProduction;
 import it.polimi.ingsw.Model.ActiveProductions;
 import it.polimi.ingsw.Commons.ResourceType;
@@ -27,6 +28,7 @@ public class ActivateProductionCLI extends AbstractActivateProduction {
     public void manageUserInteraction() {
         selectProductions();
         resourcesChoice();
+
     }
 
 
