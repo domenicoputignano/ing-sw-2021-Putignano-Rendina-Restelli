@@ -22,6 +22,7 @@ public class Client {
     private ObjectOutputStream socketOutObj ;
     private Logger LOGGER = Logger.getLogger(Client.class.getName());
     private UI ui;
+    private Socket socket;
 
     public Client(String ip, int port){
         this.ip = ip;
@@ -32,7 +33,7 @@ public class Client {
 
 
     public void start() throws IOException {
-        Socket socket = new Socket(ip, port);
+        socket = new Socket(ip, port);
         System.out.println("Connection established");
 
         DataInputStream socketIn = new DataInputStream(socket.getInputStream());
@@ -96,6 +97,14 @@ public class Client {
 
     public ReducedGame getGame() {
         return game;
+    }
+
+    public void closeConnection() {
+        try {
+            socket.close();
+        } catch (IOException e) {
+            LOGGER.log(Level.SEVERE, "Impossible to close connection!");
+        }
     }
 }
 

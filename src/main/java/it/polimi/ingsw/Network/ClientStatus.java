@@ -31,11 +31,8 @@ public class ClientStatus implements Runnable {
 
     public void send(ServerMessage serverMessage) {
         try {
-            synchronized(outputStreamToClient) {
-                outputStreamToClient = new ObjectOutputStream(socket.getOutputStream());
-                outputStreamToClient.writeObject(serverMessage);
-                outputStreamToClient.flush();
-                }
+             outputStreamToClient.writeObject(serverMessage);
+             outputStreamToClient.flush();
             } catch (IOException e) {
                 //TODO modificare come se trovassimo una disconnessione
                 LOGGER.log(Level.SEVERE, "Disconnection detected!");

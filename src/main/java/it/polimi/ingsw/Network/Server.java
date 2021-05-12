@@ -45,6 +45,7 @@ public class Server {
                 executors.submit(clientSetupConnection);
             } catch (IOException e) {
                 LOGGER.log(Level.INFO, "Unable to connect to client");
+                active = false;
             }
 
         }
@@ -73,8 +74,6 @@ public class Server {
     private Set<ClientSetupConnection> getSuitableConnections(int numOfPlayers) {
         return waitingConnections.stream().filter(x -> x.getNumOfPlayers()==numOfPlayers).collect(Collectors.toSet());
     }
-
-
 
     private Player getClientAsPlayer(ClientSetupConnection client) {
         return new Player(client.getNickname());

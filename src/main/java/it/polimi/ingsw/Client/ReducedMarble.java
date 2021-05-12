@@ -8,4 +8,8 @@ public class ReducedMarble {
     public ReducedMarble(ColorMarble colorMarble) {
         this.colorMarble = colorMarble;
     }
+
+    public ColorMarble getColorMarble() {
+        return colorMarble;
+    }
 }

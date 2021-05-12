@@ -50,4 +50,8 @@ public abstract class ReducedGame {
     public List<Deck> getDecks() {
         return decks;
     }
+
+    public ReducedMarketTray getMarketTray() {
+        return marketTray;
+    }
 }
