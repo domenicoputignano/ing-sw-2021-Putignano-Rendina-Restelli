@@ -7,6 +7,7 @@ import it.polimi.ingsw.Commons.ResourceType;
 import it.polimi.ingsw.Utils.MarketChoice;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class MarketTray {
     private Marble[][] availableMarbles = new Marble[3][4];
@@ -72,9 +73,9 @@ public class MarketTray {
         return marbles;
     }
 
-    public boolean checkRequestedMarbles(List<Marble> marblesList,MarketChoice marketChoice, int index)
+    public boolean checkRequestedMarbles(List<ReducedMarble> marblesList,MarketChoice marketChoice, int index)
     {
-        List<Marble> expectedMarbles = peekMarbles(marketChoice, index);
+        List<ReducedMarble> expectedMarbles = peekMarbles(marketChoice, index).stream().map(Marble::getReducedVersion).collect(Collectors.toList());
         return expectedMarbles.containsAll(marblesList) && marblesList.containsAll(expectedMarbles);
     }
 

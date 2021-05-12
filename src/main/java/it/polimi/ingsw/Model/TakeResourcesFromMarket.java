@@ -1,5 +1,6 @@
 package it.polimi.ingsw.Model;
 
+import it.polimi.ingsw.Client.ReducedMarble;
 import it.polimi.ingsw.Commons.ColorMarble;
 import it.polimi.ingsw.Commons.LeaderEffect;
 import it.polimi.ingsw.Commons.ResourceType;
@@ -29,11 +30,17 @@ public class TakeResourcesFromMarket implements AbstractTurnPhase {
     public void takeResourcesFromMarket(Turn turn, TakeResourcesFromMarketMessage takeResourcesFromMarketMessage) throws InvalidActionException, WhiteEffectMismatchException, NeedPositioningException {
         if(turn.isDoneNormalAction())
             throw new InvalidActionException();
-        if(checkValidWhiteEffects(turn,takeResourcesFromMarketMessage.getWhiteEffects(),takeResourcesFromMarketMessage.getRequestedMarbles())) {
+        if(checkValidWhiteEffects(turn,takeResourcesFromMarketMessage.getWhiteEffects(), takeResourcesFromMarketMessage.getRequestedMarbles())) {
+
+            List<Marble> obtainedMarbles = turn.getGame().getMarketTray().
+                    takeMarbles(takeResourcesFromMarketMessage.getPlayerChoice(), takeResourcesFromMarketMessage.getIndex());
+
             //perform convert marble effect
-            convertWhiteMarbles(turn, takeResourcesFromMarketMessage.getWhereToPutMarbles(), takeResourcesFromMarketMessage.getWhiteEffects());
+            convertWhiteMarbles(turn, obtainedMarbles, takeResourcesFromMarketMessage.getWhiteEffects());
+
             //convert a List of Pair<Marble,MarbleDestination> in a List of Pair<ResourceType,MarbleDestination>
-            convertMarblesToResources(takeResourcesFromMarketMessage.getWhereToPutMarbles());
+            convertMarblesToResources(obtainedMarbles, takeResourcesFromMarketMessage.getWhereToPutMarbles());
+
             handlePositioning(turn.getPlayer().getPersonalBoard().getWarehouse());
             turn.getGame().getMarketTray().clearWhiteMarbleEffect();
             turn.normalActionDone();
@@ -50,37 +57,35 @@ public class TakeResourcesFromMarket implements AbstractTurnPhase {
         } else throw new WhiteEffectMismatchException();
     }
 
-    private void convertWhiteMarbles(Turn turn, List<Pair<Marble, MarbleDestination>> pairList, List<Integer> whiteEffects) {
+    private void convertWhiteMarbles(Turn turn, List<Marble> marbles, List<Integer> whiteEffects) {
         List<ResourceType> whiteMarbleEffects = turn.getPlayer().getActiveEffects().stream().filter(x -> x.getEffect()==Effect.CMARBLE).
                 map(LeaderEffect::getType).collect(Collectors.toList());
-                 List<Marble> marbles = pairList.stream().map(Pair::getKey).collect(Collectors.toList());
-                    int i = 0;
-                    for(Marble m : marbles) {
-                        if(m.getColor()== ColorMarble.WHITE) {
-                            if(whiteMarbleEffects.size()==1) {
-                                WhiteMarble y = (WhiteMarble) m;
-                                y.setEffect(convertTypeToMarbleEffect(whiteMarbleEffects.get(0)));
-                            } else if(whiteMarbleEffects.size() == 2) {
-                                WhiteMarble y = (WhiteMarble) m;
-                                y.setEffect(convertTypeToMarbleEffect(whiteMarbleEffects.get(whiteEffects.get(i)-1)));
+        int i = 0;
+        for(Marble m : marbles) {
+            if(m.getColor()== ColorMarble.WHITE) {
+                if(whiteMarbleEffects.size()==1) {
+                    WhiteMarble y = (WhiteMarble) m;
+                    y.setEffect(convertTypeToMarbleEffect(whiteMarbleEffects.get(0)));
+                } else if(whiteMarbleEffects.size() == 2) {
+                    WhiteMarble y = (WhiteMarble) m;
+                    y.setEffect(convertTypeToMarbleEffect(whiteMarbleEffects.get(whiteEffects.get(i)-1)));
                     i++;
                 }
             }
         }
     }
 
-    private void convertMarblesToResources(List<Pair<Marble,MarbleDestination>> marbles) {
-        for(Pair<Marble,MarbleDestination> p : marbles) {
-            if (p.getKey().getColor() == ColorMarble.RED)
+    private void convertMarblesToResources(List<Marble> marbles, List<Pair<ReducedMarble,MarbleDestination>> whereToPutMarbles) {
+        for(Marble p : marbles) {
+            if (p.getColor() == ColorMarble.RED)
                 faith++;
         }
         ResourceType resourceType;
-        for(Pair<Marble,MarbleDestination> p : marbles) {
+        for(int i = 0; i < marbles.size(); i++) {
             try {
-                resourceType = p.getKey().addResources();
-                whereToPutResources.add(new Pair<ResourceType,MarbleDestination>(resourceType,p.getValue()));
-            } catch (NoSuchResourceTypeException e) {
-            }
+                resourceType = marbles.get(i).addResources();
+                whereToPutResources.add(new Pair<>(resourceType, whereToPutMarbles.get(i).getValue()));
+            } catch (NoSuchResourceTypeException e) {}
         }
     }
 
@@ -174,13 +179,13 @@ public class TakeResourcesFromMarket implements AbstractTurnPhase {
         return whereToPutResources.stream().map(Pair::getKey).collect(Collectors.toList());
     }
 
-    public boolean checkValidWhiteEffects(Turn turn, List<Integer> whiteEffects, List<Marble> requestedMarbles)
+    public boolean checkValidWhiteEffects(Turn turn, List<Integer> whiteEffects, List<ReducedMarble> requestedMarbles)
     {
         List<ResourceType> whiteMarbleEffects = turn.getPlayer().getActiveEffects().stream().filter(x -> x.getEffect()==Effect.CMARBLE).
                 map(LeaderEffect::getType).collect(Collectors.toList());
         if(whiteMarbleEffects.size()==2)
         {
-            if(whiteEffects.size()!=requestedMarbles.stream().filter(x -> x.getColor()== ColorMarble.WHITE).count())
+            if(whiteEffects.size()!=requestedMarbles.stream().filter(x -> x.getColorMarble() == ColorMarble.WHITE).count())
                 return false;
         }
         return true;

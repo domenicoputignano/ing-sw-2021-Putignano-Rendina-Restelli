@@ -1,5 +1,6 @@
 package it.polimi.ingsw.Utils.Messages.ClientMessages;
 
+import it.polimi.ingsw.Client.ReducedMarble;
 import it.polimi.ingsw.Controller.GameController;
 import it.polimi.ingsw.Controller.TurnController;
 import it.polimi.ingsw.Model.MarketTray.Marble;
@@ -13,13 +14,13 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class TakeResourcesFromMarketMessage implements TurnControllerHandleable {
-    private List<Pair<Marble, MarbleDestination>> whereToPutMarbles = new ArrayList<>();
+    private List<Pair<ReducedMarble, MarbleDestination>> whereToPutMarbles = new ArrayList<>();
     private MarketChoice playerChoice;
     private int index;
     private List<Integer> whiteEffects = new ArrayList<>();
 
 
-    public List<Pair<Marble, MarbleDestination>> getWhereToPutMarbles() {
+    public List<Pair<ReducedMarble, MarbleDestination>> getWhereToPutMarbles() {
         return whereToPutMarbles;
     }
 
@@ -31,8 +32,10 @@ public class TakeResourcesFromMarketMessage implements TurnControllerHandleable 
         return whiteEffects;
     }
 
-    public void setWhereToPutMarbles(List<Pair<Marble, MarbleDestination>> whereToPutMarbles) {
-        this.whereToPutMarbles = whereToPutMarbles;
+
+
+    public void addWhereToPutMarbles(Pair<ReducedMarble, MarbleDestination> whereToPutMarble) {
+        this.whereToPutMarbles.add(whereToPutMarble);
     }
 
     public void setPlayerChoice(MarketChoice playerChoice) {
@@ -69,7 +72,7 @@ public class TakeResourcesFromMarketMessage implements TurnControllerHandleable 
         return true;
     }
 
-    public List<Marble> getRequestedMarbles() {
+    public List<ReducedMarble> getRequestedMarbles() {
         return whereToPutMarbles.stream().map(x -> x.getKey()).collect(Collectors.toList());
     }
 

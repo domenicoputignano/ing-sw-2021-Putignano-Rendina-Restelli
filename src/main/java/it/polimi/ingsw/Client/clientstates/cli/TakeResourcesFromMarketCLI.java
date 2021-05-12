@@ -3,8 +3,10 @@ package it.polimi.ingsw.Client.clientstates.cli;
 import it.polimi.ingsw.Client.ReducedMarble;
 import it.polimi.ingsw.Client.clientstates.AbstractTakeResourcesFromMarket;
 import it.polimi.ingsw.Commons.ColorMarble;
+import it.polimi.ingsw.Utils.MarbleDestination;
 import it.polimi.ingsw.Utils.MarketChoice;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.ServerMessage;
+import it.polimi.ingsw.Utils.Pair;
 
 import java.util.Scanner;
 
@@ -23,7 +25,7 @@ public class TakeResourcesFromMarketCLI extends AbstractTakeResourcesFromMarket 
         computeSelectedMarbles();
         System.out.println("You obtained these marbles: " + selectedMarbles);
         for(ReducedMarble marble : selectedMarbles) {
-            chooseMarbleDestination(marble);
+            setupMarble(marble);
         }
     }
 
@@ -32,7 +34,7 @@ public class TakeResourcesFromMarketCLI extends AbstractTakeResourcesFromMarket 
         boolean choiceOK = false;
         String choice;
         do {
-            choice = input.nextLine().toUpperCase();
+            choice = input.next().toUpperCase();
             if(choice.equals("ROW")) {
                 message.setPlayerChoice(MarketChoice.ROW);
                 choiceOK = true;
@@ -74,12 +76,46 @@ public class TakeResourcesFromMarketCLI extends AbstractTakeResourcesFromMarket 
         }
     }
 
-    private void chooseMarbleDestination(ReducedMarble marble) {
+    private void setupMarble(ReducedMarble marble) {
         if(marble.getColorMarble() == ColorMarble.WHITE){
             if(getConvertMarbleActiveEffects().size() == 1) {
                 System.out.println("White marble : converted to " + getConvertMarbleActiveEffects().get(0));
-                System.out.println("Where do you want to position it? [DEPOT|EXTRADEPOT]");
+                message.addWhereToPutMarbles(new Pair<>(marble, chooseMarbleDestination()));
+
+
+
+
             }
         }
     }
+
+    private MarbleDestination chooseMarbleDestination() {
+        System.out.println("Where do you want to position it? [DEPOT1|DEPOT2|DEPOT3|EXTRA|DISCARD]");
+        String choice;
+        MarbleDestination destination;
+        boolean destinationOK = false;
+        do {
+            choice = input.next().toUpperCase();
+            destination = parseMarbleDestination(choice);
+            if(destination!=null) {
+                destinationOK = true;
+            } else {
+                System.out.println("Invalid choice, try again. [DEPOT1|DEPOT2|DEPOT3|EXTRA|DISCARD]");
+            }
+        } while(!destinationOK);
+        return destination;
+    }
+
+    private MarbleDestination parseMarbleDestination(String choice) {
+        switch (choice) {
+            case "DEPOT1" : return MarbleDestination.DEPOT1;
+            case "DEPOT2" : return MarbleDestination.DEPOT2;
+            case "DEPOT3" : return MarbleDestination.DEPOT3;
+            case "EXTRA" : return MarbleDestination.EXTRA;
+            case "DISCARD" : return MarbleDestination.DISCARD;
+            default : return null;
+        }
+    }
+
+
 }

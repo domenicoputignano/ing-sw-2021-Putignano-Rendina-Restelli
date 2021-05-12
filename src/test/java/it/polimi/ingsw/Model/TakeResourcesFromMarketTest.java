@@ -1,5 +1,6 @@
 package it.polimi.ingsw.Model;
 
+import it.polimi.ingsw.Client.ReducedMarble;
 import it.polimi.ingsw.Commons.*;
 import it.polimi.ingsw.Exceptions.*;
 import it.polimi.ingsw.Model.MarketTray.Marble;
@@ -64,9 +65,8 @@ class TakeResourcesFromMarketTest {
         List<Pair<Marble, MarbleDestination>> pairList = new ArrayList<>();
         for(Marble m: marbles)
         {
-            pairList.add(new Pair<Marble, MarbleDestination>(m,MarbleDestination.DISCARD));
+            takeResourcesFromMarketMessage.addWhereToPutMarbles(new Pair<ReducedMarble, MarbleDestination>(m.getReducedVersion(),MarbleDestination.DISCARD));
         }
-        takeResourcesFromMarketMessage.setWhereToPutMarbles(pairList);
         multiPlayerMode.getTurn().setTurnState(TurnState.ActionType.TAKERESOURCESFROMMARKET);
         multiPlayerMode.getTurn().getTurnPhase().takeResourcesFromMarket(multiPlayerMode.getTurn(),takeResourcesFromMarketMessage);
         TakeResourcesFromMarket takeResourcesFromMarket = (TakeResourcesFromMarket) multiPlayerMode.getTurn().getTurnPhase();
@@ -95,9 +95,8 @@ class TakeResourcesFromMarketTest {
         List<Pair<Marble, MarbleDestination>> pairList = new ArrayList<>();
         for(Marble m: marbles)
         {
-            pairList.add(new Pair<Marble, MarbleDestination>(m,MarbleDestination.DISCARD));
+            takeResourcesFromMarketMessage.addWhereToPutMarbles(new Pair<ReducedMarble, MarbleDestination>(m.getReducedVersion(),MarbleDestination.DISCARD));
         }
-        takeResourcesFromMarketMessage.setWhereToPutMarbles(pairList);
         multiPlayerMode.getTurn().setTurnState(TurnState.ActionType.TAKERESOURCESFROMMARKET);
         assertThrows(WhiteEffectMismatchException.class,()->multiPlayerMode.getTurn().getTurnPhase().takeResourcesFromMarket(multiPlayerMode.getTurn(),takeResourcesFromMarketMessage));
     }
@@ -120,18 +119,16 @@ class TakeResourcesFromMarketTest {
         multiPlayerMode.getTurn().getPlayer().getLeaderCards().add(new LeaderCard(new LeaderEffect(Effect.CMARBLE,ResourceType.coin),null,null,0));
         multiPlayerMode.getTurn().getPlayer().getLeaderCards().get(0).setIsActive();
         multiPlayerMode.getTurn().getPlayer().getLeaderCards().get(1).setIsActive();
-        List<Pair<Marble, MarbleDestination>> wheretoPutMarbles = new ArrayList<>();
-        wheretoPutMarbles.add(new Pair<>(new WhiteMarble(),MarbleDestination.DEPOT1));
-        wheretoPutMarbles.add(new Pair<>(new WhiteMarble(),MarbleDestination.DEPOT2));
-        wheretoPutMarbles.add(new Pair<>(new WhiteMarble(),MarbleDestination.DEPOT3));
-        wheretoPutMarbles.add(new Pair<>(new WhiteMarble(),MarbleDestination.DEPOT3));
+        message.addWhereToPutMarbles(new Pair<>(new ReducedMarble(ColorMarble.WHITE),MarbleDestination.DEPOT1));
+        message.addWhereToPutMarbles(new Pair<>(new ReducedMarble(ColorMarble.WHITE),MarbleDestination.DEPOT2));
+        message.addWhereToPutMarbles(new Pair<>(new ReducedMarble(ColorMarble.WHITE),MarbleDestination.DEPOT3));
+        message.addWhereToPutMarbles(new Pair<>(new ReducedMarble(ColorMarble.WHITE),MarbleDestination.DEPOT3));
         List<Integer> effects = new ArrayList<>();
         effects.add(1);
         effects.add(1);
         effects.add(1);
         effects.add(2);
         message.setWhiteEffects(effects);
-        message.setWhereToPutMarbles(wheretoPutMarbles);
         multiPlayerMode.getTurn().setTurnState(TurnState.ActionType.TAKERESOURCESFROMMARKET);
         assertThrows(NeedPositioningException.class,()->multiPlayerMode.getTurn().getTurnPhase().takeResourcesFromMarket(multiPlayerMode.getTurn(),message));
         TakeResourcesFromMarket takeResourcesFromMarket = (TakeResourcesFromMarket) multiPlayerMode.getTurn().getTurnPhase();
@@ -147,15 +144,13 @@ class TakeResourcesFromMarketTest {
         multiPlayerMode.getTurn().getPlayer().getLeaderCards().add(new LeaderCard(new LeaderEffect(Effect.CMARBLE,ResourceType.coin),null,null,0));
         multiPlayerMode.getTurn().getPlayer().getLeaderCards().get(0).setIsActive();
         multiPlayerMode.getTurn().getPlayer().getLeaderCards().get(1).setIsActive();
-        List<Pair<Marble, MarbleDestination>> wheretoPutMarbles = new ArrayList<>();
-        wheretoPutMarbles.add(new Pair<>(new WhiteMarble(),MarbleDestination.DEPOT1));
-        wheretoPutMarbles.add(new Pair<>(new WhiteMarble(),MarbleDestination.DEPOT2));
-        wheretoPutMarbles.add(new Pair<>(new WhiteMarble(),MarbleDestination.DEPOT3));
+        message.addWhereToPutMarbles(new Pair<>(new ReducedMarble(ColorMarble.WHITE),MarbleDestination.DEPOT1));
+        message.addWhereToPutMarbles(new Pair<>(new ReducedMarble(ColorMarble.WHITE),MarbleDestination.DEPOT2));
+        message.addWhereToPutMarbles(new Pair<>(new ReducedMarble(ColorMarble.WHITE),MarbleDestination.DEPOT3));
         List<Integer> effects = new ArrayList<>();
         effects.add(1);
         effects.add(2);
         message.setWhiteEffects(effects);
-        message.setWhereToPutMarbles(wheretoPutMarbles);
         multiPlayerMode.getTurn().setTurnState(TurnState.ActionType.TAKERESOURCESFROMMARKET);
         assertThrows(WhiteEffectMismatchException.class,()->multiPlayerMode.getTurn().getTurnPhase().takeResourcesFromMarket(multiPlayerMode.getTurn(),message));
         TakeResourcesFromMarket takeResourcesFromMarket = (TakeResourcesFromMarket) multiPlayerMode.getTurn().getTurnPhase();
@@ -185,32 +180,30 @@ class TakeResourcesFromMarketTest {
         takeResourcesFromMarketMessage.setWhiteEffects(effects);
         int pendingResources = 0;
         boolean servant = false;
-        List<Pair<Marble, MarbleDestination>> pairList = new ArrayList<>();
         for(Marble m: marbles)
         {
             if(m.getColor()== ColorMarble.YELLOW) {
                 pendingResources++;
-                pairList.add(new Pair<Marble, MarbleDestination>(m, MarbleDestination.DEPOT1));
+                takeResourcesFromMarketMessage.addWhereToPutMarbles(new Pair<ReducedMarble, MarbleDestination>(m.getReducedVersion(), MarbleDestination.DEPOT1));
             }
             else
                 if(m.getColor()== ColorMarble.GREY){
                     pendingResources++;
-                    pairList.add(new Pair<Marble, MarbleDestination>(m,MarbleDestination.DEPOT2));
+                    takeResourcesFromMarketMessage.addWhereToPutMarbles(new Pair<ReducedMarble, MarbleDestination>(m.getReducedVersion(),MarbleDestination.DEPOT2));
                 }
                 else
                 if(m.getColor()== ColorMarble.PURPLE)
                 {
                     if (servant) pendingResources++;
                     servant = true;
-                    pairList.add(new Pair<Marble, MarbleDestination>(m, MarbleDestination.DEPOT3));
+                    takeResourcesFromMarketMessage.addWhereToPutMarbles(new Pair<ReducedMarble, MarbleDestination>(m.getReducedVersion(), MarbleDestination.DEPOT3));
                 }
                 else
                 if(m.getColor()== ColorMarble.WHITE){
                     pendingResources++;
-                    pairList.add(new Pair<Marble, MarbleDestination>(m,MarbleDestination.DEPOT3));}
-                else pairList.add(new Pair<Marble, MarbleDestination>(m,MarbleDestination.DISCARD));
+                    takeResourcesFromMarketMessage.addWhereToPutMarbles(new Pair<ReducedMarble, MarbleDestination>(m.getReducedVersion(),MarbleDestination.DEPOT3));}
+                else takeResourcesFromMarketMessage.addWhereToPutMarbles(new Pair<ReducedMarble, MarbleDestination>(m.getReducedVersion(),MarbleDestination.DISCARD));
         }
-        takeResourcesFromMarketMessage.setWhereToPutMarbles(pairList);
         multiPlayerMode.getTurn().setTurnState(TurnState.ActionType.TAKERESOURCESFROMMARKET);
         assertThrows(NeedPositioningException.class, ()->multiPlayerMode.getTurn().getTurnPhase().takeResourcesFromMarket(multiPlayerMode.getTurn(),takeResourcesFromMarketMessage));
         TakeResourcesFromMarket takeResourcesFromMarket = (TakeResourcesFromMarket) multiPlayerMode.getTurn().getTurnPhase();

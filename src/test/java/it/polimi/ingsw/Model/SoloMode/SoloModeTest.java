@@ -1,5 +1,6 @@
 package it.polimi.ingsw.Model.SoloMode;
 
+import it.polimi.ingsw.Client.ReducedMarble;
 import it.polimi.ingsw.Commons.*;
 import it.polimi.ingsw.Exceptions.*;
 import it.polimi.ingsw.Model.*;
@@ -145,18 +146,16 @@ class SoloModeTest {
         game.getTurn().getPlayer().getLeaderCards().add(new LeaderCard(new LeaderEffect(Effect.CMARBLE,ResourceType.coin),null,null,0));
         game.getTurn().getPlayer().getLeaderCards().get(0).setIsActive();
         game.getTurn().getPlayer().getLeaderCards().get(1).setIsActive();
-        List<Pair<Marble, MarbleDestination>> wheretoPutMarbles = new ArrayList<>();
-        wheretoPutMarbles.add(new Pair<>(new WhiteMarble(),MarbleDestination.DEPOT1));
-        wheretoPutMarbles.add(new Pair<>(new WhiteMarble(),MarbleDestination.DEPOT2));
-        wheretoPutMarbles.add(new Pair<>(new WhiteMarble(),MarbleDestination.DEPOT3));
-        wheretoPutMarbles.add(new Pair<>(new WhiteMarble(),MarbleDestination.DEPOT3));
+        message.addWhereToPutMarbles(new Pair<>(new ReducedMarble(ColorMarble.WHITE),MarbleDestination.DEPOT1));
+        message.addWhereToPutMarbles(new Pair<>(new ReducedMarble(ColorMarble.WHITE),MarbleDestination.DEPOT2));
+        message.addWhereToPutMarbles(new Pair<>(new ReducedMarble(ColorMarble.WHITE),MarbleDestination.DEPOT3));
+        message.addWhereToPutMarbles(new Pair<>(new ReducedMarble(ColorMarble.WHITE),MarbleDestination.DEPOT3));
         List<Integer> effects = new ArrayList<>();
         effects.add(1);
         effects.add(1);
         effects.add(1);
         effects.add(2);
         message.setWhiteEffects(effects);
-        message.setWhereToPutMarbles(wheretoPutMarbles);
         game.getTurn().setTurnState(TurnState.ActionType.TAKERESOURCESFROMMARKET);
         assertThrows(NeedPositioningException.class,()->game.getTurn().getTurnPhase().takeResourcesFromMarket(game.getTurn(),message));
         TakeResourcesFromMarket takeResourcesFromMarket = (TakeResourcesFromMarket) game.getTurn().getTurnPhase();
