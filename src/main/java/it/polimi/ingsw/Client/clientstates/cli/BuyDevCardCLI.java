@@ -51,7 +51,7 @@ public class BuyDevCardCLI extends AbstractBuyDevCard {
     }
 
     private void chooseCardType() {
-        System.out.println("Which type of card do you want to buy? (level|color)");
+        System.out.println("Which type of card do you want to buy? (level|color) ");
         String choice;
         boolean cardTypeChoiceOK = false;
         do {

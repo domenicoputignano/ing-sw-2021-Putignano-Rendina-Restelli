@@ -34,13 +34,14 @@ public class ActivateProductionCLI extends AbstractActivateProduction {
             if(areValidRequestedProductions()){
                 resourcesChoice();
                 if(checkRequiredResources()) {
+                    messageToSend.setHowToTakeResources(cli.askInstructionsOnHowToTakeResources(calculateInputResources()));
                     doneSelection = true;
                 }
                 else System.out.println("You cannot activate chosen production because you don't have enough resources");
             }
             else System.out.println("Selected productions are not available, try again");
         } while(!doneSelection);
-
+        client.sendMessage(messageToSend);
     }
 
 

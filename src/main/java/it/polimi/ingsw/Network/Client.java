@@ -2,6 +2,7 @@ package it.polimi.ingsw.Network;
 
 import it.polimi.ingsw.Client.ReducedGame;
 import it.polimi.ingsw.Client.view.UI;
+import it.polimi.ingsw.Utils.Messages.ClientMessages.ClientMessage;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.ServerMessage;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.GameSetupMessage;
 
@@ -63,6 +64,15 @@ public class Client {
             socketIn.close();
             socketOut.close();
             socket.close();
+        }
+    }
+
+    public void sendMessage(ClientMessage message) {
+        try {
+            socketOutObj.writeObject(message);
+            socketOutObj.flush();
+        } catch (IOException e) {
+            LOGGER.log(Level.SEVERE, "Error: unable to process message sending");
         }
     }
 
