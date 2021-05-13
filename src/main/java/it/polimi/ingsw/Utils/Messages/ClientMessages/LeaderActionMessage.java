@@ -4,6 +4,8 @@ import it.polimi.ingsw.Controller.GameController;
 import it.polimi.ingsw.Controller.TurnController;
 import it.polimi.ingsw.Network.RemoteView;
 
+import java.util.Objects;
+
 public class LeaderActionMessage  implements TurnControllerHandleable {
     private int index;
     private boolean toDiscard;
@@ -36,4 +38,18 @@ public class LeaderActionMessage  implements TurnControllerHandleable {
     public void handleMessage(GameController gameController, RemoteView sender) {
         handleMessage(gameController.getTurnController(), sender);
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LeaderActionMessage that = (LeaderActionMessage) o;
+        return index == that.index && toDiscard == that.toDiscard;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(index, toDiscard);
+    }
 }
+

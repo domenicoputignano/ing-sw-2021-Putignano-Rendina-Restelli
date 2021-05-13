@@ -27,6 +27,8 @@ public class ReducedPlayer {
         return personalBoard;
     }
 
+    public int getNumOfAvailableLeaderCards() {  return personalBoard.getNumOfAvailableLeaderCards(); }
+
     public void updatePersonalBoard(ReducedPersonalBoard personalBoard) {
         this.personalBoard = personalBoard;
     }

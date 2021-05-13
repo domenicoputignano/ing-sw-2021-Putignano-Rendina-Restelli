@@ -4,6 +4,9 @@ import it.polimi.ingsw.Utils.Messages.ClientMessages.LeaderActionMessage;
 
 public abstract class AbstractLeaderAction extends AbstractClientState {
 
-    LeaderActionMessage messageToSend = new LeaderActionMessage();
+    protected LeaderActionMessage messageToSend = new LeaderActionMessage();
 
+    public LeaderActionMessage getMessageToSend() {
+        return messageToSend;
+    }
 }

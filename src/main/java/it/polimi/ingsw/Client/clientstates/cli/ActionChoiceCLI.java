@@ -19,7 +19,7 @@ public class ActionChoiceCLI extends AbstractActionChoice {
         String choice = input.next();
         switch(choice) {
             case "A" : {
-                ActivateProductionCLI action = new ActivateProductionCLI((CLI) client.getUI());
+                (new ActivateProductionCLI((CLI) client.getUI())).manageUserInteraction();
 
             }
             case "B" : {
@@ -29,11 +29,13 @@ public class ActionChoiceCLI extends AbstractActionChoice {
 
             }
             case "L" : {
-
+                (new LeaderActionCLI((CLI)client.getUI())).manageUserInteraction();
             }
             case "M" : {
 
             }
+            //TODO inserito solo per non dimenticarci
+            default: break;
         }
     }
 }
