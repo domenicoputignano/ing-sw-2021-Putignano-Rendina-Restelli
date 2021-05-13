@@ -78,7 +78,7 @@ public class Client {
 
 
     public void setupGame(GameSetupMessage message) {
-
+        //TODO da fare per far partire il gioco!
     }
 
 

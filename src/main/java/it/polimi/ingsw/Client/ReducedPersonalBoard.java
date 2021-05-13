@@ -41,6 +41,13 @@ public class ReducedPersonalBoard implements Serializable {
         return leaderCards.stream().filter(x -> x.getLeaderEffect().getEffect().equals(effect)&&x.isActive()).collect(Collectors.toList());
     }
 
+    public boolean isAvailableLeaderAction() {
+        if(leaderCards.size() <= 0) return false;
+        else {
+            return !leaderCards.stream().allMatch(LeaderCard::isActive);
+        }
+    }
+
     public boolean isEmptySlot(int slotIndex) {
         return slots[slotIndex].getNumOfStackedCards() == 0;
     }

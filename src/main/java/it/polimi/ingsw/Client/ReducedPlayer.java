@@ -31,6 +31,10 @@ public class ReducedPlayer {
         this.personalBoard = personalBoard;
     }
 
+    public boolean isAvailableLeaderAction() {
+        return personalBoard.isAvailableLeaderAction();
+    }
+
     public int getPosition() {
         return position;
     }
