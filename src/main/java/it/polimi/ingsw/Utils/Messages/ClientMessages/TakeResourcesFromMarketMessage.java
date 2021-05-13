@@ -56,6 +56,10 @@ public class TakeResourcesFromMarketMessage implements TurnControllerHandleable 
         this.index = index;
     }
 
+    public void addWhiteEffect(Integer choice) {
+        this.whiteEffects.add(choice);
+    }
+
     public void setWhiteEffects(List<Integer> whiteEffects) {
         this.whiteEffects = whiteEffects;
     }

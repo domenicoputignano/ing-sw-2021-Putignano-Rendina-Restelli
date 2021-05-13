@@ -57,12 +57,12 @@ public class ClientStatus implements Runnable {
 
             while(isActive){
                 ClientMessage messageFromClient = (ClientMessage) inputFromClient.readObject();
-                LOGGER.log(Level.INFO, String.format("Received message %s", messageFromClient.getClass().getName()));
+                LOGGER.log(Level.INFO, String.format("Received messageToSend %s", messageFromClient.getClass().getName()));
                 remoteView.handleClientMessage(messageFromClient);
             }
 
         } catch (IOException | ClassNotFoundException e) {
-            LOGGER.log(Level.SEVERE, "Error in receiving message from thread");
+            LOGGER.log(Level.SEVERE, "Error in receiving messageToSend from thread");
         }
 
     }

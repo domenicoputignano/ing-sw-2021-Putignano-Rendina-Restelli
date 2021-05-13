@@ -72,7 +72,7 @@ public class Client {
             socketOutObj.writeObject(message);
             socketOutObj.flush();
         } catch (IOException e) {
-            LOGGER.log(Level.SEVERE, "Error: unable to process message sending");
+            LOGGER.log(Level.SEVERE, "Error: unable to process messageToSend sending");
         }
     }
 
@@ -87,8 +87,8 @@ public class Client {
             while(isActive) {
                 try {
                     ServerMessage message = (ServerMessage) socketInObj.readObject();
-                    LOGGER.log(Level.INFO, "Received message from Server");
-                    //TODO handle of Received message
+                    LOGGER.log(Level.INFO, "Received messageToSend from Server");
+                    //TODO handle of Received messageToSend
                 } catch (IOException e) {
                     LOGGER.log(Level.SEVERE, "Client disconnected!");
                 } catch (ClassNotFoundException e) {

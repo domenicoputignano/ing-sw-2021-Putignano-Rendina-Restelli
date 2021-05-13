@@ -11,7 +11,7 @@ public class ActivateVaticanReportUpdate extends UpdateMessage {
     //User that caused activation of Vatican Report by performing an action
     private User triggeringUser;
 
-    //resulting state of tile related to a specific Player that has to match with the destination of this message
+    //resulting state of tile related to a specific Player that has to match with the destination of this messageToSend
     private StateFavorTiles state;
 
     private int section;

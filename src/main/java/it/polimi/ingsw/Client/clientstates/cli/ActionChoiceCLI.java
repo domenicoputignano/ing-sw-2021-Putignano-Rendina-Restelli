@@ -23,7 +23,7 @@ public class ActionChoiceCLI extends AbstractActionChoice {
 
             }
             case "B" : {
-                (new BuyDevCardCLI()).manageUserInteraction();
+                (new BuyDevCardCLI((CLI) client.getUI())).manageUserInteraction();
             }
             case "T" : {
 

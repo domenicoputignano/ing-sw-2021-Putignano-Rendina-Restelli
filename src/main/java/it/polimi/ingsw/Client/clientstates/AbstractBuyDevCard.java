@@ -10,11 +10,11 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public abstract class AbstractBuyDevCard extends AbstractClientState{
-    protected BuyDevCardMessage message = new BuyDevCardMessage();
+    protected BuyDevCardMessage messageToSend = new BuyDevCardMessage();
     protected Map<ResourceType, Integer> actualCost;
 
     protected boolean deckIsEmpty() {
-        return takeDeckFromCardType(message.getType()).isEmpty();
+        return takeDeckFromCardType(messageToSend.getType()).isEmpty();
     }
 
     protected boolean checkCostRequiredCardType(Map<ResourceType, Integer> cost) {
@@ -37,7 +37,7 @@ public abstract class AbstractBuyDevCard extends AbstractClientState{
 
     protected boolean canActivateCardOnThisSlot(int slotIndex){
         Slot slot = client.getGame().getCurrPlayer().getPersonalBoard().getSlot(slotIndex);
-        int level = message.getType().getLevel();
+        int level = messageToSend.getType().getLevel();
         return level == 1 ? slot.getNumOfStackedCards() == 0 : slot.peekTopCard().getType().getLevel() == (level - 1);
     }
 

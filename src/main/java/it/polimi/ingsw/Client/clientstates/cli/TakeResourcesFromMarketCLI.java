@@ -27,6 +27,7 @@ public class TakeResourcesFromMarketCLI extends AbstractTakeResourcesFromMarket 
         for(ReducedMarble marble : selectedMarbles) {
             setupMarble(marble);
         }
+        client.sendMessage(message);
     }
 
     private void chooseRowColumn() {
@@ -81,12 +82,44 @@ public class TakeResourcesFromMarketCLI extends AbstractTakeResourcesFromMarket 
             if(getConvertMarbleActiveEffects().size() == 1) {
                 System.out.println("White marble : converted to " + getConvertMarbleActiveEffects().get(0));
                 message.addWhereToPutMarbles(new Pair<>(marble, chooseMarbleDestination()));
-
-
-
-
             }
+            else if(getConvertMarbleActiveEffects().size() == 2) {
+                System.out.println("Found two convert marble active effects, choose which one you want to activate [1|2]");
+                message.addWhiteEffect(chooseConvertMarbleEffect());
+                message.addWhereToPutMarbles(new Pair<>(marble, chooseMarbleDestination()));
+            } else {
+                System.out.println("White marble : you don't have any convert marble effect active so you won't get any resource from this marble");
+            }
+        } else if (marble.getColorMarble() == ColorMarble.RED) {
+            System.out.println("Red marble : you get a faith point");
+            message.addWhereToPutMarbles(new Pair<>(marble, MarbleDestination.NOTNEEDED));
+        } else if (marble.getColorMarble() == ColorMarble.BLUE) {
+            System.out.println("Blue marble : you get a shield");
+            message.addWhereToPutMarbles(new Pair<>(marble, chooseMarbleDestination()));
+        } else if (marble.getColorMarble() == ColorMarble.GREY) {
+            System.out.println("Grey marble : you get a stone");
+            message.addWhereToPutMarbles(new Pair<>(marble, chooseMarbleDestination()));
+        } else if (marble.getColorMarble() == ColorMarble.PURPLE) {
+            System.out.println("Purple marble : you get a servant");
+            message.addWhereToPutMarbles(new Pair<>(marble, chooseMarbleDestination()));
+        } else if (marble.getColorMarble() == ColorMarble.YELLOW) {
+            System.out.println("Yellow marble : you get a coin");
+            message.addWhereToPutMarbles(new Pair<>(marble, chooseMarbleDestination()));
         }
+    }
+
+    private int chooseConvertMarbleEffect() {
+        boolean choiceOK = false;
+        int choice;
+        do {
+            choice = input.nextInt();
+            if(choice == 1 || choice == 2) {
+                choiceOK = true;
+            } else {
+                System.out.println("Invalid choice, please choose again [1|2]");
+            }
+        } while (!choiceOK);
+        return choice;
     }
 
     private MarbleDestination chooseMarbleDestination() {
@@ -116,6 +149,5 @@ public class TakeResourcesFromMarketCLI extends AbstractTakeResourcesFromMarket 
             default : return null;
         }
     }
-
 
 }

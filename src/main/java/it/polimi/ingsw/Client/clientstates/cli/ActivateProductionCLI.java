@@ -11,7 +11,7 @@ import java.util.Scanner;
 
 public class ActivateProductionCLI extends AbstractActivateProduction {
 
-    private CLI cli;
+    private final CLI cli;
     private String answer;
     private Scanner input = new Scanner(System.in);
 

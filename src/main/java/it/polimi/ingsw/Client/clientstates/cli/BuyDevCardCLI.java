@@ -1,6 +1,7 @@
 package it.polimi.ingsw.Client.clientstates.cli;
 
 import it.polimi.ingsw.Client.clientstates.AbstractBuyDevCard;
+import it.polimi.ingsw.Client.view.CLI;
 import it.polimi.ingsw.Commons.CardType;
 import it.polimi.ingsw.Commons.ColorCard;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.ServerMessage;
@@ -8,7 +9,12 @@ import it.polimi.ingsw.Utils.Messages.ServerMessages.ServerMessage;
 import java.util.Scanner;
 
 public class BuyDevCardCLI extends AbstractBuyDevCard {
-    Scanner input = new Scanner(System.in);
+    private Scanner input = new Scanner(System.in);
+    private CLI cli;
+
+    public BuyDevCardCLI(CLI cli) {
+        this.cli = cli;
+    }
 
     @Override
     public void render(ServerMessage message) {
@@ -20,7 +26,7 @@ public class BuyDevCardCLI extends AbstractBuyDevCard {
         boolean doneSelection = false;
         do {
             chooseCardType();
-            computeActualCost(takeDeckFromCardType(message.getType()));
+            computeActualCost(takeDeckFromCardType(messageToSend.getType()));
             if(checkCostRequiredCardType(actualCost)) {
                 doneSelection = true;
             } else {
@@ -29,6 +35,8 @@ public class BuyDevCardCLI extends AbstractBuyDevCard {
         } while(!doneSelection);
         doneSelection = false;
         chooseSlotDestination();
+        messageToSend.setHowToTakeResources(cli.askInstructionsOnHowToTakeResources(actualCost));
+        client.sendMessage(messageToSend);
     }
 
     private void chooseSlotDestination() {
@@ -40,7 +48,7 @@ public class BuyDevCardCLI extends AbstractBuyDevCard {
             if(choice==1||choice==2||choice==3){
                 if(canActivateCardOnThisSlot(choice)) {
                     slotDestinationChoiceOK = true;
-                    message.setDestinationSlot(choice);
+                    messageToSend.setDestinationSlot(choice);
                 } else {
                     System.out.println("You can't activate the card on this slot, choose another slot. [1-3]");
                 }
@@ -55,10 +63,10 @@ public class BuyDevCardCLI extends AbstractBuyDevCard {
         String choice;
         boolean cardTypeChoiceOK = false;
         do {
-            choice = input.nextLine();
+            choice = input.next();
             CardType typeChosen = parseChoiceCardType(choice);
             if(typeChosen!=null){
-                message.setType(typeChosen);
+                messageToSend.setType(typeChosen);
                 if(deckIsEmpty()) {
                     System.out.println("The deck of the card type you required is empty, please choose another card type. (level|color)");
                 } else {
