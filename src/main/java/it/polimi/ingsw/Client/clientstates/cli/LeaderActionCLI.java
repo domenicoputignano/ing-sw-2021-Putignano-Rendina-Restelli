@@ -24,11 +24,11 @@ public class LeaderActionCLI extends AbstractLeaderAction {
     public void manageUserInteraction() {
         if(client.getGame().getCurrPlayer().isAvailableLeaderAction()){
             System.out.println("What leader action do you want to perform (ACTIVATE|DISCARD) ? ");
-            String leaderActionChosen = chooseLeaderAction(input);
+            String leaderActionChosen = chooseLeaderAction();
             messageToSend.setToDiscard(leaderActionChosen.equalsIgnoreCase("discard"));
             System.out.printf("Well, you have %d leader card available, which one do you want to %s (value in [1 - %d]) ? ",
                     client.getGame().getCurrPlayer().getNumOfAvailableLeaderCards(), leaderActionChosen, client.getGame().getCurrPlayer().getNumOfAvailableLeaderCards());
-            int chosenIndex = chooseCardIndex(input);
+            int chosenIndex = chooseCardIndex();
             messageToSend.setIndex(chosenIndex);
             client.sendMessage(messageToSend);
         } else {
@@ -37,14 +37,14 @@ public class LeaderActionCLI extends AbstractLeaderAction {
     }
 
     //TODO stub created only for test purposes
-    public void manageUserInteraction(ReducedPlayer player, Scanner scanner) {
+    public void manageUserInteraction(ReducedPlayer player) {
         if(player.isAvailableLeaderAction()){
             System.out.println("What leader action do you want to perform (ACTIVATE|DISCARD) ? ");
-            String leaderActionChosen = chooseLeaderAction(scanner);
+            String leaderActionChosen = chooseLeaderAction();
             messageToSend.setToDiscard(leaderActionChosen.equalsIgnoreCase("discard"));
             System.out.printf("Well, you have %d leader card available, which one do you want to %s (value in [1 - %d]) ? ",
                     player.getNumOfAvailableLeaderCards(), leaderActionChosen, player.getNumOfAvailableLeaderCards());
-            int chosenIndex = chooseCardIndex(scanner);
+            int chosenIndex = chooseCardIndex();
             messageToSend.setIndex(chosenIndex);
             //client.sendMessage(messageToSend);
         } else {
@@ -54,7 +54,7 @@ public class LeaderActionCLI extends AbstractLeaderAction {
 
 
     /* Method that iterate until is chosen a valid action over a leaderCard */
-    private String chooseLeaderAction(Scanner input) {
+    private String chooseLeaderAction() {
         boolean doneSelection;
         String leaderActionChosen;
         do {
@@ -73,7 +73,7 @@ public class LeaderActionCLI extends AbstractLeaderAction {
 
 
 
-    private int chooseCardIndex(Scanner input) {
+    private int chooseCardIndex() {
         int chosenIndex;
         do {
             chosenIndex = input.nextInt();
@@ -85,7 +85,7 @@ public class LeaderActionCLI extends AbstractLeaderAction {
     }
 
     private boolean indexNotInRange(int chosenIndex) {
-        return (chosenIndex < 1 || chosenIndex > client.getGame().getCurrPlayer().getNumOfAvailableLeaderCards());
+        return (chosenIndex < 1);// || chosenIndex > client.getGame().getCurrPlayer().getNumOfAvailableLeaderCards());
     }
 
 
