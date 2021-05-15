@@ -38,7 +38,7 @@ public abstract class ReducedGame {
         decks = message.getResultingDecks();
     }
 
-    protected ReducedPlayer getPlayer(User user) {
+    public ReducedPlayer getPlayer(User user) {
         return players.stream().filter(x -> x.getNickname().equals(user)).
                 findFirst().orElseGet(() -> new ReducedPlayer(null, null, 0));
     }

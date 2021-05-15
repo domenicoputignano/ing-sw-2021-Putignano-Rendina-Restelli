@@ -16,8 +16,8 @@ import java.util.logging.Logger;
 
 public class Client {
 
-    private String ip;
-    private int port;
+    private final String ip;
+    private final int port;
     private boolean isActive;
     private ReducedGame game;
     private User user;
@@ -46,16 +46,13 @@ public class Client {
         try{
             socketLine = socketInObj.readUTF();
             System.out.print(socketLine);
-            while (isActive){
+            while (isActive) {
                 String inputLine = stdin.nextLine();
                 socketOutObj.writeUTF(inputLine);
                 socketOutObj.flush();
                 socketLine = socketInObj.readUTF();
                 //TODO chiamare opportuni metodi di CLI/GUI
                 System.out.print(socketLine);
-
-
-
             }
         } catch(NoSuchElementException e){
             System.out.println("Connection closed from the client side");
@@ -85,11 +82,12 @@ public class Client {
 
     private Thread createListeningThread() {
         Thread t = new Thread(() -> {
-            while(isActive) {
+            while (isActive) {
                 try {
                     ServerMessage message = (ServerMessage) socketInObj.readObject();
                     LOGGER.log(Level.INFO, "Received message from Server");
                     //TODO handle of Received message
+                    message.handleMessage(this);
                 } catch (IOException e) {
                     LOGGER.log(Level.SEVERE, "Client disconnected!");
                 } catch (ClassNotFoundException e) {
@@ -122,5 +120,7 @@ public class Client {
             LOGGER.log(Level.SEVERE, "Impossible to close connection!");
         }
     }
+
+
 }
 

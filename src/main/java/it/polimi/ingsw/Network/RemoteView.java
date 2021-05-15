@@ -8,7 +8,6 @@ import it.polimi.ingsw.Observer;
 import it.polimi.ingsw.Utils.Messages.ClientMessages.ClientMessage;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.Errors.ErrorMessage;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.ServerMessage;
-import it.polimi.ingsw.Utils.Messages.ServerMessages.Updates.UpdateMessage;
 
 public class RemoteView implements Observer<ServerMessage> {
 

@@ -86,6 +86,7 @@ public class Server {
             ClientStatus clientStatus = new ClientStatus(clientSetupConnection.getClientSocket(),
                     clientSetupConnection.getInputStream(),
                     clientSetupConnection.getOutputStream());
+
             executors.submit(clientStatus);
 
             //registration of each player
@@ -101,7 +102,7 @@ public class Server {
             RemoteView remoteView = new RemoteView(p.getUser(), gameController, accounts.get(p.getUser().getNickname()));
             accounts.get(p.getUser().getNickname()).bindRemoteView(remoteView);
         }
-        LOGGER.log(Level.INFO, "Game setup done");
+        LOGGER.log(Level.INFO, "MultiPlayerMode game setup done");
     }
 
 
