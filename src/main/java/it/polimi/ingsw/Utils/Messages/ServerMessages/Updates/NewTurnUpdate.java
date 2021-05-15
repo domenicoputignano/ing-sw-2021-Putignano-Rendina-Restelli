@@ -6,10 +6,18 @@ import it.polimi.ingsw.Utils.Messages.ServerMessages.ServerMessage;
 
 public class NewTurnUpdate implements ServerMessage {
 
-    private User currentUser;
+    private final User currentUser;
+
+    public NewTurnUpdate(User currentUser) {
+        this.currentUser = currentUser;
+    }
 
     @Override
     public void handleMessage(Client handler) {
-        handler.getGame().nextTurn();
+        handler.getGame().nextTurn(this);
+    }
+
+    public User getCurrentUser() {
+        return currentUser;
     }
 }

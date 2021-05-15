@@ -4,6 +4,7 @@ import it.polimi.ingsw.Commons.Deck;
 import it.polimi.ingsw.Commons.User;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.Updates.ActivateProductionUpdate;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.Updates.BuyDevCardPerformedUpdate;
+import it.polimi.ingsw.Utils.Messages.ServerMessages.Updates.NewTurnUpdate;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.Updates.UpdateMessage;
 
 import java.util.List;
@@ -37,7 +38,7 @@ public abstract class ReducedGame {
         decks = message.getResultingDecks();
     }
 
-    private ReducedPlayer getPlayer(User user) {
+    protected ReducedPlayer getPlayer(User user) {
         return players.stream().filter(x -> x.getNickname().equals(user)).
                 findFirst().orElseGet(() -> new ReducedPlayer(null, null, 0));
     }
@@ -62,7 +63,7 @@ public abstract class ReducedGame {
     }
 
 
-    public abstract void nextTurn();
+    public abstract void nextTurn(NewTurnUpdate message);
 
 }
 

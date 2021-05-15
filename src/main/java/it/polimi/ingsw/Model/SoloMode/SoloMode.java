@@ -1,15 +1,17 @@
 package it.polimi.ingsw.Model.SoloMode;
 
+import it.polimi.ingsw.Client.ReducedGame;
+import it.polimi.ingsw.Client.ReducedMarketTray;
+import it.polimi.ingsw.Client.ReducedPlayer;
+import it.polimi.ingsw.Client.ReducedSoloMode;
 import it.polimi.ingsw.Exceptions.EndGameException;
 import it.polimi.ingsw.Model.Game;
 import it.polimi.ingsw.Model.GameState;
 import it.polimi.ingsw.Model.MultiPlayerMode;
 import it.polimi.ingsw.Model.Player;
+import it.polimi.ingsw.Utils.Messages.ServerMessages.GameSetupMessage;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Stack;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class SoloMode extends Game {
@@ -41,6 +43,18 @@ public class SoloMode extends Game {
     public void nextTurn(){
         lorenzoPlays();
         //TODO notifyUpdate(new LorenzoPlayedUpdate(...))
+    }
+
+    @Override
+    protected void notifyGameSetup() {
+        notify(new GameSetupMessage(this.getReducedVersion()));
+    }
+
+    @Override
+    public ReducedGame getReducedVersion() {
+        List<ReducedPlayer> players = playerList.stream().map(Player::getReducedVersion).collect(Collectors.toList());
+        ReducedMarketTray marketTray = this.marketTray.getReducedVersion();
+        return new ReducedSoloMode(players, decks, marketTray, tokens);
     }
 
     public void lorenzoPlays(){

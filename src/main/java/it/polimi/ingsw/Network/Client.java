@@ -36,7 +36,6 @@ public class Client {
     public void start() throws IOException {
         socket = new Socket(ip, port);
         System.out.println("Connection established");
-
         DataInputStream socketIn = new DataInputStream(socket.getInputStream());
         DataOutputStream socketOut = new DataOutputStream(socket.getOutputStream());
         Scanner stdin = new Scanner(System.in);
@@ -78,7 +77,7 @@ public class Client {
 
 
     public void setupGame(GameSetupMessage message) {
-        //TODO da fare per far partire il gioco!
+        game = message.getGame();
     }
 
 
@@ -103,6 +102,11 @@ public class Client {
 
     public UI getUI() {
         return ui;
+    }
+
+    //TODO rivedere
+    public void setUi(UI ui) {
+        this.ui = ui;
     }
 
     public ReducedGame getGame() {

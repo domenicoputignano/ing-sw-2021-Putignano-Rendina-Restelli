@@ -1,6 +1,7 @@
 package it.polimi.ingsw.Client;
 
 import it.polimi.ingsw.Commons.Deck;
+import it.polimi.ingsw.Utils.Messages.ServerMessages.Updates.NewTurnUpdate;
 
 import java.util.List;
 
@@ -11,7 +12,7 @@ public class ReducedMultiPlayerMode extends ReducedGame {
     }
 
     @Override
-    public void nextTurn() {
-
+    public void nextTurn(NewTurnUpdate message) {
+        currPlayer = getPlayer(message.getCurrentUser());
     }
 }

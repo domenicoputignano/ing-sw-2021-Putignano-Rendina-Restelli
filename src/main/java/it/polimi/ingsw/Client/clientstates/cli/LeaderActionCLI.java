@@ -3,6 +3,7 @@ package it.polimi.ingsw.Client.clientstates.cli;
 import it.polimi.ingsw.Client.ReducedPlayer;
 import it.polimi.ingsw.Client.clientstates.AbstractLeaderAction;
 import it.polimi.ingsw.Client.view.CLI;
+import it.polimi.ingsw.Network.Client;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.ServerMessage;
 
 import java.util.Scanner;
@@ -12,8 +13,9 @@ public class LeaderActionCLI extends AbstractLeaderAction {
     private Scanner input = new Scanner(System.in);
     private final CLI cli;
 
-    public LeaderActionCLI(CLI cli) {
-        this.cli = cli;
+    public LeaderActionCLI(Client client) {
+        this.client = client;
+        cli = (CLI) client.getUI();
     }
 
     @Override
@@ -30,27 +32,13 @@ public class LeaderActionCLI extends AbstractLeaderAction {
                     client.getGame().getCurrPlayer().getNumOfAvailableLeaderCards(), leaderActionChosen, client.getGame().getCurrPlayer().getNumOfAvailableLeaderCards());
             int chosenIndex = chooseCardIndex();
             messageToSend.setIndex(chosenIndex);
-            client.sendMessage(messageToSend);
-        } else {
-            System.out.println("Oh no! Seems that all leader action has been performed. Try another action ");
-        }
-    }
-
-    //TODO stub created only for test purposes
-    public void manageUserInteraction(ReducedPlayer player) {
-        if(player.isAvailableLeaderAction()){
-            System.out.println("What leader action do you want to perform (ACTIVATE|DISCARD) ? ");
-            String leaderActionChosen = chooseLeaderAction();
-            messageToSend.setToDiscard(leaderActionChosen.equalsIgnoreCase("discard"));
-            System.out.printf("Well, you have %d leader card available, which one do you want to %s (value in [1 - %d]) ? ",
-                    player.getNumOfAvailableLeaderCards(), leaderActionChosen, player.getNumOfAvailableLeaderCards());
-            int chosenIndex = chooseCardIndex();
-            messageToSend.setIndex(chosenIndex);
+            //TODO da togliere il commento
             //client.sendMessage(messageToSend);
         } else {
             System.out.println("Oh no! Seems that all leader action has been performed. Try another action ");
         }
     }
+
 
 
     /* Method that iterate until is chosen a valid action over a leaderCard */

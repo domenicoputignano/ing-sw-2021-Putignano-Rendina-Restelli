@@ -54,10 +54,7 @@ public abstract class Game extends Observable<ServerMessage> implements Observer
         //Inviare notifica alle view interessate per le risorse a scelta
     }
 
-    private void notifyGameSetup() {
-        notify(new GameSetupMessage(playerList.stream().map(Player::getReducedVersion).collect(Collectors.toList()),
-                decks, marketTray.getReducedVersion()));
-    }
+    protected abstract void notifyGameSetup();
 
     private void initializeDecksDevCards() {
         String path = "src/main/resources/json/devCards.json";

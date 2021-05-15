@@ -29,7 +29,7 @@ public class ActionChoiceCLI extends AbstractActionChoice {
 
             }
             case "L" : {
-                (new LeaderActionCLI((CLI)client.getUI())).manageUserInteraction();
+
             }
             case "M" : {
 

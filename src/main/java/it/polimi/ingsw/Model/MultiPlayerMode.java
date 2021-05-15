@@ -1,6 +1,12 @@
 package it.polimi.ingsw.Model;
 
+import it.polimi.ingsw.Client.ReducedMarketTray;
+import it.polimi.ingsw.Client.ReducedMultiPlayerMode;
+import it.polimi.ingsw.Client.ReducedPlayer;
+import it.polimi.ingsw.Utils.Messages.ServerMessages.GameSetupMessage;
+
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class MultiPlayerMode extends Game {
     private int numOfPlayers;
@@ -52,5 +58,17 @@ public class MultiPlayerMode extends Game {
             return nextPlayer;
         else return nextPlayer(nextPlayer);
     }
+
+    @Override
+    protected void notifyGameSetup() {
+        notify(new GameSetupMessage(this.getReducedVersion()));
+    }
+
+    public ReducedMultiPlayerMode getReducedVersion() {
+        List<ReducedPlayer> players = playerList.stream().map(Player::getReducedVersion).collect(Collectors.toList());
+        ReducedMarketTray marketTray = this.marketTray.getReducedVersion();
+        return new ReducedMultiPlayerMode(players, decks, marketTray);
+    }
+
 }
 

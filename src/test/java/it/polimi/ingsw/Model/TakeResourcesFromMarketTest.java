@@ -110,6 +110,9 @@ class TakeResourcesFromMarketTest {
         multiPlayerMode.getTurn().setTurnState(TurnState.ActionType.TAKERESOURCESFROMMARKET);
         assertThrows(InvalidActionException.class,()->multiPlayerMode.getTurn().getTurnPhase().takeResourcesFromMarket(multiPlayerMode.getTurn(),takeResourcesFromMarketMessage));
     }
+
+
+    //TODO cambiare il test
     @Test
     void checkValidWhiteEffectsOk() throws InvalidActionException, WhiteEffectMismatchException, NeedPositioningException {
         TakeResourcesFromMarketMessage message = new TakeResourcesFromMarketMessage();
