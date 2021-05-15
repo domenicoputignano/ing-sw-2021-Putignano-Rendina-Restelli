@@ -44,8 +44,6 @@ public class Client {
         Scanner stdin = new Scanner(System.in);
         String socketLine;
         try{
-            //socketInObj = new ObjectInputStream(socket.getInputStream());
-            //socketOutObj = new ObjectOutputStream(socket.getOutputStream());
             socketLine = socketIn.readUTF();
             System.out.print(socketLine);
             while (isActive){
@@ -55,7 +53,6 @@ public class Client {
                 socketLine = socketIn.readUTF();
                 //TODO chiamare opportuni metodi di CLI/GUI
                 System.out.print(socketLine);
-
 
             }
         } catch(NoSuchElementException e){

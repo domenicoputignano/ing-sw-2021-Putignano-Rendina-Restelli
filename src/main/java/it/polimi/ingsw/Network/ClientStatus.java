@@ -5,6 +5,7 @@ import it.polimi.ingsw.Utils.Messages.ClientMessages.ClientMessage;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.ServerMessage;
 
 import java.io.IOException;
+import java.io.ObjectInput;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
@@ -15,18 +16,22 @@ public class ClientStatus implements Runnable {
 
     private RemoteView remoteView;
     private boolean isActive;
-    private ObjectOutputStream outputStreamToClient;
+    private final ObjectOutputStream outputStreamToClient;
+    private final ObjectInputStream inputFromClient;
     private final Socket socket;
     private final Logger LOGGER = Logger.getLogger(ClientStatus.class.getName());
 
-    public ClientStatus(Socket socket) {
+    public ClientStatus(Socket socket, ObjectInputStream inputFromClient, ObjectOutputStream outputStreamToClient) {
         this.socket = socket;
+        this.outputStreamToClient = outputStreamToClient;
+        this.inputFromClient = inputFromClient;
         this.isActive = true;
-        try {
-            this.outputStreamToClient = new ObjectOutputStream(socket.getOutputStream());
+        /*try {
+            //this.outputStreamToClient = new ObjectOutputStream(socket.getOutputStream());
+            //outputStreamToClient.flush();
         } catch (IOException e) {
             LOGGER.log(Level.SEVERE, "Error occurred while creating client object stream ");
-        }
+        }*/
     }
 
     public void send(ServerMessage serverMessage) {
@@ -53,7 +58,8 @@ public class ClientStatus implements Runnable {
     public void run(){
 
         try {
-            ObjectInputStream inputFromClient = new ObjectInputStream(socket.getInputStream());
+            //socket.getInputStream().reset();
+            //ObjectInputStream inputFromClient = new ObjectInputStream(socket.getInputStream());
 
             while(isActive){
                 ClientMessage messageFromClient = (ClientMessage) inputFromClient.readObject();

@@ -82,7 +82,7 @@ public class Server {
     public void initializeGame(Set<ClientSetupConnection> clients) {
         List<Player> players = new ArrayList<>();
         for(ClientSetupConnection client : clients) {
-            ClientStatus clientStatus = new ClientStatus(client.getClientSocket());
+            ClientStatus clientStatus = new ClientStatus(client.getClientSocket(),client.getInputStream(),client.getOutputStream());
             executors.submit(clientStatus);
 
             //registration of each player
@@ -103,7 +103,7 @@ public class Server {
 
     public void initializeGame(ClientSetupConnection client) {
         Player player = getClientAsPlayer(client);
-        ClientStatus clientStatus = new ClientStatus(client.getClientSocket());
+        ClientStatus clientStatus = new ClientStatus(client.getClientSocket(),client.getInputStream(), client.getOutputStream());
         executors.submit(clientStatus);
 
         // registration of the player
