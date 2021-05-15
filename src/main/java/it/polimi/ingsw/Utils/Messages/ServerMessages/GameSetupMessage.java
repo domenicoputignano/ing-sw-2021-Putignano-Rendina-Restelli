@@ -22,6 +22,6 @@ public class GameSetupMessage implements ServerMessage {
 
     @Override
     public void handleMessage(Client handler) {
-
+        handler.setupGame(this);
     }
 }

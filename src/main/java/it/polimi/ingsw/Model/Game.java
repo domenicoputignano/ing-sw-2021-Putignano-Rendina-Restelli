@@ -3,6 +3,7 @@ package it.polimi.ingsw.Model;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
+import it.polimi.ingsw.Client.ReducedGame;
 import it.polimi.ingsw.Commons.*;
 import it.polimi.ingsw.Model.ConclusionEvents.BlackCrossHitLastSpace;
 import it.polimi.ingsw.Model.ConclusionEvents.DevCardColorEnded;
@@ -203,5 +204,8 @@ public abstract class Game extends Observable<ServerMessage> implements Observer
     public Player getPlayer(User user) {
         return users.get(user);
     }
+
+
+    public abstract ReducedGame getReducedVersion();
 
 }

@@ -10,6 +10,7 @@ import it.polimi.ingsw.Utils.MarbleDestination;
 import it.polimi.ingsw.Utils.MarketChoice;
 import it.polimi.ingsw.Utils.Messages.ClientMessages.*;
 import it.polimi.ingsw.Utils.Pair;
+import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -122,7 +123,7 @@ class SoloModeTest {
         assertEquals(StateFavorTiles.FACEUP, game.getCurrPlayer().getPersonalBoard().getFaithTrack().getSections()[0].getState());
     }
 
-    @Test
+    @RepeatedTest(1)
     void activateVaticanReportByLorenzoIlMagnifico() throws EndGameException {
         playerList.add(new Player("Pippo"));
         SoloMode game = new SoloMode(playerList.get(0));
@@ -132,7 +133,7 @@ class SoloModeTest {
         assertEquals(StateFavorTiles.DISCARDED, game.getCurrPlayer().getPersonalBoard().getFaithTrack().getSections()[0].getState());
     }
 
-    @Test
+    @RepeatedTest(10)
     void takeResourcesFromMarketGamePlay() throws InvalidActionException, WhiteEffectMismatchException, NeedPositioningException {
         playerList.add(new Player("Pippo"));
         SoloMode game = new SoloMode(playerList.get(0));
@@ -146,18 +147,28 @@ class SoloModeTest {
         game.getTurn().getPlayer().getLeaderCards().add(new LeaderCard(new LeaderEffect(Effect.CMARBLE,ResourceType.coin),null,null,0));
         game.getTurn().getPlayer().getLeaderCards().get(0).setIsActive();
         game.getTurn().getPlayer().getLeaderCards().get(1).setIsActive();
-        message.addWhereToPutMarbles(new Pair<>(new ReducedMarble(ColorMarble.WHITE),MarbleDestination.DEPOT1));
-        message.addWhereToPutMarbles(new Pair<>(new ReducedMarble(ColorMarble.WHITE),MarbleDestination.DEPOT2));
-        message.addWhereToPutMarbles(new Pair<>(new ReducedMarble(ColorMarble.WHITE),MarbleDestination.DEPOT3));
-        message.addWhereToPutMarbles(new Pair<>(new ReducedMarble(ColorMarble.WHITE),MarbleDestination.DEPOT3));
+        List<Marble> marbles = game.getMarketTray().peekMarbles(MarketChoice.ROW, 2);
         List<Integer> effects = new ArrayList<>();
-        effects.add(1);
-        effects.add(1);
-        effects.add(1);
-        effects.add(2);
+        int i = 0;
+        for(Marble m : marbles) {
+            if(m.getColor() == ColorMarble.WHITE && (i%2!=0)) {
+                effects.add(1);
+                message.addWhereToPutMarbles(new Pair<>(new ReducedMarble(ColorMarble.WHITE),MarbleDestination.DEPOT1));
+                i++;
+            }
+            else if(m.getColor() == ColorMarble.WHITE && (i%2==0)){
+                    effects.add(2);
+                    message.addWhereToPutMarbles(new Pair<>(new ReducedMarble(ColorMarble.WHITE),MarbleDestination.DEPOT1));
+                    i++;
+            } else {
+                message.addWhereToPutMarbles(new Pair<>(m.getReducedVersion(),MarbleDestination.DISCARD));
+            }
+        }
         message.setWhiteEffects(effects);
         game.getTurn().setTurnState(TurnState.ActionType.TAKERESOURCESFROMMARKET);
-        assertThrows(NeedPositioningException.class,()->game.getTurn().getTurnPhase().takeResourcesFromMarket(game.getTurn(),message));
+        if(i>1) {
+            assertThrows(NeedPositioningException.class,()->game.getTurn().getTurnPhase().takeResourcesFromMarket(game.getTurn(),message));
+        }
         TakeResourcesFromMarket takeResourcesFromMarket = (TakeResourcesFromMarket) game.getTurn().getTurnPhase();
         assertTrue(takeResourcesFromMarket.checkValidWhiteEffects(game.getTurn(), message.getWhiteEffects(),message.getRequestedMarbles()));
     }

@@ -15,6 +15,15 @@ public abstract class ReducedGame {
     protected ReducedPlayer currPlayer;
     protected ReducedMarketTray marketTray;
     protected List<Deck> decks;
+    protected final boolean isSoloMode;
+
+
+    protected ReducedGame(List<ReducedPlayer> players,List<Deck> decks, ReducedMarketTray marketTray, boolean isSoloMode) {
+        this.players = players;
+        this.decks = decks;
+        this.marketTray = marketTray;
+        this.isSoloMode = isSoloMode;
+    }
 
 
     //Overloading methods to perform updates with different messages from server
@@ -27,10 +36,6 @@ public abstract class ReducedGame {
         updatePersonalBoard(message);
         decks = message.getResultingDecks();
     }
-
-
-    public abstract void nextTurn();
-
 
     private ReducedPlayer getPlayer(User user) {
         return players.stream().filter(x -> x.getNickname().equals(user)).
@@ -51,7 +56,13 @@ public abstract class ReducedGame {
         return decks;
     }
 
+
     public ReducedMarketTray getMarketTray() {
         return marketTray;
     }
+
+
+    public abstract void nextTurn();
+
 }
+
