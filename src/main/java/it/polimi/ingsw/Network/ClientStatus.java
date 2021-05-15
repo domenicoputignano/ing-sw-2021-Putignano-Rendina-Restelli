@@ -26,12 +26,6 @@ public class ClientStatus implements Runnable {
         this.outputStreamToClient = outputStreamToClient;
         this.inputFromClient = inputFromClient;
         this.isActive = true;
-        /*try {
-            //this.outputStreamToClient = new ObjectOutputStream(socket.getOutputStream());
-            //outputStreamToClient.flush();
-        } catch (IOException e) {
-            LOGGER.log(Level.SEVERE, "Error occurred while creating client object stream ");
-        }*/
     }
 
     public void send(ServerMessage serverMessage) {
@@ -56,17 +50,12 @@ public class ClientStatus implements Runnable {
     }
 
     public void run(){
-
         try {
-            //socket.getInputStream().reset();
-            //ObjectInputStream inputFromClient = new ObjectInputStream(socket.getInputStream());
-
             while(isActive){
                 ClientMessage messageFromClient = (ClientMessage) inputFromClient.readObject();
                 LOGGER.log(Level.INFO, String.format("Received messageToSend %s", messageFromClient.getClass().getName()));
                 remoteView.handleClientMessage(messageFromClient);
             }
-
         } catch (IOException | ClassNotFoundException e) {
             LOGGER.log(Level.SEVERE, "Error in receiving messageToSend from thread");
         }

@@ -38,21 +38,23 @@ public class Client {
     public void start() throws IOException {
         socket = new Socket(ip, port);
         System.out.println("Connection established");
-        ObjectOutputStream socketOut = new ObjectOutputStream(socket.getOutputStream());
-        socketOut.flush();
-        ObjectInputStream socketIn = new ObjectInputStream(socket.getInputStream());
+        socketOutObj = new ObjectOutputStream(socket.getOutputStream());
+        socketOutObj.flush();
+        socketInObj = new ObjectInputStream(socket.getInputStream());
         Scanner stdin = new Scanner(System.in);
         String socketLine;
         try{
-            socketLine = socketIn.readUTF();
+            socketLine = socketInObj.readUTF();
             System.out.print(socketLine);
             while (isActive){
                 String inputLine = stdin.nextLine();
-                socketOut.writeUTF(inputLine);
-                socketOut.flush();
-                socketLine = socketIn.readUTF();
+                socketOutObj.writeUTF(inputLine);
+                socketOutObj.flush();
+                socketLine = socketInObj.readUTF();
                 //TODO chiamare opportuni metodi di CLI/GUI
                 System.out.print(socketLine);
+
+
 
             }
         } catch(NoSuchElementException e){
@@ -60,8 +62,8 @@ public class Client {
             isActive = false;
         } finally {
             stdin.close();
-            socketIn.close();
-            socketOut.close();
+            socketInObj.close();
+            socketOutObj.close();
             socket.close();
         }
     }

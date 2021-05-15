@@ -5,6 +5,7 @@ import it.polimi.ingsw.Controller.GameController;
 import it.polimi.ingsw.Model.MultiPlayerMode;
 import it.polimi.ingsw.Model.Player;
 import it.polimi.ingsw.Model.SoloMode.SoloMode;
+import it.polimi.ingsw.Utils.Messages.ServerMessages.GameSetupMessage;
 
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -81,14 +82,16 @@ public class Server {
 
     public void initializeGame(Set<ClientSetupConnection> clients) {
         List<Player> players = new ArrayList<>();
-        for(ClientSetupConnection client : clients) {
-            ClientStatus clientStatus = new ClientStatus(client.getClientSocket(),client.getInputStream(),client.getOutputStream());
+        for(ClientSetupConnection clientSetupConnection : clients) {
+            ClientStatus clientStatus = new ClientStatus(clientSetupConnection.getClientSocket(),
+                    clientSetupConnection.getInputStream(),
+                    clientSetupConnection.getOutputStream());
             executors.submit(clientStatus);
 
             //registration of each player
-            accounts.put(client.getNickname(), clientStatus);
+            accounts.put(clientSetupConnection.getNickname(), clientStatus);
 
-            players.add(getClientAsPlayer(client));
+            players.add(getClientAsPlayer(clientSetupConnection));
             //created players and players-connections binding
         }
         //Creation of model
@@ -98,6 +101,7 @@ public class Server {
             RemoteView remoteView = new RemoteView(p.getUser(), gameController, accounts.get(p.getUser().getNickname()));
             accounts.get(p.getUser().getNickname()).bindRemoteView(remoteView);
         }
+        LOGGER.log(Level.INFO, "Game setup done");
     }
 
 
