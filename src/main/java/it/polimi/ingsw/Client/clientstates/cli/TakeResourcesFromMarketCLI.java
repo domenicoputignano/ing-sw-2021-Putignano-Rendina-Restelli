@@ -2,7 +2,9 @@ package it.polimi.ingsw.Client.clientstates.cli;
 
 import it.polimi.ingsw.Client.ReducedMarble;
 import it.polimi.ingsw.Client.clientstates.AbstractTakeResourcesFromMarket;
+import it.polimi.ingsw.Client.view.CLI;
 import it.polimi.ingsw.Commons.ColorMarble;
+import it.polimi.ingsw.Network.Client;
 import it.polimi.ingsw.Utils.MarbleDestination;
 import it.polimi.ingsw.Utils.MarketChoice;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.ServerMessage;
@@ -11,7 +13,13 @@ import it.polimi.ingsw.Utils.Pair;
 import java.util.Scanner;
 
 public class TakeResourcesFromMarketCLI extends AbstractTakeResourcesFromMarket {
-    Scanner input = new Scanner(System.in);
+    private Scanner input = new Scanner(System.in);
+    private final CLI cli;
+
+    public TakeResourcesFromMarketCLI(Client client) {
+        super(client);
+        cli = (CLI) client.getUI();
+    }
 
     @Override
     public void render(ServerMessage message) {

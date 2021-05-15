@@ -1,5 +1,7 @@
 package it.polimi.ingsw.Commons;
 
+import java.util.Objects;
+
 public class LeaderEffect {
     private Effect effect;
     private ResourceType type;
@@ -18,6 +20,11 @@ public class LeaderEffect {
     }
 
     @Override
+    public int hashCode() {
+        return Objects.hash(effect, type);
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -25,4 +32,11 @@ public class LeaderEffect {
         return effect == that.effect && type == that.type;
     }
 
+    @Override
+    public String toString() {
+        return "{" +
+                "" + effect +
+                ", type=" + type +
+                '}';
+    }
 }

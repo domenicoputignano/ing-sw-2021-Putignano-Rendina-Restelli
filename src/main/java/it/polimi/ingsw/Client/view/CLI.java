@@ -2,6 +2,7 @@ package it.polimi.ingsw.Client.view;
 
 
 import it.polimi.ingsw.Commons.Effect;
+import it.polimi.ingsw.Commons.LeaderCard;
 import it.polimi.ingsw.Commons.ResourceType;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.Updates.ActivateProductionUpdate;
 import it.polimi.ingsw.Utils.ResourceSource;
@@ -106,6 +107,13 @@ public class CLI extends UI {
     }
 
 
+
+    public void showLeaderCards() {
+        for(LeaderCard card : client.getGame().getCurrPlayer().getAvailableLeaderCards()) {
+            System.out.printf("Card n.%d "+card+"\n",
+                    client.getGame().getCurrPlayer().getAvailableLeaderCards().indexOf(card)+1);
+        }
+    }
 
 
 

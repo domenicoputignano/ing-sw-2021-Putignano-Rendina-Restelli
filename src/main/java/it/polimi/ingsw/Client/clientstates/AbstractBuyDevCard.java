@@ -3,6 +3,7 @@ package it.polimi.ingsw.Client.clientstates;
 import it.polimi.ingsw.Client.Checker;
 import it.polimi.ingsw.Client.ReducedPlayer;
 import it.polimi.ingsw.Commons.*;
+import it.polimi.ingsw.Network.Client;
 import it.polimi.ingsw.Utils.Messages.ClientMessages.BuyDevCardMessage;
 
 import java.util.EnumMap;
@@ -12,6 +13,10 @@ import java.util.stream.Collectors;
 public abstract class AbstractBuyDevCard extends AbstractClientState{
     protected BuyDevCardMessage messageToSend = new BuyDevCardMessage();
     protected Map<ResourceType, Integer> actualCost;
+
+    public AbstractBuyDevCard(Client client) {
+        super(client);
+    }
 
     protected boolean deckIsEmpty() {
         return takeDeckFromCardType(messageToSend.getType()).isEmpty();

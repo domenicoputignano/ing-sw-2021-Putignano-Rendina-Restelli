@@ -5,6 +5,7 @@ import it.polimi.ingsw.Client.ReducedPersonalBoard;
 import it.polimi.ingsw.Commons.Effect;
 import it.polimi.ingsw.Commons.ResourceType;
 import it.polimi.ingsw.Model.ActiveProductions;
+import it.polimi.ingsw.Network.Client;
 import it.polimi.ingsw.Utils.Messages.ClientMessages.ActivateProductionMessage;
 import it.polimi.ingsw.Utils.ResourceSource;
 
@@ -19,6 +20,10 @@ public abstract class AbstractActivateProduction extends AbstractClientState {
     protected ActivateProductionMessage messageToSend = new ActivateProductionMessage();
     protected ActiveProductions requiredProduction = new ActiveProductions();
     protected Map<ResourceSource, EnumMap<ResourceType, Integer>> howToTakeResources = new HashMap<>();
+
+    public AbstractActivateProduction(Client client) {
+        super(client);
+    }
 
     public boolean areValidRequestedProductions(){
         ReducedPersonalBoard playerBoard = client.getGame().getCurrPlayer().getPersonalBoard();

@@ -12,5 +12,8 @@ public abstract class UI {
     public abstract void showUpdate(ActivateProductionUpdate message);
 
 
-
+    //TODO cambiare, messa solo per esigenze di test
+    public void setClient(Client client) {
+        this.client = client;
+    }
 }

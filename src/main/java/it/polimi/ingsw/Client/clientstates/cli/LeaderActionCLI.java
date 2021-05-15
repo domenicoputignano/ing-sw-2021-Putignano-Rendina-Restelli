@@ -25,6 +25,7 @@ public class LeaderActionCLI extends AbstractLeaderAction {
     @Override
     public void manageUserInteraction() {
         if(client.getGame().getCurrPlayer().isAvailableLeaderAction()){
+            cli.showLeaderCards();
             System.out.println("What leader action do you want to perform (ACTIVATE|DISCARD) ? ");
             String leaderActionChosen = chooseLeaderAction();
             messageToSend.setToDiscard(leaderActionChosen.equalsIgnoreCase("discard"));

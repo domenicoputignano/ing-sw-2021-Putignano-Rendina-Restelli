@@ -46,12 +46,17 @@ public class LeaderCard {
 
     @Override
     public String toString() {
-        return "LeaderCard{" +
-                "leaderEffect=" + leaderEffect +
-                ", requirementsResources=" + requirementsResources +
-                ", requirementsCards=" + requirementsCards +
-                ", isActive=" + isActive +
-                ", victoryPoints=" + victoryPoints +
+        if(requirementsCards.size()>0) return "{" +
+                "\nEffect=" + leaderEffect +
+                ",\nrequirementsCards=" + requirementsCards +
+                ",\nactive=" + isActive +
+                ",\nvictoryPoints=" + victoryPoints +
+                '}';
+        else return "{" +
+                "\nEffect=" + leaderEffect +
+                ",\nrequirementsResources=" + requirementsResources +
+                ",\nactive=" + isActive +
+                ",\nvictoryPoints=" + victoryPoints +
                 '}';
     }
 }

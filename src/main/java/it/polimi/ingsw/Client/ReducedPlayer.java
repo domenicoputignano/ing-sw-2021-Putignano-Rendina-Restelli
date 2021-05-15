@@ -23,6 +23,8 @@ public class ReducedPlayer {
         return nickname;
     }
 
+    public List<LeaderCard> getAvailableLeaderCards() { return personalBoard.getAvailableLeaderCards(); }
+
     public ReducedPersonalBoard getPersonalBoard() {
         return personalBoard;
     }

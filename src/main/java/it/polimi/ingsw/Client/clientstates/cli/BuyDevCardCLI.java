@@ -4,16 +4,19 @@ import it.polimi.ingsw.Client.clientstates.AbstractBuyDevCard;
 import it.polimi.ingsw.Client.view.CLI;
 import it.polimi.ingsw.Commons.CardType;
 import it.polimi.ingsw.Commons.ColorCard;
+import it.polimi.ingsw.Network.Client;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.ServerMessage;
 
 import java.util.Scanner;
 
 public class BuyDevCardCLI extends AbstractBuyDevCard {
     private Scanner input = new Scanner(System.in);
-    private CLI cli;
+    private final CLI cli;
 
-    public BuyDevCardCLI(CLI cli) {
-        this.cli = cli;
+
+    public BuyDevCardCLI(Client client) {
+        super(client);
+        cli = (CLI)client.getUI();
     }
 
     @Override

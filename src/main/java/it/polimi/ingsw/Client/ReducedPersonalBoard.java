@@ -25,6 +25,7 @@ public class ReducedPersonalBoard implements Serializable {
     }
 
 
+
     public ReducedWarehouse getWarehouse() {
         return warehouse;
     }
@@ -37,6 +38,10 @@ public class ReducedPersonalBoard implements Serializable {
 
     public Slot[] getSlots() {
         return slots;
+    }
+
+    public List<LeaderCard> getAvailableLeaderCards() {
+        return leaderCards;
     }
 
     public List<LeaderCard> findEffect(Effect effect) {

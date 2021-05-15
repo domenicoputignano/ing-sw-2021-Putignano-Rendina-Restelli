@@ -3,6 +3,7 @@ package it.polimi.ingsw.Client.clientstates.cli;
 import it.polimi.ingsw.Client.clientstates.AbstractActivateProduction;
 import it.polimi.ingsw.Client.view.CLI;
 import it.polimi.ingsw.Commons.ResourceType;
+import it.polimi.ingsw.Network.Client;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.ServerMessage;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.Updates.ActivateProductionUpdate;
 import java.util.Scanner;
@@ -16,8 +17,9 @@ public class ActivateProductionCLI extends AbstractActivateProduction {
     private Scanner input = new Scanner(System.in);
 
 
-    public ActivateProductionCLI(CLI cli) {
-        this.cli = cli;
+    public ActivateProductionCLI(Client client) {
+        super(client);
+        cli = (CLI) client.getUI();
     }
 
     public void render(ServerMessage message) {
