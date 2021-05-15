@@ -65,5 +65,6 @@ public abstract class ReducedGame {
 
     public abstract void nextTurn(NewTurnUpdate message);
 
+
 }
 

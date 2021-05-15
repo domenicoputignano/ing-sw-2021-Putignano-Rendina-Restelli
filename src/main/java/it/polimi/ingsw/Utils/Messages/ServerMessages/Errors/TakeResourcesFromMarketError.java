@@ -3,7 +3,7 @@ package it.polimi.ingsw.Utils.Messages.ServerMessages.Errors;
 import it.polimi.ingsw.Network.Client;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.Errors.ErrorMessage;
 
-public class TakeResourcesFromMarketError implements ErrorMessage {
+public class TakeResourcesFromMarketError extends ErrorMessage {
     private final Trigger trigger;
     public enum Trigger
     {

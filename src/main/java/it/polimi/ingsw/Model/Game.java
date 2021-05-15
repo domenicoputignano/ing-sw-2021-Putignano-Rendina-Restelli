@@ -12,6 +12,7 @@ import it.polimi.ingsw.Model.ConclusionEvents.SeventhDevCardBought;
 import it.polimi.ingsw.Model.MarketTray.MarketTray;
 import it.polimi.ingsw.Observable;
 import it.polimi.ingsw.Observer;
+import it.polimi.ingsw.Utils.Messages.ServerMessages.Errors.ErrorMessage;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.GameSetupMessage;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.ServerMessage;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.Updates.ActivateVaticanReportUpdate;
@@ -190,13 +191,16 @@ public abstract class Game extends Observable<ServerMessage> implements Observer
         this.gameState = state;
     }
 
+
     public GameState getGameState() {
         return gameState;
     }
 
+
     public int getNumOfPlayers(){
         return playerList.size();
     }
+
 
     public Player getPlayer(User user) {
         return users.get(user);
@@ -204,5 +208,9 @@ public abstract class Game extends Observable<ServerMessage> implements Observer
 
 
     public abstract ReducedGame getReducedVersion();
+
+    public void notifyError(ErrorMessage message) {
+        notify(message);
+    }
 
 }

@@ -2,7 +2,7 @@ package it.polimi.ingsw.Utils.Messages.ServerMessages.Errors;
 
 import it.polimi.ingsw.Network.Client;
 
-public class BuyDevCardError implements ErrorMessage {
+public class BuyDevCardError extends ErrorMessage {
     private final Trigger trigger;
     public enum Trigger {
         EMPTYDECK("Required deck is not available !"),

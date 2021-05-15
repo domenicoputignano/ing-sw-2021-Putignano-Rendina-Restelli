@@ -4,7 +4,7 @@ import it.polimi.ingsw.Network.Client;
 
 
 
-public class ActionError implements ErrorMessage {
+public class ActionError extends ErrorMessage {
     private final Trigger trigger;
 
     @Override

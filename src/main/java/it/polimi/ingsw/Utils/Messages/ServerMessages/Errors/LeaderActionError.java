@@ -2,7 +2,7 @@ package it.polimi.ingsw.Utils.Messages.ServerMessages.Errors;
 
 import it.polimi.ingsw.Network.Client;
 
-public class LeaderActionError implements ErrorMessage {
+public class LeaderActionError extends ErrorMessage {
     private final Trigger trigger;
     public enum Trigger
     {
