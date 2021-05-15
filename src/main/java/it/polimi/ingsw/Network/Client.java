@@ -86,8 +86,8 @@ public class Client {
             while(isActive) {
                 try {
                     ServerMessage message = (ServerMessage) socketInObj.readObject();
-                    LOGGER.log(Level.INFO, "Received messageToSend from Server");
-                    //TODO handle of Received messageToSend
+                    LOGGER.log(Level.INFO, "Received message from Server");
+                    //TODO handle of Received message
                 } catch (IOException e) {
                     LOGGER.log(Level.SEVERE, "Client disconnected!");
                 } catch (ClassNotFoundException e) {

@@ -10,10 +10,12 @@ import it.polimi.ingsw.Utils.MarketChoice;
 import it.polimi.ingsw.Utils.Pair;
 import it.polimi.ingsw.Utils.Messages.ClientMessages.*;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -111,10 +113,8 @@ class TakeResourcesFromMarketTest {
         assertThrows(InvalidActionException.class,()->multiPlayerMode.getTurn().getTurnPhase().takeResourcesFromMarket(multiPlayerMode.getTurn(),takeResourcesFromMarketMessage));
     }
 
-
-    //TODO cambiare il test
-    @Test
-    void checkValidWhiteEffectsOk() throws InvalidActionException, WhiteEffectMismatchException, NeedPositioningException {
+    @RepeatedTest(5)
+    void checkValidWhiteEffectsOk() {
         TakeResourcesFromMarketMessage message = new TakeResourcesFromMarketMessage();
         message.setPlayerChoice(MarketChoice.ROW, 2);
         multiPlayerMode.getTurn().getPlayer().getLeaderCards().clear();
@@ -122,23 +122,25 @@ class TakeResourcesFromMarketTest {
         multiPlayerMode.getTurn().getPlayer().getLeaderCards().add(new LeaderCard(new LeaderEffect(Effect.CMARBLE,ResourceType.coin),null,null,0));
         multiPlayerMode.getTurn().getPlayer().getLeaderCards().get(0).setIsActive();
         multiPlayerMode.getTurn().getPlayer().getLeaderCards().get(1).setIsActive();
-        message.addWhereToPutMarbles(new Pair<>(new ReducedMarble(ColorMarble.WHITE),MarbleDestination.DEPOT1));
-        message.addWhereToPutMarbles(new Pair<>(new ReducedMarble(ColorMarble.WHITE),MarbleDestination.DEPOT2));
-        message.addWhereToPutMarbles(new Pair<>(new ReducedMarble(ColorMarble.WHITE),MarbleDestination.DEPOT3));
-        message.addWhereToPutMarbles(new Pair<>(new ReducedMarble(ColorMarble.WHITE),MarbleDestination.DEPOT3));
-        List<Integer> effects = new ArrayList<>();
-        effects.add(1);
-        effects.add(1);
-        effects.add(1);
-        effects.add(2);
-        message.setWhiteEffects(effects);
+        List<Marble> marbles = multiPlayerMode.getMarketTray().peekMarbles(MarketChoice.ROW, 2);
+        List<ReducedMarble> requestedMarbles = marbles.stream().map(Marble::getReducedVersion).collect(Collectors.toList());
+        int i = 0;
+        for(Marble marble : marbles) {
+            if((marble.getColor() == ColorMarble.WHITE) && (i%2 == 0)) {
+                message.addWhiteEffect(1);
+                i++;
+            } else if((marble.getColor() == ColorMarble.WHITE) && (i%2 != 0)) {
+                message.addWhiteEffect(2);
+                i++;
+            }
+        }
         multiPlayerMode.getTurn().setTurnState(TurnState.ActionType.TAKERESOURCESFROMMARKET);
-        assertThrows(NeedPositioningException.class,()->multiPlayerMode.getTurn().getTurnPhase().takeResourcesFromMarket(multiPlayerMode.getTurn(),message));
         TakeResourcesFromMarket takeResourcesFromMarket = (TakeResourcesFromMarket) multiPlayerMode.getTurn().getTurnPhase();
-        assertTrue(takeResourcesFromMarket.checkValidWhiteEffects(multiPlayerMode.getTurn(), message.getWhiteEffects(),message.getRequestedMarbles()));
+        assertTrue(takeResourcesFromMarket.checkValidWhiteEffects(multiPlayerMode.getTurn(), message.getWhiteEffects(), requestedMarbles));
     }
 
-    @Test
+    //TODO cambiare il test
+    @RepeatedTest(5)
     void checkValidWhiteEffectsKo() throws InvalidActionException, WhiteEffectMismatchException {
         TakeResourcesFromMarketMessage message = new TakeResourcesFromMarketMessage();
         message.setPlayerChoice(MarketChoice.ROW, 2);
@@ -160,7 +162,7 @@ class TakeResourcesFromMarketTest {
         assertFalse(takeResourcesFromMarket.checkValidWhiteEffects(multiPlayerMode.getTurn(), message.getWhiteEffects(),message.getRequestedMarbles()));
     }
 
-    @Test
+    @RepeatedTest(5)
     void handlePositioning() throws DepotOutOfBoundsException, IncompatibleResourceTypeException, InvalidActionException, WhiteEffectMismatchException, NeedPositioningException {
         List<Marble> marbles;
         multiPlayerMode.getTurn().getPlayer().getPersonalBoard().getWarehouse().addResourcesToDepot(1,ResourceType.coin,1);

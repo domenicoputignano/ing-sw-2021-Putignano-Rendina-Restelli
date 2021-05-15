@@ -129,8 +129,7 @@ public abstract class Game extends Observable<ServerMessage> implements Observer
 
     }
 
-    public boolean isEmptyDeck(CardType cardType)
-    {
+    public boolean isEmptyDeck(CardType cardType) {
         return this.decks.stream().anyMatch(x -> x.getCardType().equals(cardType) && x.getSize()<=0);
     }
 
