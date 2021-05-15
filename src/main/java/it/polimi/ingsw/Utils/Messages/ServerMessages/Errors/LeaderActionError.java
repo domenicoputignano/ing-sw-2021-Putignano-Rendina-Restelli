@@ -1,5 +1,6 @@
 package it.polimi.ingsw.Utils.Messages.ServerMessages.Errors;
 
+import it.polimi.ingsw.Commons.User;
 import it.polimi.ingsw.Network.Client;
 
 public class LeaderActionError extends ErrorMessage {
@@ -21,8 +22,9 @@ public class LeaderActionError extends ErrorMessage {
         }
     }
 
-    public LeaderActionError(Trigger trigger)
+    public LeaderActionError(User user, Trigger trigger)
     {
+        super(user);
         this.trigger = trigger;
     }
 

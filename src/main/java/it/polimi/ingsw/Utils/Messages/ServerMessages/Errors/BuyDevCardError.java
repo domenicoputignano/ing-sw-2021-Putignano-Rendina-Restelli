@@ -1,5 +1,6 @@
 package it.polimi.ingsw.Utils.Messages.ServerMessages.Errors;
 
+import it.polimi.ingsw.Commons.User;
 import it.polimi.ingsw.Network.Client;
 
 public class BuyDevCardError extends ErrorMessage {
@@ -21,8 +22,9 @@ public class BuyDevCardError extends ErrorMessage {
         }
     }
 
-    public BuyDevCardError(Trigger trigger)
+    public BuyDevCardError(User user, Trigger trigger)
     {
+        super(user);
         this.trigger = trigger;
     }
 

@@ -1,5 +1,6 @@
 package it.polimi.ingsw.Utils.Messages.ServerMessages.Errors;
 
+import it.polimi.ingsw.Commons.User;
 import it.polimi.ingsw.Network.Client;
 
 
@@ -29,7 +30,8 @@ public class ActionError extends ErrorMessage {
         }
     }
 
-    public ActionError(Trigger trigger) {
+    public ActionError(User user, Trigger trigger) {
+        super(user);
         this.trigger = trigger;
     }
 

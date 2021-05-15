@@ -46,10 +46,10 @@ public class GameController {
                 receivedChoiceMessage.getAndIncrement();
                 checkAllResourceChoiceDone(receivedChoiceMessage);
             } else {
-                sender.sendError(new ActionError(ActionError.Trigger.RESOURCECHOICEMISMATCH));
+                sender.sendError(new ActionError(sender.getPlayer().getUser(),ActionError.Trigger.RESOURCECHOICEMISMATCH));
             }
         }else {
-            sender.sendError(new InvalidMessageError());
+            sender.sendError(new InvalidMessageError(sender.getPlayer().getUser()));
         }
     }
 
@@ -60,10 +60,10 @@ public class GameController {
                 receivedChoiceMessage.getAndIncrement();
                 checkAllLeaderChoicesDone(receivedChoiceMessage);
             } else {
-                sender.sendError(new InvalidMessageError());
+                sender.sendError(new InvalidMessageError(sender.getPlayer().getUser()));
             }
         } else {
-            sender.sendError(new ActionError(ActionError.Trigger.WRONGGAMEPHASE));
+            sender.sendError(new ActionError(sender.getPlayer().getUser(),ActionError.Trigger.WRONGGAMEPHASE));
         }
     }
 

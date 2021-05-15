@@ -28,17 +28,17 @@ public class TurnController {
                     try {
                         model.getTurn().getTurnPhase().buyDevCard(model.getTurn(), message);
                     } catch (InvalidActionException e) {
-                        sender.sendError(new ActionError(ActionError.Trigger.NORMALACTIONALREADYDONE));
+                        model.notifyError(new ActionError(sender.getPlayer().getUser(),ActionError.Trigger.NORMALACTIONALREADYDONE));
                     } catch (NotEnoughResourcesException e) {
-                        sender.sendError(new BuyDevCardError(BuyDevCardError.Trigger.NOTENOUGHRESOURCES));
+                        model.notifyError(new BuyDevCardError(sender.getPlayer().getUser(),BuyDevCardError.Trigger.NOTENOUGHRESOURCES));
                     } catch (ResourceMismatchException e) {
-                        sender.sendError(new BuyDevCardError(BuyDevCardError.Trigger.RESOURCESMISMATCH));
+                        model.notifyError(new BuyDevCardError(sender.getPlayer().getUser(),BuyDevCardError.Trigger.RESOURCESMISMATCH));
                     } catch (PaymentErrorException e) {
-                        sender.sendError(new BuyDevCardError(BuyDevCardError.Trigger.PAYMENTERROR));
+                        model.notifyError(new BuyDevCardError(sender.getPlayer().getUser(),BuyDevCardError.Trigger.PAYMENTERROR));
                     }
-                } else sender.sendError(new BuyDevCardError(BuyDevCardError.Trigger.EMPTYDECK));
-            } else sender.sendError(new InvalidMessageError());
-        } else sender.sendError(new WrongTurnError());
+                } else model.notifyError(new BuyDevCardError(sender.getPlayer().getUser(),BuyDevCardError.Trigger.EMPTYDECK));
+            } else sender.sendError(new InvalidMessageError(sender.getPlayer().getUser()));
+        } else sender.sendError(new WrongTurnError(sender.getPlayer().getUser()));
     }
 
     public void handleActivateProductionMessage(ActivateProductionMessage message, RemoteView sender) {
@@ -49,19 +49,19 @@ public class TurnController {
                     try {
                         model.getTurn().getTurnPhase().activateProduction(model.getTurn(), message);
                     } catch (InvalidActionException e) {
-                        sender.sendError(new ActionError(ActionError.Trigger.NORMALACTIONALREADYDONE));
+                        model.notifyError(new ActionError(sender.getPlayer().getUser(),ActionError.Trigger.NORMALACTIONALREADYDONE));
                     } catch (PaymentErrorException e) {
-                        sender.sendError(new ActivateProductionError(ActivateProductionError.Trigger.PAYMENTERROR));
+                        model.notifyError(new ActivateProductionError(sender.getPlayer().getUser(),ActivateProductionError.Trigger.PAYMENTERROR));
                     } catch (NotEnoughResourcesException e) {
-                        sender.sendError(new ActivateProductionError(ActivateProductionError.Trigger.NOTENOUGHRESOURCES));
+                        model.notifyError(new ActivateProductionError(sender.getPlayer().getUser(),ActivateProductionError.Trigger.NOTENOUGHRESOURCES));
                     } catch (ResourceMismatchException e) {
-                        sender.sendError(new ActivateProductionError(ActivateProductionError.Trigger.RESOURCESMISMATCH));
+                        model.notifyError(new ActivateProductionError(sender.getPlayer().getUser(),ActivateProductionError.Trigger.RESOURCESMISMATCH));
                     }
                 }
-                else sender.sendError(new ActivateProductionError(ActivateProductionError.Trigger.INVALIDREQUEST));
+                else model.notifyError(new ActivateProductionError(sender.getPlayer().getUser(),ActivateProductionError.Trigger.INVALIDREQUEST));
             }
-            else sender.sendError(new InvalidMessageError());
-        } else sender.sendError(new WrongTurnError());
+            else sender.sendError(new InvalidMessageError(sender.getPlayer().getUser()));
+        } else sender.sendError(new WrongTurnError(sender.getPlayer().getUser()));
     }
 
     public void handleTakeResourcesFromMarketMessage(TakeResourcesFromMarketMessage message, RemoteView sender) {
@@ -73,18 +73,18 @@ public class TurnController {
                         try {
                             model.getTurn().getTurnPhase().takeResourcesFromMarket(model.getTurn(), message);
                         } catch (NeedPositioningException e) {
-                            sender.update(new ServerAsksForPositioning(currPlayer.getUser(),
+                            model.notifyUpdate(new ServerAsksForPositioning(currPlayer.getUser(),
                                     currPlayer.getPersonalBoard().getReducedVersion(),
                                     e.getResourcesToSettle()));
                         }
                     } catch (InvalidActionException e) {
-                        sender.sendError(new ActionError(ActionError.Trigger.NORMALACTIONALREADYDONE));
+                        model.notifyError(new ActionError(sender.getPlayer().getUser(),ActionError.Trigger.NORMALACTIONALREADYDONE));
                     } catch (WhiteEffectMismatchException e) {
-                        sender.sendError(new TakeResourcesFromMarketError(TakeResourcesFromMarketError.Trigger.WHITEEFFECTMISMATCH));
+                        model.notifyError(new TakeResourcesFromMarketError(sender.getPlayer().getUser(),TakeResourcesFromMarketError.Trigger.WHITEEFFECTMISMATCH));
                     }
-                } else sender.sendError(new TakeResourcesFromMarketError(TakeResourcesFromMarketError.Trigger.MARBLEMISMATCH));
-            } else sender.sendError(new InvalidMessageError());
-        } else sender.sendError(new WrongTurnError());
+                } else model.notifyError(new TakeResourcesFromMarketError(sender.getPlayer().getUser(),TakeResourcesFromMarketError.Trigger.MARBLEMISMATCH));
+            } else sender.sendError(new InvalidMessageError(sender.getPlayer().getUser()));
+        } else sender.sendError(new WrongTurnError(sender.getPlayer().getUser()));
     }
 
     public void handleLeaderActionMessage(LeaderActionMessage message, RemoteView sender) {
@@ -94,12 +94,12 @@ public class TurnController {
                 try {
                     model.getTurn().getTurnPhase().leaderAction(model.getTurn(), message);
                 } catch (LeaderStatusException e) {
-                    sender.sendError(new LeaderActionError(LeaderActionError.Trigger.LEADERSTATUS));
+                    model.notifyError(new LeaderActionError(sender.getPlayer().getUser(),LeaderActionError.Trigger.LEADERSTATUS));
                 } catch (LeaderRequirementsException e) {
-                    sender.sendError(new LeaderActionError(LeaderActionError.Trigger.REQUIREMENTS));
+                    model.notifyError(new LeaderActionError(sender.getPlayer().getUser(),LeaderActionError.Trigger.REQUIREMENTS));
                 }
-            } else sender.sendError(new InvalidMessageError());
-        } else sender.sendError(new WrongTurnError());
+            } else sender.sendError(new InvalidMessageError(sender.getPlayer().getUser()));
+        } else sender.sendError(new WrongTurnError(sender.getPlayer().getUser()));
     }
 
     public void handleMoveMessage(MoveResourcesMessage message, RemoteView sender) {
@@ -108,11 +108,11 @@ public class TurnController {
                 try {
                     model.getCurrPlayer().moveResources(model, message.getMoveAction());
                 } catch (MoveResourcesException e) {
-                    sender.sendError(new MoveResourcesError(MoveResourcesError.Trigger.MOVE));
+                    model.notifyError(new MoveResourcesError(sender.getPlayer().getUser(),MoveResourcesError.Trigger.MOVE));
                 }
             }
-            else sender.sendError(new InvalidMessageError());
-        } else sender.sendError(new WrongTurnError());
+            else sender.sendError(new InvalidMessageError(sender.getPlayer().getUser()));
+        } else sender.sendError(new WrongTurnError(sender.getPlayer().getUser()));
     }
 
     public void handlePositioningMessage(PositioningMessage message, RemoteView sender) {
@@ -126,17 +126,17 @@ public class TurnController {
                             turnInstance.handlePositioning(model.getTurn(), message.getWhereToPutResources());
                         //TODO: AGGIUNGERE CONCLUDETURNPHASE IN TUTTE LE ALTRE AZIONI DEL TURNO
                     } else {
-                        sender.sendError(new InvalidMessageError());
+                        sender.sendError(new InvalidMessageError(sender.getPlayer().getUser()));
                     }
                 } else {
-                    sender.sendError(new ActionError(ActionError.Trigger.WRONGTURNPHASE));
+                    model.notifyError(new ActionError(sender.getPlayer().getUser(),ActionError.Trigger.WRONGTURNPHASE));
                 }
             } else {
-                sender.sendError(new InvalidMessageError());
+                sender.sendError(new InvalidMessageError(sender.getPlayer().getUser()));
             }
         }
         else {
-            sender.sendError(new WrongTurnError());
+            sender.sendError(new WrongTurnError(sender.getPlayer().getUser()));
         }
 
     }
@@ -146,7 +146,7 @@ public class TurnController {
             model.nextTurn();
             this.currPlayer = model.getCurrPlayer();
         }
-        else sender.sendError(new WrongTurnError());
+        else sender.sendError(new WrongTurnError(sender.getPlayer().getUser()));
 
     }
 

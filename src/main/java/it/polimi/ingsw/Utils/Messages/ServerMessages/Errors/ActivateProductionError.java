@@ -1,5 +1,6 @@
 package it.polimi.ingsw.Utils.Messages.ServerMessages.Errors;
 
+import it.polimi.ingsw.Commons.User;
 import it.polimi.ingsw.Network.Client;
 
 public class ActivateProductionError extends ErrorMessage {
@@ -22,8 +23,9 @@ public class ActivateProductionError extends ErrorMessage {
 
     }
 
-    public ActivateProductionError(Trigger trigger)
+    public ActivateProductionError(User user, Trigger trigger)
     {
+        super(user);
         this.trigger = trigger;
     }
 

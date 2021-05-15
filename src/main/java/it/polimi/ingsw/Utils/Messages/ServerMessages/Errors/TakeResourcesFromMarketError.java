@@ -1,5 +1,6 @@
 package it.polimi.ingsw.Utils.Messages.ServerMessages.Errors;
 
+import it.polimi.ingsw.Commons.User;
 import it.polimi.ingsw.Network.Client;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.Errors.ErrorMessage;
 
@@ -21,8 +22,9 @@ public class TakeResourcesFromMarketError extends ErrorMessage {
         }
     }
 
-    public TakeResourcesFromMarketError(Trigger trigger)
+    public TakeResourcesFromMarketError(User user, Trigger trigger)
     {
+        super(user);
         this.trigger = trigger;
     }
 
