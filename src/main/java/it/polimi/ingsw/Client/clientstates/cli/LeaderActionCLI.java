@@ -14,7 +14,7 @@ public class LeaderActionCLI extends AbstractLeaderAction {
     private final CLI cli;
 
     public LeaderActionCLI(Client client) {
-        this.client = client;
+        super(client);
         cli = (CLI) client.getUI();
     }
 

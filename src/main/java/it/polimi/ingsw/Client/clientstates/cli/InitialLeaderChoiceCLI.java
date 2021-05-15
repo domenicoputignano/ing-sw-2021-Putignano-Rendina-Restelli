@@ -24,7 +24,18 @@ public class InitialLeaderChoiceCLI extends AbstractInitialLeaderChoice {
 
     @Override
     public void manageUserInteraction() {
-        ((CLI)client.getUI()).showLeaderCards();
+        cli.showLeaderCards();
+
+    }
+
+    private int getFirstNumber() {
+        int leaderCardIndex;
+        boolean selectionDone = false;
+        System.out.println("Choose index of leader card you want to discard ");
+        do {
+            leaderCardIndex = input.nextInt();
+        } while(!selectionDone);
+        return leaderCardIndex;
     }
 
 

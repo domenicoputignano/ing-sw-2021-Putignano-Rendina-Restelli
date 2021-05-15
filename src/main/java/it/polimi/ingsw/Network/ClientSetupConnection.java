@@ -15,8 +15,8 @@ public class ClientSetupConnection implements Runnable {
     private String nickname;
     private GameMode mode;
     private int numOfPlayers;
-    private DataOutputStream outputStream;
-    private DataInputStream inputStream;
+    private ObjectOutputStream outputStream;
+    private ObjectInputStream inputStream;
 
 
 
@@ -29,12 +29,14 @@ public class ClientSetupConnection implements Runnable {
     /*Method to initialize numOfPlayer and nickName*/
     public void run() {
         try {
-            inputStream = new DataInputStream(clientSocket.getInputStream());
-            outputStream = new DataOutputStream(clientSocket.getOutputStream());
+            outputStream = new ObjectOutputStream(clientSocket.getOutputStream());
+            outputStream.flush();
+            inputStream = new ObjectInputStream(clientSocket.getInputStream());
             outputStream.writeUTF("Choose your nickname: ");
             outputStream.flush();
             nicknameChoice();
             if (server.inactivePlayerAlreadyRegistered(nickname)) {
+                LOGGER.log(Level.INFO, "Player con lo stesso nickname già presente ma non attivo ");
                 //TODO recuperare i dati della partita associata a quel giocatore
             }
             else {
@@ -60,12 +62,14 @@ public class ClientSetupConnection implements Runnable {
         boolean availableNickname = false;
         do {
             nickname = inputStream.readUTF();
+            LOGGER.log(Level.INFO, "Chosen nickname = "+nickname);
             if (server.playerWithSameNicknameIsPlaying(nickname)) {
                 outputStream.writeUTF("Nickname not available, choose another one: ");
                 LOGGER.log(Level.INFO, "Player has chosen an unavailable nickname, connection refused");
             } else availableNickname = true;
         } while (!availableNickname);
         this.nickname = nickname;
+        LOGGER.log(Level.INFO, "Done nickname selection");
     }
 
     private void numOfPlayersChoice() throws IOException {
@@ -79,6 +83,7 @@ public class ClientSetupConnection implements Runnable {
     private void gameChoice() throws IOException {
         //TODO da cambiare con CLI/GUI
         outputStream.writeUTF("Choose game mode: ");
+        outputStream.flush();
         String choice = inputStream.readUTF();
         if(choice.equalsIgnoreCase("multiplayer")) mode = GameMode.MULTIPLAYER;
         else {

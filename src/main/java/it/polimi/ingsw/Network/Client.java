@@ -2,6 +2,7 @@ package it.polimi.ingsw.Network;
 
 import it.polimi.ingsw.Client.ReducedGame;
 import it.polimi.ingsw.Client.view.UI;
+import it.polimi.ingsw.Commons.User;
 import it.polimi.ingsw.Utils.Messages.ClientMessages.ClientMessage;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.ServerMessage;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.GameSetupMessage;
@@ -19,11 +20,13 @@ public class Client {
     private int port;
     private boolean isActive;
     private ReducedGame game;
+    private User user;
     private ObjectInputStream socketInObj ;
     private ObjectOutputStream socketOutObj ;
     private Logger LOGGER = Logger.getLogger(Client.class.getName());
     private UI ui;
     private Socket socket;
+
 
     public Client(String ip, int port){
         this.ip = ip;
@@ -32,17 +35,17 @@ public class Client {
     }
 
 
-
     public void start() throws IOException {
         socket = new Socket(ip, port);
         System.out.println("Connection established");
-        DataInputStream socketIn = new DataInputStream(socket.getInputStream());
-        DataOutputStream socketOut = new DataOutputStream(socket.getOutputStream());
+        ObjectOutputStream socketOut = new ObjectOutputStream(socket.getOutputStream());
+        socketOut.flush();
+        ObjectInputStream socketIn = new ObjectInputStream(socket.getInputStream());
         Scanner stdin = new Scanner(System.in);
         String socketLine;
         try{
-            socketInObj = new ObjectInputStream(socket.getInputStream());
-            socketOutObj = new ObjectOutputStream(socket.getOutputStream());
+            //socketInObj = new ObjectInputStream(socket.getInputStream());
+            //socketOutObj = new ObjectOutputStream(socket.getOutputStream());
             socketLine = socketIn.readUTF();
             System.out.print(socketLine);
             while (isActive){
