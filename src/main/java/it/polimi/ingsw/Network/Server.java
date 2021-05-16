@@ -103,6 +103,7 @@ public class Server {
             accounts.get(p.getUser().getNickname()).bindRemoteView(remoteView);
         }
         LOGGER.log(Level.INFO, "MultiPlayerMode game setup done");
+
     }
 
 

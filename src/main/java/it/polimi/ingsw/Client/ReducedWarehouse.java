@@ -2,9 +2,10 @@ package it.polimi.ingsw.Client;
 
 import it.polimi.ingsw.Commons.ResourceType;
 
+import java.io.Serializable;
 import java.util.Map;
 
-public class ReducedWarehouse {
+public class ReducedWarehouse implements Serializable {
     private final ReducedDepot[] normalDepots;
     private final ReducedDepot[] extraDepots;
     private final ReducedStrongbox strongbox;

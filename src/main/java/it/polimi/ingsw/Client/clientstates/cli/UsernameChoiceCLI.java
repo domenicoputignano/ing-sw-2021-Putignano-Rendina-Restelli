@@ -23,6 +23,7 @@ public class UsernameChoiceCLI extends AbstractUserNameChoice {
         //System.out.println("Waiting for player interaction ");
         String nickname = input.nextLine();
         messageToSend.setNickname(nickname);
+        client.bindUser(nickname);
         client.sendMessage(messageToSend);
         System.out.println("Message sent");
     }

@@ -1,9 +1,12 @@
 package it.polimi.ingsw.Network;
 
-import it.polimi.ingsw.Model.Game;
+
 import it.polimi.ingsw.Utils.GameMode;
-import it.polimi.ingsw.Utils.Messages.ClientMessages.ClientMessage;
+import it.polimi.ingsw.Utils.Messages.ClientMessages.GameModeChoiceMessage;
+import it.polimi.ingsw.Utils.Messages.ClientMessages.NumOfPlayerChoiceMessage;
 import it.polimi.ingsw.Utils.Messages.ClientMessages.UsernameChoiceMessage;
+import it.polimi.ingsw.Utils.Messages.ServerMessages.ServerAskForGameMode;
+import it.polimi.ingsw.Utils.Messages.ServerMessages.ServerAskForNumOfPlayer;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.ServerAsksForNickname;
 
 import java.io.*;
@@ -35,8 +38,6 @@ public class ClientSetupConnection implements Runnable {
             outputStream = new ObjectOutputStream(clientSocket.getOutputStream());
             outputStream.flush();
             inputStream = new ObjectInputStream(clientSocket.getInputStream());
-            //outputStream.writeUTF("Choose your nickname: ");
-            //outputStream.flush();
             nicknameChoice();
             if (server.inactivePlayerAlreadyRegistered(nickname)) {
                 LOGGER.log(Level.INFO, "Player con lo stesso nickname già presente ma non attivo ");
@@ -70,6 +71,7 @@ public class ClientSetupConnection implements Runnable {
             LOGGER.log(Level.INFO, "Message received from client ");
             nickname = messageFromClient.getNickname();
             if (server.playerWithSameNicknameIsPlaying(nickname)) {
+                //TODO cambiare con opportuno messaggio
                 outputStream.writeUTF("Nickname not available, choose another one: ");
                 outputStream.flush();
                 LOGGER.log(Level.INFO, "Player has chosen an unavailable nickname, connection refused ");
@@ -78,24 +80,23 @@ public class ClientSetupConnection implements Runnable {
         this.nickname = nickname;
     }
 
-    private void numOfPlayersChoice() throws IOException {
-        do {
-            outputStream.writeUTF("Choose the number of players [2-4] : ");
-            outputStream.flush();
-            numOfPlayers = Integer.parseInt(inputStream.readUTF());
-        } while (numOfPlayers < 1 || numOfPlayers > 4);
+    private void numOfPlayersChoice() throws IOException, ClassNotFoundException {
+        outputStream.writeObject(new ServerAskForNumOfPlayer());
+        outputStream.flush();
+        NumOfPlayerChoiceMessage message = (NumOfPlayerChoiceMessage)inputStream.readObject();
+        numOfPlayers = message.getNumOfPlayers();
     }
 
-    private void gameChoice() throws IOException {
+    private void gameChoice() throws IOException, ClassNotFoundException {
         //TODO da cambiare con CLI/GUI
-        outputStream.writeUTF("Choose game mode [Multiplayer | Solo]: ");
+        outputStream.writeObject(new ServerAskForGameMode());
         outputStream.flush();
-        String choice = inputStream.readUTF();
+        GameModeChoiceMessage message = (GameModeChoiceMessage) inputStream.readObject();
+        String choice = message.getGameModeChoice();
         if(choice.equalsIgnoreCase("multiplayer")) mode = GameMode.MULTIPLAYER;
         else {
             if(choice.equalsIgnoreCase("solo")) mode = GameMode.SOLO;
-            outputStream.writeUTF("The game will start soon...");
-            outputStream.flush();
+
         }
     }
 

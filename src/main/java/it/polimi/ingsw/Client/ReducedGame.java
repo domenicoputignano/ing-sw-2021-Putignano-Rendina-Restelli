@@ -7,9 +7,10 @@ import it.polimi.ingsw.Utils.Messages.ServerMessages.Updates.BuyDevCardPerformed
 import it.polimi.ingsw.Utils.Messages.ServerMessages.Updates.NewTurnUpdate;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.Updates.UpdateMessage;
 
+import java.io.Serializable;
 import java.util.List;
 
-public abstract class ReducedGame {
+public abstract class ReducedGame implements Serializable {
 
     protected List<ReducedPlayer> players;
     protected ReducedTurn turn;

@@ -1,7 +1,9 @@
 package it.polimi.ingsw.Client;
 
 
-public class ReducedTurn {
+import java.io.Serializable;
+
+public class ReducedTurn implements Serializable {
     private ReducedPlayer player;
 
 

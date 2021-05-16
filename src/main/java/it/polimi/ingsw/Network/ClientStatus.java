@@ -32,6 +32,7 @@ public class ClientStatus implements Runnable {
         try {
              outputStreamToClient.writeObject(serverMessage);
              outputStreamToClient.flush();
+             LOGGER.log(Level.INFO, "Game message sent to the client ");
             } catch (IOException e) {
                 //TODO modificare come se trovassimo una disconnessione
                 LOGGER.log(Level.SEVERE, "Disconnection detected!");
@@ -53,7 +54,7 @@ public class ClientStatus implements Runnable {
         try {
             while(isActive){
                 ClientMessage messageFromClient = (ClientMessage) inputFromClient.readObject();
-                LOGGER.log(Level.INFO, String.format("Received messageToSend %s", messageFromClient.getClass().getName()));
+                LOGGER.log(Level.INFO, String.format("Received message from client of %s type ", messageFromClient.getClass().getName()));
                 remoteView.handleClientMessage(messageFromClient);
             }
         } catch (IOException | ClassNotFoundException e) {

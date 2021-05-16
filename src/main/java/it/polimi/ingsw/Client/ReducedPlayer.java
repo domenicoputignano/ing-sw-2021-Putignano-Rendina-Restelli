@@ -4,9 +4,10 @@ import it.polimi.ingsw.Commons.Effect;
 import it.polimi.ingsw.Commons.LeaderCard;
 import it.polimi.ingsw.Commons.User;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class ReducedPlayer {
+public class ReducedPlayer implements Serializable {
 
     private User nickname;
     private ReducedPersonalBoard personalBoard;

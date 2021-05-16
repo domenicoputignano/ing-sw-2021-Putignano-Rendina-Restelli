@@ -10,8 +10,6 @@ import it.polimi.ingsw.Utils.Messages.ServerMessages.GameSetupMessage;
 
 import java.io.*;
 import java.net.Socket;
-import java.util.NoSuchElementException;
-import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -42,7 +40,6 @@ public class Client {
         socketOutObj = new ObjectOutputStream(socket.getOutputStream());
         socketOutObj.flush();
         socketInObj = new ObjectInputStream(socket.getInputStream());
-        Scanner stdin = new Scanner(System.in);
         createListeningThread();
         ui = new CLI(this);
 
@@ -88,7 +85,7 @@ public class Client {
 
     private Thread createListeningThread() {
         Thread t = new Thread(() -> {
-            //while (isActive) {
+            while (isActive) {
                 try {
                     ServerMessage message = (ServerMessage) socketInObj.readObject();
                     LOGGER.log(Level.INFO, "Received message from Server");
@@ -99,7 +96,7 @@ public class Client {
                 } catch (ClassNotFoundException e) {
                     LOGGER.log(Level.SEVERE, "Error occurred in receiving thread");
                 }
-            //}
+            }
         });
         t.start();
         return t;
@@ -122,6 +119,10 @@ public class Client {
         } catch (IOException e) {
             LOGGER.log(Level.SEVERE, "Impossible to close connection!");
         }
+    }
+
+    public void bindUser(String nickname) {
+        user = new User(nickname);
     }
 
 
