@@ -102,6 +102,8 @@ public class Server {
             RemoteView remoteView = new RemoteView(p.getUser(), gameController, accounts.get(p.getUser().getNickname()));
             accounts.get(p.getUser().getNickname()).bindRemoteView(remoteView);
         }
+        //todo AGGIUNTO da Piero
+        multiPlayerMode.notifyGameSetup();
         LOGGER.log(Level.INFO, "MultiPlayerMode game setup done");
 
     }

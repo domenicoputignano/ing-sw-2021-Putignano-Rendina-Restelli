@@ -1,5 +1,7 @@
 package it.polimi.ingsw.Commons;
 
-public enum ColorCard {
+import java.io.Serializable;
+
+public enum ColorCard implements Serializable {
     green, blue, purple, yellow
 }

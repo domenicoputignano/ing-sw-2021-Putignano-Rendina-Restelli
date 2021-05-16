@@ -126,5 +126,8 @@ public class Client {
     }
 
 
+    public User getUser() {
+        return user;
+    }
 }
 

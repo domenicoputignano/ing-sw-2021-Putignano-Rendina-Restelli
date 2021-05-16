@@ -30,15 +30,15 @@ public class ClientStatus implements Runnable {
 
     public void send(ServerMessage serverMessage) {
         try {
-             outputStreamToClient.writeObject(serverMessage);
-             outputStreamToClient.flush();
-             LOGGER.log(Level.INFO, "Game message sent to the client ");
-            } catch (IOException e) {
-                //TODO modificare come se trovassimo una disconnessione
-                LOGGER.log(Level.SEVERE, "Disconnection detected!");
-            }
+            outputStreamToClient.reset();
+            outputStreamToClient.writeObject(serverMessage);
+            outputStreamToClient.flush();
+        } catch (IOException e) {
+            e.printStackTrace(System.out);
+            //TODO modificare come se trovassimo una disconnessione
+            LOGGER.log(Level.SEVERE, "Disconnection detected!");
+        }
     }
-
 
 
 
@@ -52,6 +52,7 @@ public class ClientStatus implements Runnable {
 
     public void run(){
         try {
+            LOGGER.log(Level.INFO, "ClientStatus is waiting for client messages...");
             while(isActive){
                 ClientMessage messageFromClient = (ClientMessage) inputFromClient.readObject();
                 LOGGER.log(Level.INFO, String.format("Received message from client of %s type ", messageFromClient.getClass().getName()));

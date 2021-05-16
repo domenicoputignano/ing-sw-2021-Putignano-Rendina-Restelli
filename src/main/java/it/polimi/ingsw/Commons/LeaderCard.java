@@ -1,9 +1,10 @@
 package it.polimi.ingsw.Commons;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
-public class LeaderCard {
+public class LeaderCard implements Serializable {
     private LeaderEffect leaderEffect;
     private Map<ResourceType, Integer> requirementsResources;
     private List<CardType> requirementsCards;

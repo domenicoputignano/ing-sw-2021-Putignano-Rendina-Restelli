@@ -9,8 +9,12 @@ import it.polimi.ingsw.Utils.Messages.ClientMessages.ClientMessage;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.Errors.ErrorMessage;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.ServerMessage;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 public class RemoteView implements Observer<ServerMessage> {
 
+    private final Logger LOGGER = Logger.getLogger(RemoteView.class.getName());
     private final User user;
     private final Game game;
     private final GameController gameController;

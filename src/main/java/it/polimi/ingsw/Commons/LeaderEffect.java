@@ -1,8 +1,9 @@
 package it.polimi.ingsw.Commons;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class LeaderEffect {
+public class LeaderEffect implements Serializable {
     private Effect effect;
     private ResourceType type;
 

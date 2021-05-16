@@ -1,8 +1,9 @@
 package it.polimi.ingsw.Commons;
 
+import java.io.Serializable;
 import java.util.Stack;
 
-public class Deck {
+public class Deck implements Serializable {
 
     private CardType cardType;
     private Stack<DevelopmentCard> cards;

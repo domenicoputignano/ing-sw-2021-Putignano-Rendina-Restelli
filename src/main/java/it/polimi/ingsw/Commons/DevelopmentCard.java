@@ -2,10 +2,11 @@ package it.polimi.ingsw.Commons;
 
 import it.polimi.ingsw.Model.ProductionRule;
 
+import java.io.Serializable;
 import java.util.EnumMap;
 import java.util.Map;
 
-public class DevelopmentCard {
+public class DevelopmentCard implements Serializable {
     private Map<ResourceType, Integer> cost;
     private CardType type;
     private int victoryPoints;

@@ -2,10 +2,11 @@ package it.polimi.ingsw.Model;
 
 import it.polimi.ingsw.Commons.ResourceType;
 
+import java.io.Serializable;
 import java.util.Map;
 
 
-public class ProductionRule {
+public class ProductionRule implements Serializable {
 
     private Map<ResourceType, Integer> inputResources;
     private Map<ResourceType, Integer> outputResources;

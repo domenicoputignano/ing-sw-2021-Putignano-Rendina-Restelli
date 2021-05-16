@@ -60,7 +60,7 @@ public class MultiPlayerMode extends Game {
     }
 
     @Override
-    protected void notifyGameSetup() {
+    public void notifyGameSetup() {
         notify(new GameSetupMessage(this.getReducedVersion()));
     }
 

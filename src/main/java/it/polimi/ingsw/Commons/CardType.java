@@ -1,7 +1,9 @@
 package it.polimi.ingsw.Commons;
 
 
-public class CardType {
+import java.io.Serializable;
+
+public class CardType implements Serializable {
     private final int level;
     private final ColorCard color;
 

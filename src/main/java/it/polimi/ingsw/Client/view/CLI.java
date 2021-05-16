@@ -120,9 +120,9 @@ public class CLI extends UI {
 
 
     public void showLeaderCards() {
-        for(LeaderCard card : client.getGame().getCurrPlayer().getAvailableLeaderCards()) {
+        for(LeaderCard card : client.getGame().getPlayer(client.getUser()).getAvailableLeaderCards()) {
             System.out.printf("Card n.%d "+card+"\n",
-                    client.getGame().getCurrPlayer().getAvailableLeaderCards().indexOf(card)+1);
+                    client.getGame().getPlayer(client.getUser()).getAvailableLeaderCards().indexOf(card)+1);
         }
     }
 

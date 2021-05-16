@@ -1,5 +1,7 @@
 package it.polimi.ingsw.Commons;
 
-public enum StateFavorTiles {
+import java.io.Serializable;
+
+public enum StateFavorTiles implements Serializable {
     FACEUP, FACEDOWN, DISCARDED;
 }

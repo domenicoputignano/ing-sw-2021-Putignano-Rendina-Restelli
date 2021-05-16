@@ -20,9 +20,9 @@ public class UsernameChoiceCLI extends AbstractUserNameChoice {
 
     @Override
     public void manageUserInteraction() {
-        //System.out.println("Waiting for player interaction ");
         String nickname = input.nextLine();
         messageToSend.setNickname(nickname);
+        //TODO cambiare a seconda che il nickname venga accettato o rifiutato
         client.bindUser(nickname);
         client.sendMessage(messageToSend);
         System.out.println("Message sent");

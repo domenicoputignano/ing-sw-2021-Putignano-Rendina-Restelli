@@ -1,5 +1,7 @@
 package it.polimi.ingsw.Commons;
 
-public enum ColorMarble {
+import java.io.Serializable;
+
+public enum ColorMarble implements Serializable {
     GREY, RED, YELLOW, WHITE, BLUE, PURPLE
 }
