@@ -1,12 +1,11 @@
 package it.polimi.ingsw.Client.view;
 
-
 import it.polimi.ingsw.Client.clientstates.AbstractClientState;
 import it.polimi.ingsw.Commons.Effect;
 import it.polimi.ingsw.Commons.LeaderCard;
 import it.polimi.ingsw.Commons.ResourceType;
 import it.polimi.ingsw.Network.Client;
-import it.polimi.ingsw.Utils.Messages.ServerMessages.Updates.ActivateProductionUpdate;
+import it.polimi.ingsw.Utils.Messages.ServerMessages.ServerMessage;
 import it.polimi.ingsw.Utils.ResourceSource;
 
 import java.util.EnumMap;
@@ -88,10 +87,14 @@ public class CLI extends UI {
 
 
     @Override
-    public void showUpdate(ActivateProductionUpdate message) {
-
+    public void showUpdate(ServerMessage message) {
+        clientState.render(message);
     }
 
+    @Override
+    public void manageUserInteraction() {
+        clientState.manageUserInteraction();
+    }
 
     public ResourceType fromStringToResourceType(String resource) {
         if(resource.equalsIgnoreCase("C")) return ResourceType.coin;
@@ -125,7 +128,7 @@ public class CLI extends UI {
 
 
     @Override
-    public void setClientState(AbstractClientState clientState) {
-        this.clientState = clientState.getCLIVersion();
+    public void changeClientState(AbstractClientState newClientState) {
+        clientState = newClientState;
     }
 }

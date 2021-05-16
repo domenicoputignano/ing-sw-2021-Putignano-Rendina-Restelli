@@ -1,7 +1,6 @@
 package it.polimi.ingsw.Network;
 
 import it.polimi.ingsw.Client.ReducedGame;
-import it.polimi.ingsw.Client.clientstates.AbstractWaitForGameSetup;
 import it.polimi.ingsw.Client.view.CLI;
 import it.polimi.ingsw.Client.view.UI;
 import it.polimi.ingsw.Commons.User;
@@ -25,7 +24,7 @@ public class Client {
     private User user;
     private ObjectInputStream socketInObj ;
     private ObjectOutputStream socketOutObj ;
-    private Logger LOGGER = Logger.getLogger(Client.class.getName());
+    private final Logger LOGGER = Logger.getLogger(Client.class.getName());
     private UI ui;
     private Socket socket;
 
@@ -44,8 +43,10 @@ public class Client {
         socketOutObj.flush();
         socketInObj = new ObjectInputStream(socket.getInputStream());
         Scanner stdin = new Scanner(System.in);
+        createListeningThread();
         ui = new CLI(this);
-        String socketLine;
+
+        /*String socketLine;
         try{
             socketLine = socketInObj.readUTF();
             System.out.print(socketLine);
@@ -65,13 +66,15 @@ public class Client {
             socketInObj.close();
             socketOutObj.close();
             socket.close();
-        }
+        }*/
     }
+
 
     public void sendMessage(ClientMessage message) {
         try {
             socketOutObj.writeObject(message);
             socketOutObj.flush();
+            LOGGER.log(Level.INFO, "Message sent ");
         } catch (IOException e) {
             LOGGER.log(Level.SEVERE, "Error: unable to process messageToSend sending");
         }
@@ -85,7 +88,7 @@ public class Client {
 
     private Thread createListeningThread() {
         Thread t = new Thread(() -> {
-            while (isActive) {
+            //while (isActive) {
                 try {
                     ServerMessage message = (ServerMessage) socketInObj.readObject();
                     LOGGER.log(Level.INFO, "Received message from Server");
@@ -96,7 +99,7 @@ public class Client {
                 } catch (ClassNotFoundException e) {
                     LOGGER.log(Level.SEVERE, "Error occurred in receiving thread");
                 }
-            }
+            //}
         });
         t.start();
         return t;

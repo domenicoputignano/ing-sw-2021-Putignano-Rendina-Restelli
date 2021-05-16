@@ -2,6 +2,9 @@ package it.polimi.ingsw.Network;
 
 import it.polimi.ingsw.Model.Game;
 import it.polimi.ingsw.Utils.GameMode;
+import it.polimi.ingsw.Utils.Messages.ClientMessages.ClientMessage;
+import it.polimi.ingsw.Utils.Messages.ClientMessages.UsernameChoiceMessage;
+import it.polimi.ingsw.Utils.Messages.ServerMessages.ServerAsksForNickname;
 
 import java.io.*;
 import java.net.Socket;
@@ -32,8 +35,8 @@ public class ClientSetupConnection implements Runnable {
             outputStream = new ObjectOutputStream(clientSocket.getOutputStream());
             outputStream.flush();
             inputStream = new ObjectInputStream(clientSocket.getInputStream());
-            outputStream.writeUTF("Choose your nickname: ");
-            outputStream.flush();
+            //outputStream.writeUTF("Choose your nickname: ");
+            //outputStream.flush();
             nicknameChoice();
             if (server.inactivePlayerAlreadyRegistered(nickname)) {
                 LOGGER.log(Level.INFO, "Player con lo stesso nickname già presente ma non attivo ");
@@ -51,19 +54,24 @@ public class ClientSetupConnection implements Runnable {
                 }
 
             }
-        } catch (IOException e) {
+        } catch (IOException | ClassNotFoundException e) {
             LOGGER.log(Level.INFO, "Reset connection");
         }
     }
 
 
-    private void nicknameChoice() throws IOException {
+    private void nicknameChoice() throws IOException, ClassNotFoundException {
         String nickname;
         boolean availableNickname = false;
         do {
-            nickname = inputStream.readUTF();
+            outputStream.writeObject(new ServerAsksForNickname());
+            outputStream.flush();
+            UsernameChoiceMessage messageFromClient = (UsernameChoiceMessage) inputStream.readObject();
+            LOGGER.log(Level.INFO, "Message received from client ");
+            nickname = messageFromClient.getNickname();
             if (server.playerWithSameNicknameIsPlaying(nickname)) {
                 outputStream.writeUTF("Nickname not available, choose another one: ");
+                outputStream.flush();
                 LOGGER.log(Level.INFO, "Player has chosen an unavailable nickname, connection refused ");
             } else availableNickname = true;
         } while (!availableNickname);
