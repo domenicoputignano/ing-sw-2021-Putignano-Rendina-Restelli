@@ -1,9 +1,11 @@
 package it.polimi.ingsw.Client.view;
 
 
+import it.polimi.ingsw.Client.clientstates.AbstractClientState;
 import it.polimi.ingsw.Commons.Effect;
 import it.polimi.ingsw.Commons.LeaderCard;
 import it.polimi.ingsw.Commons.ResourceType;
+import it.polimi.ingsw.Network.Client;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.Updates.ActivateProductionUpdate;
 import it.polimi.ingsw.Utils.ResourceSource;
 
@@ -16,6 +18,12 @@ public class CLI extends UI {
 
 
     private final Scanner input = new Scanner(System.in);
+
+
+    public CLI(Client client) {
+        super(client);
+    }
+
 
     public Map<ResourceSource, EnumMap<ResourceType,Integer>> askInstructionsOnHowToTakeResources(Map<ResourceType,Integer> neededResources) {
         Map<ResourceSource, EnumMap<ResourceType,Integer>> howToTakeResources = initializeHowToTakeResources();
@@ -116,7 +124,8 @@ public class CLI extends UI {
     }
 
 
-
-
-
+    @Override
+    public void setClientState(AbstractClientState clientState) {
+        this.clientState = clientState.getCLIVersion();
+    }
 }

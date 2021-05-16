@@ -1,5 +1,6 @@
 package it.polimi.ingsw.Client.clientstates;
 
+import it.polimi.ingsw.Client.clientstates.cli.LeaderActionCLI;
 import it.polimi.ingsw.Network.Client;
 import it.polimi.ingsw.Utils.Messages.ClientMessages.LeaderActionMessage;
 
@@ -13,5 +14,15 @@ public abstract class AbstractLeaderAction extends AbstractClientState {
 
     public LeaderActionMessage getMessageToSend() {
         return messageToSend;
+    }
+
+    @Override //TODO
+    public AbstractClientState getGUIVersion() {
+        return null;
+    }
+
+    @Override
+    public LeaderActionCLI getCLIVersion() {
+        return new LeaderActionCLI(client);
     }
 }

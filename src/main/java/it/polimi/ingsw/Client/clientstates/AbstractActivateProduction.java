@@ -2,6 +2,7 @@ package it.polimi.ingsw.Client.clientstates;
 
 import it.polimi.ingsw.Client.Checker;
 import it.polimi.ingsw.Client.ReducedPersonalBoard;
+import it.polimi.ingsw.Client.clientstates.cli.ActivateProductionCLI;
 import it.polimi.ingsw.Commons.Effect;
 import it.polimi.ingsw.Commons.ResourceType;
 import it.polimi.ingsw.Model.ActiveProductions;
@@ -15,13 +16,11 @@ import java.util.Map;
 
 public abstract class AbstractActivateProduction extends AbstractClientState {
 
-
-
     protected ActivateProductionMessage messageToSend = new ActivateProductionMessage();
     protected ActiveProductions requiredProduction = new ActiveProductions();
     protected Map<ResourceSource, EnumMap<ResourceType, Integer>> howToTakeResources = new HashMap<>();
 
-    public AbstractActivateProduction(Client client) {
+    protected AbstractActivateProduction(Client client) {
         super(client);
     }
 
@@ -87,5 +86,14 @@ public abstract class AbstractActivateProduction extends AbstractClientState {
     }
 
 
+    @Override
+    public ActivateProductionCLI getCLIVersion() {
+        return new ActivateProductionCLI(client);
+    }
 
+    //TODO
+    @Override
+    public AbstractClientState getGUIVersion() {
+        return null;
+    }
 }

@@ -1,6 +1,7 @@
 package it.polimi.ingsw.Client.clientstates;
 
 import it.polimi.ingsw.Client.ReducedMarble;
+import it.polimi.ingsw.Client.clientstates.cli.TakeResourcesFromMarketCLI;
 import it.polimi.ingsw.Commons.Effect;
 import it.polimi.ingsw.Commons.LeaderCard;
 import it.polimi.ingsw.Commons.LeaderEffect;
@@ -27,5 +28,15 @@ public abstract class AbstractTakeResourcesFromMarket extends AbstractClientStat
     protected List<ResourceType> getConvertMarbleActiveEffects(){
         return client.getGame().getCurrPlayer().getCompatibleLeaderEffect(Effect.CMARBLE).stream().
                 map(x -> x.getLeaderEffect().getType()).collect(Collectors.toList());
+    }
+
+    @Override //TODO
+    public AbstractClientState getGUIVersion() {
+        return null;
+    }
+
+    @Override
+    public TakeResourcesFromMarketCLI getCLIVersion() {
+        return new TakeResourcesFromMarketCLI(client);
     }
 }

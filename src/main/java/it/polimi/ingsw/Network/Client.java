@@ -1,6 +1,8 @@
 package it.polimi.ingsw.Network;
 
 import it.polimi.ingsw.Client.ReducedGame;
+import it.polimi.ingsw.Client.clientstates.AbstractWaitForGameSetup;
+import it.polimi.ingsw.Client.view.CLI;
 import it.polimi.ingsw.Client.view.UI;
 import it.polimi.ingsw.Commons.User;
 import it.polimi.ingsw.Utils.Messages.ClientMessages.ClientMessage;
@@ -42,6 +44,7 @@ public class Client {
         socketOutObj.flush();
         socketInObj = new ObjectInputStream(socket.getInputStream());
         Scanner stdin = new Scanner(System.in);
+        ui = new CLI(this);
         String socketLine;
         try{
             socketLine = socketInObj.readUTF();
@@ -104,10 +107,7 @@ public class Client {
         return ui;
     }
 
-    //TODO rivedere
-    public void setUi(UI ui) {
-        this.ui = ui;
-    }
+
 
     public ReducedGame getGame() {
         return game;

@@ -9,11 +9,11 @@ public abstract class UI {
     protected Client client;
     protected AbstractClientState clientState;
 
-    public abstract void showUpdate(ActivateProductionUpdate message);
-
-
-    //TODO cambiare, messa solo per esigenze di test
-    public void setClient(Client client) {
+    protected UI(Client client) {
         this.client = client;
     }
+
+    public abstract void showUpdate(ActivateProductionUpdate message);
+    public abstract void setClientState(AbstractClientState clientState);
+
 }
