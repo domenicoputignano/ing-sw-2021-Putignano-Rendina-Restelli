@@ -13,7 +13,7 @@ import it.polimi.ingsw.Utils.Pair;
 import java.util.Scanner;
 
 public class TakeResourcesFromMarketCLI extends AbstractTakeResourcesFromMarket {
-    private Scanner input = new Scanner(System.in);
+    private final Scanner input = new Scanner(System.in);
     private final CLI cli;
 
     public TakeResourcesFromMarketCLI(Client client) {
@@ -89,12 +89,12 @@ public class TakeResourcesFromMarketCLI extends AbstractTakeResourcesFromMarket 
         if(marble.getColorMarble() == ColorMarble.WHITE){
             if(getConvertMarbleActiveEffects().size() == 1) {
                 System.out.println("White marble : converted to " + getConvertMarbleActiveEffects().get(0));
-                message.addWhereToPutMarbles(new Pair<>(marble, chooseMarbleDestination()));
+                message.addWhereToPutMarbles(new Pair<>(marble, cli.chooseMarbleDestination()));
             }
             else if(getConvertMarbleActiveEffects().size() == 2) {
                 System.out.println("Found two convert marble active effects, choose which one you want to activate [1|2]");
                 message.addWhiteEffect(chooseConvertMarbleEffect());
-                message.addWhereToPutMarbles(new Pair<>(marble, chooseMarbleDestination()));
+                message.addWhereToPutMarbles(new Pair<>(marble, cli.chooseMarbleDestination()));
             } else {
                 System.out.println("White marble : you don't have any convert marble effect active so you won't get any resource from this marble");
             }
@@ -103,16 +103,16 @@ public class TakeResourcesFromMarketCLI extends AbstractTakeResourcesFromMarket 
             message.addWhereToPutMarbles(new Pair<>(marble, MarbleDestination.NOTNEEDED));
         } else if (marble.getColorMarble() == ColorMarble.BLUE) {
             System.out.println("Blue marble : you get a shield");
-            message.addWhereToPutMarbles(new Pair<>(marble, chooseMarbleDestination()));
+            message.addWhereToPutMarbles(new Pair<>(marble, cli.chooseMarbleDestination()));
         } else if (marble.getColorMarble() == ColorMarble.GREY) {
             System.out.println("Grey marble : you get a stone");
-            message.addWhereToPutMarbles(new Pair<>(marble, chooseMarbleDestination()));
+            message.addWhereToPutMarbles(new Pair<>(marble, cli.chooseMarbleDestination()));
         } else if (marble.getColorMarble() == ColorMarble.PURPLE) {
             System.out.println("Purple marble : you get a servant");
-            message.addWhereToPutMarbles(new Pair<>(marble, chooseMarbleDestination()));
+            message.addWhereToPutMarbles(new Pair<>(marble, cli.chooseMarbleDestination()));
         } else if (marble.getColorMarble() == ColorMarble.YELLOW) {
             System.out.println("Yellow marble : you get a coin");
-            message.addWhereToPutMarbles(new Pair<>(marble, chooseMarbleDestination()));
+            message.addWhereToPutMarbles(new Pair<>(marble, cli.chooseMarbleDestination()));
         }
     }
 
@@ -128,34 +128,6 @@ public class TakeResourcesFromMarketCLI extends AbstractTakeResourcesFromMarket 
             }
         } while (!choiceOK);
         return choice;
-    }
-
-    private MarbleDestination chooseMarbleDestination() {
-        System.out.println("Where do you want to position it? [DEPOT1|DEPOT2|DEPOT3|EXTRA|DISCARD]");
-        String choice;
-        MarbleDestination destination;
-        boolean destinationOK = false;
-        do {
-            choice = input.next().toUpperCase();
-            destination = parseMarbleDestination(choice);
-            if(destination!=null) {
-                destinationOK = true;
-            } else {
-                System.out.println("Invalid choice, try again. [DEPOT1|DEPOT2|DEPOT3|EXTRA|DISCARD]");
-            }
-        } while(!destinationOK);
-        return destination;
-    }
-
-    private MarbleDestination parseMarbleDestination(String choice) {
-        switch (choice) {
-            case "DEPOT1" : return MarbleDestination.DEPOT1;
-            case "DEPOT2" : return MarbleDestination.DEPOT2;
-            case "DEPOT3" : return MarbleDestination.DEPOT3;
-            case "EXTRA" : return MarbleDestination.EXTRA;
-            case "DISCARD" : return MarbleDestination.DISCARD;
-            default : return null;
-        }
     }
 
 }

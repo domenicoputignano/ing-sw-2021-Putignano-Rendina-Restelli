@@ -5,9 +5,11 @@ import it.polimi.ingsw.Commons.Effect;
 import it.polimi.ingsw.Commons.LeaderCard;
 import it.polimi.ingsw.Commons.ResourceType;
 import it.polimi.ingsw.Network.Client;
+import it.polimi.ingsw.Utils.MarbleDestination;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.*;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.Updates.InitialLeaderChoiceUpdate;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.Updates.InitialResourceChoiceUpdate;
+import it.polimi.ingsw.Utils.Messages.ServerMessages.Updates.ServerAsksForPositioning;
 import it.polimi.ingsw.Utils.ResourceSource;
 
 import java.util.EnumMap;
@@ -88,6 +90,34 @@ public class CLI extends UI {
     }
 
 
+    public MarbleDestination chooseMarbleDestination() {
+        System.out.println("Where do you want to position it? [DEPOT1|DEPOT2|DEPOT3|EXTRA|DISCARD]");
+        String choice;
+        MarbleDestination destination;
+        boolean destinationOK = false;
+        do {
+            choice = input.next().toUpperCase();
+            destination = parseMarbleDestination(choice);
+            if(destination!=null) {
+                destinationOK = true;
+            } else {
+                System.out.println("Invalid choice, try again. [DEPOT1|DEPOT2|DEPOT3|EXTRA|DISCARD]");
+            }
+        } while(!destinationOK);
+        return destination;
+    }
+
+    private MarbleDestination parseMarbleDestination(String choice) {
+        switch (choice) {
+            case "DEPOT1" : return MarbleDestination.DEPOT1;
+            case "DEPOT2" : return MarbleDestination.DEPOT2;
+            case "DEPOT3" : return MarbleDestination.DEPOT3;
+            case "EXTRA" : return MarbleDestination.EXTRA;
+            case "DISCARD" : return MarbleDestination.DISCARD;
+            default : return null;
+        }
+    }
+
     @Override
     public void showUpdate(ServerMessage message) {
         clientState.render(message);
@@ -117,6 +147,11 @@ public class CLI extends UI {
             System.out.println("You have chosen " + message.getChosenResources() + " resources ");
         } else System.out.println("User "+message.getUser()+" added "+message.getChosenResources()+" to his" +
                 " depots ");
+    }
+    public void render(ServerAsksForPositioning message) {
+        if(isReceiverAction(message.getUser())) {
+            System.out.println("You have not correctly positioned the following resources: " + message.getResourcesToSettle());
+        } else System.out.println("User " + message.getUser() + "has not correctly positioned some resources.");
     }
 
     @Override

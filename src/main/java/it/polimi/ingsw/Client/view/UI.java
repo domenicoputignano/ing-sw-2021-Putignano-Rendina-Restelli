@@ -8,6 +8,7 @@ import it.polimi.ingsw.Utils.Messages.ServerMessages.*;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.Updates.ActivateProductionUpdate;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.Updates.InitialLeaderChoiceUpdate;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.Updates.InitialResourceChoiceUpdate;
+import it.polimi.ingsw.Utils.Messages.ServerMessages.Updates.ServerAsksForPositioning;
 
 
 public abstract class UI {
@@ -41,6 +42,7 @@ public abstract class UI {
     public abstract void render(GameSetupMessage message);
     public abstract void render(InitialLeaderChoiceUpdate message);
     public abstract void render(InitialResourceChoiceUpdate message);
+    public abstract void render(ServerAsksForPositioning message);
 
     public boolean isReceiverAction(User sender) {
         return sender.equals(client.getUser());

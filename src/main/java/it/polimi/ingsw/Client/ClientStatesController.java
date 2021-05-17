@@ -9,6 +9,7 @@ import it.polimi.ingsw.Utils.Messages.ServerMessages.ServerAskForNumOfPlayer;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.ServerAsksForNickname;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.Updates.InitialLeaderChoiceUpdate;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.Updates.NewTurnUpdate;
+import it.polimi.ingsw.Utils.Messages.ServerMessages.Updates.ServerAsksForPositioning;
 
 public class ClientStatesController {
 
@@ -45,15 +46,29 @@ public class ClientStatesController {
     }
 
     public static void updateClientState(InitialLeaderChoiceUpdate message, UI ui) {
-        if(ui.isCLI()) {
-            if(ui.getClient().getUserPosition() > 1 && ui.isReceiverAction(message.getUser())) {
-                ui.changeClientState(new InitialResourceChoiceCLI(ui.getClient()));
+        if(ui.isReceiverAction(message.getUser())) {
+            if(ui.isCLI()) {
+                if(ui.getClient().getUserPosition() > 1) {
+                    ui.changeClientState(new InitialResourceChoiceCLI(ui.getClient()));
+                    ui.manageUserInteraction();
+                } else {
+                    //TODO settare il client in attesa del completamento della configurazione
+                }
+            } else {
+
+            }
+        }
+
+    }
+
+    public static void updateClientState(ServerAsksForPositioning message, UI ui) {
+        if(ui.isReceiverAction(message.getUser())) {
+            if(ui.isCLI()) {
+                ui.changeClientState(new PositioningResourcesCLI(ui.getClient(), message.getResourcesToSettle()));
                 ui.manageUserInteraction();
             } else {
-                //TODO settare il client in attesa del completamento della configurazione
+                //TODO metodo con GUI
             }
-        } else {
-
         }
     }
 
