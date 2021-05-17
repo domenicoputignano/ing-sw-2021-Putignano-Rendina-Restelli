@@ -1,8 +1,8 @@
 package it.polimi.ingsw.Utils.Messages.ServerMessages;
 
 
+import it.polimi.ingsw.Client.ClientStatesController;
 import it.polimi.ingsw.Client.ReducedGame;
-import it.polimi.ingsw.Client.clientstates.cli.InitialLeaderChoiceCLI;
 import it.polimi.ingsw.Network.Client;
 
 
@@ -22,13 +22,7 @@ public class GameSetupMessage implements ServerMessage {
     @Override
     public void handleMessage(Client handler) {
         handler.setupGame(this);
-        //TODO
-        if(handler.getUI().isCLI()) {
-            handler.getUI().changeClientState(new InitialLeaderChoiceCLI(handler));
-            handler.getUI().showUpdate(this);
-            handler.getUI().manageUserInteraction();
-        } else {
-            //TODO metodo con GUI
-        }
+        handler.getUI().render(this);
+        ClientStatesController.updateClientState(this, handler.getUI());
     }
 }

@@ -125,9 +125,8 @@ public class Client {
         user = new User(nickname);
     }
 
+    public int getUserPosition() { return game.getPlayer(user).getPosition(); }
 
-    public User getUser() {
-        return user;
-    }
+    public User getUser() { return user; }
 }
 

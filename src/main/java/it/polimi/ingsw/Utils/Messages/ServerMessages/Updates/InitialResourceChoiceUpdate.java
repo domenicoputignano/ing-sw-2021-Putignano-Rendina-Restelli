@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class InitialResourceChoiceUpdate extends UpdateMessage {
-    private List<ResourceType> chosenResources = new ArrayList<>();
+    private List<ResourceType> chosenResources;
 
     public InitialResourceChoiceUpdate(User user, ReducedPersonalBoard reducedPersonalBoard, List<ResourceType> chosenResources) {
         this.user = user;
@@ -21,4 +21,5 @@ public class InitialResourceChoiceUpdate extends UpdateMessage {
     public void handleMessage(Client client) {
 
     }
+
 }

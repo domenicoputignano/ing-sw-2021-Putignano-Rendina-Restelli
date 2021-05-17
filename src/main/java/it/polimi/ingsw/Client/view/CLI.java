@@ -5,7 +5,8 @@ import it.polimi.ingsw.Commons.Effect;
 import it.polimi.ingsw.Commons.LeaderCard;
 import it.polimi.ingsw.Commons.ResourceType;
 import it.polimi.ingsw.Network.Client;
-import it.polimi.ingsw.Utils.Messages.ServerMessages.ServerMessage;
+import it.polimi.ingsw.Utils.Messages.ServerMessages.*;
+import it.polimi.ingsw.Utils.Messages.ServerMessages.Updates.InitialLeaderChoiceUpdate;
 import it.polimi.ingsw.Utils.ResourceSource;
 
 import java.util.EnumMap;
@@ -89,6 +90,26 @@ public class CLI extends UI {
     @Override
     public void showUpdate(ServerMessage message) {
         clientState.render(message);
+    }
+
+    //TODO - Aggiunto da Piero.
+    @Override
+    public void render(ServerAsksForNickname message) {
+        System.out.println("Choose your nickname: ");
+    }
+    public void render(ServerAskForGameMode message) {
+        System.out.println("Choose game mode [Multiplayer | Solo]: ");
+    }
+    public void render(ServerAskForNumOfPlayer message) {
+        System.out.println("Choose the number of players [2-4]: ");
+    }
+    public void render(GameSetupMessage message) { System.out.println("Game setup has been done, now you need to choose two leader cards to discard "); }
+    public void render(InitialLeaderChoiceUpdate message) {
+        if(isReceiverAction(message.getUser())) {
+            System.out.println("You have successfully discarded two leader cards ");
+        } else {
+            System.out.println("User "+message.getUser()+" has discarded two leader cards");
+        }
     }
 
     @Override

@@ -45,7 +45,7 @@ public abstract class ReducedGame implements Serializable {
     }
 
 
-    private void updatePersonalBoard(UpdateMessage message) {
+    public void updatePersonalBoard(UpdateMessage message) {
         getPlayer(message.getUser()).updatePersonalBoard(message.getUserPersonalBoard());
     }
 

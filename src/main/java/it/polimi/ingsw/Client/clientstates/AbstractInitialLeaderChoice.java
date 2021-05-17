@@ -8,11 +8,12 @@ public abstract class AbstractInitialLeaderChoice extends AbstractClientState {
 
     protected int leaderCard1Index;
     protected int leaderCard2Index;
+    protected LeaderChoiceMessage messageToSend;
+
+
     public AbstractInitialLeaderChoice(Client client) {
         super(client);
     }
-
-    protected LeaderChoiceMessage messageToSend;
 
     @Override //TODO
     public AbstractClientState getGUIVersion() {

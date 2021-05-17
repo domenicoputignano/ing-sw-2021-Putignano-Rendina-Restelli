@@ -54,7 +54,7 @@ public class GameController {
     }
 
     public synchronized void handleLeaderChoiceMessage(LeaderChoiceMessage message, RemoteView sender) {
-        if(model.getGameState() != GameState.LEADERCHOICE){
+        if(model.getGameState() == GameState.LEADERCHOICE){
             if(message.isValidMessage()) {
                 sender.getPlayer().performInitialLeaderChoice(model,message.getLeader1ToDiscard(), message.getLeader2ToDiscard());
                 receivedChoiceMessage.getAndIncrement();

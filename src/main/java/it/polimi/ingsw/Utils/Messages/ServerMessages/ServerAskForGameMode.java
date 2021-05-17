@@ -7,6 +7,7 @@ public class ServerAskForGameMode implements ServerMessage {
 
     @Override
     public void handleMessage(Client handler) {
+        handler.getUI().render(this);
         ClientStatesController.updateClientState(this, handler.getUI());
     }
 }
