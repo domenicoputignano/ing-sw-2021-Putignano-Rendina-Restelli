@@ -1,5 +1,6 @@
 package it.polimi.ingsw.Utils.Messages.ServerMessages.Updates;
 
+import it.polimi.ingsw.Client.ClientStatesController;
 import it.polimi.ingsw.Commons.User;
 import it.polimi.ingsw.Network.Client;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.ServerMessage;
@@ -15,6 +16,8 @@ public class NewTurnUpdate implements ServerMessage {
     @Override
     public void handleMessage(Client handler) {
         handler.getGame().nextTurn(this);
+        handler.getUI().render(this);
+        ClientStatesController.updateClientState(this, handler.getUI());
     }
 
     public User getCurrentUser() {

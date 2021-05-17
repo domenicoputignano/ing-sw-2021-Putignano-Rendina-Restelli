@@ -73,7 +73,15 @@ public class ClientStatesController {
     }
 
     public static void updateClientState(NewTurnUpdate message, UI ui) {
-
+        if(ui.isReceiverAction(message.getCurrentUser())) {
+            if(ui.isCLI()) {
+                ui.changeClientState(new ActionChoiceCLI(ui.getClient()));
+                ui.manageUserInteraction();
+            }
+        }
+        else {
+            //TODO mandare il client in uno stato di attesa
+        }
     }
 
 }

@@ -77,7 +77,7 @@ public class TakeResourcesFromMarketMessage implements TurnControllerHandleable 
     }
 
     public List<ReducedMarble> getRequestedMarbles() {
-        return whereToPutMarbles.stream().map(x -> x.getKey()).collect(Collectors.toList());
+        return whereToPutMarbles.stream().map(Pair::getKey).collect(Collectors.toList());
     }
 
     public void handleMessage(TurnController turnController, RemoteView sender) {

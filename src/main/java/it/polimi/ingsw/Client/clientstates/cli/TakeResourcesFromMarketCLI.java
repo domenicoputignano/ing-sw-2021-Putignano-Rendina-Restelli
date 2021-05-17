@@ -97,6 +97,7 @@ public class TakeResourcesFromMarketCLI extends AbstractTakeResourcesFromMarket 
                 message.addWhereToPutMarbles(new Pair<>(marble, cli.chooseMarbleDestination()));
             } else {
                 System.out.println("White marble : you don't have any convert marble effect active so you won't get any resource from this marble");
+                message.addWhereToPutMarbles(new Pair<>(marble,MarbleDestination.NOTNEEDED));
             }
         } else if (marble.getColorMarble() == ColorMarble.RED) {
             System.out.println("Red marble : you get a faith point");

@@ -71,6 +71,7 @@ public class ActivateProductionCLI extends AbstractActivateProduction {
             answer = input.nextLine();
             requiredProduction.setExtraSlot2(answer.equalsIgnoreCase("yes"));
         }
+        messageToSend.setProductions(requiredProduction);
     }
 
 
@@ -96,7 +97,7 @@ public class ActivateProductionCLI extends AbstractActivateProduction {
         boolean done = false;
         ResourceType resource = null;
         while(!done) {
-            answer = input.nextLine();
+            answer = input.next();
             resource = cli.fromStringToResourceType(answer);
             if(resource!=null){
                 done = true;

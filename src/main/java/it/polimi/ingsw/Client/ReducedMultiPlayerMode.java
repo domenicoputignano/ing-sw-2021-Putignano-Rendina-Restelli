@@ -13,6 +13,6 @@ public class ReducedMultiPlayerMode extends ReducedGame {
 
     @Override
     public void nextTurn(NewTurnUpdate message) {
-        currPlayer = getPlayer(message.getCurrentUser());
+        currPlayer = this.getPlayer(message.getCurrentUser());
     }
 }

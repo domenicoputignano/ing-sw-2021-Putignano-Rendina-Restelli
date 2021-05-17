@@ -5,10 +5,7 @@ import it.polimi.ingsw.Commons.User;
 import it.polimi.ingsw.Network.Client;
 import it.polimi.ingsw.Network.Server;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.*;
-import it.polimi.ingsw.Utils.Messages.ServerMessages.Updates.ActivateProductionUpdate;
-import it.polimi.ingsw.Utils.Messages.ServerMessages.Updates.InitialLeaderChoiceUpdate;
-import it.polimi.ingsw.Utils.Messages.ServerMessages.Updates.InitialResourceChoiceUpdate;
-import it.polimi.ingsw.Utils.Messages.ServerMessages.Updates.ServerAsksForPositioning;
+import it.polimi.ingsw.Utils.Messages.ServerMessages.Updates.*;
 
 
 public abstract class UI {
@@ -43,6 +40,7 @@ public abstract class UI {
     public abstract void render(InitialLeaderChoiceUpdate message);
     public abstract void render(InitialResourceChoiceUpdate message);
     public abstract void render(ServerAsksForPositioning message);
+    public abstract void render(NewTurnUpdate message);
 
     public boolean isReceiverAction(User sender) {
         return sender.equals(client.getUser());

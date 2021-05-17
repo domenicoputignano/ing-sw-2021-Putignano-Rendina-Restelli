@@ -5,11 +5,11 @@ import it.polimi.ingsw.Commons.User;
 import it.polimi.ingsw.Commons.ResourceType;
 import it.polimi.ingsw.Network.Client;
 
-import java.util.ArrayList;
+
 import java.util.List;
 
 public class InitialResourceChoiceUpdate extends UpdateMessage {
-    private List<ResourceType> chosenResources;
+    private final List<ResourceType> chosenResources;
 
     public InitialResourceChoiceUpdate(User user, ReducedPersonalBoard reducedPersonalBoard, List<ResourceType> chosenResources) {
         this.user = user;

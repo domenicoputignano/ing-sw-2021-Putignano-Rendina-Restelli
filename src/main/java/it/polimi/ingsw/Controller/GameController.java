@@ -7,6 +7,7 @@ import it.polimi.ingsw.Network.RemoteView;
 import it.polimi.ingsw.Utils.Messages.ClientMessages.*;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.Errors.ActionError;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.Errors.InvalidMessageError;
+import it.polimi.ingsw.Utils.Messages.ServerMessages.Updates.NewTurnUpdate;
 
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.logging.Level;
@@ -79,6 +80,7 @@ public class GameController {
         if(resourceChoiceDone.get() == model.getNumOfPlayers()-1){
             model.nextState(GameState.GAMEFLOW);
             receivedChoiceMessage.set(0);
+            model.notifyFirstTurn(new NewTurnUpdate(model.getCurrPlayer().getUser()));
         }
     }
 

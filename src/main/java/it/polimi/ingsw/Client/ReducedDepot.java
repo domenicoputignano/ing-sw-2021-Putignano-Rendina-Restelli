@@ -29,4 +29,13 @@ public class ReducedDepot implements Serializable {
     public int hashCode() {
         return Objects.hash(occ, type, size);
     }
+
+    @Override
+    public String toString() {
+        return "Depot {" +
+                "occ=" + occ +
+                ", type=" + type +
+                ", size=" + size +
+                '}';
+    }
 }

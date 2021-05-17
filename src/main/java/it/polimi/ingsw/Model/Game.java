@@ -16,6 +16,7 @@ import it.polimi.ingsw.Utils.Messages.ServerMessages.Errors.ErrorMessage;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.GameSetupMessage;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.ServerMessage;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.Updates.ActivateVaticanReportUpdate;
+import it.polimi.ingsw.Utils.Messages.ServerMessages.Updates.NewTurnUpdate;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.Updates.UpdateMessage;
 
 import java.io.FileNotFoundException;
@@ -185,11 +186,12 @@ public abstract class Game extends Observable<ServerMessage> implements Observer
         else return null;
     }
 
-    public void nextState(GameState state)
-    {
-        this.gameState = state;
-    }
+    public void nextState(GameState state) {  this.gameState = state; }
 
+
+    public void notifyFirstTurn(NewTurnUpdate message) {
+        notify(message);
+    }
 
     public GameState getGameState() {
         return gameState;

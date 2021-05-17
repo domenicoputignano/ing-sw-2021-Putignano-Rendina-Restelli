@@ -50,4 +50,5 @@ public class Slot implements Cloneable, Serializable {
     public int hashCode() {
         return Objects.hash(developmentCardStack);
     }
+
 }

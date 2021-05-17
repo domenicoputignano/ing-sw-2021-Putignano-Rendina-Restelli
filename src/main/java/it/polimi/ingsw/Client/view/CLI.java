@@ -9,6 +9,7 @@ import it.polimi.ingsw.Utils.MarbleDestination;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.*;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.Updates.InitialLeaderChoiceUpdate;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.Updates.InitialResourceChoiceUpdate;
+import it.polimi.ingsw.Utils.Messages.ServerMessages.Updates.NewTurnUpdate;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.Updates.ServerAsksForPositioning;
 import it.polimi.ingsw.Utils.ResourceSource;
 
@@ -123,7 +124,6 @@ public class CLI extends UI {
         clientState.render(message);
     }
 
-    //TODO - Aggiunto da Piero.
     @Override
     public void render(ServerAsksForNickname message) {
         System.out.print("Choose your nickname: ");
@@ -153,6 +153,14 @@ public class CLI extends UI {
             System.out.println("You have not correctly positioned the following resources: " + message.getResourcesToSettle());
         } else System.out.println("User " + message.getUser() + "has not correctly positioned some resources.");
     }
+    public void render(NewTurnUpdate message) {
+        if(isReceiverAction(message.getCurrentUser())) {
+            System.out.println("It's now your turn, make the move ");
+        } else {
+            System.out.printf("It's %s's turn, please wait ", message.getCurrentUser());
+        }
+    }
+
 
     @Override
     public void manageUserInteraction() {
