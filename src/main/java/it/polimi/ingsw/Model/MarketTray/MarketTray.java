@@ -75,7 +75,7 @@ public class MarketTray {
 
     public boolean checkRequestedMarbles(List<ReducedMarble> marblesList,MarketChoice marketChoice, int index)
     {
-        List<ReducedMarble> expectedMarbles = peekMarbles(marketChoice, index).stream().map(Marble::getReducedVersion).collect(Collectors.toList());
+        List<ReducedMarble> expectedMarbles = peekMarbles(marketChoice, index-1).stream().map(Marble::getReducedVersion).collect(Collectors.toList());
         return expectedMarbles.containsAll(marblesList) && marblesList.containsAll(expectedMarbles);
     }
 

@@ -33,7 +33,7 @@ public class TakeResourcesFromMarket implements AbstractTurnPhase {
         if(checkValidWhiteEffects(turn,takeResourcesFromMarketMessage.getWhiteEffects(), takeResourcesFromMarketMessage.getRequestedMarbles())) {
 
             List<Marble> obtainedMarbles = turn.getGame().getMarketTray().
-                    takeMarbles(takeResourcesFromMarketMessage.getPlayerChoice(), takeResourcesFromMarketMessage.getIndex());
+                    takeMarbles(takeResourcesFromMarketMessage.getPlayerChoice(), takeResourcesFromMarketMessage.getIndex()-1);
 
             //perform convert marble effect
             convertWhiteMarbles(turn, obtainedMarbles, takeResourcesFromMarketMessage.getWhiteEffects());

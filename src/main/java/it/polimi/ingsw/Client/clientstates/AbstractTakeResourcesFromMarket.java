@@ -22,7 +22,7 @@ public abstract class AbstractTakeResourcesFromMarket extends AbstractClientStat
     }
 
     protected void computeSelectedMarbles() {
-        this.selectedMarbles = client.getGame().getMarketTray().peekMarbles(message.getPlayerChoice(), message.getIndex());
+        this.selectedMarbles = client.getGame().getMarketTray().peekMarbles(message.getPlayerChoice(), message.getIndex()-1);
     }
 
     protected List<ResourceType> getConvertMarbleActiveEffects(){
