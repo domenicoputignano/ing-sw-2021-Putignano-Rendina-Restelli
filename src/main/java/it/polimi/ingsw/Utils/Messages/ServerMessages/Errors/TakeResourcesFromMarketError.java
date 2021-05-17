@@ -34,6 +34,6 @@ public class TakeResourcesFromMarketError extends ErrorMessage {
 
     @Override
     public void handleMessage(Client handler) {
-
+        System.out.println("Error caused by: "+ trigger);
     }
 }

@@ -28,4 +28,22 @@ public class ReducedMarketTray implements Serializable {
         }
         return marbles;
     }
+
+    @Override
+    public String toString() {
+        return  toStringAvailableMarbles() +
+                ", slidingMarble=" + slidingMarble +
+                '}';
+    }
+
+    private String toStringAvailableMarbles() {
+        String result = "";
+        for(int i = 0; i < availableMarbles.length; i++){
+            for(int j = 0; j < availableMarbles[i].length; j++) {
+                result = result.concat(availableMarbles[i][j].toString());
+            }
+            result = result+"\n";
+        }
+        return result;
+    }
 }

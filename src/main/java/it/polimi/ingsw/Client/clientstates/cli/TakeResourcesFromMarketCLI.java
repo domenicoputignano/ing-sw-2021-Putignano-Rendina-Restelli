@@ -28,6 +28,7 @@ public class TakeResourcesFromMarketCLI extends AbstractTakeResourcesFromMarket 
 
     @Override
     public void manageUserInteraction() {
+        cli.showMarketTray();
         chooseRowColumn();
         chooseIndex();
         computeSelectedMarbles();

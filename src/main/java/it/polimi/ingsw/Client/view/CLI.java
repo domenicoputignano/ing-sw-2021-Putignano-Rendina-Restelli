@@ -222,6 +222,10 @@ public class CLI extends UI {
         return index;
     }
 
+    public void showMarketTray() {
+        System.out.println(client.getGame().getMarketTray());
+    }
+
     @Override
     public void changeClientState(AbstractClientState newClientState) {
         clientState = newClientState;
