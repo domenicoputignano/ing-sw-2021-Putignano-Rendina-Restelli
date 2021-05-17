@@ -6,6 +6,7 @@ import it.polimi.ingsw.Model.MultiPlayerMode;
 import it.polimi.ingsw.Model.Player;
 import it.polimi.ingsw.Model.SoloMode.SoloMode;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.GameSetupMessage;
+import it.polimi.ingsw.Utils.Messages.ServerMessages.Updates.NewTurnUpdate;
 
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -122,8 +123,9 @@ public class Server {
         GameController gameController = new GameController(soloMode);
         RemoteView remoteView = new RemoteView(player.getUser(), gameController, clientStatus);
         accounts.get(player.getUser().getNickname()).bindRemoteView(remoteView);
-
         LOGGER.log(Level.INFO, "Starting a new SoloMode game...");
+        soloMode.notifyGameSetup();
+        soloMode.notifyFirstTurn(new NewTurnUpdate(soloMode.getCurrPlayer().getUser()));
     }
 
     public Map<String, ClientStatus> getAccounts() {

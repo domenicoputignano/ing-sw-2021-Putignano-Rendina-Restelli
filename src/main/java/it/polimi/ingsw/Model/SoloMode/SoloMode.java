@@ -25,6 +25,7 @@ public class SoloMode extends Game {
         this.gameState = GameState.LEADERCHOICE;
         lorenzoIlMagnifico = new LorenzoIlMagnifico(this.getCurrPlayer().getPersonalBoard().getFaithTrack(), this);
         this.refreshTokens();
+        this.setup();
     }
 
     public void refreshTokens()
@@ -46,7 +47,7 @@ public class SoloMode extends Game {
     }
 
     @Override
-    protected void notifyGameSetup() {
+    public void notifyGameSetup() {
         notify(new GameSetupMessage(this.getReducedVersion()));
     }
 

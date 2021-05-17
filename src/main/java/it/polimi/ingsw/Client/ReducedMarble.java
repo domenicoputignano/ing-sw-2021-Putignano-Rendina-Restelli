@@ -14,4 +14,10 @@ public class ReducedMarble implements Serializable {
     public ColorMarble getColorMarble() {
         return colorMarble;
     }
+
+
+    @Override
+    public String toString() {
+        return " [" + colorMarble +']';
+    }
 }

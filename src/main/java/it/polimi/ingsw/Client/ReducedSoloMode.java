@@ -20,6 +20,7 @@ public class ReducedSoloMode extends ReducedGame {
 
     @Override
     public void nextTurn(NewTurnUpdate message) {
+        currPlayer = this.getPlayer(message.getCurrentUser());
         //TODO: aggiornare lo stato della personal board, con i dati di lorenzo. Metodo chiamato con il messaggio
         //lorenzoPlayedUpdate();
     }

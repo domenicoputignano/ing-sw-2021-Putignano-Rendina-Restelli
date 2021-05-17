@@ -50,7 +50,6 @@ public abstract class Game extends Observable<ServerMessage> implements Observer
             if (p.getPosition() == 3 || p.getPosition() == 4)
                 p.getPersonalBoard().getFaithTrack().moveMarker(1);
         }
-        //notifyGameSetup();
         this.turn = new Turn(this,inkwell);
         //DISTRIBUZIONE RISORSE A SCELTA E SCELTA CARTE LEADER PASSANDO IN RESOURCECHOICE E LEADER CHOICE
         //Inviare notifica alle view interessate per le risorse a scelta

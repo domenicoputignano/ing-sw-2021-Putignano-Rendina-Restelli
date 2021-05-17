@@ -36,7 +36,7 @@ public abstract class AbstractActivateProduction extends AbstractClientState {
 
 
     public int countExtraProductionEffect() {
-        return client.getGame().getCurrPlayer().getCompatibleLeaderEffect(Effect.EXTRAPRODUCTION).size();
+        return client.getGame().getPlayer(client.getUser()).getCompatibleLeaderEffect(Effect.EXTRAPRODUCTION).size();
     }
 
 

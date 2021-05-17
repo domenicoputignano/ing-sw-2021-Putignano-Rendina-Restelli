@@ -2,7 +2,9 @@ package it.polimi.ingsw.Model.SoloMode;
 
 import it.polimi.ingsw.Exceptions.EndGameException;
 
-public interface TokenEffect {
+import java.io.Serializable;
+
+public interface TokenEffect extends Serializable {
     void performTokenEffect(LorenzoIlMagnifico lorenzoIlMagnifico) throws EndGameException;
 
 }

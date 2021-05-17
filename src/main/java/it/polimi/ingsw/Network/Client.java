@@ -121,6 +121,7 @@ public class Client {
         }
     }
 
+
     public void bindUser(String nickname) {
         user = new User(nickname);
     }

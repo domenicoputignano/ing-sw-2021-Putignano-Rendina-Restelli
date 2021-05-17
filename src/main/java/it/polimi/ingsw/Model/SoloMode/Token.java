@@ -2,7 +2,9 @@ package it.polimi.ingsw.Model.SoloMode;
 
 import it.polimi.ingsw.Exceptions.EndGameException;
 
-public class Token {
+import java.io.Serializable;
+
+public class Token implements Serializable {
     private TokenEffect tokenEffect;
 
     public Token(TokenEffect tokenEffect) {
