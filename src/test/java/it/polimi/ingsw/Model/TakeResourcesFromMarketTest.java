@@ -149,17 +149,20 @@ class TakeResourcesFromMarketTest {
         multiPlayerMode.getTurn().getPlayer().getLeaderCards().add(new LeaderCard(new LeaderEffect(Effect.CMARBLE,ResourceType.coin),null,null,0));
         multiPlayerMode.getTurn().getPlayer().getLeaderCards().get(0).setIsActive();
         multiPlayerMode.getTurn().getPlayer().getLeaderCards().get(1).setIsActive();
-        message.addWhereToPutMarbles(new Pair<>(new ReducedMarble(ColorMarble.WHITE),MarbleDestination.DEPOT1));
-        message.addWhereToPutMarbles(new Pair<>(new ReducedMarble(ColorMarble.WHITE),MarbleDestination.DEPOT2));
-        message.addWhereToPutMarbles(new Pair<>(new ReducedMarble(ColorMarble.WHITE),MarbleDestination.DEPOT3));
-        List<Integer> effects = new ArrayList<>();
-        effects.add(1);
-        effects.add(2);
-        message.setWhiteEffects(effects);
+        List<Marble> marbles = multiPlayerMode.getMarketTray().peekMarbles(MarketChoice.ROW, 2);
+        List<ReducedMarble> requestedMarbles = marbles.stream().map(Marble::getReducedVersion).collect(Collectors.toList());
+        int i = 0;
+        for(Marble marble : marbles) {
+            if((marble.getColor() == ColorMarble.WHITE) && (i != 0)) {
+                message.addWhiteEffect(1);
+                i++;
+            }
+        }
         multiPlayerMode.getTurn().setTurnState(TurnState.ActionType.TAKERESOURCESFROMMARKET);
-        assertThrows(WhiteEffectMismatchException.class,()->multiPlayerMode.getTurn().getTurnPhase().takeResourcesFromMarket(multiPlayerMode.getTurn(),message));
         TakeResourcesFromMarket takeResourcesFromMarket = (TakeResourcesFromMarket) multiPlayerMode.getTurn().getTurnPhase();
-        assertFalse(takeResourcesFromMarket.checkValidWhiteEffects(multiPlayerMode.getTurn(), message.getWhiteEffects(),message.getRequestedMarbles()));
+        if(requestedMarbles.stream().anyMatch(x -> x.getColorMarble() == ColorMarble.WHITE)){
+            assertFalse(takeResourcesFromMarket.checkValidWhiteEffects(multiPlayerMode.getTurn(), message.getWhiteEffects(),requestedMarbles));
+        }
     }
 
     @RepeatedTest(5)
