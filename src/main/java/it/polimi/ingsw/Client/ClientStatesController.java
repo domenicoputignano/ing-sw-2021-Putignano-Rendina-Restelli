@@ -18,7 +18,6 @@ public class ClientStatesController {
 
         }
         //todo con i metodi della GUI
-        //ui.showUpdate(message);
         ui.manageUserInteraction();
     }
 
@@ -47,7 +46,7 @@ public class ClientStatesController {
 
     public static void updateClientState(InitialLeaderChoiceUpdate message, UI ui) {
         if(ui.isCLI()) {
-            if(ui.getClient().getUserPosition() == 3 || ui.getClient().getUserPosition() == 4) {
+            if(ui.getClient().getUserPosition() > 1 && ui.isReceiverAction(message.getUser())) {
                 ui.changeClientState(new InitialResourceChoiceCLI(ui.getClient()));
                 ui.manageUserInteraction();
             } else {

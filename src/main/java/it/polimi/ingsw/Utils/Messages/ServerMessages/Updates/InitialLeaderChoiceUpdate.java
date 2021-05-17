@@ -1,5 +1,6 @@
 package it.polimi.ingsw.Utils.Messages.ServerMessages.Updates;
 
+import it.polimi.ingsw.Client.ClientStatesController;
 import it.polimi.ingsw.Client.ReducedPersonalBoard;
 import it.polimi.ingsw.Client.clientstates.cli.InitialLeaderChoiceCLI;
 import it.polimi.ingsw.Commons.User;
@@ -7,8 +8,8 @@ import it.polimi.ingsw.Network.Client;
 
 public class InitialLeaderChoiceUpdate extends UpdateMessage {
 
-    private int leader1ToDiscard;
-    private int leader2ToDiscard;
+    private final int leader1ToDiscard;
+    private final int leader2ToDiscard;
 
     public InitialLeaderChoiceUpdate(User user, ReducedPersonalBoard reducedPersonalBoard, int leader1ToDiscard, int leader2ToDiscard) {
         this.user = user;
@@ -21,10 +22,7 @@ public class InitialLeaderChoiceUpdate extends UpdateMessage {
     public void handleMessage(Client client) {
         client.getGame().updatePersonalBoard(this);
         client.getUI().render(this);
-
+        ClientStatesController.updateClientState(this, client.getUI());
     }
 
-    private boolean isReceiverAction(Client client) {
-        return user.equals(client.getUser());
-    }
 }

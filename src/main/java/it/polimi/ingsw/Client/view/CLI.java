@@ -7,6 +7,7 @@ import it.polimi.ingsw.Commons.ResourceType;
 import it.polimi.ingsw.Network.Client;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.*;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.Updates.InitialLeaderChoiceUpdate;
+import it.polimi.ingsw.Utils.Messages.ServerMessages.Updates.InitialResourceChoiceUpdate;
 import it.polimi.ingsw.Utils.ResourceSource;
 
 import java.util.EnumMap;
@@ -95,13 +96,13 @@ public class CLI extends UI {
     //TODO - Aggiunto da Piero.
     @Override
     public void render(ServerAsksForNickname message) {
-        System.out.println("Choose your nickname: ");
+        System.out.print("Choose your nickname: ");
     }
     public void render(ServerAskForGameMode message) {
-        System.out.println("Choose game mode [Multiplayer | Solo]: ");
+        System.out.print("Choose game mode [Multiplayer | Solo]: ");
     }
     public void render(ServerAskForNumOfPlayer message) {
-        System.out.println("Choose the number of players [2-4]: ");
+        System.out.print("Choose the number of players [2-4]: ");
     }
     public void render(GameSetupMessage message) { System.out.println("Game setup has been done, now you need to choose two leader cards to discard "); }
     public void render(InitialLeaderChoiceUpdate message) {
@@ -110,6 +111,12 @@ public class CLI extends UI {
         } else {
             System.out.println("User "+message.getUser()+" has discarded two leader cards");
         }
+    }
+    public void render(InitialResourceChoiceUpdate message) {
+        if(isReceiverAction(message.getUser())) {
+            System.out.println("You have chosen " + message.getChosenResources() + " resources ");
+        } else System.out.println("User "+message.getUser()+" added "+message.getChosenResources()+" to his" +
+                " depots ");
     }
 
     @Override
@@ -147,6 +154,30 @@ public class CLI extends UI {
         }
     }
 
+    public ResourceType askValidResource(Scanner input) {
+        boolean done = false;
+        ResourceType resource = null;
+        while(!done) {
+            String answer = input.nextLine();
+            resource = fromStringToResourceType(answer);
+            if(resource!=null){
+                done = true;
+            }
+        }
+        return resource;
+    }
+
+    public int askValidDepotIndex(Scanner input) {
+        boolean done = false;
+        int index = 0;
+        while(!done) {
+            index = input.nextInt();
+            if(index < 1 || index > 3) {
+                System.out.print("Invalid chosen index, please select a number between [1 - 3]: ");
+            } else done = true;
+        }
+        return index;
+    }
 
     @Override
     public void changeClientState(AbstractClientState newClientState) {

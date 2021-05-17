@@ -25,7 +25,7 @@ public class ActionChoiceCLI extends AbstractActionChoice {
 
     public void manageUserInteraction() {
         System.out.print("Choose between: Activate Production (A)," +
-                " Buy (B), Take Resources (T), Leader Action (L) and Move Resources (M)");
+                " Buy (B), Take Resources (T), Leader Action (L) and Move Resources (M): ");
         String choice = input.next();
         switch(choice) {
             case "A" : {

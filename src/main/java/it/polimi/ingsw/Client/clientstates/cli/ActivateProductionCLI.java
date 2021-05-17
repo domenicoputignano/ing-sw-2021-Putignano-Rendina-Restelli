@@ -92,7 +92,7 @@ public class ActivateProductionCLI extends AbstractActivateProduction {
         }
     }
 
-    private ResourceType askValidResource() {
+    public ResourceType askValidResource() {
         boolean done = false;
         ResourceType resource = null;
         while(!done) {
@@ -104,10 +104,6 @@ public class ActivateProductionCLI extends AbstractActivateProduction {
         }
         return resource;
     }
-
-
-
-
 
 
 }

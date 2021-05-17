@@ -52,14 +52,13 @@ public class ClientStatus implements Runnable {
 
     public void run(){
         try {
-            LOGGER.log(Level.INFO, "ClientStatus is waiting for client messages...");
             while(isActive){
                 ClientMessage messageFromClient = (ClientMessage) inputFromClient.readObject();
-                LOGGER.log(Level.INFO, String.format("Received message from client of %s type ", messageFromClient.getClass().getName()));
+                LOGGER.log(Level.INFO, "Message from client of type "+messageFromClient.getClass().getName()+"");
                 remoteView.handleClientMessage(messageFromClient);
             }
         } catch (IOException | ClassNotFoundException e) {
-            LOGGER.log(Level.SEVERE, "Error in receiving messageToSend from thread");
+            LOGGER.log(Level.SEVERE, "Error in receiving message from client");
         }
 
     }

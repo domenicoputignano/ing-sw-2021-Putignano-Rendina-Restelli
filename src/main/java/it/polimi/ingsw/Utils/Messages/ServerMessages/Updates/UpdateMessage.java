@@ -16,4 +16,6 @@ public abstract class UpdateMessage implements ServerMessage {
     public ReducedPersonalBoard getUserPersonalBoard() {
         return userPersonalBoard;
     }
+
+
 }

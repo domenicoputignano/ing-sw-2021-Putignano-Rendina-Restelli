@@ -11,7 +11,11 @@ import java.util.List;
 
 public class ResourceChoiceMessage implements GameControllerHandleable {
 
-    private List<Pair<ResourceType,Integer>> chosenResources = new ArrayList<>();
+    private final List<Pair<ResourceType,Integer>> chosenResources = new ArrayList<>();
+
+    public ResourceChoiceMessage(List<Pair<ResourceType,Integer>> chosenResources) {
+        this.chosenResources.addAll(chosenResources);
+    }
 
     public void handleMessage(GameController gameController, RemoteView sender) {
         gameController.handleResourceChoiceMessage(this, sender);

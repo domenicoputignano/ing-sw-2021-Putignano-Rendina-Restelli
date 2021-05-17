@@ -17,9 +17,14 @@ public class InitialResourceChoiceUpdate extends UpdateMessage {
         this.chosenResources = chosenResources;
     }
 
+    public List<ResourceType> getChosenResources() {
+        return chosenResources;
+    }
+
     @Override
     public void handleMessage(Client client) {
-
+        client.getGame().updatePersonalBoard(this);
+        client.getUI().render(this);
     }
 
 }
