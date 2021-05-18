@@ -2,10 +2,7 @@ package it.polimi.ingsw.Client;
 
 import it.polimi.ingsw.Commons.Deck;
 import it.polimi.ingsw.Commons.User;
-import it.polimi.ingsw.Utils.Messages.ServerMessages.Updates.ActivateProductionUpdate;
-import it.polimi.ingsw.Utils.Messages.ServerMessages.Updates.BuyDevCardPerformedUpdate;
-import it.polimi.ingsw.Utils.Messages.ServerMessages.Updates.NewTurnUpdate;
-import it.polimi.ingsw.Utils.Messages.ServerMessages.Updates.UpdateMessage;
+import it.polimi.ingsw.Utils.Messages.ServerMessages.Updates.*;
 
 import java.io.Serializable;
 import java.util.List;
@@ -37,6 +34,11 @@ public abstract class ReducedGame implements Serializable {
     public void performUpdate(BuyDevCardPerformedUpdate message) {
         updatePersonalBoard(message);
         decks = message.getResultingDecks();
+    }
+
+    public void performUpdate(TakeResourcesFromMarketUpdate message) {
+        updatePersonalBoard(message);
+        marketTray = message.getResultingMarketTray();
     }
 
     public ReducedPlayer getPlayer(User user) {

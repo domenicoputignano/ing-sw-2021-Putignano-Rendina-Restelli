@@ -7,9 +7,7 @@ import it.polimi.ingsw.Utils.Messages.ServerMessages.GameSetupMessage;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.ServerAskForGameMode;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.ServerAskForNumOfPlayer;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.ServerAsksForNickname;
-import it.polimi.ingsw.Utils.Messages.ServerMessages.Updates.InitialLeaderChoiceUpdate;
-import it.polimi.ingsw.Utils.Messages.ServerMessages.Updates.NewTurnUpdate;
-import it.polimi.ingsw.Utils.Messages.ServerMessages.Updates.ServerAsksForPositioning;
+import it.polimi.ingsw.Utils.Messages.ServerMessages.Updates.*;
 
 public class ClientStatesController {
 
@@ -83,6 +81,21 @@ public class ClientStatesController {
         else {
             //TODO mandare il client in uno stato di attesa
         }
+    }
+
+    public static void updateClientState(UpdateMessage message, UI ui) {
+        if(ui.isReceiverAction(message.getUser())) {
+            if(ui.isCLI()){
+                ui.changeClientState(new ActionChoiceCLI(ui.getClient()));
+                ui.manageUserInteraction();
+            }
+        } else {
+
+        }
+    }
+
+    public static void updateClientState(FaithMarkerUpdate message, UI ui) {
+
     }
 
 }

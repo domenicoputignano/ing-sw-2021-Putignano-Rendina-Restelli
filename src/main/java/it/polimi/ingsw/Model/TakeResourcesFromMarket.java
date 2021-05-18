@@ -142,14 +142,14 @@ public class TakeResourcesFromMarket implements AbstractTurnPhase {
     }
 
     public void concludeTurnPhase(Turn turn) {
-        for(Player  p : turn.getGame().getPlayerList()) {
+        for(Player p : turn.getGame().getPlayerList()) {
             if(!p.equals(turn.getPlayer())) {
                 p.getPersonalBoard().getFaithTrack().moveMarker(discardedResources);
-                turn.getGame().notifyUpdate(new FaithMarkerUpdate(p.getUser(),
-                        p.getReducedPersonalBoard(),
-                        turn.getPlayer().getUser(),
-                        discardedResources));
             }
+            turn.getGame().notifyUpdate(new FaithMarkerUpdate(p.getUser(),
+                    p.getReducedPersonalBoard(),
+                    turn.getPlayer().getUser(),
+                    discardedResources));
         }
     }
 

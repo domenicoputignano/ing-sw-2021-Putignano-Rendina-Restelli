@@ -54,7 +54,7 @@ public abstract class AbstractActivateProduction extends AbstractClientState {
         result.put(ResourceType.stone,0);
         if(messageToSend.getProductions().isBasic()) {
             result.put(messageToSend.getInput1(), result.get(messageToSend.getInput1())+1);
-            result.put(messageToSend.getInput2(), result.get(messageToSend.getInput2())+2);
+            result.put(messageToSend.getInput2(), result.get(messageToSend.getInput2())+1);
         }
         if(messageToSend.getProductions().isSlot1()) Checker.mapMerging(retrieveCardInputResources(playerBoard,0), result);
         if(messageToSend.getProductions().isSlot2()) Checker.mapMerging(retrieveCardInputResources(playerBoard, 1), result);

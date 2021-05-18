@@ -187,7 +187,6 @@ public abstract class Game extends Observable<ServerMessage> implements Observer
 
     public void nextState(GameState state) {  this.gameState = state; }
 
-
     public void notifyFirstTurn(NewTurnUpdate message) {
         notify(message);
     }

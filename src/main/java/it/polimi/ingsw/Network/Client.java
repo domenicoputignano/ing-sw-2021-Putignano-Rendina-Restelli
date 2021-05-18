@@ -73,6 +73,7 @@ public class Client {
             socketOutObj.flush();
             //LOGGER.log(Level.INFO, "Message sent ");
         } catch (IOException e) {
+            System.out.println(e.getMessage());
             LOGGER.log(Level.SEVERE, "Error: unable to process messageToSend sending");
         }
     }

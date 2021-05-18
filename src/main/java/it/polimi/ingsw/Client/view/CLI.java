@@ -7,10 +7,7 @@ import it.polimi.ingsw.Commons.ResourceType;
 import it.polimi.ingsw.Network.Client;
 import it.polimi.ingsw.Utils.MarbleDestination;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.*;
-import it.polimi.ingsw.Utils.Messages.ServerMessages.Updates.InitialLeaderChoiceUpdate;
-import it.polimi.ingsw.Utils.Messages.ServerMessages.Updates.InitialResourceChoiceUpdate;
-import it.polimi.ingsw.Utils.Messages.ServerMessages.Updates.NewTurnUpdate;
-import it.polimi.ingsw.Utils.Messages.ServerMessages.Updates.ServerAsksForPositioning;
+import it.polimi.ingsw.Utils.Messages.ServerMessages.Updates.*;
 import it.polimi.ingsw.Utils.ResourceSource;
 
 import java.util.EnumMap;
@@ -38,7 +35,7 @@ public class CLI extends UI {
             do {
                 source = fromStringToResourceSource(input.next());
             } while (source == null);
-            System.out.println("Choose the resource [Coin (C), Servant (SE), Shield (SH), Stone(ST)] ");
+            System.out.print("Choose the resource [Coin (C), Servant (SE), Shield (SH), Stone(ST)]:  ");
             ResourceType resource;
             do {
                 resource = fromStringToResourceType(input.next());
@@ -49,13 +46,13 @@ public class CLI extends UI {
                     }
                 }
             } while (resource == null);
-            System.out.println("Choose the number ");
+            System.out.println("Choose the number: ");
             int number;
             boolean rightNumber = false;
             do {
                 number = input.nextInt();
                 if (neededResources.get(resource) < number) {
-                    System.out.println("Error detected, select again number of occurrences you want to pick ");
+                    System.out.println("Error detected, select again number of occurrences you want to pick: ");
                     rightNumber = false;
                 } else {
                     rightNumber = true;
@@ -157,7 +154,26 @@ public class CLI extends UI {
         if(isReceiverAction(message.getCurrentUser())) {
             System.out.println("It's now your turn, make the move ");
         } else {
-            System.out.printf("It's %s's turn, please wait ", message.getCurrentUser());
+            System.out.printf("It's %s's turn, please wait \n", message.getCurrentUser());
+        }
+    }
+    public void render(TakeResourcesFromMarketUpdate message) {
+        if(isReceiverAction(message.getUser())) {
+            System.out.println("You got following resources from market: "+message.getEarnedResources());
+        } else {
+            System.out.println("User "+message.getUser()+" " +
+                    "has taken following resources from market: "+message.getEarnedResources());
+        }
+        System.out.println("Resulting market tray is shown below \n");
+        showMarketTray();
+    }
+    public void render(FaithMarkerUpdate message) {
+        if(isReceiverAction(message.getUser())) {
+            System.out.printf("%s's action involved faith track, you got %d faith points\n", message.getTriggeringUser()
+                    , message.getPoints());
+        } else {
+            System.out.printf("User "+message.getTriggeringUser()+" has triggered actions involving faith track, " +
+                    "%s got %d faith points\n",message.getUser(),message.getPoints());
         }
     }
 

@@ -1,5 +1,7 @@
 package it.polimi.ingsw.Utils;
 
-public enum ResourceSource {
+import java.io.Serializable;
+
+public enum ResourceSource implements Serializable {
     DEPOT,EXTRA,STRONGBOX
 }

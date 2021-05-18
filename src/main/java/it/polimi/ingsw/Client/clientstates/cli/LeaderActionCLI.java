@@ -33,8 +33,7 @@ public class LeaderActionCLI extends AbstractLeaderAction {
                     client.getGame().getCurrPlayer().getNumOfAvailableLeaderCards(), leaderActionChosen, client.getGame().getCurrPlayer().getNumOfAvailableLeaderCards());
             int chosenIndex = chooseCardIndex();
             messageToSend.setIndex(chosenIndex);
-            //TODO da togliere il commento
-            //client.sendMessage(messageToSend);
+            client.sendMessage(messageToSend);
         } else {
             System.out.println("Oh no! Seems that all leader action has been performed. Try another action ");
         }
@@ -74,7 +73,7 @@ public class LeaderActionCLI extends AbstractLeaderAction {
     }
 
     private boolean indexNotInRange(int chosenIndex) {
-        return (chosenIndex < 1);// || chosenIndex > client.getGame().getCurrPlayer().getNumOfAvailableLeaderCards());
+        return (chosenIndex < 1) || chosenIndex > client.getGame().getCurrPlayer().getNumOfAvailableLeaderCards();
     }
 
 

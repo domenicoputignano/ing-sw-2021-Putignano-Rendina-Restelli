@@ -12,4 +12,5 @@ public abstract class ErrorMessage implements ServerMessage {
         this.triggeringUser = triggeringUser;
     }
 
+
 }
