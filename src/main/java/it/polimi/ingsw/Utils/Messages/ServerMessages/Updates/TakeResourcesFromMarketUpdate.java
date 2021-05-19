@@ -14,13 +14,16 @@ public class TakeResourcesFromMarketUpdate extends UpdateMessage {
 
     private ReducedMarketTray resultingMarketTray;
     private List<ResourceType> earnedResources = new ArrayList<>();
+    private int faithPoints;
 
-    public TakeResourcesFromMarketUpdate(User user, ReducedPersonalBoard reducedPersonalBoard, ReducedMarketTray reducedMarketTray, List<ResourceType> resources)
+    public TakeResourcesFromMarketUpdate(User user, ReducedPersonalBoard reducedPersonalBoard, ReducedMarketTray reducedMarketTray, List<ResourceType> resources
+    , int faithPoints)
     {
         this.user = user;
         this.userPersonalBoard = reducedPersonalBoard;
         this.resultingMarketTray = reducedMarketTray;
         this.earnedResources = resources;
+        this.faithPoints = faithPoints;
     }
     @Override
     public void handleMessage(Client client) {
@@ -35,5 +38,9 @@ public class TakeResourcesFromMarketUpdate extends UpdateMessage {
 
     public List<ResourceType> getEarnedResources() {
         return earnedResources;
+    }
+
+    public int getFaithPoints() {
+        return faithPoints;
     }
 }

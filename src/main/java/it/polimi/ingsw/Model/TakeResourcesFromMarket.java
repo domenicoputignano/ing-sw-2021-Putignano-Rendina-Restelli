@@ -51,7 +51,7 @@ public class TakeResourcesFromMarket implements AbstractTurnPhase {
                 turn.getGame().notifyUpdate(new TakeResourcesFromMarketUpdate(turn.getPlayer().getUser(),
                         turn.getPlayer().getReducedPersonalBoard(),
                         turn.getGame().getMarketTray().getReducedVersion(),
-                        getEarnedResources()));
+                        getEarnedResources(),faith));
                 concludeTurnPhase(turn);
             }
         } else throw new WhiteEffectMismatchException();

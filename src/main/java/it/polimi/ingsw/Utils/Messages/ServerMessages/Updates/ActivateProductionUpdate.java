@@ -7,14 +7,16 @@ import it.polimi.ingsw.Network.Client;
 import java.util.Map;
 
 public class ActivateProductionUpdate extends UpdateMessage {
-    private Map<ResourceType, Integer> payedResources;
-    private Map<ResourceType, Integer> receivedResources;
+    private final Map<ResourceType, Integer> payedResources;
+    private final Map<ResourceType, Integer> receivedResources;
+    private final int faithPoints;
 
-    public ActivateProductionUpdate(User user, ReducedPersonalBoard reducedPersonalBoard, Map<ResourceType, Integer> payed, Map<ResourceType,Integer> received) {
+    public ActivateProductionUpdate(User user, ReducedPersonalBoard reducedPersonalBoard, Map<ResourceType, Integer> payed, Map<ResourceType,Integer> received, int faithPoints) {
         this.user = user;
         this.userPersonalBoard = reducedPersonalBoard;
         this.payedResources = payed;
         this.receivedResources = received;
+        this.faithPoints = faithPoints;
     }
 
     @Override
@@ -28,5 +30,9 @@ public class ActivateProductionUpdate extends UpdateMessage {
 
     public Map<ResourceType, Integer> getReceivedResources() {
         return receivedResources;
+    }
+
+    public int getFaithPoints() {
+        return faithPoints;
     }
 }

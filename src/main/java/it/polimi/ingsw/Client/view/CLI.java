@@ -159,21 +159,27 @@ public class CLI extends UI {
     }
     public void render(TakeResourcesFromMarketUpdate message) {
         if(isReceiverAction(message.getUser())) {
-            System.out.println("You got following resources from market: "+message.getEarnedResources());
+            System.out.printf("You got following resources from market: "+message.getEarnedResources()+" and %d faith points",
+                    message.getFaithPoints());
         } else {
-            System.out.println("User "+message.getUser()+" " +
-                    "has taken following resources from market: "+message.getEarnedResources());
+            System.out.printf("User "+message.getUser()+"" +
+                    " has taken following resources from market: "+message.getEarnedResources()+" and he got %d faith points \n", message.getFaithPoints());
         }
-        System.out.println("Resulting market tray is shown below \n");
+        System.out.println("Resulting market tray is shown below\n");
         showMarketTray();
     }
     public void render(FaithMarkerUpdate message) {
-        if(isReceiverAction(message.getUser())) {
-            System.out.printf("%s's action involved faith track, you got %d faith points\n", message.getTriggeringUser()
-                    , message.getPoints());
+        if(message.getUser().equals(message.getTriggeringUser())&&isReceiverAction(message.getTriggeringUser())) {
+            System.out.printf("Your action involved faith track, other players got %d faith points\n", message.getPoints());
         } else {
-            System.out.printf("User "+message.getTriggeringUser()+" has triggered actions involving faith track, " +
-                    "%s got %d faith points\n",message.getUser(),message.getPoints());
+            if(isReceiverAction(message.getUser())) {
+                System.out.printf("User "+message.getTriggeringUser()+" has performed action" +
+                        "involving faith track, you got %d faith points\n", message.getPoints());
+            }
+            else {
+                System.out.printf("User "+message.getTriggeringUser()+" has performed action" +
+                        "involving faith track, %s got %d faith points\n", message.getUser(), message.getPoints());
+            }
         }
     }
 
