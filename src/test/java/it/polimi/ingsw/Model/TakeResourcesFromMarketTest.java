@@ -166,7 +166,7 @@ class TakeResourcesFromMarketTest {
         }
     }
 
-    @RepeatedTest(5)
+    @RepeatedTest(5000)
     void handlePositioning() throws DepotOutOfBoundsException, IncompatibleResourceTypeException, InvalidActionException, WhiteEffectMismatchException, NeedPositioningException {
         List<Marble> marbles;
         multiPlayerMode.getTurn().getPlayer().getPersonalBoard().getWarehouse().addResourcesToDepot(1,ResourceType.coin,1);
@@ -215,15 +215,18 @@ class TakeResourcesFromMarketTest {
                 else takeResourcesFromMarketMessage.addWhereToPutMarbles(new Pair<ReducedMarble, MarbleDestination>(m.getReducedVersion(),MarbleDestination.DISCARD));
         }
         multiPlayerMode.getTurn().setTurnState(TurnState.ActionType.TAKERESOURCESFROMMARKET);
-        assertThrows(NeedPositioningException.class, ()->multiPlayerMode.getTurn().getTurnPhase().takeResourcesFromMarket(multiPlayerMode.getTurn(),takeResourcesFromMarketMessage));
-        TakeResourcesFromMarket takeResourcesFromMarket = (TakeResourcesFromMarket) multiPlayerMode.getTurn().getTurnPhase();
-        assertEquals(multiPlayerMode.getTurn().getPlayer().getPersonalBoard().getWarehouse().getNormalDepots().get(0).getOcc(),1);
-        assertEquals(multiPlayerMode.getTurn().getPlayer().getPersonalBoard().getWarehouse().getNormalDepots().get(1).getOcc(),2);
-        if(servant)
-            assertEquals(multiPlayerMode.getTurn().getPlayer().getPersonalBoard().getWarehouse().getNormalDepots().get(2).getOcc(),3);
-        else
-            assertEquals(multiPlayerMode.getTurn().getPlayer().getPersonalBoard().getWarehouse().getNormalDepots().get(2).getOcc(),2);
-        assertEquals(pendingResources,takeResourcesFromMarket.getPendingResources().size());
+
+        if(pendingResources > 0) {
+            assertThrows(NeedPositioningException.class, ()->multiPlayerMode.getTurn().getTurnPhase().takeResourcesFromMarket(multiPlayerMode.getTurn(),takeResourcesFromMarketMessage));
+            TakeResourcesFromMarket takeResourcesFromMarket = (TakeResourcesFromMarket) multiPlayerMode.getTurn().getTurnPhase();
+            assertEquals(multiPlayerMode.getTurn().getPlayer().getPersonalBoard().getWarehouse().getNormalDepots().get(0).getOcc(),1);
+            assertEquals(multiPlayerMode.getTurn().getPlayer().getPersonalBoard().getWarehouse().getNormalDepots().get(1).getOcc(),2);
+            if(servant)
+                assertEquals(multiPlayerMode.getTurn().getPlayer().getPersonalBoard().getWarehouse().getNormalDepots().get(2).getOcc(),3);
+            else
+                assertEquals(multiPlayerMode.getTurn().getPlayer().getPersonalBoard().getWarehouse().getNormalDepots().get(2).getOcc(),2);
+            assertEquals(pendingResources,takeResourcesFromMarket.getPendingResources().size());
+        }
     }
 
 }
