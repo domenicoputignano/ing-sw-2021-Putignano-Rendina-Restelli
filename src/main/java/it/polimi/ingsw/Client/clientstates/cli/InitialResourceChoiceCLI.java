@@ -38,7 +38,7 @@ public class InitialResourceChoiceCLI extends AbstractInitialResourceChoice {
             System.out.print("Select resource [Coin(C), Servant(SE), Shield(SH), Stone(ST)]: ");
             resource = cli.askValidResource(input);
             System.out.print("Select index of depot that will contain selected resource [1 - 3]: ");
-            depotIndex = cli.askValidDepotIndex(input);
+            depotIndex = cli.askValidDepotIndex(input, 3);
             requiredResources.add(new Pair<>(resource,depotIndex));
         }
         messageToSend = new ResourceChoiceMessage(requiredResources);

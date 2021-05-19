@@ -1,6 +1,7 @@
 package it.polimi.ingsw.Client.view;
 
 import it.polimi.ingsw.Client.clientstates.AbstractClientState;
+import it.polimi.ingsw.Client.clientstates.cli.ActionChoiceCLI;
 import it.polimi.ingsw.Commons.Effect;
 import it.polimi.ingsw.Commons.LeaderCard;
 import it.polimi.ingsw.Commons.ResourceType;
@@ -183,7 +184,6 @@ public class CLI extends UI {
         }
     }
 
-
     @Override
     public void manageUserInteraction() {
         clientState.manageUserInteraction();
@@ -232,16 +232,33 @@ public class CLI extends UI {
         return resource;
     }
 
-    public int askValidDepotIndex(Scanner input) {
+    public int askValidDepotIndex(Scanner input, int maxIndex) {
         boolean done = false;
         int index = 0;
         while(!done) {
             index = input.nextInt();
-            if(index < 1 || index > 3) {
-                System.out.print("Invalid chosen index, please select a number between [1 - 3]: ");
+            if(index < 1 || index > maxIndex) {
+                System.out.printf("Invalid chosen index, please select a number between [1 - %d]: ", maxIndex);
             } else done = true;
         }
         return index;
+    }
+
+    public int askValidOcc(Scanner input, int maxOcc) {
+        boolean done = false;
+        int occ = 0;
+        while(!done) {
+            occ = input.nextInt();
+            if(occ < 1 || occ > maxOcc) {
+                System.out.printf("Invalid number of occurrences chosen, please select a number between [1 - %d]: ", maxOcc);
+            } else done = true;
+        }
+        return occ;
+    }
+
+    public void returnToActionChoice() {
+        changeClientState(new ActionChoiceCLI(this.client));
+        this.clientState.manageUserInteraction();
     }
 
     public void showMarketTray() {
