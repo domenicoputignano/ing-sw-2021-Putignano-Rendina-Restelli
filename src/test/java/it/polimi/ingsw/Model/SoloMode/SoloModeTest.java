@@ -137,7 +137,6 @@ class SoloModeTest {
     void takeResourcesFromMarketGamePlay() throws InvalidActionException, WhiteEffectMismatchException, NeedPositioningException {
         playerList.add(new Player("Pippo"));
         SoloMode game = new SoloMode(playerList.get(0));
-        game.setup();
         game.getCurrPlayer().getLeaderCards().remove(2);
         game.getCurrPlayer().getLeaderCards().remove(2);
         TakeResourcesFromMarketMessage message = new TakeResourcesFromMarketMessage();
@@ -147,7 +146,7 @@ class SoloModeTest {
         game.getTurn().getPlayer().getLeaderCards().add(new LeaderCard(new LeaderEffect(Effect.CMARBLE,ResourceType.coin),null,null,0));
         game.getTurn().getPlayer().getLeaderCards().get(0).setIsActive();
         game.getTurn().getPlayer().getLeaderCards().get(1).setIsActive();
-        List<Marble> marbles = game.getMarketTray().peekMarbles(MarketChoice.ROW, 2);
+        List<Marble> marbles = game.getMarketTray().peekMarbles(MarketChoice.ROW, 1);
         List<Integer> effects = new ArrayList<>();
         int i = 0;
         for(Marble m : marbles) {
@@ -177,7 +176,6 @@ class SoloModeTest {
     void LeaderAction() throws InvalidActionException, LeaderStatusException, LeaderRequirementsException {
         playerList.add(new Player("Pippo"));
         SoloMode game = new SoloMode(playerList.get(0));
-        game.setup();
         game.getCurrPlayer().getLeaderCards().remove(2);
         game.getCurrPlayer().getLeaderCards().remove(2);
         LeaderActionMessage leaderActionMessage = new LeaderActionMessage();

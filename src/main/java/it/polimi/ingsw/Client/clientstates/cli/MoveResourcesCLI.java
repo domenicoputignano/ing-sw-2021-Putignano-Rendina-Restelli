@@ -25,7 +25,7 @@ public class MoveResourcesCLI extends AbstractMoveResources {
     }
 
     private void chooseSourceDestination() {
-        System.out.println("Choose the depot source of you move action and its index. [DEPOT|EXTRADEPOT],[Index]" );
+        System.out.println("Choose the depot source of your move action and its index. [DEPOT|EXTRADEPOT],[Index]" );
         String choice;
         boolean choiceOK = false;
         do {

@@ -14,7 +14,7 @@ public class ActivateProductionCLI extends AbstractActivateProduction {
 
     private final CLI cli;
     private String answer;
-    private Scanner input = new Scanner(System.in);
+    private final Scanner input = new Scanner(System.in);
 
 
     public ActivateProductionCLI(Client client) {

@@ -41,13 +41,14 @@ class TakeResourcesFromMarketTest {
     void takeResourcesFromMarket() throws InvalidActionException, WhiteEffectMismatchException, NeedPositioningException {
         List<Marble> marbles;
         TakeResourcesFromMarketMessage takeResourcesFromMarketMessage = new TakeResourcesFromMarketMessage();
-        takeResourcesFromMarketMessage.setPlayerChoice(MarketChoice.ROW, 2);
+        int index = 2;
+        takeResourcesFromMarketMessage.setPlayerChoice(MarketChoice.ROW, index);
         multiPlayerMode.getTurn().getPlayer().getLeaderCards().clear();
         multiPlayerMode.getTurn().getPlayer().getLeaderCards().add(new LeaderCard(new LeaderEffect(Effect.CMARBLE, ResourceType.shield),null,null,0));
         multiPlayerMode.getTurn().getPlayer().getLeaderCards().add(new LeaderCard(new LeaderEffect(Effect.CMARBLE,ResourceType.coin),null,null,0));
         multiPlayerMode.getTurn().getPlayer().getLeaderCards().get(0).setIsActive();
         multiPlayerMode.getTurn().getPlayer().getLeaderCards().get(1).setIsActive();
-        marbles = multiPlayerMode.getMarketTray().peekMarbles(MarketChoice.ROW, 2);
+        marbles = multiPlayerMode.getMarketTray().peekMarbles(MarketChoice.ROW, index-1);
         List<Integer> effects = new ArrayList<>();
         for(Marble m: marbles)
         {
@@ -172,13 +173,14 @@ class TakeResourcesFromMarketTest {
         multiPlayerMode.getTurn().getPlayer().getPersonalBoard().getWarehouse().addResourcesToDepot(2,ResourceType.shield,2);
         multiPlayerMode.getTurn().getPlayer().getPersonalBoard().getWarehouse().addResourcesToDepot(3,ResourceType.servant,2);
         TakeResourcesFromMarketMessage takeResourcesFromMarketMessage = new TakeResourcesFromMarketMessage();
-        takeResourcesFromMarketMessage.setPlayerChoice(MarketChoice.ROW, 2);
+        int index = 2;
+        takeResourcesFromMarketMessage.setPlayerChoice(MarketChoice.ROW, index);
         multiPlayerMode.getTurn().getPlayer().getLeaderCards().clear();
         multiPlayerMode.getTurn().getPlayer().getLeaderCards().add(new LeaderCard(new LeaderEffect(Effect.CMARBLE,ResourceType.shield),null,null,0));
         multiPlayerMode.getTurn().getPlayer().getLeaderCards().add(new LeaderCard(new LeaderEffect(Effect.CMARBLE,ResourceType.coin),null,null,0));
         multiPlayerMode.getTurn().getPlayer().getLeaderCards().get(0).setIsActive();
         multiPlayerMode.getTurn().getPlayer().getLeaderCards().get(1).setIsActive();
-        marbles = multiPlayerMode.getMarketTray().peekMarbles(MarketChoice.ROW, 2);
+        marbles = multiPlayerMode.getMarketTray().peekMarbles(MarketChoice.ROW, index-1);
         List<Integer> effects = new ArrayList<>();
         for(Marble m: marbles)
         {
