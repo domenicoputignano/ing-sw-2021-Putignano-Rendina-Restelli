@@ -59,7 +59,9 @@ public class GameController {
             if(message.isValidMessage()) {
                 sender.getPlayer().performInitialLeaderChoice(model,message.getLeader1ToDiscard(), message.getLeader2ToDiscard());
                 receivedChoiceMessage.getAndIncrement();
-                checkAllLeaderChoicesDone(receivedChoiceMessage);
+                if(checkAllLeaderChoicesDone(receivedChoiceMessage)) {
+                    notifyAll();
+                }
             } else {
                 sender.sendError(new InvalidMessageError(sender.getPlayer().getUser()));
             }
@@ -68,12 +70,13 @@ public class GameController {
         }
     }
 
-    private void checkAllLeaderChoicesDone(AtomicInteger leaderChoicesDone) {
+    private boolean checkAllLeaderChoicesDone(AtomicInteger leaderChoicesDone) {
         if(leaderChoicesDone.get() == model.getNumOfPlayers()){
             model.nextState(GameState.RESOURCECHOICE);
             receivedChoiceMessage.set(0);
-            notifyAll();
+            return true;
         }
+        return false;
     }
 
     private void checkAllResourceChoiceDone(AtomicInteger resourceChoiceDone) {
