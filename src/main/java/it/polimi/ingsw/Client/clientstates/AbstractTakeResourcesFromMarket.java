@@ -1,10 +1,8 @@
 package it.polimi.ingsw.Client.clientstates;
 
-import it.polimi.ingsw.Client.ReducedMarble;
+import it.polimi.ingsw.Client.reducedmodel.ReducedMarble;
 import it.polimi.ingsw.Client.clientstates.cli.TakeResourcesFromMarketCLI;
 import it.polimi.ingsw.Commons.Effect;
-import it.polimi.ingsw.Commons.LeaderCard;
-import it.polimi.ingsw.Commons.LeaderEffect;
 import it.polimi.ingsw.Commons.ResourceType;
 import it.polimi.ingsw.Network.Client;
 import it.polimi.ingsw.Utils.Messages.ClientMessages.TakeResourcesFromMarketMessage;

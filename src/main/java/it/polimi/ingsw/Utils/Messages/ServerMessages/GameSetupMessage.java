@@ -2,7 +2,7 @@ package it.polimi.ingsw.Utils.Messages.ServerMessages;
 
 
 import it.polimi.ingsw.Client.ClientStatesController;
-import it.polimi.ingsw.Client.ReducedGame;
+import it.polimi.ingsw.Client.reducedmodel.ReducedGame;
 import it.polimi.ingsw.Network.Client;
 
 

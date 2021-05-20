@@ -1,11 +1,10 @@
 package it.polimi.ingsw.Model.SoloMode;
 
-import it.polimi.ingsw.Client.ReducedMarble;
+import it.polimi.ingsw.Client.reducedmodel.ReducedMarble;
 import it.polimi.ingsw.Commons.*;
 import it.polimi.ingsw.Exceptions.*;
 import it.polimi.ingsw.Model.*;
 import it.polimi.ingsw.Model.MarketTray.Marble;
-import it.polimi.ingsw.Model.MarketTray.WhiteMarble;
 import it.polimi.ingsw.Utils.MarbleDestination;
 import it.polimi.ingsw.Utils.MarketChoice;
 import it.polimi.ingsw.Utils.Messages.ClientMessages.*;

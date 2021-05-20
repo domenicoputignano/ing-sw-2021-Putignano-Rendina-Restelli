@@ -1,5 +1,6 @@
-package it.polimi.ingsw.Client;
+package it.polimi.ingsw.Client.reducedmodel;
 
+import it.polimi.ingsw.Client.reducedmodel.ReducedPersonalBoard;
 import it.polimi.ingsw.Commons.Effect;
 import it.polimi.ingsw.Commons.LeaderCard;
 import it.polimi.ingsw.Commons.User;

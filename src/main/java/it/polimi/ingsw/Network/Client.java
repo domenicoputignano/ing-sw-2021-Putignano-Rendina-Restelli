@@ -1,6 +1,6 @@
 package it.polimi.ingsw.Network;
 
-import it.polimi.ingsw.Client.ReducedGame;
+import it.polimi.ingsw.Client.reducedmodel.ReducedGame;
 import it.polimi.ingsw.Client.view.CLI;
 import it.polimi.ingsw.Client.view.UI;
 import it.polimi.ingsw.Commons.User;

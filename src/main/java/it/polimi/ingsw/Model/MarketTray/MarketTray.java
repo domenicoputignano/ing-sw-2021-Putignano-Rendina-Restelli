@@ -1,7 +1,7 @@
 package it.polimi.ingsw.Model.MarketTray;
 
-import it.polimi.ingsw.Client.ReducedMarble;
-import it.polimi.ingsw.Client.ReducedMarketTray;
+import it.polimi.ingsw.Client.reducedmodel.ReducedMarble;
+import it.polimi.ingsw.Client.reducedmodel.ReducedMarketTray;
 import it.polimi.ingsw.Commons.ColorMarble;
 import it.polimi.ingsw.Commons.ResourceType;
 import it.polimi.ingsw.Utils.MarketChoice;

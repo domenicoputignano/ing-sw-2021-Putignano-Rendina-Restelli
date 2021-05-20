@@ -1,6 +1,7 @@
 package it.polimi.ingsw.Client;
 
 
+import it.polimi.ingsw.Client.reducedmodel.ReducedPersonalBoard;
 import it.polimi.ingsw.Commons.ResourceType;
 import java.util.Map;
 

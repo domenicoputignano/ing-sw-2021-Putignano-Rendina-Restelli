@@ -1,6 +1,5 @@
 package it.polimi.ingsw.Client.clientstates.cli;
 
-import it.polimi.ingsw.Client.ReducedPlayer;
 import it.polimi.ingsw.Client.clientstates.AbstractLeaderAction;
 import it.polimi.ingsw.Client.view.CLI;
 import it.polimi.ingsw.Network.Client;

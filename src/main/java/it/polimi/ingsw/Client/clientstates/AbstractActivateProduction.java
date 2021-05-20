@@ -1,7 +1,7 @@
 package it.polimi.ingsw.Client.clientstates;
 
 import it.polimi.ingsw.Client.Checker;
-import it.polimi.ingsw.Client.ReducedPersonalBoard;
+import it.polimi.ingsw.Client.reducedmodel.ReducedPersonalBoard;
 import it.polimi.ingsw.Client.clientstates.cli.ActivateProductionCLI;
 import it.polimi.ingsw.Commons.Effect;
 import it.polimi.ingsw.Commons.ResourceType;

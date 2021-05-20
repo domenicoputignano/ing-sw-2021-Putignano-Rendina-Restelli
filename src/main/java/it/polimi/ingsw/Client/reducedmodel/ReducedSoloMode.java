@@ -1,5 +1,8 @@
-package it.polimi.ingsw.Client;
+package it.polimi.ingsw.Client.reducedmodel;
 
+import it.polimi.ingsw.Client.reducedmodel.ReducedGame;
+import it.polimi.ingsw.Client.reducedmodel.ReducedMarketTray;
+import it.polimi.ingsw.Client.reducedmodel.ReducedPlayer;
 import it.polimi.ingsw.Commons.Deck;
 import it.polimi.ingsw.Model.SoloMode.Token;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.Updates.NewTurnUpdate;

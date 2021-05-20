@@ -1,5 +1,7 @@
-package it.polimi.ingsw.Client;
+package it.polimi.ingsw.Client.reducedmodel;
 
+import it.polimi.ingsw.Client.reducedmodel.ReducedDepot;
+import it.polimi.ingsw.Client.reducedmodel.ReducedStrongbox;
 import it.polimi.ingsw.Commons.ResourceType;
 
 import java.io.Serializable;

@@ -1,4 +1,4 @@
-package it.polimi.ingsw.Client;
+package it.polimi.ingsw.Client.reducedmodel;
 
 import it.polimi.ingsw.Utils.MarketChoice;
 

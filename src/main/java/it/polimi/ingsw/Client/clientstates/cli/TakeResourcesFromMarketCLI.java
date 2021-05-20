@@ -1,6 +1,6 @@
 package it.polimi.ingsw.Client.clientstates.cli;
 
-import it.polimi.ingsw.Client.ReducedMarble;
+import it.polimi.ingsw.Client.reducedmodel.ReducedMarble;
 import it.polimi.ingsw.Client.clientstates.AbstractTakeResourcesFromMarket;
 import it.polimi.ingsw.Client.view.CLI;
 import it.polimi.ingsw.Commons.ColorMarble;

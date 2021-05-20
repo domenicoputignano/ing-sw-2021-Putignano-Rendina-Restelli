@@ -1,9 +1,8 @@
 package it.polimi.ingsw.Utils.Messages.ServerMessages.Updates;
 
-import it.polimi.ingsw.Client.ReducedPersonalBoard;
+import it.polimi.ingsw.Client.reducedmodel.ReducedPersonalBoard;
 import it.polimi.ingsw.Commons.LeaderCard;
 import it.polimi.ingsw.Commons.User;
-import it.polimi.ingsw.Model.LeaderAction;
 import it.polimi.ingsw.Network.Client;
 
 public class LeaderActionUpdate extends UpdateMessage {

@@ -1,10 +1,9 @@
 package it.polimi.ingsw.Client.clientstates;
 
 import it.polimi.ingsw.Client.Checker;
-import it.polimi.ingsw.Client.ReducedPlayer;
+import it.polimi.ingsw.Client.reducedmodel.ReducedPlayer;
 import it.polimi.ingsw.Client.clientstates.cli.BuyDevCardCLI;
 import it.polimi.ingsw.Commons.*;
-import it.polimi.ingsw.Model.BuyDevCard;
 import it.polimi.ingsw.Network.Client;
 import it.polimi.ingsw.Utils.Messages.ClientMessages.BuyDevCardMessage;
 

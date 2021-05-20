@@ -1,7 +1,7 @@
 package it.polimi.ingsw.Model;
 
-import it.polimi.ingsw.Client.ReducedPersonalBoard;
-import it.polimi.ingsw.Client.ReducedPlayer;
+import it.polimi.ingsw.Client.reducedmodel.ReducedPersonalBoard;
+import it.polimi.ingsw.Client.reducedmodel.ReducedPlayer;
 import it.polimi.ingsw.Commons.*;
 import it.polimi.ingsw.Exceptions.DepotOutOfBoundsException;
 import it.polimi.ingsw.Exceptions.IncompatibleResourceTypeException;

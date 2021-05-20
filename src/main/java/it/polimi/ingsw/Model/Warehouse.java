@@ -1,8 +1,8 @@
 package it.polimi.ingsw.Model;
 
-import it.polimi.ingsw.Client.ReducedDepot;
-import it.polimi.ingsw.Client.ReducedStrongbox;
-import it.polimi.ingsw.Client.ReducedWarehouse;
+import it.polimi.ingsw.Client.reducedmodel.ReducedDepot;
+import it.polimi.ingsw.Client.reducedmodel.ReducedStrongbox;
+import it.polimi.ingsw.Client.reducedmodel.ReducedWarehouse;
 import it.polimi.ingsw.Commons.ResourceType;
 import it.polimi.ingsw.Exceptions.DepotNotFoundException;
 import it.polimi.ingsw.Exceptions.DepotOutOfBoundsException;

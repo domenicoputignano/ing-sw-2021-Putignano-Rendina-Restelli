@@ -1,8 +1,8 @@
 package it.polimi.ingsw.Model;
 
-import it.polimi.ingsw.Client.ReducedMarketTray;
-import it.polimi.ingsw.Client.ReducedMultiPlayerMode;
-import it.polimi.ingsw.Client.ReducedPlayer;
+import it.polimi.ingsw.Client.reducedmodel.ReducedMarketTray;
+import it.polimi.ingsw.Client.reducedmodel.ReducedMultiPlayerMode;
+import it.polimi.ingsw.Client.reducedmodel.ReducedPlayer;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.GameSetupMessage;
 
 import java.util.*;

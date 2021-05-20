@@ -1,7 +1,6 @@
 package it.polimi.ingsw.Utils.Messages.ServerMessages.Updates;
 
-import it.polimi.ingsw.Client.ClientStatesController;
-import it.polimi.ingsw.Client.ReducedPersonalBoard;
+import it.polimi.ingsw.Client.reducedmodel.ReducedPersonalBoard;
 import it.polimi.ingsw.Commons.User;
 import it.polimi.ingsw.Network.Client;
 

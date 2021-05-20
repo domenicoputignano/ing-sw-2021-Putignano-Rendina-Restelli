@@ -1,7 +1,7 @@
 package it.polimi.ingsw.Model;
 
 
-import it.polimi.ingsw.Client.ReducedFaithTrack;
+import it.polimi.ingsw.Client.reducedmodel.ReducedFaithTrack;
 import it.polimi.ingsw.Commons.StateFavorTiles;
 import it.polimi.ingsw.Observable;
 

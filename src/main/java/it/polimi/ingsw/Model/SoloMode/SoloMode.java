@@ -1,13 +1,12 @@
 package it.polimi.ingsw.Model.SoloMode;
 
-import it.polimi.ingsw.Client.ReducedGame;
-import it.polimi.ingsw.Client.ReducedMarketTray;
-import it.polimi.ingsw.Client.ReducedPlayer;
-import it.polimi.ingsw.Client.ReducedSoloMode;
+import it.polimi.ingsw.Client.reducedmodel.ReducedGame;
+import it.polimi.ingsw.Client.reducedmodel.ReducedMarketTray;
+import it.polimi.ingsw.Client.reducedmodel.ReducedPlayer;
+import it.polimi.ingsw.Client.reducedmodel.ReducedSoloMode;
 import it.polimi.ingsw.Exceptions.EndGameException;
 import it.polimi.ingsw.Model.Game;
 import it.polimi.ingsw.Model.GameState;
-import it.polimi.ingsw.Model.MultiPlayerMode;
 import it.polimi.ingsw.Model.Player;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.GameSetupMessage;
 
