@@ -166,7 +166,7 @@ class TakeResourcesFromMarketTest {
         }
     }
 
-    @RepeatedTest(5)
+    @RepeatedTest(10)
     void handlePositioning() throws DepotOutOfBoundsException, IncompatibleResourceTypeException, InvalidActionException, WhiteEffectMismatchException, NeedPositioningException {
         List<Marble> marbles;
         multiPlayerMode.getTurn().getPlayer().getPersonalBoard().getWarehouse().addResourcesToDepot(1,ResourceType.coin,1);

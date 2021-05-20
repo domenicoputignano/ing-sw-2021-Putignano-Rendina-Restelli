@@ -15,12 +15,14 @@ import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class CLI extends UI {
 
 
     private final Scanner input = new Scanner(System.in);
-
+    private final ExecutorService interactionManagerService = Executors.newCachedThreadPool();
 
     public CLI(Client client) {
         super(client);
@@ -155,7 +157,7 @@ public class CLI extends UI {
         if(isReceiverAction(message.getCurrentUser())) {
             System.out.println("It's now your turn, make the move ");
         } else {
-            System.out.printf("It's %s's turn, please wait \n", message.getCurrentUser());
+            System.out.printf("It's %s's turn, please wait\n", message.getCurrentUser());
         }
     }
     public void render(TakeResourcesFromMarketUpdate message) {
@@ -186,7 +188,7 @@ public class CLI extends UI {
 
     @Override
     public void manageUserInteraction() {
-        clientState.manageUserInteraction();
+        interactionManagerService.submit(() -> clientState.manageUserInteraction());
     }
 
     public ResourceType fromStringToResourceType(String resource) {
@@ -269,4 +271,5 @@ public class CLI extends UI {
     public void changeClientState(AbstractClientState newClientState) {
         clientState = newClientState;
     }
+
 }

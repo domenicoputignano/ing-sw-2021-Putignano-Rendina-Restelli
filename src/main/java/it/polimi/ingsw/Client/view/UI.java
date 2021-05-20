@@ -48,4 +48,7 @@ public abstract class UI {
         return sender.equals(client.getUser());
     }
 
+    public AbstractClientState getClientState() {
+        return clientState;
+    }
 }

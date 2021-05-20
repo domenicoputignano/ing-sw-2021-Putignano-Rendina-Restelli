@@ -50,6 +50,9 @@ public class ClientStatesController {
                     ui.changeClientState(new InitialResourceChoiceCLI(ui.getClient()));
                     ui.manageUserInteraction();
                 } else {
+                    System.out.println("Waiting for players that are choosing initial resources..");
+                    ui.changeClientState(new WaitForTurnCLI(ui.getClient()));
+                    ui.manageUserInteraction();
                     //TODO settare il client in attesa del completamento della configurazione
                 }
             } else {
@@ -71,15 +74,19 @@ public class ClientStatesController {
     }
 
     public static void updateClientState(NewTurnUpdate message, UI ui) {
-
         if(ui.isReceiverAction(message.getCurrentUser())) {
             if(ui.isCLI()) {
+                WaitForTurnCLI state = (WaitForTurnCLI) ui.getClientState();
+                state.setInTurn();
                 ui.changeClientState(new ActionChoiceCLI(ui.getClient()));
                 ui.manageUserInteraction();
             }
         }
         else {
-            //TODO mandare il client in uno stato di attesa
+            if(ui.isCLI()) {
+                ui.changeClientState(new WaitForTurnCLI(ui.getClient()));
+                ui.manageUserInteraction();
+            }
         }
     }
 
