@@ -4,6 +4,7 @@ import it.polimi.ingsw.Client.clientstates.AbstractMoveResources;
 import it.polimi.ingsw.Client.view.CLI;
 import it.polimi.ingsw.Network.Client;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.ServerMessage;
+import it.polimi.ingsw.Utils.MoveFromExtraToNormalAction;
 import it.polimi.ingsw.Utils.MoveFromNormalToExtraAction;
 import it.polimi.ingsw.Utils.MoveFromNormalToNormalAction;
 
@@ -40,7 +41,10 @@ public class MoveResourcesCLI extends AbstractMoveResources {
 
     private void parseSourceDestinationChoice(String choice) {
         switch(choice) {
-            case "DEPOT,DEPOT": manageMoveFromNormalToNormalDepot();
+            case "DEPOT,DEPOT": {
+                manageMoveFromNormalToNormalDepot();
+                break;
+            }
             case "DEPOT,EXTRADEPOT": {
                 if(getNumOfExtraDepots() == 0) {
                     System.out.println("You can't move resources to an extradepot because you don't have one.");
@@ -50,8 +54,19 @@ public class MoveResourcesCLI extends AbstractMoveResources {
                 } else {
                     manageMoveFromNormalToExtraDepot(true);
                 }
-            };
-            case "EXTRADEPOT, DEPOT": ;
+                break;
+            }
+            case "EXTRADEPOT, DEPOT": {
+                if(getNumOfExtraDepots() == 0) {
+                    System.out.println("You can't move resources to an extradepot because you don't have one.");
+                    cli.returnToActionChoice();
+                } else if(getNumOfExtraDepots() == 1) {
+                    manageMoveFromExtraToNormalDepot(false);
+                } else {
+                    manageMoveFromExtraToNormalDepot(true);
+                }
+                break;
+            }
         }
     }
 
@@ -76,7 +91,25 @@ public class MoveResourcesCLI extends AbstractMoveResources {
             System.out.println("You have only one extra depot active so it will be the destination of your move action");
             extraDepotIndex = 1;
         }
+        System.out.println("How many resources do you want to move? [1-2]");
         int occ = cli.askValidOcc(input, 2);
         messageToSend.setMoveAction(new MoveFromNormalToExtraAction(depotIndexSource, occ, extraDepotIndex));
+    }
+
+    private void manageMoveFromExtraToNormalDepot(boolean canChooseExtraDepotIndex) {
+        System.out.println("You chose to move resources from an extra depot to a normal one");
+        int extraDepotIndex;
+        if(canChooseExtraDepotIndex) {
+            System.out.println("Choose the index of the extraDepot source: [1-2]");
+            extraDepotIndex = cli.askValidDepotIndex(input, 2);
+        } else {
+            System.out.println("You have only one extra depot active so it will be the source of your move action");
+            extraDepotIndex = 1;
+        }
+        System.out.println("Choose the index of the depot destination: [1-3]");
+        int depotIndexDestination = cli.askValidDepotIndex(input, 3);
+        System.out.println("How many resources do you want to move? [1-2]");
+        int occ = cli.askValidOcc(input, 2);
+        messageToSend.setMoveAction(new MoveFromExtraToNormalAction(extraDepotIndex, occ, depotIndexDestination));
     }
 }

@@ -45,7 +45,9 @@ public class ActionChoiceCLI extends AbstractActionChoice {
                 break;
             }
             case "M" : {
-
+                cli.changeClientState(new MoveResourcesCLI(client));
+                cli.manageUserInteraction();
+                break;
             }
             //TODO inserito solo per non dimenticarci
             default: break;
