@@ -20,7 +20,7 @@ public class ActionChoiceCLI extends AbstractActionChoice {
 
     @Override
     public void render(ServerMessage message) {
-        System.out.println("It's now your turn: ");
+        System.out.println("It's now your turn ");
     }
 
     public void manageUserInteraction() {

@@ -1,22 +1,22 @@
 package it.polimi.ingsw.Client.clientstates.cli;
 
 import it.polimi.ingsw.Client.clientstates.AbstractClientState;
-import it.polimi.ingsw.Client.clientstates.AbstractWaitForTurn;
+import it.polimi.ingsw.Client.clientstates.AbstractLobby;
 import it.polimi.ingsw.Client.view.CLI;
 import it.polimi.ingsw.Network.Client;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.ServerMessage;
 
 import java.util.Scanner;
 
-public class WaitForTurnCLI extends AbstractWaitForTurn {
+public class LobbyCLI extends AbstractLobby {
 
     private final CLI cli;
+    private Thread waiterThread;
     private Scanner input = new Scanner(System.in);
-    private Thread thread;
 
-    public WaitForTurnCLI(Client client) {
+    protected LobbyCLI(Client client) {
         super(client);
-        this.cli = (CLI) client.getUI();
+        cli = (CLI)client.getUI();
     }
 
     @Override
@@ -36,22 +36,18 @@ public class WaitForTurnCLI extends AbstractWaitForTurn {
 
     @Override
     public void manageUserInteraction() {
-        thread = new Thread(()-> {
-            while(!thread.isInterrupted()){
-                if(!client.getGame().getCurrPlayer().equals(client.getGame().getPlayer(client.getUser()))){
-                    String input = this.input.next();
-                    if(!input.isEmpty()) System.out.println("It's not your turn, please wait..");
-                }
-            }
+        waiterThread = new Thread(() -> {
+           while(!waiterThread.isInterrupted()) {
+               if(input.hasNext()) {
+                   input.next();
+                   System.out.println("You are in lobby, you can't type anything ");
+               }
+           }
         });
-        thread.start();
+        waiterThread.start();
     }
 
     public void shutDownWaiterThread() {
-        thread.interrupt();
+        waiterThread.interrupt();
     }
-
-
-
-
 }

@@ -38,31 +38,29 @@ public class InitialLeaderChoiceCLI extends AbstractInitialLeaderChoice {
         System.out.println("Choose index of the first leader card you want to discard: ");
         do {
             leaderCard1Index = input.nextInt();
-            if(leaderCard1Index < 1 || leaderCard1Index > 4) {
+            if (leaderCard1Index < 1 || leaderCard1Index > 4) {
                 System.out.println("Invalid index, try again ");
             } else {
                 this.leaderCard1Index = leaderCard1Index;
                 selectionDone = true;
             }
-        } while(!selectionDone);
+        } while (!selectionDone);
         selectionDone = false;
         System.out.println("Choose index of the second leader card you want to discard: ");
         do {
             leaderCard2Index = input.nextInt();
-            if(leaderCard2Index < 1 || leaderCard2Index > 4) {
+            if (leaderCard2Index < 1 || leaderCard2Index > 4) {
                 System.out.println("Invalid index, try again ");
             } else {
-                if(leaderCard2Index == this.leaderCard1Index) {
+                if (leaderCard2Index == this.leaderCard1Index) {
                     System.out.println("Index already selected, try again ");
-                }
-                else {
+                } else {
                     this.leaderCard2Index = leaderCard1Index;
                     selectionDone = true;
                 }
             }
-        } while(!selectionDone);
+        } while (!selectionDone);
         this.leaderCard2Index = leaderCard2Index;
     }
-
 
 }

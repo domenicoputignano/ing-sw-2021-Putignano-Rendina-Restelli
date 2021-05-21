@@ -65,7 +65,7 @@ public class CLI extends UI {
                 howToTakeResources.get(source).merge(resource, number, Integer::sum);
             } else howToTakeResources.get(source).put(resource, number);
             neededResources.put(resource, neededResources.get(resource) - number);
-        } while(neededResources.values().stream().allMatch(x -> x==0));
+        } while(!neededResources.values().stream().allMatch(x -> x==0));
         return howToTakeResources;
     }
 

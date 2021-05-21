@@ -6,6 +6,7 @@ import it.polimi.ingsw.Network.Client;
 import it.polimi.ingsw.Utils.Messages.ClientMessages.NumOfPlayerChoiceMessage;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.ServerMessage;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 public class NumOfPlayersChoiceCLI extends AbstractNumOfPlayersChoice {
@@ -26,11 +27,16 @@ public class NumOfPlayersChoiceCLI extends AbstractNumOfPlayersChoice {
         int numOfPlayers;
         do {
             numOfPlayers = input.nextInt();
-            if(numOfPlayers < 1 || numOfPlayers > 4) {
+            if (numOfPlayers < 1 || numOfPlayers > 4) {
                 System.out.println("Number of players selected not valid, please choose again ");
             }
-        } while(numOfPlayers < 1 || numOfPlayers > 4);
+        } while (numOfPlayers < 1 || numOfPlayers > 4);
         messageToSend = new NumOfPlayerChoiceMessage(numOfPlayers);
         client.sendMessage(messageToSend);
+
+        //TODO PROVA
+        client.getUI().changeClientState(new LobbyCLI(client));
+        client.getUI().getClientState().manageUserInteraction();
+
     }
 }

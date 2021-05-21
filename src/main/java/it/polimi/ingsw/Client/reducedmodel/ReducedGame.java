@@ -22,6 +22,7 @@ public abstract class ReducedGame implements Serializable {
         this.decks = decks;
         this.marketTray = marketTray;
         this.isSoloMode = isSoloMode;
+        this.currPlayer = players.get(0);
     }
 
 

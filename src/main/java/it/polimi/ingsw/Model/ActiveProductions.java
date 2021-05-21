@@ -1,6 +1,8 @@
 package it.polimi.ingsw.Model;
 
-public class ActiveProductions {
+import java.io.Serializable;
+
+public class ActiveProductions implements Serializable {
     private boolean slot1;
     private boolean slot2;
     private boolean slot3;
