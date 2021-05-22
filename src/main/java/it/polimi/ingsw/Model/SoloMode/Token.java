@@ -1,7 +1,5 @@
 package it.polimi.ingsw.Model.SoloMode;
 
-import it.polimi.ingsw.Exceptions.EndGameException;
-
 import java.io.Serializable;
 
 public class Token implements Serializable {
@@ -11,7 +9,7 @@ public class Token implements Serializable {
         this.tokenEffect = tokenEffect;
     }
 
-    public void performEffect(LorenzoIlMagnifico lorenzoIlMagnifico) throws EndGameException {
+    public void performEffect(LorenzoIlMagnifico lorenzoIlMagnifico) {
         tokenEffect.performTokenEffect(lorenzoIlMagnifico);
     }
 

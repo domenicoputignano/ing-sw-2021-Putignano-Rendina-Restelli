@@ -5,10 +5,7 @@ import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
 import it.polimi.ingsw.Client.reducedmodel.ReducedGame;
 import it.polimi.ingsw.Commons.*;
-import it.polimi.ingsw.Model.ConclusionEvents.BlackCrossHitLastSpace;
-import it.polimi.ingsw.Model.ConclusionEvents.DevCardColorEnded;
-import it.polimi.ingsw.Model.ConclusionEvents.HitLastSpace;
-import it.polimi.ingsw.Model.ConclusionEvents.SeventhDevCardBought;
+import it.polimi.ingsw.Model.ConclusionEvents.*;
 import it.polimi.ingsw.Model.MarketTray.MarketTray;
 import it.polimi.ingsw.Observable;
 import it.polimi.ingsw.Observer;
@@ -24,7 +21,7 @@ import java.lang.reflect.Type;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public abstract class Game extends Observable<ServerMessage> implements Observer<Integer> {
+public abstract class Game extends Observable<ServerMessage> implements Observer<GameEvent> {
     protected Player inkwell;
     protected Player currPlayer;
     protected List<Player> playerList;
@@ -35,8 +32,7 @@ public abstract class Game extends Observable<ServerMessage> implements Observer
     protected MarketTray marketTray;
     private Random rand = new Random();
 
-    public void setup()
-    {
+    public void setup(){
         this.marketTray = new MarketTray();
         this.users = new HashMap<User, Player>();
         this.initializeDecksDevCards();
@@ -46,8 +42,9 @@ public abstract class Game extends Observable<ServerMessage> implements Observer
             users.put(p.getUser(), p);
             /*aggiungo MultiPlayerMode alla lista di Observer di faithtrack per la vatican report section*/
             p.getPersonalBoard().getFaithTrack().addObserver(this);
-            if (p.getPosition() == 3 || p.getPosition() == 4)
+            if (p.getPosition() == 3 || p.getPosition() == 4) {
                 p.getPersonalBoard().getFaithTrack().moveMarker(1);
+            }
         }
         this.turn = new Turn(this,inkwell);
         //DISTRIBUZIONE RISORSE A SCELTA E SCELTA CARTE LEADER PASSANDO IN RESOURCECHOICE E LEADER CHOICE
@@ -111,7 +108,7 @@ public abstract class Game extends Observable<ServerMessage> implements Observer
     }
 
 
-    private void activateVaticanReport(int vatican_index) {
+    public void activateVaticanReport(int vatican_index) {
         int start = currPlayer.getPersonalBoard().getFaithTrack().getSections()[vatican_index].getStartSpace();
 
         for(Player p: playerList)
@@ -141,8 +138,8 @@ public abstract class Game extends Observable<ServerMessage> implements Observer
     public void endGame(BlackCrossHitLastSpace event){};
 
     @Override
-    public void update(Integer message) {
-        activateVaticanReport(message);
+    public void update(GameEvent event) {
+        event.handleEvent(this);
     }
 
     public Player getCurrPlayer() {
@@ -159,7 +156,7 @@ public abstract class Game extends Observable<ServerMessage> implements Observer
     }
 
 
-    //TODO handleConclusion method
+    //TODO handleEvent method
 
     public void setTurn(Turn turn) {
         this.turn = turn;

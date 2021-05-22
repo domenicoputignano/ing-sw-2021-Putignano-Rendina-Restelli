@@ -32,7 +32,7 @@ class LeaderActionTest {
         }
     }
     @Test
-    void leaderActionDiscardLeaderCard() throws InvalidActionException, LeaderStatusException, LeaderRequirementsException {
+    void leaderActionDiscardLeaderCard() throws InvalidActionException, LeaderStatusException, LeaderRequirementsException{
         LeaderActionMessage leaderActionMessage = new LeaderActionMessage();
         leaderActionMessage.setIndex(1);
         leaderActionMessage.setToDiscard(true);

@@ -49,7 +49,7 @@ class SoloModeTest {
     }
 
     @Test
-    void lorenzoPlaysBaseCase() throws EndGameException {
+    void lorenzoPlaysBaseCase() {
         playerList.add(new Player("Pippo"));
         SoloMode game = new SoloMode(playerList.get(0));
         game.setup();
@@ -78,7 +78,7 @@ class SoloModeTest {
     }
 
     @Test
-    void lorenzoPlaysEndGameCase() throws EndGameException {
+    void lorenzoPlaysEndGameCase() {
         playerList.add(new Player("Pippo"));
         SoloMode game = new SoloMode(playerList.get(0));
         game.setup();
@@ -123,7 +123,7 @@ class SoloModeTest {
     }
 
     @RepeatedTest(1)
-    void activateVaticanReportByLorenzoIlMagnifico() throws EndGameException {
+    void activateVaticanReportByLorenzoIlMagnifico() {
         playerList.add(new Player("Pippo"));
         SoloMode game = new SoloMode(playerList.get(0));
         game.setup();

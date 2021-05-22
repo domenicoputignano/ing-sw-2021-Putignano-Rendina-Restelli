@@ -1,16 +1,19 @@
 package it.polimi.ingsw.Model.SoloMode;
 
-import it.polimi.ingsw.Exceptions.EndGameException;
 import it.polimi.ingsw.Commons.ColorCard;
 import it.polimi.ingsw.Commons.Deck;
+import it.polimi.ingsw.Model.ConclusionEvents.BlackCrossHitLastSpace;
+import it.polimi.ingsw.Model.ConclusionEvents.ConclusionEvent;
 import it.polimi.ingsw.Model.ConclusionEvents.DevCardColorEnded;
+import it.polimi.ingsw.Model.ConclusionEvents.GameEvent;
 import it.polimi.ingsw.Model.FaithTrack;
+import it.polimi.ingsw.Observable;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-public class LorenzoIlMagnifico {
+public class LorenzoIlMagnifico extends Observable<GameEvent> {
     private int blackCross = 0;
     private int passedSection = 0;
     private final FaithTrack faithTrack;
@@ -20,9 +23,10 @@ public class LorenzoIlMagnifico {
     {
         this.faithTrack = faithTrack;
         this.soloGame = soloGame;
+        this.addObserver(this.soloGame);
     }
 
-    public void moveBlackCross(int pos) throws EndGameException {
+    public void moveBlackCross(int pos) {
         for(int i=0; i<pos; i++){
             this.blackCross++;
             if(faithTrack.isPopeSpace(passedSection,blackCross)){
@@ -32,12 +36,13 @@ public class LorenzoIlMagnifico {
                 if(passedSection < 2)// controllo se ho sorpassato la vaticanReportSection attuale
                     this.passedSection++;
             }
+            if(blackCross == 24)
+                notify(new BlackCrossHitLastSpace());
         }
     }
 
-    public void throwDevCards(ColorCard color) throws EndGameException
+    public void throwDevCards(ColorCard color)
     {
-        boolean toEndGame;
         for(int i=0;i<2;i++) {
                List<Deck> decksInvolved = this.soloGame.getDecks().stream().filter(x -> x.getCardType().getColor() == color).collect(Collectors.toList());
                Optional<Deck> deckInvolved = decksInvolved.stream().filter(x -> x.getCardType().getLevel()==1 && x.getSize()>0).findFirst();
@@ -53,7 +58,7 @@ public class LorenzoIlMagnifico {
                             if(deckInvolved.isPresent()) {
                                 deckInvolved.ifPresent(Deck::draw);
                                 if(this.soloGame.getDecks().stream().filter(x -> x.getCardType().getColor()==color).allMatch(x -> x.getSize()==0)) {
-                                    throw new EndGameException(new DevCardColorEnded(soloGame));
+                                    notify(new DevCardColorEnded());
                                 }
                             }
                        }
@@ -61,7 +66,7 @@ public class LorenzoIlMagnifico {
         }
     }
 
-    public void moveAndShuffle() throws EndGameException {
+    public void moveAndShuffle() {
         this.moveBlackCross(1);
         this.soloGame.refreshTokens();
     }

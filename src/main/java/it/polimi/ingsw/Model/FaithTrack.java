@@ -3,18 +3,21 @@ package it.polimi.ingsw.Model;
 
 import it.polimi.ingsw.Client.reducedmodel.ReducedFaithTrack;
 import it.polimi.ingsw.Commons.StateFavorTiles;
+import it.polimi.ingsw.Model.ConclusionEvents.ActivateVaticanReportEvent;
+import it.polimi.ingsw.Model.ConclusionEvents.GameEvent;
+import it.polimi.ingsw.Model.ConclusionEvents.HitLastSpace;
 import it.polimi.ingsw.Observable;
 
 import java.util.Arrays;
 
-public class FaithTrack extends Observable<Integer> {
+public class FaithTrack extends Observable<GameEvent> {
     private int faithMarker;
     private int passedSection;
     private final int victoryPoints[] = new int[25];
     private final VaticanReportSection[] sections = new VaticanReportSection[3];
 
 
-    public void moveMarker(int pos){
+    public void moveMarker(int pos) {
         for(int i=0; i<pos; i++){
             this.faithMarker++;
             if(sections[passedSection].isPopeSpace(this.faithMarker)){
@@ -24,6 +27,8 @@ public class FaithTrack extends Observable<Integer> {
                 if(passedSection < 2)// controllo se ho sorpassato la vaticanReportSection attuale
                    this.passedSection++;
             }
+            if(this.faithMarker == 24)
+                notify(new HitLastSpace());
         }
     }
 
@@ -42,7 +47,7 @@ public class FaithTrack extends Observable<Integer> {
     public void activeVaticanReport(int vatican_index) {
 
         if (this.sections[vatican_index].getState() == StateFavorTiles.FACEDOWN)
-            notify(vatican_index);
+            notify(new ActivateVaticanReportEvent(vatican_index));
     }
 
     public void setFavorTile(int index, StateFavorTiles state)

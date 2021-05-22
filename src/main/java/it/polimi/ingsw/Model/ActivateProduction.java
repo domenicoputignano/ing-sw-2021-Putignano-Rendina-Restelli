@@ -42,14 +42,15 @@ public class ActivateProduction implements AbstractTurnPhase {
                     playerWarehouse.addResourcesToStrongbox(outputResources);
                     turn.getPlayer().getPersonalBoard().getFaithTrack().moveMarker(faith);
                     turn.normalActionDone();
-                    turn.getGame().notifyUpdate(new ActivateProductionUpdate(turn.getPlayer().getUser(),
-                            turn.getPlayer().getReducedPersonalBoard(),
+                    turn.getGame().notifyUpdate(new ActivateProductionUpdate(turn.getPlayer().getUser(), turn.getPlayer().getReducedPersonalBoard(),
                             inputResources, outputResources, faith));
-                } catch (DepotOutOfBoundsException | DepotNotFoundException | StrongboxOutOfBoundException e) {
+                }
+                catch (DepotOutOfBoundsException | DepotNotFoundException | StrongboxOutOfBoundException e) {
                     LOGGER.log(Level.SEVERE, "Critical error detected: exception not expected thrown!");
                 }
             } else  throw new NotEnoughResourcesException();
         } else  throw new ResourceMismatchException();
+
     }
 
     private void calculateResources(Turn turn, ActiveProductions requestedProductions) {

@@ -5,11 +5,8 @@ import it.polimi.ingsw.Model.Game;
 
 public class DevCardColorEnded extends ConclusionEvent {
 
-    public DevCardColorEnded(Game game){
-        super(game);
-    }
-
-    public void handleConclusion(){
+    @Override
+    public void handleEvent(Game game){
         game.endGame(this);
     }
 }

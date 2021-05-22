@@ -1,6 +1,5 @@
 package it.polimi.ingsw.Model.SoloMode;
 
-import it.polimi.ingsw.Exceptions.EndGameException;
 import it.polimi.ingsw.Model.FaithTrack;
 import it.polimi.ingsw.Model.Player;
 import org.junit.jupiter.api.BeforeEach;
@@ -26,7 +25,7 @@ class LorenzoIlMagnificoTest {
     }
 
     @Test
-    void moveAndShuffle() throws EndGameException {
+    void moveAndShuffle() {
         Player player = new Player("Pippo");
         SoloMode game = new SoloMode(player);
         game.setup();

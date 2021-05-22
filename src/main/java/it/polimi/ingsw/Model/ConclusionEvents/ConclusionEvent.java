@@ -2,12 +2,10 @@ package it.polimi.ingsw.Model.ConclusionEvents;
 
 import it.polimi.ingsw.Model.Game;
 
-public abstract class ConclusionEvent {
-    Game game;
+public abstract class ConclusionEvent implements GameEvent {
 
-    protected ConclusionEvent(Game game){
-        this.game = game;
+    @Override
+    public void handleEvent(Game game){
+
     }
-
-    public void handleConclusion(){}
 }

@@ -5,11 +5,8 @@ import it.polimi.ingsw.Model.Game;
 
 public class BlackCrossHitLastSpace extends ConclusionEvent {
 
-    public BlackCrossHitLastSpace(Game game) {
-        super(game);
-    }
-
-    public void handleConclusion(){
+    @Override
+    public void handleEvent(Game game){
         game.endGame(this);
     }
 }

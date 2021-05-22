@@ -21,7 +21,7 @@ public interface AbstractTurnPhase {
     }
 
     default void concludeTurnPhase(Turn turn) {
-        //TODO turn.getGame().handleConclusion();
+        //TODO turn.getGame().handleEvent();
     }
 
 }

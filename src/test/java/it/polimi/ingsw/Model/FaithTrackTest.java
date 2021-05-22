@@ -30,7 +30,7 @@ class FaithTrackTest {
     }
 
     @Test
-    void calcVictoryPoints() {
+    void calcVictoryPoints(){
         faithTrack.moveMarker(22);
         assertEquals(16, faithTrack.calcVictoryPoints());
     }

@@ -4,7 +4,6 @@ import it.polimi.ingsw.Client.reducedmodel.ReducedGame;
 import it.polimi.ingsw.Client.reducedmodel.ReducedMarketTray;
 import it.polimi.ingsw.Client.reducedmodel.ReducedPlayer;
 import it.polimi.ingsw.Client.reducedmodel.ReducedSoloMode;
-import it.polimi.ingsw.Exceptions.EndGameException;
 import it.polimi.ingsw.Model.Game;
 import it.polimi.ingsw.Model.GameState;
 import it.polimi.ingsw.Model.Player;
@@ -58,11 +57,7 @@ public class SoloMode extends Game {
     }
 
     public void lorenzoPlays(){
-        try {
-            tokens.pop().performEffect(lorenzoIlMagnifico);
-        } catch(EndGameException e){
-            e.getConclusionEvent().handleConclusion();
-        }
+        tokens.pop().performEffect(lorenzoIlMagnifico);
     }
 
     public Token peekToken()
