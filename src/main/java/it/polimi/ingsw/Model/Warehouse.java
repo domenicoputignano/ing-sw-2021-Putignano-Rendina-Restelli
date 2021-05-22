@@ -60,8 +60,6 @@ public class Warehouse implements Cloneable {
         this.updateAvailableResources();
     }
 
-
-
     /* -1 perché gli indici dati dalla CLI partono da 1*/
     public void addResourcesToDepot(int depotIndex, ResourceType type, int num) throws DepotOutOfBoundsException, IncompatibleResourceTypeException {
         if(!isValidEditing(type,depotIndex))

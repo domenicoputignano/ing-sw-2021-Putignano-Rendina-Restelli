@@ -3,12 +3,14 @@ package it.polimi.ingsw.Model;
 import it.polimi.ingsw.Client.reducedmodel.ReducedMarketTray;
 import it.polimi.ingsw.Client.reducedmodel.ReducedMultiPlayerMode;
 import it.polimi.ingsw.Client.reducedmodel.ReducedPlayer;
+import it.polimi.ingsw.Commons.User;
 import it.polimi.ingsw.Model.ConclusionEvents.BlackCrossHitLastSpace;
 import it.polimi.ingsw.Model.ConclusionEvents.DevCardColorEnded;
 import it.polimi.ingsw.Model.ConclusionEvents.HitLastSpace;
 import it.polimi.ingsw.Model.ConclusionEvents.SeventhDevCardBought;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.GameSetupMessage;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.LastTurnMessage;
+import it.polimi.ingsw.Utils.Messages.ServerMessages.RankMessage;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -54,7 +56,7 @@ public class MultiPlayerMode extends Game {
 
     public void nextTurn(){
         if(isLastTurn && currPlayer.getPosition()==numOfPlayers) {
-            //TODO metodo che calcola i punti dei giocatori e termina la partita
+            concludeGame();
         }
         else{
             this.currPlayer = nextPlayer(this.currPlayer);
@@ -93,5 +95,16 @@ public class MultiPlayerMode extends Game {
         notify(new LastTurnMessage(this.currPlayer.getUser(),event));
     }
 
+    public void concludeGame()
+    {
+        Map<User,Integer> rank = new HashMap<>();
+        Map<User,Integer> sortedRank = new HashMap<>();
+        for(Player p: playerList)
+        {
+            rank.put(p.getUser(),p.calcVictoryPointsPlayer());
+        }
+        rank.entrySet().stream().sorted(Collections.reverseOrder(Map.Entry.comparingByValue())).forEach(x -> sortedRank.put(x.getKey(),x.getValue()));
+        notify(new RankMessage(sortedRank));
+    }
 }
 
