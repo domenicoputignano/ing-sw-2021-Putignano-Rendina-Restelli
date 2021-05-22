@@ -3,7 +3,12 @@ package it.polimi.ingsw.Model;
 import it.polimi.ingsw.Client.reducedmodel.ReducedMarketTray;
 import it.polimi.ingsw.Client.reducedmodel.ReducedMultiPlayerMode;
 import it.polimi.ingsw.Client.reducedmodel.ReducedPlayer;
+import it.polimi.ingsw.Model.ConclusionEvents.BlackCrossHitLastSpace;
+import it.polimi.ingsw.Model.ConclusionEvents.DevCardColorEnded;
+import it.polimi.ingsw.Model.ConclusionEvents.HitLastSpace;
+import it.polimi.ingsw.Model.ConclusionEvents.SeventhDevCardBought;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.GameSetupMessage;
+import it.polimi.ingsw.Utils.Messages.ServerMessages.LastTurnMessage;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -11,6 +16,7 @@ import java.util.stream.Collectors;
 public class MultiPlayerMode extends Game {
     private int numOfPlayers;
     private int receivedInitialMessages;
+    private boolean isLastTurn;
 
     public MultiPlayerMode(Player inkwell, List<Player> playerList, Player currPlayer, int numOfPlayers) {
         this.inkwell = inkwell;
@@ -68,6 +74,18 @@ public class MultiPlayerMode extends Game {
         List<ReducedPlayer> players = playerList.stream().map(Player::getReducedVersion).collect(Collectors.toList());
         ReducedMarketTray marketTray = this.marketTray.getReducedVersion();
         return new ReducedMultiPlayerMode(players, decks, marketTray);
+    }
+
+    @Override
+    public void endGame(HitLastSpace event){
+        isLastTurn = true;
+        notify(new LastTurnMessage(this.currPlayer.getUser(),event));
+    }
+
+    @Override
+    public void endGame(SeventhDevCardBought event){
+        isLastTurn = true;
+        notify(new LastTurnMessage(this.currPlayer.getUser(),event));
     }
 
 }

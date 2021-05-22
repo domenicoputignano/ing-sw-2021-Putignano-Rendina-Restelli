@@ -9,4 +9,10 @@ public class SeventhDevCardBought extends ConclusionEvent {
     public void handleEvent(Game game){
         game.endGame(this);
     }
+
+    @Override
+    public String eventTrigger()
+    {
+        return "Seventh Card has been bought.";
+    }
 }

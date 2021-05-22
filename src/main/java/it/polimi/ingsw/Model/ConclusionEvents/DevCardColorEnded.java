@@ -9,4 +9,10 @@ public class DevCardColorEnded extends ConclusionEvent {
     public void handleEvent(Game game){
         game.endGame(this);
     }
+
+    @Override
+    public String eventTrigger()
+    {
+        return "One development card color is ended.";
+    }
 }

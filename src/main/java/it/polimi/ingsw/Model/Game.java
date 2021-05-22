@@ -41,6 +41,7 @@ public abstract class Game extends Observable<ServerMessage> implements Observer
             p.setPosition(playerList.indexOf(p) + 1);
             users.put(p.getUser(), p);
             /*aggiungo MultiPlayerMode alla lista di Observer di faithtrack per la vatican report section*/
+            p.getPersonalBoard().addObserver(this);
             p.getPersonalBoard().getFaithTrack().addObserver(this);
             if (p.getPosition() == 3 || p.getPosition() == 4) {
                 p.getPersonalBoard().getFaithTrack().moveMarker(1);
@@ -129,13 +130,13 @@ public abstract class Game extends Observable<ServerMessage> implements Observer
         return this.decks.stream().anyMatch(x -> x.getCardType().equals(cardType) && x.getSize()<=0);
     }
 
-    public void endGame(HitLastSpace event){};
+    public abstract void endGame(HitLastSpace event);
 
-    public void endGame(DevCardColorEnded event){};
+    public void endGame(DevCardColorEnded event){}
 
-    public void endGame(SeventhDevCardBought event){};
+    public abstract void endGame(SeventhDevCardBought event);
 
-    public void endGame(BlackCrossHitLastSpace event){};
+    public void endGame(BlackCrossHitLastSpace event){}
 
     @Override
     public void update(GameEvent event) {

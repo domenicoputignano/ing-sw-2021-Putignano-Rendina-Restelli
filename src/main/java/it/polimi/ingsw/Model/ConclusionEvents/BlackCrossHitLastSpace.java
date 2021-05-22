@@ -9,4 +9,10 @@ public class BlackCrossHitLastSpace extends ConclusionEvent {
     public void handleEvent(Game game){
         game.endGame(this);
     }
+
+    @Override
+    public String eventTrigger()
+    {
+        return "Lorenzo il Magnifico hit last space.";
+    }
 }

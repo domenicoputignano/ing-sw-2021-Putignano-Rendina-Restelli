@@ -8,6 +8,9 @@ import it.polimi.ingsw.Commons.CardType;
 import it.polimi.ingsw.Commons.DevelopmentCard;
 import it.polimi.ingsw.Commons.Effect;
 import it.polimi.ingsw.Commons.LeaderCard;
+import it.polimi.ingsw.Model.ConclusionEvents.GameEvent;
+import it.polimi.ingsw.Model.ConclusionEvents.SeventhDevCardBought;
+import it.polimi.ingsw.Observable;
 import it.polimi.ingsw.Utils.Pair;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -15,7 +18,7 @@ import java.util.*;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.stream.Collectors;
 
-public class PersonalBoard {
+public class PersonalBoard extends Observable<GameEvent> {
     private Player owner;
     private Slot[] slots;
     private ProductionRule basicProductionPower;
@@ -40,8 +43,17 @@ public class PersonalBoard {
         else return null;
     }
 
-    public void putCardOnTop(DevelopmentCard developmentCard, int slot) { this.slots[slot - 1].putCardOnTop(developmentCard); }
+    public void putCardOnTop(DevelopmentCard developmentCard, int slot) {
+        this.slots[slot - 1].putCardOnTop(developmentCard);
+        if(isSeventhCard())
+            notify(new SeventhDevCardBought());
+    }
 
+    private boolean isSeventhCard()
+    {
+        if(Arrays.stream(slots).map(Slot::getNumOfStackedCards).reduce(0,Integer::sum).equals(7) ) return true;
+        else return false;
+    }
 
     public FaithTrack getFaithTrack() {
         return faithTrack;

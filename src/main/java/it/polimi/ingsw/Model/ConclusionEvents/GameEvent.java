@@ -2,7 +2,11 @@ package it.polimi.ingsw.Model.ConclusionEvents;
 
 import it.polimi.ingsw.Model.Game;
 
-public interface GameEvent {
+import java.io.Serializable;
+
+public interface GameEvent extends Serializable {
 
     public void handleEvent(Game game);
+
+    public String eventTrigger();
 }

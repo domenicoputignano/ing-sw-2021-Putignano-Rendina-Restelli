@@ -25,7 +25,6 @@ public class Player {
     private int position;
     private final PersonalBoard personalBoard;
     private final List<LeaderCard> leaderCards = new ArrayList<>();
-    private Game game;
 
     public Player(String username){
         this.user = new User(username);

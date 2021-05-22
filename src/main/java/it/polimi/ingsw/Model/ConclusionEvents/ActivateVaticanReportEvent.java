@@ -13,4 +13,10 @@ public class ActivateVaticanReportEvent implements GameEvent{
     public void handleEvent(Game game) {
         game.activateVaticanReport(vatican_index);
     }
+
+    @Override
+    public String eventTrigger()
+    {
+        return "Vatican Report on Section "+vatican_index+" has been activated.";
+    }
 }

@@ -9,4 +9,10 @@ public class HitLastSpace extends ConclusionEvent {
      public void handleEvent(Game game){
          game.endGame(this);
      }
+
+     @Override
+     public String eventTrigger()
+     {
+         return "Last space has been hit.";
+     }
 }
