@@ -36,18 +36,6 @@ public class MultiPlayerMode extends Game {
         this.currPlayer = inkwell;
         gameSetup();
     }
-    /*
-    public Player getWinner() {
-        //TODO
-        return null;
-    }
-
-    public int calcVictoryPoints() {
-        //TODO
-        return 1;
-
-    }*/
-
     private void gameSetup()
     {
         this.setup();
