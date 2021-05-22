@@ -1,6 +1,8 @@
 package it.polimi.ingsw.Model;
 
 import it.polimi.ingsw.Commons.*;
+import it.polimi.ingsw.Exceptions.DepotOutOfBoundsException;
+import it.polimi.ingsw.Exceptions.IncompatibleResourceTypeException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -117,5 +119,41 @@ class PlayerTest {
         expectedActiveEffects.add(toActive2.getLeaderEffect());
 
         assertEquals(expectedActiveEffects, player.getActiveEffects());
+    }
+
+    @Test
+    void calcVictoryPointsPlayer() throws DepotOutOfBoundsException, IncompatibleResourceTypeException {
+        Warehouse warehouse = player.getPersonalBoard().getWarehouse();
+        Map<ResourceType,Integer> startingresource = new EnumMap<ResourceType, Integer>(ResourceType.class);
+
+        warehouse.addResourcesToDepot(3, ResourceType.shield, 3);
+        warehouse.addResourcesToDepot(2, ResourceType.coin, 2);
+        warehouse.addResourcesToDepot(1, ResourceType.stone, 1);
+        startingresource.put(ResourceType.servant,2);
+        startingresource.put(ResourceType.coin,3);
+        startingresource.put(ResourceType.stone,4);
+        startingresource.put(ResourceType.shield,1);
+        warehouse.addResourcesToStrongbox(startingresource);//3 VP
+
+        player.getLeaderCards().get(0).setIsActive();//5 VP
+
+        player.getPersonalBoard().getFaithTrack().moveMarker(19);//12 VP
+
+        Map<ResourceType, Integer> cost = new EnumMap<ResourceType, Integer>(ResourceType.class);
+        cost.put(ResourceType.servant,0);
+        cost.put(ResourceType.coin,0);
+        cost.put(ResourceType.stone,0);
+        cost.put(ResourceType.shield,0);
+        player.getPersonalBoard().putCardOnTop(new DevelopmentCard(cost,1,ColorCard.blue,3,null),1);
+        player.getPersonalBoard().putCardOnTop(new DevelopmentCard(cost,2,ColorCard.yellow,5,null),1);
+        player.getPersonalBoard().putCardOnTop(new DevelopmentCard(cost,1,ColorCard.purple,2,null),2);
+        player.getPersonalBoard().putCardOnTop(new DevelopmentCard(cost,1,ColorCard.green,3,null),3);
+
+        player.getPersonalBoard().getFaithTrack().setFavorTile(0,StateFavorTiles.FACEUP);
+        player.getPersonalBoard().getFaithTrack().setFavorTile(1,StateFavorTiles.FACEUP);
+        //5 VP FAVOR TILES
+
+        assertEquals(38,player.calcVictoryPointsPlayer());
+
     }
 }

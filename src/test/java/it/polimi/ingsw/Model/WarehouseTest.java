@@ -184,6 +184,20 @@ class WarehouseTest {
     }
 
     @Test
+    void calcVictoryPointsWarehouse() throws DepotOutOfBoundsException, IncompatibleResourceTypeException {
+        warehouse.addResourcesToDepot(3, ResourceType.shield, 3);
+        warehouse.addResourcesToDepot(2, ResourceType.coin, 2);
+        warehouse.addResourcesToDepot(1, ResourceType.stone, 1);
+        startingresource.put(ResourceType.servant,2);
+        startingresource.put(ResourceType.coin,3);
+        startingresource.put(ResourceType.stone,4);
+        startingresource.put(ResourceType.shield,1);
+        warehouse.addResourcesToStrongbox(startingresource);
+        int victoryPoints = warehouse.calcVictoryPointsWarehouse();
+        assertEquals(3,victoryPoints);
+    }
+
+    @Test
     void checkIsValidEditing() {
 
     }
