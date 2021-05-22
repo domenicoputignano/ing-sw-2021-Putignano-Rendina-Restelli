@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 public class MultiPlayerMode extends Game {
     private int numOfPlayers;
     private int receivedInitialMessages;
-    private boolean isLastTurn;
+    private boolean isLastTurn = false;
 
     public MultiPlayerMode(Player inkwell, List<Player> playerList, Player currPlayer, int numOfPlayers) {
         this.inkwell = inkwell;
@@ -53,8 +53,13 @@ public class MultiPlayerMode extends Game {
     }
 
     public void nextTurn(){
-        this.currPlayer = nextPlayer(this.currPlayer);
-        this.turn = new Turn(turn.getGame(), currPlayer);
+        if(isLastTurn && currPlayer.getPosition()==numOfPlayers) {
+            //TODO metodo che calcola i punti dei giocatori e termina la partita
+        }
+        else{
+            this.currPlayer = nextPlayer(this.currPlayer);
+            this.turn = new Turn(turn.getGame(), currPlayer);
+        }
     }
 
     public Player nextPlayer(Player currPlayer)

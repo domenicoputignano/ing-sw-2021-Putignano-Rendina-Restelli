@@ -43,6 +43,15 @@ public class PersonalBoard extends Observable<GameEvent> {
         else return null;
     }
 
+    private int calcVictoryPointsDevCards()
+    {
+        return Arrays.stream(slots).map(Slot::getVictoryPointsSlot).reduce(0,Integer::sum);
+    }
+
+    public int calcVictoryPoints()
+    {
+        return calcVictoryPointsDevCards()+this.faithTrack.calcVictoryPoints()+this.warehouse.calcVictoryPointsWarehouse();
+    }
     public void putCardOnTop(DevelopmentCard developmentCard, int slot) {
         this.slots[slot - 1].putCardOnTop(developmentCard);
         if(isSeventhCard())

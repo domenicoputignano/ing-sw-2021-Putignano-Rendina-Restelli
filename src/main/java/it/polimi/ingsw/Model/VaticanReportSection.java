@@ -22,6 +22,12 @@ public class VaticanReportSection {
         return false;
     }
 
+    public int getVictoryPoints()
+    {
+        if (state == FACEUP)
+            return popeFavorTiles;
+        else return 0;
+    }
     public int getPopeSpace() {
         return popeSpace;
     }

@@ -13,6 +13,7 @@ import it.polimi.ingsw.Utils.MoveActionInterface;
 import it.polimi.ingsw.Utils.Pair;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -31,6 +32,15 @@ public class Player {
         this.personalBoard = new PersonalBoard(this);
     }
 
+    private int calcVictoryPointsLeaderCard()
+    {
+        return leaderCards.stream().filter(LeaderCard::isActive).map(LeaderCard::getVictoryPoints).reduce(0,Integer::sum);
+    }
+
+    public int calcVictoryPointsPlayer()
+    {
+        return calcVictoryPointsLeaderCard()+this.personalBoard.calcVictoryPoints();
+    }
 
     public void moveResources(Game game, MoveActionInterface move) throws MoveResourcesException {
         if(move.handleMove(this.personalBoard.getWarehouse())){

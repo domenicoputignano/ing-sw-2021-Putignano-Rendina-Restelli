@@ -1,6 +1,7 @@
 package it.polimi.ingsw.Commons;
 
 import java.io.Serializable;
+import java.util.Arrays;
 import java.util.Objects;
 import java.util.Stack;
 
@@ -37,7 +38,10 @@ public class Slot implements Cloneable, Serializable {
         return new Slot(this);
     }
 
-
+    public int getVictoryPointsSlot()
+    {
+        return developmentCardStack.stream().map(DevelopmentCard::getVictoryPoints).reduce(0,Integer::sum);
+    }
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

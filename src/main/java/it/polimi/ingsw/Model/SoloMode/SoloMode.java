@@ -4,6 +4,8 @@ import it.polimi.ingsw.Client.reducedmodel.ReducedGame;
 import it.polimi.ingsw.Client.reducedmodel.ReducedMarketTray;
 import it.polimi.ingsw.Client.reducedmodel.ReducedPlayer;
 import it.polimi.ingsw.Client.reducedmodel.ReducedSoloMode;
+import it.polimi.ingsw.Model.ConclusionEvents.HitLastSpace;
+import it.polimi.ingsw.Model.ConclusionEvents.SeventhDevCardBought;
 import it.polimi.ingsw.Model.Game;
 import it.polimi.ingsw.Model.GameState;
 import it.polimi.ingsw.Model.Player;
@@ -42,6 +44,16 @@ public class SoloMode extends Game {
     public void nextTurn(){
         lorenzoPlays();
         //TODO notifyUpdate(new LorenzoPlayedUpdate(...))
+    }
+
+    @Override
+    public void endGame(HitLastSpace event) {
+
+    }
+
+    @Override
+    public void endGame(SeventhDevCardBought event) {
+
     }
 
     @Override

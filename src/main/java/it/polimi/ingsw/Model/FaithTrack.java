@@ -2,6 +2,7 @@ package it.polimi.ingsw.Model;
 
 
 import it.polimi.ingsw.Client.reducedmodel.ReducedFaithTrack;
+import it.polimi.ingsw.Commons.Slot;
 import it.polimi.ingsw.Commons.StateFavorTiles;
 import it.polimi.ingsw.Model.ConclusionEvents.ActivateVaticanReportEvent;
 import it.polimi.ingsw.Model.ConclusionEvents.GameEvent;
@@ -32,7 +33,7 @@ public class FaithTrack extends Observable<GameEvent> {
         }
     }
 
-    public int calcVictoryPoints() {
+    private int calcVictoryPointsFaithTrack() {
         if(this.victoryPoints[this.faithMarker]!=0) return this.victoryPoints[this.faithMarker];
         else
         {
@@ -42,6 +43,16 @@ public class FaithTrack extends Observable<GameEvent> {
             }
             return 0;
         }
+    }
+
+    private int calcVictoryPointsFavorTiles()
+    {
+        return Arrays.stream(sections).map(VaticanReportSection::getVictoryPoints).reduce(0,Integer::sum);
+    }
+
+    public int calcVictoryPoints()
+    {
+        return calcVictoryPointsFaithTrack()+calcVictoryPointsFavorTiles();
     }
 
     public void activeVaticanReport(int vatican_index) {

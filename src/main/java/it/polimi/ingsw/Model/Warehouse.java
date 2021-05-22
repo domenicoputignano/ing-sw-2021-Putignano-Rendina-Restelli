@@ -226,7 +226,10 @@ public class Warehouse implements Cloneable {
         throw new DepotNotFoundException();
     }
 
-
+    public int calcVictoryPointsWarehouse()
+    {
+        return availableResources.keySet().stream().map(x -> availableResources.get(x)).reduce(0,Integer::sum)/5;
+    }
 
     private boolean isValidEditing(ResourceType resourceType, int depotTo)
     {
