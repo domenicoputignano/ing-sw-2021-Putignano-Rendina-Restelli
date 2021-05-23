@@ -4,20 +4,18 @@ import it.polimi.ingsw.Client.reducedmodel.ReducedMarketTray;
 import it.polimi.ingsw.Client.reducedmodel.ReducedMultiPlayerMode;
 import it.polimi.ingsw.Client.reducedmodel.ReducedPlayer;
 import it.polimi.ingsw.Commons.User;
-import it.polimi.ingsw.Model.ConclusionEvents.BlackCrossHitLastSpace;
-import it.polimi.ingsw.Model.ConclusionEvents.DevCardColorEnded;
 import it.polimi.ingsw.Model.ConclusionEvents.HitLastSpace;
 import it.polimi.ingsw.Model.ConclusionEvents.SeventhDevCardBought;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.GameSetupMessage;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.LastTurnMessage;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.RankMessage;
+import it.polimi.ingsw.Utils.Pair;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
 public class MultiPlayerMode extends Game {
-    private int numOfPlayers;
-    private int receivedInitialMessages;
+    private final int numOfPlayers;
     private boolean isLastTurn = false;
 
     public MultiPlayerMode(Player inkwell, List<Player> playerList, Player currPlayer, int numOfPlayers) {
@@ -83,16 +81,16 @@ public class MultiPlayerMode extends Game {
         notify(new LastTurnMessage(this.currPlayer.getUser(),event));
     }
 
-    public void concludeGame()
-    {
-        Map<User,Integer> rank = new HashMap<>();
-        Map<User,Integer> sortedRank = new HashMap<>();
-        for(Player p: playerList)
-        {
-            rank.put(p.getUser(),p.calcVictoryPointsPlayer());
+    // returns rank only for test purposes
+    public List<Pair<User, Integer>> concludeGame(){
+        List<Pair<User, Integer>> rank = new ArrayList<>();
+        for(Player p: playerList) {
+            rank.add(new Pair<>(p.getUser(),p.calcVictoryPointsPlayer()));
         }
-        rank.entrySet().stream().sorted(Collections.reverseOrder(Map.Entry.comparingByValue())).forEach(x -> sortedRank.put(x.getKey(),x.getValue()));
-        notify(new RankMessage(sortedRank));
+        rank = rank.stream().sorted(Collections.reverseOrder(Comparator.comparing(Pair::getValue))).
+                collect(Collectors.toList());
+        notify(new RankMessage(rank));
+        return rank;
     }
 }
 

@@ -3,6 +3,7 @@ package it.polimi.ingsw.Model;
 import it.polimi.ingsw.Commons.*;
 import it.polimi.ingsw.Exceptions.DepotOutOfBoundsException;
 import it.polimi.ingsw.Exceptions.IncompatibleResourceTypeException;
+import it.polimi.ingsw.Utils.Pair;
 import org.junit.jupiter.api.Test;
 
 import java.util.*;
@@ -67,6 +68,7 @@ class MultiPlayerModeTest {
         playerList.get(2).getUser().setActive(false);
         System.out.println(multiPlayerMode.nextPlayer(multiPlayerMode.getCurrPlayer()));
     }
+
     @Test
     void concludeGame() throws DepotOutOfBoundsException, IncompatibleResourceTypeException {
         playerList.add(new Player("Piero"));
@@ -99,8 +101,6 @@ class MultiPlayerModeTest {
         playerList.get(1).getPersonalBoard().getFaithTrack().moveMarker(5);
         playerList.get(2).getPersonalBoard().getFaithTrack().moveMarker(15);
 
-
-
         Map<ResourceType, Integer> cost = new EnumMap<ResourceType, Integer>(ResourceType.class);
         cost.put(ResourceType.servant,0);
         cost.put(ResourceType.coin,0);
@@ -120,16 +120,18 @@ class MultiPlayerModeTest {
 
         playerList.get(3).getPersonalBoard().putCardOnTop(new DevelopmentCard(cost,1, ColorCard.blue,3,null),1);
 
-        int victorypoints1 = playerList.get(0).calcVictoryPointsPlayer();
-        int victorypoints2 = playerList.get(1).calcVictoryPointsPlayer();
-        int victorypoints3 = playerList.get(2).calcVictoryPointsPlayer();
-        int victorypoints4 = playerList.get(3).calcVictoryPointsPlayer();
+        int victoryPoints1 = playerList.get(0).calcVictoryPointsPlayer();
+        int victoryPoints2 = playerList.get(1).calcVictoryPointsPlayer();
+        int victoryPoints3 = playerList.get(2).calcVictoryPointsPlayer();
+        int victoryPoints4 = playerList.get(3).calcVictoryPointsPlayer();
 
-        System.out.println("1) "+victorypoints1);
-        System.out.println("2) "+victorypoints2);
-        System.out.println("3) "+victorypoints3);
-        System.out.println("4) "+victorypoints4);
+        List<Pair<User, Integer>> expectedRank = new ArrayList<>();
 
-        multiPlayerMode.concludeGame();
+        expectedRank.add(new Pair<>(playerList.get(2).getUser(), victoryPoints3));
+        expectedRank.add(new Pair<>(playerList.get(0).getUser(), victoryPoints1));
+        expectedRank.add(new Pair<>(playerList.get(1).getUser(), victoryPoints2));
+        expectedRank.add(new Pair<>(playerList.get(3).getUser(), victoryPoints4));
+
+        assertEquals(expectedRank, multiPlayerMode.concludeGame());
        }
 }
