@@ -6,13 +6,16 @@ import it.polimi.ingsw.Client.view.CLI;
 import it.polimi.ingsw.Network.Client;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.ServerMessage;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.Scanner;
 
 public class WaitForTurnCLI extends AbstractWaitForTurn {
 
     private final CLI cli;
-    private Scanner input = new Scanner(System.in);
-    private Thread thread;
+    private final BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
+    private Thread waiterThread;
 
     public WaitForTurnCLI(Client client) {
         super(client);
@@ -36,19 +39,26 @@ public class WaitForTurnCLI extends AbstractWaitForTurn {
 
     @Override
     public void manageUserInteraction() {
-        thread = new Thread(()-> {
-            while(!thread.isInterrupted()){
-                if(!client.getGame().getCurrPlayer().equals(client.getGame().getPlayer(client.getUser()))){
-                    String input = this.input.next();
-                    if(!input.isEmpty()) System.out.println("It's not your turn, please wait..");
+        waiterThread = new Thread(()-> {
+            while(!waiterThread.isInterrupted()){
+                try{
+                    while(!input.ready()){
+                        Thread.sleep(50);
+                    }
+                    input.readLine();
+                    System.out.println("It's not your turn, please wait..");
+                } catch (IOException e) {
+                    System.out.println("Buffered Reader accidentally cancelled, program will be shut down.");
+                } catch (InterruptedException e) {
+                    return;
                 }
             }
         });
-        thread.start();
+        waiterThread.start();
     }
 
     public void shutDownWaiterThread() {
-        thread.interrupt();
+        waiterThread.interrupt();
     }
 
 

@@ -6,13 +6,16 @@ import it.polimi.ingsw.Client.view.CLI;
 import it.polimi.ingsw.Network.Client;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.ServerMessage;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.Scanner;
 
 public class LobbyCLI extends AbstractLobby {
 
     private final CLI cli;
+    private final BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
     private Thread waiterThread;
-    private Scanner input = new Scanner(System.in);
 
     protected LobbyCLI(Client client) {
         super(client);
@@ -37,12 +40,20 @@ public class LobbyCLI extends AbstractLobby {
     @Override
     public void manageUserInteraction() {
         waiterThread = new Thread(() -> {
-           while(!waiterThread.isInterrupted()) {
-               if(input.hasNext()) {
-                   input.next();
-                   System.out.println("You are in lobby, you can't type anything ");
-               }
-           }
+            while(!waiterThread.isInterrupted()) {
+                try {
+                    while(!input.ready()) {
+                        Thread.sleep(50);
+                    }
+                    input.readLine();
+                    System.out.println("You are in lobby, you can't type anything");
+                } catch (IOException e) {
+                    System.out.println("Buffered Reader accidentally cancelled, program will be shut down.");
+                } catch (InterruptedException e) {
+                    System.out.println("Match found. Exiting from lobby...");
+                    return;
+                }
+            }
         });
         waiterThread.start();
     }

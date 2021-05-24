@@ -11,7 +11,7 @@ import java.util.Scanner;
 public class InitialLeaderChoiceCLI extends AbstractInitialLeaderChoice {
 
     private final CLI cli;
-    private Scanner input = new Scanner(System.in);
+    private final Scanner input = new Scanner(System.in);
 
     public InitialLeaderChoiceCLI(Client client) {
         super(client);

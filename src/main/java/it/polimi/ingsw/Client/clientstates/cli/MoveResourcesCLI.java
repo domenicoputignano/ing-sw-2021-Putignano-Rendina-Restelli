@@ -36,7 +36,7 @@ public class MoveResourcesCLI extends AbstractMoveResources {
         boolean choiceOK = false;
         choice = input.next().toUpperCase();
         parseSourceDestinationChoice(choice);
-
+        client.sendMessage(messageToSend);
     }
 
     private void parseSourceDestinationChoice(String choice) {
