@@ -29,7 +29,7 @@ public class PositioningResourcesCLI extends AbstractPositioningResources {
     public void manageUserInteraction() {
         List<Pair<ResourceType, MarbleDestination>> whereToPutResources = new ArrayList<>();
         for(ResourceType resource : resourcesToSettle) {
-            System.out.println("You have a " + resource + "to settle.");
+            System.out.println("You have a " + resource + " to settle.");
             whereToPutResources.add(new Pair<>(resource, cli.chooseMarbleDestination()));
         }
         messageToSend.setWhereToPutResources(whereToPutResources);

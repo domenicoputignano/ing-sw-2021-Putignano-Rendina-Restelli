@@ -45,6 +45,9 @@ public abstract class UI {
     public abstract void render(FaithMarkerUpdate message);
     public abstract void render(MoveUpdate message);
     public abstract void render(LeaderActionUpdate message);
+    public abstract void render(PositioningUpdate message);
+
+    public abstract void renderError(String errorMessage);
 
     public boolean isReceiverAction(User sender) {
         return sender.equals(client.getUser());

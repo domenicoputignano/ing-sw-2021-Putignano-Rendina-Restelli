@@ -6,12 +6,14 @@ import it.polimi.ingsw.Network.Client;
 
 public class WrongTurnError extends ErrorMessage {
 
-    @Override
-    public void handleMessage(Client handler) {
-
-    }
-
     public WrongTurnError(User triggeringUser) {
         super(triggeringUser);
+    }
+
+    @Override
+    public void handleMessage(Client handler) {
+        if(handler.getUI().isReceiverAction(triggeringUser)){
+            handler.getUI().renderError("It's not your turn, please wait..");
+        }
     }
 }

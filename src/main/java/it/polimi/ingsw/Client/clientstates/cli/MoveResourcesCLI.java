@@ -31,19 +31,22 @@ public class MoveResourcesCLI extends AbstractMoveResources {
     }
 
     private void chooseSourceDestination() {
-        System.out.println("Choose the type of depot source and destination of your move action. FROM [DEPOT|EXTRADEPOT], TO [DEPOT|EXTRADEPOT]");
         String choice;
-        boolean choiceOK = false;
-        choice = input.next().toUpperCase();
-        parseSourceDestinationChoice(choice);
+        boolean choiceOK;
+        do {
+            System.out.println("Choose the type of depot source and destination of your move action. FROM [DEPOT|EXTRADEPOT], TO [DEPOT|EXTRADEPOT]");
+            choice = input.next().toUpperCase();
+            choiceOK = parseSourceDestinationChoice(choice);
+        } while (!choiceOK);
+
         client.sendMessage(messageToSend);
     }
 
-    private void parseSourceDestinationChoice(String choice) {
+    private boolean parseSourceDestinationChoice(String choice) {
         switch(choice) {
             case "DEPOT,DEPOT": {
                 manageMoveFromNormalToNormalDepot();
-                break;
+                return true;
             }
             case "DEPOT,EXTRADEPOT": {
                 if(getNumOfExtraDepots() == 0) {
@@ -54,7 +57,7 @@ public class MoveResourcesCLI extends AbstractMoveResources {
                 } else {
                     manageMoveFromNormalToExtraDepot(true);
                 }
-                break;
+                return true;
             }
             case "EXTRADEPOT, DEPOT": {
                 if(getNumOfExtraDepots() == 0) {
@@ -65,8 +68,11 @@ public class MoveResourcesCLI extends AbstractMoveResources {
                 } else {
                     manageMoveFromExtraToNormalDepot(true);
                 }
-                break;
+                return true;
             }
+            default:
+                System.out.println("Invalid choice, please try again.");
+                return false;
         }
     }
 

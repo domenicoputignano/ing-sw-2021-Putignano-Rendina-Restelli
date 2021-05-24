@@ -5,12 +5,14 @@ import it.polimi.ingsw.Network.Client;
 
 public class InvalidMessageError extends ErrorMessage {
 
-    @Override
-    public void handleMessage(Client handler) {
-
-    }
-
     public InvalidMessageError(User triggeringUser) {
         super(triggeringUser);
+    }
+
+    @Override
+    public void handleMessage(Client handler) {
+        if(handler.getUI().isReceiverAction(triggeringUser)) {
+            handler.getUI().renderError("Invalid message!");
+        }
     }
 }

@@ -11,8 +11,8 @@ public class ActivateProductionError extends ErrorMessage {
         PAYMENTERROR("Error found while performing payment! You wrongly selected resources from some between Depot(s), Strongbox or Extradepot(s)"),
         RESOURCESMISMATCH("Selected resources don't match required resources !"),
         NOTENOUGHRESOURCES("You don't have enough resources to activate selected productions !");
-        private String description;
-        private Trigger(String description)
+        private final String description;
+        Trigger(String description)
         {
             this.description = description;
         }
@@ -23,8 +23,7 @@ public class ActivateProductionError extends ErrorMessage {
 
     }
 
-    public ActivateProductionError(User user, Trigger trigger)
-    {
+    public ActivateProductionError(User user, Trigger trigger) {
         super(user);
         this.trigger = trigger;
     }
@@ -33,9 +32,10 @@ public class ActivateProductionError extends ErrorMessage {
         return trigger;
     }
 
-
     @Override
     public void handleMessage(Client handler) {
-
+        if(handler.getUI().isReceiverAction(triggeringUser)) {
+            handler.getUI().renderError(trigger.toString());
+        }
     }
 }

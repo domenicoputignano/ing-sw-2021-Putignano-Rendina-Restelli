@@ -8,8 +8,8 @@ public class MoveResourcesError extends ErrorMessage {
     public enum Trigger
     {
         MOVE("Error occurred while performing your move action !");
-        private String description;
-        private Trigger(String description)
+        private final String description;
+        Trigger(String description)
         {
             this.description = description;
         }
@@ -32,7 +32,9 @@ public class MoveResourcesError extends ErrorMessage {
 
     @Override
     public void handleMessage(Client handler) {
-
+        if(handler.getUI().isReceiverAction(triggeringUser)) {
+            handler.getUI().renderError(trigger.toString());
+        }
     }
 }
 

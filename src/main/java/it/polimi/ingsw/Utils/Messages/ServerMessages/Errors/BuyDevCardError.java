@@ -11,8 +11,8 @@ public class BuyDevCardError extends ErrorMessage {
         RESOURCESMISMATCH("Selected resources don't match required resources !"),
         PAYMENTERROR("Error while performing payment, you wrongly selected resources from some between Depot(s), Strongbox or ExtraDepot(s) !");
 
-        private String description;
-        private Trigger(String description)
+        private final String description;
+        Trigger(String description)
         {
             this.description = description;
         }
@@ -22,8 +22,7 @@ public class BuyDevCardError extends ErrorMessage {
         }
     }
 
-    public BuyDevCardError(User user, Trigger trigger)
-    {
+    public BuyDevCardError(User user, Trigger trigger) {
         super(user);
         this.trigger = trigger;
     }
@@ -34,6 +33,8 @@ public class BuyDevCardError extends ErrorMessage {
 
     @Override
     public void handleMessage(Client handler) {
-
+        if(handler.getUI().isReceiverAction(triggeringUser)) {
+            handler.getUI().renderError(trigger.toString());
+        }
     }
 }

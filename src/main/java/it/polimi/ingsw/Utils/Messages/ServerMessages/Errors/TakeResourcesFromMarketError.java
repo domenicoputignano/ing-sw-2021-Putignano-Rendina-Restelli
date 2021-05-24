@@ -2,7 +2,6 @@ package it.polimi.ingsw.Utils.Messages.ServerMessages.Errors;
 
 import it.polimi.ingsw.Commons.User;
 import it.polimi.ingsw.Network.Client;
-import it.polimi.ingsw.Utils.Messages.ServerMessages.Errors.ErrorMessage;
 
 public class TakeResourcesFromMarketError extends ErrorMessage {
     private final Trigger trigger;
@@ -10,8 +9,8 @@ public class TakeResourcesFromMarketError extends ErrorMessage {
     {
         MARBLEMISMATCH("Selected marbles don't match marbles in Market Tray !"),
         WHITEEFFECTMISMATCH("Mismatch in selected white marbles effects !");
-        private String description;
-        private Trigger(String description)
+        private final String description;
+        Trigger(String description)
         {
             this.description = description;
         }
@@ -22,8 +21,7 @@ public class TakeResourcesFromMarketError extends ErrorMessage {
         }
     }
 
-    public TakeResourcesFromMarketError(User user, Trigger trigger)
-    {
+    public TakeResourcesFromMarketError(User user, Trigger trigger) {
         super(user);
         this.trigger = trigger;
     }
@@ -34,6 +32,8 @@ public class TakeResourcesFromMarketError extends ErrorMessage {
 
     @Override
     public void handleMessage(Client handler) {
-        System.out.println("Error caused by: "+ trigger);
+        if(handler.getUI().isReceiverAction(triggeringUser)){
+            handler.getUI().renderError(trigger.toString());
+        }
     }
 }

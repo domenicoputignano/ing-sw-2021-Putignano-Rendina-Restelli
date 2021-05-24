@@ -8,22 +8,18 @@ public class LeaderActionError extends ErrorMessage {
     public enum Trigger
     {
         REQUIREMENTS("Requirements not satisfied !"),
-        LEADERSTATUS("Not available action !"),
-        ;
-        private String description;
-        private Trigger(String description)
+        LEADERSTATUS("Not available action !");
+        private final String description;
+        Trigger(String description)
         {
             this.description = description;
         }
-
-        public String toString()
-        {
+        public String toString() {
             return this.description;
         }
     }
 
-    public LeaderActionError(User user, Trigger trigger)
-    {
+    public LeaderActionError(User user, Trigger trigger) {
         super(user);
         this.trigger = trigger;
     }
@@ -35,6 +31,8 @@ public class LeaderActionError extends ErrorMessage {
 
     @Override
     public void handleMessage(Client handler) {
-
+        if(handler.getUI().isReceiverAction(triggeringUser)) {
+            handler.getUI().renderError(trigger.toString());
+        }
     }
 }

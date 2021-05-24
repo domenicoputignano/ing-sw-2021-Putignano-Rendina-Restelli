@@ -198,6 +198,24 @@ public class CLI extends UI {
             else System.out.println("User " + message.getUser() + " has activated a leader card");
         }
     }
+    public void render(PositioningUpdate message){
+        if(isReceiverAction(message.getUser())){
+            if(message.getDiscardedResources().size() > 0) {
+                System.out.println("You haven't correctly positioned the following resources " + message.getDiscardedResources() +
+                        " so they have been discarded");
+            } else System.out.println("You have correctly positioned all the resources you had to settle");
+        } else {
+            if(message.getDiscardedResources().size() > 0) {
+                System.out.println("User " + message.getUser() + " hasn't correctly positioned the following resources " +
+                        message.getDiscardedResources() + " so you got some faith points");
+            } else System.out.println("User " + message.getUser() + " has correctly positioned all the resources he had to settle");
+        }
+    }
+
+    @Override
+    public void renderError(String errorMessage) {
+        System.out.println(errorMessage);
+    }
 
     @Override
     public void manageUserInteraction() {
