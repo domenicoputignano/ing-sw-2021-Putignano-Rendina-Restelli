@@ -43,6 +43,8 @@ public abstract class UI {
     public abstract void render(NewTurnUpdate message);
     public abstract void render(TakeResourcesFromMarketUpdate message);
     public abstract void render(FaithMarkerUpdate message);
+    public abstract void render(MoveUpdate message);
+    public abstract void render(LeaderActionUpdate message);
 
     public boolean isReceiverAction(User sender) {
         return sender.equals(client.getUser());

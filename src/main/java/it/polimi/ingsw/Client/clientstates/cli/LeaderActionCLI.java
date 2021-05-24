@@ -9,7 +9,7 @@ import java.util.Scanner;
 
 public class LeaderActionCLI extends AbstractLeaderAction {
 
-    private Scanner input = new Scanner(System.in);
+    private final Scanner input = new Scanner(System.in);
     private final CLI cli;
 
     public LeaderActionCLI(Client client) {

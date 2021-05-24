@@ -1,5 +1,6 @@
 package it.polimi.ingsw.Utils.Messages.ServerMessages.Updates;
 
+import it.polimi.ingsw.Client.ClientStatesController;
 import it.polimi.ingsw.Client.reducedmodel.ReducedPersonalBoard;
 import it.polimi.ingsw.Commons.LeaderCard;
 import it.polimi.ingsw.Commons.User;
@@ -19,7 +20,13 @@ public class LeaderActionUpdate extends UpdateMessage {
         this.toDiscard = toDiscard;
     }
     @Override
-    public void handleMessage(Client client) {
+    public void handleMessage(Client handler) {
+        handler.getGame().updatePersonalBoard(this);
+        handler.getUI().render(this);
+        ClientStatesController.updateClientState(this, handler.getUI());
+    }
 
+    public boolean hasBeenDiscarded() {
+        return toDiscard;
     }
 }

@@ -176,12 +176,26 @@ public class CLI extends UI {
         } else {
             if(isReceiverAction(message.getUser())) {
                 System.out.printf("User "+message.getTriggeringUser()+" has performed action" +
-                        "involving faith track, you got %d faith points\n", message.getPoints());
+                        " involving faith track, you got %d faith points\n", message.getPoints());
             }
             else {
                 System.out.printf("User "+message.getTriggeringUser()+" has performed action" +
-                        "involving faith track, %s got %d faith points\n", message.getUser(), message.getPoints());
+                        " involving faith track, %s got %d faith points\n", message.getUser(), message.getPoints());
             }
+        }
+    }
+    public void render(MoveUpdate message) {
+        if(isReceiverAction(message.getUser())) {
+            System.out.println("Your move action has been correctly performed");
+        } else System.out.println("User " + message.getUser() + " has moved resources in his warehouse");
+    }
+    public void render(LeaderActionUpdate message) {
+        if(isReceiverAction(message.getUser())) {
+            if(message.hasBeenDiscarded()) System.out.println("You discarded your leader card!");
+            else System.out.println("You activated your leader card!");
+        } else {
+            if(message.hasBeenDiscarded()) System.out.println("User " + message.getUser() + " has discarded a leader card");
+            else System.out.println("User " + message.getUser() + " has activated a leader card");
         }
     }
 

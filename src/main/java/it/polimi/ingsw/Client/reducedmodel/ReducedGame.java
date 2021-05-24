@@ -29,7 +29,6 @@ public abstract class ReducedGame implements Serializable {
     //Overloading methods to perform updates with different messages from server
     public void performUpdate(ActivateProductionUpdate message) {
         updatePersonalBoard(message);
-        //TODO chiamare un render delle risorse
     }
 
     public void performUpdate(BuyDevCardPerformedUpdate message) {
