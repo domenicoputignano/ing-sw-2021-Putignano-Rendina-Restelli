@@ -4,6 +4,7 @@ import it.polimi.ingsw.Commons.*;
 import it.polimi.ingsw.Exceptions.DepotOutOfBoundsException;
 import it.polimi.ingsw.Exceptions.IncompatibleResourceTypeException;
 import it.polimi.ingsw.Utils.Pair;
+import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 
 import java.util.*;
@@ -88,12 +89,19 @@ class MultiPlayerModeTest {
             startingresource.put(ResourceType.stone, 4);
             startingresource.put(ResourceType.shield, 1);
             playerList.get(i).getPersonalBoard().getWarehouse().addResourcesToStrongbox(startingresource);
+            playerList.get(i).getLeaderCards().clear();
         }
+        playerList.get(0).getLeaderCards().add(new LeaderCard(new LeaderEffect(Effect.EXTRAPRODUCTION, ResourceType.coin), null, null, 5));
         playerList.get(0).getLeaderCards().get(0).setIsActive();
+        playerList.get(1).getLeaderCards().add(new LeaderCard(new LeaderEffect(Effect.EXTRAPRODUCTION, ResourceType.coin), null, null, 3));
+        playerList.get(1).getLeaderCards().add(new LeaderCard(new LeaderEffect(Effect.EXTRAPRODUCTION, ResourceType.coin), null, null, 5));
         playerList.get(1).getLeaderCards().get(0).setIsActive();
         playerList.get(1).getLeaderCards().get(1).setIsActive();
+        playerList.get(2).getLeaderCards().add(new LeaderCard(new LeaderEffect(Effect.EXTRAPRODUCTION, ResourceType.coin), null, null, 5));
+        playerList.get(2).getLeaderCards().add(new LeaderCard(new LeaderEffect(Effect.EXTRAPRODUCTION, ResourceType.coin), null, null, 5));
         playerList.get(2).getLeaderCards().get(0).setIsActive();
         playerList.get(2).getLeaderCards().get(1).setIsActive();
+        playerList.get(3).getLeaderCards().add(new LeaderCard(new LeaderEffect(Effect.EXTRAPRODUCTION, ResourceType.coin), null, null, 2));
         playerList.get(3).getLeaderCards().get(0).setIsActive();
 
         playerList.get(0).getPersonalBoard().getFaithTrack().moveMarker(8);
