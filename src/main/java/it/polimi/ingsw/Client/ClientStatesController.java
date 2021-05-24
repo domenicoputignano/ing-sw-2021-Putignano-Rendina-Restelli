@@ -4,6 +4,7 @@ package it.polimi.ingsw.Client;
 import it.polimi.ingsw.Client.clientstates.AbstractClientState;
 import it.polimi.ingsw.Client.clientstates.cli.*;
 import it.polimi.ingsw.Client.view.UI;
+import it.polimi.ingsw.Utils.Messages.ServerMessages.Errors.ErrorMessage;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.GameSetupMessage;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.ServerAskForGameMode;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.ServerAskForNumOfPlayer;
@@ -107,8 +108,13 @@ public class ClientStatesController {
         }
     }
 
-    public static void updateClientState(FaithMarkerUpdate message, UI ui) {
-
+    public static void updateClientState(ErrorMessage message, UI ui) {
+        if(ui.isReceiverAction(message.getTriggeringUser())){
+            if(ui.isCLI()){
+                ui.changeClientState(new ActionChoiceCLI(ui.getClient()));
+                ui.manageUserInteraction();
+            }
+        }
     }
 
 }

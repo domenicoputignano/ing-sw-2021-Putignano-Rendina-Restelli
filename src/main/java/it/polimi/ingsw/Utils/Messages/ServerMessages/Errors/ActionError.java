@@ -35,6 +35,7 @@ public class ActionError extends ErrorMessage {
     public void handleMessage(Client handler) {
         if(handler.getUI().isReceiverAction(triggeringUser)) {
             handler.getUI().renderError(trigger.toString());
+            ClientStatesController.updateClientState(this, handler.getUI());
         }
     }
 

@@ -1,5 +1,6 @@
 package it.polimi.ingsw.Utils.Messages.ServerMessages.Errors;
 
+import it.polimi.ingsw.Client.ClientStatesController;
 import it.polimi.ingsw.Commons.User;
 import it.polimi.ingsw.Network.Client;
 
@@ -24,15 +25,11 @@ public class LeaderActionError extends ErrorMessage {
         this.trigger = trigger;
     }
 
-    public Trigger getTrigger() {
-        return trigger;
-    }
-
-
     @Override
     public void handleMessage(Client handler) {
         if(handler.getUI().isReceiverAction(triggeringUser)) {
             handler.getUI().renderError(trigger.toString());
+            ClientStatesController.updateClientState(this, handler.getUI());
         }
     }
 }
