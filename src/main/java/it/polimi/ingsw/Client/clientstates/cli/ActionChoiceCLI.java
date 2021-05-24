@@ -9,7 +9,7 @@ import java.util.Scanner;
 
 public class ActionChoiceCLI extends AbstractActionChoice {
 
-    private Scanner input = new Scanner(System.in);
+    private final Scanner input = new Scanner(System.in);
     private final CLI cli;
 
 
@@ -24,33 +24,42 @@ public class ActionChoiceCLI extends AbstractActionChoice {
     }
 
     public void manageUserInteraction() {
+        boolean choiceOK;
+        do {
+            choiceOK = actionChoice();
+        } while(!choiceOK);
+        cli.manageUserInteraction();
+    }
+
+    private boolean actionChoice() {
         System.out.print("Choose between Activate Production (A)," +
                 " Buy (B), Take Resources (T), Leader Action (L) and Move Resources (M) ");
         String choice = input.next();
         switch(choice) {
             case "A" : {
-                (new ActivateProductionCLI(client)).manageUserInteraction();
-                break;
+                cli.changeClientState(new ActivateProductionCLI(client));
+                return true;
             }
             case "B" : {
-                (new BuyDevCardCLI(client)).manageUserInteraction();
-                break;
+                cli.changeClientState(new BuyDevCardCLI(client));
+                return true;
             }
             case "T" : {
-                (new TakeResourcesFromMarketCLI(client)).manageUserInteraction();
-                break;
+                cli.changeClientState(new TakeResourcesFromMarketCLI(client));
+                return true;
             }
             case "L" : {
-                (new LeaderActionCLI(client)).manageUserInteraction();
-                break;
+                cli.changeClientState(new LeaderActionCLI(client));
+                return true;
             }
             case "M" : {
                 cli.changeClientState(new MoveResourcesCLI(client));
-                cli.manageUserInteraction();
-                break;
+                return true;
             }
-            //TODO inserito solo per non dimenticarci
-            default: break;
+            default: {
+                System.out.println("Invalid choice, try again");
+                return false;
+            }
         }
     }
 }
