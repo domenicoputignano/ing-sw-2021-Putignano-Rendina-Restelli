@@ -2,7 +2,6 @@ package it.polimi.ingsw.Client.clientstates;
 
 import it.polimi.ingsw.Client.Checker;
 import it.polimi.ingsw.Client.reducedmodel.ReducedPersonalBoard;
-import it.polimi.ingsw.Client.clientstates.cli.ActivateProductionCLI;
 import it.polimi.ingsw.Commons.Effect;
 import it.polimi.ingsw.Commons.ResourceType;
 import it.polimi.ingsw.Model.ActiveProductions;
@@ -85,15 +84,4 @@ public abstract class AbstractActivateProduction extends AbstractClientState {
         return Checker.checkResources(neededResources, client.getGame().getCurrPlayer().getPersonalBoard());
     }
 
-
-    @Override
-    public ActivateProductionCLI getCLIVersion() {
-        return new ActivateProductionCLI(client);
-    }
-
-    //TODO
-    @Override
-    public AbstractClientState getGUIVersion() {
-        return null;
-    }
 }

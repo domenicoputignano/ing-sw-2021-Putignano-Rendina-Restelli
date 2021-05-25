@@ -1,25 +1,17 @@
 package it.polimi.ingsw.Client.clientstates.cli;
 
-import it.polimi.ingsw.Client.clientstates.AbstractClientState;
 import it.polimi.ingsw.Client.clientstates.AbstractNumOfPlayersChoice;
 import it.polimi.ingsw.Network.Client;
 import it.polimi.ingsw.Utils.Messages.ClientMessages.NumOfPlayerChoiceMessage;
-import it.polimi.ingsw.Utils.Messages.ServerMessages.ServerMessage;
 
-import java.io.IOException;
 import java.util.Scanner;
 
 public class NumOfPlayersChoiceCLI extends AbstractNumOfPlayersChoice {
 
-    private Scanner input = new Scanner(System.in);
+    private final Scanner input = new Scanner(System.in);
 
     public NumOfPlayersChoiceCLI(Client client) {
         super(client);
-    }
-
-    @Override
-    public void render(ServerMessage message) {
-        System.out.println("Choose the number of players [2-4]: ");
     }
 
     @Override

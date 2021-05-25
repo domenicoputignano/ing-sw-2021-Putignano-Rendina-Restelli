@@ -14,9 +14,9 @@ public class ServerAsksForPositioning extends UpdateMessage {
 
     public ServerAsksForPositioning(User user, ReducedPersonalBoard reducedPersonalBoard, ReducedMarketTray resultingMarketTray, List<ResourceType> pendingResources)
     {
-        this.resultingMarketTray = resultingMarketTray;
         this.user = user;
         this.userPersonalBoard = reducedPersonalBoard;
+        this.resultingMarketTray = resultingMarketTray;
         this.resourcesToSettle = pendingResources;
     }
 
@@ -24,7 +24,7 @@ public class ServerAsksForPositioning extends UpdateMessage {
     public void handleMessage(Client handler) {
         handler.getGame().performUpdate(this);
         handler.getUI().render(this);
-        handler.getUI().setNormalActionDone(true);
+        if(handler.getUI().isReceiverAction(user)) handler.getUI().setNormalActionDone(true);
         ClientStatesController.updateClientState(this, handler.getUI());
     }
 

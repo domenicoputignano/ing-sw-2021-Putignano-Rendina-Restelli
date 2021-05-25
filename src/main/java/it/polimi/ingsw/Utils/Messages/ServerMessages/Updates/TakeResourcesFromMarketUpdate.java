@@ -28,7 +28,7 @@ public class TakeResourcesFromMarketUpdate extends UpdateMessage {
     public void handleMessage(Client handler) {
         handler.getGame().performUpdate(this);
         handler.getUI().render(this);
-        handler.getUI().setNormalActionDone(true);
+        if(handler.getUI().isReceiverAction(user)) handler.getUI().setNormalActionDone(true);
         ClientStatesController.updateClientState(this, handler.getUI());
     }
 

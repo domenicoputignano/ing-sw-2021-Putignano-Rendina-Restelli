@@ -17,8 +17,6 @@ public abstract class UI {
         this.client = client;
     }
 
-    public abstract void showUpdate(ServerMessage message);
-
     public abstract void manageUserInteraction();
 
     public abstract void changeClientState(AbstractClientState clientState);

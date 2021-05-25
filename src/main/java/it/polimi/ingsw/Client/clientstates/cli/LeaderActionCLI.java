@@ -3,7 +3,6 @@ package it.polimi.ingsw.Client.clientstates.cli;
 import it.polimi.ingsw.Client.clientstates.AbstractLeaderAction;
 import it.polimi.ingsw.Client.view.CLI;
 import it.polimi.ingsw.Network.Client;
-import it.polimi.ingsw.Utils.Messages.ServerMessages.ServerMessage;
 
 import java.util.Scanner;
 
@@ -15,10 +14,6 @@ public class LeaderActionCLI extends AbstractLeaderAction {
     public LeaderActionCLI(Client client) {
         super(client);
         cli = (CLI) client.getUI();
-    }
-
-    @Override
-    public void render(ServerMessage message){
     }
 
     @Override

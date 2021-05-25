@@ -1,7 +1,6 @@
 package it.polimi.ingsw.Client.clientstates;
 
 import it.polimi.ingsw.Client.reducedmodel.ReducedMarble;
-import it.polimi.ingsw.Client.clientstates.cli.TakeResourcesFromMarketCLI;
 import it.polimi.ingsw.Commons.Effect;
 import it.polimi.ingsw.Commons.ResourceType;
 import it.polimi.ingsw.Network.Client;
@@ -28,13 +27,4 @@ public abstract class AbstractTakeResourcesFromMarket extends AbstractClientStat
                 map(x -> x.getLeaderEffect().getType()).collect(Collectors.toList());
     }
 
-    @Override //TODO
-    public AbstractClientState getGUIVersion() {
-        return null;
-    }
-
-    @Override
-    public TakeResourcesFromMarketCLI getCLIVersion() {
-        return new TakeResourcesFromMarketCLI(client);
-    }
 }

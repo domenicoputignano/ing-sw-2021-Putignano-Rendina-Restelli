@@ -5,7 +5,6 @@ import it.polimi.ingsw.Client.view.CLI;
 import it.polimi.ingsw.Commons.ResourceType;
 import it.polimi.ingsw.Network.Client;
 import it.polimi.ingsw.Utils.Messages.ClientMessages.ResourceChoiceMessage;
-import it.polimi.ingsw.Utils.Messages.ServerMessages.ServerMessage;
 import it.polimi.ingsw.Utils.Pair;
 
 import java.util.ArrayList;
@@ -20,11 +19,6 @@ public class InitialResourceChoiceCLI extends AbstractInitialResourceChoice {
     public InitialResourceChoiceCLI(Client client) {
         super(client);
         this.cli = (CLI) client.getUI();
-    }
-
-    @Override
-    public void render(ServerMessage message) {
-
     }
 
     @Override

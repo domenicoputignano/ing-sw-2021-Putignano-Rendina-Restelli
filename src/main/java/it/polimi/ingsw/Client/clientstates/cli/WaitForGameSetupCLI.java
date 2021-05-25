@@ -15,11 +15,6 @@ public class WaitForGameSetupCLI extends AbstractWaitForGameSetup {
     }
 
     @Override
-    public void render(ServerMessage message) {
-
-    }
-
-    @Override
     public void manageUserInteraction() {
         System.out.println("Game will start in a while...");
     }

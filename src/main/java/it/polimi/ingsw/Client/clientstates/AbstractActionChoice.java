@@ -1,7 +1,6 @@
 package it.polimi.ingsw.Client.clientstates;
 
 
-import it.polimi.ingsw.Client.clientstates.cli.ActionChoiceCLI;
 import it.polimi.ingsw.Network.Client;
 
 public abstract class AbstractActionChoice extends AbstractClientState {
@@ -13,15 +12,4 @@ public abstract class AbstractActionChoice extends AbstractClientState {
 
     protected boolean normalActionAlreadyDone(){return client.getUI().hasDoneNormalAction();}
 
-    @Override
-    public ActionChoiceCLI getCLIVersion() {
-        return new ActionChoiceCLI(client);
-    }
-
-
-    //TODO
-    @Override
-    public AbstractClientState getGUIVersion() {
-        return null;
-    }
 }

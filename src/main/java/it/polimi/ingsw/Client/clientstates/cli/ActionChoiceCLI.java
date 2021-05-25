@@ -3,7 +3,6 @@ package it.polimi.ingsw.Client.clientstates.cli;
 import it.polimi.ingsw.Client.clientstates.AbstractActionChoice;
 import it.polimi.ingsw.Client.view.CLI;
 import it.polimi.ingsw.Network.Client;
-import it.polimi.ingsw.Utils.Messages.ServerMessages.ServerMessage;
 
 import java.util.Scanner;
 
@@ -16,11 +15,6 @@ public class ActionChoiceCLI extends AbstractActionChoice {
     public ActionChoiceCLI(Client client) {
         super(client);
         cli = (CLI) client.getUI();
-    }
-
-    @Override
-    public void render(ServerMessage message) {
-        System.out.println("It's now your turn ");
     }
 
     public void manageUserInteraction() {

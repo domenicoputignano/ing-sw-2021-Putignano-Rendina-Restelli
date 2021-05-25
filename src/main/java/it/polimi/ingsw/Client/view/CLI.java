@@ -119,11 +119,6 @@ public class CLI extends UI {
     }
 
     @Override
-    public void showUpdate(ServerMessage message) {
-        clientState.render(message);
-    }
-
-    @Override
     public void render(ServerAsksForNickname message) {
         System.out.print("Choose your nickname: ");
     }

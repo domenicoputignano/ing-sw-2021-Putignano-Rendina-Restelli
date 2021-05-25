@@ -4,10 +4,8 @@ import it.polimi.ingsw.Client.clientstates.AbstractActivateProduction;
 import it.polimi.ingsw.Client.view.CLI;
 import it.polimi.ingsw.Commons.ResourceType;
 import it.polimi.ingsw.Network.Client;
-import it.polimi.ingsw.Utils.Messages.ServerMessages.ServerMessage;
-import it.polimi.ingsw.Utils.Messages.ServerMessages.Updates.ActivateProductionUpdate;
-import java.util.Scanner;
 
+import java.util.Scanner;
 
 
 public class ActivateProductionCLI extends AbstractActivateProduction {
@@ -20,11 +18,6 @@ public class ActivateProductionCLI extends AbstractActivateProduction {
     public ActivateProductionCLI(Client client) {
         super(client);
         cli = (CLI) client.getUI();
-    }
-
-    public void render(ServerMessage message) {
-        ActivateProductionUpdate update = (ActivateProductionUpdate) message;
-        System.out.print("Player "+update.getUser()+" activated productions\nhe obtained following resources: "+update.getReceivedResources());
     }
 
 

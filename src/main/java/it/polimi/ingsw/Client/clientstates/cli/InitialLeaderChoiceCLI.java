@@ -4,7 +4,6 @@ import it.polimi.ingsw.Client.clientstates.AbstractInitialLeaderChoice;
 import it.polimi.ingsw.Client.view.CLI;
 import it.polimi.ingsw.Network.Client;
 import it.polimi.ingsw.Utils.Messages.ClientMessages.LeaderChoiceMessage;
-import it.polimi.ingsw.Utils.Messages.ServerMessages.ServerMessage;
 
 import java.util.Scanner;
 
@@ -16,11 +15,6 @@ public class InitialLeaderChoiceCLI extends AbstractInitialLeaderChoice {
     public InitialLeaderChoiceCLI(Client client) {
         super(client);
         cli = (CLI) client.getUI();
-    }
-
-    @Override
-    public void render(ServerMessage message) {
-        System.out.println("Before starting the game you need to select two leader cards to discard ");
     }
 
     @Override
