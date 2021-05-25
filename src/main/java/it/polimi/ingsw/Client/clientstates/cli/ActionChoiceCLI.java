@@ -32,7 +32,7 @@ public class ActionChoiceCLI extends AbstractActionChoice {
             System.out.print("Choose between Activate Production (A)," +
                     " Buy (B), Take Resources (T), Leader Action (L) and Move Resources (M) ");
         }
-        String choice = input.next();
+        String choice = input.next().toUpperCase();
         switch(choice) {
             case "A" : {
                 if(normalActionAlreadyDone()) {
@@ -63,6 +63,16 @@ public class ActionChoiceCLI extends AbstractActionChoice {
             case "M" : {
                 cli.changeClientState(new MoveResourcesCLI(client));
                 return true;
+            }
+            case "E" : {
+                if(!normalActionAlreadyDone()) {
+                    System.out.println("You can't end you turn now, you have to do a normal action before");
+                    return false;
+                } else {
+                    endTurn();
+                    cli.changeClientState(new WaitForTurnCLI(client));
+                    return true;
+                }
             }
             default: {
                 System.out.println("Invalid choice, try again");
