@@ -23,6 +23,7 @@ public class BuyDevCardPerformedUpdate extends UpdateMessage {
 
     public void handleMessage(Client client) {
         client.getGame().performUpdate(this);
+        client.getUI().setNormalActionDone(true);
     }
 
     public List<Deck> getResultingDecks() {

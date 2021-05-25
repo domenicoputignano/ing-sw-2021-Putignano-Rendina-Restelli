@@ -75,7 +75,7 @@ public class TurnController {
                         } catch (NeedPositioningException e) {
                             model.notifyUpdate(new ServerAsksForPositioning(currPlayer.getUser(),
                                     currPlayer.getPersonalBoard().getReducedVersion(),
-                                    e.getResourcesToSettle()));
+                                    model.getMarketTray().getReducedVersion(), e.getResourcesToSettle()));
                         }
                     } catch (InvalidActionException e) {
                         model.notifyError(new ActionError(sender.getPlayer().getUser(),ActionError.Trigger.NORMALACTIONALREADYDONE));

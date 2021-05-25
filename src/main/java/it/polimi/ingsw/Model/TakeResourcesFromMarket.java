@@ -85,7 +85,7 @@ public class TakeResourcesFromMarket implements AbstractTurnPhase {
             try {
                 resourceType = marbles.get(i).addResources();
                 whereToPutResources.add(new Pair<>(resourceType, whereToPutMarbles.get(i).getValue()));
-            } catch (NoSuchResourceTypeException e) {}
+            } catch (NoSuchResourceTypeException ignored) {}
         }
     }
 

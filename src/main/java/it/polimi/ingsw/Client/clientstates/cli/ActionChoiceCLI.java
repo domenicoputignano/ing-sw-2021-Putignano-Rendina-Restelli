@@ -32,21 +32,35 @@ public class ActionChoiceCLI extends AbstractActionChoice {
     }
 
     private boolean actionChoice() {
-        System.out.print("Choose between Activate Production (A)," +
-                " Buy (B), Take Resources (T), Leader Action (L) and Move Resources (M) ");
+        if(normalActionAlreadyDone()) {
+            System.out.println("Choose between Leader Action (L), Move Resources (M) and End Turn (E) ");
+        } else {
+            System.out.print("Choose between Activate Production (A)," +
+                    " Buy (B), Take Resources (T), Leader Action (L) and Move Resources (M) ");
+        }
         String choice = input.next();
         switch(choice) {
             case "A" : {
-                cli.changeClientState(new ActivateProductionCLI(client));
-                return true;
+                if(normalActionAlreadyDone()) {
+                    return normalActionAlreadyDoneMessage();
+                } else {
+                    cli.changeClientState(new ActivateProductionCLI(client));
+                    return true;
+                }
             }
             case "B" : {
-                cli.changeClientState(new BuyDevCardCLI(client));
-                return true;
+                if(normalActionAlreadyDone()) return normalActionAlreadyDoneMessage();
+                else {
+                    cli.changeClientState(new BuyDevCardCLI(client));
+                    return true;
+                }
             }
             case "T" : {
-                cli.changeClientState(new TakeResourcesFromMarketCLI(client));
-                return true;
+                if(normalActionAlreadyDone()) return normalActionAlreadyDoneMessage();
+                else {
+                    cli.changeClientState(new TakeResourcesFromMarketCLI(client));
+                    return true;
+                }
             }
             case "L" : {
                 cli.changeClientState(new LeaderActionCLI(client));
@@ -61,5 +75,10 @@ public class ActionChoiceCLI extends AbstractActionChoice {
                 return false;
             }
         }
+    }
+
+    private boolean normalActionAlreadyDoneMessage(){
+        System.out.println("You have already done the normal action for this turn, please choose another action");
+        return false;
     }
 }

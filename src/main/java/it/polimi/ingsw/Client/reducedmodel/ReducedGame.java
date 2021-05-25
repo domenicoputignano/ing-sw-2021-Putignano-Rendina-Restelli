@@ -41,6 +41,11 @@ public abstract class ReducedGame implements Serializable {
         marketTray = message.getResultingMarketTray();
     }
 
+    public void performUpdate(ServerAsksForPositioning message) {
+        updatePersonalBoard(message);
+        marketTray = message.getResultingMarketTray();
+    }
+
     public ReducedPlayer getPlayer(User user) {
         return players.stream().filter(x -> x.getNickname().equals(user)).
                 findFirst().orElseGet(() -> new ReducedPlayer(null, null, 0));

@@ -11,6 +11,7 @@ import it.polimi.ingsw.Utils.Messages.ServerMessages.Updates.*;
 public abstract class UI {
     protected Client client;
     protected AbstractClientState clientState;
+    protected boolean normalActionDone;
 
     protected UI(Client client) {
         this.client = client;
@@ -55,5 +56,13 @@ public abstract class UI {
 
     public AbstractClientState getClientState() {
         return clientState;
+    }
+
+    public boolean hasDoneNormalAction() {
+        return normalActionDone;
+    }
+
+    public void setNormalActionDone(boolean normalActionDone) {
+        this.normalActionDone = normalActionDone;
     }
 }

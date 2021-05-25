@@ -22,6 +22,7 @@ public class ActivateProductionUpdate extends UpdateMessage {
     @Override
     public void handleMessage(Client client) {
         client.getGame().performUpdate(this);
+        client.getUI().setNormalActionDone(true);
     }
 
     public Map<ResourceType, Integer> getPayedResources() {

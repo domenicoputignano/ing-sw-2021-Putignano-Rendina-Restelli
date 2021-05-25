@@ -11,6 +11,8 @@ public abstract class AbstractActionChoice extends AbstractClientState {
         super(client);
     }
 
+    protected boolean normalActionAlreadyDone(){return client.getUI().hasDoneNormalAction();}
+
     @Override
     public ActionChoiceCLI getCLIVersion() {
         return new ActionChoiceCLI(client);

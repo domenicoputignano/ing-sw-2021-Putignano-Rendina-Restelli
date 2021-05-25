@@ -7,14 +7,13 @@ import it.polimi.ingsw.Commons.User;
 import it.polimi.ingsw.Commons.ResourceType;
 import it.polimi.ingsw.Network.Client;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class TakeResourcesFromMarketUpdate extends UpdateMessage {
 
-    private ReducedMarketTray resultingMarketTray;
-    private List<ResourceType> earnedResources = new ArrayList<>();
-    private int faithPoints;
+    private final ReducedMarketTray resultingMarketTray;
+    private final List<ResourceType> earnedResources;
+    private final int faithPoints;
 
     public TakeResourcesFromMarketUpdate(User user, ReducedPersonalBoard reducedPersonalBoard, ReducedMarketTray reducedMarketTray, List<ResourceType> resources
     , int faithPoints)
@@ -26,10 +25,11 @@ public class TakeResourcesFromMarketUpdate extends UpdateMessage {
         this.faithPoints = faithPoints;
     }
     @Override
-    public void handleMessage(Client client) {
-        client.getGame().performUpdate(this);
-        client.getUI().render(this);
-        ClientStatesController.updateClientState(this, client.getUI());
+    public void handleMessage(Client handler) {
+        handler.getGame().performUpdate(this);
+        handler.getUI().render(this);
+        handler.getUI().setNormalActionDone(true);
+        ClientStatesController.updateClientState(this, handler.getUI());
     }
 
     public ReducedMarketTray getResultingMarketTray() {
