@@ -39,6 +39,7 @@ public class GameController {
             try { wait(); }
             catch (InterruptedException e) {
                 LOGGER.log(Level.SEVERE, "Thread accidentally interrupted");
+                Thread.currentThread().interrupt();
             }
         }
         if(message.isValidMessage()) {

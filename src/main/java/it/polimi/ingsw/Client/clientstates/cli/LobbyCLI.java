@@ -12,6 +12,7 @@ public class LobbyCLI extends AbstractLobby {
 
     private final CLI cli;
     private final BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
+    private String stringToIgnore;
     private Thread waiterThread;
 
     protected LobbyCLI(Client client) {
@@ -27,12 +28,13 @@ public class LobbyCLI extends AbstractLobby {
                     while(!input.ready()) {
                         Thread.sleep(50);
                     }
-                    input.readLine();
+                    stringToIgnore = input.readLine();
                     System.out.println("You are in lobby, you can't type anything");
                 } catch (IOException e) {
                     System.out.println("Buffered Reader accidentally cancelled, program will be shut down.");
                 } catch (InterruptedException e) {
                     System.out.println("Match found. Exiting from lobby...");
+                    Thread.currentThread().interrupt();
                     return;
                 }
             }

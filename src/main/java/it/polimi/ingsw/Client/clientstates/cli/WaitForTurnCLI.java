@@ -12,6 +12,7 @@ public class WaitForTurnCLI extends AbstractWaitForTurn {
 
     private final CLI cli;
     private final BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
+    private String stringToIgnore;
     private Thread waiterThread;
 
     public WaitForTurnCLI(Client client) {
@@ -27,11 +28,12 @@ public class WaitForTurnCLI extends AbstractWaitForTurn {
                     while(!input.ready()){
                         Thread.sleep(50);
                     }
-                    input.readLine();
+                    stringToIgnore = input.readLine();
                     System.out.println("It's not your turn, please wait..");
                 } catch (IOException e) {
                     System.out.println("Buffered Reader accidentally cancelled, program will be shut down.");
                 } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
                     return;
                 }
             }
