@@ -16,6 +16,7 @@ public class NewTurnUpdate implements ServerMessage {
     @Override
     public void handleMessage(Client handler) {
         handler.getGame().nextTurn(this);
+        if(handler.getUI().isReceiverAction(currentUser)) handler.getUI().setNormalActionDone(false);
         ClientStatesController.updateClientState(this, handler.getUI());
         handler.getUI().render(this);
     }

@@ -9,6 +9,7 @@ import it.polimi.ingsw.Model.ConclusionEvents.SeventhDevCardBought;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.GameSetupMessage;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.LastTurnMessage;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.RankMessage;
+import it.polimi.ingsw.Utils.Messages.ServerMessages.Updates.NewTurnUpdate;
 import it.polimi.ingsw.Utils.Pair;
 
 import java.util.*;
@@ -47,6 +48,7 @@ public class MultiPlayerMode extends Game {
         else{
             this.currPlayer = nextPlayer(this.currPlayer);
             this.turn = new Turn(turn.getGame(), currPlayer);
+            notify(new NewTurnUpdate(currPlayer.getUser()));
         }
     }
 
