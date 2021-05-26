@@ -8,6 +8,7 @@ import it.polimi.ingsw.Model.ConclusionEvents.*;
 import it.polimi.ingsw.Model.Game;
 import it.polimi.ingsw.Model.GameState;
 import it.polimi.ingsw.Model.Player;
+import it.polimi.ingsw.Model.Turn;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.GameSetupMessage;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.SoloModeMatchWinnerMessage;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.Updates.LorenzoPlayedUpdate;
@@ -43,6 +44,7 @@ public class SoloMode extends Game {
 
     public void nextTurn() {
         Token playedToken = lorenzoPlays();
+        this.turn = new Turn(this, this.currPlayer);
         notify(new LorenzoPlayedUpdate(currPlayer.getReducedPersonalBoard(), playedToken,
                 tokens, decks, lorenzoIlMagnifico.getBlackCross()));
     }

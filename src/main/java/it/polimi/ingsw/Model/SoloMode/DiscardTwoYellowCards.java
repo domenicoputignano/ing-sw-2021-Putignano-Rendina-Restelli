@@ -6,4 +6,11 @@ public class DiscardTwoYellowCards implements TokenEffect{
     public void performTokenEffect(LorenzoIlMagnifico lorenzoIlMagnifico) {
         lorenzoIlMagnifico.throwDevCards(ColorCard.yellow);
     }
+
+    @Override
+    public String renderTokenEffect() {
+        return "Lorenzo discarded two yellow cards from the decks";
+    }
+
+
 }

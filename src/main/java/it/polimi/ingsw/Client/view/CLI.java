@@ -207,6 +207,7 @@ public class CLI extends UI {
         }
     }
     public void render(LorenzoPlayedUpdate message){
+        System.out.println(message.getPlayedToken().getTokenEffect().renderTokenEffect());
         System.out.println("Lorenzo il Magnifico played, now it's your turn..");
     }
 
