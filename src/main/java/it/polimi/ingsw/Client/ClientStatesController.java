@@ -1,18 +1,11 @@
 package it.polimi.ingsw.Client;
 
 
-import it.polimi.ingsw.Client.clientstates.AbstractClientState;
 import it.polimi.ingsw.Client.clientstates.cli.*;
 import it.polimi.ingsw.Client.view.UI;
+import it.polimi.ingsw.Utils.Messages.ServerMessages.*;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.Errors.ErrorMessage;
-import it.polimi.ingsw.Utils.Messages.ServerMessages.GameSetupMessage;
-import it.polimi.ingsw.Utils.Messages.ServerMessages.ServerAskForGameMode;
-import it.polimi.ingsw.Utils.Messages.ServerMessages.ServerAskForNumOfPlayer;
-import it.polimi.ingsw.Utils.Messages.ServerMessages.ServerAsksForNickname;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.Updates.*;
-
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class ClientStatesController {
 
@@ -101,6 +94,15 @@ public class ClientStatesController {
                 ui.changeClientState(new WaitForTurnCLI(ui.getClient()));
                 ui.getClientState().manageUserInteraction();
             }
+        }
+    }
+
+    public static void updateClientState(LorenzoPlayedUpdate message, UI ui) {
+        if(ui.isCLI()) {
+            WaitForTurnCLI state = (WaitForTurnCLI) ui.getClientState();
+            state.shutDownWaiterThread();
+            ui.changeClientState(new ActionChoiceCLI(ui.getClient()));
+            ui.manageUserInteraction();
         }
     }
 

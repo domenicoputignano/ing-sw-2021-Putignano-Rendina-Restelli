@@ -3,7 +3,6 @@ package it.polimi.ingsw.Client.view;
 import it.polimi.ingsw.Client.clientstates.AbstractClientState;
 import it.polimi.ingsw.Commons.User;
 import it.polimi.ingsw.Network.Client;
-import it.polimi.ingsw.Network.Server;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.*;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.Updates.*;
 
@@ -46,6 +45,7 @@ public abstract class UI {
     public abstract void render(MoveUpdate message);
     public abstract void render(LeaderActionUpdate message);
     public abstract void render(PositioningUpdate message);
+    public abstract void render(LorenzoPlayedUpdate message);
 
     public abstract void renderError(String errorMessage);
 

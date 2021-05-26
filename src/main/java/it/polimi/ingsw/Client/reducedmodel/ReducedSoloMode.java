@@ -1,10 +1,8 @@
 package it.polimi.ingsw.Client.reducedmodel;
 
-import it.polimi.ingsw.Client.reducedmodel.ReducedGame;
-import it.polimi.ingsw.Client.reducedmodel.ReducedMarketTray;
-import it.polimi.ingsw.Client.reducedmodel.ReducedPlayer;
 import it.polimi.ingsw.Commons.Deck;
 import it.polimi.ingsw.Model.SoloMode.Token;
+import it.polimi.ingsw.Utils.Messages.ServerMessages.Updates.LorenzoPlayedUpdate;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.Updates.NewTurnUpdate;
 
 import java.util.List;
@@ -20,11 +18,12 @@ public class ReducedSoloMode extends ReducedGame {
         this.tokens = tokens;
     }
 
-
-    @Override
-    public void nextTurn(NewTurnUpdate message) {
-        currPlayer = this.getPlayer(message.getCurrentUser());
-        //TODO: aggiornare lo stato della personal board, con i dati di lorenzo. Metodo chiamato con il messaggio
-        //lorenzoPlayedUpdate();
+    public void nextTurn(LorenzoPlayedUpdate message) {
+        this.currPlayer.updatePersonalBoard(message.getUserPersonalBoard());
+        this.tokens = message.getTokens();
+        this.decks = message.getDecks();
+        this.blackCross = message.getBlackCross();
     }
+
+
 }

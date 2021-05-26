@@ -206,6 +206,9 @@ public class CLI extends UI {
             } else System.out.println("User " + message.getUser() + " has correctly positioned all the resources he had to settle");
         }
     }
+    public void render(LorenzoPlayedUpdate message){
+        System.out.println("Lorenzo il Magnifico played, now it's your turn..");
+    }
 
     @Override
     public void renderError(String errorMessage) {

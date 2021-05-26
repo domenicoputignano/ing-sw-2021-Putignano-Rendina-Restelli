@@ -2,6 +2,8 @@ package it.polimi.ingsw.Client.reducedmodel;
 
 import it.polimi.ingsw.Commons.Deck;
 import it.polimi.ingsw.Commons.User;
+import it.polimi.ingsw.Utils.Messages.ServerMessages.ServerMessage;
+import it.polimi.ingsw.Utils.Messages.ServerMessages.Updates.NewTurnUpdate;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.Updates.*;
 
 import java.io.Serializable;
@@ -69,9 +71,6 @@ public abstract class ReducedGame implements Serializable {
     public ReducedMarketTray getMarketTray() {
         return marketTray;
     }
-
-
-    public abstract void nextTurn(NewTurnUpdate message);
 
 
 }

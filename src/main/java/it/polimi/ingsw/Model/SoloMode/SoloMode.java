@@ -10,6 +10,7 @@ import it.polimi.ingsw.Model.GameState;
 import it.polimi.ingsw.Model.Player;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.GameSetupMessage;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.SoloModeMatchWinnerMessage;
+import it.polimi.ingsw.Utils.Messages.ServerMessages.Updates.LorenzoPlayedUpdate;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -41,8 +42,9 @@ public class SoloMode extends Game {
     }
 
     public void nextTurn() {
-        lorenzoPlays();
-        //TODO notifyUpdate(new LorenzoPlayedUpdate(...))
+        Token playedToken = lorenzoPlays();
+        notify(new LorenzoPlayedUpdate(currPlayer.getReducedPersonalBoard(), playedToken,
+                tokens, decks, lorenzoIlMagnifico.getBlackCross()));
     }
 
     @Override
@@ -77,8 +79,10 @@ public class SoloMode extends Game {
         return new ReducedSoloMode(players, decks, marketTray, tokens);
     }
 
-    public void lorenzoPlays() {
-        tokens.pop().performEffect(lorenzoIlMagnifico);
+    public Token lorenzoPlays() {
+        Token playedToken = tokens.pop();
+        playedToken.performEffect(lorenzoIlMagnifico);
+        return playedToken;
     }
 
     public Token peekToken() {
