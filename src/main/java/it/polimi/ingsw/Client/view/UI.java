@@ -12,6 +12,7 @@ public abstract class UI {
     protected Client client;
     protected AbstractClientState clientState;
     protected boolean normalActionDone;
+    protected boolean soloMode;
 
     protected UI(Client client) {
         this.client = client;
@@ -62,5 +63,13 @@ public abstract class UI {
 
     public void setNormalActionDone(boolean normalActionDone) {
         this.normalActionDone = normalActionDone;
+    }
+
+    public boolean isSoloMode() {
+        return soloMode;
+    }
+
+    public void setSoloMode(boolean soloMode) {
+        this.soloMode = soloMode;
     }
 }

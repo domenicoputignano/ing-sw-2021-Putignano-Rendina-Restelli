@@ -33,7 +33,6 @@ public class LobbyCLI extends AbstractLobby {
                 } catch (IOException e) {
                     System.out.println("Buffered Reader accidentally cancelled, program will be shut down.");
                 } catch (InterruptedException e) {
-                    System.out.println("Match found. Exiting from lobby...");
                     Thread.currentThread().interrupt();
                     return;
                 }

@@ -27,8 +27,10 @@ public class GameModeChoiceCLI extends AbstractGameModeChoice {
                 System.out.println("Error select a valid mode ");
             }
         } while(!choiceDone);
+        if(gameModeChoice.equalsIgnoreCase("solo")) client.getUI().setSoloMode(true);
         messageToSend = new GameModeChoiceMessage(gameModeChoice);
         client.sendMessage(messageToSend);
+
     }
 
 

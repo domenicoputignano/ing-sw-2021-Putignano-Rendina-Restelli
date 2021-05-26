@@ -1,11 +1,9 @@
 package it.polimi.ingsw.Network;
 
-import it.polimi.ingsw.Commons.User;
 import it.polimi.ingsw.Controller.GameController;
 import it.polimi.ingsw.Model.MultiPlayerMode;
 import it.polimi.ingsw.Model.Player;
 import it.polimi.ingsw.Model.SoloMode.SoloMode;
-import it.polimi.ingsw.Utils.Messages.ServerMessages.GameSetupMessage;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.Updates.NewTurnUpdate;
 
 import java.io.IOException;
@@ -28,7 +26,7 @@ public class Server {
     private final Map<String, ClientStatus> accounts = new HashMap<>();
 
     private boolean active = false;
-    private ExecutorService executors = Executors.newCachedThreadPool();
+    private final ExecutorService executors = Executors.newCachedThreadPool();
 
 
     public Server(int PORT) throws IOException {
@@ -125,7 +123,8 @@ public class Server {
         accounts.get(player.getUser().getNickname()).bindRemoteView(remoteView);
         LOGGER.log(Level.INFO, "Starting a new SoloMode game...");
         soloMode.notifyGameSetup();
-        soloMode.notifyFirstTurn(new NewTurnUpdate(soloMode.getCurrPlayer().getUser()));
+        LOGGER.log(Level.INFO, "SoloMode game setup done");
+        //soloMode.notifyFirstTurn(new NewTurnUpdate(soloMode.getCurrPlayer().getUser()));
     }
 
     public Map<String, ClientStatus> getAccounts() {

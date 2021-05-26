@@ -41,7 +41,9 @@ public class ClientStatesController {
 
     public static void updateClientState(GameSetupMessage message, UI ui) {
         if(ui.isCLI()) {
-            ((LobbyCLI) ui.getClientState()).shutDownWaiterThread();
+            if (!ui.isSoloMode()) {
+                ((LobbyCLI) ui.getClientState()).shutDownWaiterThread();
+            }
             ui.changeClientState(new InitialLeaderChoiceCLI(ui.getClient()));
             ui.manageUserInteraction();
         } else {
@@ -52,14 +54,19 @@ public class ClientStatesController {
     public static void updateClientState(InitialLeaderChoiceUpdate message, UI ui) {
         if(ui.isReceiverAction(message.getUser())) {
             if(ui.isCLI()) {
-                if(ui.getClient().getUserPosition() > 1) {
-                    ui.changeClientState(new InitialResourceChoiceCLI(ui.getClient()));
+                if(ui.isSoloMode()) {
+                    ui.changeClientState(new ActionChoiceCLI(ui.getClient()));
                     ui.manageUserInteraction();
                 } else {
-                    System.out.println("Waiting for players that are choosing initial resources..");
-                    ui.changeClientState(new WaitForTurnCLI(ui.getClient()));
-                    ui.getClientState().manageUserInteraction();
-                    //TODO settare il client in attesa del completamento della configurazione
+                    if(ui.getClient().getUserPosition() > 1) {
+                        ui.changeClientState(new InitialResourceChoiceCLI(ui.getClient()));
+                        ui.manageUserInteraction();
+                    } else {
+                        System.out.println("Waiting for players that are choosing initial resources..");
+                        ui.changeClientState(new WaitForTurnCLI(ui.getClient()));
+                        ui.getClientState().manageUserInteraction();
+                        //TODO settare il client in attesa del completamento della configurazione
+                    }
                 }
             } else {
 
