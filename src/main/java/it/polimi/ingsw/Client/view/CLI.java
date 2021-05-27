@@ -210,6 +210,15 @@ public class CLI extends UI {
         System.out.println(message.getPlayedToken().getTokenEffect().renderTokenEffect());
         System.out.println("Lorenzo il Magnifico played, now it's your turn..");
     }
+    public void render(BuyDevCardPerformedUpdate message) {
+        if(isReceiverAction(message.getUser())) {
+            System.out.println("You successfully bought this development card: " + message.getBoughtCard());
+        } else {
+            System.out.println("User " + message.getUser() + " successfully bought a leader card of level "
+                    + message.getBoughtCard().getType().getLevel() + " and color "
+                    + message.getBoughtCard().getType().getColor());
+        }
+    }
 
     @Override
     public void renderError(String errorMessage) {
