@@ -24,8 +24,6 @@ public class ClientSetupConnection implements Runnable {
     private ObjectOutputStream outputStream;
     private ObjectInputStream inputStream;
 
-
-
     public ClientSetupConnection(Server server, Socket clientSocket){
         this.server = server;
         this.clientSocket = clientSocket;
@@ -121,6 +119,7 @@ public class ClientSetupConnection implements Runnable {
     public ObjectInputStream getInputStream() {
         return inputStream;
     }
+
 }
 
 

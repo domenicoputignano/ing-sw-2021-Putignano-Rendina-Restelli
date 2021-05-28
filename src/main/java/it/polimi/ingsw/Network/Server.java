@@ -25,7 +25,6 @@ public class Server {
     private final Map<String, ClientStatus> accounts = new HashMap<>();
 
     private boolean active = false;
-    private final ExecutorService executors = Executors.newCachedThreadPool();
 
 
     public Server(int PORT) throws IOException {
@@ -41,7 +40,7 @@ public class Server {
                 Socket socket = serverSocket.accept();
                 LOGGER.log(Level.INFO, "Connection established");
                 ClientSetupConnection clientSetupConnection = new ClientSetupConnection(this, socket);
-                executors.submit(clientSetupConnection);
+                new Thread(clientSetupConnection).start();
             } catch (IOException e) {
                 LOGGER.log(Level.INFO, "Unable to connect to client");
                 active = false;
@@ -85,7 +84,7 @@ public class Server {
                     clientSetupConnection.getInputStream(),
                     clientSetupConnection.getOutputStream());
 
-            executors.submit(clientStatus);
+            new Thread(clientStatus).start();
 
             //registration of each player
             accounts.put(clientSetupConnection.getNickname(), clientStatus);
@@ -110,7 +109,7 @@ public class Server {
     public void initializeGame(ClientSetupConnection client) {
         Player player = getClientAsPlayer(client);
         ClientStatus clientStatus = new ClientStatus(client.getClientSocket(),client.getInputStream(), client.getOutputStream());
-        executors.submit(clientStatus);
+        new Thread(clientStatus).start();
 
         // registration of the player
         accounts.put(client.getNickname(), clientStatus);
