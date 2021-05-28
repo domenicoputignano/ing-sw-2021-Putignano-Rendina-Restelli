@@ -21,7 +21,7 @@ import java.util.concurrent.Executors;
 public class CLI extends UI {
 
     private final Scanner input = new Scanner(System.in);
-    private final ExecutorService interactionManagerService = Executors.newCachedThreadPool();
+    private final ExecutorService interactionManagerService = Executors.newSingleThreadExecutor();
 
     public CLI(Client client) {
         super(client);

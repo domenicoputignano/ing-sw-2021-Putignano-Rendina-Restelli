@@ -42,7 +42,6 @@ public class Client {
         socketInObj = new ObjectInputStream(socket.getInputStream());
         createListeningThread();
         ui = new CLI(this);
-
         /*String socketLine;
         try{
             socketLine = socketInObj.readUTF();
@@ -91,7 +90,7 @@ public class Client {
                 try {
                     ServerMessage message = (ServerMessage) socketInObj.readObject();
                     LOGGER.log(Level.INFO, "Received message from Server of "+message.getClass().getName()+" type");
-                    //TODO handle of Received message
+                    // handle of Received message
                     message.handleMessage(this);
                 } catch (IOException e) {
                     LOGGER.log(Level.SEVERE, "Client disconnected!");
