@@ -46,6 +46,7 @@ public abstract class UI {
     public abstract void render(LeaderActionUpdate message);
     public abstract void render(PositioningUpdate message);
     public abstract void render(LorenzoPlayedUpdate message);
+    public abstract void render(BuyDevCardPerformedUpdate message);
 
     public abstract void renderError(String errorMessage);
 

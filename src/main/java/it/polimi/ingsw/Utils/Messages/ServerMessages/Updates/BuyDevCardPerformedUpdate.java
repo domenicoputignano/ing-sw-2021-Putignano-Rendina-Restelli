@@ -1,5 +1,6 @@
 package it.polimi.ingsw.Utils.Messages.ServerMessages.Updates;
 
+import it.polimi.ingsw.Client.ClientStatesController;
 import it.polimi.ingsw.Client.reducedmodel.ReducedPersonalBoard;
 import it.polimi.ingsw.Commons.Deck;
 import it.polimi.ingsw.Commons.DevelopmentCard;
@@ -24,9 +25,15 @@ public class BuyDevCardPerformedUpdate extends UpdateMessage {
     public void handleMessage(Client client) {
         client.getGame().performUpdate(this);
         if(client.getUI().isReceiverAction(user)) client.getUI().setNormalActionDone(true);
+        client.getUI().render(this);
+        ClientStatesController.updateClientState(this, client.getUI());
     }
 
     public List<Deck> getResultingDecks() {
         return resultingDecks;
+    }
+
+    public DevelopmentCard getBoughtCard() {
+        return boughtCard;
     }
 }
