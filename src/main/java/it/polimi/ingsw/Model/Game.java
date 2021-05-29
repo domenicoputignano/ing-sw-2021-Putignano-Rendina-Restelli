@@ -202,7 +202,6 @@ public abstract class Game extends Observable<ServerMessage> implements Observer
         return users.get(user);
     }
 
-
     public abstract ReducedGame getReducedVersion();
 
     public void notifyError(ErrorMessage message) {

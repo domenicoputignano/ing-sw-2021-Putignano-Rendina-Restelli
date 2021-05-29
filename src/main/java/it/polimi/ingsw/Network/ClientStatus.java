@@ -59,6 +59,7 @@ public class ClientStatus implements Runnable {
         } catch (IOException e) {
             LOGGER.log(Level.SEVERE, "Disconnection detected");
             isActive = false;
+            remoteView.handlePlayerDisconnection();
         } catch (ClassNotFoundException e) {
             LOGGER.log(Level.SEVERE, "Error in receiving message from client");
         }

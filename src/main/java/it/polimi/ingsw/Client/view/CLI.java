@@ -2,10 +2,12 @@ package it.polimi.ingsw.Client.view;
 
 import it.polimi.ingsw.Client.clientstates.AbstractClientState;
 import it.polimi.ingsw.Client.clientstates.cli.ActionChoiceCLI;
+import it.polimi.ingsw.Client.reducedmodel.ReducedDepot;
 import it.polimi.ingsw.Commons.Effect;
 import it.polimi.ingsw.Commons.LeaderCard;
 import it.polimi.ingsw.Commons.ResourceType;
 import it.polimi.ingsw.Network.Client;
+import it.polimi.ingsw.Utils.ANSI_Color;
 import it.polimi.ingsw.Utils.MarbleDestination;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.*;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.Updates.*;
@@ -156,14 +158,16 @@ public class CLI extends UI {
     }
     public void render(TakeResourcesFromMarketUpdate message) {
         if(isReceiverAction(message.getUser())) {
-            System.out.printf("You got following resources from market: "+message.getEarnedResources()+" and %d faith points",
+            System.out.printf("You got following resources from market: "+message.getEarnedResources()+" and %d faith points\n" +
+                            "Your depots are show below\n",
                     message.getFaithPoints());
+
         } else {
             System.out.printf("User "+message.getUser()+"" +
-                    " has taken following resources from market: "+message.getEarnedResources()+" and he got %d faith points \n", message.getFaithPoints());
+                    " has taken following resources from market: "+message.getEarnedResources()+" and he got %d faith points\n" +
+                    "His depots are shown below\n", message.getFaithPoints());
         }
-        System.out.println("Resulting market tray is shown below\n");
-        showMarketTray();
+        showDepots();
     }
     public void render(FaithMarkerUpdate message) {
         if(message.getUser().equals(message.getTriggeringUser())&&isReceiverAction(message.getTriggeringUser())) {
@@ -286,6 +290,12 @@ public class CLI extends UI {
         for(LeaderCard card : client.getGame().getPlayer(client.getUser()).getAvailableLeaderCards()) {
             System.out.printf("Card n.%d "+card+"\n",
                     client.getGame().getPlayer(client.getUser()).getAvailableLeaderCards().indexOf(card)+1);
+        }
+    }
+
+    public void showDepots() {
+        for(ReducedDepot depot : client.getGame().getPlayer(client.getUser()).getPersonalBoard().getWarehouse().getNormalDepots()) {
+            System.out.println(ANSI_Color.escape(depot.getType()) + depot + ANSI_Color.RESET);
         }
     }
 

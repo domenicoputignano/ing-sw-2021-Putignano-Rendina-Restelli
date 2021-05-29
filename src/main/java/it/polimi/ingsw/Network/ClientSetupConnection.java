@@ -63,15 +63,12 @@ public class ClientSetupConnection implements Runnable {
     private void nicknameChoice() throws IOException, ClassNotFoundException {
         String nickname;
         boolean availableNickname = false;
-        int x = 1;
         outputStream.writeObject(new ServerAsksForNickname());
         outputStream.flush();
         do {
-            LOGGER.log(Level.INFO,"Tentativo scelta nome n.ro "+x);
             UsernameChoiceMessage messageFromClient = (UsernameChoiceMessage) inputStream.readObject();
             nickname = messageFromClient.getNickname();
             if(server.isNicknameAvailableBeforeStarting(nickname)) {
-                x++;
                 outputStream.writeObject(new NotAvailableNicknameMessage());
                 outputStream.flush();
             }
@@ -84,7 +81,6 @@ public class ClientSetupConnection implements Runnable {
                 }
                 else {
                     availableNickname = true;
-                    LOGGER.log(Level.INFO, "Nickname choice done ");
                 }
             }
         } while (!availableNickname);
@@ -100,7 +96,6 @@ public class ClientSetupConnection implements Runnable {
     }
 
     private void gameChoice() throws IOException, ClassNotFoundException {
-        //TODO da cambiare con CLI/GUI
         outputStream.writeObject(new ServerAskForGameMode());
         outputStream.flush();
         GameModeChoiceMessage message = (GameModeChoiceMessage) inputStream.readObject();
@@ -108,7 +103,6 @@ public class ClientSetupConnection implements Runnable {
         if(choice.equalsIgnoreCase("multiplayer")) mode = GameMode.MULTIPLAYER;
         else {
             if(choice.equalsIgnoreCase("solo")) mode = GameMode.SOLO;
-
         }
     }
 

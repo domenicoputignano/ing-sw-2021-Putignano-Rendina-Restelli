@@ -36,6 +36,9 @@ public class RemoteView implements Observer<ServerMessage> {
 
     public void handleClientMessage(ClientMessage message) {  message.handleMessage(gameController, this); }
 
+    public void handlePlayerDisconnection() {
+        user.setActive(false);
+    }
 
     public void update(ServerMessage message) {
         clientStatus.send(message);

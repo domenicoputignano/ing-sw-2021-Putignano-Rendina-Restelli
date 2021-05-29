@@ -1,6 +1,7 @@
 package it.polimi.ingsw.Client.reducedmodel;
 
 import it.polimi.ingsw.Commons.ResourceType;
+import it.polimi.ingsw.Utils.ANSI_Color;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -15,6 +16,7 @@ public class ReducedDepot implements Serializable {
         this.type = type;
         this.size = size;
     }
+
 
 
     @Override
@@ -32,10 +34,22 @@ public class ReducedDepot implements Serializable {
 
     @Override
     public String toString() {
-        return "Depot {" +
-                "occ=" + occ +
-                ", type=" + type +
-                ", size=" + size +
-                '}';
+        StringBuilder result = new StringBuilder();
+        result.append(size).append(": ");
+        for(int i = 0; i < occ; i++ )
+            result.append(type.toString()).append("\t");
+        return String.valueOf(result);
+    }
+
+    public int getOcc() {
+        return occ;
+    }
+
+    public ResourceType getType() {
+        return type;
+    }
+
+    public int getSize() {
+        return size;
     }
 }

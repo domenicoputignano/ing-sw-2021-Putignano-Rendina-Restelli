@@ -38,11 +38,11 @@ public class ReducedMarketTray implements Serializable {
 
     private String toStringAvailableMarbles() {
         String result = "";
-        for(int i = 0; i < availableMarbles.length; i++){
-            for(int j = 0; j < availableMarbles[i].length; j++) {
-                result = result.concat(availableMarbles[i][j].toString());
+        for (ReducedMarble[] availableMarble : availableMarbles) {
+            for (ReducedMarble reducedMarble : availableMarble) {
+                result = result.concat(reducedMarble.toString());
             }
-            result = result+"\n";
+            result = result + "\n";
         }
         return result;
     }

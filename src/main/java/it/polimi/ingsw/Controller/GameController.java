@@ -1,5 +1,6 @@
 package it.polimi.ingsw.Controller;
 
+import it.polimi.ingsw.Commons.User;
 import it.polimi.ingsw.Model.Game;
 import it.polimi.ingsw.Model.GameState;
 import it.polimi.ingsw.Model.Player;
@@ -70,6 +71,7 @@ public class GameController {
             sender.sendError(new ActionError(sender.getPlayer().getUser(),ActionError.Trigger.WRONGGAMEPHASE));
         }
     }
+
 
     private boolean checkAllLeaderChoicesDone(AtomicInteger leaderChoicesDone) {
         if(leaderChoicesDone.get() == model.getNumOfPlayers()){
