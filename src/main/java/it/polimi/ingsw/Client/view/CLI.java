@@ -13,10 +13,7 @@ import it.polimi.ingsw.Utils.Messages.ServerMessages.*;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.Updates.*;
 import it.polimi.ingsw.Utils.ResourceSource;
 
-import java.util.EnumMap;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -172,15 +169,14 @@ public class CLI extends UI {
     public void render(FaithMarkerUpdate message) {
         if(message.getUser().equals(message.getTriggeringUser())&&isReceiverAction(message.getTriggeringUser())) {
             System.out.printf("Your action involved faith track, other players got %d faith points\n", message.getPoints());
-        } else {
-            if(isReceiverAction(message.getUser())) {
-                System.out.printf("User "+message.getTriggeringUser()+" has performed action" +
-                        " involving faith track, you got %d faith points\n", message.getPoints());
-            }
-            else {
-                System.out.printf("User "+message.getTriggeringUser()+" has performed action" +
-                        " involving faith track, %s got %d faith points\n", message.getUser(), message.getPoints());
-            }
+        }
+        if(isReceiverAction(message.getUser())&&!isReceiverAction(message.getTriggeringUser())) {
+            System.out.printf("User "+message.getTriggeringUser()+" has performed action" +
+                    " involving faith track, you got %d faith points\n", message.getPoints());
+        }
+        if(!isReceiverAction(message.getUser())&&isReceiverAction(message.getTriggeringUser())) {
+            System.out.printf("You performed action " +
+                    "involving faith track, user "+ message.getUser()+" got %d faith points\n", message.getPoints());
         }
     }
     public void render(MoveUpdate message) {
@@ -296,6 +292,11 @@ public class CLI extends UI {
     public void showDepots() {
         for(ReducedDepot depot : client.getGame().getPlayer(client.getUser()).getPersonalBoard().getWarehouse().getNormalDepots()) {
             System.out.println(ANSI_Color.escape(depot.getType()) + depot + ANSI_Color.RESET);
+        }
+        if(Arrays.stream(client.getGame().getPlayer(client.getUser()).getPersonalBoard().getWarehouse().getExtraDepots()).filter(Objects::nonNull).count() > 0) {
+            for(ReducedDepot depot : client.getGame().getPlayer(client.getUser()).getPersonalBoard().getWarehouse().getExtraDepots()) {
+                System.out.println(ANSI_Color.escape(depot.getType()) + depot + ANSI_Color.RESET);
+            }
         }
     }
 
