@@ -49,6 +49,7 @@ public abstract class UI {
     public abstract void render(BuyDevCardPerformedUpdate message);
     public abstract void render(ActivateProductionUpdate message);
     public abstract void render(NotAvailableNicknameMessage message);
+    public abstract void render(ActivateVaticanReportUpdate message);
 
     public abstract void renderError(String errorMessage);
 

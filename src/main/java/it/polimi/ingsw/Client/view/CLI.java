@@ -240,6 +240,16 @@ public class CLI extends UI {
     }
 
     @Override
+    public void render(ActivateVaticanReportUpdate message) {
+        if(isReceiverAction(client.getUser())) {
+            System.out.println("You activated a Vatican Report on section + "+message.getSection()+"."
+                    +"\nYour tile is now face up ");
+        }
+        System.out.println("User "+message.getTriggeringUser()+" activated a Vatican Report on section "+message.getSection()+"."
+        +"\nYour tile is "+message.getState());
+    }
+
+    @Override
     public void renderError(String errorMessage) {
         System.out.println(errorMessage);
     }

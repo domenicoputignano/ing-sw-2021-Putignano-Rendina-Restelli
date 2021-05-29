@@ -56,9 +56,13 @@ public class ClientStatus implements Runnable {
                 LOGGER.log(Level.INFO, "Message from client of type "+messageFromClient.getClass().getName()+"");
                 remoteView.handleClientMessage(messageFromClient);
             }
-        } catch (IOException | ClassNotFoundException e) {
+        } catch (IOException e) {
+            LOGGER.log(Level.SEVERE, "Disconnection detected");
+            isActive = false;
+        } catch (ClassNotFoundException e) {
             LOGGER.log(Level.SEVERE, "Error in receiving message from client");
         }
+
 
     }
 

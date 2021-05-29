@@ -9,12 +9,12 @@ import it.polimi.ingsw.Network.Client;
 public class ActivateVaticanReportUpdate extends UpdateMessage {
 
     //User that caused activation of Vatican Report by performing an action
-    private User triggeringUser;
+    private final User triggeringUser;
 
     //resulting state of tile related to a specific Player that has to match with the destination of this messageToSend
-    private StateFavorTiles state;
+    private final StateFavorTiles state;
 
-    private int section;
+    private final int section;
 
     public ActivateVaticanReportUpdate(User user, ReducedPersonalBoard reducedPersonalBoard, User triggeringUser, StateFavorTiles state, int section) {
         this.user = user;
@@ -26,6 +26,19 @@ public class ActivateVaticanReportUpdate extends UpdateMessage {
 
     @Override
     public void handleMessage(Client client) {
+        client.getGame().updatePersonalBoard(this);
+        client.getUI().render(this);
+    }
 
+    public User getTriggeringUser() {
+        return triggeringUser;
+    }
+
+    public StateFavorTiles getState() {
+        return state;
+    }
+
+    public int getSection() {
+        return section;
     }
 }

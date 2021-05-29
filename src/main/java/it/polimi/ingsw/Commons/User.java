@@ -35,11 +35,11 @@ public class User implements Serializable {
         return nickname;
     }
 
-    public boolean isActive() {
+    public synchronized boolean isActive() {
         return isActive;
     }
 
-    public void setActive(boolean active) {
+    public synchronized void setActive(boolean active) {
         isActive = active;
     }
 

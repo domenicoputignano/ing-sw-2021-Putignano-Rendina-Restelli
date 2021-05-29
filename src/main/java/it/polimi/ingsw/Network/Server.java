@@ -20,6 +20,7 @@ public class Server {
     private final ServerSocket serverSocket;
     private final Logger LOGGER = Logger.getLogger(Server.class.getName());
     private final Set<ClientSetupConnection> waitingConnections = new HashSet<>();
+    private final ExecutorService setupManagers = Executors.newCachedThreadPool();
 
     //username of players involved in one match (connected or not)
     private final Map<String, ClientStatus> accounts = new HashMap<>();
@@ -40,7 +41,7 @@ public class Server {
                 Socket socket = serverSocket.accept();
                 LOGGER.log(Level.INFO, "Connection established");
                 ClientSetupConnection clientSetupConnection = new ClientSetupConnection(this, socket);
-                new Thread(clientSetupConnection).start();
+                setupManagers.submit(clientSetupConnection);
             } catch (IOException e) {
                 LOGGER.log(Level.INFO, "Unable to connect to client");
                 active = false;
@@ -54,8 +55,6 @@ public class Server {
     }
 
     public void lobby(ClientSetupConnection clientSetupConnection) {
-        //todo eventualmente spostare
-        //waitingConnections.add(clientSetupConnection);
         Set<ClientSetupConnection> suitableConnections = getSuitableConnections(clientSetupConnection.getNumOfPlayers());
         if(suitableConnections.size() == clientSetupConnection.getNumOfPlayers()) {
             initializeGame(suitableConnections);

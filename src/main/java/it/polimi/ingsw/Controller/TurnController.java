@@ -20,7 +20,7 @@ public class TurnController {
 
 
 
-    public void handleBuyDevCardMessage(BuyDevCardMessage message, RemoteView sender) {
+    public synchronized void handleBuyDevCardMessage(BuyDevCardMessage message, RemoteView sender) {
         if (isSenderTurn(sender.getPlayer())) {
             if (message.isValidMessage()) {
                 if (!model.isEmptyDeck(message.getType())) {
@@ -42,7 +42,7 @@ public class TurnController {
         } else sender.sendError(new WrongTurnError(sender.getPlayer().getUser()));
     }
 
-    public void handleActivateProductionMessage(ActivateProductionMessage message, RemoteView sender) {
+    public synchronized void handleActivateProductionMessage(ActivateProductionMessage message, RemoteView sender) {
         if(isSenderTurn(sender.getPlayer())) {
             if (message.isValidMessage()) {
                 if (currPlayer.getPersonalBoard().isValidRequestedProduction(message.getProductions())) {
@@ -65,7 +65,7 @@ public class TurnController {
         } else sender.sendError(new WrongTurnError(sender.getPlayer().getUser()));
     }
 
-    public void handleTakeResourcesFromMarketMessage(TakeResourcesFromMarketMessage message, RemoteView sender) {
+    public synchronized void handleTakeResourcesFromMarketMessage(TakeResourcesFromMarketMessage message, RemoteView sender) {
         if(isSenderTurn(sender.getPlayer())) {
             if (message.isValidMessage()) {
                 if (model.getMarketTray().checkRequestedMarbles(message.getRequestedMarbles(), message.getPlayerChoice(), message.getIndex())) {
@@ -88,7 +88,7 @@ public class TurnController {
         } else sender.sendError(new WrongTurnError(sender.getPlayer().getUser()));
     }
 
-    public void handleLeaderActionMessage(LeaderActionMessage message, RemoteView sender) {
+    public synchronized void handleLeaderActionMessage(LeaderActionMessage message, RemoteView sender) {
         if(isSenderTurn(sender.getPlayer())) {
             if (message.isValidMessage()) {
                 model.getTurn().setTurnState(TurnState.ActionType.LEADERACTION);
@@ -103,7 +103,7 @@ public class TurnController {
         } else sender.sendError(new WrongTurnError(sender.getPlayer().getUser()));
     }
 
-    public void handleMoveMessage(MoveResourcesMessage message, RemoteView sender) {
+    public synchronized void handleMoveMessage(MoveResourcesMessage message, RemoteView sender) {
         if(isSenderTurn(sender.getPlayer())) {
             if (message.isValidMessage()) {
                 try {
@@ -116,7 +116,7 @@ public class TurnController {
         } else sender.sendError(new WrongTurnError(sender.getPlayer().getUser()));
     }
 
-    public void handlePositioningMessage(PositioningMessage message, RemoteView sender) {
+    public synchronized void handlePositioningMessage(PositioningMessage message, RemoteView sender) {
         if(isSenderTurn(sender.getPlayer())) {
             if (message.isValidMessage()) {
                 if (model.getTurn().getActionType() == TurnState.ActionType.TAKERESOURCESFROMMARKET) {
@@ -142,7 +142,7 @@ public class TurnController {
 
     }
 
-    public void handleEndTurnMessage(EndTurnMessage message, RemoteView sender) {
+    public synchronized void handleEndTurnMessage(EndTurnMessage message, RemoteView sender) {
         if(isSenderTurn(sender.getPlayer())) {
             model.nextTurn();
             this.currPlayer = model.getCurrPlayer();
