@@ -220,6 +220,25 @@ public class CLI extends UI {
         }
     }
 
+    public void render(ActivateProductionUpdate message) {
+        if(isReceiverAction(message.getUser())) {
+            System.out.println("You successfully activated production, these resources have been converted" +
+                    " ( "+message.getPayedResources()+" )");
+            System.out.println("Following resources have been stored in your warehouse: "+
+                    message.getReceivedResources());
+            if(message.getFaithPoints()>0) System.out.printf("You got also %d faith points\n", message.getFaithPoints());
+        } else {
+            System.out.println("User "+message.getUser()+" activated production and he got following resources: "
+            +message.getReceivedResources());
+            if(message.getFaithPoints()>0) System.out.println("He got also "+message.getFaithPoints()+" faith points");
+        }
+    }
+
+    @Override
+    public void render(NotAvailableNicknameMessage message) {
+        System.out.print("Nickname not available, select another one: ");
+    }
+
     @Override
     public void renderError(String errorMessage) {
         System.out.println(errorMessage);

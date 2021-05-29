@@ -42,14 +42,13 @@ public class MultiPlayerMode extends Game {
     }
 
     public void nextTurn(){
-        if(isLastTurn && currPlayer.getPosition()==numOfPlayers) {
-            concludeGame();
-        }
-        else{
-            this.currPlayer = nextPlayer(this.currPlayer);
-            this.turn = new Turn(turn.getGame(), currPlayer);
-            notify(new NewTurnUpdate(currPlayer.getUser()));
-        }
+                if(isLastTurn && currPlayer.getPosition()==numOfPlayers) {
+                    concludeGame();
+                }
+                else {
+                    this.currPlayer = nextPlayer(this.currPlayer);
+                    this.turn = new Turn(turn.getGame(), currPlayer);
+                }
     }
 
     public Player nextPlayer(Player currPlayer)

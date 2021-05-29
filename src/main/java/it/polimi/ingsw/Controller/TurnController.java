@@ -5,6 +5,7 @@ import it.polimi.ingsw.Model.*;
 import it.polimi.ingsw.Network.RemoteView;
 import it.polimi.ingsw.Utils.Messages.ClientMessages.*;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.Errors.*;
+import it.polimi.ingsw.Utils.Messages.ServerMessages.Updates.NewTurnUpdate;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.Updates.ServerAsksForPositioning;
 
 
@@ -145,6 +146,7 @@ public class TurnController {
         if(isSenderTurn(sender.getPlayer())) {
             model.nextTurn();
             this.currPlayer = model.getCurrPlayer();
+            model.notifyFirstTurn(new NewTurnUpdate(currPlayer.getUser()));
         }
         else sender.sendError(new WrongTurnError(sender.getPlayer().getUser()));
 

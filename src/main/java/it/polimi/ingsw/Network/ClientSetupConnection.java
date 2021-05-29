@@ -5,6 +5,7 @@ import it.polimi.ingsw.Utils.GameMode;
 import it.polimi.ingsw.Utils.Messages.ClientMessages.GameModeChoiceMessage;
 import it.polimi.ingsw.Utils.Messages.ClientMessages.NumOfPlayerChoiceMessage;
 import it.polimi.ingsw.Utils.Messages.ClientMessages.UsernameChoiceMessage;
+import it.polimi.ingsw.Utils.Messages.ServerMessages.NotAvailableNicknameMessage;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.ServerAskForGameMode;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.ServerAskForNumOfPlayer;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.ServerAsksForNickname;
@@ -62,19 +63,33 @@ public class ClientSetupConnection implements Runnable {
     private void nicknameChoice() throws IOException, ClassNotFoundException {
         String nickname;
         boolean availableNickname = false;
+        int x = 1;
+        outputStream.writeObject(new ServerAsksForNickname());
+        outputStream.flush();
         do {
-            outputStream.writeObject(new ServerAsksForNickname());
-            outputStream.flush();
+            LOGGER.log(Level.INFO,"Tentativo scelta nome n.ro "+x);
             UsernameChoiceMessage messageFromClient = (UsernameChoiceMessage) inputStream.readObject();
             nickname = messageFromClient.getNickname();
-            if (server.playerWithSameNicknameIsPlaying(nickname)) {
+            if(server.isNicknameAvailableBeforeStarting(nickname)) {
+                x++;
+                outputStream.writeObject(new NotAvailableNicknameMessage());
+                outputStream.flush();
+            }
+            else {
+                if (server.isPlayerWithSameNicknamePlaying(nickname)) {
                 //TODO cambiare con opportuno messaggio
-                outputStream.writeObject("Nickname not available, choose another one: ");
+                outputStream.writeObject(new NotAvailableNicknameMessage());
                 outputStream.flush();
                 LOGGER.log(Level.INFO, "Player has chosen an unavailable nickname, connection refused ");
-            } else availableNickname = true;
+                }
+                else {
+                    availableNickname = true;
+                    LOGGER.log(Level.INFO, "Nickname choice done ");
+                }
+            }
         } while (!availableNickname);
         this.nickname = nickname;
+        server.addWaitingPlayer(this);
     }
 
     private void numOfPlayersChoice() throws IOException, ClassNotFoundException {

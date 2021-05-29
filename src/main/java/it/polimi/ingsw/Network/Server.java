@@ -49,25 +49,34 @@ public class Server {
         }
     }
 
+    public void addWaitingPlayer(ClientSetupConnection waitingConnection) {
+        waitingConnections.add(waitingConnection);
+    }
 
     public void lobby(ClientSetupConnection clientSetupConnection) {
-        waitingConnections.add(clientSetupConnection);
+        //todo eventualmente spostare
+        //waitingConnections.add(clientSetupConnection);
         Set<ClientSetupConnection> suitableConnections = getSuitableConnections(clientSetupConnection.getNumOfPlayers());
         if(suitableConnections.size() == clientSetupConnection.getNumOfPlayers()) {
             initializeGame(suitableConnections);
             waitingConnections.removeAll(suitableConnections);
         }
-
+        LOGGER.log(Level.INFO, "Waiting connections "+ waitingConnections);
     }
 
     //method to detect if a player with the same nickname is already playing
-    public boolean playerWithSameNicknameIsPlaying(String nickname) {
+    public boolean isPlayerWithSameNicknamePlaying(String nickname) {
         return accounts.containsKey(nickname) && accounts.get(nickname).isActive();
     }
 
     public boolean inactivePlayerAlreadyRegistered(String nickname) {
         return accounts.containsKey(nickname) && !accounts.get(nickname).isActive();
     }
+
+    public boolean isNicknameAvailableBeforeStarting(String nickname) {
+        return waitingConnections.stream().anyMatch(x -> x.getNickname().equals(nickname));
+    }
+
 
     private Set<ClientSetupConnection> getSuitableConnections(int numOfPlayers) {
         return waitingConnections.stream().filter(x -> x.getNumOfPlayers()==numOfPlayers).collect(Collectors.toSet());
@@ -107,6 +116,7 @@ public class Server {
 
 
     public void initializeGame(ClientSetupConnection client) {
+        waitingConnections.remove(client);
         Player player = getClientAsPlayer(client);
         ClientStatus clientStatus = new ClientStatus(client.getClientSocket(),client.getInputStream(), client.getOutputStream());
         new Thread(clientStatus).start();
@@ -125,7 +135,4 @@ public class Server {
         //soloMode.notifyFirstTurn(new NewTurnUpdate(soloMode.getCurrPlayer().getUser()));
     }
 
-    public Map<String, ClientStatus> getAccounts() {
-        return accounts;
-    }
 }
