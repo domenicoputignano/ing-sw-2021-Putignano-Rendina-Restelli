@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane fx:id="anchorBuyDevCard" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.Client.view.GUI.BuyDevCardController">
+    <children>
+        <Button fx:id="closeBuyDevCard" layoutX="975.0" layoutY="50.0" mnemonicParsing="false" onAction="#handleCloseChooseAction" prefHeight="65.0" prefWidth="70.0" styleClass="button, exit" stylesheets="@../css/button.css" />
+      <ImageView fitHeight="126.0" fitWidth="78.0" layoutX="256.0" layoutY="108.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/deck_bg.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="126.0" fitWidth="78.0" layoutX="256.0" layoutY="237.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/deck_bg.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="126.0" fitWidth="78.0" layoutX="256.0" layoutY="369.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/deck_bg.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="126.0" fitWidth="78.0" layoutX="256.0" layoutY="499.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/deck_bg.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="devCard1" layoutX="257.0" layoutY="100.0" mnemonicParsing="false" prefHeight="130.0" prefWidth="71.0" styleClass="devCard1" stylesheets="@../css/button.css" />
+    </children>
+</AnchorPane>

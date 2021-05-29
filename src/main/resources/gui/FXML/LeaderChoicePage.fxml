@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="950.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.Client.view.GUI.LeaderChoiceController">
+    <top>
+        <AnchorPane fx:id="top" prefHeight="104.0" prefWidth="950.0" BorderPane.alignment="CENTER" />
+    </top>
+    <center>
+        <AnchorPane fx:id="center" prefHeight="470.0" prefWidth="950.0" BorderPane.alignment="CENTER">
+            <children>
+                <Button fx:id="backButton" layoutX="14.0" layoutY="8.0" mnemonicParsing="false" onAction="#handleBackButton" prefHeight="85.0" prefWidth="73.0" styleClass="button, back" stylesheets="@../css/button.css" />
+                <Button fx:id="infoButton" layoutX="796.0" layoutY="8.0" mnemonicParsing="false" onAction="#info" prefHeight="85.0" prefWidth="73.0" styleClass="button, info" stylesheets="@../css/button.css" />
+                <Button fx:id="exitButton" layoutX="869.0" layoutY="8.0" mnemonicParsing="false" onAction="#exit" prefHeight="85.0" prefWidth="73.0" styleClass="button, exit" stylesheets="@../css/button.css" />
+            <ImageView fitHeight="547.0" fitWidth="699.0" layoutX="71.0" layoutY="63.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/leaderChoiceTab.png" />
+               </image>
+            </ImageView>
+            <TextField fx:id="chooseCardText" editable="false" layoutX="157.0" layoutY="122.0" mouseTransparent="true" prefHeight="24.0" prefWidth="573.0" styleClass="chooseLeaderCard" stylesheets="@../css/text.css" text="You have received these leadercards. Choose 2 leader cards to discard !" />
+            <Button fx:id="leaderCard1" layoutX="125.0" layoutY="189.0" mnemonicParsing="false" onAction="#discardLeaderCard1" prefHeight="215.0" prefWidth="147.0" styleClass="chooseLeaderCard" stylesheets="@../css/button.css" />
+            <Button fx:id="leaderCard2" layoutX="275.0" layoutY="189.0" mnemonicParsing="false" onAction="#discardLeaderCard2" prefHeight="215.0" prefWidth="147.0" styleClass="chooseLeaderCard" stylesheets="@../css/button.css" />
+            <Button fx:id="leaderCard3" layoutX="425.0" layoutY="189.0" mnemonicParsing="false" onAction="#discardLeaderCard3" prefHeight="215.0" prefWidth="147.0" styleClass="chooseLeaderCard" stylesheets="@../css/button.css" />
+            <Button fx:id="leaderCard4" layoutX="575.0" layoutY="189.0" mnemonicParsing="false" onAction="#discardLeaderCard4" prefHeight="215.0" prefWidth="147.0" styleClass="chooseLeaderCard" stylesheets="@../css/button.css" />
+            <ImageView fx:id="indicator1" fitHeight="63.0" fitWidth="54.0" layoutX="193.0" layoutY="410.0" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@../img/indicator.png" />
+               </image></ImageView>
+            <ImageView fx:id="indicator2" fitHeight="63.0" fitWidth="54.0" layoutX="353.0" layoutY="410.0" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@../img/indicator.png" />
+               </image></ImageView>
+            <ImageView fx:id="indicator3" fitHeight="63.0" fitWidth="54.0" layoutX="513.0" layoutY="410.0" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@../img/indicator.png" />
+               </image></ImageView>
+            <ImageView fx:id="indicator4" fitHeight="63.0" fitWidth="54.0" layoutX="673.0" layoutY="410.0" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@../img/indicator.png" />
+               </image></ImageView>
+            <TextField fx:id="errorChoiceText" editable="false" layoutX="127.0" layoutY="463.0" mouseTransparent="true" prefHeight="44.0" prefWidth="561.0" styleClass="errorLeaderCard" stylesheets="@../css/text.css" />
+            <Button fx:id="clearButton" alignment="CENTER" contentDisplay="CENTER" layoutX="531.0" layoutY="475.0" mnemonicParsing="false" onAction="#clearIndicator" prefHeight="50.0" prefWidth="81.0" styleClass="clearButton" stylesheets="@../css/button.css" text="Clear" />
+            <Button fx:id="okButton" layoutX="605.0" layoutY="463.0" mnemonicParsing="false" onAction="#handleOkChoice" prefHeight="69.0" prefWidth="137.0" styleClass="okButton" stylesheets="@../css/button.css" text="OK" />
+            <TextField fx:id="errorSelectedResources" editable="false" layoutX="331.0" layoutY="476.0" mouseTransparent="true" prefHeight="44.0" prefWidth="263.0" styleClass="errorLeaderCard" stylesheets="@../css/text.css" />
+                </children>
+        </AnchorPane>
+    </center>
+    <bottom>
+        <AnchorPane fx:id="bottom" prefHeight="91.0" prefWidth="950.0" BorderPane.alignment="CENTER" />
+    </bottom>
+</BorderPane>

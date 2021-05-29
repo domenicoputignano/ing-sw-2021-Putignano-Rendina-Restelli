@@ -141,5 +141,5 @@ class MultiPlayerModeTest {
         expectedRank.add(new Pair<>(playerList.get(3).getUser(), victoryPoints4));
 
         assertEquals(expectedRank, multiPlayerMode.concludeGame());
-       }
+    }
 }

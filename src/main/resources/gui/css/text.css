@@ -1,0 +1,42 @@
+.username{
+    -fx-background-color: rgba(255,255,255,0.3);
+    -fx-font-weight: bold;
+}
+.text-field {
+    -fx-focus-color: black ;
+    -fx-background-color: rgba(255,255,255,0.3);
+    -fx-prompt-text-fill: rgba(0,0,0,0.5);
+    -fx-font-weight: bold;
+}
+.errorText{
+     -fx-background-color: transparent;
+     -fx-font-weight: bold;
+ }
+.numberPlayers{
+    -fx-background-color: transparent;
+    -fx-font-weight: bold;
+}
+.chooseLeaderCard{
+    -fx-background-color: transparent;
+    -fx-font-weight: bold;
+}
+.errorLeaderCard{
+    -fx-background-color: transparent;
+    -fx-font-weight: bold;
+}
+.resourcesText{
+    -fx-background-color: rgb(216, 167, 67);
+    -fx-font-weight: bold;
+}
+.textFieldResources {
+    -fx-focus-color: black ;
+    -fx-background-color: rgba(255,255,255,0.3);
+    -fx-prompt-text-fill: rgba(0,0,0,0.5);
+    -fx-font-weight: bold;
+}
+.errorResourcesText
+{
+    -fx-background-color: transparent;
+    -fx-font-weight: bold;
+}
+
