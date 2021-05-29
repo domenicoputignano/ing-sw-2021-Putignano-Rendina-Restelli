@@ -1,5 +1,7 @@
 package it.polimi.ingsw.Commons;
 
+import it.polimi.ingsw.Utils.ANSI_Color;
+
 import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
@@ -45,19 +47,39 @@ public class LeaderCard implements Serializable {
         this.isActive = true;
     }
 
+
+
+
     @Override
     public String toString() {
-        if(requirementsCards.size()>0) return "{" +
+        String color;
+        switch (leaderEffect.getType()) {
+            case shield:
+                color = ANSI_Color.BLUE.escape();
+                break;
+            case stone:
+                color = ANSI_Color.GREY.escape();
+                break;
+            case servant:
+                color = ANSI_Color.PURPLE.escape();
+                break;
+            case coin:
+                color = ANSI_Color.YELLOW.escape();
+                break;
+            default:
+                throw new IllegalStateException("Unexpected value: " + leaderEffect.getType());
+        }
+        if(requirementsCards.size()>0) return color+"{" +
                 "\nEffect=" + leaderEffect +
-                ",\nrequirementsCards=" + requirementsCards +
-                ",\nactive=" + isActive +
-                ",\nvictoryPoints=" + victoryPoints +
-                '}';
-        else return "{" +
+                "\nrequirementsCards=" + requirementsCards +
+                "\nactive=" + isActive +
+                "\nvictoryPoints=" + victoryPoints +
+                "}"+ ANSI_Color.RESET;
+        else return color+"{" +
                 "\nEffect=" + leaderEffect +
-                ",\nrequirementsResources=" + requirementsResources +
-                ",\nactive=" + isActive +
-                ",\nvictoryPoints=" + victoryPoints +
-                '}';
+                "\nrequirementsResources=" + requirementsResources +
+                "\nactive=" + isActive +
+                "\nvictoryPoints=" + victoryPoints +
+                '}'+ ANSI_Color.RESET;
     }
 }
