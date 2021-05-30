@@ -131,7 +131,7 @@ public class Server {
         LOGGER.log(Level.INFO, "Starting a new SoloMode game...");
         soloMode.notifyGameSetup();
         LOGGER.log(Level.INFO, "SoloMode game setup done");
-        //soloMode.notifyFirstTurn(new NewTurnUpdate(soloMode.getCurrPlayer().getUser()));
+
     }
 
 }

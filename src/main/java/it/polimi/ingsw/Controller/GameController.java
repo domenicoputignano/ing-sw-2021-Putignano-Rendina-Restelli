@@ -1,6 +1,5 @@
 package it.polimi.ingsw.Controller;
 
-import it.polimi.ingsw.Commons.User;
 import it.polimi.ingsw.Model.Game;
 import it.polimi.ingsw.Model.GameState;
 import it.polimi.ingsw.Model.Player;
@@ -86,7 +85,7 @@ public class GameController {
         if(resourceChoiceDone.get() == model.getNumOfPlayers()-1){
             model.nextState(GameState.GAMEFLOW);
             receivedChoiceMessage.set(0);
-            model.notifyFirstTurn(new NewTurnUpdate(model.getCurrPlayer().getUser()));
+            model.notifyTurn(new NewTurnUpdate(model.getCurrPlayer().getUser()));
         }
     }
 

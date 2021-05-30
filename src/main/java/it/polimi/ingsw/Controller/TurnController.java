@@ -146,7 +146,6 @@ public class TurnController {
         if(isSenderTurn(sender.getPlayer())) {
             model.nextTurn();
             this.currPlayer = model.getCurrPlayer();
-            model.notifyFirstTurn(new NewTurnUpdate(currPlayer.getUser()));
         }
         else sender.sendError(new WrongTurnError(sender.getPlayer().getUser()));
 

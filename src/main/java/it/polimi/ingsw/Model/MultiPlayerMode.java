@@ -47,6 +47,7 @@ public class MultiPlayerMode extends Game {
         } else {
             this.currPlayer = nextPlayer(this.currPlayer);
             this.turn = new Turn(turn.getGame(), currPlayer);
+            notifyTurn(new NewTurnUpdate(currPlayer.getUser()));
         }
     }
 
