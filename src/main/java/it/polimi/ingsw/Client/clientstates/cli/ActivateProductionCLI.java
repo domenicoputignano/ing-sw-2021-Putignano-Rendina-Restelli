@@ -27,6 +27,8 @@ public class ActivateProductionCLI extends AbstractActivateProduction {
         do {
             selectProductions();
             if(areValidRequestedProductions()){
+                System.out.println("Available resources are shown below\n"+
+                        client.getGame().getPlayer(client.getUser()).getPersonalBoard().getWarehouse());
                 resourcesChoice();
                 if(checkRequiredResources()) {
                     messageToSend.setHowToTakeResources(cli.askInstructionsOnHowToTakeResources(calculateInputResources()));

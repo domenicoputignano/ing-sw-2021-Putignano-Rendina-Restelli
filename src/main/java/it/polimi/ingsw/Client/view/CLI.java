@@ -6,6 +6,7 @@ import it.polimi.ingsw.Client.reducedmodel.ReducedDepot;
 import it.polimi.ingsw.Commons.Effect;
 import it.polimi.ingsw.Commons.LeaderCard;
 import it.polimi.ingsw.Commons.ResourceType;
+import it.polimi.ingsw.Commons.User;
 import it.polimi.ingsw.Network.Client;
 import it.polimi.ingsw.Utils.ANSI_Color;
 import it.polimi.ingsw.Utils.MarbleDestination;
@@ -30,6 +31,8 @@ public class CLI extends UI {
     public Map<ResourceSource, EnumMap<ResourceType,Integer>> askInstructionsOnHowToTakeResources(Map<ResourceType,Integer> neededResources) {
         Map<ResourceSource, EnumMap<ResourceType,Integer>> howToTakeResources = initializeHowToTakeResources();
         boolean availableExtraDepot = client.getGame().getCurrPlayer().getCompatibleLeaderEffect(Effect.EXTRADEPOT).size()>0;
+        System.out.println("Following resources are available in your warehouse\n" +
+                client.getGame().getPlayer(client.getUser()).getPersonalBoard().getWarehouse());
         do {
             showPossibleSources(neededResources, availableExtraDepot);
             ResourceSource source;
@@ -137,7 +140,9 @@ public class CLI extends UI {
     }
     public void render(InitialResourceChoiceUpdate message) {
         if(isReceiverAction(message.getUser())) {
-            System.out.println("You have chosen " + message.getChosenResources() + " resources ");
+            System.out.println("You have chosen " + message.getChosenResources() + " resources, your depots " +
+                    "have been updated as follows\n");
+            showDepots();
         } else System.out.println("User "+message.getUser()+" added "+message.getChosenResources()+" to his" +
                 " depots ");
     }
@@ -158,13 +163,14 @@ public class CLI extends UI {
             System.out.printf("You got following resources from market: "+message.getEarnedResources()+" and %d faith points\n" +
                             "Your depots are show below\n",
                     message.getFaithPoints());
-
+            showDepots();
         } else {
             System.out.printf("User "+message.getUser()+"" +
                     " has taken following resources from market: "+message.getEarnedResources()+" and he got %d faith points\n" +
                     "His depots are shown below\n", message.getFaithPoints());
+            showDepots(message.getUser());
         }
-        showDepots();
+
     }
     public void render(FaithMarkerUpdate message) {
         if(message.getUser().equals(message.getTriggeringUser())&&isReceiverAction(message.getTriggeringUser())) {
@@ -224,8 +230,10 @@ public class CLI extends UI {
         if(isReceiverAction(message.getUser())) {
             System.out.println("You successfully activated production, these resources have been converted" +
                     " ( "+message.getPayedResources()+" )");
-            System.out.println("Following resources have been stored in your warehouse: "+
+            System.out.println("Following resources have been stored in your strongbox: "+
                     message.getReceivedResources());
+            //TODO rivedere questa parte anche negli altri render
+            System.out.println("Here is your warehouse updated\n"+ message.getUserPersonalBoard().getWarehouse());
             if(message.getFaithPoints()>0) System.out.printf("You got also %d faith points\n", message.getFaithPoints());
         } else {
             System.out.println("User "+message.getUser()+" activated production and he got following resources: "
@@ -289,15 +297,22 @@ public class CLI extends UI {
         }
     }
 
-    public void showDepots() {
-        for(ReducedDepot depot : client.getGame().getPlayer(client.getUser()).getPersonalBoard().getWarehouse().getNormalDepots()) {
-            System.out.println(ANSI_Color.escape(depot.getType()) + depot + ANSI_Color.RESET);
+
+    public void showDepots(User user) {
+        int index = 1;
+        for(ReducedDepot depot : client.getGame().getPlayer(user).getPersonalBoard().getWarehouse().getNormalDepots()) {
+            System.out.print("Depot "+index+": "+ANSI_Color.escape(depot.getType()) + depot + ANSI_Color.RESET+"\n");
+            index = index + 1;
         }
-        if(Arrays.stream(client.getGame().getPlayer(client.getUser()).getPersonalBoard().getWarehouse().getExtraDepots()).filter(Objects::nonNull).count() > 0) {
+        if(Arrays.stream(client.getGame().getPlayer(user).getPersonalBoard().getWarehouse().getExtraDepots()).anyMatch(Objects::nonNull)) {
             for(ReducedDepot depot : client.getGame().getPlayer(client.getUser()).getPersonalBoard().getWarehouse().getExtraDepots()) {
-                System.out.println(ANSI_Color.escape(depot.getType()) + depot + ANSI_Color.RESET);
+                System.out.print("Extra depot of type: "+depot.getType()+" "+ANSI_Color.escape(depot.getType()) + depot + ANSI_Color.RESET+"\n");
             }
         }
+    }
+
+    public void showDepots() {
+        showDepots(client.getUser());
     }
 
     public ResourceType askValidResource(Scanner input) {

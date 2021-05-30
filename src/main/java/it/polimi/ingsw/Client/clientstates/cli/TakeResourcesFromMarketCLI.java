@@ -9,6 +9,7 @@ import it.polimi.ingsw.Utils.MarbleDestination;
 import it.polimi.ingsw.Utils.MarketChoice;
 import it.polimi.ingsw.Utils.Pair;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class TakeResourcesFromMarketCLI extends AbstractTakeResourcesFromMarket {
@@ -53,28 +54,40 @@ public class TakeResourcesFromMarketCLI extends AbstractTakeResourcesFromMarket 
 
     private void chooseIndex() {
         System.out.println("You chose " + message.getPlayerChoice());
+        //int choice;
         int choice;
         boolean choiceOK = false;
         if(message.getPlayerChoice() == MarketChoice.ROW) {
             System.out.println("Choose the index of the row [1-3]");
             do {
-                choice = input.nextInt();
-                if(choice==1||choice==2||choice==3) {
-                    message.setIndex(choice);
-                    choiceOK = true;
-                } else {
+                try {
+                    String string = input.next();
+                    choice = Integer.parseInt(string);
+                    if(choice==1|| choice==2|| choice==3) {
+                        message.setIndex(choice);
+                        choiceOK = true;
+                    } else {
+                        throw new NumberFormatException();
+                    }
+                } catch (NumberFormatException e) {
                     System.out.println("Invalid index, choose again [1-3]");
                 }
             } while(!choiceOK);
-        } else {
+        }
+        else {
             System.out.println("Choose the index of the column [1-4]");
             do {
-                choice = input.nextInt();
-                if(choice==1||choice==2||choice==3||choice==4) {
-                    message.setIndex(choice);
-                    choiceOK = true;
-                } else {
-                    System.out.println("Invalid index, choose again [1-4]");
+                try {
+                    String string = input.next();
+                    choice = Integer.parseInt(string);
+                    if(choice==1|| choice==2|| choice==3 || choice == 4) {
+                        message.setIndex(choice);
+                        choiceOK = true;
+                    } else {
+                        throw new NumberFormatException();
+                    }
+                } catch (NumberFormatException e) {
+                    System.out.println("Invalid index, choose again [1-3]");
                 }
             } while(!choiceOK);
         }
