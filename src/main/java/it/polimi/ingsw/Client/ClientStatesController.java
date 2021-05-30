@@ -117,6 +117,13 @@ public class ClientStatesController {
         }
     }
 
+    public static void updateClientState(GameResumedMessage message, UI ui) {
+        if(ui.isCLI()) {
+            ui.changeClientState(new WaitForTurnCLI(ui.getClient()));
+            ui.manageUserInteraction();
+        }
+    }
+
     public static void updateClientState(ErrorMessage message, UI ui) {
         if(ui.isReceiverAction(message.getTriggeringUser())){
             if(ui.isCLI()){

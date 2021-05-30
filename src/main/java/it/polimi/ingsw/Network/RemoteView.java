@@ -30,6 +30,7 @@ public class RemoteView implements Observer<ServerMessage> {
 
     public RemoteView(RemoteView remoteView, ClientStatus clientStatus) {
         this.user = remoteView.user;
+        this.user.setActive(true);
         this.gameController = remoteView.gameController;
         this.game = gameController.getModel();
         this.clientStatus = clientStatus;

@@ -36,6 +36,7 @@ public abstract class UI {
     public abstract void render(ServerAskForGameMode message);
     public abstract void render(ServerAskForNumOfPlayer message);
     public abstract void render(GameSetupMessage message);
+    public abstract void render(GameResumedMessage message);
     public abstract void render(InitialLeaderChoiceUpdate message);
     public abstract void render(InitialResourceChoiceUpdate message);
     public abstract void render(ServerAsksForPositioning message);
@@ -50,7 +51,6 @@ public abstract class UI {
     public abstract void render(ActivateProductionUpdate message);
     public abstract void render(NotAvailableNicknameMessage message);
     public abstract void render(ActivateVaticanReportUpdate message);
-
     public abstract void renderError(String errorMessage);
 
     public boolean isReceiverAction(User sender) {

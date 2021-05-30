@@ -212,6 +212,11 @@ public class CLI extends UI {
             } else System.out.println("User " + message.getUser() + " has correctly positioned all the resources he had to settle");
         }
     }
+
+    public void render(GameResumedMessage message) {
+        System.out.println("Game resumed..");
+    }
+
     public void render(LorenzoPlayedUpdate message){
         System.out.println(message.getPlayedToken().getTokenEffect().renderTokenEffect());
         System.out.println("Lorenzo il Magnifico played, now it's your turn..");

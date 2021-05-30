@@ -37,7 +37,7 @@ public class MoveResourcesCLI extends AbstractMoveResources {
     }
 
     private boolean parseSourceDestinationChoice(String choice) {
-        switch(choice) {
+        switch(choice.toUpperCase()) {
             case "DEPOT,DEPOT": {
                 manageMoveFromNormalToNormalDepot();
                 return true;

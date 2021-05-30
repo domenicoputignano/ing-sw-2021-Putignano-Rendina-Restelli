@@ -10,6 +10,7 @@ import it.polimi.ingsw.Model.MarketTray.MarketTray;
 import it.polimi.ingsw.Observable;
 import it.polimi.ingsw.Observer;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.Errors.ErrorMessage;
+import it.polimi.ingsw.Utils.Messages.ServerMessages.GameResumedMessage;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.ServerMessage;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.Updates.ActivateVaticanReportUpdate;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.Updates.NewTurnUpdate;
@@ -187,6 +188,8 @@ public abstract class Game extends Observable<ServerMessage> implements Observer
     public void notifyTurn(NewTurnUpdate message) {
         notify(message);
     }
+
+    public void notifyGameResumed() { notify(new GameResumedMessage(this.getReducedVersion())); }
 
     public GameState getGameState() {
         return gameState;
