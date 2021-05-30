@@ -257,6 +257,7 @@ public class CLI extends UI {
         +"\nYour tile is "+message.getState());
     }
 
+
     @Override
     public void renderError(String errorMessage) {
         System.out.println(errorMessage);

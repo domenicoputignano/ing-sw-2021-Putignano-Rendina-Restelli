@@ -41,6 +41,7 @@ public class ClientSetupConnection implements Runnable {
             if (server.inactivePlayerAlreadyRegistered(nickname)) {
                 LOGGER.log(Level.INFO, "Player con lo stesso nickname già presente ma non attivo ");
                 //TODO recuperare i dati della partita associata a quel giocatore
+                server.resumeGame(this);
             }
             else {
                 gameChoice();
@@ -74,7 +75,6 @@ public class ClientSetupConnection implements Runnable {
             }
             else {
                 if (server.isPlayerWithSameNicknamePlaying(nickname)) {
-                //TODO cambiare con opportuno messaggio
                 outputStream.writeObject(new NotAvailableNicknameMessage());
                 outputStream.flush();
                 LOGGER.log(Level.INFO, "Player has chosen an unavailable nickname, connection refused ");

@@ -131,7 +131,15 @@ public class Server {
         LOGGER.log(Level.INFO, "Starting a new SoloMode game...");
         soloMode.notifyGameSetup();
         LOGGER.log(Level.INFO, "SoloMode game setup done");
+    }
 
+    public void resumeGame(ClientSetupConnection client) {
+        ClientStatus oldClientStatus = accounts.get(client.getNickname());
+        RemoteView oldRemoteView = oldClientStatus.getRemoteView();
+        ClientStatus newClientStatus = new ClientStatus(client.getClientSocket(), client.getInputStream(), client.getOutputStream());
+        RemoteView newRemoteView = new RemoteView(oldRemoteView, newClientStatus);
+        newClientStatus.bindRemoteView(newRemoteView);
+        accounts.put(client.getNickname(), newClientStatus);
     }
 
 }

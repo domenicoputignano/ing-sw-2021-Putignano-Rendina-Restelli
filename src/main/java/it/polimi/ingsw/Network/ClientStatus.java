@@ -36,18 +36,10 @@ public class ClientStatus implements Runnable {
             e.printStackTrace(System.out);
             //TODO modificare come se trovassimo una disconnessione
             LOGGER.log(Level.SEVERE, "Disconnection detected!");
+            isActive = false;
         }
     }
 
-
-
-    public void bindRemoteView(RemoteView remoteView) {
-        this.remoteView = remoteView;
-    }
-
-    public boolean isActive() {
-        return isActive;
-    }
 
     public void run(){
         try {
@@ -63,8 +55,16 @@ public class ClientStatus implements Runnable {
         } catch (ClassNotFoundException e) {
             LOGGER.log(Level.SEVERE, "Error in receiving message from client");
         }
-
-
     }
 
+
+    public void bindRemoteView(RemoteView remoteView) {
+        this.remoteView = remoteView;
+    }
+
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public RemoteView getRemoteView() { return remoteView; }
 }

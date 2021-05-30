@@ -28,6 +28,13 @@ public class RemoteView implements Observer<ServerMessage> {
         game.addObserver(this);
     }
 
+    public RemoteView(RemoteView remoteView, ClientStatus clientStatus) {
+        this.user = remoteView.user;
+        this.gameController = remoteView.gameController;
+        this.game = gameController.getModel();
+        this.clientStatus = clientStatus;
+        game.addObserver(this);
+    }
 
 
     public void sendError(ErrorMessage errorMessage) {
@@ -47,4 +54,7 @@ public class RemoteView implements Observer<ServerMessage> {
     public Player getPlayer() {
         return game.getPlayer(user);
     }
+
+    public Game getModel() { return game; }
+
 }
