@@ -172,6 +172,8 @@ public class CLI extends UI {
         }
 
     }
+
+    //TODO da cambiare
     public void render(FaithMarkerUpdate message) {
         if(message.getUser().equals(message.getTriggeringUser())&&isReceiverAction(message.getTriggeringUser())) {
             System.out.printf("Your action involved faith track, other players got %d faith points\n", message.getPoints());
@@ -185,6 +187,7 @@ public class CLI extends UI {
                     "involving faith track, user "+ message.getUser()+" got %d faith points\n", message.getPoints());
         }
     }
+
     public void render(MoveUpdate message) {
         if(isReceiverAction(message.getUser())) {
             System.out.println("Your move action has been correctly performed\n"+

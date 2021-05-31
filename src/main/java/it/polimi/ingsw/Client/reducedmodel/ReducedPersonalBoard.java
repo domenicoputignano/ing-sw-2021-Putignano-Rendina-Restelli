@@ -71,4 +71,7 @@ public class ReducedPersonalBoard implements Serializable {
         return slots[index];
     }
 
+    public ReducedFaithTrack getFaithTrack() {
+        return faithTrack;
+    }
 }

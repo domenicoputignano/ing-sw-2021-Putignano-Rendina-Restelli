@@ -55,4 +55,5 @@ public class Slot implements Cloneable, Serializable {
         return Objects.hash(developmentCardStack);
     }
 
+
 }
