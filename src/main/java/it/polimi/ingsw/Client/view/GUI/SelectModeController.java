@@ -1,5 +1,7 @@
 package it.polimi.ingsw.Client.view.GUI;
 
+import it.polimi.ingsw.Client.clientstates.gui.GameModeChoiceGUI;
+import it.polimi.ingsw.Client.clientstates.gui.UsernameChoiceGUI;
 import javafx.fxml.FXML;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
@@ -21,15 +23,15 @@ public class SelectModeController extends Controller {
     @FXML
     void handleMultiPlayButton()
     {
-        GUIApp.getStage().setScene(GUIApp.loadScene("/gui/fxml/SelectNumOfPlayersPage.fxml"));
-        GUIApp.getStage().show();
+        clientState = new GameModeChoiceGUI(client,"multiplayer");
+        clientState.manageUserInteraction();
     }
 
     @FXML
     void handleSoloPlayButton()
     {
-        GUIApp.getStage().setScene(GUIApp.loadScene("/gui/fxml/LeaderChoicePage.fxml"));
-        GUIApp.getStage().show();
+        clientState = new GameModeChoiceGUI(client,"solo");
+        clientState.manageUserInteraction();
     }
     @FXML
     void handleBackButton()

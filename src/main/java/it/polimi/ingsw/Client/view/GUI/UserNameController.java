@@ -58,7 +58,6 @@ public class UserNameController extends Controller {
 
     @FXML
     void submitUsername() {
-        Logger.getLogger(UserNameController.class.getName()).log(Level.INFO,client.toString());
         clientState = new UsernameChoiceGUI(client,username.getText());
         clientState.manageUserInteraction();
     }

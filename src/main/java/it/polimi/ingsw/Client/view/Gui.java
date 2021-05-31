@@ -57,7 +57,10 @@ public class Gui extends UI{
 
     @Override
     public void render(ServerAskForNumOfPlayer message) {
-
+        Platform.runLater(() ->{
+                    GUIApp.showScene("/gui/fxml/SelectNumOfPlayersPage.fxml");
+                }
+        );
     }
 
     @Override
