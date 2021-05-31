@@ -144,6 +144,11 @@ public class Gui extends UI{
     }
 
     @Override
+    public void render(JoinLobbyMessage message) {
+
+    }
+
+    @Override
     public void renderError(String errorMessage) {
 
     }

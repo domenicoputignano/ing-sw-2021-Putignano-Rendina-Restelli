@@ -25,8 +25,6 @@ public class NumOfPlayersChoiceCLI extends AbstractNumOfPlayersChoice {
         } while (numOfPlayers < 1 || numOfPlayers > 4);
         messageToSend = new NumOfPlayerChoiceMessage(numOfPlayers);
         client.sendMessage(messageToSend);
-
-        //TODO PROVA
         client.getUI().changeClientState(new LobbyCLI(client));
         client.getUI().getClientState().manageUserInteraction();
 

@@ -4,7 +4,7 @@ import it.polimi.ingsw.Controller.GameController;
 import it.polimi.ingsw.Model.MultiPlayerMode;
 import it.polimi.ingsw.Model.Player;
 import it.polimi.ingsw.Model.SoloMode.SoloMode;
-import it.polimi.ingsw.Utils.Messages.ServerMessages.GameResumedMessage;
+import it.polimi.ingsw.Utils.Messages.ServerMessages.JoinLobbyMessage;
 
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -51,8 +51,8 @@ public class Server {
         }
     }
 
-    public void addWaitingPlayer(ClientSetupConnection waitingConnection) {
-        waitingConnections.add(waitingConnection);
+    public void addWaitingPlayer(ClientSetupConnection awaitingConnection) {
+        waitingConnections.add(awaitingConnection);
     }
 
     public void lobby(ClientSetupConnection clientSetupConnection) {
@@ -77,6 +77,15 @@ public class Server {
         return waitingConnections.stream().anyMatch(x -> x.getNickname().equals(nickname));
     }
 
+    public int getNumOfMissingPlayers(int numOfPlayersChosen) {
+        return numOfPlayersChosen - getSuitableConnections(numOfPlayersChosen).size();
+    }
+
+    public void notifyLobbyJoin(int numOfPlayersChosen, String guest) throws IOException {
+        for(ClientSetupConnection awaitingConnection : getSuitableConnections(numOfPlayersChosen)) {
+            awaitingConnection.sendConfigurationMessage(new JoinLobbyMessage(guest, getNumOfMissingPlayers(numOfPlayersChosen)));
+        }
+    }
 
     private Set<ClientSetupConnection> getSuitableConnections(int numOfPlayers) {
         return waitingConnections.stream().filter(x -> x.getNumOfPlayers()==numOfPlayers).collect(Collectors.toSet());

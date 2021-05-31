@@ -51,10 +51,15 @@ public abstract class UI {
     public abstract void render(ActivateProductionUpdate message);
     public abstract void render(NotAvailableNicknameMessage message);
     public abstract void render(ActivateVaticanReportUpdate message);
+    public abstract void render(JoinLobbyMessage message);
     public abstract void renderError(String errorMessage);
 
     public boolean isReceiverAction(User sender) {
         return sender.equals(client.getUser());
+    }
+
+    public boolean isGuestWhoHasJustJoined(String senderNickname) {
+        return senderNickname.equals(client.getUser().getNickname());
     }
 
     public AbstractClientState getClientState() {

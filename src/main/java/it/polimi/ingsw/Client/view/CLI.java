@@ -264,6 +264,24 @@ public class CLI extends UI {
         +"\nYour tile is "+message.getState());
     }
 
+    @Override
+    public void render(JoinLobbyMessage message) {
+        if(isGuestWhoHasJustJoined(message.getAwaitingGuest())) {
+            if(message.getNumOfMissingPlayers()<=0) {
+                System.out.println("All required players joined the lobby, game will start soon...");
+            } else {
+                System.out.println("You successfully joined the lobby, please wait for other "+
+                        message.getNumOfMissingPlayers()+" player(s) to join...");
+            }
+        } else {
+            if(message.getNumOfMissingPlayers()<=0) {
+                System.out.println("Guest "+message.getAwaitingGuest()+" joined the lobby, game will start soon...");
+            } else {
+                System.out.println("Guest "+message.getAwaitingGuest()+" joined the lobby, please " +
+                        "wait for "+message.getNumOfMissingPlayers()+" player(s) to join...");
+            }
+        }
+    }
 
     @Override
     public void renderError(String errorMessage) {

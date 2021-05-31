@@ -1,14 +1,12 @@
 package it.polimi.ingsw.Network;
 
 
+import it.polimi.ingsw.Commons.User;
 import it.polimi.ingsw.Utils.GameMode;
 import it.polimi.ingsw.Utils.Messages.ClientMessages.GameModeChoiceMessage;
 import it.polimi.ingsw.Utils.Messages.ClientMessages.NumOfPlayerChoiceMessage;
 import it.polimi.ingsw.Utils.Messages.ClientMessages.UsernameChoiceMessage;
-import it.polimi.ingsw.Utils.Messages.ServerMessages.NotAvailableNicknameMessage;
-import it.polimi.ingsw.Utils.Messages.ServerMessages.ServerAskForGameMode;
-import it.polimi.ingsw.Utils.Messages.ServerMessages.ServerAskForNumOfPlayer;
-import it.polimi.ingsw.Utils.Messages.ServerMessages.ServerAsksForNickname;
+import it.polimi.ingsw.Utils.Messages.ServerMessages.*;
 
 import java.io.*;
 import java.net.Socket;
@@ -39,8 +37,8 @@ public class ClientSetupConnection implements Runnable {
             inputStream = new ObjectInputStream(clientSocket.getInputStream());
             nicknameChoice();
             if (server.inactivePlayerAlreadyRegistered(nickname)) {
-                LOGGER.log(Level.INFO, "Player con lo stesso nickname già presente ma non attivo ");
-                //TODO recuperare i dati della partita associata a quel giocatore
+                LOGGER.log(Level.INFO, "Player already existing but not playing");
+                //TODO correctly resuming of the game. Check what happens if player in turn disconnects
                 server.resumeGame(this);
             }
             else {
@@ -50,6 +48,7 @@ public class ClientSetupConnection implements Runnable {
                 }
                 else {
                     numOfPlayersChoice();
+                    server.notifyLobbyJoin(numOfPlayers,nickname);
                     LOGGER.log(Level.INFO, "Client " + nickname + " connected and " + numOfPlayers + " players chosen");
                     server.lobby(this);
                 }
@@ -64,20 +63,17 @@ public class ClientSetupConnection implements Runnable {
     private void nicknameChoice() throws IOException, ClassNotFoundException {
         String nickname;
         boolean availableNickname = false;
-        outputStream.writeObject(new ServerAsksForNickname());
-        outputStream.flush();
+        sendConfigurationMessage(new ServerAsksForNickname());
         do {
             UsernameChoiceMessage messageFromClient = (UsernameChoiceMessage) inputStream.readObject();
             nickname = messageFromClient.getNickname();
             if(server.isNicknameAvailableBeforeStarting(nickname)) {
-                outputStream.writeObject(new NotAvailableNicknameMessage());
-                outputStream.flush();
+                sendConfigurationMessage(new NotAvailableNicknameMessage());
             }
             else {
                 if (server.isPlayerWithSameNicknamePlaying(nickname)) {
-                outputStream.writeObject(new NotAvailableNicknameMessage());
-                outputStream.flush();
-                LOGGER.log(Level.INFO, "Player has chosen an unavailable nickname, connection refused ");
+                    sendConfigurationMessage(new NotAvailableNicknameMessage());
+                    LOGGER.log(Level.INFO, "Player has chosen an unavailable nickname, connection refused ");
                 }
                 else {
                     availableNickname = true;
@@ -89,15 +85,13 @@ public class ClientSetupConnection implements Runnable {
     }
 
     private void numOfPlayersChoice() throws IOException, ClassNotFoundException {
-        outputStream.writeObject(new ServerAskForNumOfPlayer());
-        outputStream.flush();
+        sendConfigurationMessage(new ServerAskForNumOfPlayer());
         NumOfPlayerChoiceMessage message = (NumOfPlayerChoiceMessage)inputStream.readObject();
         numOfPlayers = message.getNumOfPlayers();
     }
 
     private void gameChoice() throws IOException, ClassNotFoundException {
-        outputStream.writeObject(new ServerAskForGameMode());
-        outputStream.flush();
+        sendConfigurationMessage(new ServerAskForGameMode());
         GameModeChoiceMessage message = (GameModeChoiceMessage) inputStream.readObject();
         String choice = message.getGameModeChoice();
         if(choice.equalsIgnoreCase("multiplayer")) mode = GameMode.MULTIPLAYER;
@@ -127,6 +121,11 @@ public class ClientSetupConnection implements Runnable {
 
     public ObjectInputStream getInputStream() {
         return inputStream;
+    }
+
+    public void sendConfigurationMessage(ServerMessage message) throws IOException {
+        outputStream.writeObject(message);
+        outputStream.flush();
     }
 
 }
