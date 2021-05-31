@@ -36,14 +36,18 @@ public class Client {
     }
 
 
-    public void start() throws IOException {
+    public void start(boolean startAsGui) throws IOException {
         socket = new Socket(ip, port);
         System.out.println("Connection established");
         socketOutObj = new ObjectOutputStream(socket.getOutputStream());
         socketOutObj.flush();
         socketInObj = new ObjectInputStream(socket.getInputStream());
-        ui = new Gui(this);
-        //ui = new CLI(this);
+        if(startAsGui) {
+            ui = new Gui(this);
+            new Thread(() -> GUIApp.launchGUI(this)).start();
+        }
+        else
+            ui = new CLI(this);
         createListeningThread();
         /*String socketLine;
         try{

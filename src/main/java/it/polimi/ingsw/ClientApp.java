@@ -7,11 +7,12 @@ import java.io.IOException;
 
 public class ClientApp {
 
+    private static boolean startAsGui = true;
+
     public static void main(String[] args) {
         Client client = new Client("127.0.0.1", 12345);
        try{
-           new Thread(() -> GUIApp.launchGUI(args)).start();
-           client.start();
+           client.start(startAsGui);
         }catch (IOException e){
             System.err.println(e.getMessage());
         }

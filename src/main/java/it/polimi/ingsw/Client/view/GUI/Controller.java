@@ -1,5 +1,7 @@
 package it.polimi.ingsw.Client.view.GUI;
 
+import it.polimi.ingsw.Client.clientstates.AbstractClientState;
+import it.polimi.ingsw.Network.Client;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.ImageCursor;
@@ -39,6 +41,10 @@ public class Controller {
     @FXML
     public Button infoButton;
 
+    protected Client client;
+
+    protected AbstractClientState clientState;
+
     Stage exit;
     Stage infoStage;
     Stage mainstage;
@@ -51,6 +57,7 @@ public class Controller {
         mainstage = new Stage();
         mainstage.setTitle("Master of Renaissance");
         mainstage.initStyle(StageStyle.TRANSPARENT);
+
 
         BackgroundSize bSize = new BackgroundSize(BackgroundSize.AUTO,BackgroundSize.AUTO, false,false,true,true);
 
@@ -112,6 +119,14 @@ public class Controller {
         }
         infoStage.show();
 
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
+    }
+
+    public Client getClient() {
+        return client;
     }
 
     public void setFont(TextField textField, int dim){

@@ -1,6 +1,7 @@
 package it.polimi.ingsw.Client.view.GUI;
 
-import it.polimi.ingsw.Utils.Messages.ServerMessages.ServerAsksForNickname;
+import it.polimi.ingsw.Client.view.Gui;
+import it.polimi.ingsw.Network.Client;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
@@ -19,13 +20,18 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class GUIApp extends Application {
+
     private static final Object objectLock = new Object();
 
     public static Stage stage;
 
     public static Controller controller;
+
     private static boolean ok = false;
+
     private static final String CURSOR = "/gui/img/cursor.png";
+
+    private static Client client;
 
     @Override
     public void start(Stage stageD) throws InterruptedException {
@@ -43,8 +49,8 @@ public class GUIApp extends Application {
 
     }
 
-    public static void launchGUI(String[] args) {
-        launch(args);
+    public static void launchGUI(Client client) {
+        launch();
     }
 
     public static Scene loadScene(String fxmlFile) {
@@ -52,6 +58,7 @@ public class GUIApp extends Application {
             FXMLLoader loader = new FXMLLoader(GUIApp.class.getResource(fxmlFile));
             Parent root = loader.load();
             controller = loader.getController();
+            controller.setClient(client);
             Scene scene = new Scene(Objects.requireNonNull(root), 950, 800, Color.TRANSPARENT);
             scene.setCursor(new ImageCursor(new Image(CURSOR)));
             scene.setUserData(loader);
@@ -72,10 +79,15 @@ public class GUIApp extends Application {
         return stage;
     }
 
-    public static void waitForGameSetup() throws InterruptedException {
+    public static void waitForGameSetup(Client client) throws InterruptedException {
         synchronized (objectLock) {
             while(!ok) objectLock.wait();
         }
+        GUIApp.setClient(client);
     }
 
+    private static void setClient(Client clientInput)
+    {
+        client = clientInput;
+    }
 }

@@ -32,7 +32,7 @@ public class Gui extends UI{
     @Override
     public void render(ServerAsksForNickname message) {
         try {
-            GUIApp.waitForGameSetup();
+            GUIApp.waitForGameSetup(client);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -42,7 +42,6 @@ public class Gui extends UI{
             e.printStackTrace();
         }
         Platform.runLater(() ->{
-
             GUIApp.showScene("/gui/fxml/UserName.fxml");
                 }
         );
@@ -50,7 +49,10 @@ public class Gui extends UI{
 
     @Override
     public void render(ServerAskForGameMode message) {
-
+        Platform.runLater(() ->{
+                    GUIApp.showScene("/gui/fxml/SelectModePage.fxml");
+                }
+        );
     }
 
     @Override

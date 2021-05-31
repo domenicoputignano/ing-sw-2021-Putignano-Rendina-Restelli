@@ -1,10 +1,15 @@
 package it.polimi.ingsw.Client.view.GUI;
 
+import it.polimi.ingsw.Client.clientstates.gui.UsernameChoiceGUI;
+import it.polimi.ingsw.Utils.Messages.ClientMessages.UsernameChoiceMessage;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class UserNameController extends Controller {
 
@@ -19,6 +24,9 @@ public class UserNameController extends Controller {
 
     @FXML
     public Button cancelButton;
+
+
+
     @FXML
     public void initialize() {
         super.initialize();
@@ -49,14 +57,10 @@ public class UserNameController extends Controller {
     }
 
     @FXML
-    void submitUsername() throws InterruptedException {
-        if(username.getText().length()<3) {
-
-            errorText.setText("Insert valid username");
-        }
-        else {
-            GUIApp.showScene("/gui/fxml/SelectModePage.fxml");
-        }
+    void submitUsername() {
+        Logger.getLogger(UserNameController.class.getName()).log(Level.INFO,client.toString());
+        clientState = new UsernameChoiceGUI(client,username.getText());
+        clientState.manageUserInteraction();
     }
 
 }
