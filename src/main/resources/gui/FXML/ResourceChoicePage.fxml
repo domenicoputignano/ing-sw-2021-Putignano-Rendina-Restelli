@@ -61,7 +61,7 @@
             <TextField fx:id="numShield" alignment="CENTER" layoutX="533.0" layoutY="340.0" prefHeight="58.0" prefWidth="97.0" styleClass="textFieldResources" stylesheets="@../css/text.css" />
             <TextField fx:id="numStone" alignment="CENTER" layoutX="533.0" layoutY="415.0" prefHeight="58.0" prefWidth="97.0" styleClass="textFieldResources" stylesheets="@../css/text.css" />
             <TextField fx:id="errorResources" editable="false" layoutX="314.0" layoutY="464.0" mouseTransparent="true" prefHeight="40.0" prefWidth="335.0" styleClass="errorResourcesText" stylesheets="@../css/text.css" />
-            <TextField fx:id="errorMismatch" editable="false" layoutX="413.0" layoutY="476.0" mouseTransparent="true" prefHeight="30.0" prefWidth="325.0" styleClass="errorResourcesText" stylesheets="@../css/text.css" />
+            <TextField fx:id="errorMismatch" editable="false" layoutX="342.0" layoutY="484.0" mouseTransparent="true" prefHeight="30.0" prefWidth="325.0" styleClass="errorResourcesText" stylesheets="@../css/text.css" />
             </children>
         </AnchorPane>
     </center>

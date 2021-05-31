@@ -7,7 +7,6 @@ import javafx.scene.layout.*;
 
 public class HomeController extends Controller{
 
-    public Button go;
     @FXML
     public void initialize() {
         super.initialize();
@@ -18,18 +17,6 @@ public class HomeController extends Controller{
                 BackgroundRepeat.NO_REPEAT,
                 BackgroundPosition.CENTER,
                 bSize)));
-        try{
-            Thread.sleep(4000);
-        }
-        catch (InterruptedException e)
-        {
-            e.printStackTrace();
-        }
     }
-    @FXML
-    public void startGame()
-    {
-        this.gui.getStage().setScene(this.gui.loadScene("/GUI/FXML/UserName.fxml"));
-        this.gui.getStage().show();
-    }
+
 }

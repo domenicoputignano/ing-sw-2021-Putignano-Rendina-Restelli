@@ -21,7 +21,6 @@ import java.util.Objects;
 
 public class Controller {
 
-    protected GUI gui;
 
     private static final String CURSOR = "/gui/img/cursor.png";
 
@@ -44,9 +43,6 @@ public class Controller {
     Stage infoStage;
     Stage mainstage;
 
-    public void setGUI(GUI gui) {
-        this.gui = gui;
-    }
 
 
     @FXML
@@ -76,15 +72,14 @@ public class Controller {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/FXML/ExitPage.fxml"));
             Parent root = loader.load();
-            this.gui.controller = loader.getController();
-            this.gui.controller.setGUI(this.gui);
+            GUIApp.controller = loader.getController();
             Scene scene = new Scene(Objects.requireNonNull(root), 570, 380, Color.TRANSPARENT);
             scene.setCursor(new ImageCursor(new Image(CURSOR), 36, 45));
             exit.initStyle(StageStyle.TRANSPARENT);
             exit.setAlwaysOnTop(true);
             scene.setUserData(loader);
             exit.initModality(Modality.WINDOW_MODAL);
-            exit.initOwner(this.gui.getStage());
+            exit.initOwner(GUIApp.getStage());
             scene.setUserData(loader);
             exit.setScene(scene);
 
@@ -101,15 +96,14 @@ public class Controller {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/FXML/InfoPage.fxml"));
             Parent root = loader.load();
-            this.gui.controller = loader.getController();
-            this.gui.controller.setGUI(this.gui);
+            GUIApp.controller = loader.getController();
             Scene scene = new Scene(Objects.requireNonNull(root), 1180, 750, Color.TRANSPARENT);
             scene.setCursor(new ImageCursor(new Image(CURSOR), 36, 45));
             infoStage.initStyle(StageStyle.TRANSPARENT);
             infoStage.setAlwaysOnTop(true);
             scene.setUserData(loader);
             infoStage.initModality(Modality.WINDOW_MODAL);
-            infoStage.initOwner(this.gui.getStage());
+            infoStage.initOwner(GUIApp.getStage());
             scene.setUserData(loader);
             infoStage.setScene(scene);
 

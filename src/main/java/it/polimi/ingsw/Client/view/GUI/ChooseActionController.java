@@ -84,15 +84,14 @@ public class ChooseActionController extends Controller{
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/FXML/LeaderActionPage.fxml"));
             Parent root = loader.load();
-            this.gui.controller = loader.getController();
-            this.gui.controller.setGUI(this.gui);
+            GUIApp.controller = loader.getController();
             Scene scene = new Scene(Objects.requireNonNull(root), 1180, 750, Color.TRANSPARENT);
             scene.setCursor(new ImageCursor(new Image(CURSOR), 36, 45));
             leaderStage.initStyle(StageStyle.TRANSPARENT);
             leaderStage.setAlwaysOnTop(true);
             scene.setUserData(loader);
             leaderStage.initModality(Modality.WINDOW_MODAL);
-            leaderStage.initOwner(this.gui.getStage());
+            leaderStage.initOwner(GUIApp.getStage());
             scene.setUserData(loader);
             leaderStage.setScene(scene);
 
@@ -109,15 +108,14 @@ public class ChooseActionController extends Controller{
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/FXML/ActivateProductionPage.fxml"));
             Parent root = loader.load();
-            this.gui.controller = loader.getController();
-            this.gui.controller.setGUI(this.gui);
+            GUIApp.controller = loader.getController();
             Scene scene = new Scene(Objects.requireNonNull(root), 1180, 750, Color.TRANSPARENT);
             scene.setCursor(new ImageCursor(new Image(CURSOR), 36, 45));
             activateProdStage.initStyle(StageStyle.TRANSPARENT);
             activateProdStage.setAlwaysOnTop(true);
             scene.setUserData(loader);
             activateProdStage.initModality(Modality.WINDOW_MODAL);
-            activateProdStage.initOwner(this.gui.getStage());
+            activateProdStage.initOwner(GUIApp.getStage());
             scene.setUserData(loader);
             activateProdStage.setScene(scene);
 
@@ -134,15 +132,14 @@ public class ChooseActionController extends Controller{
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/FXML/BuyDevCardPage.fxml"));
             Parent root = loader.load();
-            this.gui.controller = loader.getController();
-            this.gui.controller.setGUI(this.gui);
+            GUIApp.controller = loader.getController();
             Scene scene = new Scene(Objects.requireNonNull(root), 1180, 750, Color.TRANSPARENT);
             scene.setCursor(new ImageCursor(new Image(CURSOR), 36, 45));
             buyDevCardStage.initStyle(StageStyle.TRANSPARENT);
             buyDevCardStage.setAlwaysOnTop(true);
             scene.setUserData(loader);
             buyDevCardStage.initModality(Modality.WINDOW_MODAL);
-            buyDevCardStage.initOwner(this.gui.getStage());
+            buyDevCardStage.initOwner(GUIApp.getStage());
             scene.setUserData(loader);
             buyDevCardStage.setScene(scene);
 
@@ -157,17 +154,16 @@ public class ChooseActionController extends Controller{
         stage.close();
         takeResourcesStage = new Stage();
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/FXML/TakeResourcesFromMarketPage.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/fxml/TakeResourcesFromMarketPage.fxml"));
             Parent root = loader.load();
-            this.gui.controller = loader.getController();
-            this.gui.controller.setGUI(this.gui);
+            GUIApp.controller = loader.getController();
             Scene scene = new Scene(Objects.requireNonNull(root), 1180, 750, Color.TRANSPARENT);
             scene.setCursor(new ImageCursor(new Image(CURSOR), 36, 45));
             takeResourcesStage.initStyle(StageStyle.TRANSPARENT);
             takeResourcesStage.setAlwaysOnTop(true);
             scene.setUserData(loader);
             takeResourcesStage.initModality(Modality.WINDOW_MODAL);
-            takeResourcesStage.initOwner(this.gui.getStage());
+            takeResourcesStage.initOwner(GUIApp.getStage());
             scene.setUserData(loader);
             takeResourcesStage.setScene(scene);
 

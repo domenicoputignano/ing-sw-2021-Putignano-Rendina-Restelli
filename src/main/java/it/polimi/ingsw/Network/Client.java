@@ -2,11 +2,14 @@ package it.polimi.ingsw.Network;
 
 import it.polimi.ingsw.Client.reducedmodel.ReducedGame;
 import it.polimi.ingsw.Client.view.CLI;
+import it.polimi.ingsw.Client.view.GUI.GUIApp;
+import it.polimi.ingsw.Client.view.Gui;
 import it.polimi.ingsw.Client.view.UI;
 import it.polimi.ingsw.Commons.User;
 import it.polimi.ingsw.Utils.Messages.ClientMessages.ClientMessage;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.ServerMessage;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.GameSetupMessage;
+import javafx.application.Application;
 
 import java.io.*;
 import java.net.Socket;
@@ -26,7 +29,6 @@ public class Client {
     private UI ui;
     private Socket socket;
 
-
     public Client(String ip, int port){
         this.ip = ip;
         this.port = port;
@@ -40,8 +42,9 @@ public class Client {
         socketOutObj = new ObjectOutputStream(socket.getOutputStream());
         socketOutObj.flush();
         socketInObj = new ObjectInputStream(socket.getInputStream());
+        ui = new Gui(this);
+        //ui = new CLI(this);
         createListeningThread();
-        ui = new CLI(this);
         /*String socketLine;
         try{
             socketLine = socketInObj.readUTF();
@@ -51,7 +54,7 @@ public class Client {
                 socketOutObj.writeUTF(inputLine);
                 socketOutObj.flush();
                 socketLine = socketInObj.readUTF();
-                //TODO chiamare opportuni metodi di CLI/GUI
+                //TODO chiamare opportuni metodi di CLI/GUIApp
                 System.out.print(socketLine);
             }
         } catch(NoSuchElementException e){

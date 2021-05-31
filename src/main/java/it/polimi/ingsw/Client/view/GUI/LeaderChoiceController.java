@@ -75,8 +75,8 @@ public class LeaderChoiceController extends Controller{
     @FXML
     void handleBackButton()
     {
-        this.gui.getStage().setScene(this.gui.loadScene("/GUI/FXML/SelectNumOfPlayersPage.fxml"));
-        this.gui.getStage().show();
+        GUIApp.getStage().setScene(GUIApp.loadScene("/gui/fxml/SelectNumOfPlayersPage.fxml"));
+        GUIApp.getStage().show();
     }
 
     @FXML
@@ -168,8 +168,8 @@ public class LeaderChoiceController extends Controller{
         }
         else
         {
-            this.gui.getStage().setScene(this.gui.loadScene("/GUI/FXML/ResourceChoicePage.fxml"));
-            this.gui.getStage().show();
+            GUIApp.getStage().setScene(GUIApp.loadScene("/gui/fxml/ResourceChoicePage.fxml"));
+            GUIApp.getStage().show();
         }
     }
 }

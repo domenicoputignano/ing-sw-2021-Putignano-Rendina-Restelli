@@ -21,20 +21,20 @@ public class SelectModeController extends Controller {
     @FXML
     void handleMultiPlayButton()
     {
-        this.gui.getStage().setScene(this.gui.loadScene("/GUI/FXML/SelectNumOfPlayersPage.fxml"));
-        this.gui.getStage().show();
+        GUIApp.getStage().setScene(GUIApp.loadScene("/gui/fxml/SelectNumOfPlayersPage.fxml"));
+        GUIApp.getStage().show();
     }
 
     @FXML
     void handleSoloPlayButton()
     {
-        this.gui.getStage().setScene(this.gui.loadScene("/GUI/FXML/LeaderChoicePage.fxml"));
-        this.gui.getStage().show();
+        GUIApp.getStage().setScene(GUIApp.loadScene("/gui/fxml/LeaderChoicePage.fxml"));
+        GUIApp.getStage().show();
     }
     @FXML
     void handleBackButton()
     {
-        this.gui.getStage().setScene(this.gui.loadScene("/GUI/FXML/UserName.fxml"));
-        this.gui.getStage().show();
+        GUIApp.getStage().setScene(GUIApp.loadScene("/gui/fxml/UserName.fxml"));
+        GUIApp.getStage().show();
     }
 }

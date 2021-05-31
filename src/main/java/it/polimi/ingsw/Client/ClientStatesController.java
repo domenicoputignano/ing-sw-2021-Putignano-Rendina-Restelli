@@ -14,7 +14,7 @@ public class ClientStatesController {
             ui.changeClientState(new UsernameChoiceCLI(ui.getClient()));
 
         }
-        //todo con i metodi della GUI
+        //todo con i metodi della GUIApp
         ui.manageUserInteraction();
     }
 
@@ -40,7 +40,7 @@ public class ClientStatesController {
             ui.changeClientState(new InitialLeaderChoiceCLI(ui.getClient()));
             ui.manageUserInteraction();
         } else {
-            //TODO metodo con GUI
+            //TODO metodo con GUIApp
         }
     }
 
@@ -74,7 +74,7 @@ public class ClientStatesController {
                 ui.changeClientState(new PositioningResourcesCLI(ui.getClient(), message.getResourcesToSettle()));
                 ui.manageUserInteraction();
             } else {
-                //TODO metodo con GUI
+                //TODO metodo con GUIApp
             }
         }
     }

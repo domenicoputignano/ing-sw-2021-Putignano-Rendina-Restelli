@@ -17,8 +17,7 @@
                         <Image url="@../img/Masters of Renaissance icon.png" />
                     </image>
                 </ImageView>
-            <Button fx:id="go" layoutX="713.0" layoutY="196.0" mnemonicParsing="false" onAction="#startGame" prefHeight="80.0" prefWidth="152.0" text="Button" />
-                </children>
+             </children>
         </AnchorPane>
     </center>
     <bottom>

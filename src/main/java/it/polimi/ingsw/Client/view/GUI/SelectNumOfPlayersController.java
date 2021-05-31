@@ -44,20 +44,20 @@ public class SelectNumOfPlayersController extends Controller{
     @FXML
     void handleBackButton()
     {
-        this.gui.getStage().setScene(this.gui.loadScene("/GUI/FXML/SelectModePage.fxml"));
-        this.gui.getStage().show();
+        GUIApp.getStage().setScene(GUIApp.loadScene("/gui/fxml/SelectModePage.fxml"));
+        GUIApp.getStage().show();
     }
 
     @FXML
     void goLeaderChoice()
     {
-        this.gui.getStage().setScene(this.gui.loadScene("/GUI/FXML/LeaderChoicePage.fxml"));
-        this.gui.getStage().show();
+        GUIApp.getStage().setScene(GUIApp.loadScene("/gui/fxml/LeaderChoicePage.fxml"));
+        GUIApp.getStage().show();
     }
     @FXML
     void pb()
     {
-        this.gui.getStage().setScene(this.gui.loadScene("/GUI/FXML/PlayerBoard.fxml"));
-        this.gui.getStage().show();
+        GUIApp.getStage().setScene(GUIApp.loadScene("/gui/fxml/PlayerBoard.fxml"));
+        GUIApp.getStage().show();
     }
 }

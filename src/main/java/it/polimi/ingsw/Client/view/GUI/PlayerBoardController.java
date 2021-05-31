@@ -48,17 +48,16 @@ public class PlayerBoardController extends Controller {
     {
         actions = new Stage();
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/FXML/ChooseActionPage.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/fxml/ChooseActionPage.fxml"));
             Parent root = loader.load();
-            this.gui.controller = loader.getController();
-            this.gui.controller.setGUI(this.gui);
+            GUIApp.controller = loader.getController();
             Scene scene = new Scene(Objects.requireNonNull(root), 820, 520, Color.TRANSPARENT);
             scene.setCursor(new ImageCursor(new Image(CURSOR), 36, 45));
             actions.initStyle(StageStyle.TRANSPARENT);
             actions.setAlwaysOnTop(true);
             scene.setUserData(loader);
             actions.initModality(Modality.WINDOW_MODAL);
-            actions.initOwner(this.gui.getStage());
+            actions.initOwner(GUIApp.getStage());
             scene.setUserData(loader);
             actions.setScene(scene);
 

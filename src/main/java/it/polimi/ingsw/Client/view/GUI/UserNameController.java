@@ -49,15 +49,13 @@ public class UserNameController extends Controller {
     }
 
     @FXML
-    void submitUsername()
-    {
+    void submitUsername() throws InterruptedException {
         if(username.getText().length()<3) {
 
             errorText.setText("Insert valid username");
         }
         else {
-            this.gui.getStage().setScene(this.gui.loadScene("/GUI/FXML/SelectModePage.fxml"));
-            this.gui.getStage().show();
+            GUIApp.showScene("/gui/fxml/SelectModePage.fxml");
         }
     }
 
