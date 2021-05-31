@@ -40,7 +40,7 @@ public class GUIApp extends Application {
         stage = stageD;
         stage.setTitle("Masters of Renaissance");
         stage.initStyle(StageStyle.TRANSPARENT);
-        stage.getIcons().add(new Image("/gui/img/Masters of Renaissance icon.png"));
+        stage.getIcons().add(new Image("/gui/img/MastersOfRenaissanceIcon.png"));
         ok = true;
         stage.setScene(loadScene("/gui/fxml/HomePage.fxml"));
         stage.show();

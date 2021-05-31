@@ -23,7 +23,6 @@
                         <Image url="@../img/home_bg.png" />
                     </image>
                 </ImageView>
-            <Button fx:id="backButton" layoutX="14.0" layoutY="8.0" mnemonicParsing="false" onAction="#handleBackButton" prefHeight="85.0" prefWidth="73.0" styleClass="button, back" stylesheets="@../css/button.css" />
             </children></AnchorPane>
     </center>
     <bottom>

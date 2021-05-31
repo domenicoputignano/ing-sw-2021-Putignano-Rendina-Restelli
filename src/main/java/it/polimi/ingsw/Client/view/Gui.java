@@ -37,7 +37,7 @@ public class Gui extends UI{
             e.printStackTrace();
         }
         try {
-            Thread.sleep(1000);
+            Thread.sleep(2500);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

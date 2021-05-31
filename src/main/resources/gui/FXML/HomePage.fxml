@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.*?>
 <?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
@@ -12,12 +13,13 @@
     <center>
         <AnchorPane fx:id="center" prefHeight="470.0" prefWidth="950.0" BorderPane.alignment="CENTER">
             <children>
-                <ImageView fitHeight="410.0" fitWidth="550.0" layoutX="200.0" layoutY="120.0" pickOnBounds="true" preserveRatio="true">
+                <ImageView fitHeight="527.0" fitWidth="471.0" layoutX="233.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
                     <image>
-                        <Image url="@../img/Masters of Renaissance icon.png" />
+                        <Image url="@../img/home_bg.png" />
                     </image>
                 </ImageView>
-             </children>
+            <ImageView fx:id="loading" fitHeight="71.0" fitWidth="362.0" layoutX="269.0" layoutY="541.0" pickOnBounds="true" preserveRatio="true" />
+           </children>
         </AnchorPane>
     </center>
     <bottom>

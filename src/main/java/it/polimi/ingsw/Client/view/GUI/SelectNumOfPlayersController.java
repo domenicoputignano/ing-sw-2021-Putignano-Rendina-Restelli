@@ -44,13 +44,6 @@ public class SelectNumOfPlayersController extends Controller{
     }
 
     @FXML
-    void handleBackButton()
-    {
-        GUIApp.getStage().setScene(GUIApp.loadScene("/gui/fxml/SelectModePage.fxml"));
-        GUIApp.getStage().show();
-    }
-
-    @FXML
     void handleTwoPlayersChoice() {
         clientState = new NumOfPlayerChoiceGUI(client, 2);
         clientState.manageUserInteraction();

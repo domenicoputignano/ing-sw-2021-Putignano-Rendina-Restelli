@@ -33,10 +33,4 @@ public class SelectModeController extends Controller {
         clientState = new GameModeChoiceGUI(client,"solo");
         clientState.manageUserInteraction();
     }
-    @FXML
-    void handleBackButton()
-    {
-        GUIApp.getStage().setScene(GUIApp.loadScene("/gui/fxml/UserName.fxml"));
-        GUIApp.getStage().show();
-    }
 }
