@@ -187,16 +187,18 @@ public class CLI extends UI {
     }
     public void render(MoveUpdate message) {
         if(isReceiverAction(message.getUser())) {
-            System.out.println("Your move action has been correctly performed");
+            System.out.println("Your move action has been correctly performed\n"+
+                    message.getUserPersonalBoard().getWarehouse());
         } else System.out.println("User " + message.getUser() + " has moved resources in his warehouse");
     }
     public void render(LeaderActionUpdate message) {
         if(isReceiverAction(message.getUser())) {
-            if(message.hasBeenDiscarded()) System.out.println("You discarded your leader card!");
-            else System.out.println("You activated your leader card!");
+            if(message.hasBeenDiscarded()) System.out.println("You discarded following leader card\n"+message.getLeaderCard());
+            else System.out.println("You activated following leader card\n"+message.getLeaderCard());
         } else {
-            if(message.hasBeenDiscarded()) System.out.println("User " + message.getUser() + " has discarded a leader card");
-            else System.out.println("User " + message.getUser() + " has activated a leader card");
+            if(message.hasBeenDiscarded()) System.out.println("User " + message.getUser() + " has discarded this leader card\n"+
+            message.getLeaderCard());
+            else System.out.println("User " + message.getUser() + " has activated this leader card\n"+message.getLeaderCard());
         }
     }
     public void render(PositioningUpdate message){

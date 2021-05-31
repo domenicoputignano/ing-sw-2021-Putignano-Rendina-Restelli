@@ -9,7 +9,6 @@ import it.polimi.ingsw.Utils.Messages.ClientMessages.ClientMessage;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.Errors.ErrorMessage;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.ServerMessage;
 
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class RemoteView implements Observer<ServerMessage> {
@@ -28,10 +27,10 @@ public class RemoteView implements Observer<ServerMessage> {
         game.addObserver(this);
     }
 
-    public RemoteView(RemoteView remoteView, ClientStatus clientStatus) {
-        this.user = remoteView.user;
+    public RemoteView(RemoteView oldRemoteView, ClientStatus clientStatus) {
+        this.user = oldRemoteView.user;
         this.user.setActive(true);
-        this.gameController = remoteView.gameController;
+        this.gameController = oldRemoteView.gameController;
         this.game = gameController.getModel();
         this.clientStatus = clientStatus;
         game.addObserver(this);

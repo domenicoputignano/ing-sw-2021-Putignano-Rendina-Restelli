@@ -70,16 +70,22 @@ public class LeaderCard implements Serializable {
                 throw new IllegalStateException("Unexpected value: " + leaderEffect.getType());
         }
         if(requirementsCards.size()>0) return color+"{" +
-                "\nEffect=" + leaderEffect +
-                "\nrequirementsCards=" + requirementsCards +
-                "\nactive=" + isActive +
-                "\nvictoryPoints=" + victoryPoints +
+                "\nEffect =" + leaderEffect +
+                "\nRequired Cards = " + requirementsCards +
+                "\n"+activation()+
+                "\nPoints = " + victoryPoints +
                 "}"+ ANSI_Color.RESET;
         else return color+"{" +
                 "\nEffect=" + leaderEffect +
-                "\nrequirementsResources=" + requirementsResources +
-                "\nactive=" + isActive +
-                "\nvictoryPoints=" + victoryPoints +
+                "\nRequired resources = " + requirementsResources +
+                "\nStatus = "+activation()+
+                "\nPoints =" + victoryPoints +
                 '}'+ ANSI_Color.RESET;
     }
+
+    private String activation() {
+        if(isActive) return "active";
+        else return "inactive";
+    }
+
 }

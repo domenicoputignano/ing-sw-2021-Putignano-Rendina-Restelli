@@ -7,11 +7,11 @@ import it.polimi.ingsw.Commons.User;
 import it.polimi.ingsw.Network.Client;
 
 public class LeaderActionUpdate extends UpdateMessage {
-    private LeaderCard leaderCard;
+    private final LeaderCard leaderCard;
     private int index;
-    private boolean toDiscard;
+    private final boolean toDiscard;
 
-    public LeaderActionUpdate(User user, ReducedPersonalBoard reducedPersonalBoard, LeaderCard card, int index,boolean toDiscard)
+    public LeaderActionUpdate(User user, ReducedPersonalBoard reducedPersonalBoard, LeaderCard card, int index, boolean toDiscard)
     {
         this.user = user;
         this.userPersonalBoard = reducedPersonalBoard;
@@ -28,5 +28,9 @@ public class LeaderActionUpdate extends UpdateMessage {
 
     public boolean hasBeenDiscarded() {
         return toDiscard;
+    }
+
+    public LeaderCard getLeaderCard() {
+        return leaderCard;
     }
 }

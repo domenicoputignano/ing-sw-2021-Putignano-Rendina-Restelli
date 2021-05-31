@@ -95,5 +95,6 @@ public class GameController {
         if(sender.getPosition()==4) return message.getChosenResources().size() == 2;
         return true;
     }
+
 }
 
