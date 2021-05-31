@@ -1,5 +1,7 @@
 package it.polimi.ingsw.Client.view.GUI;
 
+import it.polimi.ingsw.Client.clientstates.gui.NumOfPlayerChoiceGUI;
+import it.polimi.ingsw.Client.clientstates.gui.UsernameChoiceGUI;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
@@ -49,15 +51,20 @@ public class SelectNumOfPlayersController extends Controller{
     }
 
     @FXML
-    void goLeaderChoice()
-    {
-        GUIApp.getStage().setScene(GUIApp.loadScene("/gui/fxml/LeaderChoicePage.fxml"));
-        GUIApp.getStage().show();
+    void handleTwoPlayersChoice() {
+        clientState = new NumOfPlayerChoiceGUI(client, 2);
+        clientState.manageUserInteraction();
     }
     @FXML
-    void pb()
-    {
-        GUIApp.getStage().setScene(GUIApp.loadScene("/gui/fxml/PlayerBoard.fxml"));
-        GUIApp.getStage().show();
+    void handleThreePlayersChoice() {
+        clientState = new NumOfPlayerChoiceGUI(client, 3);
+        clientState.manageUserInteraction();
     }
+    @FXML
+    void handleFourPlayersChoice() {
+        clientState = new NumOfPlayerChoiceGUI(client, 4);
+        clientState.manageUserInteraction();
+    }
+
+
 }
