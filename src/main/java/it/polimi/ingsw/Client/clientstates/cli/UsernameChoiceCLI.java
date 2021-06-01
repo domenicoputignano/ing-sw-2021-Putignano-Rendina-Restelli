@@ -17,8 +17,6 @@ public class UsernameChoiceCLI extends AbstractUserNameChoice {
     public void manageUserInteraction() {
         String nickname = input.nextLine();
         messageToSend.setNickname(nickname);
-        //TODO cambiare a seconda che il nickname venga accettato o rifiutato
-        client.bindUser(nickname);
         client.sendMessage(messageToSend);
     }
 }

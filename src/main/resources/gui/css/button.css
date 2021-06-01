@@ -113,7 +113,6 @@
     -fx-text-fill: red;
 }
 .chooseLeaderCard{
-    -fx-background-image: url("/gui/img/leaderCard1.png");
     -fx-background-size: 90% auto;
     -fx-border-radius: 0.5;
 }
@@ -234,7 +233,6 @@
     -fx-background-size: 85% auto;
 }
 .devCard1{
-    -fx-background-image: url("/gui/img/leaderCard1.png");
     -fx-background-size: 100% auto;
 }
 .devCard1:hover{

@@ -91,7 +91,7 @@ public class ClientSetupConnection implements Runnable {
     }
 
     private void gameChoice() throws IOException, ClassNotFoundException {
-        sendConfigurationMessage(new ServerAskForGameMode());
+        sendConfigurationMessage(new ServerAskForGameMode(this.nickname));
         GameModeChoiceMessage message = (GameModeChoiceMessage) inputStream.readObject();
         String choice = message.getGameModeChoice();
         if(choice.equalsIgnoreCase("multiplayer")) mode = GameMode.MULTIPLAYER;

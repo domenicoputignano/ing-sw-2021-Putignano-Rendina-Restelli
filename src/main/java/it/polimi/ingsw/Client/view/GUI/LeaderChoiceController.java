@@ -65,11 +65,17 @@ public class LeaderChoiceController extends Controller{
                 BackgroundRepeat.NO_REPEAT,
                 BackgroundPosition.CENTER,
                 bSize)));
+
+        this.client = GUIApp.client;
+
         chooseCardText.setStyle("-fx-text-fill: rgb(35, 25, 22);");
         errorChoiceText.setStyle("-fx-text-fill: #f2b535");
         clearButton.setStyle("-fx-text-fill: rgb(35, 25, 22);");
         okButton.setStyle("-fx-text-fill: rgb(35, 25, 22);");
         errorSelectedResources.setStyle("-fx-text-fill: #f2b535");
+
+        setLeaderCardImages();
+
         setFont(chooseCardText,30);
         setFont(errorSelectedResources,30);
         setFont(errorChoiceText,30);
@@ -83,7 +89,9 @@ public class LeaderChoiceController extends Controller{
         errorSelectedResources.clear();
         if(!card1) {
             if(selectedCard < 2) {
-                leaderCard1.setStyle("-fx-border-color: rgb(231,156,48);-fx-border-width: 5;");
+                leaderCard1.setStyle("-fx-border-color: rgb(231,156,48);-fx-border-width: 5;" +
+                        "-fx-background-image: url(" +
+                        client.getGame().getPlayer(client.getUser()).getAvailableLeaderCards().get(0).toImage() + ")");
                 selectedCard++;
                 card1 = true;
                 indicator1.setVisible(true);
@@ -97,7 +105,9 @@ public class LeaderChoiceController extends Controller{
         errorSelectedResources.clear();
         if(!card2) {
             if(selectedCard < 2) {
-                leaderCard2.setStyle("-fx-border-color: rgb(231,156,48);-fx-border-width: 5;");
+                leaderCard2.setStyle("-fx-border-color: rgb(231,156,48);-fx-border-width: 5;" +
+                        "-fx-background-image: url(" +
+                        client.getGame().getPlayer(client.getUser()).getAvailableLeaderCards().get(1).toImage() + ")");
                 selectedCard++;
                 card2 = true;
                 indicator2.setVisible(true);
@@ -111,7 +121,9 @@ public class LeaderChoiceController extends Controller{
         errorSelectedResources.clear();
         if(!card3) {
             if(selectedCard < 2) {
-                leaderCard3.setStyle("-fx-border-color: rgb(231,156,48);-fx-border-width: 5;");
+                leaderCard3.setStyle("-fx-border-color: rgb(231,156,48);-fx-border-width: 5;" +
+                        "-fx-background-image: url(" +
+                        client.getGame().getPlayer(client.getUser()).getAvailableLeaderCards().get(2).toImage() + ")");
                 selectedCard++;
                 card3 = true;
                 indicator3.setVisible(true);
@@ -125,7 +137,9 @@ public class LeaderChoiceController extends Controller{
         errorSelectedResources.clear();
         if(!card4) {
             if(selectedCard < 2) {
-                leaderCard4.setStyle("-fx-border-color: rgb(231,156,48);-fx-border-width: 5;");
+                leaderCard4.setStyle("-fx-border-color: rgb(231,156,48);-fx-border-width: 5;" +
+                        "-fx-background-image: url(" +
+                        client.getGame().getPlayer(client.getUser()).getAvailableLeaderCards().get(3).toImage() + ")");
                 selectedCard++;
                 card4 = true;
                 indicator4.setVisible(true);
@@ -149,12 +163,24 @@ public class LeaderChoiceController extends Controller{
         leaderCard3.setStyle(":hover -fx-border-color: rgb(231,156,48);-fx-border-width: 5;");
         leaderCard4.setStyle("-fx-border-color: none;-fx-border-width: none;");
         leaderCard4.setStyle(":hover -fx-border-color: rgb(231,156,48);-fx-border-width: 5;");
+        setLeaderCardImages();
         indicator1.setVisible(false);
         indicator2.setVisible(false);
         indicator3.setVisible(false);
         indicator4.setVisible(false);
         errorChoiceText.clear();
         errorSelectedResources.clear();
+    }
+
+    private void setLeaderCardImages() {
+        leaderCard1.setStyle("-fx-background-image: url(" +
+                client.getGame().getPlayer(client.getUser()).getAvailableLeaderCards().get(0).toImage() + ")");
+        leaderCard2.setStyle("-fx-background-image: url(" +
+                client.getGame().getPlayer(client.getUser()).getAvailableLeaderCards().get(1).toImage() + ")");
+        leaderCard3.setStyle("-fx-background-image: url(" +
+                client.getGame().getPlayer(client.getUser()).getAvailableLeaderCards().get(2).toImage() + ")");
+        leaderCard4.setStyle("-fx-background-image: url(" +
+                client.getGame().getPlayer(client.getUser()).getAvailableLeaderCards().get(3).toImage() + ")");
     }
 
     @FXML

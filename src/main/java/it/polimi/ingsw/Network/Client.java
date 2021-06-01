@@ -44,7 +44,7 @@ public class Client {
         socketInObj = new ObjectInputStream(socket.getInputStream());
         if(startAsGui) {
             ui = new Gui(this);
-            new Thread(() -> GUIApp.launchGUI(this)).start();
+            new Thread(GUIApp::launchGUI).start();
         }
         else
             ui = new CLI(this);

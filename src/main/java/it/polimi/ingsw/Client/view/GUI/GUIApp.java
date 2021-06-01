@@ -31,7 +31,7 @@ public class GUIApp extends Application {
 
     private static final String CURSOR = "/gui/img/cursor.png";
 
-    private static Client client;
+    public static Client client;
 
     @Override
     public void start(Stage stageD) throws InterruptedException {
@@ -49,7 +49,7 @@ public class GUIApp extends Application {
 
     }
 
-    public static void launchGUI(Client client) {
+    public static void launchGUI() {
         launch();
     }
 
