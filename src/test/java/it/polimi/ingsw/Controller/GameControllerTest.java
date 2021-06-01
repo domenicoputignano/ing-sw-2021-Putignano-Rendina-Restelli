@@ -56,7 +56,7 @@ class GameControllerTest {
 
         verify(multiPlayerModeSpy, times(1)).getGameState();
         when(spyMessage.getChosenResources()).thenReturn(resources);
-        verify(second, times(1)).performInitialResourcesChoice(multiPlayerModeSpy, resources);
+        verify(second, atLeastOnce()).performInitialResourcesChoice(multiPlayerModeSpy, resources);
 
     }
 

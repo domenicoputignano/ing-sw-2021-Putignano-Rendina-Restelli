@@ -1,6 +1,7 @@
 package it.polimi.ingsw.Client.reducedmodel;
 
 import it.polimi.ingsw.Commons.ColorMarble;
+import it.polimi.ingsw.Utils.ANSI_Color;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -32,6 +33,6 @@ public class ReducedMarble implements Serializable {
 
     @Override
     public String toString() {
-        return " [" + colorMarble +']';
+        return ANSI_Color.escape(colorMarble)+" [" + colorMarble +']'+ANSI_Color.RESET;
     }
 }
