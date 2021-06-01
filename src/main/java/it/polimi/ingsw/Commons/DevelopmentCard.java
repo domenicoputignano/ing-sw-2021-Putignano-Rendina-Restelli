@@ -1,25 +1,28 @@
 package it.polimi.ingsw.Commons;
 
 import it.polimi.ingsw.Model.ProductionRule;
+import it.polimi.ingsw.Utils.ResourceLocator;
 
 import java.io.Serializable;
 import java.util.EnumMap;
 import java.util.Map;
 
 public class DevelopmentCard implements Serializable {
-    private Map<ResourceType, Integer> cost;
-    private CardType type;
-    private int victoryPoints;
-    private ProductionRule trade;
+    private final String ID;
+    private final Map<ResourceType, Integer> cost;
+    private final CardType type;
+    private final int victoryPoints;
+    private final ProductionRule trade;
 
+    // Used only for test purposes
     public DevelopmentCard(Map<ResourceType, Integer> cost, int level, ColorCard color, int victoryPoints, ProductionRule trade){
+        this.ID = "1B";
         this.cost = new EnumMap<ResourceType, Integer>(cost);
         this.type = new CardType(level, color);
         this.victoryPoints = victoryPoints;
         this.trade = trade;
     }
 
-    // TODO DA CAMBIARE ESPONE L'IMPLEMENTAZIONE
     public Map<ResourceType, Integer> getCost() {
         return cost;
     }
@@ -52,5 +55,9 @@ public class DevelopmentCard implements Serializable {
                 ", victoryPoints=" + victoryPoints +
                 ", trade=" + trade +
                 '}';
+    }
+
+    public String toImage(){
+        return ResourceLocator.retrieveDevCardImage(this.ID);
     }
 }
