@@ -1,12 +1,14 @@
 package it.polimi.ingsw.Client.view;
 
 import it.polimi.ingsw.Client.clientstates.AbstractClientState;
+import it.polimi.ingsw.Client.view.GUI.GUIApp;
 import it.polimi.ingsw.Network.Client;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.*;
-import it.polimi.ingsw.Client.view.GUI.GUIApp;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.Updates.*;
-import javafx.application.Application;
 import javafx.application.Platform;
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Gui extends UI{
 
@@ -34,32 +36,28 @@ public class Gui extends UI{
         try {
             GUIApp.waitForGameSetup(client);
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            Thread.currentThread().interrupt();
+            Logger.getLogger(Gui.class.getName()).log(Level.SEVERE, "Listening thread has been accidentally interrupted");
         }
         try {
             Thread.sleep(2500);
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            Thread.currentThread().interrupt();
+            Logger.getLogger(Gui.class.getName()).log(Level.SEVERE, "Listening thread has been accidentally interrupted");
         }
-        Platform.runLater(() ->{
-            GUIApp.showScene("/gui/fxml/UserName.fxml");
-                }
+        Platform.runLater(() -> GUIApp.showScene("/gui/fxml/UserName.fxml")
         );
     }
 
     @Override
     public void render(ServerAskForGameMode message) {
-        Platform.runLater(() ->{
-                    GUIApp.showScene("/gui/fxml/SelectModePage.fxml");
-                }
+        Platform.runLater(() -> GUIApp.showScene("/gui/fxml/SelectModePage.fxml")
         );
     }
 
     @Override
     public void render(ServerAskForNumOfPlayer message) {
-        Platform.runLater(() ->{
-                    GUIApp.showScene("/gui/fxml/SelectNumOfPlayersPage.fxml");
-                }
+        Platform.runLater(() -> GUIApp.showScene("/gui/fxml/SelectNumOfPlayersPage.fxml")
         );
     }
 
