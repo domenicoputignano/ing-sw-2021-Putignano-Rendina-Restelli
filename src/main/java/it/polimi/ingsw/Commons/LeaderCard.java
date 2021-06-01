@@ -1,19 +1,23 @@
 package it.polimi.ingsw.Commons;
 
 import it.polimi.ingsw.Utils.ANSI_Color;
+import it.polimi.ingsw.Utils.ResourceLocator;
 
 import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
 public class LeaderCard implements Serializable {
-    private LeaderEffect leaderEffect;
-    private Map<ResourceType, Integer> requirementsResources;
-    private List<CardType> requirementsCards;
+    private final String ID;
+    private final LeaderEffect leaderEffect;
+    private final Map<ResourceType, Integer> requirementsResources;
+    private final List<CardType> requirementsCards;
     private boolean isActive;
-    private int victoryPoints;
+    private final int victoryPoints;
 
+    // Used only for test purposes
     public LeaderCard(LeaderEffect leaderEffect, Map<ResourceType, Integer> requirementsResources, List<CardType> requirementsCards, int victoryPoints) {
+        this.ID = "SA-SE";
         this.leaderEffect = leaderEffect;
         this.requirementsResources = requirementsResources;
         this.requirementsCards = requirementsCards;
@@ -86,6 +90,10 @@ public class LeaderCard implements Serializable {
     private String activation() {
         if(isActive) return "active";
         else return "inactive";
+    }
+
+    public String toImage(){
+        return ResourceLocator.retrieveLeaderCardImage(this.ID);
     }
 
 }

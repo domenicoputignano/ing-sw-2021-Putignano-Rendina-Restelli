@@ -1,5 +1,6 @@
 [
   {
+    "ID" : "SA-SE",
     "leaderEffect" : {
       "effect" : "SALES",
       "type" : "servant"
@@ -24,6 +25,7 @@
     "victoryPoints" : 2
   },
   {
+    "ID" : "SA-SH",
     "leaderEffect" : {
       "effect" : "SALES",
       "type" : "shield"
@@ -48,6 +50,7 @@
     "victoryPoints" : 2
   },
   {
+    "ID" : "SA-ST",
     "leaderEffect" : {
       "effect" : "SALES",
       "type" : "stone"
@@ -72,6 +75,7 @@
     "victoryPoints" : 2
   },
   {
+    "ID" : "SA-CO",
     "leaderEffect" : {
       "effect" : "SALES",
       "type" : "coin"
@@ -96,6 +100,7 @@
     "victoryPoints" : 2
   },
   {
+    "ID" : "ED-ST",
     "leaderEffect" : {
       "effect" : "EXTRADEPOT",
       "type" : "stone"
@@ -113,6 +118,7 @@
     "victoryPoints" : 3
   },
   {
+    "ID" : "ED-SE",
     "leaderEffect" : {
       "effect" : "EXTRADEPOT",
       "type" : "servant"
@@ -130,6 +136,7 @@
     "victoryPoints" : 3
   },
   {
+    "ID" : "ED-SH",
     "leaderEffect" : {
       "effect" : "EXTRADEPOT",
       "type" : "shield"
@@ -147,6 +154,7 @@
     "victoryPoints" : 3
   },
   {
+    "ID" : "ED-CO",
     "leaderEffect" : {
       "effect" : "EXTRADEPOT",
       "type" : "coin"
@@ -164,6 +172,7 @@
     "victoryPoints" : 3
   },
   {
+    "ID" : "CM-SE",
     "leaderEffect" : {
       "effect" : "CMARBLE",
       "type" : "servant"
@@ -192,6 +201,7 @@
     "victoryPoints" : 5
   },
   {
+    "ID" : "CM-SH",
     "leaderEffect" : {
       "effect" : "CMARBLE",
       "type" : "shield"
@@ -220,6 +230,7 @@
     "victoryPoints" : 5
   },
   {
+    "ID" : "CM-ST",
     "leaderEffect" : {
       "effect" : "CMARBLE",
       "type" : "stone"
@@ -248,6 +259,7 @@
     "victoryPoints" : 5
   },
   {
+    "ID" : "CM-CO",
     "leaderEffect" : {
       "effect" : "CMARBLE",
       "type" : "coin"
@@ -276,6 +288,7 @@
     "victoryPoints" : 5
   },
   {
+    "ID" : "EP-SH",
     "leaderEffect" : {
       "effect" : "EXTRAPRODUCTION",
       "type" : "shield"
@@ -296,6 +309,7 @@
     "victoryPoints" : 4
   },
   {
+    "ID" : "EP-SE",
     "leaderEffect" : {
       "effect" : "EXTRAPRODUCTION",
       "type" : "servant"
@@ -316,6 +330,7 @@
     "victoryPoints" : 4
   },
   {
+    "ID" : "EP-ST",
     "leaderEffect" : {
       "effect" : "EXTRAPRODUCTION",
       "type" : "stone"
@@ -336,6 +351,7 @@
     "victoryPoints" : 4
   },
   {
+    "ID" : "EP-CO",
     "leaderEffect" : {
       "effect" : "EXTRAPRODUCTION",
       "type" : "coin"

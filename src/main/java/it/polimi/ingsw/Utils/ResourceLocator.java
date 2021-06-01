@@ -54,4 +54,26 @@ public final class ResourceLocator {
             default : return null; // image not found
         }
     }
+
+    public static String retrieveLeaderCardImage(String ID){
+        switch(ID) {
+            case "SA-SE" : return "gui/img/leaderCards/SA-SE.png";
+            case "SA-SH" : return "gui/img/leaderCards/SA-SH.png";
+            case "SA-ST" : return "gui/img/leaderCards/SA-ST.png";
+            case "SA-CO" : return "gui/img/leaderCards/SA-CO.png";
+            case "ED-SE" : return "gui/img/leaderCards/ED-SE.png";
+            case "ED-SH" : return "gui/img/leaderCards/ED-SH.png";
+            case "ED-ST" : return "gui/img/leaderCards/ED-ST.png";
+            case "ED-CO" : return "gui/img/leaderCards/ED-CO.png";
+            case "CM-SE" : return "gui/img/leaderCards/CM-SE.png";
+            case "CM-SH" : return "gui/img/leaderCards/CM-SH.png";
+            case "CM-ST" : return "gui/img/leaderCards/CM-ST.png";
+            case "CM-CO" : return "gui/img/leaderCards/CM-CO.png";
+            case "EP-SE" : return "gui/img/leaderCards/EP-SE.png";
+            case "EP-SH" : return "gui/img/leaderCards/EP-SH.png";
+            case "EP-ST" : return "gui/img/leaderCards/EP-ST.png";
+            case "EP-CO" : return "gui/img/leaderCards/EP-CO.png";
+            default : return null; // image not found
+        }
+    }
 }
