@@ -19,10 +19,10 @@ public class ReducedFaithTrack implements Serializable {
         for(int i = 0; i < 2; i++) {
             for(int j = 0; j < 25; j++) {
                 if(i == 0) {
-                    if (j == faithMarker) resultBuilder.append("*");
-                    else resultBuilder.append("__");
+                    if (j == faithMarker) resultBuilder.append("*\t");
+                    else resultBuilder.append("__\t");
                 } else {
-                    resultBuilder.append(j).append(" ");
+                    resultBuilder.append(j).append("\t");
                 }
             }
             resultBuilder.append("\n");

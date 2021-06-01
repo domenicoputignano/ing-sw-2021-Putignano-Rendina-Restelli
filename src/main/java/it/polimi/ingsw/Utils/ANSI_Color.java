@@ -10,7 +10,6 @@ public enum ANSI_Color {
         PURPLE("\u001B[35m"),
         RED("\u001b[31m");
 
-
         public static final String RESET = "\u001B[0m";
 
         private String escape;

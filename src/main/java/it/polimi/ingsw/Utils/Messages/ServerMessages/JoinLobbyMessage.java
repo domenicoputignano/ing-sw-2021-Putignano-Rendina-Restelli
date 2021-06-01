@@ -3,14 +3,18 @@ package it.polimi.ingsw.Utils.Messages.ServerMessages;
 
 import it.polimi.ingsw.Network.Client;
 
+import java.util.List;
+
 public class JoinLobbyMessage implements ServerMessage {
 
-    private final String awaitingGuest;
+    private final String lastAwaitingGuest;
     private int numOfMissingPlayers;
+    private final List<String> awaitingGuests;
 
-    public JoinLobbyMessage(String awaitingGuest, int numOfMissingPlayers) {
-        this.awaitingGuest = awaitingGuest;
+    public JoinLobbyMessage(String lastAwaitingGuest, List<String> awaitingGuests, int numOfMissingPlayers) {
+        this.lastAwaitingGuest = lastAwaitingGuest;
         this.numOfMissingPlayers = numOfMissingPlayers;
+        this.awaitingGuests = awaitingGuests;
     }
 
     @Override
@@ -18,8 +22,12 @@ public class JoinLobbyMessage implements ServerMessage {
         handler.getUI().render(this);
     }
 
-    public String getAwaitingGuest() {
-        return awaitingGuest;
+    public String getLastAwaitingGuest() {
+        return lastAwaitingGuest;
+    }
+
+    public List<String> getAwaitingGuests() {
+        return awaitingGuests;
     }
 
     public int getNumOfMissingPlayers() {

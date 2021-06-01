@@ -81,9 +81,13 @@ public class Server {
         return numOfPlayersChosen - getSuitableConnections(numOfPlayersChosen).size();
     }
 
+    private List<String> getAwaitingGuests(int numOfPlayersChosen) {
+        return getSuitableConnections(numOfPlayersChosen).stream().map(ClientSetupConnection::getNickname).collect(Collectors.toList());
+    }
+
     public void notifyLobbyJoin(int numOfPlayersChosen, String guest) throws IOException {
         for(ClientSetupConnection awaitingConnection : getSuitableConnections(numOfPlayersChosen)) {
-            awaitingConnection.sendConfigurationMessage(new JoinLobbyMessage(guest, getNumOfMissingPlayers(numOfPlayersChosen)));
+            awaitingConnection.sendConfigurationMessage(new JoinLobbyMessage(guest,getAwaitingGuests(numOfPlayersChosen), getNumOfMissingPlayers(numOfPlayersChosen)));
         }
     }
 

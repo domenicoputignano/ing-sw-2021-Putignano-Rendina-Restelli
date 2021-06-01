@@ -141,7 +141,7 @@ public class CLI extends UI {
     public void render(InitialResourceChoiceUpdate message) {
         if(isReceiverAction(message.getUser())) {
             System.out.println("You have chosen " + message.getChosenResources() + " resources, your depots " +
-                    "have been updated as follows\n");
+                    "have been updated as follows");
             showDepots();
         } else System.out.println("User "+message.getUser()+" added "+message.getChosenResources()+" to his" +
                 " depots ");
@@ -175,8 +175,9 @@ public class CLI extends UI {
 
     //TODO da cambiare
     public void render(FaithMarkerUpdate message) {
-        if(message.getUser().equals(message.getTriggeringUser())&&isReceiverAction(message.getTriggeringUser())) {
+        /*if(message.getUser().equals(message.getTriggeringUser())&&isReceiverAction(message.getTriggeringUser())) {
             System.out.printf("Your action involved faith track, other players got %d faith points\n", message.getPoints());
+
         }
         if(isReceiverAction(message.getUser())&&!isReceiverAction(message.getTriggeringUser())) {
             System.out.printf("User "+message.getTriggeringUser()+" has performed action" +
@@ -185,7 +186,13 @@ public class CLI extends UI {
         if(!isReceiverAction(message.getUser())&&isReceiverAction(message.getTriggeringUser())) {
             System.out.printf("You performed action " +
                     "involving faith track, user "+ message.getUser()+" got %d faith points\n", message.getPoints());
-        }
+        }*/
+        if(!isReceiverAction(message.getUser())){
+        System.out.println("User "+message.getUser()+" updated his faith track\n"+message.getUserPersonalBoard()
+        .getFaithTrack());
+        } else System.out.println("Your faith track is shown below\n"+message.getUserPersonalBoard().getFaithTrack());
+
+
     }
 
     public void render(MoveUpdate message) {
@@ -269,7 +276,7 @@ public class CLI extends UI {
 
     @Override
     public void render(JoinLobbyMessage message) {
-        if(isGuestWhoHasJustJoined(message.getAwaitingGuest())) {
+        if(isGuestWhoHasJustJoined(message.getLastAwaitingGuest())) {
             if(message.getNumOfMissingPlayers()<=0) {
                 System.out.println("All required players joined the lobby, game will start soon...");
             } else {
@@ -278,12 +285,13 @@ public class CLI extends UI {
             }
         } else {
             if(message.getNumOfMissingPlayers()<=0) {
-                System.out.println("Guest "+message.getAwaitingGuest()+" joined the lobby, game will start soon...");
+                System.out.println("Guest "+message.getLastAwaitingGuest()+" joined the lobby, game will start soon...");
             } else {
-                System.out.println("Guest "+message.getAwaitingGuest()+" joined the lobby, please " +
+                System.out.println("Guest "+message.getLastAwaitingGuest()+" joined the lobby, please " +
                         "wait for "+message.getNumOfMissingPlayers()+" player(s) to join...");
             }
         }
+        System.out.println("Lobby: "+message.getAwaitingGuests());
     }
 
     @Override
