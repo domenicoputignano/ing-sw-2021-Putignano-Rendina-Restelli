@@ -47,16 +47,20 @@ public class SelectNumOfPlayersController extends Controller{
     void handleTwoPlayersChoice() {
         clientState = new NumOfPlayerChoiceGUI(client, 2);
         clientState.manageUserInteraction();
+        GUIApp.showScene("/gui/fxml/LobbyPage.fxml");
     }
     @FXML
     void handleThreePlayersChoice() {
         clientState = new NumOfPlayerChoiceGUI(client, 3);
         clientState.manageUserInteraction();
+        GUIApp.showScene("/gui/fxml/LobbyPage.fxml");
     }
     @FXML
     void handleFourPlayersChoice() {
         clientState = new NumOfPlayerChoiceGUI(client, 4);
         clientState.manageUserInteraction();
+        GUIApp.showScene("/gui/fxml/LobbyPage.fxml");
+
     }
 
 

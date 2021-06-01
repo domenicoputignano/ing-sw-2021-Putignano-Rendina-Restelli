@@ -2,6 +2,7 @@ package it.polimi.ingsw.Client.view;
 
 import it.polimi.ingsw.Client.clientstates.AbstractClientState;
 import it.polimi.ingsw.Client.view.GUI.GUIApp;
+import it.polimi.ingsw.Client.view.GUI.LobbyController;
 import it.polimi.ingsw.Network.Client;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.*;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.Updates.*;
@@ -143,7 +144,7 @@ public class Gui extends UI{
 
     @Override
     public void render(JoinLobbyMessage message) {
-
+        Platform.runLater(() -> ((LobbyController) GUIApp.controller).setPlayer1(message.getLastAwaitingGuest()));
     }
 
     @Override

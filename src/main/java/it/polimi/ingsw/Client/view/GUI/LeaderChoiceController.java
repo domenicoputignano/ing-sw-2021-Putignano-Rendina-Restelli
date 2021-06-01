@@ -78,14 +78,6 @@ public class LeaderChoiceController extends Controller{
     }
 
     @FXML
-    void handleBackButton()
-    {
-        // TODO da eliminare
-        GUIApp.getStage().setScene(GUIApp.loadScene("/gui/fxml/SelectNumOfPlayersPage.fxml"));
-        GUIApp.getStage().show();
-    }
-
-    @FXML
     void discardLeaderCard1()
     {
         errorSelectedResources.clear();
@@ -180,6 +172,7 @@ public class LeaderChoiceController extends Controller{
             if(card3) toDiscard.add(3);
             if(card4) toDiscard.add(4);
             clientState = new InitialLeaderChoiceGUI(client, toDiscard.get(0), toDiscard.get(1));
+            clientState.manageUserInteraction();
         }
     }
 }

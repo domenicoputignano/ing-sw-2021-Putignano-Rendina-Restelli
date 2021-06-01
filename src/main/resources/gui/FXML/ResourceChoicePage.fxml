@@ -13,7 +13,6 @@
     <center>
         <AnchorPane fx:id="center" prefHeight="470.0" prefWidth="950.0" BorderPane.alignment="CENTER">
             <children>
-                <Button fx:id="backButton" layoutX="14.0" layoutY="8.0" mnemonicParsing="false" onAction="#handleBackButton" prefHeight="85.0" prefWidth="73.0" styleClass="button, back" stylesheets="@../css/button.css" />
                 <Button fx:id="infoButton" layoutX="796.0" layoutY="8.0" mnemonicParsing="false" onAction="#info" prefHeight="85.0" prefWidth="73.0" styleClass="button, info" stylesheets="@../css/button.css" />
                 <Button fx:id="exitButton" layoutX="869.0" layoutY="8.0" mnemonicParsing="false" onAction="#exit" prefHeight="85.0" prefWidth="73.0" styleClass="button, exit" stylesheets="@../css/button.css" />
                 <ImageView fitHeight="514.0" fitWidth="699.0" layoutX="93.0" layoutY="78.0" pickOnBounds="true" preserveRatio="true">

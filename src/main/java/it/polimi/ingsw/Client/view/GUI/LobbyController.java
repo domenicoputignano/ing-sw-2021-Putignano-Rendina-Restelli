@@ -45,10 +45,24 @@ public class LobbyController extends Controller {
         setFont(player3,30);
         player4.setStyle("-fx-text-fill: rgb(35, 25, 22);");
         setFont(player4,30);
-        player1.setText("Pippo");
-        player2.setText("Piero");
-        player3.setText("Domenico");
-        player4.setText("Andrea");
+    }
+
+    public void setPlayer1(String player)
+    {
+        player1.setText(player);
+    }
+
+    public void setPlayer2(String player)
+    {
+        player2.setText(player);
+    }
+    public void setPlayer3(String player)
+    {
+        player3.setText(player);
+    }
+    public void setPlayer4(String player)
+    {
+        player4.setText(player);
     }
 }
 
