@@ -63,7 +63,7 @@ public class Gui extends UI{
 
     @Override
     public void render(GameSetupMessage message) {
-
+        Platform.runLater(() -> GUIApp.showScene("/gui/FXML/LeaderChoicePage.fxml"));
     }
 
     @Override

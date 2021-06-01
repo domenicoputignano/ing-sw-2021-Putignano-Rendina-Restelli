@@ -1,11 +1,15 @@
 package it.polimi.ingsw.Client.view.GUI;
 
+import it.polimi.ingsw.Client.clientstates.gui.InitialLeaderChoiceGUI;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class LeaderChoiceController extends Controller{
     @FXML
@@ -49,6 +53,7 @@ public class LeaderChoiceController extends Controller{
 
     private int selectedCard = 0;
     private boolean card1 = false,card2 = false,card3 = false,card4 = false;
+
     @FXML
     public void initialize() {
         super.initialize();
@@ -75,6 +80,7 @@ public class LeaderChoiceController extends Controller{
     @FXML
     void handleBackButton()
     {
+        // TODO da eliminare
         GUIApp.getStage().setScene(GUIApp.loadScene("/gui/fxml/SelectNumOfPlayersPage.fxml"));
         GUIApp.getStage().show();
     }
@@ -168,8 +174,12 @@ public class LeaderChoiceController extends Controller{
         }
         else
         {
-            GUIApp.getStage().setScene(GUIApp.loadScene("/gui/fxml/ResourceChoicePage.fxml"));
-            GUIApp.getStage().show();
+            List<Integer> toDiscard = new ArrayList<>();
+            if(card1) toDiscard.add(1);
+            if(card2) toDiscard.add(2);
+            if(card3) toDiscard.add(3);
+            if(card4) toDiscard.add(4);
+            clientState = new InitialLeaderChoiceGUI(client, toDiscard.get(0), toDiscard.get(1));
         }
     }
 }
