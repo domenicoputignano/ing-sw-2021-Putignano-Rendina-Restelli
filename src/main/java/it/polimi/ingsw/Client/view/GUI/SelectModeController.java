@@ -30,6 +30,7 @@ public class SelectModeController extends Controller {
     @FXML
     void handleSoloPlayButton()
     {
+        client.getUI().setSoloMode(true);
         clientState = new GameModeChoiceGUI(client,"solo");
         clientState.manageUserInteraction();
     }

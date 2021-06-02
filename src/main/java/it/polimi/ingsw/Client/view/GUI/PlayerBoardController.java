@@ -42,6 +42,12 @@ public class PlayerBoardController extends Controller {
                 BackgroundPosition.CENTER,
                 bSize)));
         setFont(chooseAction,24);
+
+        this.client = GUIApp.client;
+
+        leaderCard1.setImage(new Image(client.getGame().getPlayer(client.getUser()).getAvailableLeaderCards().get(0).toImage()));
+
+        leaderCard2.setImage(new Image(client.getGame().getPlayer(client.getUser()).getAvailableLeaderCards().get(1).toImage()));
     }
     @FXML
     public void handleChooseActionButton()

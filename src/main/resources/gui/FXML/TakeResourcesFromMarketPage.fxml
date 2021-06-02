@@ -51,66 +51,66 @@
             </image></ImageView>
       <ImageView fx:id="marble11" fitHeight="38.0" fitWidth="38.0" layoutX="291.0" layoutY="205.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../img/yellowMarble.png" />
+            <Image url="@../img/marbles/yellowMarble.png" />
          </image></ImageView>
       <ImageView fx:id="marble12" fitHeight="38.0" fitWidth="38.0" layoutX="329.0" layoutY="205.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../img/redMarble.png" />
+            <Image url="@../img/marbles/redMarble.png" />
          </image>
       </ImageView>
       <ImageView fx:id="marble13" fitHeight="38.0" fitWidth="38.0" layoutX="367.0" layoutY="205.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../img/greyMarble.png" />
+            <Image url="@../img/marbles/greyMarble.png" />
          </image>
       </ImageView>
       <ImageView fx:id="marble14" fitHeight="38.0" fitWidth="38.0" layoutX="405.0" layoutY="205.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../img/whiteMarble.png" />
+            <Image url="@../img/marbles/whiteMarble.png" />
          </image>
       </ImageView>
       <ImageView fx:id="marble21" fitHeight="38.0" fitWidth="38.0" layoutX="291.0" layoutY="243.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../img/greyMarble.png" />
+            <Image url="@../img/marbles/greyMarble.png" />
          </image>
       </ImageView>
       <ImageView fx:id="marble22" fitHeight="38.0" fitWidth="38.0" layoutX="329.0" layoutY="243.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../img/whiteMarble.png" />
+            <Image url="@../img/marbles/whiteMarble.png" />
          </image>
       </ImageView>
       <ImageView fx:id="marble23" fitHeight="38.0" fitWidth="38.0" layoutX="367.0" layoutY="243.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../img/purpleMarble.png" />
+            <Image url="@../img/marbles/purpleMarble.png" />
          </image>
       </ImageView>
       <ImageView fx:id="marble24" fitHeight="38.0" fitWidth="38.0" layoutX="405.0" layoutY="243.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../img/blueMarble.png" />
+            <Image url="@../img/marbles/blueMarble.png" />
          </image>
       </ImageView>
       <ImageView fx:id="marble31" fitHeight="38.0" fitWidth="38.0" layoutX="291.0" layoutY="281.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../img/yellowMarble.png" />
+            <Image url="@../img/marbles/yellowMarble.png" />
          </image>
       </ImageView>
       <ImageView fx:id="marble32" fitHeight="38.0" fitWidth="38.0" layoutX="329.0" layoutY="281.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../img/purpleMarble.png" />
+            <Image url="@../img/marbles/purpleMarble.png" />
          </image>
       </ImageView>
       <ImageView fx:id="marble33" fitHeight="38.0" fitWidth="38.0" layoutX="367.0" layoutY="281.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../img/whiteMarble.png" />
+            <Image url="@../img/marbles/whiteMarble.png" />
          </image>
       </ImageView>
       <ImageView fx:id="marble34" fitHeight="38.0" fitWidth="38.0" layoutX="405.0" layoutY="281.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../img/whiteMarble.png" />
+            <Image url="@../img/marbles/whiteMarble.png" />
          </image>
       </ImageView>
       <ImageView fx:id="slidingMarble" fitHeight="38.0" fitWidth="38.0" layoutX="430.0" layoutY="167.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../img/blueMarble.png" />
+            <Image url="@../img/marbles/blueMarble.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="110.0" fitWidth="453.0" layoutX="534.0" layoutY="128.0" pickOnBounds="true" preserveRatio="true">

@@ -46,4 +46,12 @@ public class ReducedMarketTray implements Serializable {
         }
         return result;
     }
+
+    public ReducedMarble getMarble(int row, int col) {
+        return availableMarbles[row-1][col-1];
+    }
+
+    public ReducedMarble getSlidingMarble() {
+        return slidingMarble;
+    }
 }

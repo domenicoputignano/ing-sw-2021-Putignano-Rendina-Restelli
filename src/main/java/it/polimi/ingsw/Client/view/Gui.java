@@ -79,7 +79,7 @@ public class Gui extends UI{
     public void render(InitialLeaderChoiceUpdate message) {
         if(isReceiverAction(message.getUser())){
             if(isSoloMode()){
-                // TODO INIZIARE IL PRIMO TURNO
+                Platform.runLater(() -> GUIApp.showScene("/gui/FXML/PlayerBoard.fxml"));
             } else {
                 if(client.getUserPosition() > 1) {
                     Platform.runLater(() -> GUIApp.showScene("/gui/FXML/ResourceChoicePage.fxml"));

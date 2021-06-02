@@ -1,5 +1,6 @@
 package it.polimi.ingsw.Client.view.GUI;
 
+import it.polimi.ingsw.Client.reducedmodel.ReducedMarketTray;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuButton;
@@ -31,7 +32,7 @@ public class TakeResourcesController extends Controller{
     @FXML
     public ImageView marble11,marble12,marble13,marble14,
                         marble21,marble22,marble23,marble24
-                        ,marble31,marble32,marble33,marble34;
+                        ,marble31,marble32,marble33,marble34,slidingMarble;
 
     @FXML
     public ImageView selResources1,selResources2,selResources3,selResources4;
@@ -59,6 +60,7 @@ public class TakeResourcesController extends Controller{
     @Override
     public void initialize() {
 
+        this.client = GUIApp.client;
 
         anchorBuyDevCard.setBackground(new Background(new BackgroundImage(new Image("/gui/img/exit_tab.png"),
                 BackgroundRepeat.NO_REPEAT,
@@ -66,6 +68,9 @@ public class TakeResourcesController extends Controller{
                 BackgroundPosition.CENTER,
                 new BackgroundSize(100, 100, true, true, true, false))));
         resourcesText.setStyle("-fx-text-fill: rgb(35, 25, 22);");
+
+        setMarbleImages();
+
         setFont(resourcesText,27);
         setFont(yesResources,23);
         setFont(noResources,23);
@@ -246,6 +251,26 @@ public class TakeResourcesController extends Controller{
         discard2.setVisible(true);
         discard3.setVisible(true);
         discard4.setVisible(true);;
+    }
+
+    private void setMarbleImages() {
+        ReducedMarketTray marketTray = client.getGame().getMarketTray();
+        marble11.setImage(new Image(marketTray.getMarble(1, 1).toImage()));
+        marble12.setImage(new Image(marketTray.getMarble(1, 2).toImage()));
+        marble13.setImage(new Image(marketTray.getMarble(1, 3).toImage()));
+        marble14.setImage(new Image(marketTray.getMarble(1, 4).toImage()));
+
+        marble21.setImage(new Image(marketTray.getMarble(2, 1).toImage()));
+        marble22.setImage(new Image(marketTray.getMarble(2, 2).toImage()));
+        marble23.setImage(new Image(marketTray.getMarble(2, 3).toImage()));
+        marble24.setImage(new Image(marketTray.getMarble(2, 4).toImage()));
+
+        marble31.setImage(new Image(marketTray.getMarble(3, 1).toImage()));
+        marble32.setImage(new Image(marketTray.getMarble(3, 2).toImage()));
+        marble33.setImage(new Image(marketTray.getMarble(3, 3).toImage()));
+        marble34.setImage(new Image(marketTray.getMarble(3, 4).toImage()));
+
+        slidingMarble.setImage(new Image(marketTray.getSlidingMarble().toImage()));
     }
 
 }

@@ -1,5 +1,7 @@
 package it.polimi.ingsw.Utils;
 
+import it.polimi.ingsw.Commons.ColorMarble;
+
 public final class ResourceLocator {
     public static String retrieveDevCardImage(String ID) {
         switch (ID) {
@@ -74,6 +76,18 @@ public final class ResourceLocator {
             case "EP-ST" : return "gui/img/leaderCards/EP-ST.png";
             case "EP-CO" : return "gui/img/leaderCards/EP-CO.png";
             default : return null; // image not found
+        }
+    }
+
+    public static String retrieveMarbleImage(ColorMarble colorMarble){
+        switch (colorMarble) {
+            case RED : return "gui/img/marbles/redMarble.png";
+            case BLUE: return "gui/img/marbles/blueMarble.png";
+            case GREY: return "gui/img/marbles/greyMarble.png";
+            case PURPLE: return "gui/img/marbles/purpleMarble.png";
+            case WHITE: return "gui/img/marbles/whiteMarble.png";
+            case YELLOW: return "gui/img/marbles/yellowMarble.png";
+            default: return null;
         }
     }
 }

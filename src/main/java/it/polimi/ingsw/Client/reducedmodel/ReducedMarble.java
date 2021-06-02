@@ -2,6 +2,7 @@ package it.polimi.ingsw.Client.reducedmodel;
 
 import it.polimi.ingsw.Commons.ColorMarble;
 import it.polimi.ingsw.Utils.ANSI_Color;
+import it.polimi.ingsw.Utils.ResourceLocator;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -35,4 +36,6 @@ public class ReducedMarble implements Serializable {
     public String toString() {
         return ANSI_Color.escape(colorMarble)+" [" + colorMarble +']'+ANSI_Color.RESET;
     }
+
+    public String toImage() {return ResourceLocator.retrieveMarbleImage(this.colorMarble);}
 }
