@@ -34,6 +34,7 @@
             </ImageView>
             <ImageView fx:id="leaderCard2" fitHeight="258.0" fitWidth="168.0" layoutX="758.0" layoutY="297.0" pickOnBounds="true" preserveRatio="true" />
             <Button fx:id="chooseAction" layoutX="541.0" layoutY="545.0" mnemonicParsing="false" onAction="#handleChooseActionButton" prefHeight="60.0" prefWidth="161.0" styleClass="chooseAction" stylesheets="@../css/button.css" text="Choose Action" />
+            <Button fx:id="moveAction" layoutX="14.0" layoutY="545.0" mnemonicParsing="false" onAction="#handleMoveActionButton" prefHeight="60.0" prefWidth="161.0" styleClass="chooseAction" stylesheets="@../css/button.css" text="Move Action" />
             </children>
         </AnchorPane>
     </center>

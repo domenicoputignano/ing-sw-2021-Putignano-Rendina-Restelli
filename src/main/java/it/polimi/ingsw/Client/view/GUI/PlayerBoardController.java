@@ -19,12 +19,13 @@ import java.util.Objects;
 
 public class PlayerBoardController extends Controller {
     Stage actions;
+    Stage move;
 
     @FXML
     public ImageView leaderCard1;
 
     @FXML
-    public Button chooseAction;
+    public Button chooseAction,moveAction;
 
     @FXML
     public ImageView leaderCard2;
@@ -42,6 +43,9 @@ public class PlayerBoardController extends Controller {
                 BackgroundPosition.CENTER,
                 bSize)));
         setFont(chooseAction,24);
+        setFont(moveAction,24);
+        chooseAction.setStyle("-fx-text-fill: rgb(35, 25, 22);");
+        moveAction.setStyle("-fx-text-fill: rgb(35, 25, 22);");
 
         this.client = GUIApp.client;
 
@@ -71,5 +75,28 @@ public class PlayerBoardController extends Controller {
                 e.printStackTrace();
             }
         actions.show();
+    }
+    @FXML
+    public void handleMoveActionButton()
+    {
+        move = new Stage();
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/fxml/MoveActionPage.fxml"));
+            Parent root = loader.load();
+            GUIApp.controller = loader.getController();
+            Scene scene = new Scene(Objects.requireNonNull(root), 1180, 750, Color.TRANSPARENT);
+            scene.setCursor(new ImageCursor(new Image(CURSOR), 36, 45));
+            move.initStyle(StageStyle.TRANSPARENT);
+            move.setAlwaysOnTop(true);
+            scene.setUserData(loader);
+            move.initModality(Modality.WINDOW_MODAL);
+            move.initOwner(GUIApp.getStage());
+            scene.setUserData(loader);
+            move.setScene(scene);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        move.show();
     }
 }
