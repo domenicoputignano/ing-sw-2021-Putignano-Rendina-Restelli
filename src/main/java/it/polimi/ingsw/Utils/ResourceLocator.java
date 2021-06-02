@@ -109,8 +109,22 @@ public final class ResourceLocator {
                 case 6 : return "      |     |      |      ";
                 case 8 : return "           VP:1            ";
             }
-            case "1B-3" : return "gui/img/devCards/1B-3.png";
-            case "1B-4" : return "gui/img/devCards/1B-4.png";
+            case "1B-3" : switch (row) {
+                case 1 : return "           3" + ANSI_Color.YELLOW.escape()+"CO"+ ANSI_Color.RESET +"             ";
+                case 2 : return " lv:1                 " + ANSI_Color.BLUE.escape()+ "BLUE" + ANSI_Color.RESET + " ";
+                case 4 : return "      |     |  1"+ ANSI_Color.YELLOW.escape()+"CO"+ ANSI_Color.RESET +"  |      ";
+                case 5 : return "      |  2"+ ANSI_Color.GREY.escape()+"ST"+ ANSI_Color.RESET +"|=>1"+ ANSI_Color.PURPLE.escape()+"SE"+ ANSI_Color.RESET +"  |      ";
+                case 6 : return "      |     |  1"+ ANSI_Color.BLUE.escape()+"SH"+ ANSI_Color.RESET +"  |      ";
+                case 8 : return "           VP:3            ";
+            }
+            case "1B-4" : switch (row) {
+                case 1 : return "         2" + ANSI_Color.YELLOW.escape()+"CO"+ ANSI_Color.RESET +"  2"+ ANSI_Color.PURPLE.escape()+"SE"+ ANSI_Color.RESET +"          ";
+                case 2 : return " lv:1                 " + ANSI_Color.BLUE.escape()+ "BLUE" + ANSI_Color.RESET + " ";
+                case 4 : return "      |  1"+ ANSI_Color.BLUE.escape()+"SH"+ ANSI_Color.RESET +"|  2"+ ANSI_Color.PURPLE.escape()+"SE"+ ANSI_Color.RESET +"  |      ";
+                case 5 : return "      |     |=>     |      ";
+                case 6 : return "      |  1"+ ANSI_Color.GREY.escape()+"ST"+ ANSI_Color.RESET +"|  1"+ ANSI_Color.RED.escape()+"FA"+ ANSI_Color.RESET +"  |      ";
+                case 8 : return "           VP:4            ";
+            }
             case "1G-1" : return "gui/img/devCards/1G-1.png";
             case "1G-2" : return "gui/img/devCards/1G-2.png";
             case "1G-3" : return "gui/img/devCards/1G-3.png";
