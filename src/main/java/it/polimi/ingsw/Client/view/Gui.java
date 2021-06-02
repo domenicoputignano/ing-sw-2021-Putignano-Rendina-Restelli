@@ -77,6 +77,17 @@ public class Gui extends UI{
 
     @Override
     public void render(InitialLeaderChoiceUpdate message) {
+        if(isReceiverAction(message.getUser())){
+            if(isSoloMode()){
+                // TODO INIZIARE IL PRIMO TURNO
+            } else {
+                if(client.getUserPosition() > 1) {
+                    Platform.runLater(() -> GUIApp.showScene("/gui/FXML/ResourceChoicePage.fxml"));
+                } else {
+                    // TODO MANDARE IN UNA SCHERMATA DI ATTESA
+                }
+            }
+        }
 
     }
 

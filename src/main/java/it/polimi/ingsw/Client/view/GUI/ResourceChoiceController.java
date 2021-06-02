@@ -65,7 +65,10 @@ public class ResourceChoiceController extends Controller{
                 BackgroundRepeat.NO_REPEAT,
                 BackgroundPosition.CENTER,
                 bSize)));
-        playerNumber = 4;
+
+        this.client = GUIApp.client;
+        playerNumber = client.getUserPosition();
+
         if(playerNumber == 2 || playerNumber == 3)
             maxResources = 1;
         else if(playerNumber == 4)
