@@ -403,4 +403,9 @@ public class CLI extends UI {
         clientState = newClientState;
     }
 
+    public void printDecks(){
+        System.out.println(".---------------------------..---------------------------..---------------------------..---------------------------.");
+        //System.out.println("|"+client.getGame()."|""|""|""|""|");
+    }
+
 }

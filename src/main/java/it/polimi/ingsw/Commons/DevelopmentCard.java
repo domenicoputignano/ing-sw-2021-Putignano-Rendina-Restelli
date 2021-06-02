@@ -57,6 +57,11 @@ public class DevelopmentCard implements Serializable {
                 '}';
     }
 
+    public String toASCII(int row) {
+        return null;
+        //ResourceLocator.retrieve
+    }
+
     public String toImage(){
         return ResourceLocator.retrieveDevCardImage(this.ID);
     }

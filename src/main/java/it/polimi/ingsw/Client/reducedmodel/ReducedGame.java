@@ -1,5 +1,6 @@
 package it.polimi.ingsw.Client.reducedmodel;
 
+import it.polimi.ingsw.Commons.ColorCard;
 import it.polimi.ingsw.Commons.Deck;
 import it.polimi.ingsw.Commons.User;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.ServerMessage;
@@ -8,6 +9,7 @@ import it.polimi.ingsw.Utils.Messages.ServerMessages.Updates.*;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public abstract class ReducedGame implements Serializable {
 
@@ -72,6 +74,12 @@ public abstract class ReducedGame implements Serializable {
         return marketTray;
     }
 
+    public String getDeckTopCardAsASCII(int level, ColorCard color, int row){
+        if(getDecks().stream().anyMatch(x -> x.getCardType().getLevel()==level && x.getCardType().getColor()==color))
+            return decks.stream().filter(x -> x.getCardType().getLevel()==level && x.getCardType().getColor()==color)
+                    .collect(Collectors.toList()).get(0).getTop().toASCII(row);
+        else return "            ";
+    }
 
 }
 
