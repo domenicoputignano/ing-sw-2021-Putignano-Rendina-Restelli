@@ -18,7 +18,9 @@ import it.polimi.ingsw.Utils.Messages.ServerMessages.Updates.UpdateMessage;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.InputStreamReader;
 import java.lang.reflect.Type;
+import java.nio.charset.StandardCharsets;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -62,7 +64,7 @@ public abstract class Game extends Observable<ServerMessage> implements Observer
             Gson gson = new Gson();
 
             JsonReader reader = new JsonReader(new FileReader(path));
-
+            //JsonReader reader = new JsonReader(new InputStreamReader(Objects.requireNonNull(decks.getClass().getResourceAsStream(path)), StandardCharsets.UTF_8));
             Type listType = new TypeToken<List<Deck>>() {
             }.getType();
             decks = gson.fromJson(reader, listType);

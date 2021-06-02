@@ -51,7 +51,6 @@ public class LobbyController extends Controller {
     {
         player1.setText(player);
     }
-
     public void setPlayer2(String player)
     {
         player2.setText(player);

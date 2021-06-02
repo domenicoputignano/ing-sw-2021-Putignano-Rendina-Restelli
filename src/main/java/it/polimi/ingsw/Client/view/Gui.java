@@ -3,11 +3,14 @@ package it.polimi.ingsw.Client.view;
 import it.polimi.ingsw.Client.clientstates.AbstractClientState;
 import it.polimi.ingsw.Client.view.GUI.GUIApp;
 import it.polimi.ingsw.Client.view.GUI.LobbyController;
+import it.polimi.ingsw.Commons.User;
 import it.polimi.ingsw.Network.Client;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.*;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.Updates.*;
 import javafx.application.Platform;
 
+import javax.print.DocFlavor;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -144,7 +147,25 @@ public class Gui extends UI{
 
     @Override
     public void render(JoinLobbyMessage message) {
-        Platform.runLater(() -> ((LobbyController) GUIApp.controller).setPlayer1(message.getLastAwaitingGuest()));
+        List<String> nicknames = message.getAwaitingGuests();
+        for(String nickname : nicknames) {
+            if(nicknames.indexOf(nickname) == 0) {
+                if(isReceiverAction(new User(nickname))) Platform.runLater(() -> ((LobbyController) GUIApp.controller).setPlayer1("You"));
+                else Platform.runLater(() -> ((LobbyController) GUIApp.controller).setPlayer1(nickname));
+            }
+            if(nicknames.indexOf(nickname) == 1) {
+                if(isReceiverAction(new User(nickname))) Platform.runLater(() -> ((LobbyController) GUIApp.controller).setPlayer2("You"));
+                else Platform.runLater(() -> ((LobbyController) GUIApp.controller).setPlayer2(nickname));
+            }
+            if(nicknames.indexOf(nickname) == 2) {
+                if(isReceiverAction(new User(nickname))) Platform.runLater(() -> ((LobbyController) GUIApp.controller).setPlayer3("You"));
+                else Platform.runLater(() -> ((LobbyController) GUIApp.controller).setPlayer3(nickname));
+            }
+            if(nickname.indexOf(nickname) == 3) {
+                if(isReceiverAction(new User(nickname))) Platform.runLater(() -> ((LobbyController) GUIApp.controller).setPlayer4("You"));
+                else Platform.runLater(() -> ((LobbyController) GUIApp.controller).setPlayer4(nickname));
+            }
+        }
     }
 
     @Override
