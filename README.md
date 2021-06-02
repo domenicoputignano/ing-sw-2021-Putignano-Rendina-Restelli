@@ -2,4 +2,4 @@
 GC15 - Putignano-Rendina-Restelli
 
 ## Test coverage details
-![test_coverage](deliverables/screenshots/testcoverage.JPG)
+![test_coverage](deliverables/screenshots/testcoverage0206.JPG)
