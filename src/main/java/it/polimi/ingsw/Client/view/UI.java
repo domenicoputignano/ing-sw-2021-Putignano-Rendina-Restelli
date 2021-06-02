@@ -1,6 +1,7 @@
 package it.polimi.ingsw.Client.view;
 
 import it.polimi.ingsw.Client.clientstates.AbstractClientState;
+import it.polimi.ingsw.Commons.ResourceType;
 import it.polimi.ingsw.Commons.User;
 import it.polimi.ingsw.Network.Client;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.*;
@@ -77,6 +78,18 @@ public abstract class UI {
     public boolean isSoloMode() {
         return soloMode;
     }
+
+    public static ResourceType fromStringToResourceType(String resource) {
+        if(resource.equalsIgnoreCase("C")||resource.equalsIgnoreCase("coin")) return ResourceType.coin;
+        if(resource.equalsIgnoreCase("SE")||resource.equalsIgnoreCase("servant")) return ResourceType.servant;
+        if(resource.equalsIgnoreCase("SH")||resource.equalsIgnoreCase("shield")) return ResourceType.shield;
+        if(resource.equalsIgnoreCase("ST")||resource.equalsIgnoreCase("stone")) return ResourceType.stone;
+        else {
+            System.out.println("Error detected, please select again ");
+            return null;
+        }
+    }
+
 
     public void setSoloMode(boolean soloMode) {
         this.soloMode = soloMode;

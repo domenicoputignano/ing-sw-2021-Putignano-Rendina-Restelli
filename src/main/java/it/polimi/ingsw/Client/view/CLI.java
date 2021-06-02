@@ -304,16 +304,6 @@ public class CLI extends UI {
         interactionManagerService.submit(() -> clientState.manageUserInteraction());
     }
 
-    public ResourceType fromStringToResourceType(String resource) {
-        if(resource.equalsIgnoreCase("C")) return ResourceType.coin;
-        if(resource.equalsIgnoreCase("SE")) return ResourceType.servant;
-        if(resource.equalsIgnoreCase("SH")) return ResourceType.shield;
-        if(resource.equalsIgnoreCase("ST")) return ResourceType.stone;
-        else {
-            System.out.println("Error detected, please select again ");
-            return null;
-        }
-    }
 
     public ResourceSource fromStringToResourceSource(String source) {
         if(source.equalsIgnoreCase("depot")) return ResourceSource.DEPOT;

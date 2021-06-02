@@ -82,7 +82,7 @@ public class LeaderCard implements Serializable {
         else return color+"{" +
                 "\nEffect=" + leaderEffect +
                 "\nRequired resources = " + requirementsResources +
-                "\nStatus = "+activation()+
+                "\n"+activation()+
                 "\nPoints =" + victoryPoints +
                 '}'+ ANSI_Color.RESET;
     }

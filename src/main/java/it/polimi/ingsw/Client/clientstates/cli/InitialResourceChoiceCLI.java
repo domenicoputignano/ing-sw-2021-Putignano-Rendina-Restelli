@@ -37,5 +37,7 @@ public class InitialResourceChoiceCLI extends AbstractInitialResourceChoice {
         }
         messageToSend = new ResourceChoiceMessage(requiredResources);
         client.sendMessage(messageToSend);
+        cli.changeClientState(new WaitForTurnCLI(client));
+        cli.manageUserInteraction();
     }
 }

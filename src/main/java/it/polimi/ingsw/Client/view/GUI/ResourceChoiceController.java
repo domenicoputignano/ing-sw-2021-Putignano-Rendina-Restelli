@@ -1,5 +1,8 @@
 package it.polimi.ingsw.Client.view.GUI;
 
+import it.polimi.ingsw.Client.clientstates.gui.InitialResourceChoiceGUI;
+import it.polimi.ingsw.Commons.ResourceType;
+import it.polimi.ingsw.Utils.Pair;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
@@ -7,6 +10,12 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+
+import static it.polimi.ingsw.Client.view.UI.fromStringToResourceType;
 
 
 public class ResourceChoiceController extends Controller{
@@ -273,19 +282,26 @@ public class ResourceChoiceController extends Controller{
         buttonDepot1.setVisible(true);
         buttonDepot2.setVisible(true);
         buttonDepot3.setVisible(true);
-        if(playerNumber != 4) {
-            if (coin > 0)
-                resource1Img.setImage(new Image("/gui/img/coin.png"));
-            else if (servant > 0)
-                resource1Img.setImage(new Image("/gui/img/servant.png"));
-            else if (shield > 0)
-                resource1Img.setImage(new Image("/gui/img/shield.png"));
-            else if (stone > 0)
-                resource1Img.setImage(new Image("/gui/img/stone.png"));
+
+        if(getResourcesSelectedTimes(1).size()==1){
+            resource1Img.setImage(new Image(getURLImageResource(getResourcesSelectedTimes(1).get(0))));
         }
         else {
-            //TODO
+            if(getResourcesSelectedTimes(1).size()==2) {
+                resource1Img.setImage(new Image(getURLImageResource(getResourcesSelectedTimes(1).get(0))));
+                resource1Imgpl4.setVisible(true);
+                resource1Imgpl4.setImage(new Image(getURLImageResource(getResourcesSelectedTimes(1).get(1))));
+                buttonDepot1pl4.setVisible(true);
+                buttonDepot2pl4.setVisible(true);
+                buttonDepot3pl4.setVisible(true);
+
+            }
+            if(getResourcesSelectedTimes(2).size()==1) {
+                resource1Img.setImage(new Image(getURLImageResource(getResourcesSelectedTimes(2).get(0))));
+                buttonDepot1.setVisible(false);
+            }
         }
+
     }
     void clearSelect()
     {
@@ -314,32 +330,40 @@ public class ResourceChoiceController extends Controller{
     {
         clearSelect();
         buttonDepot11=true;
+        buttonDepot12 = false;
         buttonDepot1.setStyle("-fx-background-size: 75% auto;");
-
+        buttonDepot1pl4.setStyle("-fx-background-size: 100% auto;");
     }
     public void selectedButtonDepot21()
     {
         clearSelect();
         buttonDepot21=true;
+        buttonDepot22=false;
         buttonDepot2.setStyle("-fx-background-size: 75% auto;");
-
+        buttonDepot2pl4.setStyle("-fx-background-size: 100% auto;");
     }
     public void selectedButtonDepot31()
     {
         clearSelect();
         buttonDepot31=true;
+        buttonDepot32=false;
+        buttonDepot3pl4.setStyle("-fx-background-size: 100% auto;");
         buttonDepot3.setStyle("-fx-background-size: 75% auto;");
 
     }
     public void selectedButtonDepot12()
     {
         clearSelectpl4();
-        buttonDepot12=true;
+        buttonDepot11 = false;
+        buttonDepot1.setStyle("-fx-background-size: 100% auto;");
+        buttonDepot12 = true;
         buttonDepot1pl4.setStyle("-fx-background-size: 75% auto;");
     }
     public void selectedButtonDepot22()
     {
         clearSelectpl4();
+        buttonDepot21 = false;
+        buttonDepot2.setStyle("-fx-background-size: 100% auto;");
         buttonDepot22=true;
         buttonDepot2pl4.setStyle("-fx-background-size: 75% auto;");
 
@@ -347,8 +371,64 @@ public class ResourceChoiceController extends Controller{
     public void selectedButtonDepot32()
     {
         clearSelectpl4();
+        buttonDepot31 = false;
+        buttonDepot3.setStyle("-fx-background-size: 100% auto;");
         buttonDepot32=true;
         buttonDepot3pl4.setStyle("-fx-background-size: 75% auto;");
     }
+
+    private List<String> getResourcesSelectedTimes(int times) {
+        List<String> result = new ArrayList<>();
+        if(coin == times) result.add("coin");
+        if(servant == times) result.add("servant");
+        if(shield == times) result.add("shield");
+        if(stone == times) result.add("stone");
+        return result;
+    }
+
+
+
+    private String getURLImageResource(String resource) {
+        if(resource.equals("coin")) return "/gui/img/coin.png";
+        if(resource.equals("servant")) return "/gui/img/servant.png";
+        if(resource.equals("shield")) return "/gui/img/shield.png";
+        if(resource.equals("stone")) return "/gui/img/stone.png";
+        else return "";
+    }
+
+    private int getDepotIndex(boolean buttonDepot1, boolean buttonDepot2, boolean buttonDepot3) {
+        if(buttonDepot1) return 1;
+        if(buttonDepot2) return 2;
+        if(buttonDepot3) return 3;
+        else return 0;
+    }
+
+
+
+
+    @FXML
+    void submitInitialResourceChoice() {
+        List<Pair<ResourceType,Integer>> resourcesWithDepotDestination = new ArrayList<>();
+        if(getResourcesSelectedTimes(1).size()==1) {
+            resourcesWithDepotDestination.
+                    add(new Pair<>(fromStringToResourceType(getResourcesSelectedTimes(1).get(0)),
+                            getDepotIndex(buttonDepot11, buttonDepot21, buttonDepot31)));
+        } else {
+            if(getResourcesSelectedTimes(1).size()==2) {
+                resourcesWithDepotDestination.add(new Pair<>(fromStringToResourceType(getResourcesSelectedTimes(1).get(0)),
+                        getDepotIndex(buttonDepot11, buttonDepot21, buttonDepot31)));
+                resourcesWithDepotDestination.add(new Pair<>(fromStringToResourceType(getResourcesSelectedTimes(1).get(1)),
+                        getDepotIndex(buttonDepot12, buttonDepot22, buttonDepot32)));
+            }
+            if(getResourcesSelectedTimes(2).size()==1) {
+                resourcesWithDepotDestination.add(new Pair<>(fromStringToResourceType(getResourcesSelectedTimes(2).get(0)),
+                        getDepotIndex(buttonDepot11, buttonDepot21, buttonDepot31)));
+                resourcesWithDepotDestination.add(new Pair<>(fromStringToResourceType(getResourcesSelectedTimes(2).get(0)),
+                        getDepotIndex(buttonDepot11, buttonDepot21, buttonDepot31)));
+            }
+        }
+        (new InitialResourceChoiceGUI(client, resourcesWithDepotDestination)).manageUserInteraction();
+    }
+
 
 }
