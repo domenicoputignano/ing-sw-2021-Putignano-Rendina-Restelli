@@ -3,10 +3,7 @@ package it.polimi.ingsw.Client.view;
 import it.polimi.ingsw.Client.clientstates.AbstractClientState;
 import it.polimi.ingsw.Client.clientstates.cli.ActionChoiceCLI;
 import it.polimi.ingsw.Client.reducedmodel.ReducedDepot;
-import it.polimi.ingsw.Commons.Effect;
-import it.polimi.ingsw.Commons.LeaderCard;
-import it.polimi.ingsw.Commons.ResourceType;
-import it.polimi.ingsw.Commons.User;
+import it.polimi.ingsw.Commons.*;
 import it.polimi.ingsw.Network.Client;
 import it.polimi.ingsw.Utils.ANSI_Color;
 import it.polimi.ingsw.Utils.MarbleDestination;
@@ -382,7 +379,35 @@ public class CLI extends UI {
 
     public void printDecks(){
         System.out.println(".---------------------------..---------------------------..---------------------------..---------------------------.");
-        //System.out.println("|"+client.getGame()."|""|""|""|""|");
+        System.out.println("|"+client.getGame().getDeckTopCardAsASCII(3, ColorCard.green, 1)+"||"+client.getGame().getDeckTopCardAsASCII(3, ColorCard.blue, 1)+"||"+client.getGame().getDeckTopCardAsASCII(3, ColorCard.yellow, 1)+"||"+client.getGame().getDeckTopCardAsASCII(3, ColorCard.purple, 1)+"|");
+        System.out.println("|"+client.getGame().getDeckTopCardAsASCII(3, ColorCard.green, 2)+"||"+client.getGame().getDeckTopCardAsASCII(3, ColorCard.blue, 2)+"||"+client.getGame().getDeckTopCardAsASCII(3, ColorCard.yellow, 2)+"||"+client.getGame().getDeckTopCardAsASCII(3, ColorCard.purple, 2)+"|");
+        System.out.println("|      .-------------.      ||      .-------------.      ||      .-------------.      ||      .-------------.      |");
+        System.out.println("|"+client.getGame().getDeckTopCardAsASCII(3, ColorCard.green, 4)+"||"+client.getGame().getDeckTopCardAsASCII(3, ColorCard.blue, 4)+"||"+client.getGame().getDeckTopCardAsASCII(3, ColorCard.yellow, 4)+"||"+client.getGame().getDeckTopCardAsASCII(3, ColorCard.purple, 4)+"|");
+        System.out.println("|"+client.getGame().getDeckTopCardAsASCII(3, ColorCard.green, 5)+"||"+client.getGame().getDeckTopCardAsASCII(3, ColorCard.blue, 5)+"||"+client.getGame().getDeckTopCardAsASCII(3, ColorCard.yellow, 5)+"||"+client.getGame().getDeckTopCardAsASCII(3, ColorCard.purple, 5)+"|");
+        System.out.println("|"+client.getGame().getDeckTopCardAsASCII(3, ColorCard.green, 6)+"||"+client.getGame().getDeckTopCardAsASCII(3, ColorCard.blue, 6)+"||"+client.getGame().getDeckTopCardAsASCII(3, ColorCard.yellow, 6)+"||"+client.getGame().getDeckTopCardAsASCII(3, ColorCard.purple, 6)+"|");
+        System.out.println("|      '.............'      ||      '.............'      ||      '.............'      ||      '.............'      |");
+        System.out.println("|"+client.getGame().getDeckTopCardAsASCII(3, ColorCard.green, 8)+"||"+client.getGame().getDeckTopCardAsASCII(3, ColorCard.blue, 8)+"||"+client.getGame().getDeckTopCardAsASCII(3, ColorCard.yellow, 8)+"||"+client.getGame().getDeckTopCardAsASCII(3, ColorCard.purple, 8)+"|");
+        System.out.println("'---------------------------''---------------------------''---------------------------''---------------------------'");
+        System.out.println(".---------------------------..---------------------------..---------------------------..---------------------------.");
+        System.out.println("|"+client.getGame().getDeckTopCardAsASCII(2, ColorCard.green, 1)+"||"+client.getGame().getDeckTopCardAsASCII(2, ColorCard.blue, 1)+"||"+client.getGame().getDeckTopCardAsASCII(2, ColorCard.yellow, 1)+"||"+client.getGame().getDeckTopCardAsASCII(2, ColorCard.purple, 1)+"|");
+        System.out.println("|"+client.getGame().getDeckTopCardAsASCII(2, ColorCard.green, 2)+"||"+client.getGame().getDeckTopCardAsASCII(2, ColorCard.blue, 2)+"||"+client.getGame().getDeckTopCardAsASCII(2, ColorCard.yellow, 2)+"||"+client.getGame().getDeckTopCardAsASCII(2, ColorCard.purple, 2)+"|");
+        System.out.println("|      .-------------.      ||      .-------------.      ||      .-------------.      ||      .-------------.      |");
+        System.out.println("|"+client.getGame().getDeckTopCardAsASCII(2, ColorCard.green, 4)+"||"+client.getGame().getDeckTopCardAsASCII(2, ColorCard.blue, 4)+"||"+client.getGame().getDeckTopCardAsASCII(2, ColorCard.yellow, 4)+"||"+client.getGame().getDeckTopCardAsASCII(2, ColorCard.purple, 4)+"|");
+        System.out.println("|"+client.getGame().getDeckTopCardAsASCII(2, ColorCard.green, 5)+"||"+client.getGame().getDeckTopCardAsASCII(2, ColorCard.blue, 5)+"||"+client.getGame().getDeckTopCardAsASCII(2, ColorCard.yellow, 5)+"||"+client.getGame().getDeckTopCardAsASCII(2, ColorCard.purple, 5)+"|");
+        System.out.println("|"+client.getGame().getDeckTopCardAsASCII(2, ColorCard.green, 6)+"||"+client.getGame().getDeckTopCardAsASCII(2, ColorCard.blue, 6)+"||"+client.getGame().getDeckTopCardAsASCII(2, ColorCard.yellow, 6)+"||"+client.getGame().getDeckTopCardAsASCII(2, ColorCard.purple, 6)+"|");
+        System.out.println("|      '.............'      ||      '.............'      ||      '.............'      ||      '.............'      |");
+        System.out.println("|"+client.getGame().getDeckTopCardAsASCII(2, ColorCard.green, 8)+"||"+client.getGame().getDeckTopCardAsASCII(2, ColorCard.blue, 8)+"||"+client.getGame().getDeckTopCardAsASCII(2, ColorCard.yellow, 8)+"||"+client.getGame().getDeckTopCardAsASCII(2, ColorCard.purple, 8)+"|");
+        System.out.println("'---------------------------''---------------------------''---------------------------''---------------------------'");
+        System.out.println(".---------------------------..---------------------------..---------------------------..---------------------------.");
+        System.out.println("|"+client.getGame().getDeckTopCardAsASCII(1, ColorCard.green, 1)+"||"+client.getGame().getDeckTopCardAsASCII(1, ColorCard.blue, 1)+"||"+client.getGame().getDeckTopCardAsASCII(1, ColorCard.yellow, 1)+"||"+client.getGame().getDeckTopCardAsASCII(1, ColorCard.purple, 1)+"|");
+        System.out.println("|"+client.getGame().getDeckTopCardAsASCII(1, ColorCard.green, 2)+"||"+client.getGame().getDeckTopCardAsASCII(1, ColorCard.blue, 2)+"||"+client.getGame().getDeckTopCardAsASCII(1, ColorCard.yellow, 2)+"||"+client.getGame().getDeckTopCardAsASCII(1, ColorCard.purple, 2)+"|");
+        System.out.println("|      .-------------.      ||      .-------------.      ||      .-------------.      ||      .-------------.      |");
+        System.out.println("|"+client.getGame().getDeckTopCardAsASCII(1, ColorCard.green, 4)+"||"+client.getGame().getDeckTopCardAsASCII(1, ColorCard.blue, 4)+"||"+client.getGame().getDeckTopCardAsASCII(1, ColorCard.yellow, 4)+"||"+client.getGame().getDeckTopCardAsASCII(1, ColorCard.purple, 4)+"|");
+        System.out.println("|"+client.getGame().getDeckTopCardAsASCII(1, ColorCard.green, 5)+"||"+client.getGame().getDeckTopCardAsASCII(1, ColorCard.blue, 5)+"||"+client.getGame().getDeckTopCardAsASCII(1, ColorCard.yellow, 5)+"||"+client.getGame().getDeckTopCardAsASCII(1, ColorCard.purple, 5)+"|");
+        System.out.println("|"+client.getGame().getDeckTopCardAsASCII(1, ColorCard.green, 6)+"||"+client.getGame().getDeckTopCardAsASCII(1, ColorCard.blue, 6)+"||"+client.getGame().getDeckTopCardAsASCII(1, ColorCard.yellow, 6)+"||"+client.getGame().getDeckTopCardAsASCII(1, ColorCard.purple, 6)+"|");
+        System.out.println("|      '.............'      ||      '.............'      ||      '.............'      ||      '.............'      |");
+        System.out.println("|"+client.getGame().getDeckTopCardAsASCII(1, ColorCard.green, 8)+"||"+client.getGame().getDeckTopCardAsASCII(1, ColorCard.blue, 8)+"||"+client.getGame().getDeckTopCardAsASCII(1, ColorCard.yellow, 8)+"||"+client.getGame().getDeckTopCardAsASCII(1, ColorCard.purple, 8)+"|");
+        System.out.println("'---------------------------''---------------------------''---------------------------''---------------------------'");
     }
 
 }

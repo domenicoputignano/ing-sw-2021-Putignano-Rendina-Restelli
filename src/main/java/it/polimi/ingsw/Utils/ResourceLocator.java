@@ -94,19 +94,19 @@ public final class ResourceLocator {
     public static String retrieveDevCardASCII(String ID, int row){
         switch (ID) {
             case "1B-1" : switch (row) {
-                case 1 : return "          2" +ANSI_Color.YELLOW.escape() +"CO"+ ANSI_Color.RESET +"            ";
-                case 2 : return " lv:1                " + ANSI_Color.BLUE.escape()+ "BLUE" + ANSI_Color.RESET + " ";
-                case 4 : return "      |     |      |      ";
+                case 1 : return "            2" +ANSI_Color.YELLOW.escape() +"CO"+ ANSI_Color.RESET +"            ";
+                case 2 : return " lv:1                 " + ANSI_Color.BLUE.escape()+ "BLUE" + ANSI_Color.RESET + " ";
+                case 4 : return "      |     |       |      ";
                 case 5 : return "      |  1" + ANSI_Color.BLUE.escape() + "SH"+ ANSI_Color.RESET +"|=>1"+ ANSI_Color.RED.escape() + "FA"+ANSI_Color.RESET +"  |      ";
-                case 6 : return "      |     |      |      ";
+                case 6 : return "      |     |       |      ";
                 case 8 : return "           VP:1            ";
             }
             case "1B-2" : switch (row) {
                 case 1 : return "       1" + ANSI_Color.YELLOW.escape()+"CO"+ ANSI_Color.RESET +"  1" + ANSI_Color.PURPLE.escape()+"SE"+ ANSI_Color.RESET +" 1 " + ANSI_Color.GREY.escape()+"ST"+ ANSI_Color.RESET + "       ";
                 case 2 : return " lv:1                 " + ANSI_Color.BLUE.escape()+ "BLUE" + ANSI_Color.RESET + " ";
-                case 4 : return "      |     |      |      ";
+                case 4 : return "      |     |       |      ";
                 case 5 : return "      |  1"+ ANSI_Color.PURPLE.escape()+"SE"+ ANSI_Color.RESET +"|=>1"+ ANSI_Color.GREY.escape()+"ST"+ ANSI_Color.RESET +"  |      ";
-                case 6 : return "      |     |      |      ";
+                case 6 : return "      |     |       |      ";
                 case 8 : return "           VP:2            ";
             }
             case "1B-3" : switch (row) {
@@ -126,19 +126,19 @@ public final class ResourceLocator {
                 case 8 : return "           VP:4            ";
             }
             case "1G-1" : switch (row) {
-                case 1 : return "          2" +ANSI_Color.BLUE.escape() +"SH"+ ANSI_Color.RESET +"            ";
+                case 1 : return "           2" +ANSI_Color.BLUE.escape() +"SH"+ ANSI_Color.RESET +"             ";
                 case 2 : return " lv:1                " + ANSI_Color.GREEN.escape()+ "GREEN" + ANSI_Color.RESET + " ";
-                case 4 : return "      |     |      |      ";
+                case 4 : return "      |     |       |      ";
                 case 5 : return "      |  1" + ANSI_Color.YELLOW.escape() + "CO"+ ANSI_Color.RESET +"|=>1"+ ANSI_Color.RED.escape() + "FA"+ANSI_Color.RESET +"  |      ";
-                case 6 : return "      |     |      |      ";
+                case 6 : return "      |     |       |      ";
                 case 8 : return "           VP:1            ";
             }
             case "1G-2" : switch (row) {
                 case 1 : return "       1" + ANSI_Color.BLUE.escape()+"SH"+ ANSI_Color.RESET +"  1" + ANSI_Color.PURPLE.escape()+"SE"+ ANSI_Color.RESET +" 1 " + ANSI_Color.GREY.escape()+"ST"+ ANSI_Color.RESET + "       ";
                 case 2 : return " lv:1                " + ANSI_Color.GREEN.escape()+ "GREEN" + ANSI_Color.RESET + " ";
-                case 4 : return "      |     |      |      ";
+                case 4 : return "      |     |       |      ";
                 case 5 : return "      |  1"+ ANSI_Color.GREY.escape()+"ST"+ ANSI_Color.RESET +"|=>1"+ ANSI_Color.PURPLE.escape()+"SE"+ ANSI_Color.RESET +"  |      ";
-                case 6 : return "      |     |      |      ";
+                case 6 : return "      |     |       |      ";
                 case 8 : return "           VP:2            ";
             }
             case "1G-3" : switch (row) {
@@ -158,19 +158,19 @@ public final class ResourceLocator {
                 case 8 : return "           VP:4            ";
             }
             case "1P-1" : switch (row) {
-                case 1 : return "          2" +ANSI_Color.PURPLE.escape() +"SE"+ ANSI_Color.RESET +"            ";
-                case 2 : return " lv:1              " + ANSI_Color.PURPLE.escape()+ "PURPLE" + ANSI_Color.RESET + " ";
-                case 4 : return "      |     |      |      ";
+                case 1 : return "            2" +ANSI_Color.PURPLE.escape() +"SE"+ ANSI_Color.RESET +"            ";
+                case 2 : return " lv:1               " + ANSI_Color.PURPLE.escape()+ "PURPLE" + ANSI_Color.RESET + " ";
+                case 4 : return "      |     |       |      ";
                 case 5 : return "      |  1" + ANSI_Color.GREY.escape() + "ST"+ ANSI_Color.RESET +"|=>1"+ ANSI_Color.RED.escape() + "FA"+ANSI_Color.RESET +"  |      ";
-                case 6 : return "      |     |      |      ";
+                case 6 : return "      |     |       |      ";
                 case 8 : return "           VP:1            ";
             }
             case "1P-2" : switch (row) {
                 case 1 : return "       1" + ANSI_Color.BLUE.escape()+"SH"+ ANSI_Color.RESET +"  1" + ANSI_Color.PURPLE.escape()+"SE"+ ANSI_Color.RESET +" 1 " + ANSI_Color.YELLOW.escape()+"CO"+ ANSI_Color.RESET + "       ";
                 case 2 : return " lv:1               " + ANSI_Color.PURPLE.escape()+ "PURPLE" + ANSI_Color.RESET + " ";
-                case 4 : return "      |     |      |      ";
+                case 4 : return "      |     |       |      ";
                 case 5 : return "      |  1" + ANSI_Color.YELLOW.escape()+"CO"+ ANSI_Color.RESET +"|=>1"+ ANSI_Color.BLUE.escape()+"SH"+ ANSI_Color.RESET +"  |      ";
-                case 6 : return "      |     |      |      ";
+                case 6 : return "      |     |       |      ";
                 case 8 : return "           VP:2            ";
             }
             case "1P-3" : switch (row) {
@@ -183,31 +183,31 @@ public final class ResourceLocator {
             }
             case "1P-4" : switch (row) {
                 case 1 : return "         2" + ANSI_Color.PURPLE.escape()+"SE"+ ANSI_Color.RESET +"  2"+ ANSI_Color.GREY.escape()+"ST"+ ANSI_Color.RESET +"          ";
-                case 2 : return " lv:1              " + ANSI_Color.PURPLE.escape()+ "PURPLE" + ANSI_Color.RESET + " ";
+                case 2 : return " lv:1               " + ANSI_Color.PURPLE.escape()+ "PURPLE" + ANSI_Color.RESET + " ";
                 case 4 : return "      |  1"+ ANSI_Color.YELLOW.escape()+"CO"+ ANSI_Color.RESET +"|  2"+ ANSI_Color.GREY.escape()+"ST"+ ANSI_Color.RESET +"  |      ";
                 case 5 : return "      |     |=>     |      ";
                 case 6 : return "      |  1"+ ANSI_Color.BLUE.escape()+"SH"+ ANSI_Color.RESET +"|  1"+ ANSI_Color.RED.escape()+"FA"+ ANSI_Color.RESET +"  |      ";
                 case 8 : return "           VP:4            ";
             }
             case "1Y-1" : switch (row) {
-                case 1 : return "          2" +ANSI_Color.GREY.escape() +"ST"+ ANSI_Color.RESET +"            ";
-                case 2 : return " lv:1              " + ANSI_Color.YELLOW.escape()+ "YELLOW" + ANSI_Color.RESET + " ";
-                case 4 : return "      |     |      |      ";
+                case 1 : return "            2" +ANSI_Color.GREY.escape() +"ST"+ ANSI_Color.RESET +"            ";
+                case 2 : return " lv:1               " + ANSI_Color.YELLOW.escape()+ "YELLOW" + ANSI_Color.RESET + " ";
+                case 4 : return "      |     |       |      ";
                 case 5 : return "      |  1" + ANSI_Color.PURPLE.escape() + "SE"+ ANSI_Color.RESET +"|=>1"+ ANSI_Color.RED.escape() + "FA"+ANSI_Color.RESET +"  |      ";
-                case 6 : return "      |     |      |      ";
+                case 6 : return "      |     |       |      ";
                 case 8 : return "           VP:1            ";
             }
             case "1Y-2" : switch (row) {
                 case 1 : return "       1" + ANSI_Color.BLUE.escape()+"SH"+ ANSI_Color.RESET +"  1" + ANSI_Color.GREY.escape()+"ST"+ ANSI_Color.RESET +" 1 " + ANSI_Color.YELLOW.escape()+"CO"+ ANSI_Color.RESET + "       ";
-                case 2 : return " lv:1              " + ANSI_Color.YELLOW.escape()+ "YELLOW" + ANSI_Color.RESET + " ";
-                case 4 : return "      |     |      |      ";
+                case 2 : return " lv:1               " + ANSI_Color.YELLOW.escape()+ "YELLOW" + ANSI_Color.RESET + " ";
+                case 4 : return "      |     |       |      ";
                 case 5 : return "      |  1"+ ANSI_Color.BLUE.escape()+"SH"+ ANSI_Color.RESET +"|=>1"+ ANSI_Color.YELLOW.escape()+"CO"+ ANSI_Color.RESET +"  |      ";
-                case 6 : return "      |     |      |      ";
+                case 6 : return "      |     |       |      ";
                 case 8 : return "           VP:2            ";
             }
             case "1Y-3" : switch (row) {
                 case 1 : return "           3" + ANSI_Color.GREY.escape()+"ST"+ ANSI_Color.RESET +"             ";
-                case 2 : return " lv:1              " + ANSI_Color.YELLOW.escape()+ "YELLOW" + ANSI_Color.RESET + " ";
+                case 2 : return " lv:1               " + ANSI_Color.YELLOW.escape()+ "YELLOW" + ANSI_Color.RESET + " ";
                 case 4 : return "      |     |  1"+ ANSI_Color.YELLOW.escape()+"CO"+ ANSI_Color.RESET +"  |      ";
                 case 5 : return "      |  2"+ ANSI_Color.BLUE.escape()+"SH"+ ANSI_Color.RESET +"|=>1"+ ANSI_Color.PURPLE.escape()+"SE"+ ANSI_Color.RESET +"  |      ";
                 case 6 : return "      |     |  1"+ ANSI_Color.GREY.escape()+"ST"+ ANSI_Color.RESET +"  |      ";
@@ -215,23 +215,23 @@ public final class ResourceLocator {
             }
             case "1Y-4" : switch (row) {
                 case 1 : return "         2" + ANSI_Color.GREY.escape()+"ST"+ ANSI_Color.RESET +"  2"+ ANSI_Color.BLUE.escape()+"SH"+ ANSI_Color.RESET +"          ";
-                case 2 : return " lv:1              " + ANSI_Color.YELLOW.escape()+ "YELLOW" + ANSI_Color.RESET + " ";
+                case 2 : return " lv:1               " + ANSI_Color.YELLOW.escape()+ "YELLOW" + ANSI_Color.RESET + " ";
                 case 4 : return "      |  1"+ ANSI_Color.YELLOW.escape()+"CO"+ ANSI_Color.RESET +"|  2"+ ANSI_Color.BLUE.escape()+"SH"+ ANSI_Color.RESET +"  |      ";
                 case 5 : return "      |     |=>     |      ";
                 case 6 : return "      |  1"+ ANSI_Color.PURPLE.escape()+"SE"+ ANSI_Color.RESET +"|  1"+ ANSI_Color.RED.escape()+"FA"+ ANSI_Color.RESET +"  |      ";
                 case 8 : return "           VP:4            ";
             }
             case "2B-1" : switch (row) {
-                case 1 : return "          4" +ANSI_Color.YELLOW.escape() +"CO"+ ANSI_Color.RESET +"            ";
-                case 2 : return " lv:2                " + ANSI_Color.BLUE.escape()+ "BLUE" + ANSI_Color.RESET + " ";
-                case 4 : return "      |     |      |      ";
+                case 1 : return "            4" +ANSI_Color.YELLOW.escape() +"CO"+ ANSI_Color.RESET +"            ";
+                case 2 : return " lv:2                 " + ANSI_Color.BLUE.escape()+ "BLUE" + ANSI_Color.RESET + " ";
+                case 4 : return "      |     |       |      ";
                 case 5 : return "      |  1" + ANSI_Color.PURPLE.escape() + "SE"+ ANSI_Color.RESET +"|=>2"+ ANSI_Color.RED.escape() + "FA"+ANSI_Color.RESET +"  |      ";
-                case 6 : return "      |     |      |      ";
+                case 6 : return "      |     |       |      ";
                 case 8 : return "           VP:5            ";
             }
             case "2B-2" : switch (row) {
                 case 1 : return "         3" + ANSI_Color.YELLOW.escape()+"CO"+ ANSI_Color.RESET +"  2"+ ANSI_Color.GREY.escape()+"ST"+ ANSI_Color.RESET +"          ";
-                case 2 : return " lv:2                " + ANSI_Color.BLUE.escape()+ "BLUE" + ANSI_Color.RESET + " ";
+                case 2 : return " lv:2                 " + ANSI_Color.BLUE.escape()+ "BLUE" + ANSI_Color.RESET + " ";
                 case 4 : return "      |  1"+ ANSI_Color.YELLOW.escape()+"CO"+ ANSI_Color.RESET +"|       |      ";
                 case 5 : return "      |     |=>3"+ ANSI_Color.PURPLE.escape()+"SE"+ ANSI_Color.RESET +"  |      ";
                 case 6 : return "      |  1"+ ANSI_Color.GREY.escape()+"ST"+ ANSI_Color.RESET +"|       |      ";
@@ -254,11 +254,11 @@ public final class ResourceLocator {
                 case 8 : return "           VP:8            ";
             }
             case "2G-1" : switch (row) {
-                case 1 : return "          4" +ANSI_Color.BLUE.escape() +"SH"+ ANSI_Color.RESET +"            ";
+                case 1 : return "            4" +ANSI_Color.BLUE.escape() +"SH"+ ANSI_Color.RESET +"            ";
                 case 2 : return " lv:2                " + ANSI_Color.GREEN.escape()+ "GREEN" + ANSI_Color.RESET + " ";
-                case 4 : return "      |     |      |      ";
+                case 4 : return "      |     |       |      ";
                 case 5 : return "      |  1" + ANSI_Color.GREY.escape() + "ST"+ ANSI_Color.RESET +"|=>2"+ ANSI_Color.RED.escape() + "FA"+ANSI_Color.RESET +"  |      ";
-                case 6 : return "      |     |      |      ";
+                case 6 : return "      |     |       |      ";
                 case 8 : return "           VP:5            ";
             }
             case "2G-2" : switch (row) {
@@ -286,11 +286,11 @@ public final class ResourceLocator {
                 case 8 : return "           VP:8            ";
             }
             case "2P-1" : switch (row) {
-                case 1 : return "          4" +ANSI_Color.PURPLE.escape() +"SE"+ ANSI_Color.RESET +"            ";
-                case 2 : return " lv:2                " + ANSI_Color.PURPLE.escape()+ "PURPLE" + ANSI_Color.RESET + " ";
-                case 4 : return "      |     |      |      ";
+                case 1 : return "           4" +ANSI_Color.PURPLE.escape() +"SE"+ ANSI_Color.RESET +"             ";
+                case 2 : return " lv:2               " + ANSI_Color.PURPLE.escape()+ "PURPLE" + ANSI_Color.RESET + " ";
+                case 4 : return "      |     |       |      ";
                 case 5 : return "      |  1" + ANSI_Color.YELLOW.escape() + "CO"+ ANSI_Color.RESET +"|=>2"+ ANSI_Color.RED.escape() + "FA"+ANSI_Color.RESET +"  |      ";
-                case 6 : return "      |     |      |      ";
+                case 6 : return "      |     |       |      ";
                 case 8 : return "           VP:5            ";
             }
             case "2P-2" : switch (row) {
@@ -318,11 +318,11 @@ public final class ResourceLocator {
                 case 8 : return "           VP:8            ";
             }
             case "2Y-1" : switch (row) {
-                case 1 : return "          4" +ANSI_Color.GREY.escape() +"ST"+ ANSI_Color.RESET +"            ";
+                case 1 : return "            4" +ANSI_Color.GREY.escape() +"ST"+ ANSI_Color.RESET +"            ";
                 case 2 : return " lv:2               " + ANSI_Color.YELLOW.escape()+ "YELLOW" + ANSI_Color.RESET + " ";
-                case 4 : return "      |     |      |      ";
+                case 4 : return "      |     |       |      ";
                 case 5 : return "      |  1" + ANSI_Color.BLUE.escape() + "SH"+ ANSI_Color.RESET +"|=>2"+ ANSI_Color.RED.escape() + "FA"+ANSI_Color.RESET +"  |      ";
-                case 6 : return "      |     |      |      ";
+                case 6 : return "      |     |       |      ";
                 case 8 : return "           VP:5            ";
             }
             case "2Y-2" : switch (row) {
@@ -351,7 +351,7 @@ public final class ResourceLocator {
             }
             case "3B-1" : switch (row) {
                 case 1 : return "            6" + ANSI_Color.YELLOW.escape()+"CO"+ ANSI_Color.RESET +"            ";
-                case 2 : return " lv:3               " + ANSI_Color.BLUE.escape()+ "BLUE" + ANSI_Color.RESET + " ";
+                case 2 : return " lv:3                 " + ANSI_Color.BLUE.escape()+ "BLUE" + ANSI_Color.RESET + " ";
                 case 4 : return "      |      |  3"+ ANSI_Color.BLUE.escape()+"SH"+ ANSI_Color.RESET +" |      ";
                 case 5 : return "      |   2"+ ANSI_Color.PURPLE.escape()+"SE"+ ANSI_Color.RESET +"|=>    |      ";
                 case 6 : return "      |      |  2"+ ANSI_Color.RED.escape()+"FA"+ ANSI_Color.RESET +" |      ";
@@ -359,7 +359,7 @@ public final class ResourceLocator {
             }
             case "3B-2" : switch (row) {
                 case 1 : return "          5" + ANSI_Color.YELLOW.escape()+"CO"+ ANSI_Color.RESET +"  2"+ ANSI_Color.GREY.escape()+"ST"+ ANSI_Color.RESET +"         ";
-                case 2 : return " lv:3               " + ANSI_Color.BLUE.escape()+ "BLUE" + ANSI_Color.RESET + " ";
+                case 2 : return " lv:3                 " + ANSI_Color.BLUE.escape()+ "BLUE" + ANSI_Color.RESET + " ";
                 case 4 : return "      |   1"+ ANSI_Color.YELLOW.escape()+"CO"+ ANSI_Color.RESET +"|  2"+ ANSI_Color.PURPLE.escape()+"SE"+ ANSI_Color.RESET +" |      ";
                 case 5 : return "      |      |=>2"+ ANSI_Color.GREY.escape()+"ST"+ ANSI_Color.RESET +" |      ";
                 case 6 : return "      |   1"+ ANSI_Color.BLUE.escape()+"SH"+ ANSI_Color.RESET +"|  1"+ ANSI_Color.RED.escape()+"FA"+ ANSI_Color.RESET +" |      ";
@@ -367,7 +367,7 @@ public final class ResourceLocator {
             }
             case "3B-3" : switch (row) {
                 case 1 : return "            7" + ANSI_Color.YELLOW.escape()+"CO"+ ANSI_Color.RESET +"            ";
-                case 2 : return " lv:3               " + ANSI_Color.BLUE.escape()+ "BLUE" + ANSI_Color.RESET + " ";
+                case 2 : return " lv:3                 " + ANSI_Color.BLUE.escape()+ "BLUE" + ANSI_Color.RESET + " ";
                 case 4 : return "      |      |  1"+ ANSI_Color.BLUE.escape()+"SH"+ ANSI_Color.RESET +" |      ";
                 case 5 : return "      |   1"+ ANSI_Color.GREY.escape()+"ST"+ ANSI_Color.RESET +"|=>    |      ";
                 case 6 : return "      |      |  3"+ ANSI_Color.RED.escape()+"FA"+ ANSI_Color.RESET +" |      ";
@@ -383,7 +383,7 @@ public final class ResourceLocator {
             }
             case "3G-1" : switch (row) {
                 case 1 : return "            6" + ANSI_Color.BLUE.escape()+"SH"+ ANSI_Color.RESET +"            ";
-                case 2 : return " lv:3              " + ANSI_Color.GREEN.escape()+ "GREEN" + ANSI_Color.RESET + " ";
+                case 2 : return " lv:3                " + ANSI_Color.GREEN.escape()+ "GREEN" + ANSI_Color.RESET + " ";
                 case 4 : return "      |      |  3"+ ANSI_Color.GREY.escape()+"ST"+ ANSI_Color.RESET +" |      ";
                 case 5 : return "      |   2"+ ANSI_Color.YELLOW.escape()+"CO"+ ANSI_Color.RESET +"|=>    |      ";
                 case 6 : return "      |      |  2"+ ANSI_Color.RED.escape()+"FA"+ ANSI_Color.RESET +" |      ";
@@ -391,7 +391,7 @@ public final class ResourceLocator {
             }
             case "3G-2" : switch (row) {
                 case 1 : return "          5" + ANSI_Color.BLUE.escape()+"SH"+ ANSI_Color.RESET +"  2"+ ANSI_Color.PURPLE.escape()+"SE"+ ANSI_Color.RESET +"         ";
-                case 2 : return " lv:3               " + ANSI_Color.GREEN.escape()+ "GREEN" + ANSI_Color.RESET + " ";
+                case 2 : return " lv:3                " + ANSI_Color.GREEN.escape()+ "GREEN" + ANSI_Color.RESET + " ";
                 case 4 : return "      |   1"+ ANSI_Color.YELLOW.escape()+"CO"+ ANSI_Color.RESET +"|  2"+ ANSI_Color.BLUE.escape()+"SH"+ ANSI_Color.RESET +" |      ";
                 case 5 : return "      |      |=>2"+ ANSI_Color.GREY.escape()+"ST"+ ANSI_Color.RESET +" |      ";
                 case 6 : return "      |   1"+ ANSI_Color.PURPLE.escape()+"SE"+ ANSI_Color.RESET +"|  1"+ ANSI_Color.RED.escape()+"FA"+ ANSI_Color.RESET +" |      ";
@@ -399,7 +399,7 @@ public final class ResourceLocator {
             }
             case "3G-3" : switch (row) {
                 case 1 : return "            7" + ANSI_Color.BLUE.escape()+"SH"+ ANSI_Color.RESET +"            ";
-                case 2 : return " lv:3               " + ANSI_Color.GREEN.escape()+ "GREEN" + ANSI_Color.RESET + " ";
+                case 2 : return " lv:3                " + ANSI_Color.GREEN.escape()+ "GREEN" + ANSI_Color.RESET + " ";
                 case 4 : return "      |      |  1"+ ANSI_Color.YELLOW.escape()+"CO"+ ANSI_Color.RESET +" |      ";
                 case 5 : return "      |   1"+ ANSI_Color.PURPLE.escape()+"SE"+ ANSI_Color.RESET +"|=>    |      ";
                 case 6 : return "      |      |  3"+ ANSI_Color.RED.escape()+"FA"+ ANSI_Color.RESET +" |      ";
@@ -415,7 +415,7 @@ public final class ResourceLocator {
             }
             case "3P-1" : switch (row) {
                 case 1 : return "            6" + ANSI_Color.PURPLE.escape()+"SE"+ ANSI_Color.RESET +"            ";
-                case 2 : return " lv:3             " + ANSI_Color.PURPLE.escape()+ "PURPLE" + ANSI_Color.RESET + " ";
+                case 2 : return " lv:3               " + ANSI_Color.PURPLE.escape()+ "PURPLE" + ANSI_Color.RESET + " ";
                 case 4 : return "      |      |  3"+ ANSI_Color.YELLOW.escape()+"CO"+ ANSI_Color.RESET +" |      ";
                 case 5 : return "      |   2"+ ANSI_Color.GREY.escape()+"ST"+ ANSI_Color.RESET +"|=>    |      ";
                 case 6 : return "      |      |  2"+ ANSI_Color.RED.escape()+"FA"+ ANSI_Color.RESET +" |      ";
@@ -423,7 +423,7 @@ public final class ResourceLocator {
             }
             case "3P-2" : switch (row) {
                 case 1 : return "          5" + ANSI_Color.PURPLE.escape()+"SE"+ ANSI_Color.RESET +"  2"+ ANSI_Color.YELLOW.escape()+"CO"+ ANSI_Color.RESET +"         ";
-                case 2 : return " lv:3             " + ANSI_Color.PURPLE.escape()+ "PURPLE" + ANSI_Color.RESET + " ";
+                case 2 : return " lv:3               " + ANSI_Color.PURPLE.escape()+ "PURPLE" + ANSI_Color.RESET + " ";
                 case 4 : return "      |   1"+ ANSI_Color.GREY.escape()+"ST"+ ANSI_Color.RESET +"|  2"+ ANSI_Color.YELLOW.escape()+"CO"+ ANSI_Color.RESET +" |      ";
                 case 5 : return "      |      |=>2"+ ANSI_Color.PURPLE.escape()+"SE"+ ANSI_Color.RESET +" |      ";
                 case 6 : return "      |   1"+ ANSI_Color.BLUE.escape()+"SH"+ ANSI_Color.RESET +"|  1"+ ANSI_Color.RED.escape()+"FA"+ ANSI_Color.RESET +" |      ";
@@ -431,7 +431,7 @@ public final class ResourceLocator {
             }
             case "3P-3" : switch (row) {
                 case 1 : return "            7" + ANSI_Color.PURPLE.escape()+"SE"+ ANSI_Color.RESET +"            ";
-                case 2 : return " lv:3             " + ANSI_Color.PURPLE.escape()+ "PURPLE" + ANSI_Color.RESET + " ";
+                case 2 : return " lv:3               " + ANSI_Color.PURPLE.escape()+ "PURPLE" + ANSI_Color.RESET + " ";
                 case 4 : return "      |      |  1"+ ANSI_Color.GREY.escape()+"ST"+ ANSI_Color.RESET +" |      ";
                 case 5 : return "      |   1"+ ANSI_Color.YELLOW.escape()+"CO"+ ANSI_Color.RESET +"|=>    |      ";
                 case 6 : return "      |      |  3"+ ANSI_Color.RED.escape()+"FA"+ ANSI_Color.RESET +" |      ";
@@ -447,7 +447,7 @@ public final class ResourceLocator {
             }
             case "3Y-1" : switch (row) {
                 case 1 : return "            6" + ANSI_Color.GREY.escape()+"ST"+ ANSI_Color.RESET +"            ";
-                case 2 : return " lv:3             " + ANSI_Color.YELLOW.escape()+ "YELLOW" + ANSI_Color.RESET + " ";
+                case 2 : return " lv:3               " + ANSI_Color.YELLOW.escape()+ "YELLOW" + ANSI_Color.RESET + " ";
                 case 4 : return "      |      |  3"+ ANSI_Color.PURPLE.escape()+"SE"+ ANSI_Color.RESET +" |      ";
                 case 5 : return "      |   2"+ ANSI_Color.BLUE.escape()+"SH"+ ANSI_Color.RESET +"|=>    |      ";
                 case 6 : return "      |      |  2"+ ANSI_Color.RED.escape()+"FA"+ ANSI_Color.RESET +" |      ";
@@ -455,7 +455,7 @@ public final class ResourceLocator {
             }
             case "3Y-2" : switch (row) {
                 case 1 : return "          5" + ANSI_Color.GREY.escape()+"ST"+ ANSI_Color.RESET +"  2"+ ANSI_Color.PURPLE.escape()+"SE"+ ANSI_Color.RESET +"         ";
-                case 2 : return " lv:3             " + ANSI_Color.YELLOW.escape()+ "YELLOW" + ANSI_Color.RESET + " ";
+                case 2 : return " lv:3               " + ANSI_Color.YELLOW.escape()+ "YELLOW" + ANSI_Color.RESET + " ";
                 case 4 : return "      |   1"+ ANSI_Color.GREY.escape()+"ST"+ ANSI_Color.RESET +"|  2"+ ANSI_Color.YELLOW.escape()+"CO"+ ANSI_Color.RESET +" |      ";
                 case 5 : return "      |      |=>2"+ ANSI_Color.BLUE.escape()+"SH"+ ANSI_Color.RESET +" |      ";
                 case 6 : return "      |   1"+ ANSI_Color.PURPLE.escape()+"SE"+ ANSI_Color.RESET +"|  1"+ ANSI_Color.RED.escape()+"FA"+ ANSI_Color.RESET +" |      ";
@@ -463,7 +463,7 @@ public final class ResourceLocator {
             }
             case "3Y-3" : switch (row) {
                 case 1 : return "            7" + ANSI_Color.GREY.escape()+"ST"+ ANSI_Color.RESET +"            ";
-                case 2 : return " lv:3             " + ANSI_Color.YELLOW.escape()+ "YELLOW" + ANSI_Color.RESET + " ";
+                case 2 : return " lv:3               " + ANSI_Color.YELLOW.escape()+ "YELLOW" + ANSI_Color.RESET + " ";
                 case 4 : return "      |      |  1"+ ANSI_Color.PURPLE.escape()+"SE"+ ANSI_Color.RESET +" |      ";
                 case 5 : return "      |   1"+ ANSI_Color.BLUE.escape()+"SH"+ ANSI_Color.RESET +"|=>    |      ";
                 case 6 : return "      |      |  3"+ ANSI_Color.RED.escape()+"FA"+ ANSI_Color.RESET +" |      ";

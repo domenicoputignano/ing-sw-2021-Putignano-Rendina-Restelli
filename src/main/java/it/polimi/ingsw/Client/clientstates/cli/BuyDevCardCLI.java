@@ -20,6 +20,8 @@ public class BuyDevCardCLI extends AbstractBuyDevCard {
 
     @Override
     public void manageUserInteraction() {
+        System.out.println("Decks are shown below!");
+        cli.printDecks();
         boolean doneSelection = false;
         do {
             chooseCardType();
