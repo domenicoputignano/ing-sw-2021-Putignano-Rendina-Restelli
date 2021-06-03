@@ -107,7 +107,7 @@ public final class ResourceLocator {
                 case 4 : return "      |     |      |      ";
                 case 5 : return "      |  1"+ ANSI_Color.PURPLE.escape()+"SE"+ ANSI_Color.RESET +"|=>1"+ ANSI_Color.GREY.escape()+"ST"+ ANSI_Color.RESET +"  |      ";
                 case 6 : return "      |     |      |      ";
-                case 8 : return "           VP:1            ";
+                case 8 : return "           VP:2            ";
             }
             case "1B-3" : switch (row) {
                 case 1 : return "           3" + ANSI_Color.YELLOW.escape()+"CO"+ ANSI_Color.RESET +"             ";
@@ -133,7 +133,14 @@ public final class ResourceLocator {
                 case 6 : return "      |     |      |      ";
                 case 8 : return "           VP:1            ";
             }
-            case "1G-2" : return "gui/img/devCards/1G-2.png";
+            case "1G-2" : switch (row) {
+                case 1 : return "       1" + ANSI_Color.BLUE.escape()+"SH"+ ANSI_Color.RESET +"  1" + ANSI_Color.PURPLE.escape()+"SE"+ ANSI_Color.RESET +" 1 " + ANSI_Color.GREY.escape()+"ST"+ ANSI_Color.RESET + "       ";
+                case 2 : return " lv:1                 " + ANSI_Color.GREEN.escape()+ "GREEN" + ANSI_Color.RESET + " ";
+                case 4 : return "      |     |      |      ";
+                case 5 : return "      |  1"+ ANSI_Color.GREY.escape()+"ST"+ ANSI_Color.RESET +"|=>1"+ ANSI_Color.PURPLE.escape()+"SE"+ ANSI_Color.RESET +"  |      ";
+                case 6 : return "      |     |      |      ";
+                case 8 : return "           VP:2            ";
+            }
             case "1G-3" : return "gui/img/devCards/1G-3.png";
             case "1G-4" : return "gui/img/devCards/1G-4.png";
             case "1P-1" : switch (row) {
@@ -144,7 +151,14 @@ public final class ResourceLocator {
                 case 6 : return "      |     |      |      ";
                 case 8 : return "           VP:1            ";
             }
-            case "1P-2" : return "gui/img/devCards/1P-2.png";
+            case "1P-2" : switch (row) {
+                case 1 : return "       1" + ANSI_Color.BLUE.escape()+"SH"+ ANSI_Color.RESET +"  1" + ANSI_Color.PURPLE.escape()+"SE"+ ANSI_Color.RESET +" 1 " + ANSI_Color.YELLOW.escape()+"CO"+ ANSI_Color.RESET + "       ";
+                case 2 : return " lv:1               " + ANSI_Color.PURPLE.escape()+ "PURPLE" + ANSI_Color.RESET + " ";
+                case 4 : return "      |     |      |      ";
+                case 5 : return "      |  1" + ANSI_Color.YELLOW.escape()+"CO"+ ANSI_Color.RESET +"|=>1"+ ANSI_Color.BLUE.escape()+"SH"+ ANSI_Color.RESET +"  |      ";
+                case 6 : return "      |     |      |      ";
+                case 8 : return "           VP:2            ";
+            }
             case "1P-3" : return "gui/img/devCards/1P-3.png";
             case "1P-4" : return "gui/img/devCards/1P-4.png";
             case "1Y-1" : switch (row) {
@@ -155,7 +169,14 @@ public final class ResourceLocator {
                 case 6 : return "      |     |      |      ";
                 case 8 : return "           VP:1            ";
             }
-            case "1Y-2" : return "gui/img/devCards/1Y-2.png";
+            case "1Y-2" : switch (row) {
+                case 1 : return "       1" + ANSI_Color.BLUE.escape()+"SH"+ ANSI_Color.RESET +"  1" + ANSI_Color.GREY.escape()+"ST"+ ANSI_Color.RESET +" 1 " + ANSI_Color.YELLOW.escape()+"CO"+ ANSI_Color.RESET + "       ";
+                case 2 : return " lv:1               " + ANSI_Color.YELLOW.escape()+ "YELLOW" + ANSI_Color.RESET + " ";
+                case 4 : return "      |     |      |      ";
+                case 5 : return "      |  1"+ ANSI_Color.BLUE.escape()+"SH"+ ANSI_Color.RESET +"|=>1"+ ANSI_Color.YELLOW.escape()+"CO"+ ANSI_Color.RESET +"  |      ";
+                case 6 : return "      |     |      |      ";
+                case 8 : return "           VP:2            ";
+            }
             case "1Y-3" : return "gui/img/devCards/1Y-3.png";
             case "1Y-4" : return "gui/img/devCards/1Y-4.png";
             case "2B-1" : return "gui/img/devCards/2B-1.png";
