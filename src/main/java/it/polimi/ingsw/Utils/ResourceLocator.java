@@ -221,19 +221,47 @@ public final class ResourceLocator {
                 case 6 : return "      |  1"+ ANSI_Color.PURPLE.escape()+"SE"+ ANSI_Color.RESET +"|  1"+ ANSI_Color.RED.escape()+"FA"+ ANSI_Color.RESET +"  |      ";
                 case 8 : return "           VP:4            ";
             }
-            case "2B-1" : return "gui/img/devCards/2B-1.png";
+            case "2B-1" : switch (row) {
+                case 1 : return "          4" +ANSI_Color.YELLOW.escape() +"CO"+ ANSI_Color.RESET +"            ";
+                case 2 : return " lv:2                " + ANSI_Color.BLUE.escape()+ "BLUE" + ANSI_Color.RESET + " ";
+                case 4 : return "      |     |      |      ";
+                case 5 : return "      |  1" + ANSI_Color.PURPLE.escape() + "SE"+ ANSI_Color.RESET +"|=>2"+ ANSI_Color.RED.escape() + "FA"+ANSI_Color.RESET +"  |      ";
+                case 6 : return "      |     |      |      ";
+                case 8 : return "           VP:5            ";
+            }
             case "2B-2" : return "gui/img/devCards/2B-2.png";
             case "2B-3" : return "gui/img/devCards/2B-3.png";
             case "2B-4" : return "gui/img/devCards/2B-4.png";
-            case "2G-1" : return "gui/img/devCards/2G-1.png";
+            case "2G-1" : switch (row) {
+                case 1 : return "          4" +ANSI_Color.BLUE.escape() +"SH"+ ANSI_Color.RESET +"            ";
+                case 2 : return " lv:2                " + ANSI_Color.GREEN.escape()+ "GREEN" + ANSI_Color.RESET + " ";
+                case 4 : return "      |     |      |      ";
+                case 5 : return "      |  1" + ANSI_Color.GREY.escape() + "ST"+ ANSI_Color.RESET +"|=>2"+ ANSI_Color.RED.escape() + "FA"+ANSI_Color.RESET +"  |      ";
+                case 6 : return "      |     |      |      ";
+                case 8 : return "           VP:5            ";
+            }
             case "2G-2" : return "gui/img/devCards/2G-2.png";
             case "2G-3" : return "gui/img/devCards/2G-3.png";
             case "2G-4" : return "gui/img/devCards/2G-4.png";
-            case "2P-1" : return "gui/img/devCards/2P-1.png";
+            case "2P-1" : switch (row) {
+                case 1 : return "          4" +ANSI_Color.PURPLE.escape() +"SE"+ ANSI_Color.RESET +"            ";
+                case 2 : return " lv:2                " + ANSI_Color.PURPLE.escape()+ "PURPLE" + ANSI_Color.RESET + " ";
+                case 4 : return "      |     |      |      ";
+                case 5 : return "      |  1" + ANSI_Color.YELLOW.escape() + "CO"+ ANSI_Color.RESET +"|=>2"+ ANSI_Color.RED.escape() + "FA"+ANSI_Color.RESET +"  |      ";
+                case 6 : return "      |     |      |      ";
+                case 8 : return "           VP:5            ";
+            }
             case "2P-2" : return "gui/img/devCards/2P-2.png";
             case "2P-3" : return "gui/img/devCards/2P-3.png";
             case "2P-4" : return "gui/img/devCards/2P-4.png";
-            case "2Y-1" : return "gui/img/devCards/2Y-1.png";
+            case "2Y-1" : switch (row) {
+                case 1 : return "          4" +ANSI_Color.GREY.escape() +"ST"+ ANSI_Color.RESET +"            ";
+                case 2 : return " lv:2                " + ANSI_Color.YELLOW.escape()+ "YELLOW" + ANSI_Color.RESET + " ";
+                case 4 : return "      |     |      |      ";
+                case 5 : return "      |  1" + ANSI_Color.BLUE.escape() + "SH"+ ANSI_Color.RESET +"|=>2"+ ANSI_Color.RED.escape() + "FA"+ANSI_Color.RESET +"  |      ";
+                case 6 : return "      |     |      |      ";
+                case 8 : return "           VP:5            ";
+            }
             case "2Y-2" : return "gui/img/devCards/2Y-2.png";
             case "2Y-3" : return "gui/img/devCards/2Y-3.png";
             case "2Y-4" : return "gui/img/devCards/2Y-4.png";
