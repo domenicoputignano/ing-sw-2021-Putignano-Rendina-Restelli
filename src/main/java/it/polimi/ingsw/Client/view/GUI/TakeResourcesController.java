@@ -45,8 +45,6 @@ public class TakeResourcesController extends Controller{
     @FXML
     public Button yesResources,noResources;
 
-    @FXML
-    public MenuButton menu1,menu2,menu3,menu4;
 
     @FXML
     public Button sel1Depot1,sel1Depot2,sel1Depot3,

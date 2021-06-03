@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
@@ -23,51 +24,70 @@
             <Image url="@../img/deck_bg.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="170.0" fitWidth="107.0" layoutX="415.0" layoutY="108.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../img/deck_bg.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="170.0" fitWidth="107.0" layoutX="415.0" layoutY="281.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../img/deck_bg.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="170.0" fitWidth="107.0" layoutX="415.0" layoutY="457.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../img/deck_bg.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="170.0" fitWidth="107.0" layoutX="574.0" layoutY="108.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../img/deck_bg.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="170.0" fitWidth="107.0" layoutX="574.0" layoutY="281.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../img/deck_bg.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="170.0" fitWidth="107.0" layoutX="574.0" layoutY="457.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../img/deck_bg.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="170.0" fitWidth="107.0" layoutX="733.0" layoutY="108.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../img/deck_bg.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="170.0" fitWidth="107.0" layoutX="733.0" layoutY="281.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../img/deck_bg.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="170.0" fitWidth="107.0" layoutX="733.0" layoutY="457.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../img/deck_bg.png" />
-         </image>
-      </ImageView>
       <Button fx:id="green3" layoutX="261.0" layoutY="160.0" mnemonicParsing="false" prefHeight="131.0" prefWidth="84.0" styleClass="buyDevCard" stylesheets="@../css/button.css" />
+      <Button fx:id="green2" layoutX="261.0" layoutY="320.0" mnemonicParsing="false" prefHeight="131.0" prefWidth="84.0" styleClass="buyDevCard" stylesheets="@../css/button.css" />
+      <ImageView fitHeight="150.0" fitWidth="100.0" layoutX="397.0" layoutY="155.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/deck_bg.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="150.0" fitWidth="100.0" layoutX="397.0" layoutY="315.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/deck_bg.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="150.0" fitWidth="100.0" layoutX="397.0" layoutY="475.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/deck_bg.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="150.0" fitWidth="100.0" layoutX="539.0" layoutY="475.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/deck_bg.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="150.0" fitWidth="100.0" layoutX="539.0" layoutY="315.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/deck_bg.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="150.0" fitWidth="100.0" layoutX="539.0" layoutY="155.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/deck_bg.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="150.0" fitWidth="100.0" layoutX="681.0" layoutY="155.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/deck_bg.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="150.0" fitWidth="100.0" layoutX="681.0" layoutY="475.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/deck_bg.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="150.0" fitWidth="100.0" layoutX="681.0" layoutY="315.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/deck_bg.png" />
+         </image>
+      </ImageView>
+      <Text fx:id="level3" layoutX="221.0" layoutY="230.0" strokeType="OUTSIDE" strokeWidth="0.0" text="III" />
+      <Text fx:id="level2" layoutX="221.0" layoutY="394.0" strokeType="OUTSIDE" strokeWidth="0.0" text="II" />
+      <Text fx:id="level1" layoutX="221.0" layoutY="554.0" strokeType="OUTSIDE" strokeWidth="0.0" text="I" />
+      <Text fx:id="green" layoutX="281.0" layoutY="150.0" strokeType="OUTSIDE" strokeWidth="0.0" text="GREEN" />
+      <Text fx:id="blue" layoutX="425.0" layoutY="150.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BLUE" />
+      <Text fx:id="yellow" layoutX="565.0" layoutY="150.0" strokeType="OUTSIDE" strokeWidth="0.0" text="YELLOW" />
+      <Text fx:id="purple" layoutX="707.0" layoutY="150.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PURPLE" />
+        <Text fx:id="buyDevCardText" layoutX="493.0" layoutY="119.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Buy Development Card" />
+      <Button fx:id="green1" layoutX="261.0" layoutY="480.0" mnemonicParsing="false" prefHeight="131.0" prefWidth="84.0" styleClass="buyDevCard" stylesheets="@../css/button.css" />
+      <Button fx:id="blue3" layoutX="403.0" layoutY="160.0" mnemonicParsing="false" prefHeight="131.0" prefWidth="84.0" styleClass="buyDevCard" stylesheets="@../css/button.css" />
+      <Button fx:id="blue2" layoutX="403.0" layoutY="320.0" mnemonicParsing="false" prefHeight="131.0" prefWidth="84.0" styleClass="buyDevCard" stylesheets="@../css/button.css" />
+      <Button fx:id="blue1" layoutX="403.0" layoutY="480.0" mnemonicParsing="false" prefHeight="131.0" prefWidth="84.0" styleClass="buyDevCard" stylesheets="@../css/button.css" />
+      <Button fx:id="yellow1" layoutX="545.0" layoutY="480.0" mnemonicParsing="false" prefHeight="131.0" prefWidth="84.0" styleClass="buyDevCard" stylesheets="@../css/button.css" />
+      <Button fx:id="yellow2" layoutX="545.0" layoutY="320.0" mnemonicParsing="false" prefHeight="131.0" prefWidth="84.0" styleClass="buyDevCard" stylesheets="@../css/button.css" />
+      <Button fx:id="yellow3" layoutX="545.0" layoutY="160.0" mnemonicParsing="false" prefHeight="131.0" prefWidth="84.0" styleClass="buyDevCard" stylesheets="@../css/button.css" />
+      <Button fx:id="purple3" layoutX="687.0" layoutY="160.0" mnemonicParsing="false" prefHeight="131.0" prefWidth="84.0" styleClass="buyDevCard" stylesheets="@../css/button.css" />
+      <Button fx:id="purple2" layoutX="685.0" layoutY="320.0" mnemonicParsing="false" prefHeight="131.0" prefWidth="84.0" styleClass="buyDevCard" stylesheets="@../css/button.css" />
+      <Button fx:id="purple1" layoutX="685.0" layoutY="480.0" mnemonicParsing="false" prefHeight="131.0" prefWidth="84.0" styleClass="buyDevCard" stylesheets="@../css/button.css" />
     </children>
 </AnchorPane>
