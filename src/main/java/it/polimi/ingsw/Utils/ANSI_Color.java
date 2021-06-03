@@ -6,6 +6,7 @@ import it.polimi.ingsw.Commons.ResourceType;
 public enum ANSI_Color {
         GREY("\u001B[37m"),
         YELLOW("\u001B[33m"),
+        GREEN("\u001B[32m"),
         BLUE("\u001B[34m"),
         PURPLE("\u001B[35m"),
         RED("\u001b[31m");
