@@ -346,7 +346,7 @@ public class CLI extends UI {
         boolean done = false;
         ResourceType resource = null;
         while(!done) {
-            String answer = input.nextLine();
+            String answer = input.next();
             resource = fromStringToResourceType(answer);
             if(resource!=null){
                 done = true;

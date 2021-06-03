@@ -25,7 +25,7 @@ public class NumOfPlayersChoiceCLI extends AbstractNumOfPlayersChoice {
                     throw new NumberFormatException();
                 }
             } catch(NumberFormatException e) {
-                System.out.println("Number of players selected not valid, please choose again ");
+                System.out.print("Number of players selected not valid, please choose again\nNumber of players: ");
                 numOfPlayers = 0;
             }
         } while (numOfPlayers < 2);

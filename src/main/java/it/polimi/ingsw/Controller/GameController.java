@@ -1,5 +1,6 @@
 package it.polimi.ingsw.Controller;
 
+import it.polimi.ingsw.Commons.ResourceType;
 import it.polimi.ingsw.Model.Game;
 import it.polimi.ingsw.Model.GameState;
 import it.polimi.ingsw.Model.Player;
@@ -8,7 +9,9 @@ import it.polimi.ingsw.Utils.Messages.ClientMessages.*;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.Errors.ActionError;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.Errors.InvalidMessageError;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.Updates.NewTurnUpdate;
+import it.polimi.ingsw.Utils.Pair;
 
+import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -92,7 +95,22 @@ public class GameController {
 
     private boolean checkPlayerResourceChoice(ResourceChoiceMessage message, Player sender){
         if(sender.getPosition()==2 || sender.getPosition()==3) return message.getChosenResources().size() == 1;
-        if(sender.getPosition()==4) return message.getChosenResources().size() == 2;
+        if(sender.getPosition()==4) {
+            return isValidFourthPlayerPositioning(message.getChosenResources());
+        }
+        return true;
+    }
+
+    private boolean isValidFourthPlayerPositioning(List<Pair<ResourceType,Integer>> resourceDestination) {
+        if(resourceDestination.size() != 2) return false;
+        if(resourceDestination.get(0).getKey() == resourceDestination.get(1).getKey()) {
+            if(resourceDestination.stream().map(Pair::getValue).anyMatch(x -> x.equals(1))) return false;
+            if(!resourceDestination.get(0).getValue().equals(resourceDestination.get(1).getValue())) return false;
+        } else {
+            if(resourceDestination.stream().map(Pair::getValue).allMatch(x -> x.equals(1)||x.equals(2)||x.equals(3))) {
+                return false;
+            }
+        }
         return true;
     }
 

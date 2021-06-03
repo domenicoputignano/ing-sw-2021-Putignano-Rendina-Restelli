@@ -85,7 +85,7 @@ public abstract class UI {
         if(resource.equalsIgnoreCase("SH")||resource.equalsIgnoreCase("shield")) return ResourceType.shield;
         if(resource.equalsIgnoreCase("ST")||resource.equalsIgnoreCase("stone")) return ResourceType.stone;
         else {
-            System.out.println("Error detected, please select again ");
+            System.out.println("Error detected while choosing resources, please select again ");
             return null;
         }
     }

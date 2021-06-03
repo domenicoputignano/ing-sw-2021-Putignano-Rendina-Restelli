@@ -1,6 +1,8 @@
 package it.polimi.ingsw.Client;
 
 
+import it.polimi.ingsw.Client.clientstates.AbstractActionChoice;
+import it.polimi.ingsw.Client.clientstates.AbstractClientState;
 import it.polimi.ingsw.Client.clientstates.cli.*;
 import it.polimi.ingsw.Client.view.UI;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.*;
@@ -127,8 +129,14 @@ public class ClientStatesController {
     public static void updateClientState(ErrorMessage message, UI ui) {
         if(ui.isReceiverAction(message.getTriggeringUser())){
             if(ui.isCLI()){
-                ui.changeClientState(new ActionChoiceCLI(ui.getClient()));
-                ui.manageUserInteraction();
+                AbstractClientState previousState = ui.getClientState();
+                //TODO fixare per bene, fixato con instance of (Es. errore durante la resource choice)
+                if(previousState instanceof WaitForTurnCLI){
+                    ui.changeClientState(new InitialResourceChoiceCLI(ui.getClient()));
+                    ui.manageUserInteraction();
+                }
+                else
+                    ui.changeClientState(new ActionChoiceCLI(ui.getClient()));
             }
         }
     }
