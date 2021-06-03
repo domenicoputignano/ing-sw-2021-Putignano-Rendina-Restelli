@@ -18,6 +18,9 @@ public class MoveActionController extends Controller{
     public Button closeMoveAction;
 
     @FXML
+    public Button res1Depot1,res1Depot2,res2Depot2,res1Depot3,res2Depot3,res3Depot3;
+
+    @FXML
     @Override
     public void initialize() {
 

@@ -26,7 +26,7 @@ public class ResourceChoiceController extends Controller{
     public Button clearButton;
 
     @FXML
-    public Button okButton;
+    public Button okButton,okButton1;
 
     @FXML
     public TextField coinText;
@@ -282,6 +282,7 @@ public class ResourceChoiceController extends Controller{
         buttonDepot1.setVisible(true);
         buttonDepot2.setVisible(true);
         buttonDepot3.setVisible(true);
+        okButton1.setVisible(true);
 
         if(getResourcesSelectedTimes(1).size()==1){
             resource1Img.setImage(new Image(getURLImageResource(getResourcesSelectedTimes(1).get(0))));

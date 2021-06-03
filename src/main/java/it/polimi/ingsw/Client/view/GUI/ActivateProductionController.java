@@ -17,6 +17,7 @@ public class ActivateProductionController extends Controller{
     @FXML
     public Button closeActivateProd;
 
+
     @FXML
     @Override
     public void initialize() {

@@ -17,6 +17,9 @@ public class BuyDevCardController extends Controller{
     @FXML
     public Button closeBuyDevCard;
 
+    @FXML
+    public Button green3;
+
 
     @FXML
     @Override

@@ -72,6 +72,7 @@
                   <Image url="@../img/coin.png" />
                </image>
             </ImageView>
+            <Button fx:id="okButton1" layoutX="619.0" layoutY="473.0" mnemonicParsing="false" onAction="#submitInitialResourceChoice" prefHeight="69.0" prefWidth="137.0" styleClass="okButton" stylesheets="@../css/button.css" text="OK" visible="false" />
             </children>
         </AnchorPane>
     </center>
