@@ -52,16 +52,16 @@ public class CLI extends UI {
             } while (resource == null);
             System.out.println("Choose the number: ");
             int number;
-            boolean rightNumber = false;
+            boolean isRightNumber = false;
             do {
                 number = input.nextInt();
                 if (neededResources.get(resource) < number) {
                     System.out.println("Error detected, select again number of occurrences you want to pick: ");
-                    rightNumber = false;
+                    isRightNumber = false;
                 } else {
-                    rightNumber = true;
+                    isRightNumber = true;
                 }
-            } while (!rightNumber);
+            } while (!isRightNumber);
             if(howToTakeResources.get(source).containsKey(resource)) {
                 howToTakeResources.get(source).merge(resource, number, Integer::sum);
             } else howToTakeResources.get(source).put(resource, number);
@@ -161,37 +161,22 @@ public class CLI extends UI {
     public void render(TakeResourcesFromMarketUpdate message) {
         if(isReceiverAction(message.getUser())) {
             System.out.printf("You got following resources from market: "+message.getEarnedResources()+" and %d faith points\n" +
-                            "Your depots are show below\n",
-                    message.getFaithPoints());
+                            "Your depots are show below\n", message.getFaithPoints());
             showDepots();
         } else {
-            System.out.printf("User "+message.getUser()+"" +
-                    " has taken following resources from market: "+message.getEarnedResources()+" and he got %d faith points\n" +
-                    "His depots are shown below\n", message.getFaithPoints());
-            showDepots(message.getUser());
+            System.out.println("User "+message.getUser()+"" +
+                    " has taken following resources from market: "+message.getEarnedResources()+" and he got "+
+                    message.getFaithPoints()+" faith points");
         }
 
     }
 
     //TODO da cambiare
     public void render(FaithMarkerUpdate message) {
-        /*if(message.getUser().equals(message.getTriggeringUser())&&isReceiverAction(message.getTriggeringUser())) {
-            System.out.printf("Your action involved faith track, other players got %d faith points\n", message.getPoints());
-
-        }
         if(isReceiverAction(message.getUser())&&!isReceiverAction(message.getTriggeringUser())) {
             System.out.printf("User "+message.getTriggeringUser()+" has performed action" +
                     " involving faith track, you got %d faith points\n", message.getPoints());
         }
-        if(!isReceiverAction(message.getUser())&&isReceiverAction(message.getTriggeringUser())) {
-            System.out.printf("You performed action " +
-                    "involving faith track, user "+ message.getUser()+" got %d faith points\n", message.getPoints());
-        }*/
-        if(!isReceiverAction(message.getUser())){
-        System.out.println("User "+message.getUser()+" updated his faith track\n"+message.getUserPersonalBoard()
-        .getFaithTrack());
-        } else System.out.println("Your faith track is shown below\n"+message.getUserPersonalBoard().getFaithTrack());
-
 
     }
 
@@ -216,11 +201,13 @@ public class CLI extends UI {
             if(message.getDiscardedResources().size() > 0) {
                 System.out.println("You haven't correctly positioned the following resources " + message.getDiscardedResources() +
                         " so they have been discarded");
-            } else System.out.println("You have correctly positioned all the resources you had to settle");
+            } else System.out.print("You have correctly positioned all the resources you had to settle\nYour depots update" +
+                    "are shown below\n");
+            showDepots();
         } else {
             if(message.getDiscardedResources().size() > 0) {
                 System.out.println("User " + message.getUser() + " hasn't correctly positioned the following resources " +
-                        message.getDiscardedResources() + " so you got some faith points");
+                        message.getDiscardedResources() + " so you got "+message.getDiscardedResources().size()+" faith points");
             } else System.out.println("User " + message.getUser() + " has correctly positioned all the resources he had to settle");
         }
     }
