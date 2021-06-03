@@ -132,6 +132,7 @@ public class ClientStatesController {
                 AbstractClientState previousState = ui.getClientState();
                 //TODO fixare per bene, fixato con instance of (Es. errore durante la resource choice)
                 if(previousState instanceof WaitForTurnCLI){
+                    ((WaitForTurnCLI) previousState).shutDownWaiterThread();
                     ui.changeClientState(new InitialResourceChoiceCLI(ui.getClient()));
                     ui.manageUserInteraction();
                 }

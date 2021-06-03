@@ -13,7 +13,9 @@ public class ActionError extends ErrorMessage {
         NORMALACTIONALREADYDONE("Normal action has been already done for this turn!"),
         WRONGTURNPHASE("Required action cannot be accomplished in this context!"),
         WRONGGAMEPHASE("Required action cannot be accomplished in this game phase!"),
-        RESOURCECHOICEMISMATCH("Number of selected resources is not compliant with Game rules!");
+        RESOURCECHOICEMISMATCH("Number of selected resources is not compliant with Game rules!"),
+        INITIALRESOURCEPOSITIONINGERROR("Selected resources cannot be settled in your depots according to game rules," +
+                "please redo selection");
 
         private final String description;
         Trigger(String description)

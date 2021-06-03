@@ -47,9 +47,19 @@ public class GameController {
         }
         if(message.isValidMessage()) {
             if(checkPlayerResourceChoice(message, sender.getPlayer())){
-                sender.getPlayer().performInitialResourcesChoice(model, message.getChosenResources());
-                receivedChoiceMessage.getAndIncrement();
-                checkAllResourceChoiceDone(receivedChoiceMessage);
+                if(sender.getPlayer().getPosition()==4) {
+                    if (isValidFourthPlayerPositioning(message.getChosenResources())) {
+                        sender.getPlayer().performInitialResourcesChoice(model, message.getChosenResources());
+                        receivedChoiceMessage.getAndIncrement();
+                        checkAllResourceChoiceDone(receivedChoiceMessage);
+                    } else {
+                        sender.sendError(new ActionError(sender.getPlayer().getUser(), ActionError.Trigger.INITIALRESOURCEPOSITIONINGERROR));
+                    }
+                } else {
+                    sender.getPlayer().performInitialResourcesChoice(model, message.getChosenResources());
+                    receivedChoiceMessage.getAndIncrement();
+                    checkAllResourceChoiceDone(receivedChoiceMessage);
+                }
             } else {
                 sender.sendError(new ActionError(sender.getPlayer().getUser(),ActionError.Trigger.RESOURCECHOICEMISMATCH));
             }
@@ -96,13 +106,14 @@ public class GameController {
     private boolean checkPlayerResourceChoice(ResourceChoiceMessage message, Player sender){
         if(sender.getPosition()==2 || sender.getPosition()==3) return message.getChosenResources().size() == 1;
         if(sender.getPosition()==4) {
-            return isValidFourthPlayerPositioning(message.getChosenResources());
+            //return isValidFourthPlayerPositioning(message.getChosenResources());
+            return message.getChosenResources().size()==2;
         }
         return true;
     }
 
     private boolean isValidFourthPlayerPositioning(List<Pair<ResourceType,Integer>> resourceDestination) {
-        if(resourceDestination.size() != 2) return false;
+        //if(resourceDestination.size() != 2) return false;
         if(resourceDestination.get(0).getKey() == resourceDestination.get(1).getKey()) {
             if(resourceDestination.stream().map(Pair::getValue).anyMatch(x -> x.equals(1))) return false;
             if(!resourceDestination.get(0).getValue().equals(resourceDestination.get(1).getValue())) return false;
