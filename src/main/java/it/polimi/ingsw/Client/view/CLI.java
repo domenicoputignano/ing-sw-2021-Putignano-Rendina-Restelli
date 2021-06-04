@@ -219,9 +219,9 @@ public class CLI extends UI {
     }
     public void render(BuyDevCardPerformedUpdate message) {
         if(isReceiverAction(message.getUser())) {
-            System.out.println("You successfully bought this development card: " + message.getBoughtCard());
+            System.out.println("You successfully bought this development card\n " + message.getBoughtCard());
         } else {
-            System.out.println("User " + message.getUser() + " successfully bought a leader card of level "
+            System.out.println("User " + message.getUser() + " successfully bought a development card of level "
                     + message.getBoughtCard().getType().getLevel() + " and color "
                     + message.getBoughtCard().getType().getColor());
         }
@@ -312,12 +312,12 @@ public class CLI extends UI {
     public void showDepots(User user) {
         int index = 1;
         for(ReducedDepot depot : client.getGame().getPlayer(user).getPersonalBoard().getWarehouse().getNormalDepots()) {
-            System.out.print("Depot "+index+": "+ANSI_Color.escape(depot.getType()) + depot + ANSI_Color.RESET+"\n");
+            System.out.print("Depot "+index+": " + depot + "\n");
             index = index + 1;
         }
         if(Arrays.stream(client.getGame().getPlayer(user).getPersonalBoard().getWarehouse().getExtraDepots()).anyMatch(Objects::nonNull)) {
             for(ReducedDepot depot : client.getGame().getPlayer(client.getUser()).getPersonalBoard().getWarehouse().getExtraDepots()) {
-                System.out.print("Extra depot of type: "+depot.getType()+" "+ANSI_Color.escape(depot.getType()) + depot + ANSI_Color.RESET+"\n");
+                System.out.print("Extra depot of type: "+ depot +"\n");
             }
         }
     }

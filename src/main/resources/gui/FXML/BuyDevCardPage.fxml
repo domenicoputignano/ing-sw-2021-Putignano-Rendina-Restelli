@@ -89,5 +89,8 @@
       <Button fx:id="purple3" layoutX="687.0" layoutY="160.0" mnemonicParsing="false" onAction="#checkIfCanBuyCard3Purple" prefHeight="131.0" prefWidth="84.0" styleClass="buyDevCard" stylesheets="@../css/button.css" />
       <Button fx:id="purple2" layoutX="685.0" layoutY="320.0" mnemonicParsing="false" onAction="#checkIfCanBuyCard2Purple" prefHeight="131.0" prefWidth="84.0" styleClass="buyDevCard" stylesheets="@../css/button.css" />
       <Button fx:id="purple1" layoutX="685.0" layoutY="480.0" mnemonicParsing="false" onAction="#checkIfCanBuyCard1Purple" prefHeight="131.0" prefWidth="84.0" styleClass="buyDevCard" stylesheets="@../css/button.css" />
+      <Text fx:id="errorDevText" layoutX="820.0" layoutY="430.0" strokeType="OUTSIDE" strokeWidth="0.0" />
+      <ImageView fx:id="selectedCard" fitHeight="233.0" fitWidth="153.0" layoutX="820.0" layoutY="167.0" pickOnBounds="true" preserveRatio="true" />
+      <Button fx:id="okButton" layoutX="832.0" layoutY="558.0" mnemonicParsing="false"  prefHeight="69.0" prefWidth="137.0" styleClass="okButton" stylesheets="@../css/button.css" text="Buy Card" visible="false" />
     </children>
 </AnchorPane>

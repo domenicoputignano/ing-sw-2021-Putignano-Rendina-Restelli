@@ -33,12 +33,12 @@
       </ImageView>
       <ImageView fitHeight="78.0" fitWidth="79.0" layoutX="672.0" layoutY="233.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../img/servant.png" />
+            <Image url="@../img/resources/coin.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="78.0" fitWidth="79.0" layoutX="680.0" layoutY="350.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="78.0" fitWidth="79.0" layoutX="672.0" layoutY="354.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../img/shield.png" />
+            <Image url="@../img/resources/servant.png" />
          </image>
       </ImageView>
       <Text fx:id="extraDepotsText" layoutX="751.0" layoutY="190.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Extra Depots" />

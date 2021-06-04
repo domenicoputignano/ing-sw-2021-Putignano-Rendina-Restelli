@@ -176,7 +176,8 @@ public class TakeResourcesFromMarket implements AbstractTurnPhase {
 
     private List<ResourceType> getEarnedResources()
     {
-        return whereToPutResources.stream().map(Pair::getKey).collect(Collectors.toList());
+        return whereToPutResources.stream().filter(x -> x.getValue()!=MarbleDestination.DISCARD).
+                map(Pair::getKey).collect(Collectors.toList());
     }
 
     public boolean checkValidWhiteEffects(Turn turn, List<Integer> whiteEffects, List<ReducedMarble> requestedMarbles)
