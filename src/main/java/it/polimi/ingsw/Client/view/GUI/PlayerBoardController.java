@@ -146,12 +146,7 @@ public class PlayerBoardController extends Controller {
     }
 
     private void loadImageResource(ImageView target, ResourceType resourceType){
-        switch (resourceType) {
-            case servant: target.setImage(new Image(ResourceLocator.retrieveResourceTypeImage(ResourceType.servant)));
-            case stone : target.setImage(new Image(ResourceLocator.retrieveResourceTypeImage(ResourceType.stone)));
-            case coin : target.setImage(new Image(ResourceLocator.retrieveResourceTypeImage(ResourceType.coin)));
-            case shield : target.setImage(new Image(ResourceLocator.retrieveResourceTypeImage(ResourceType.shield)));
-        }
+        target.setImage(new Image(ResourceLocator.retrieveResourceTypeImage(resourceType)));
     }
 
     @FXML

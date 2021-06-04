@@ -1,9 +1,10 @@
 package it.polimi.ingsw.Client.view.GUI;
 
+import it.polimi.ingsw.Commons.ResourceType;
+import it.polimi.ingsw.Utils.ResourceLocator;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -42,6 +43,46 @@ public class MoveActionController extends Controller{
 
     private void initializeDepots(){
 
+        // SETUP DEPOT 1
+        if(client.getGame().getPlayer(client.getUser()).getPersonalBoard().getWarehouse().getNormalDepots()[0].getOcc()==1){
+            loadImageResourceCSS(res1Depot1, client.getGame().getPlayer(client.getUser()).
+                    getPersonalBoard().getWarehouse().getNormalDepots()[0].getType());
+        }
+
+        // SETUP DEPOT 2
+        if(client.getGame().getPlayer(client.getUser()).getPersonalBoard().getWarehouse().getNormalDepots()[1].getOcc()==2){
+            loadImageResourceCSS(res1Depot2, client.getGame().getPlayer(client.getUser()).
+                    getPersonalBoard().getWarehouse().getNormalDepots()[1].getType());
+            loadImageResourceCSS(res2Depot2, client.getGame().getPlayer(client.getUser()).
+                    getPersonalBoard().getWarehouse().getNormalDepots()[1].getType());
+        } else if(client.getGame().getPlayer(client.getUser()).getPersonalBoard().getWarehouse().getNormalDepots()[1].getOcc()==1){
+            loadImageResourceCSS(res1Depot2, client.getGame().getPlayer(client.getUser()).
+                    getPersonalBoard().getWarehouse().getNormalDepots()[1].getType());
+        }
+
+        // SETUP DEPOT 3
+        if(client.getGame().getPlayer(client.getUser()).getPersonalBoard().getWarehouse().getNormalDepots()[2].getOcc()==3){
+            loadImageResourceCSS(res1Depot3, client.getGame().getPlayer(client.getUser()).
+                    getPersonalBoard().getWarehouse().getNormalDepots()[2].getType());
+            loadImageResourceCSS(res2Depot3, client.getGame().getPlayer(client.getUser()).
+                    getPersonalBoard().getWarehouse().getNormalDepots()[2].getType());
+            loadImageResourceCSS(res3Depot3, client.getGame().getPlayer(client.getUser()).
+                    getPersonalBoard().getWarehouse().getNormalDepots()[2].getType());
+        } else if(client.getGame().getPlayer(client.getUser()).getPersonalBoard().getWarehouse().getNormalDepots()[2].getOcc()==2){
+            loadImageResourceCSS(res1Depot3, client.getGame().getPlayer(client.getUser()).
+                    getPersonalBoard().getWarehouse().getNormalDepots()[2].getType());
+            loadImageResourceCSS(res2Depot3, client.getGame().getPlayer(client.getUser()).
+                    getPersonalBoard().getWarehouse().getNormalDepots()[2].getType());
+        } else if(client.getGame().getPlayer(client.getUser()).getPersonalBoard().getWarehouse().getNormalDepots()[2].getOcc()==1){
+            loadImageResourceCSS(res1Depot3, client.getGame().getPlayer(client.getUser()).
+                    getPersonalBoard().getWarehouse().getNormalDepots()[2].getType());
+        }
+
+    }
+
+    private void loadImageResourceCSS(Button target, ResourceType resourceType) {
+        target.setStyle("-fx-background-image: url(" +
+                ResourceLocator.retrieveResourceTypeImage(resourceType)+ ")");
     }
 
     @FXML
