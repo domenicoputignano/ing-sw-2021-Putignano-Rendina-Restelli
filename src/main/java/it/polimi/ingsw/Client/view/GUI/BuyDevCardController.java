@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -27,11 +28,21 @@ public class BuyDevCardController extends Controller{
     @FXML
     public Button green3,green2,green1,blue3,blue2,blue1,yellow1,yellow2,yellow3,purple1,purple2,purple3;
 
+    @FXML
+    public Text errorDevText;
 
+    @FXML
+    public ImageView selectedCard;
+
+    @FXML
+    public Button okButton;
 
     @FXML
     @Override
     public void initialize() {
+
+        this.client = GUIApp.client;
+
         anchorBuyDevCard.setBackground(new Background(new BackgroundImage(new Image("/gui/img/exit_tab.png"),
                 BackgroundRepeat.NO_REPEAT,
                 BackgroundRepeat.NO_REPEAT,
@@ -53,6 +64,10 @@ public class BuyDevCardController extends Controller{
         setFont(level2,24);
         level3.setStyle("-fx-text-fill: rgb(35, 25, 22);");
         setFont(level3,24);
+        errorDevText.setStyle("-fx-text-fill: rgb(35, 25, 22);");
+        setFont(errorDevText,30);
+        okButton.setStyle("-fx-text-fill: rgb(35, 25, 22);");
+        setFont(okButton,24);
     }
 
     @FXML
@@ -60,8 +75,12 @@ public class BuyDevCardController extends Controller{
         DevelopmentCard developmentCard = client.getGame().getDeckTopCard(3,ColorCard.green);
         if(Checker.checkResources(developmentCard.getCost(),client.getGame().getPlayer(client.getUser()).getPersonalBoard())) {
             //TODO mandarlo nella scelta di dove vuole prendere le risorse per acquistarla
+            selectedCard.setImage(new Image("/gui/img/leaderCard1.png"));
+            errorDevText.setText("You have enough \nresources to purchase \nthe selected card");
+            okButton.setVisible(true);
         } else {
-            //TODO setErrorTextField(Non puoi aquistare la carta)
+            selectedCard.setImage(new Image("/gui/img/leaderCard1.png"));
+            errorDevText.setText("You don't have \nenough resources \nto purchase \nthe selected card");
         }
     }
 
