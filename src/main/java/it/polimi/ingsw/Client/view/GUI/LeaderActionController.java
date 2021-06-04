@@ -3,9 +3,12 @@ package it.polimi.ingsw.Client.view.GUI;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+
+import java.util.stream.Collectors;
 
 public class LeaderActionController extends Controller{
     @FXML
@@ -27,6 +30,8 @@ public class LeaderActionController extends Controller{
     public Button discard2;
     @FXML
     public Button okButton;
+    @FXML
+    public ImageView leaderCard1, leaderCard2;
 
     @FXML
     @Override
@@ -37,6 +42,23 @@ public class LeaderActionController extends Controller{
                 BackgroundRepeat.NO_REPEAT,
                 BackgroundPosition.CENTER,
                 new BackgroundSize(100, 100, true, true, true, false))));
+
+        this.client = GUIApp.client;
+
+        if(client.getGame().getPlayer(client.getUser()).getNumOfAvailableLeaderCards()==2){
+            leaderCard1.setImage(new Image(client.getGame().getPlayer(client.getUser()).getAvailableLeaderCards()
+                    .stream().filter(x->!x.isActive()).collect(Collectors.toList()).get(0).toImage()));
+            leaderCard2.setImage(new Image(client.getGame().getPlayer(client.getUser()).getAvailableLeaderCards()
+                    .stream().filter(x->!x.isActive()).collect(Collectors.toList()).get(1).toImage()));
+
+        } else if(client.getGame().getPlayer(client.getUser()).getNumOfAvailableLeaderCards()==1){
+            leaderCard1.setImage(new Image(client.getGame().getPlayer(client.getUser()).getAvailableLeaderCards()
+                    .stream().filter(x->!x.isActive()).collect(Collectors.toList()).get(0).toImage()));
+            // TODO centrare l'immagine e rendere i bottoni della seconda carta invisibili
+            // leaderCard1.setX(467)
+            // bottoni.setX(467)
+        }
+
         leaderActionText.setStyle("-fx-text-fill: rgb(35, 25, 22);");
         setFont(leaderActionText,39);
         active1.setStyle("-fx-text-fill: rgb(35, 25, 22);");
