@@ -49,12 +49,17 @@ public class DevelopmentCard implements Serializable {
 
     @Override
     public String toString() {
-        return "DevelopmentCard{" +
-                "cost=" + cost +
-                ", type=" + type +
-                ", victoryPoints=" + victoryPoints +
-                ", trade=" + trade +
-                '}';
+        return
+                ".---------------------------.\n" +
+                        "|"+toASCII(1)+"|\n"+
+                        "|"+toASCII(2)+"|\n"+
+                        "|      .-------------.      |\n"+
+                        "|"+toASCII(4)+"|\n"+
+                        "|"+toASCII(5)+"|\n"+
+                        "|"+toASCII(6)+"|\n"+
+                        "|      '.............'      |\n"+
+                        "|"+toASCII(8)+"|\n"+
+                        "'---------------------------'\n";
     }
 
     public String toASCII(int row) {

@@ -34,7 +34,7 @@ public class ReducedMarble implements Serializable {
 
     @Override
     public String toString() {
-        return ANSI_Color.escape(colorMarble)+" [" + colorMarble +']'+ANSI_Color.RESET;
+        return ANSI_Color.escape(colorMarble)+'[' + colorMarble +']'+ANSI_Color.RESET;
     }
 
     public String toImage() {return ResourceLocator.retrieveMarbleImage(this.colorMarble);}

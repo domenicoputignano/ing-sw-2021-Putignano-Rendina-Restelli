@@ -136,8 +136,10 @@ public class ClientStatesController {
                     ui.changeClientState(new InitialResourceChoiceCLI(ui.getClient()));
                     ui.manageUserInteraction();
                 }
-                else
+                else {
                     ui.changeClientState(new ActionChoiceCLI(ui.getClient()));
+                    ui.manageUserInteraction();
+                }
             }
         }
     }

@@ -16,7 +16,7 @@ public class ReducedStrongbox implements Serializable {
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
         resources.forEach((key, value) -> stringBuilder.append(ANSI_Color.escape(key)).
-                append(key).append(" ").append(value).append(ANSI_Color.RESET).append("\n"));
+                append(" ").append(value).append(ANSI_Color.RESET).append("\n"));
         return String.valueOf(stringBuilder);
     }
 

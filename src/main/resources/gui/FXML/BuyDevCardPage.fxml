@@ -24,8 +24,8 @@
             <Image url="@../img/deck_bg.png" />
          </image>
       </ImageView>
-      <Button fx:id="green3" layoutX="261.0" layoutY="160.0" mnemonicParsing="false" prefHeight="131.0" prefWidth="84.0" styleClass="buyDevCard" stylesheets="@../css/button.css" />
-      <Button fx:id="green2" layoutX="261.0" layoutY="320.0" mnemonicParsing="false" prefHeight="131.0" prefWidth="84.0" styleClass="buyDevCard" stylesheets="@../css/button.css" />
+      <Button fx:id="green3" layoutX="261.0" layoutY="160.0" mnemonicParsing="false" onAction="#checkIfCanBuyCard3Green" prefHeight="131.0" prefWidth="84.0" styleClass="buyDevCard" stylesheets="@../css/button.css" />
+      <Button fx:id="green2" layoutX="261.0" layoutY="320.0" mnemonicParsing="false" onAction="#checkIfCanBuyCard2Green" prefHeight="131.0" prefWidth="84.0" styleClass="buyDevCard" stylesheets="@../css/button.css" />
       <ImageView fitHeight="150.0" fitWidth="100.0" layoutX="397.0" layoutY="155.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../img/deck_bg.png" />
@@ -79,15 +79,15 @@
       <Text fx:id="yellow" layoutX="565.0" layoutY="150.0" strokeType="OUTSIDE" strokeWidth="0.0" text="YELLOW" />
       <Text fx:id="purple" layoutX="707.0" layoutY="150.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PURPLE" />
         <Text fx:id="buyDevCardText" layoutX="493.0" layoutY="119.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Buy Development Card" />
-      <Button fx:id="green1" layoutX="261.0" layoutY="480.0" mnemonicParsing="false" prefHeight="131.0" prefWidth="84.0" styleClass="buyDevCard" stylesheets="@../css/button.css" />
-      <Button fx:id="blue3" layoutX="403.0" layoutY="160.0" mnemonicParsing="false" prefHeight="131.0" prefWidth="84.0" styleClass="buyDevCard" stylesheets="@../css/button.css" />
-      <Button fx:id="blue2" layoutX="403.0" layoutY="320.0" mnemonicParsing="false" prefHeight="131.0" prefWidth="84.0" styleClass="buyDevCard" stylesheets="@../css/button.css" />
-      <Button fx:id="blue1" layoutX="403.0" layoutY="480.0" mnemonicParsing="false" prefHeight="131.0" prefWidth="84.0" styleClass="buyDevCard" stylesheets="@../css/button.css" />
-      <Button fx:id="yellow1" layoutX="545.0" layoutY="480.0" mnemonicParsing="false" prefHeight="131.0" prefWidth="84.0" styleClass="buyDevCard" stylesheets="@../css/button.css" />
-      <Button fx:id="yellow2" layoutX="545.0" layoutY="320.0" mnemonicParsing="false" prefHeight="131.0" prefWidth="84.0" styleClass="buyDevCard" stylesheets="@../css/button.css" />
-      <Button fx:id="yellow3" layoutX="545.0" layoutY="160.0" mnemonicParsing="false" prefHeight="131.0" prefWidth="84.0" styleClass="buyDevCard" stylesheets="@../css/button.css" />
-      <Button fx:id="purple3" layoutX="687.0" layoutY="160.0" mnemonicParsing="false" prefHeight="131.0" prefWidth="84.0" styleClass="buyDevCard" stylesheets="@../css/button.css" />
-      <Button fx:id="purple2" layoutX="685.0" layoutY="320.0" mnemonicParsing="false" prefHeight="131.0" prefWidth="84.0" styleClass="buyDevCard" stylesheets="@../css/button.css" />
-      <Button fx:id="purple1" layoutX="685.0" layoutY="480.0" mnemonicParsing="false" prefHeight="131.0" prefWidth="84.0" styleClass="buyDevCard" stylesheets="@../css/button.css" />
+      <Button fx:id="green1" layoutX="261.0" layoutY="480.0" mnemonicParsing="false" onAction="#checkIfCanBuyCard1Green" prefHeight="131.0" prefWidth="84.0" styleClass="buyDevCard" stylesheets="@../css/button.css" />
+      <Button fx:id="blue3" layoutX="403.0" layoutY="160.0" mnemonicParsing="false" onAction="#checkIfCanBuyCard3Blue" prefHeight="131.0" prefWidth="84.0" styleClass="buyDevCard" stylesheets="@../css/button.css" />
+      <Button fx:id="blue2" layoutX="403.0" layoutY="320.0" mnemonicParsing="false" onAction="#checkIfCanBuyCard2Blue" prefHeight="131.0" prefWidth="84.0" styleClass="buyDevCard" stylesheets="@../css/button.css" />
+      <Button fx:id="blue1" layoutX="403.0" layoutY="480.0" mnemonicParsing="false" onAction="#checkIfCanBuyCard1Blue" prefHeight="131.0" prefWidth="84.0" styleClass="buyDevCard" stylesheets="@../css/button.css" />
+      <Button fx:id="yellow1" layoutX="545.0" layoutY="480.0" mnemonicParsing="false" onAction="#checkIfCanBuyCard1Yellow" prefHeight="131.0" prefWidth="84.0" styleClass="buyDevCard" stylesheets="@../css/button.css" />
+      <Button fx:id="yellow2" layoutX="545.0" layoutY="320.0" mnemonicParsing="false" onAction="#checkIfCanBuyCard2Yellow" prefHeight="131.0" prefWidth="84.0" styleClass="buyDevCard" stylesheets="@../css/button.css" />
+      <Button fx:id="yellow3" layoutX="545.0" layoutY="160.0" mnemonicParsing="false" onAction="#checkIfCanBuyCard3Yellow" prefHeight="131.0" prefWidth="84.0" styleClass="buyDevCard" stylesheets="@../css/button.css" />
+      <Button fx:id="purple3" layoutX="687.0" layoutY="160.0" mnemonicParsing="false" onAction="#checkIfCanBuyCard3Purple" prefHeight="131.0" prefWidth="84.0" styleClass="buyDevCard" stylesheets="@../css/button.css" />
+      <Button fx:id="purple2" layoutX="685.0" layoutY="320.0" mnemonicParsing="false" onAction="#checkIfCanBuyCard2Purple" prefHeight="131.0" prefWidth="84.0" styleClass="buyDevCard" stylesheets="@../css/button.css" />
+      <Button fx:id="purple1" layoutX="685.0" layoutY="480.0" mnemonicParsing="false" onAction="#checkIfCanBuyCard1Purple" prefHeight="131.0" prefWidth="84.0" styleClass="buyDevCard" stylesheets="@../css/button.css" />
     </children>
 </AnchorPane>

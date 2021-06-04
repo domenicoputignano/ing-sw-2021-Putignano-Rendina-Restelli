@@ -31,7 +31,7 @@ public class InitialLeaderChoiceCLI extends AbstractInitialLeaderChoice {
         int leaderCard1Index = 0;
         int leaderCard2Index = 0;
         boolean selectionDone = false;
-        System.out.println("Choose index of the first leader card you want to discard: ");
+        System.out.print("Choose index of the first leader card you want to discard: ");
         do {
             try {
                 leaderCard1Index = Integer.parseInt(input.next());
@@ -48,7 +48,7 @@ public class InitialLeaderChoiceCLI extends AbstractInitialLeaderChoice {
         } while (!selectionDone);
         System.out.println("First chosen index: "+leaderCard1Index);
         selectionDone = false;
-        System.out.println("Choose index of the second leader card you want to discard: ");
+        System.out.print("Choose index of the second leader card you want to discard: ");
         do {
             try {
             leaderCard2Index = Integer.parseInt(input.next());
