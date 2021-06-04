@@ -4,6 +4,7 @@ import it.polimi.ingsw.Client.clientstates.AbstractActivateProduction;
 import it.polimi.ingsw.Client.view.CLI;
 import it.polimi.ingsw.Client.view.UI;
 import it.polimi.ingsw.Commons.ResourceType;
+import it.polimi.ingsw.Exceptions.InterruptedActionException;
 import it.polimi.ingsw.Network.Client;
 
 import java.util.Scanner;
@@ -27,7 +28,7 @@ public class ActivateProductionCLI extends AbstractActivateProduction {
     @Override
     public void manageUserInteraction() {
         boolean doneSelection = false;
-        do {
+        try {
             selectProductions();
             if(areValidRequestedProductions()){
                 System.out.println("Available resources are shown below\n"+
@@ -37,11 +38,19 @@ public class ActivateProductionCLI extends AbstractActivateProduction {
                     messageToSend.setHowToTakeResources(cli.askInstructionsOnHowToTakeResources(calculateInputResources()));
                     doneSelection = true;
                 }
-                else System.out.println("You cannot activate chosen production because you don't have enough resources");
+                else {
+                    System.out.println("You cannot activate chosen production because you don't have enough resources");
+                    throw new InterruptedActionException();
+                }
             }
-            else System.out.println("Selected productions are not available, try again");
-        } while(!doneSelection);
-        client.sendMessage(messageToSend);
+            else {
+                System.out.println("Selected productions are not available, try again");
+                throw new InterruptedActionException();
+            }
+            client.sendMessage(messageToSend);
+        } catch(InterruptedActionException e) {
+            cli.returnToActionBeginning(new ActivateProductionCLI(this.client));
+        }
     }
 
 

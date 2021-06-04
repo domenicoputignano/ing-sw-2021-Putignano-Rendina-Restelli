@@ -4,6 +4,7 @@ import it.polimi.ingsw.Client.clientstates.AbstractBuyDevCard;
 import it.polimi.ingsw.Client.view.CLI;
 import it.polimi.ingsw.Commons.CardType;
 import it.polimi.ingsw.Commons.ColorCard;
+import it.polimi.ingsw.Exceptions.InterruptedActionException;
 import it.polimi.ingsw.Network.Client;
 
 import java.util.Scanner;
@@ -20,27 +21,30 @@ public class BuyDevCardCLI extends AbstractBuyDevCard {
 
     @Override
     public void manageUserInteraction() {
-        System.out.println("Decks are shown below!");
+        System.out.println("Decks are shown below");
         cli.printDecks();
         boolean doneSelection = false;
-        do {
+        try {
             chooseCardType();
             computeActualCost(takeDeckFromCardType(messageToSend.getType()));
-            if(checkCostRequiredCardType(actualCost)) {
+            if (checkCostRequiredCardType(actualCost)) {
                 doneSelection = true;
             } else {
-                System.out.println("You don't have enough resources to buy this card! Choose another one.");
+                System.out.println("You don't have enough resources to buy this card! Choose another one");
+                throw new InterruptedActionException();
             }
-        } while(!doneSelection);
-        doneSelection = false;
-        chooseSlotDestination();
-        messageToSend.setHowToTakeResources(cli.askInstructionsOnHowToTakeResources(actualCost));
-        client.sendMessage(messageToSend);
+            chooseSlotDestination();
+            messageToSend.setHowToTakeResources(cli.askInstructionsOnHowToTakeResources(actualCost));
+            client.sendMessage(messageToSend);
+        } catch (InterruptedActionException e) {
+            cli.returnToActionBeginning(new BuyDevCardCLI(this.client));
+        }
     }
 
-    private void chooseSlotDestination() {
+    private void chooseSlotDestination() throws InterruptedActionException {
         System.out.println("Which slot do you want to put the card on? [1-3]");
         int choice;
+        int attempts = 1;
         boolean slotDestinationChoiceOK = false;
         do {
             choice = input.nextInt();
@@ -49,7 +53,11 @@ public class BuyDevCardCLI extends AbstractBuyDevCard {
                     slotDestinationChoiceOK = true;
                     messageToSend.setDestinationSlot(choice);
                 } else {
-                    System.out.println("You can't activate the card on this slot, choose another slot. [1-3]");
+                    System.out.println("You can't put the card on this slot, choose another slot. [1-3]");
+                    attempts = attempts + 1;
+                    if(attempts == 4) {
+                        throw new InterruptedActionException();
+                    }
                 }
             } else {
                 System.out.println("Invalid choice, which slot do you want to put the card on? [1-3]");

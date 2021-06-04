@@ -57,7 +57,7 @@ public class ClientStatesController {
                         ui.changeClientState(new InitialResourceChoiceCLI(ui.getClient()));
                         ui.manageUserInteraction();
                     } else {
-                        System.out.println("Waiting for players that are choosing initial resources..");
+                        System.out.println("Waiting for players that are performing initial choices...");
                         ui.changeClientState(new WaitForTurnCLI(ui.getClient()));
                         ui.getClientState().manageUserInteraction();
                         //TODO settare il client in attesa del completamento della configurazione

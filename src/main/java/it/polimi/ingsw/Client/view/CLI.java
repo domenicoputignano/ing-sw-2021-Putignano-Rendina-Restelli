@@ -5,7 +5,6 @@ import it.polimi.ingsw.Client.clientstates.cli.ActionChoiceCLI;
 import it.polimi.ingsw.Client.reducedmodel.ReducedDepot;
 import it.polimi.ingsw.Commons.*;
 import it.polimi.ingsw.Network.Client;
-import it.polimi.ingsw.Utils.ANSI_Color;
 import it.polimi.ingsw.Utils.MarbleDestination;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.*;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.Updates.*;
@@ -363,9 +362,13 @@ public class CLI extends UI {
         return occ;
     }
 
-    public void returnToActionChoice() {
-        changeClientState(new ActionChoiceCLI(this.client));
-        this.clientState.manageUserInteraction();
+    public void returnToActionBeginning(AbstractClientState action) {
+        changeClientState(action);
+        manageUserInteraction();
+    }
+
+    public void returnToMenu() {
+        returnToActionBeginning(new ActionChoiceCLI(this.client));
     }
 
     public void showMarketTray() {

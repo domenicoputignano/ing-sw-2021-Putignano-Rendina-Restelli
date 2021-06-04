@@ -79,7 +79,7 @@ public abstract class ReducedGame implements Serializable {
         if(isAnyCardPresentInDeck(level,color))
             return decks.stream().filter(x -> x.getCardType().getLevel()==level && x.getCardType().getColor()==color)
                     .collect(Collectors.toList()).get(0).getTop().toASCII(row);
-        else return "                   ";
+        else return "|                            |";
     }
 
     private boolean isAnyCardPresentInDeck(int level, ColorCard color){

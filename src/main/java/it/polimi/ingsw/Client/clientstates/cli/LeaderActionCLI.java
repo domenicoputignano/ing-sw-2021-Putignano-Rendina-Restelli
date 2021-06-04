@@ -19,17 +19,18 @@ public class LeaderActionCLI extends AbstractLeaderAction {
     @Override
     public void manageUserInteraction() {
         if(client.getGame().getCurrPlayer().isAvailableLeaderAction()){
-            cli.showLeaderCards();
-            System.out.println("What leader action do you want to perform (ACTIVATE|DISCARD) ? ");
-            String leaderActionChosen = chooseLeaderAction();
-            messageToSend.setToDiscard(leaderActionChosen.equalsIgnoreCase("discard"));
-            System.out.printf("Well, you have %d leader card available, which one do you want to %s (value in [1 - %d]) ? ",
-                    client.getGame().getCurrPlayer().getNumOfAvailableLeaderCards(), leaderActionChosen, client.getGame().getCurrPlayer().getNumOfAvailableLeaderCards());
-            int chosenIndex = chooseCardIndex();
-            messageToSend.setIndex(chosenIndex);
-            client.sendMessage(messageToSend);
+                cli.showLeaderCards();
+                System.out.println("What leader action do you want to perform (ACTIVATE|DISCARD) ? ");
+                String leaderActionChosen = chooseLeaderAction();
+                messageToSend.setToDiscard(leaderActionChosen.equalsIgnoreCase("discard"));
+                System.out.printf("Well, you have %d leader card available, which one do you want to %s (value in [1 - %d]) ? ",
+                        client.getGame().getCurrPlayer().getNumOfAvailableLeaderCards(), leaderActionChosen, client.getGame().getCurrPlayer().getNumOfAvailableLeaderCards());
+                int chosenIndex = chooseCardIndex();
+                messageToSend.setIndex(chosenIndex);
+                client.sendMessage(messageToSend);
         } else {
             System.out.println("Oh no! Seems that all leader action has been performed. Try another action ");
+            cli.returnToMenu();
         }
     }
 

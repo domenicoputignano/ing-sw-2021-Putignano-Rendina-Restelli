@@ -2,6 +2,7 @@ package it.polimi.ingsw.Client.clientstates.cli;
 
 import it.polimi.ingsw.Client.clientstates.AbstractMoveResources;
 import it.polimi.ingsw.Client.view.CLI;
+import it.polimi.ingsw.Exceptions.InterruptedActionException;
 import it.polimi.ingsw.Network.Client;
 import it.polimi.ingsw.Utils.MoveFromExtraToNormalAction;
 import it.polimi.ingsw.Utils.MoveFromNormalToExtraAction;
@@ -27,16 +28,19 @@ public class MoveResourcesCLI extends AbstractMoveResources {
     private void chooseSourceDestination() {
         String choice;
         boolean choiceOK;
-        do {
-            System.out.println("Choose the type of depot source and destination of your move action. FROM [DEPOT|EXTRADEPOT], TO [DEPOT|EXTRADEPOT]");
-            choice = input.next().toUpperCase();
-            choiceOK = parseSourceDestinationChoice(choice);
-        } while (!choiceOK);
-
-        client.sendMessage(messageToSend);
+        try {
+            do {
+                System.out.println("Choose the type of depot source and destination of your move action. FROM [DEPOT|EXTRADEPOT], TO [DEPOT|EXTRADEPOT]");
+                choice = input.next().toUpperCase();
+                choiceOK = parseSourceDestinationChoice(choice);
+            } while (!choiceOK);
+            client.sendMessage(messageToSend);
+        } catch (InterruptedActionException e) {
+            cli.returnToActionBeginning(new MoveResourcesCLI(this.client));
+        }
     }
 
-    private boolean parseSourceDestinationChoice(String choice) {
+    private boolean parseSourceDestinationChoice(String choice) throws InterruptedActionException {
         switch(choice.toUpperCase()) {
             case "DEPOT,DEPOT": {
                 manageMoveFromNormalToNormalDepot();
@@ -45,7 +49,7 @@ public class MoveResourcesCLI extends AbstractMoveResources {
             case "DEPOT,EXTRADEPOT": {
                 if(getNumOfExtraDepots() == 0) {
                     System.out.println("You can't move resources to an extradepot because you don't have one.");
-                    cli.returnToActionChoice();
+                    throw new InterruptedActionException();
                 } else if(getNumOfExtraDepots() == 1) {
                     manageMoveFromNormalToExtraDepot(false);
                 } else {
@@ -56,7 +60,7 @@ public class MoveResourcesCLI extends AbstractMoveResources {
             case "EXTRADEPOT, DEPOT": {
                 if(getNumOfExtraDepots() == 0) {
                     System.out.println("You can't move resources to an extradepot because you don't have one.");
-                    cli.returnToActionChoice();
+                    throw new InterruptedActionException();
                 } else if(getNumOfExtraDepots() == 1) {
                     manageMoveFromExtraToNormalDepot(false);
                 } else {
