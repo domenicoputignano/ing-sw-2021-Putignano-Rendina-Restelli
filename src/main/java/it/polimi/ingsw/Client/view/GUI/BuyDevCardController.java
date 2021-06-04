@@ -68,39 +68,87 @@ public class BuyDevCardController extends Controller{
         setFont(errorDevText,30);
         okButton.setStyle("-fx-text-fill: rgb(35, 25, 22);");
         setFont(okButton,24);
+        initializeDecksImages();
+    }
+
+    private void initializeDecksImages(){
+
+        green3.setStyle("-fx-background-image: url(" +
+                client.getGame().getDeckTopCard(3, ColorCard.green).toImage() + ")");
+        green2.setStyle("-fx-background-image: url(" +
+                client.getGame().getDeckTopCard(2, ColorCard.green).toImage() + ")");
+        green1.setStyle("-fx-background-image: url(" +
+                client.getGame().getDeckTopCard(1, ColorCard.green).toImage() + ")");
+
+        blue3.setStyle("-fx-background-image: url(" +
+                client.getGame().getDeckTopCard(3, ColorCard.blue).toImage() + ")");
+        blue2.setStyle("-fx-background-image: url(" +
+                client.getGame().getDeckTopCard(2, ColorCard.blue).toImage() + ")");
+        blue1.setStyle("-fx-background-image: url(" +
+                client.getGame().getDeckTopCard(1, ColorCard.blue).toImage() + ")");
+
+        yellow3.setStyle("-fx-background-image: url(" +
+                client.getGame().getDeckTopCard(3, ColorCard.yellow).toImage() + ")");
+        yellow2.setStyle("-fx-background-image: url(" +
+                client.getGame().getDeckTopCard(2, ColorCard.yellow).toImage() + ")");
+        yellow1.setStyle("-fx-background-image: url(" +
+                client.getGame().getDeckTopCard(1, ColorCard.yellow).toImage() + ")");
+
+        purple3.setStyle("-fx-background-image: url(" +
+                client.getGame().getDeckTopCard(3, ColorCard.purple).toImage() + ")");
+        purple2.setStyle("-fx-background-image: url(" +
+                client.getGame().getDeckTopCard(2, ColorCard.purple).toImage() + ")");
+        purple1.setStyle("-fx-background-image: url(" +
+                client.getGame().getDeckTopCard(1, ColorCard.purple).toImage() + ")");
+
+    }
+
+    private void setSelectedCardImage(DevelopmentCard developmentCard){
+        selectedCard.setImage(new Image(developmentCard.toImage()));
+    }
+
+    private void setErrorDevTextOK(){
+        errorDevText.setText("You have enough \nresources to purchase \nthe selected card");
+        okButton.setVisible(true);
+    }
+
+    private void setErrorDevTextKO(){
+        errorDevText.setText("You don't have \nenough resources \nto purchase \nthe selected card");
     }
 
     @FXML
     public void checkIfCanBuyCard3Green() {
         DevelopmentCard developmentCard = client.getGame().getDeckTopCard(3,ColorCard.green);
+        setSelectedCardImage(developmentCard);
         if(Checker.checkResources(developmentCard.getCost(),client.getGame().getPlayer(client.getUser()).getPersonalBoard())) {
             //TODO mandarlo nella scelta di dove vuole prendere le risorse per acquistarla
-            selectedCard.setImage(new Image("/gui/img/leaderCard1.png"));
-            errorDevText.setText("You have enough \nresources to purchase \nthe selected card");
-            okButton.setVisible(true);
+            setErrorDevTextOK();
         } else {
-            selectedCard.setImage(new Image("/gui/img/leaderCard1.png"));
-            errorDevText.setText("You don't have \nenough resources \nto purchase \nthe selected card");
+            setErrorDevTextKO();
         }
     }
 
     @FXML
     public void checkIfCanBuyCard2Green() {
         DevelopmentCard developmentCard = client.getGame().getDeckTopCard(2,ColorCard.green);
+        setSelectedCardImage(developmentCard);
         if(Checker.checkResources(developmentCard.getCost(),client.getGame().getPlayer(client.getUser()).getPersonalBoard())) {
             //TODO mandarlo nella scelta di dove vuole prendere le risorse per acquistarla
+            setErrorDevTextOK();
         } else {
-            //TODO setErrorTextField(Non puoi aquistare la carta)
+            setErrorDevTextKO();
         }
     }
 
     @FXML
     public void checkIfCanBuyCard1Green() {
         DevelopmentCard developmentCard = client.getGame().getDeckTopCard(1,ColorCard.green);
+        setSelectedCardImage(developmentCard);
         if(Checker.checkResources(developmentCard.getCost(),client.getGame().getPlayer(client.getUser()).getPersonalBoard())) {
             //TODO mandarlo nella scelta di dove vuole prendere le risorse per acquistarla
+            setErrorDevTextOK();
         } else {
-            //TODO setErrorTextField(Non puoi aquistare la carta)
+            setErrorDevTextKO();
         }
 
     }
@@ -108,90 +156,108 @@ public class BuyDevCardController extends Controller{
     @FXML
     public void checkIfCanBuyCard3Blue() {
         DevelopmentCard developmentCard = client.getGame().getDeckTopCard(3,ColorCard.blue);
+        setSelectedCardImage(developmentCard);
         if(Checker.checkResources(developmentCard.getCost(),client.getGame().getPlayer(client.getUser()).getPersonalBoard())) {
             //TODO mandarlo nella scelta di dove vuole prendere le risorse per acquistarla
+            setErrorDevTextOK();
         } else {
-            //TODO setErrorTextField(Non puoi aquistare la carta)
+            setErrorDevTextKO();
         }
     }
 
     @FXML
     public void checkIfCanBuyCard2Blue() {
         DevelopmentCard developmentCard = client.getGame().getDeckTopCard(2,ColorCard.blue);
+        setSelectedCardImage(developmentCard);
         if(Checker.checkResources(developmentCard.getCost(),client.getGame().getPlayer(client.getUser()).getPersonalBoard())) {
             //TODO mandarlo nella scelta di dove vuole prendere le risorse per acquistarla
+            setErrorDevTextOK();
         } else {
-            //TODO setErrorTextField(Non puoi aquistare la carta)
+            setErrorDevTextKO();
         }
     }
 
     @FXML
     public void checkIfCanBuyCard1Blue() {
         DevelopmentCard developmentCard = client.getGame().getDeckTopCard(1,ColorCard.blue);
+        setSelectedCardImage(developmentCard);
         if(Checker.checkResources(developmentCard.getCost(),client.getGame().getPlayer(client.getUser()).getPersonalBoard())) {
             //TODO mandarlo nella scelta di dove vuole prendere le risorse per acquistarla
+            setErrorDevTextOK();
         } else {
-            //TODO setErrorTextField(Non puoi aquistare la carta)
+            setErrorDevTextKO();
         }
     }
 
     @FXML
     public void checkIfCanBuyCard3Yellow() {
         DevelopmentCard developmentCard = client.getGame().getDeckTopCard(3,ColorCard.yellow);
+        setSelectedCardImage(developmentCard);
         if(Checker.checkResources(developmentCard.getCost(),client.getGame().getPlayer(client.getUser()).getPersonalBoard())) {
             //TODO mandarlo nella scelta di dove vuole prendere le risorse per acquistarla
+            setErrorDevTextOK();
         } else {
-            //TODO setErrorTextField(Non puoi aquistare la carta)
+            setErrorDevTextKO();
         }
     }
 
     @FXML
     public void checkIfCanBuyCard2Yellow() {
         DevelopmentCard developmentCard = client.getGame().getDeckTopCard(2,ColorCard.yellow);
+        setSelectedCardImage(developmentCard);
         if(Checker.checkResources(developmentCard.getCost(),client.getGame().getPlayer(client.getUser()).getPersonalBoard())) {
             //TODO mandarlo nella scelta di dove vuole prendere le risorse per acquistarla
+            setErrorDevTextOK();
         } else {
-            //TODO setErrorTextField(Non puoi aquistare la carta)
+            setErrorDevTextKO();
         }
     }
 
     @FXML
     public void checkIfCanBuyCard1Yellow() {
         DevelopmentCard developmentCard = client.getGame().getDeckTopCard(1,ColorCard.yellow);
+        setSelectedCardImage(developmentCard);
         if(Checker.checkResources(developmentCard.getCost(),client.getGame().getPlayer(client.getUser()).getPersonalBoard())) {
             //TODO mandarlo nella scelta di dove vuole prendere le risorse per acquistarla
+            setErrorDevTextOK();
         } else {
-            //TODO setErrorTextField(Non puoi aquistare la carta)
+            setErrorDevTextKO();
         }
     }
 
     @FXML
     public void checkIfCanBuyCard3Purple() {
         DevelopmentCard developmentCard = client.getGame().getDeckTopCard(3,ColorCard.purple);
+        setSelectedCardImage(developmentCard);
         if(Checker.checkResources(developmentCard.getCost(),client.getGame().getPlayer(client.getUser()).getPersonalBoard())) {
             //TODO mandarlo nella scelta di dove vuole prendere le risorse per acquistarla
+            setErrorDevTextOK();
         } else {
-            //TODO setErrorTextField(Non puoi aquistare la carta)
+            setErrorDevTextKO();
         }
     }
 
     @FXML
     public void checkIfCanBuyCard2Purple() {
         DevelopmentCard developmentCard = client.getGame().getDeckTopCard(2,ColorCard.purple);
+        setSelectedCardImage(developmentCard);
         if(Checker.checkResources(developmentCard.getCost(),client.getGame().getPlayer(client.getUser()).getPersonalBoard())) {
             //TODO mandarlo nella scelta di dove vuole prendere le risorse per acquistarla
+            setErrorDevTextOK();
         } else {
-            //TODO setErrorTextField(Non puoi aquistare la carta)
+            setErrorDevTextKO();
         }
     }
 
     @FXML
     public void checkIfCanBuyCard1Purple() {
         DevelopmentCard developmentCard = client.getGame().getDeckTopCard(1,ColorCard.purple);
+        setSelectedCardImage(developmentCard);
         if(Checker.checkResources(developmentCard.getCost(),client.getGame().getPlayer(client.getUser()).getPersonalBoard())) {
             //TODO mandarlo nella scelta di dove vuole prendere le risorse per acquistarla
+            setErrorDevTextOK();
         } else {
-            //TODO setErrorTextField(Non puoi aquistare la carta)
+            setErrorDevTextKO();
         }
     }
 
