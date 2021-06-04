@@ -266,7 +266,6 @@
     -fx-background-size: 107% auto;
 }
 .buyDevCard:hover{
-
 }
 .buyDevCard:pressed{
     -fx-background-size: 105% auto;
