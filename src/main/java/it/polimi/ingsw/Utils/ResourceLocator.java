@@ -1,6 +1,7 @@
 package it.polimi.ingsw.Utils;
 
 import it.polimi.ingsw.Commons.ColorMarble;
+import it.polimi.ingsw.Commons.ResourceType;
 
 public final class ResourceLocator {
     public static String retrieveDevCardImage(String ID) {
@@ -480,5 +481,15 @@ public final class ResourceLocator {
             default : return null; // image not found
         }
 
+    }
+
+    public static String retrieveResourceTypeImage(ResourceType resourceType){
+        switch(resourceType){
+            case shield : return "gui/img/resources/shield.png";
+            case stone : return "gui/img/resources/stone.png";
+            case servant : return "gui/img/resources/servant.png";
+            case coin : return "gui/img/resources/coin.png";
+        }
+        return null;
     }
 }

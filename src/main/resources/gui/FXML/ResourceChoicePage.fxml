@@ -28,22 +28,22 @@
             <TextField fx:id="stoneText" editable="false" layoutX="271.0" layoutY="425.0" mouseTransparent="true" prefHeight="37.0" prefWidth="95.0" styleClass="resourcesText" stylesheets="@../css/text.css" text="Stone :" />
             <ImageView fx:id="resource1Img" fitHeight="65.0" fitWidth="77.0" layoutX="177.0" layoutY="186.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../img/coin.png" />
+                  <Image url="@../img/resources/coin.png" />
                </image>
             </ImageView>
             <ImageView fx:id="resource2Img" fitHeight="65.0" fitWidth="77.0" layoutX="177.0" layoutY="261.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../img/servant.png" />
+                  <Image url="@../img/resources/servant.png" />
                </image>
             </ImageView>
             <ImageView fx:id="resource3Img" fitHeight="65.0" fitWidth="77.0" layoutX="185.0" layoutY="336.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../img/shield.png" />
+                  <Image url="@../img/resources/shield.png" />
                </image>
             </ImageView>
             <ImageView fx:id="resource4Img" fitHeight="65.0" fitWidth="77.0" layoutX="177.0" layoutY="411.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../img/stone.png" />
+                  <Image url="@../img/resources/stone.png" />
                </image>
             </ImageView>
             <Button fx:id="clearButton" alignment="CENTER" contentDisplay="CENTER" layoutX="667.0" layoutY="127.0" mnemonicParsing="false" onAction="#clearResources" prefHeight="50.0" prefWidth="81.0" styleClass="clearButton" stylesheets="@../css/button.css" text="Clear" />
@@ -69,7 +69,7 @@
             <Button fx:id="buttonDepot3pl4" layoutX="524.0" layoutY="315.0" mnemonicParsing="false" onAction="#selectedButtonDepot32" prefHeight="60.0" prefWidth="170.0" styleClass="buttonDepot" stylesheets="@../css/button.css" text="Depot 3" visible="false" />
             <ImageView fx:id="resource1Imgpl4" fitHeight="65.0" fitWidth="77.0" layoutX="441.0" layoutY="184.0" pickOnBounds="true" preserveRatio="true" visible="false">
                <image>
-                  <Image url="@../img/coin.png" />
+                  <Image url="@../img/resources/coin.png" />
                </image>
             </ImageView>
             <Button fx:id="okButton1" layoutX="619.0" layoutY="473.0" mnemonicParsing="false" onAction="#submitInitialResourceChoice" prefHeight="69.0" prefWidth="137.0" styleClass="okButton" stylesheets="@../css/button.css" text="OK" visible="false" />

@@ -5,7 +5,6 @@ import it.polimi.ingsw.Commons.ResourceType;
 import it.polimi.ingsw.Utils.Pair;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -13,7 +12,6 @@ import javafx.scene.layout.*;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 import static it.polimi.ingsw.Client.view.UI.fromStringToResourceType;
 
@@ -390,10 +388,10 @@ public class ResourceChoiceController extends Controller{
 
 
     private String getURLImageResource(String resource) {
-        if(resource.equals("coin")) return "/gui/img/coin.png";
-        if(resource.equals("servant")) return "/gui/img/servant.png";
-        if(resource.equals("shield")) return "/gui/img/shield.png";
-        if(resource.equals("stone")) return "/gui/img/stone.png";
+        if(resource.equals("coin")) return "/gui/img/resources/coin.png";
+        if(resource.equals("servant")) return "/gui/img/resources/servant.png";
+        if(resource.equals("shield")) return "/gui/img/resources/shield.png";
+        if(resource.equals("stone")) return "/gui/img/resources/stone.png";
         else return "";
     }
 
