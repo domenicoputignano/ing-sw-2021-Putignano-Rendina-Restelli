@@ -42,6 +42,9 @@ public class PlayerBoardController extends Controller {
     @FXML
     public ImageView favorTile1,favorTile2,favorTile3;
 
+    @FXML
+    public ImageView depot1,depot21,depot22,depot31,depot32,depot33;
+
     public void initialize() {
         super.initialize();
 

@@ -63,6 +63,12 @@
             <ImageView fx:id="favorTile1" fitHeight="59.0" fitWidth="59.0" layoutX="185.0" layoutY="92.0" pickOnBounds="true" preserveRatio="true" />
             <ImageView fx:id="favorTile2" fitHeight="59.0" fitWidth="59.0" layoutX="364.0" layoutY="55.0" pickOnBounds="true" preserveRatio="true" />
             <ImageView fx:id="favorTile3" fitHeight="59.0" fitWidth="59.0" layoutX="578.0" layoutY="93.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="depot1" fitHeight="24.0" fitWidth="24.0" layoutX="95.0" layoutY="250.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="depot21" fitHeight="24.0" fitWidth="24.0" layoutX="78.0" layoutY="294.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="depot22" fitHeight="24.0" fitWidth="24.0" layoutX="106.0" layoutY="294.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="depot31" fitHeight="24.0" fitWidth="24.0" layoutX="65.0" layoutY="340.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="depot32" fitHeight="24.0" fitWidth="24.0" layoutX="92.0" layoutY="340.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="depot33" fitHeight="24.0" fitWidth="24.0" layoutX="119.0" layoutY="340.0" pickOnBounds="true" preserveRatio="true" />
             </children>
         </AnchorPane>
     </center>
