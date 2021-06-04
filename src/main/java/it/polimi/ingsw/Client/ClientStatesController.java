@@ -91,12 +91,6 @@ public class ClientStatesController {
                 ui.manageUserInteraction();
             }
         }
-        else {
-            if(ui.isCLI()) {
-                ui.changeClientState(new WaitForTurnCLI(ui.getClient()));
-                ui.getClientState().manageUserInteraction();
-            }
-        }
     }
 
     public static void updateClientState(LorenzoPlayedUpdate message, UI ui) {
@@ -134,12 +128,11 @@ public class ClientStatesController {
                 if(previousState instanceof WaitForTurnCLI){
                     ((WaitForTurnCLI) previousState).shutDownWaiterThread();
                     ui.changeClientState(new InitialResourceChoiceCLI(ui.getClient()));
-                    ui.manageUserInteraction();
                 }
                 else {
                     ui.changeClientState(new ActionChoiceCLI(ui.getClient()));
-                    ui.manageUserInteraction();
                 }
+                ui.manageUserInteraction();
             }
         }
     }
