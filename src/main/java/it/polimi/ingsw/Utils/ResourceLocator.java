@@ -489,7 +489,7 @@ public final class ResourceLocator {
             case stone : return "gui/img/resources/stone.png";
             case servant : return "gui/img/resources/servant.png";
             case coin : return "gui/img/resources/coin.png";
+            default: return null;
         }
-        return null;
     }
 }

@@ -19,7 +19,7 @@ public class MoveActionController extends Controller{
     public Button closeMoveAction;
 
     @FXML
-    public Button res1Depot1,res1Depot2,res2Depot2,res1Depot3,res2Depot3,res3Depot3;
+    public Button res1Depot1, res1Depot2, res2Depot2, res1Depot3, res2Depot3, res3Depot3;
 
     @FXML
     public Text extraDepotsText;
@@ -38,6 +38,10 @@ public class MoveActionController extends Controller{
         setFont(moveActionText,39);
         extraDepotsText.setStyle("-fx-text-fill: rgb(35, 25, 22);");
         setFont(extraDepotsText,30);
+    }
+
+    private void initializeDepots(){
+
     }
 
     @FXML

@@ -1,5 +1,7 @@
 package it.polimi.ingsw.Client.view.GUI;
 
+import it.polimi.ingsw.Commons.ResourceType;
+import it.polimi.ingsw.Utils.ResourceLocator;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.ImageCursor;
@@ -43,7 +45,7 @@ public class PlayerBoardController extends Controller {
     public ImageView favorTile1,favorTile2,favorTile3;
 
     @FXML
-    public ImageView depot1,depot21,depot22,depot31,depot32,depot33;
+    public ImageView depot1, depot21, depot22, depot31, depot32, depot33;
 
     public void initialize() {
         super.initialize();
@@ -66,6 +68,7 @@ public class PlayerBoardController extends Controller {
 
         leaderCard2.setImage(new Image(client.getGame().getPlayer(client.getUser()).getAvailableLeaderCards().get(1).toImage()));
         initializeCells();
+        initializeDepots();
     }
 
     private void initializeCells()
@@ -103,6 +106,54 @@ public class PlayerBoardController extends Controller {
         favorTiles[2].setImage(new Image("/gui/img/favorTile3D.png"));
         cells[12].setImage(new Image("/gui/img/faith.png"));
     }
+
+    private void initializeDepots(){
+
+        // SETUP DEPOT 1
+        if(client.getGame().getPlayer(client.getUser()).getPersonalBoard().getWarehouse().getNormalDepots()[0].getOcc()==1){
+            loadImageResource(depot1, client.getGame().getPlayer(client.getUser()).
+                    getPersonalBoard().getWarehouse().getNormalDepots()[0].getType());
+        }
+
+        // SETUP DEPOT 2
+        if(client.getGame().getPlayer(client.getUser()).getPersonalBoard().getWarehouse().getNormalDepots()[1].getOcc()==2){
+            loadImageResource(depot21, client.getGame().getPlayer(client.getUser()).
+                    getPersonalBoard().getWarehouse().getNormalDepots()[1].getType());
+            loadImageResource(depot22, client.getGame().getPlayer(client.getUser()).
+                    getPersonalBoard().getWarehouse().getNormalDepots()[1].getType());
+        } else if(client.getGame().getPlayer(client.getUser()).getPersonalBoard().getWarehouse().getNormalDepots()[1].getOcc()==1){
+            loadImageResource(depot21, client.getGame().getPlayer(client.getUser()).
+                    getPersonalBoard().getWarehouse().getNormalDepots()[1].getType());
+        }
+
+        // SETUP DEPOT 3
+        if(client.getGame().getPlayer(client.getUser()).getPersonalBoard().getWarehouse().getNormalDepots()[2].getOcc()==3){
+            loadImageResource(depot31, client.getGame().getPlayer(client.getUser()).
+                    getPersonalBoard().getWarehouse().getNormalDepots()[2].getType());
+            loadImageResource(depot32, client.getGame().getPlayer(client.getUser()).
+                    getPersonalBoard().getWarehouse().getNormalDepots()[2].getType());
+            loadImageResource(depot33, client.getGame().getPlayer(client.getUser()).
+                    getPersonalBoard().getWarehouse().getNormalDepots()[2].getType());
+        } else if(client.getGame().getPlayer(client.getUser()).getPersonalBoard().getWarehouse().getNormalDepots()[2].getOcc()==2){
+            loadImageResource(depot31, client.getGame().getPlayer(client.getUser()).
+                    getPersonalBoard().getWarehouse().getNormalDepots()[2].getType());
+            loadImageResource(depot32, client.getGame().getPlayer(client.getUser()).
+                    getPersonalBoard().getWarehouse().getNormalDepots()[2].getType());
+        } else if(client.getGame().getPlayer(client.getUser()).getPersonalBoard().getWarehouse().getNormalDepots()[2].getOcc()==1){
+            loadImageResource(depot31, client.getGame().getPlayer(client.getUser()).
+                    getPersonalBoard().getWarehouse().getNormalDepots()[2].getType());
+        }
+    }
+
+    private void loadImageResource(ImageView target, ResourceType resourceType){
+        switch (resourceType) {
+            case servant: target.setImage(new Image(ResourceLocator.retrieveResourceTypeImage(ResourceType.servant)));
+            case stone : target.setImage(new Image(ResourceLocator.retrieveResourceTypeImage(ResourceType.stone)));
+            case coin : target.setImage(new Image(ResourceLocator.retrieveResourceTypeImage(ResourceType.coin)));
+            case shield : target.setImage(new Image(ResourceLocator.retrieveResourceTypeImage(ResourceType.shield)));
+        }
+    }
+
     @FXML
     public void handleChooseActionButton()
     {
