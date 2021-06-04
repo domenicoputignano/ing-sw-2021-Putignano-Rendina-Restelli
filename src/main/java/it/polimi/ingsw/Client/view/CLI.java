@@ -3,6 +3,7 @@ package it.polimi.ingsw.Client.view;
 import it.polimi.ingsw.Client.clientstates.AbstractClientState;
 import it.polimi.ingsw.Client.clientstates.cli.ActionChoiceCLI;
 import it.polimi.ingsw.Client.reducedmodel.ReducedDepot;
+import it.polimi.ingsw.Client.reducedmodel.ReducedPersonalBoard;
 import it.polimi.ingsw.Commons.*;
 import it.polimi.ingsw.Network.Client;
 import it.polimi.ingsw.Utils.MarbleDestination;
@@ -41,18 +42,18 @@ public class CLI extends UI {
                 resource = fromStringToResourceType(input.next());
                 if(resource!=null) {
                     if (neededResources.get(resource) == 0) {
-                        System.out.println("You don't need this type of resources, please select again ");
+                        System.out.println("You don't need this type of resources, please select again resource ");
                         resource = null;
                     }
                 }
             } while (resource == null);
-            System.out.println("Choose the number: ");
+            System.out.print("Choose the number: ");
             int number;
             boolean isRightNumber = false;
             do {
                 number = input.nextInt();
                 if (neededResources.get(resource) < number) {
-                    System.out.println("Error detected, select again number of occurrences you want to pick: ");
+                    System.out.print("Error detected, select again number of occurrences you want to pick: ");
                     isRightNumber = false;
                 } else {
                     isRightNumber = true;
@@ -411,6 +412,19 @@ public class CLI extends UI {
         System.out.println("|      '.............'      ||      '.............'      ||      '.............'      ||      '.............'      |");
         System.out.println("|"+client.getGame().getDeckTopCardAsASCII(1, ColorCard.green, 8)+"||"+client.getGame().getDeckTopCardAsASCII(1, ColorCard.blue, 8)+"||"+client.getGame().getDeckTopCardAsASCII(1, ColorCard.yellow, 8)+"||"+client.getGame().getDeckTopCardAsASCII(1, ColorCard.purple, 8)+"|");
         System.out.println("'---------------------------''---------------------------''---------------------------''---------------------------'");
+    }
+
+    public void printSlots(ReducedPersonalBoard playerBoard) {
+        System.out.println(".---------------------------..---------------------------..---------------------------.");
+        System.out.println("|"+playerBoard.getSlotTopCardAsASCII(0, 1)+"||"+playerBoard.getSlotTopCardAsASCII(1, 1)+"||"+playerBoard.getSlotTopCardAsASCII(2,1)+"   |");
+        System.out.println("|"+playerBoard.getSlotTopCardAsASCII(0, 2)+"||"+playerBoard.getSlotTopCardAsASCII(1, 2)+"||"+playerBoard.getSlotTopCardAsASCII(2,2)+"   |");
+        System.out.println("|      .-------------.      ||      .-------------.     ||      .-------------.       |");
+        System.out.println("|"+playerBoard.getSlotTopCardAsASCII(0, 4)+"||"+playerBoard.getSlotTopCardAsASCII(1, 4)+"||"+playerBoard.getSlotTopCardAsASCII(2,4)+"   |");
+        System.out.println("|"+playerBoard.getSlotTopCardAsASCII(0, 5)+"||"+playerBoard.getSlotTopCardAsASCII(1, 5)+"||"+playerBoard.getSlotTopCardAsASCII(2,5)+"   |");
+        System.out.println("|"+playerBoard.getSlotTopCardAsASCII(0, 6)+"||"+playerBoard.getSlotTopCardAsASCII(1, 6)+"||"+playerBoard.getSlotTopCardAsASCII(2,6)+"   |");
+        System.out.println("|      '.............'      ||      '.............'      ||      '.............'      |");
+        System.out.println("|"+playerBoard.getSlotTopCardAsASCII(0, 8)+"||"+playerBoard.getSlotTopCardAsASCII(1, 8)+"||"+playerBoard.getSlotTopCardAsASCII(2,8)+"   |");
+        System.out.println("'---------------------------''---------------------------''---------------------------'");
     }
 
 }

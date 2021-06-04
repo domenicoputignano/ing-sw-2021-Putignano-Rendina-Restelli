@@ -59,19 +59,32 @@ public class ReducedPersonalBoard implements Serializable {
         return slots[slotIndex].getNumOfStackedCards() == 0;
     }
 
-    public DevelopmentCard peekTopCardInSlot(int slotIndex) {
-        return slots[slotIndex].peekTopCard();
-    }
 
     public boolean canBuyCardOfLevel(int level) {
         return level == 1 || Arrays.stream(slots).anyMatch(x -> x.peekTopCard().getType().getLevel() == (level - 1));
+    }
+
+
+    public String getSlotTopCardAsASCII(int slotIndex, int row) {
+        if(!isEmptySlot(slotIndex)) {
+            DevelopmentCard card = slots[slotIndex].peekTopCard();
+            return card.toASCII(row);
+        }
+        else
+            return "                          ";
+
     }
 
     public Slot getSlot(int index) {
         return slots[index];
     }
 
+    public DevelopmentCard peekTopCardInSlot(int slotIndex) {
+        return slots[slotIndex].peekTopCard();
+    }
+
     public ReducedFaithTrack getFaithTrack() {
         return faithTrack;
     }
+
 }

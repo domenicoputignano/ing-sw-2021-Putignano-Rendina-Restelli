@@ -29,6 +29,7 @@ public class ActivateProductionCLI extends AbstractActivateProduction {
     public void manageUserInteraction() {
         boolean doneSelection = false;
         try {
+            cli.printSlots(client.getGame().getPlayer(client.getUser()).getPersonalBoard());
             selectProductions();
             if(areValidRequestedProductions()){
                 System.out.println("Available resources are shown below\n"+
