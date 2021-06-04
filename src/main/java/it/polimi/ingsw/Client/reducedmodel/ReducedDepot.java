@@ -34,9 +34,9 @@ public class ReducedDepot implements Serializable {
 
     @Override
     public String toString() {
-        StringBuilder result = new StringBuilder();;
+        StringBuilder result = new StringBuilder();
         for(int i = 0; i < occ; i++ )
-            result.append(type.toString()).append("\t");
+            result.append(type).append("\t");
         return String.valueOf(result);
     }
 
