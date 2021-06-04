@@ -32,6 +32,16 @@ public class PlayerBoardController extends Controller {
     @FXML
     private static final String CURSOR = "/gui/img/cursor.png";
 
+    public ImageView[] cells = new ImageView[25];
+    public ImageView[] favorTiles = new ImageView[3];
+
+    @FXML
+    public ImageView cell0,cell1,cell2,cell3,cell4,cell5,cell6,cell7,cell8,cell9,cell10
+            ,cell11,cell12,cell13,cell14,cell15,cell16,cell17,cell18,cell19,cell20,cell21,
+            cell22,cell23,cell24;
+    @FXML
+    public ImageView favorTile1,favorTile2,favorTile3;
+
     public void initialize() {
         super.initialize();
 
@@ -52,6 +62,43 @@ public class PlayerBoardController extends Controller {
         leaderCard1.setImage(new Image(client.getGame().getPlayer(client.getUser()).getAvailableLeaderCards().get(0).toImage()));
 
         leaderCard2.setImage(new Image(client.getGame().getPlayer(client.getUser()).getAvailableLeaderCards().get(1).toImage()));
+        initializeCells();
+    }
+
+    private void initializeCells()
+    {
+        cells[0] = cell0;
+        cells[1] = cell1;
+        cells[2] = cell2;
+        cells[3] = cell3;
+        cells[4] = cell4;
+        cells[5] = cell5;
+        cells[6] = cell6;
+        cells[7] = cell7;
+        cells[8] = cell8;
+        cells[9] = cell9;
+        cells[10] = cell10;
+        cells[11] = cell11;
+        cells[12] = cell12;
+        cells[13] = cell13;
+        cells[14] = cell14;
+        cells[15] = cell15;
+        cells[16] = cell16;
+        cells[17] = cell17;
+        cells[18] = cell18;
+        cells[19] = cell19;
+        cells[20] = cell20;
+        cells[21] = cell21;
+        cells[22] = cell22;
+        cells[23] = cell23;
+        cells[24] = cell24;
+        favorTiles[0] = favorTile1;
+        favorTiles[1] = favorTile2;
+        favorTiles[2] = favorTile3;
+        favorTiles[0].setImage(new Image("/gui/img/favorTile1D.png"));
+        favorTiles[1].setImage(new Image("/gui/img/favorTile2D.png"));
+        favorTiles[2].setImage(new Image("/gui/img/favorTile3D.png"));
+        cells[12].setImage(new Image("/gui/img/faith.png"));
     }
     @FXML
     public void handleChooseActionButton()
