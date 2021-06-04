@@ -2,6 +2,7 @@ package it.polimi.ingsw.Client.reducedmodel;
 
 import it.polimi.ingsw.Commons.ColorCard;
 import it.polimi.ingsw.Commons.Deck;
+import it.polimi.ingsw.Commons.DevelopmentCard;
 import it.polimi.ingsw.Commons.User;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.ServerMessage;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.Updates.NewTurnUpdate;
@@ -75,10 +76,22 @@ public abstract class ReducedGame implements Serializable {
     }
 
     public String getDeckTopCardAsASCII(int level, ColorCard color, int row){
-        if(getDecks().stream().anyMatch(x -> x.getCardType().getLevel()==level && x.getCardType().getColor()==color))
+        if(isAnyCardPresentInDeck(level,color))
             return decks.stream().filter(x -> x.getCardType().getLevel()==level && x.getCardType().getColor()==color)
                     .collect(Collectors.toList()).get(0).getTop().toASCII(row);
-        else return "            ";
+        else return "                   ";
+    }
+
+    private boolean isAnyCardPresentInDeck(int level, ColorCard color){
+        return decks.stream().anyMatch(x -> x.getCardType().getLevel()==level && x.getCardType().getColor()==color && !x.isEmpty());
+    }
+
+    public DevelopmentCard getDeckTopCard(int level, ColorCard color) {
+        if(isAnyCardPresentInDeck(level,color)) {
+            return decks.stream().filter(x -> x.getCardType().getLevel() == level && x.getCardType().getColor()==color)
+                    .collect(Collectors.toList()).get(0).getTop();
+        } else
+            return null;
     }
 
 }

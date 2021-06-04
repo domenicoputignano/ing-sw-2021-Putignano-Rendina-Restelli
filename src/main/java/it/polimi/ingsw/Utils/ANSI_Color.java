@@ -23,10 +23,10 @@ public enum ANSI_Color {
         }
 
         public static String escape(ResourceType type) {
-            if (type == ResourceType.coin) return YELLOW.escape();
-            if (type == ResourceType.servant) return PURPLE.escape();
-            if (type == ResourceType.shield) return BLUE.escape();
-            if (type == ResourceType.stone) return GREY.escape();
+            if (type == ResourceType.coin) return YELLOW.escape()+"coin"+RESET;
+            if (type == ResourceType.servant) return PURPLE.escape()+"servant"+RESET;
+            if (type == ResourceType.shield) return BLUE.escape()+"shield"+RESET;
+            if (type == ResourceType.stone) return GREY.escape()+"stone"+RESET;
             else return "";
         }
 

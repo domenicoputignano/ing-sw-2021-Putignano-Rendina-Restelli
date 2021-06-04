@@ -2,10 +2,13 @@ package it.polimi.ingsw.Client.clientstates.cli;
 
 import it.polimi.ingsw.Client.clientstates.AbstractActivateProduction;
 import it.polimi.ingsw.Client.view.CLI;
+import it.polimi.ingsw.Client.view.UI;
 import it.polimi.ingsw.Commons.ResourceType;
 import it.polimi.ingsw.Network.Client;
 
 import java.util.Scanner;
+
+import static it.polimi.ingsw.Client.view.UI.fromStringToResourceType;
 
 
 public class ActivateProductionCLI extends AbstractActivateProduction {
@@ -72,10 +75,12 @@ public class ActivateProductionCLI extends AbstractActivateProduction {
 
     private void resourcesChoice() {
         if(requiredProduction.isBasic()) {
-            System.out.println("You chose basic production power, please select two input resources " +
-                    "and one output resource [Coin (C), Servant(SE), Shield(SH), Stone(ST)]");
+            System.out.print("You chose basic production power, please select two input resources " +
+                    "and one output resource [Coin (C), Servant(SE), Shield(SH), Stone(ST)]\nChoose first input: ");
             messageToSend.setInput1(askValidResource());
+            System.out.print("\nChoose second input: ");
             messageToSend.setInput2(askValidResource());
+            System.out.print("\nChoose output: ");
             messageToSend.setOutput(askValidResource());
         }
         if(requiredProduction.isExtraSlot1()) {
@@ -93,7 +98,7 @@ public class ActivateProductionCLI extends AbstractActivateProduction {
         ResourceType resource = null;
         while(!done) {
             answer = input.next();
-            resource = cli.fromStringToResourceType(answer);
+            resource = fromStringToResourceType(answer);
             if(resource!=null){
                 done = true;
             }

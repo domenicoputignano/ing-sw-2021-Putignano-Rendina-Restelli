@@ -32,8 +32,7 @@ public class ReducedMarketTray implements Serializable {
     @Override
     public String toString() {
         return  toStringAvailableMarbles() +
-                ", slidingMarble=" + slidingMarble +
-                '}';
+                " slidingMarble =" + slidingMarble;
     }
 
     private String toStringAvailableMarbles() {

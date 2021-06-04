@@ -199,7 +199,7 @@ public class CLI extends UI {
                 System.out.println("You haven't correctly positioned the following resources " + message.getDiscardedResources() +
                         " so they have been discarded");
             } else System.out.print("You have correctly positioned all the resources you had to settle\nYour depots update" +
-                    "are shown below\n");
+                    " are shown below\n");
             showDepots();
         } else {
             if(message.getDiscardedResources().size() > 0) {

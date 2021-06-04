@@ -1,5 +1,8 @@
 package it.polimi.ingsw.Client.view.GUI;
 
+import it.polimi.ingsw.Client.Checker;
+import it.polimi.ingsw.Commons.ColorCard;
+import it.polimi.ingsw.Commons.DevelopmentCard;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
@@ -25,11 +28,10 @@ public class BuyDevCardController extends Controller{
     public Button green3,green2,green1,blue3,blue2,blue1,yellow1,yellow2,yellow3,purple1,purple2,purple3;
 
 
+
     @FXML
     @Override
     public void initialize() {
-
-
         anchorBuyDevCard.setBackground(new Background(new BackgroundImage(new Image("/gui/img/exit_tab.png"),
                 BackgroundRepeat.NO_REPEAT,
                 BackgroundRepeat.NO_REPEAT,
@@ -52,6 +54,131 @@ public class BuyDevCardController extends Controller{
         level3.setStyle("-fx-text-fill: rgb(35, 25, 22);");
         setFont(level3,24);
     }
+
+    @FXML
+    public void checkIfCanBuyCard3Green() {
+        DevelopmentCard developmentCard = client.getGame().getDeckTopCard(3,ColorCard.green);
+        if(Checker.checkResources(developmentCard.getCost(),client.getGame().getPlayer(client.getUser()).getPersonalBoard())) {
+            //TODO mandarlo nella scelta di dove vuole prendere le risorse per acquistarla
+        } else {
+            //TODO setErrorTextField(Non puoi aquistare la carta)
+        }
+    }
+
+    @FXML
+    public void checkIfCanBuyCard2Green() {
+        DevelopmentCard developmentCard = client.getGame().getDeckTopCard(2,ColorCard.green);
+        if(Checker.checkResources(developmentCard.getCost(),client.getGame().getPlayer(client.getUser()).getPersonalBoard())) {
+            //TODO mandarlo nella scelta di dove vuole prendere le risorse per acquistarla
+        } else {
+            //TODO setErrorTextField(Non puoi aquistare la carta)
+        }
+    }
+
+    @FXML
+    public void checkIfCanBuyCard1Green() {
+        DevelopmentCard developmentCard = client.getGame().getDeckTopCard(1,ColorCard.green);
+        if(Checker.checkResources(developmentCard.getCost(),client.getGame().getPlayer(client.getUser()).getPersonalBoard())) {
+            //TODO mandarlo nella scelta di dove vuole prendere le risorse per acquistarla
+        } else {
+            //TODO setErrorTextField(Non puoi aquistare la carta)
+        }
+
+    }
+
+    @FXML
+    public void checkIfCanBuyCard3Blue() {
+        DevelopmentCard developmentCard = client.getGame().getDeckTopCard(3,ColorCard.blue);
+        if(Checker.checkResources(developmentCard.getCost(),client.getGame().getPlayer(client.getUser()).getPersonalBoard())) {
+            //TODO mandarlo nella scelta di dove vuole prendere le risorse per acquistarla
+        } else {
+            //TODO setErrorTextField(Non puoi aquistare la carta)
+        }
+    }
+
+    @FXML
+    public void checkIfCanBuyCard2Blue() {
+        DevelopmentCard developmentCard = client.getGame().getDeckTopCard(2,ColorCard.blue);
+        if(Checker.checkResources(developmentCard.getCost(),client.getGame().getPlayer(client.getUser()).getPersonalBoard())) {
+            //TODO mandarlo nella scelta di dove vuole prendere le risorse per acquistarla
+        } else {
+            //TODO setErrorTextField(Non puoi aquistare la carta)
+        }
+    }
+
+    @FXML
+    public void checkIfCanBuyCard1Blue() {
+        DevelopmentCard developmentCard = client.getGame().getDeckTopCard(1,ColorCard.blue);
+        if(Checker.checkResources(developmentCard.getCost(),client.getGame().getPlayer(client.getUser()).getPersonalBoard())) {
+            //TODO mandarlo nella scelta di dove vuole prendere le risorse per acquistarla
+        } else {
+            //TODO setErrorTextField(Non puoi aquistare la carta)
+        }
+    }
+
+    @FXML
+    public void checkIfCanBuyCard3Yellow() {
+        DevelopmentCard developmentCard = client.getGame().getDeckTopCard(3,ColorCard.yellow);
+        if(Checker.checkResources(developmentCard.getCost(),client.getGame().getPlayer(client.getUser()).getPersonalBoard())) {
+            //TODO mandarlo nella scelta di dove vuole prendere le risorse per acquistarla
+        } else {
+            //TODO setErrorTextField(Non puoi aquistare la carta)
+        }
+    }
+
+    @FXML
+    public void checkIfCanBuyCard2Yellow() {
+        DevelopmentCard developmentCard = client.getGame().getDeckTopCard(2,ColorCard.yellow);
+        if(Checker.checkResources(developmentCard.getCost(),client.getGame().getPlayer(client.getUser()).getPersonalBoard())) {
+            //TODO mandarlo nella scelta di dove vuole prendere le risorse per acquistarla
+        } else {
+            //TODO setErrorTextField(Non puoi aquistare la carta)
+        }
+    }
+
+    @FXML
+    public void checkIfCanBuyCard1Yellow() {
+        DevelopmentCard developmentCard = client.getGame().getDeckTopCard(1,ColorCard.yellow);
+        if(Checker.checkResources(developmentCard.getCost(),client.getGame().getPlayer(client.getUser()).getPersonalBoard())) {
+            //TODO mandarlo nella scelta di dove vuole prendere le risorse per acquistarla
+        } else {
+            //TODO setErrorTextField(Non puoi aquistare la carta)
+        }
+    }
+
+    @FXML
+    public void checkIfCanBuyCard3Purple() {
+        DevelopmentCard developmentCard = client.getGame().getDeckTopCard(3,ColorCard.purple);
+        if(Checker.checkResources(developmentCard.getCost(),client.getGame().getPlayer(client.getUser()).getPersonalBoard())) {
+            //TODO mandarlo nella scelta di dove vuole prendere le risorse per acquistarla
+        } else {
+            //TODO setErrorTextField(Non puoi aquistare la carta)
+        }
+    }
+
+    @FXML
+    public void checkIfCanBuyCard2Purple() {
+        DevelopmentCard developmentCard = client.getGame().getDeckTopCard(2,ColorCard.purple);
+        if(Checker.checkResources(developmentCard.getCost(),client.getGame().getPlayer(client.getUser()).getPersonalBoard())) {
+            //TODO mandarlo nella scelta di dove vuole prendere le risorse per acquistarla
+        } else {
+            //TODO setErrorTextField(Non puoi aquistare la carta)
+        }
+    }
+
+    @FXML
+    public void checkIfCanBuyCard1Purple() {
+        DevelopmentCard developmentCard = client.getGame().getDeckTopCard(1,ColorCard.purple);
+        if(Checker.checkResources(developmentCard.getCost(),client.getGame().getPlayer(client.getUser()).getPersonalBoard())) {
+            //TODO mandarlo nella scelta di dove vuole prendere le risorse per acquistarla
+        } else {
+            //TODO setErrorTextField(Non puoi aquistare la carta)
+        }
+    }
+
+
+
+
 
     @FXML
     public void handleCloseChooseAction()

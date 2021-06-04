@@ -35,7 +35,7 @@ public class TakeResourcesFromMarketCLI extends AbstractTakeResourcesFromMarket 
     }
 
     private void chooseRowColumn() {
-        System.out.println("You chose to take resources from Market. Now choose ROW/COL");
+        System.out.println("You chose to take resources from Market. Now choose ROW|COL");
         boolean choiceOK = false;
         String choice;
         do {
@@ -47,7 +47,7 @@ public class TakeResourcesFromMarketCLI extends AbstractTakeResourcesFromMarket 
                 message.setPlayerChoice(MarketChoice.COLUMN);
                 choiceOK = true;
             } else {
-                System.out.println("Invalid choice, please choose again ROW/COL");
+                System.out.println("Invalid choice, please choose again ROW|COL");
             }
         } while (!choiceOK);
     }
@@ -100,7 +100,7 @@ public class TakeResourcesFromMarketCLI extends AbstractTakeResourcesFromMarket 
                 message.addWhereToPutMarbles(new Pair<>(marble, cli.chooseMarbleDestination()));
             }
             else if(getConvertMarbleActiveEffects().size() == 2) {
-                System.out.println("Found two convert marble active effects, choose which one you want to activate [1|2]");
+                System.out.print("Found two convert marble active effects, choose which one you want to activate [1|2]");
                 message.addWhiteEffect(chooseConvertMarbleEffect());
                 message.addWhereToPutMarbles(new Pair<>(marble, cli.chooseMarbleDestination()));
             } else {
@@ -133,7 +133,7 @@ public class TakeResourcesFromMarketCLI extends AbstractTakeResourcesFromMarket 
             if(choice == 1 || choice == 2) {
                 choiceOK = true;
             } else {
-                System.out.println("Invalid choice, please choose again [1|2]");
+                System.out.print("Invalid choice, please choose again [1|2]");
             }
         } while (!choiceOK);
         return choice;
