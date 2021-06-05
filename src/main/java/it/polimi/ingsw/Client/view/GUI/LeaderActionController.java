@@ -1,5 +1,6 @@
 package it.polimi.ingsw.Client.view.GUI;
 
+import it.polimi.ingsw.Client.clientstates.gui.LeaderActionGUI;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
@@ -33,10 +34,12 @@ public class LeaderActionController extends Controller{
     @FXML
     public ImageView leaderCard1, leaderCard2;
 
+
+    LeaderActionGUI leaderAction;
+
     @FXML
     @Override
     public void initialize() {
-
         anchorLeader.setBackground(new Background(new BackgroundImage(new Image("/gui/img/exit_tab.png"),
                 BackgroundRepeat.NO_REPEAT,
                 BackgroundRepeat.NO_REPEAT,
@@ -71,6 +74,7 @@ public class LeaderActionController extends Controller{
         setFont(discard2,24);
         okButton.setStyle("-fx-text-fill: rgb(35, 25, 22);");
         setFont(okButton,24);
+        leaderAction = new LeaderActionGUI(client);
     }
 
     @FXML
@@ -78,5 +82,58 @@ public class LeaderActionController extends Controller{
     {
         Stage stage = (Stage) closeLeaderAction.getScene().getWindow();
         stage.close();
+    }
+
+    @FXML
+    public void handleDiscardFirstLeader() {
+        clearSelection();
+        discard1.setStyle("-fx-background-size: 77% auto;");
+        editLeaderAction(1, true);
+    }
+
+    @FXML
+    public void handleDiscardSecondLeader() {
+        clearSelection();
+        discard2.setStyle("-fx-background-size: 77% auto;");
+        editLeaderAction(2, true);
+    }
+
+    @FXML
+    public void handleFirstLeaderActivation() {
+        clearSelection();
+        active1.setStyle("-fx-background-size: 77% auto;");
+        editLeaderAction(1, false);
+    }
+
+    @FXML
+    public void handleSecondLeaderActivation() {
+        clearSelection();
+        active2.setStyle("-fx-background-size: 77% auto;");
+        editLeaderAction(2, false);
+    }
+
+    @FXML
+    public void sendLeaderActionMessage() {
+        leaderAction.manageUserInteraction();
+    }
+
+    @FXML
+    void clearSelection() {
+        active1.setStyle("-fx-background-size: 90% auto;");
+        active2.setStyle("-fx-background-size: 90% auto;");
+        discard1.setStyle("-fx-background-size: 90% auto;");
+        discard2.setStyle("-fx-background-size: 90% auto;");
+    }
+
+
+    private void editLeaderAction(int leaderIndex, boolean toDiscard) {
+        if(client.getGame().getCurrPlayer().getNumOfAvailableLeaderCards()==1) {
+            leaderAction.setLeaderAction(toDiscard);
+            //TODO setta ad 1 per evitare side effect o problemi lato server
+            leaderAction.setLeaderIndex(1);
+        } else if(client.getGame().getCurrPlayer().getNumOfAvailableLeaderCards() == 2) {
+            leaderAction.setLeaderAction(toDiscard);
+            leaderAction.setLeaderIndex(leaderIndex);
+        }
     }
 }
