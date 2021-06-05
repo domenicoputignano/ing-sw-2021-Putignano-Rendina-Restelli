@@ -13,11 +13,11 @@
       </ImageView>
       <ImageView fx:id="leaderCard2" fitHeight="327.0" fitWidth="250.0" layoutX="702.0" layoutY="170.0" pickOnBounds="true" preserveRatio="true" >
       </ImageView>
-      <Button fx:id="active1" layoutX="281.0" layoutY="497.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="125.0" styleClass="leaderAction" stylesheets="@../css/button.css" text="Active" />
-      <Button fx:id="discard1" layoutX="392.0" layoutY="497.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="125.0" styleClass="leaderAction" stylesheets="@../css/button.css" text="Discard" />
-      <Button fx:id="active2" layoutX="693.0" layoutY="497.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="125.0" styleClass="leaderAction" stylesheets="@../css/button.css" text="Active" />
-      <Button fx:id="discard2" layoutX="804.0" layoutY="497.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="125.0" styleClass="leaderAction" stylesheets="@../css/button.css" text="Discard" />
-      <Button fx:id="okButton" layoutX="842.0" layoutY="572.0" mnemonicParsing="false" prefHeight="57.0" prefWidth="158.0" styleClass="leaderAction" stylesheets="@../css/button.css" text="OK" />
+      <Button fx:id="active1" layoutX="281.0" layoutY="497.0" mnemonicParsing="false" onAction="#handleFirstLeaderActivation" prefHeight="50.0" prefWidth="125.0" styleClass="leaderAction" stylesheets="@../css/button.css" text="Active" />
+      <Button fx:id="discard1" layoutX="392.0" layoutY="497.0" mnemonicParsing="false" onAction="#handleDiscardFirstLeader" prefHeight="50.0" prefWidth="125.0" styleClass="leaderAction" stylesheets="@../css/button.css" text="Discard" />
+      <Button fx:id="active2" layoutX="693.0" layoutY="497.0" mnemonicParsing="false" onAction="#handleSecondLeaderActivation" prefHeight="50.0" prefWidth="125.0" styleClass="leaderAction" stylesheets="@../css/button.css" text="Active" />
+      <Button fx:id="discard2" layoutX="804.0" layoutY="497.0" mnemonicParsing="false" onAction="#handleDiscardSecondLeader" prefHeight="50.0" prefWidth="125.0" styleClass="leaderAction" stylesheets="@../css/button.css" text="Discard" />
+      <Button fx:id="okButton" layoutX="842.0" layoutY="572.0" mnemonicParsing="false" onAction="#sendLeaderActionMessage" prefHeight="57.0" prefWidth="158.0" styleClass="leaderAction" stylesheets="@../css/button.css" text="OK" />
       <Text fx:id="leaderActionText" layoutX="454.0" layoutY="130.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Perform the leader action" wrappingWidth="571.4700775146484" />
     </children>
 </AnchorPane>

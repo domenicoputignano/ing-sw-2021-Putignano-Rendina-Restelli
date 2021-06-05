@@ -29,13 +29,30 @@ public class BuyDevCardController extends Controller{
     public Button green3,green2,green1,blue3,blue2,blue1,yellow1,yellow2,yellow3,purple1,purple2,purple3;
 
     @FXML
-    public Text errorDevText;
+    public Text errorDevText,resDepot1Text,resDepot2Text,resDepot3Text,resStronbox1Text,resStronbox2Text,resStronbox3Text,resExtra1Text,resExtra2Text,resExtra3Text;
 
     @FXML
     public ImageView selectedCard;
 
     @FXML
-    public Button okButton;
+    public Button buyCard;
+
+    @FXML
+    public ImageView deck1,deck2,deck3,deck4,deck5,deck6,deck7,deck8,deck9,deck10,deck11,deck12;
+
+    @FXML
+    public ImageView resource1Cost,resource2Cost,resource3Cost;
+
+    @FXML
+    public Text selectHowPickResourcesText;
+
+    @FXML
+    public Button plusDepotRes1,plusExtraRes1,plusStrRes1,minusDepotRes1,minusStrRes1,minusExtraRes1,
+            plusDepotRes2,plusExtraRes2,plusStrRes2,minusDepotRes2,minusStrRes2,minusExtraRes2,
+            plusDepotRes3,plusExtraRes3,plusStrRes3,minusDepotRes3,minusStrRes3,minusExtraRes3;
+
+    @FXML
+    public TextField textField1,textField2,textField3,textField4,textField5,textField6,textField7,textField8,textField9;
 
     @FXML
     @Override
@@ -66,8 +83,42 @@ public class BuyDevCardController extends Controller{
         setFont(level3,24);
         errorDevText.setStyle("-fx-text-fill: rgb(35, 25, 22);");
         setFont(errorDevText,30);
-        okButton.setStyle("-fx-text-fill: rgb(35, 25, 22);");
-        setFont(okButton,24);
+        buyCard.setStyle("-fx-text-fill: rgb(35, 25, 22);");
+        setFont(buyCard,24);
+        selectHowPickResourcesText.setStyle("-fx-text-fill: rgb(35, 25, 22);");
+        setFont(selectHowPickResourcesText,35);
+        resDepot1Text.setStyle("-fx-text-fill: rgb(35, 25, 22);");
+        setFont(resDepot1Text,30);
+        resDepot2Text.setStyle("-fx-text-fill: rgb(35, 25, 22);");
+        setFont(resDepot2Text,30);
+        resDepot2Text.setStyle("-fx-text-fill: rgb(35, 25, 22);");
+        setFont(resDepot2Text,30);
+        resDepot3Text.setStyle("-fx-text-fill: rgb(35, 25, 22);");
+        setFont(resDepot3Text,30);
+        resStronbox1Text.setStyle("-fx-text-fill: rgb(35, 25, 22);");
+        setFont(resStronbox1Text,30);
+        resStronbox2Text.setStyle("-fx-text-fill: rgb(35, 25, 22);");
+        setFont(resStronbox2Text,30);
+        resStronbox3Text.setStyle("-fx-text-fill: rgb(35, 25, 22);");
+        setFont(resStronbox3Text,30);
+        resExtra1Text.setStyle("-fx-text-fill: rgb(35, 25, 22);");
+        setFont(resExtra1Text,30);
+        resExtra2Text.setStyle("-fx-text-fill: rgb(35, 25, 22);");
+        setFont(resExtra2Text,30);
+        resExtra3Text.setStyle("-fx-text-fill: rgb(35, 25, 22);");
+        setFont(resExtra3Text,30);
+        textField4.setStyle("-fx-text-fill: rgb(35, 25, 22);");
+        setFont(textField4,15);
+        textField5.setStyle("-fx-text-fill: rgb(35, 25, 22);");
+        setFont(textField5,15);
+        textField6.setStyle("-fx-text-fill: rgb(35, 25, 22);");
+        setFont(textField6,15);
+        textField7.setStyle("-fx-text-fill: rgb(35, 25, 22);");
+        setFont(textField7,15);
+        textField8.setStyle("-fx-text-fill: rgb(35, 25, 22);");
+        setFont(textField8,15);
+        textField9.setStyle("-fx-text-fill: rgb(35, 25, 22);");
+        setFont(textField9,15);
         initializeDecksImages();
     }
 
@@ -109,11 +160,12 @@ public class BuyDevCardController extends Controller{
 
     private void setErrorDevTextOK(){
         errorDevText.setText("You have enough \nresources to purchase \nthe selected card");
-        okButton.setVisible(true);
+        buyCard.setVisible(true);
     }
 
     private void setErrorDevTextKO(){
         errorDevText.setText("You don't have \nenough resources \nto purchase \nthe selected card");
+        buyCard.setVisible(true);
     }
 
     @FXML
@@ -121,7 +173,6 @@ public class BuyDevCardController extends Controller{
         DevelopmentCard developmentCard = client.getGame().getDeckTopCard(3,ColorCard.green);
         setSelectedCardImage(developmentCard);
         if(Checker.checkResources(developmentCard.getCost(),client.getGame().getPlayer(client.getUser()).getPersonalBoard())) {
-            //TODO mandarlo nella scelta di dove vuole prendere le risorse per acquistarla
             setErrorDevTextOK();
         } else {
             setErrorDevTextKO();
@@ -133,7 +184,6 @@ public class BuyDevCardController extends Controller{
         DevelopmentCard developmentCard = client.getGame().getDeckTopCard(2,ColorCard.green);
         setSelectedCardImage(developmentCard);
         if(Checker.checkResources(developmentCard.getCost(),client.getGame().getPlayer(client.getUser()).getPersonalBoard())) {
-            //TODO mandarlo nella scelta di dove vuole prendere le risorse per acquistarla
             setErrorDevTextOK();
         } else {
             setErrorDevTextKO();
@@ -145,7 +195,6 @@ public class BuyDevCardController extends Controller{
         DevelopmentCard developmentCard = client.getGame().getDeckTopCard(1,ColorCard.green);
         setSelectedCardImage(developmentCard);
         if(Checker.checkResources(developmentCard.getCost(),client.getGame().getPlayer(client.getUser()).getPersonalBoard())) {
-            //TODO mandarlo nella scelta di dove vuole prendere le risorse per acquistarla
             setErrorDevTextOK();
         } else {
             setErrorDevTextKO();
@@ -158,7 +207,6 @@ public class BuyDevCardController extends Controller{
         DevelopmentCard developmentCard = client.getGame().getDeckTopCard(3,ColorCard.blue);
         setSelectedCardImage(developmentCard);
         if(Checker.checkResources(developmentCard.getCost(),client.getGame().getPlayer(client.getUser()).getPersonalBoard())) {
-            //TODO mandarlo nella scelta di dove vuole prendere le risorse per acquistarla
             setErrorDevTextOK();
         } else {
             setErrorDevTextKO();
@@ -170,7 +218,6 @@ public class BuyDevCardController extends Controller{
         DevelopmentCard developmentCard = client.getGame().getDeckTopCard(2,ColorCard.blue);
         setSelectedCardImage(developmentCard);
         if(Checker.checkResources(developmentCard.getCost(),client.getGame().getPlayer(client.getUser()).getPersonalBoard())) {
-            //TODO mandarlo nella scelta di dove vuole prendere le risorse per acquistarla
             setErrorDevTextOK();
         } else {
             setErrorDevTextKO();
@@ -182,7 +229,6 @@ public class BuyDevCardController extends Controller{
         DevelopmentCard developmentCard = client.getGame().getDeckTopCard(1,ColorCard.blue);
         setSelectedCardImage(developmentCard);
         if(Checker.checkResources(developmentCard.getCost(),client.getGame().getPlayer(client.getUser()).getPersonalBoard())) {
-            //TODO mandarlo nella scelta di dove vuole prendere le risorse per acquistarla
             setErrorDevTextOK();
         } else {
             setErrorDevTextKO();
@@ -194,7 +240,6 @@ public class BuyDevCardController extends Controller{
         DevelopmentCard developmentCard = client.getGame().getDeckTopCard(3,ColorCard.yellow);
         setSelectedCardImage(developmentCard);
         if(Checker.checkResources(developmentCard.getCost(),client.getGame().getPlayer(client.getUser()).getPersonalBoard())) {
-            //TODO mandarlo nella scelta di dove vuole prendere le risorse per acquistarla
             setErrorDevTextOK();
         } else {
             setErrorDevTextKO();
@@ -206,7 +251,6 @@ public class BuyDevCardController extends Controller{
         DevelopmentCard developmentCard = client.getGame().getDeckTopCard(2,ColorCard.yellow);
         setSelectedCardImage(developmentCard);
         if(Checker.checkResources(developmentCard.getCost(),client.getGame().getPlayer(client.getUser()).getPersonalBoard())) {
-            //TODO mandarlo nella scelta di dove vuole prendere le risorse per acquistarla
             setErrorDevTextOK();
         } else {
             setErrorDevTextKO();
@@ -218,7 +262,6 @@ public class BuyDevCardController extends Controller{
         DevelopmentCard developmentCard = client.getGame().getDeckTopCard(1,ColorCard.yellow);
         setSelectedCardImage(developmentCard);
         if(Checker.checkResources(developmentCard.getCost(),client.getGame().getPlayer(client.getUser()).getPersonalBoard())) {
-            //TODO mandarlo nella scelta di dove vuole prendere le risorse per acquistarla
             setErrorDevTextOK();
         } else {
             setErrorDevTextKO();
@@ -230,7 +273,6 @@ public class BuyDevCardController extends Controller{
         DevelopmentCard developmentCard = client.getGame().getDeckTopCard(3,ColorCard.purple);
         setSelectedCardImage(developmentCard);
         if(Checker.checkResources(developmentCard.getCost(),client.getGame().getPlayer(client.getUser()).getPersonalBoard())) {
-            //TODO mandarlo nella scelta di dove vuole prendere le risorse per acquistarla
             setErrorDevTextOK();
         } else {
             setErrorDevTextKO();
@@ -242,7 +284,6 @@ public class BuyDevCardController extends Controller{
         DevelopmentCard developmentCard = client.getGame().getDeckTopCard(2,ColorCard.purple);
         setSelectedCardImage(developmentCard);
         if(Checker.checkResources(developmentCard.getCost(),client.getGame().getPlayer(client.getUser()).getPersonalBoard())) {
-            //TODO mandarlo nella scelta di dove vuole prendere le risorse per acquistarla
             setErrorDevTextOK();
         } else {
             setErrorDevTextKO();
@@ -254,16 +295,87 @@ public class BuyDevCardController extends Controller{
         DevelopmentCard developmentCard = client.getGame().getDeckTopCard(1,ColorCard.purple);
         setSelectedCardImage(developmentCard);
         if(Checker.checkResources(developmentCard.getCost(),client.getGame().getPlayer(client.getUser()).getPersonalBoard())) {
-            //TODO mandarlo nella scelta di dove vuole prendere le risorse per acquistarla
             setErrorDevTextOK();
         } else {
             setErrorDevTextKO();
         }
     }
-
-
-
-
+    private void setInvisible()
+    {
+        green3.setVisible(false);
+        green2.setVisible(false);
+        green1.setVisible(false);
+        yellow3.setVisible(false);
+        yellow2.setVisible(false);
+        yellow1.setVisible(false);
+        blue3.setVisible(false);
+        blue2.setVisible(false);
+        blue1.setVisible(false);
+        purple3.setVisible(false);
+        purple2.setVisible(false);
+        purple1.setVisible(false);
+        level1.setVisible(false);
+        level2.setVisible(false);
+        level3.setVisible(false);
+        buyCard.setVisible(false);
+        errorDevText.setVisible(false);
+        deck1.setVisible(false);
+        deck2.setVisible(false);
+        deck3.setVisible(false);
+        deck4.setVisible(false);
+        deck5.setVisible(false);
+        deck6.setVisible(false);
+        deck7.setVisible(false);
+        deck8.setVisible(false);
+        deck9.setVisible(false);
+        deck10.setVisible(false);
+        deck11.setVisible(false);
+        deck12.setVisible(false);
+        green.setVisible(false);
+        purple.setVisible(false);
+        blue.setVisible(false);
+        yellow.setVisible(false);
+        resource1Cost.setVisible(true);
+        resource2Cost.setVisible(true);
+        resource3Cost.setVisible(true);
+        resDepot1Text.setVisible(true);
+        resDepot2Text.setVisible(true);
+        resDepot3Text.setVisible(true);
+        resStronbox1Text.setVisible(true);
+        resStronbox2Text.setVisible(true);
+        resStronbox3Text.setVisible(true);
+        resExtra1Text.setVisible(true);
+        resExtra2Text.setVisible(true);
+        resExtra3Text.setVisible(true);
+        selectHowPickResourcesText.setVisible(true);
+        plusDepotRes1.setVisible(true);
+        plusExtraRes1.setVisible(true);
+        plusStrRes1.setVisible(true);
+        minusDepotRes1.setVisible(true);
+        minusExtraRes1.setVisible(true);
+        minusStrRes1.setVisible(true);
+        textField1.setVisible(true);
+        textField2.setVisible(true);
+        textField3.setVisible(true);
+        plusDepotRes2.setVisible(true);
+        plusExtraRes2.setVisible(true);
+        plusStrRes2.setVisible(true);
+        minusDepotRes2.setVisible(true);
+        minusExtraRes2.setVisible(true);
+        minusStrRes2.setVisible(true);
+        textField4.setVisible(true);
+        textField5.setVisible(true);
+        textField6.setVisible(true);
+        plusDepotRes3.setVisible(true);
+        plusExtraRes3.setVisible(true);
+        plusStrRes3.setVisible(true);
+        minusDepotRes3.setVisible(true);
+        minusExtraRes3.setVisible(true);
+        minusStrRes3.setVisible(true);
+        textField7.setVisible(true);
+        textField8.setVisible(true);
+        textField9.setVisible(true);
+    }
 
     @FXML
     public void handleCloseChooseAction()
@@ -271,6 +383,9 @@ public class BuyDevCardController extends Controller{
         Stage stage = (Stage) closeBuyDevCard.getScene().getWindow();
         stage.close();
     }
-
-
+    @FXML
+    public void handleOkBuyDevCard()
+    {
+        setInvisible();
+    }
 }
