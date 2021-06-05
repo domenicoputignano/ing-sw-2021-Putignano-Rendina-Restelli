@@ -4,6 +4,7 @@ import it.polimi.ingsw.Client.clientstates.AbstractLeaderAction;
 import it.polimi.ingsw.Client.view.CLI;
 import it.polimi.ingsw.Network.Client;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class LeaderActionCLI extends AbstractLeaderAction {
@@ -57,11 +58,16 @@ public class LeaderActionCLI extends AbstractLeaderAction {
 
 
     private int chooseCardIndex() {
-        int chosenIndex;
+        int chosenIndex = 0;
         do {
-            chosenIndex = input.nextInt();
-            if(indexNotInRange(chosenIndex)) {
-                System.out.println("Invalid index, try again ");
+            try {
+                chosenIndex = Integer.parseInt(input.next());
+                if (indexNotInRange(chosenIndex)) {
+                    throw new NumberFormatException();
+                }
+            }
+            catch(NumberFormatException e){
+                System.out.printf("Invalid chosen index, please select again index between [1 - %d] : ", client.getGame().getCurrPlayer().getNumOfAvailableLeaderCards());
             }
         } while(indexNotInRange(chosenIndex));
         return chosenIndex;

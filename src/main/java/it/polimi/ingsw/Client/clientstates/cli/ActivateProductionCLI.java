@@ -4,6 +4,7 @@ import it.polimi.ingsw.Client.clientstates.AbstractActivateProduction;
 import it.polimi.ingsw.Client.view.CLI;
 import it.polimi.ingsw.Client.view.UI;
 import it.polimi.ingsw.Commons.ResourceType;
+import it.polimi.ingsw.Exceptions.BackToMenuException;
 import it.polimi.ingsw.Exceptions.InterruptedActionException;
 import it.polimi.ingsw.Network.Client;
 
@@ -30,6 +31,7 @@ public class ActivateProductionCLI extends AbstractActivateProduction {
         boolean doneSelection = false;
         try {
             cli.printSlots(client.getGame().getPlayer(client.getUser()).getPersonalBoard());
+            cli.playerWantsToGoBack();
             selectProductions();
             if(areValidRequestedProductions()){
                 System.out.println("Available resources are shown below\n"+
@@ -51,6 +53,8 @@ public class ActivateProductionCLI extends AbstractActivateProduction {
             client.sendMessage(messageToSend);
         } catch(InterruptedActionException e) {
             cli.returnToActionBeginning(new ActivateProductionCLI(this.client));
+        } catch (BackToMenuException e) {
+            cli.returnToMenu();
         }
     }
 
