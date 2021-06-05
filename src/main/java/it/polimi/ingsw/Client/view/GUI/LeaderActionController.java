@@ -14,13 +14,10 @@ import java.util.stream.Collectors;
 public class LeaderActionController extends Controller{
     @FXML
     public AnchorPane anchorLeader;
-
     @FXML
     public Text leaderActionText;
-
     @FXML
     public Button closeLeaderAction;
-
     @FXML
     public Button active1;
     @FXML
@@ -115,6 +112,8 @@ public class LeaderActionController extends Controller{
     @FXML
     public void sendLeaderActionMessage() {
         leaderAction.manageUserInteraction();
+        Stage stage = (Stage) closeLeaderAction.getScene().getWindow();
+        stage.close();
     }
 
     @FXML

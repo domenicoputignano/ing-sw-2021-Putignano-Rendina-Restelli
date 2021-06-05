@@ -269,3 +269,13 @@
 .buyDevCard:pressed{
     -fx-background-size: 105% auto;
 }
+.slotButton{
+    -fx-background-size: 100% auto;
+    -fx-background-image: url("/gui/img/leaderCard1.png");
+}
+.slotButton:hover{
+    -fx-background-size: 105% auto;
+}
+.slotButton:pressed{
+    -fx-background-size: 95% auto;
+}

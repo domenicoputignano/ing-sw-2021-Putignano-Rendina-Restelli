@@ -25,19 +25,19 @@
             <Button fx:id="leaderCard2" layoutX="275.0" layoutY="189.0" mnemonicParsing="false" onAction="#discardLeaderCard2" prefHeight="215.0" prefWidth="147.0" styleClass="chooseLeaderCard" stylesheets="@../css/button.css" />
             <Button fx:id="leaderCard3" layoutX="425.0" layoutY="189.0" mnemonicParsing="false" onAction="#discardLeaderCard3" prefHeight="215.0" prefWidth="147.0" styleClass="chooseLeaderCard" stylesheets="@../css/button.css" />
             <Button fx:id="leaderCard4" layoutX="575.0" layoutY="189.0" mnemonicParsing="false" onAction="#discardLeaderCard4" prefHeight="215.0" prefWidth="147.0" styleClass="chooseLeaderCard" stylesheets="@../css/button.css" />
-            <ImageView fx:id="indicator1" fitHeight="63.0" fitWidth="54.0" layoutX="193.0" layoutY="410.0" pickOnBounds="true" preserveRatio="true" visible="false">
+            <ImageView fx:id="indicator1" fitHeight="63.0" fitWidth="54.0" layoutX="183.0" layoutY="410.0" pickOnBounds="true" preserveRatio="true" visible="false">
                <image>
                   <Image url="@../img/indicator.png" />
                </image></ImageView>
-            <ImageView fx:id="indicator2" fitHeight="63.0" fitWidth="54.0" layoutX="353.0" layoutY="410.0" pickOnBounds="true" preserveRatio="true" visible="false">
+            <ImageView fx:id="indicator2" fitHeight="63.0" fitWidth="54.0" layoutX="333.0" layoutY="410.0" pickOnBounds="true" preserveRatio="true" visible="false">
                <image>
                   <Image url="@../img/indicator.png" />
                </image></ImageView>
-            <ImageView fx:id="indicator3" fitHeight="63.0" fitWidth="54.0" layoutX="513.0" layoutY="410.0" pickOnBounds="true" preserveRatio="true" visible="false">
+            <ImageView fx:id="indicator3" fitHeight="63.0" fitWidth="54.0" layoutX="483.0" layoutY="410.0" pickOnBounds="true" preserveRatio="true" visible="false">
                <image>
                   <Image url="@../img/indicator.png" />
                </image></ImageView>
-            <ImageView fx:id="indicator4" fitHeight="63.0" fitWidth="54.0" layoutX="673.0" layoutY="410.0" pickOnBounds="true" preserveRatio="true" visible="false">
+            <ImageView fx:id="indicator4" fitHeight="63.0" fitWidth="54.0" layoutX="633.0" layoutY="410.0" pickOnBounds="true" preserveRatio="true" visible="false">
                <image>
                   <Image url="@../img/indicator.png" />
                </image></ImageView>

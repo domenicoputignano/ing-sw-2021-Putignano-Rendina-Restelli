@@ -17,6 +17,8 @@ public class ActivateProductionController extends Controller{
     @FXML
     public Button closeActivateProd;
 
+    @FXML
+    public Button slot1,slot2,slot3;
 
     @FXML
     @Override

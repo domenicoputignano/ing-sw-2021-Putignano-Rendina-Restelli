@@ -104,7 +104,7 @@ public class PlayerBoardController extends Controller {
         favorTiles[0].setImage(new Image("/gui/img/favorTile1D.png"));
         favorTiles[1].setImage(new Image("/gui/img/favorTile2D.png"));
         favorTiles[2].setImage(new Image("/gui/img/favorTile3D.png"));
-        cells[12].setImage(new Image("/gui/img/faith.png"));
+        cells[0].setImage(new Image("/gui/img/faith.png"));
     }
 
     private void initializeDepots(){
