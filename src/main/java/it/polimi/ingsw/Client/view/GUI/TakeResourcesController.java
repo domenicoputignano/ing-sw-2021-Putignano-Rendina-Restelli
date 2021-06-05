@@ -1,7 +1,11 @@
 package it.polimi.ingsw.Client.view.GUI;
 
+import it.polimi.ingsw.Client.clientstates.gui.TakeResourcesFromMarketGUI;
+import it.polimi.ingsw.Client.reducedmodel.ReducedMarble;
 import it.polimi.ingsw.Client.reducedmodel.ReducedMarketTray;
 import it.polimi.ingsw.Utils.MarbleDestination;
+import it.polimi.ingsw.Utils.MarketChoice;
+import it.polimi.ingsw.Utils.Pair;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuButton;
@@ -11,6 +15,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+
+import java.util.List;
 
 public class TakeResourcesController extends Controller{
     @FXML
@@ -55,13 +61,14 @@ public class TakeResourcesController extends Controller{
                 sel1ExtraDepot,sel2ExtraDepot,sel3ExtraDepot,sel4ExtraDepot,
                 discard1,discard2,discard3,discard4;
 
-    @FXML
-    public Button[] marble1Buttons = new Button[5];
-
     private boolean depot1Marble1, depot2Marble1, depot3Marble1, extraMarble1, discardMarble1,
                 depot1Marble2, depot2Marble2, depot3Marble2, extraMarble2, discardMarble2,
                 depot1Marble3, depot2Marble3, depot3Marble3, extraMarble3, discardMarble3,
                 depot1Marble4, depot2Marble4, depot3Marble4, extraMarble4, discardMarble4;
+
+    private TakeResourcesFromMarketGUI state;
+
+    private List<ReducedMarble> chosenMarbles;
 
     @FXML
     @Override
@@ -77,6 +84,8 @@ public class TakeResourcesController extends Controller{
         resourcesText.setStyle("-fx-text-fill: rgb(35, 25, 22);");
 
         setMarbleImages();
+
+        state = new TakeResourcesFromMarketGUI(client);
 
         setFont(resourcesText,27);
         setFont(yesResources,23);
@@ -103,6 +112,66 @@ public class TakeResourcesController extends Controller{
         setFont(discard4,21);
     }
 
+    private void parseWarehouseChoices(){
+        List<ReducedMarble> marbles = state.getSelectedMarbles();
+
+        if(depot1Marble1){
+            state.addMarbleChoice(new Pair<>(marbles.get(0), MarbleDestination.DEPOT1));
+        } else if(depot2Marble1) {
+            state.addMarbleChoice(new Pair<>(marbles.get(0), MarbleDestination.DEPOT2));
+        } else if(depot3Marble1) {
+            state.addMarbleChoice(new Pair<>(marbles.get(0), MarbleDestination.DEPOT3));
+        } else if(extraMarble1) {
+            state.addMarbleChoice(new Pair<>(marbles.get(0), MarbleDestination.EXTRA));
+        } else if(discardMarble1) {
+            state.addMarbleChoice(new Pair<>(marbles.get(0), MarbleDestination.DISCARD));
+        }
+
+        if(depot1Marble2){
+            state.addMarbleChoice(new Pair<>(marbles.get(1), MarbleDestination.DEPOT1));
+        } else if(depot2Marble2) {
+            state.addMarbleChoice(new Pair<>(marbles.get(1), MarbleDestination.DEPOT2));
+        } else if(depot3Marble2) {
+            state.addMarbleChoice(new Pair<>(marbles.get(1), MarbleDestination.DEPOT3));
+        } else if(extraMarble2) {
+            state.addMarbleChoice(new Pair<>(marbles.get(1), MarbleDestination.EXTRA));
+        } else if(discardMarble2) {
+            state.addMarbleChoice(new Pair<>(marbles.get(1), MarbleDestination.DISCARD));
+        }
+
+        if(depot1Marble3){
+            state.addMarbleChoice(new Pair<>(marbles.get(2), MarbleDestination.DEPOT1));
+        } else if(depot2Marble3) {
+            state.addMarbleChoice(new Pair<>(marbles.get(2), MarbleDestination.DEPOT2));
+        } else if(depot3Marble3) {
+            state.addMarbleChoice(new Pair<>(marbles.get(2), MarbleDestination.DEPOT3));
+        } else if(extraMarble3) {
+            state.addMarbleChoice(new Pair<>(marbles.get(2), MarbleDestination.EXTRA));
+        } else if(discardMarble3) {
+            state.addMarbleChoice(new Pair<>(marbles.get(2), MarbleDestination.DISCARD));
+        }
+
+        if(depot1Marble4){
+            state.addMarbleChoice(new Pair<>(marbles.get(3), MarbleDestination.DEPOT1));
+        } else if(depot2Marble4) {
+            state.addMarbleChoice(new Pair<>(marbles.get(3), MarbleDestination.DEPOT2));
+        } else if(depot3Marble4) {
+            state.addMarbleChoice(new Pair<>(marbles.get(3), MarbleDestination.DEPOT3));
+        } else if(extraMarble4) {
+            state.addMarbleChoice(new Pair<>(marbles.get(3), MarbleDestination.EXTRA));
+        } else if(discardMarble4) {
+            state.addMarbleChoice(new Pair<>(marbles.get(3), MarbleDestination.DISCARD));
+        }
+    }
+
+    private void setSelectedMarbles(){
+        chosenMarbles = state.getSelectedMarbles();
+        selResources1.setImage(new Image(chosenMarbles.get(0).toImage()));
+        selResources2.setImage(new Image(chosenMarbles.get(1).toImage()));
+        selResources3.setImage(new Image(chosenMarbles.get(2).toImage()));
+        if(chosenMarbles.size()==4) selResources4.setImage(new Image(chosenMarbles.get(3).toImage()));
+    }
+
     @FXML
     public void handleCloseChooseAction()
     {
@@ -118,10 +187,8 @@ public class TakeResourcesController extends Controller{
         yesResources.setVisible(true);
         noResources.setVisible(true);
         light1rows.setVisible(true);
-        selResources1.setImage(marble11.getImage());
-        selResources2.setImage(marble12.getImage());
-        selResources3.setImage(marble13.getImage());
-        selResources4.setImage(marble14.getImage());
+        state.setMarketChoice(MarketChoice.ROW, 1);
+        setSelectedMarbles();
     }
     @FXML
     public void selectedRow2()
@@ -131,10 +198,8 @@ public class TakeResourcesController extends Controller{
         yesResources.setVisible(true);
         noResources.setVisible(true);
         light2rows.setVisible(true);
-        selResources1.setImage(marble21.getImage());
-        selResources2.setImage(marble22.getImage());
-        selResources3.setImage(marble23.getImage());
-        selResources4.setImage(marble24.getImage());
+        state.setMarketChoice(MarketChoice.ROW, 2);
+        setSelectedMarbles();
     }
     @FXML
     public void selectedRow3()
@@ -144,10 +209,8 @@ public class TakeResourcesController extends Controller{
         yesResources.setVisible(true);
         noResources.setVisible(true);
         light3rows.setVisible(true);
-        selResources1.setImage(marble31.getImage());
-        selResources2.setImage(marble32.getImage());
-        selResources3.setImage(marble33.getImage());
-        selResources4.setImage(marble34.getImage());
+        state.setMarketChoice(MarketChoice.ROW, 3);
+        setSelectedMarbles();
     }
     @FXML
     public void selectedColumn1()
@@ -157,9 +220,8 @@ public class TakeResourcesController extends Controller{
         yesResources.setVisible(true);
         noResources.setVisible(true);
         light1columns.setVisible(true);
-        selResources1.setImage(marble11.getImage());
-        selResources2.setImage(marble21.getImage());
-        selResources3.setImage(marble31.getImage());
+        state.setMarketChoice(MarketChoice.COLUMN, 1);
+        setSelectedMarbles();
     }
     @FXML
     public void selectedColumn2()
@@ -169,9 +231,8 @@ public class TakeResourcesController extends Controller{
         yesResources.setVisible(true);
         noResources.setVisible(true);
         light2columns.setVisible(true);
-        selResources1.setImage(marble12.getImage());
-        selResources2.setImage(marble22.getImage());
-        selResources3.setImage(marble32.getImage());
+        state.setMarketChoice(MarketChoice.COLUMN, 2);
+        setSelectedMarbles();
     }
     @FXML
     public void selectedColumn3()
@@ -182,9 +243,8 @@ public class TakeResourcesController extends Controller{
         noResources.setVisible(true);
         light3columns.setVisible(true);
 
-        selResources1.setImage(marble13.getImage());
-        selResources2.setImage(marble23.getImage());
-        selResources3.setImage(marble33.getImage());
+        state.setMarketChoice(MarketChoice.COLUMN, 3);
+        setSelectedMarbles();
     }
     @FXML
     public void selectedColumn4()
@@ -195,9 +255,8 @@ public class TakeResourcesController extends Controller{
         noResources.setVisible(true);
         light4columns.setVisible(true);
 
-        selResources1.setImage(marble14.getImage());
-        selResources2.setImage(marble24.getImage());
-        selResources3.setImage(marble34.getImage());
+        state.setMarketChoice(MarketChoice.COLUMN, 4);
+        setSelectedMarbles();
     }
     public void setVisibleFalse()
     {
