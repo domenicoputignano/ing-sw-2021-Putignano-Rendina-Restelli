@@ -4,6 +4,7 @@ import it.polimi.ingsw.Client.clientstates.AbstractTakeResourcesFromMarket;
 import it.polimi.ingsw.Client.reducedmodel.ReducedMarble;
 import it.polimi.ingsw.Client.view.CLI;
 import it.polimi.ingsw.Commons.ColorMarble;
+import it.polimi.ingsw.Exceptions.BackToMenuException;
 import it.polimi.ingsw.Network.Client;
 import it.polimi.ingsw.Utils.MarbleDestination;
 import it.polimi.ingsw.Utils.MarketChoice;
@@ -23,15 +24,20 @@ public class TakeResourcesFromMarketCLI extends AbstractTakeResourcesFromMarket 
 
     @Override
     public void manageUserInteraction() {
-        cli.showMarketTray();
-        chooseRowColumn();
-        chooseIndex();
-        computeSelectedMarbles();
-        System.out.println("You obtained these marbles: " + selectedMarbles);
-        for(ReducedMarble marble : selectedMarbles) {
-            setupMarble(marble);
+        try {
+            cli.showMarketTray();
+            cli.playerWantsToGoBack();
+            chooseRowColumn();
+            chooseIndex();
+            computeSelectedMarbles();
+            System.out.println("You obtained these marbles: " + selectedMarbles);
+            for (ReducedMarble marble : selectedMarbles) {
+                setupMarble(marble);
+            }
+            client.sendMessage(message);
+        } catch(BackToMenuException e) {
+            cli.returnToMenu();
         }
-        client.sendMessage(message);
     }
 
     private void chooseRowColumn() {

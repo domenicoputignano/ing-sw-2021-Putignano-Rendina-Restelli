@@ -71,7 +71,7 @@ public class ReducedPersonalBoard implements Serializable {
             return card.toASCII(row);
         }
         else
-            return "                          ";
+            return "                           ";
 
     }
 

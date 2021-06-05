@@ -4,6 +4,7 @@ import it.polimi.ingsw.Client.clientstates.AbstractBuyDevCard;
 import it.polimi.ingsw.Client.view.CLI;
 import it.polimi.ingsw.Commons.CardType;
 import it.polimi.ingsw.Commons.ColorCard;
+import it.polimi.ingsw.Exceptions.BackToMenuException;
 import it.polimi.ingsw.Exceptions.InterruptedActionException;
 import it.polimi.ingsw.Network.Client;
 
@@ -21,23 +22,28 @@ public class BuyDevCardCLI extends AbstractBuyDevCard {
 
     @Override
     public void manageUserInteraction() {
-        System.out.println("Decks are shown below");
-        cli.printDecks();
-        boolean doneSelection = false;
         try {
-            chooseCardType();
-            computeActualCost(takeDeckFromCardType(messageToSend.getType()));
-            if (checkCostRequiredCardType(actualCost)) {
-                doneSelection = true;
-            } else {
-                System.out.println("You don't have enough resources to buy this card! Choose another one");
-                throw new InterruptedActionException();
+            System.out.println("Decks are shown below");
+            cli.printDecks();
+            cli.playerWantsToGoBack();
+            boolean doneSelection = false;
+            try {
+                chooseCardType();
+                computeActualCost(takeDeckFromCardType(messageToSend.getType()));
+                if (checkCostRequiredCardType(actualCost)) {
+                    doneSelection = true;
+                } else {
+                    System.out.println("You don't have enough resources to buy this card! Choose another one");
+                    throw new InterruptedActionException();
+                }
+                chooseSlotDestination();
+                messageToSend.setHowToTakeResources(cli.askInstructionsOnHowToTakeResources(actualCost));
+                client.sendMessage(messageToSend);
+            } catch (InterruptedActionException e) {
+                cli.returnToActionBeginning(new BuyDevCardCLI(this.client));
             }
-            chooseSlotDestination();
-            messageToSend.setHowToTakeResources(cli.askInstructionsOnHowToTakeResources(actualCost));
-            client.sendMessage(messageToSend);
-        } catch (InterruptedActionException e) {
-            cli.returnToActionBeginning(new BuyDevCardCLI(this.client));
+        } catch (BackToMenuException e) {
+            cli.returnToMenu();
         }
     }
 

@@ -5,6 +5,7 @@ import it.polimi.ingsw.Client.clientstates.cli.ActionChoiceCLI;
 import it.polimi.ingsw.Client.reducedmodel.ReducedDepot;
 import it.polimi.ingsw.Client.reducedmodel.ReducedPersonalBoard;
 import it.polimi.ingsw.Commons.*;
+import it.polimi.ingsw.Exceptions.BackToMenuException;
 import it.polimi.ingsw.Network.Client;
 import it.polimi.ingsw.Utils.MarbleDestination;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.*;
@@ -372,6 +373,14 @@ public class CLI extends UI {
         returnToActionBeginning(new ActionChoiceCLI(this.client));
     }
 
+    public void playerWantsToGoBack() throws BackToMenuException {
+        System.out.print("Type [esc] if you want to go back to menu, else [continue] to perform this action: ");
+        String choice = input.next();
+        if(choice.equalsIgnoreCase("esc")) {
+            throw new BackToMenuException();
+        }
+    }
+
     public void showMarketTray() {
         System.out.println(client.getGame().getMarketTray());
     }
@@ -416,14 +425,14 @@ public class CLI extends UI {
 
     public void printSlots(ReducedPersonalBoard playerBoard) {
         System.out.println(".---------------------------..---------------------------..---------------------------.");
-        System.out.println("|"+playerBoard.getSlotTopCardAsASCII(0, 1)+"||"+playerBoard.getSlotTopCardAsASCII(1, 1)+"||"+playerBoard.getSlotTopCardAsASCII(2,1)+"   |");
-        System.out.println("|"+playerBoard.getSlotTopCardAsASCII(0, 2)+"||"+playerBoard.getSlotTopCardAsASCII(1, 2)+"||"+playerBoard.getSlotTopCardAsASCII(2,2)+"   |");
-        System.out.println("|      .-------------.      ||      .-------------.     ||      .-------------.       |");
-        System.out.println("|"+playerBoard.getSlotTopCardAsASCII(0, 4)+"||"+playerBoard.getSlotTopCardAsASCII(1, 4)+"||"+playerBoard.getSlotTopCardAsASCII(2,4)+"   |");
-        System.out.println("|"+playerBoard.getSlotTopCardAsASCII(0, 5)+"||"+playerBoard.getSlotTopCardAsASCII(1, 5)+"||"+playerBoard.getSlotTopCardAsASCII(2,5)+"   |");
-        System.out.println("|"+playerBoard.getSlotTopCardAsASCII(0, 6)+"||"+playerBoard.getSlotTopCardAsASCII(1, 6)+"||"+playerBoard.getSlotTopCardAsASCII(2,6)+"   |");
+        System.out.println("|"+playerBoard.getSlotTopCardAsASCII(0, 1)+"||"+playerBoard.getSlotTopCardAsASCII(1, 1)+"||"+playerBoard.getSlotTopCardAsASCII(2,1)+"|");
+        System.out.println("|"+playerBoard.getSlotTopCardAsASCII(0, 2)+"||"+playerBoard.getSlotTopCardAsASCII(1, 2)+"||"+playerBoard.getSlotTopCardAsASCII(2,2)+"|");
+        System.out.println("|      .-------------.      ||      .-------------.      ||      .-------------.      |");
+        System.out.println("|"+playerBoard.getSlotTopCardAsASCII(0, 4)+"||"+playerBoard.getSlotTopCardAsASCII(1, 4)+"||"+playerBoard.getSlotTopCardAsASCII(2,4)+"|");
+        System.out.println("|"+playerBoard.getSlotTopCardAsASCII(0, 5)+"||"+playerBoard.getSlotTopCardAsASCII(1, 5)+"||"+playerBoard.getSlotTopCardAsASCII(2,5)+"|");
+        System.out.println("|"+playerBoard.getSlotTopCardAsASCII(0, 6)+"||"+playerBoard.getSlotTopCardAsASCII(1, 6)+"||"+playerBoard.getSlotTopCardAsASCII(2,6)+"|");
         System.out.println("|      '.............'      ||      '.............'      ||      '.............'      |");
-        System.out.println("|"+playerBoard.getSlotTopCardAsASCII(0, 8)+"||"+playerBoard.getSlotTopCardAsASCII(1, 8)+"||"+playerBoard.getSlotTopCardAsASCII(2,8)+"   |");
+        System.out.println("|"+playerBoard.getSlotTopCardAsASCII(0, 8)+"||"+playerBoard.getSlotTopCardAsASCII(1, 8)+"||"+playerBoard.getSlotTopCardAsASCII(2,8)+"|");
         System.out.println("'---------------------------''---------------------------''---------------------------'");
     }
 
