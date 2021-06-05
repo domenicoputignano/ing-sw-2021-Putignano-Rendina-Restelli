@@ -1,6 +1,7 @@
 package it.polimi.ingsw.Client.view.GUI;
 
 import it.polimi.ingsw.Client.reducedmodel.ReducedMarketTray;
+import it.polimi.ingsw.Utils.MarbleDestination;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuButton;
@@ -53,6 +54,14 @@ public class TakeResourcesController extends Controller{
                 sel4Depot1,sel4Depot2,sel4Depot3,
                 sel1ExtraDepot,sel2ExtraDepot,sel3ExtraDepot,sel4ExtraDepot,
                 discard1,discard2,discard3,discard4;
+
+    @FXML
+    public Button[] marble1Buttons = new Button[5];
+
+    private boolean depot1Marble1, depot2Marble1, depot3Marble1, extraMarble1, discardMarble1,
+                depot1Marble2, depot2Marble2, depot3Marble2, extraMarble2, discardMarble2,
+                depot1Marble3, depot2Marble3, depot3Marble3, extraMarble3, discardMarble3,
+                depot1Marble4, depot2Marble4, depot3Marble4, extraMarble4, discardMarble4;
 
     @FXML
     @Override
@@ -269,6 +278,294 @@ public class TakeResourcesController extends Controller{
         marble34.setImage(new Image(marketTray.getMarble(3, 4).toImage()));
 
         slidingMarble.setImage(new Image(marketTray.getSlidingMarble().toImage()));
+    }
+
+    @FXML
+    public void selectedDepot1Marble1(){
+        pressedButton(sel1Depot1);
+        clearButtonSelection(sel1Depot2);
+        clearButtonSelection(sel1Depot3);
+        clearButtonSelection(sel1ExtraDepot);
+        clearButtonSelection(discard1);
+        depot1Marble1 = true;
+        depot2Marble1 = false;
+        depot3Marble1 = false;
+        extraMarble1 = false;
+        discardMarble1 = false;
+    }
+
+    @FXML
+    public void selectedDepot2Marble1(){
+        pressedButton(sel1Depot2);
+        clearButtonSelection(sel1Depot1);
+        clearButtonSelection(sel1Depot3);
+        clearButtonSelection(sel1ExtraDepot);
+        clearButtonSelection(discard1);
+        depot1Marble1 = false;
+        depot2Marble1 = true;
+        depot3Marble1 = false;
+        extraMarble1 = false;
+        discardMarble1 = false;
+    }
+
+    @FXML
+    public void selectedDepot3Marble1(){
+        pressedButton(sel1Depot3);
+        clearButtonSelection(sel1Depot1);
+        clearButtonSelection(sel1Depot2);
+        clearButtonSelection(sel1ExtraDepot);
+        clearButtonSelection(discard1);
+        depot1Marble1 = false;
+        depot2Marble1 = false;
+        depot3Marble1 = true;
+        extraMarble1 = false;
+        discardMarble1 = false;
+    }
+
+    @FXML
+    public void selectedExtraDepotMarble1(){
+        pressedButton(sel1ExtraDepot);
+        clearButtonSelection(sel1Depot1);
+        clearButtonSelection(sel1Depot2);
+        clearButtonSelection(sel1Depot3);
+        clearButtonSelection(discard1);
+        depot1Marble1 = false;
+        depot2Marble1 = false;
+        depot3Marble1 = false;
+        extraMarble1 = true;
+        discardMarble1 = false;
+    }
+
+    @FXML
+    public void selectedDiscardMarble1(){
+        pressedButton(discard1);
+        clearButtonSelection(sel1Depot1);
+        clearButtonSelection(sel1Depot2);
+        clearButtonSelection(sel1Depot3);
+        clearButtonSelection(sel1ExtraDepot);
+        depot1Marble1 = false;
+        depot2Marble1 = false;
+        depot3Marble1 = false;
+        extraMarble1 = false;
+        discardMarble1 = true;
+    }
+
+    @FXML
+    public void selectedDepot1Marble2(){
+        pressedButton(sel2Depot1);
+        clearButtonSelection(sel2Depot2);
+        clearButtonSelection(sel2Depot3);
+        clearButtonSelection(sel2ExtraDepot);
+        clearButtonSelection(discard2);
+        depot1Marble2 = true;
+        depot2Marble2 = false;
+        depot3Marble2 = false;
+        extraMarble2 = false;
+        discardMarble2 = false;
+    }
+
+    @FXML
+    public void selectedDepot2Marble2(){
+        pressedButton(sel2Depot2);
+        clearButtonSelection(sel2Depot1);
+        clearButtonSelection(sel2Depot3);
+        clearButtonSelection(sel2ExtraDepot);
+        clearButtonSelection(discard2);
+        depot1Marble2 = false;
+        depot2Marble2 = true;
+        depot3Marble2 = false;
+        extraMarble2 = false;
+        discardMarble2 = false;
+    }
+
+    @FXML
+    public void selectedDepot3Marble2(){
+        pressedButton(sel2Depot3);
+        clearButtonSelection(sel2Depot1);
+        clearButtonSelection(sel2Depot2);
+        clearButtonSelection(sel2ExtraDepot);
+        clearButtonSelection(discard2);
+        depot1Marble2 = false;
+        depot2Marble2 = false;
+        depot3Marble2 = true;
+        extraMarble2 = false;
+        discardMarble2 = false;
+    }
+
+    @FXML
+    public void selectedExtraDepotMarble2(){
+        pressedButton(sel2ExtraDepot);
+        clearButtonSelection(sel2Depot1);
+        clearButtonSelection(sel2Depot2);
+        clearButtonSelection(sel2Depot3);
+        clearButtonSelection(discard2);
+        depot1Marble2 = false;
+        depot2Marble2 = false;
+        depot3Marble2 = false;
+        extraMarble2 = true;
+        discardMarble2 = false;
+    }
+
+    @FXML
+    public void selectedDiscardMarble2(){
+        pressedButton(discard2);
+        clearButtonSelection(sel2Depot1);
+        clearButtonSelection(sel2Depot2);
+        clearButtonSelection(sel2Depot3);
+        clearButtonSelection(sel2ExtraDepot);
+        depot1Marble2 = false;
+        depot2Marble2 = false;
+        depot3Marble2 = false;
+        extraMarble2 = false;
+        discardMarble2 = true;
+    }
+
+    @FXML
+    public void selectedDepot1Marble3(){
+        pressedButton(sel3Depot1);
+        clearButtonSelection(sel3Depot2);
+        clearButtonSelection(sel3Depot3);
+        clearButtonSelection(sel3ExtraDepot);
+        clearButtonSelection(discard3);
+        depot1Marble3 = true;
+        depot2Marble3 = false;
+        depot3Marble3 = false;
+        extraMarble3 = false;
+        discardMarble3 = false;
+    }
+
+    @FXML
+    public void selectedDepot2Marble3(){
+        pressedButton(sel3Depot2);
+        clearButtonSelection(sel3Depot1);
+        clearButtonSelection(sel3Depot3);
+        clearButtonSelection(sel3ExtraDepot);
+        clearButtonSelection(discard3);
+        depot1Marble3 = false;
+        depot2Marble3 = true;
+        depot3Marble3 = false;
+        extraMarble3 = false;
+        discardMarble3 = false;
+    }
+
+    @FXML
+    public void selectedDepot3Marble3(){
+        pressedButton(sel3Depot3);
+        clearButtonSelection(sel3Depot1);
+        clearButtonSelection(sel3Depot2);
+        clearButtonSelection(sel3ExtraDepot);
+        clearButtonSelection(discard3);
+        depot1Marble3 = false;
+        depot2Marble3 = false;
+        depot3Marble3 = true;
+        extraMarble3 = false;
+        discardMarble3 = false;
+    }
+
+    @FXML
+    public void selectedExtraDepotMarble3(){
+        pressedButton(sel3ExtraDepot);
+        clearButtonSelection(sel3Depot1);
+        clearButtonSelection(sel3Depot2);
+        clearButtonSelection(sel3Depot3);
+        clearButtonSelection(discard3);
+        depot1Marble3 = false;
+        depot2Marble3 = false;
+        depot3Marble3 = false;
+        extraMarble3 = true;
+        discardMarble3 = false;
+    }
+
+    @FXML
+    public void selectedDiscardMarble3(){
+        pressedButton(discard3);
+        clearButtonSelection(sel3Depot1);
+        clearButtonSelection(sel3Depot2);
+        clearButtonSelection(sel3Depot3);
+        clearButtonSelection(sel3ExtraDepot);
+        depot1Marble3 = false;
+        depot2Marble3 = false;
+        depot3Marble3 = false;
+        extraMarble3 = false;
+        discardMarble3 = true;
+    }
+
+    @FXML
+    public void selectedDepot1Marble4(){
+        pressedButton(sel4Depot1);
+        clearButtonSelection(sel4Depot2);
+        clearButtonSelection(sel4Depot3);
+        clearButtonSelection(sel4ExtraDepot);
+        clearButtonSelection(discard4);
+        depot1Marble4 = true;
+        depot2Marble4 = false;
+        depot3Marble4 = false;
+        extraMarble4 = false;
+        discardMarble4 = false;
+    }
+
+    @FXML
+    public void selectedDepot2Marble4(){
+        pressedButton(sel4Depot2);
+        clearButtonSelection(sel4Depot1);
+        clearButtonSelection(sel4Depot3);
+        clearButtonSelection(sel4ExtraDepot);
+        clearButtonSelection(discard4);
+        depot1Marble4 = false;
+        depot2Marble4 = true;
+        depot3Marble4 = false;
+        extraMarble4 = false;
+        discardMarble4 = false;
+    }
+
+    @FXML
+    public void selectedDepot3Marble4(){
+        pressedButton(sel4Depot3);
+        clearButtonSelection(sel4Depot1);
+        clearButtonSelection(sel4Depot2);
+        clearButtonSelection(sel4ExtraDepot);
+        clearButtonSelection(discard4);
+        depot1Marble4 = false;
+        depot2Marble4 = false;
+        depot3Marble4 = true;
+        extraMarble4 = false;
+        discardMarble4 = false;
+    }
+
+    @FXML
+    public void selectedExtraDepotMarble4(){
+        pressedButton(sel4ExtraDepot);
+        clearButtonSelection(sel4Depot1);
+        clearButtonSelection(sel4Depot2);
+        clearButtonSelection(sel4Depot3);
+        clearButtonSelection(discard4);
+        depot1Marble4 = false;
+        depot2Marble4 = false;
+        depot3Marble4 = false;
+        extraMarble4 = true;
+        discardMarble4 = false;
+    }
+
+    @FXML
+    public void selectedDiscardMarble4(){
+        pressedButton(discard4);
+        clearButtonSelection(sel4Depot1);
+        clearButtonSelection(sel4Depot2);
+        clearButtonSelection(sel4Depot3);
+        clearButtonSelection(sel4ExtraDepot);
+        depot1Marble4 = false;
+        depot2Marble4 = false;
+        depot3Marble4 = false;
+        extraMarble4 = false;
+        discardMarble4 = true;
+    }
+
+    private void pressedButton(Button target){
+        target.setStyle("-fx-background-size: 75% auto;");
+    }
+
+    private void clearButtonSelection(Button target){
+        target.setStyle("-fx-background-size: 100% auto");
     }
 
 }
