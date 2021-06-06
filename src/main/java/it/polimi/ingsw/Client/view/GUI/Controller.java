@@ -8,6 +8,7 @@ import javafx.scene.ImageCursor;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBase;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
@@ -133,7 +134,7 @@ public class Controller {
         Font fontText = Font.loadFont(getClass().getResourceAsStream("/gui/font/Enchanted-Land.otf"),dim);
         textField.setFont(fontText);
     }
-    public void setFont(Button button, int dim){
+    public void setFont(ButtonBase button, int dim){
         Font fontButton = Font.loadFont(getClass().getResourceAsStream("/gui/font/Enchanted-Land.otf"),dim);
         button.setFont(fontButton);
         button.setStyle("-fx-text-fill: rgb(35, 25, 22);");

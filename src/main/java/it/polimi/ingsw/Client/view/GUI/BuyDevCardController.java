@@ -3,14 +3,21 @@ package it.polimi.ingsw.Client.view.GUI;
 import it.polimi.ingsw.Client.Checker;
 import it.polimi.ingsw.Commons.ColorCard;
 import it.polimi.ingsw.Commons.DevelopmentCard;
+import it.polimi.ingsw.Commons.Effect;
+import it.polimi.ingsw.Commons.ResourceType;
+import it.polimi.ingsw.Utils.ResourceLocator;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public class BuyDevCardController extends Controller{
     @FXML
@@ -35,7 +42,7 @@ public class BuyDevCardController extends Controller{
     public ImageView selectedCard;
 
     @FXML
-    public Button buyCard;
+    public Button buyCard, toPayment;
 
     @FXML
     public ImageView deck1,deck2,deck3,deck4,deck5,deck6,deck7,deck8,deck9,deck10,deck11,deck12;
@@ -53,6 +60,14 @@ public class BuyDevCardController extends Controller{
 
     @FXML
     public TextField textField1,textField2,textField3,textField4,textField5,textField6,textField7,textField8,textField9;
+    public ToggleGroup availableSlot;
+
+    @FXML
+    public VBox slotBox;
+
+    DevelopmentCard developmentCard;
+    boolean isCardBuyable;
+
 
     @FXML
     @Override
@@ -158,150 +173,183 @@ public class BuyDevCardController extends Controller{
         selectedCard.setImage(new Image(developmentCard.toImage()));
     }
 
-    private void setErrorDevTextOK(){
-        errorDevText.setText("You have enough \nresources to purchase \nthe selected card");
+    private void setDevelopmentCardTextOK(String toDisplay){
+        errorDevText.setText(toDisplay);
+        errorDevText.setVisible(true);
         buyCard.setVisible(true);
     }
 
-    private void setErrorDevTextKO(){
-        errorDevText.setText("You don't have \nenough resources \nto purchase \nthe selected card");
+    private void setFeasiblePurchaseOK(){
+        setDevelopmentCardTextOK("You have have \nenough resources \nto purchase \nselected card");
+        buyCard.setVisible(true);
+    }
+
+    private void setErrorDevTextKO(String error){
+        errorDevText.setText(error);
+        errorDevText.setVisible(true);
         buyCard.setVisible(true);
     }
 
     @FXML
     public void checkIfCanBuyCard3Green() {
-        DevelopmentCard developmentCard = client.getGame().getDeckTopCard(3,ColorCard.green);
+        developmentCard = client.getGame().getDeckTopCard(3,ColorCard.green);
         setSelectedCardImage(developmentCard);
         if(Checker.checkResources(developmentCard.getCost(),client.getGame().getPlayer(client.getUser()).getPersonalBoard())) {
-            setErrorDevTextOK();
+            isCardBuyable = true;
+            setFeasiblePurchaseOK();
         } else {
-            setErrorDevTextKO();
+            isCardBuyable = false;
+            setErrorDevTextKO("You don't have \nenough resources \nto purchase \nselected card");
         }
     }
 
     @FXML
     public void checkIfCanBuyCard2Green() {
-        DevelopmentCard developmentCard = client.getGame().getDeckTopCard(2,ColorCard.green);
+        developmentCard = client.getGame().getDeckTopCard(2,ColorCard.green);
         setSelectedCardImage(developmentCard);
         if(Checker.checkResources(developmentCard.getCost(),client.getGame().getPlayer(client.getUser()).getPersonalBoard())) {
-            setErrorDevTextOK();
+            isCardBuyable = true;
+            setFeasiblePurchaseOK();
         } else {
-            setErrorDevTextKO();
+            isCardBuyable = false;
+            setErrorDevTextKO("You don't have \nenough resources \nto purchase \nselected card");
         }
     }
 
     @FXML
     public void checkIfCanBuyCard1Green() {
-        DevelopmentCard developmentCard = client.getGame().getDeckTopCard(1,ColorCard.green);
+        developmentCard = client.getGame().getDeckTopCard(1,ColorCard.green);
         setSelectedCardImage(developmentCard);
         if(Checker.checkResources(developmentCard.getCost(),client.getGame().getPlayer(client.getUser()).getPersonalBoard())) {
-            setErrorDevTextOK();
+            setFeasiblePurchaseOK();
         } else {
-            setErrorDevTextKO();
+            isCardBuyable = false;
+            setErrorDevTextKO("You don't have \nenough resources \nto purchase \nselected card");
         }
 
     }
 
     @FXML
     public void checkIfCanBuyCard3Blue() {
-        DevelopmentCard developmentCard = client.getGame().getDeckTopCard(3,ColorCard.blue);
+        developmentCard = client.getGame().getDeckTopCard(3,ColorCard.blue);
         setSelectedCardImage(developmentCard);
         if(Checker.checkResources(developmentCard.getCost(),client.getGame().getPlayer(client.getUser()).getPersonalBoard())) {
-            setErrorDevTextOK();
+            isCardBuyable = true;
+            setFeasiblePurchaseOK();
         } else {
-            setErrorDevTextKO();
+            isCardBuyable = false;
+            setErrorDevTextKO("You don't have \nenough resources \nto purchase \nselected card");
         }
     }
 
     @FXML
     public void checkIfCanBuyCard2Blue() {
-        DevelopmentCard developmentCard = client.getGame().getDeckTopCard(2,ColorCard.blue);
+        developmentCard = client.getGame().getDeckTopCard(2,ColorCard.blue);
         setSelectedCardImage(developmentCard);
         if(Checker.checkResources(developmentCard.getCost(),client.getGame().getPlayer(client.getUser()).getPersonalBoard())) {
-            setErrorDevTextOK();
+            isCardBuyable = true;
+            setFeasiblePurchaseOK();
         } else {
-            setErrorDevTextKO();
+            isCardBuyable = false;
+            setErrorDevTextKO("You don't have \nenough resources \nto purchase \nselected card");
         }
     }
 
     @FXML
     public void checkIfCanBuyCard1Blue() {
-        DevelopmentCard developmentCard = client.getGame().getDeckTopCard(1,ColorCard.blue);
+        developmentCard = client.getGame().getDeckTopCard(1,ColorCard.blue);
         setSelectedCardImage(developmentCard);
         if(Checker.checkResources(developmentCard.getCost(),client.getGame().getPlayer(client.getUser()).getPersonalBoard())) {
-            setErrorDevTextOK();
+            isCardBuyable = true;
+            setFeasiblePurchaseOK();
         } else {
-            setErrorDevTextKO();
+            isCardBuyable = false;
+            setErrorDevTextKO("You don't have \nenough resources \nto purchase \nselected card");
         }
     }
 
     @FXML
     public void checkIfCanBuyCard3Yellow() {
-        DevelopmentCard developmentCard = client.getGame().getDeckTopCard(3,ColorCard.yellow);
+        developmentCard = client.getGame().getDeckTopCard(3,ColorCard.yellow);
         setSelectedCardImage(developmentCard);
         if(Checker.checkResources(developmentCard.getCost(),client.getGame().getPlayer(client.getUser()).getPersonalBoard())) {
-            setErrorDevTextOK();
+            isCardBuyable = true;
+            setFeasiblePurchaseOK();
         } else {
-            setErrorDevTextKO();
+            isCardBuyable = false;
+            setErrorDevTextKO("You don't have \nenough resources \nto purchase \nselected card");
         }
     }
 
     @FXML
     public void checkIfCanBuyCard2Yellow() {
-        DevelopmentCard developmentCard = client.getGame().getDeckTopCard(2,ColorCard.yellow);
+        developmentCard = client.getGame().getDeckTopCard(2,ColorCard.yellow);
         setSelectedCardImage(developmentCard);
         if(Checker.checkResources(developmentCard.getCost(),client.getGame().getPlayer(client.getUser()).getPersonalBoard())) {
-            setErrorDevTextOK();
+            isCardBuyable = true;
+            setFeasiblePurchaseOK();
         } else {
-            setErrorDevTextKO();
+            isCardBuyable = false;
+            setErrorDevTextKO("You don't have \nenough resources \nto purchase \nselected card");
         }
     }
 
     @FXML
     public void checkIfCanBuyCard1Yellow() {
-        DevelopmentCard developmentCard = client.getGame().getDeckTopCard(1,ColorCard.yellow);
+        developmentCard = client.getGame().getDeckTopCard(1,ColorCard.yellow);
         setSelectedCardImage(developmentCard);
         if(Checker.checkResources(developmentCard.getCost(),client.getGame().getPlayer(client.getUser()).getPersonalBoard())) {
-            setErrorDevTextOK();
+            isCardBuyable = true;
+            setFeasiblePurchaseOK();
         } else {
-            setErrorDevTextKO();
+            isCardBuyable = false;
+            setErrorDevTextKO("You don't have \nenough resources \nto purchase \nselected card");
         }
     }
 
     @FXML
     public void checkIfCanBuyCard3Purple() {
-        DevelopmentCard developmentCard = client.getGame().getDeckTopCard(3,ColorCard.purple);
+        developmentCard = client.getGame().getDeckTopCard(3,ColorCard.purple);
         setSelectedCardImage(developmentCard);
         if(Checker.checkResources(developmentCard.getCost(),client.getGame().getPlayer(client.getUser()).getPersonalBoard())) {
-            setErrorDevTextOK();
+            isCardBuyable = true;
+            setFeasiblePurchaseOK();
         } else {
-            setErrorDevTextKO();
+            isCardBuyable = false;
+            setErrorDevTextKO("You don't have \nenough resources \nto purchase \nselected card");
         }
     }
 
     @FXML
     public void checkIfCanBuyCard2Purple() {
-        DevelopmentCard developmentCard = client.getGame().getDeckTopCard(2,ColorCard.purple);
+        developmentCard = client.getGame().getDeckTopCard(2,ColorCard.purple);
         setSelectedCardImage(developmentCard);
         if(Checker.checkResources(developmentCard.getCost(),client.getGame().getPlayer(client.getUser()).getPersonalBoard())) {
-            setErrorDevTextOK();
+            isCardBuyable = true;
+            setFeasiblePurchaseOK();
         } else {
-            setErrorDevTextKO();
+
+            isCardBuyable = false;
+            setErrorDevTextKO("You don't have \nenough resources \nto purchase \nselected card");
         }
     }
 
     @FXML
     public void checkIfCanBuyCard1Purple() {
-        DevelopmentCard developmentCard = client.getGame().getDeckTopCard(1,ColorCard.purple);
+        developmentCard = client.getGame().getDeckTopCard(1,ColorCard.purple);
         setSelectedCardImage(developmentCard);
         if(Checker.checkResources(developmentCard.getCost(),client.getGame().getPlayer(client.getUser()).getPersonalBoard())) {
-            setErrorDevTextOK();
+            isCardBuyable = true;
+            setFeasiblePurchaseOK();
         } else {
-            setErrorDevTextKO();
+            isCardBuyable = false;
+            setErrorDevTextKO("You don't have \nenough resources \nto purchase \nselected card");
         }
     }
-    private void setInvisible()
-    {
+
+
+    @FXML
+    public void setInvisible() {
         green3.setVisible(false);
         green2.setVisible(false);
         green1.setVisible(false);
@@ -335,46 +383,7 @@ public class BuyDevCardController extends Controller{
         purple.setVisible(false);
         blue.setVisible(false);
         yellow.setVisible(false);
-        resource1Cost.setVisible(true);
-        resource2Cost.setVisible(true);
-        resource3Cost.setVisible(true);
-        resDepot1Text.setVisible(true);
-        resDepot2Text.setVisible(true);
-        resDepot3Text.setVisible(true);
-        resStronbox1Text.setVisible(true);
-        resStronbox2Text.setVisible(true);
-        resStronbox3Text.setVisible(true);
-        resExtra1Text.setVisible(true);
-        resExtra2Text.setVisible(true);
-        resExtra3Text.setVisible(true);
-        selectHowPickResourcesText.setVisible(true);
-        plusDepotRes1.setVisible(true);
-        plusExtraRes1.setVisible(true);
-        plusStrRes1.setVisible(true);
-        minusDepotRes1.setVisible(true);
-        minusExtraRes1.setVisible(true);
-        minusStrRes1.setVisible(true);
-        textField1.setVisible(true);
-        textField2.setVisible(true);
-        textField3.setVisible(true);
-        plusDepotRes2.setVisible(true);
-        plusExtraRes2.setVisible(true);
-        plusStrRes2.setVisible(true);
-        minusDepotRes2.setVisible(true);
-        minusExtraRes2.setVisible(true);
-        minusStrRes2.setVisible(true);
-        textField4.setVisible(true);
-        textField5.setVisible(true);
-        textField6.setVisible(true);
-        plusDepotRes3.setVisible(true);
-        plusExtraRes3.setVisible(true);
-        plusStrRes3.setVisible(true);
-        minusDepotRes3.setVisible(true);
-        minusExtraRes3.setVisible(true);
-        minusStrRes3.setVisible(true);
-        textField7.setVisible(true);
-        textField8.setVisible(true);
-        textField9.setVisible(true);
+        slotBox.setVisible(false);
     }
 
     @FXML
@@ -386,6 +395,109 @@ public class BuyDevCardController extends Controller{
     @FXML
     public void handleOkBuyDevCard()
     {
-        setInvisible();
+        if(isCardBuyable) {}
+        else {
+            //TODO da spostare opportunamente
+            setInvisible();
+            Label label = (Label) slotBox.getChildren().get(0);
+            label.setFont(Font.loadFont(getClass().getResourceAsStream("/gui/font/Enchanted-Land.otf"),40));
+            setFont((RadioButton)availableSlot.getToggles().get(0), 35);
+            setFont((RadioButton)availableSlot.getToggles().get(1), 35);
+            setFont((RadioButton)availableSlot.getToggles().get(2), 35);
+            slotBox.setVisible(true);
+        }
+    }
+
+    @FXML
+    public void handleButtonSelection() {
+        RadioButton slot = (RadioButton) availableSlot.getSelectedToggle();
+        int slotIndex = Integer.parseInt(String.valueOf(slot.getText().charAt(slot.getText().length()-1)));
+        if (client.getGame().getPlayer(client.getUser()).getPersonalBoard().canPutCardInSlot(slotIndex, developmentCard.getType().getLevel())) {
+            setDevelopmentCardTextOK("Now we need instruction on\nhow you want to pay the card");
+            buyCard.setVisible(false);
+            setFont(toPayment, 24);
+            toPayment.setVisible(true);
+        } else {
+            setErrorDevTextKO("Selected slot is not available");
+        }
+    }
+
+
+    private void switchToHowToTakeResourcesPhase()
+    {
+        errorDevText.setVisible(false);
+        slotBox.setVisible(false);
+        selectHowPickResourcesText.setVisible(true);
+        showRequiredResources();
+    }
+
+    @FXML
+    public void goToPayment() {
+        switchToHowToTakeResourcesPhase();
+    }
+
+    public boolean isAvailableExtraDepotOfType(ResourceType resource) {
+        return client.getGame().getPlayer(client.getUser()).getPersonalBoard().isAvailableEffectOfType(Effect.EXTRADEPOT,resource);
+    }
+
+    public void showRequiredResources() {
+        List<ResourceType> neededResources = developmentCard.getCost().entrySet().stream().filter(x -> x.getValue() > 0).map(Map.Entry::getKey).collect(Collectors.toList());
+        for(int i = 0; i < neededResources.size(); i++) {
+            if(i == 0) {
+                resource1Cost.setImage(new Image(ResourceLocator.retrieveResourceTypeImage(neededResources.get(0))));
+                resource1Cost.setVisible(true);
+                resDepot1Text.setVisible(true);
+                resStronbox1Text.setVisible(true);
+                plusDepotRes1.setVisible(true);
+                plusStrRes1.setVisible(true);
+                minusDepotRes1.setVisible(true);
+                minusStrRes1.setVisible(true);
+                textField1.setVisible(true);
+                textField2.setVisible(true);
+                if(isAvailableExtraDepotOfType(neededResources.get(i))) {
+                    resExtra1Text.setVisible(true);
+                    plusExtraRes1.setVisible(true);
+                    minusExtraRes1.setVisible(true);
+                    textField3.setVisible(true);
+                }
+            }
+            if(i == 1) {
+                resource2Cost.setImage(new Image(ResourceLocator.retrieveResourceTypeImage(neededResources.get(1))));
+                resource2Cost.setVisible(true);
+                resDepot2Text.setVisible(true);
+                resStronbox2Text.setVisible(true);
+                plusDepotRes2.setVisible(true);
+                plusStrRes2.setVisible(true);
+                minusDepotRes2.setVisible(true);
+                minusStrRes2.setVisible(true);
+                textField4.setVisible(true);
+                textField5.setVisible(true);
+                if(isAvailableExtraDepotOfType(neededResources.get(i))) {
+                    resExtra2Text.setVisible(true);
+                    plusExtraRes2.setVisible(true);
+                    minusExtraRes2.setVisible(true);
+                    textField6.setVisible(true);
+                }
+            }
+            if(i == 2) {
+                resource3Cost.setImage(new Image(ResourceLocator.retrieveResourceTypeImage(neededResources.get(2))));
+                resource3Cost.setVisible(true);
+                resDepot3Text.setVisible(true);
+                resStronbox3Text.setVisible(true);
+                plusDepotRes3.setVisible(true);
+                plusStrRes3.setVisible(true);
+                minusDepotRes3.setVisible(true);
+                minusStrRes3.setVisible(true);
+                textField7.setVisible(true);
+                textField8.setVisible(true);
+                if(isAvailableExtraDepotOfType(neededResources.get(i))) {
+                    resExtra3Text.setVisible(true);
+                    plusExtraRes3.setVisible(true);
+                    minusExtraRes3.setVisible(true);
+                    textField9.setVisible(true);
+                }
+            }
+        }
+        switchToHowToTakeResourcesPhase();
     }
 }

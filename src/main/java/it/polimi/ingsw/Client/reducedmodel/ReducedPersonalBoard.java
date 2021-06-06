@@ -48,6 +48,10 @@ public class ReducedPersonalBoard implements Serializable {
         return leaderCards.stream().filter(x -> x.getLeaderEffect().getEffect().equals(effect)&&x.isActive()).collect(Collectors.toList());
     }
 
+    public boolean isAvailableEffectOfType(Effect effect, ResourceType type) {
+        return findEffect(effect).stream().anyMatch(x -> x.getLeaderEffect().getType() == type);
+    }
+
     public boolean isAvailableLeaderAction() {
         if(leaderCards.size() <= 0) return false;
         else {
@@ -61,9 +65,19 @@ public class ReducedPersonalBoard implements Serializable {
 
 
     public boolean canBuyCardOfLevel(int level) {
-        return level == 1 || Arrays.stream(slots).anyMatch(x -> x.peekTopCard().getType().getLevel() == (level - 1));
+        if(level == 1) return true;
+        else {
+            return (Arrays.stream(slots).anyMatch(x -> x.peekTopCard().getType().getLevel() == (level - 1)));
+        }
     }
 
+    public boolean canPutCardInSlot(int slotIndex, int level) {
+        if(slots[slotIndex-1].getNumOfStackedCards()==0) {
+            return level == 1;
+        } else {
+            return slots[slotIndex - 1].peekTopCard().getType().getLevel() == level - 1;
+        }
+    }
 
     public String getSlotTopCardAsASCII(int slotIndex, int row) {
         if(!isEmptySlot(slotIndex)) {
