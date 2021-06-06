@@ -69,6 +69,7 @@ public class BuyDevCardController extends Controller{
     DevelopmentCard developmentCard;
     boolean isCardBuyable;
     List<Pair<ResourceType,Integer>> neededResources = new ArrayList<>();
+    List<Pair<ResourceType,Integer>> startingCost = new ArrayList<>();
 
 
     @FXML
@@ -124,18 +125,24 @@ public class BuyDevCardController extends Controller{
         setFont(resExtra2Text,30);
         resExtra3Text.setStyle("-fx-text-fill: rgb(35, 25, 22);");
         setFont(resExtra3Text,30);
+        textField1.setStyle("-fx-text-fill: rgb(35, 25, 22);");
+        setFont(textField1,18);
+        textField2.setStyle("-fx-text-fill: rgb(35, 25, 22);");
+        setFont(textField2,18);
+        textField3.setStyle("-fx-text-fill: rgb(35, 25, 22);");
+        setFont(textField3,18);
         textField4.setStyle("-fx-text-fill: rgb(35, 25, 22);");
-        setFont(textField4,15);
+        setFont(textField4,18);
         textField5.setStyle("-fx-text-fill: rgb(35, 25, 22);");
-        setFont(textField5,15);
+        setFont(textField5,18);
         textField6.setStyle("-fx-text-fill: rgb(35, 25, 22);");
-        setFont(textField6,15);
+        setFont(textField6,18);
         textField7.setStyle("-fx-text-fill: rgb(35, 25, 22);");
-        setFont(textField7,15);
+        setFont(textField7,18);
         textField8.setStyle("-fx-text-fill: rgb(35, 25, 22);");
-        setFont(textField8,15);
+        setFont(textField8,18);
         textField9.setStyle("-fx-text-fill: rgb(35, 25, 22);");
-        setFont(textField9,15);
+        setFont(textField9,18);
         initializeDecksImages();
     }
 
@@ -461,7 +468,10 @@ public class BuyDevCardController extends Controller{
                     plusExtraRes1.setVisible(true);
                     minusExtraRes1.setVisible(true);
                     textField3.setVisible(true);
+                    textField3.setText("0");
                 }
+                textField1.setText(""+ firstCurrentValueDepot);
+                textField2.setText(""+ firstCurrentValueDepot);
             }
             if(i == 1) {
                 resource2Cost.setImage(new Image(ResourceLocator.retrieveResourceTypeImage(neededResources.get(1).getKey())));
@@ -479,7 +489,11 @@ public class BuyDevCardController extends Controller{
                     plusExtraRes2.setVisible(true);
                     minusExtraRes2.setVisible(true);
                     textField6.setVisible(true);
+                    textField6.setText("0");
                 }
+                textField4.setText(""+ firstCurrentValueDepot);
+                textField5.setText(""+ firstCurrentValueDepot);
+
             }
             if(i == 2) {
                 resource3Cost.setImage(new Image(ResourceLocator.retrieveResourceTypeImage(neededResources.get(2).getKey())));
@@ -496,9 +510,70 @@ public class BuyDevCardController extends Controller{
                     resExtra3Text.setVisible(true);
                     plusExtraRes3.setVisible(true);
                     minusExtraRes3.setVisible(true);
+                    textField9.setText("0");
                     textField9.setVisible(true);
                 }
+                textField7.setText(""+ firstCurrentValueDepot);
+                textField8.setText(""+ firstCurrentValueDepot);
             }
         }
     }
+
+    @FXML
+    public void plusFirstResourceFromDepot() {
+        editCostList(1, 1, firstCurrentValueDepot);
+    }
+
+    @FXML
+    public void plusSecondResourceFromDepot(){
+        editCostList(2, 1, secondCurrentValueDepot);
+    }
+
+    @FXML
+    public void plusThirdResourceFromDepot(){
+        editCostList(3, 1, thirdCurrentValueDepot);
+    }
+
+    @FXML
+    public void plusFirstResourceFromStrongbox() {
+        editCostList(1, 1, firstCurrentValueStrongbox);
+    }
+
+    @FXML
+    public void plusSecondResourceFromStrongbox(){
+        editCostList(2, 1, secondCurrentValueStronbox);
+    }
+
+    @FXML
+    public void plusThirdResourceFromStrongbox(){
+        editCostList(3, 1, thirdCurrentValueStrongbox);
+    }
+
+
+
+
+    int firstCurrentValueDepot = 0;
+    int secondCurrentValueDepot = 0;
+    int thirdCurrentValueDepot = 0;
+
+
+
+    int firstCurrentValueStrongbox = 0;
+    int secondCurrentValueStronbox = 0;
+    int thirdCurrentValueStrongbox = 0;
+
+
+
+    private void editCostList(int resourceIndex, int taken, int currentValue) {
+        int required = neededResources.get(resourceIndex-1).getValue();
+        if(required>=taken) {
+            currentValue = currentValue + taken;
+            firstCurrentValueDepot++;
+            neededResources.get(resourceIndex-1).setValue(required-taken);
+            textField1.setText(""+currentValue);
+        } else {
+            setErrorDevTextKO("Maximum number selected!");
+        }
+    }
+
 }
