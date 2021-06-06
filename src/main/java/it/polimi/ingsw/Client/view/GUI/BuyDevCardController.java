@@ -5,6 +5,7 @@ import it.polimi.ingsw.Commons.ColorCard;
 import it.polimi.ingsw.Commons.DevelopmentCard;
 import it.polimi.ingsw.Commons.Effect;
 import it.polimi.ingsw.Commons.ResourceType;
+import it.polimi.ingsw.Utils.Pair;
 import it.polimi.ingsw.Utils.ResourceLocator;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -15,8 +16,8 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 public class BuyDevCardController extends Controller{
@@ -67,6 +68,7 @@ public class BuyDevCardController extends Controller{
 
     DevelopmentCard developmentCard;
     boolean isCardBuyable;
+    List<Pair<ResourceType,Integer>> neededResources = new ArrayList<>();
 
 
     @FXML
@@ -226,7 +228,6 @@ public class BuyDevCardController extends Controller{
             isCardBuyable = false;
             setErrorDevTextKO("You don't have \nenough resources \nto purchase \nselected card");
         }
-
     }
 
     @FXML
@@ -423,14 +424,6 @@ public class BuyDevCardController extends Controller{
     }
 
 
-    private void switchToHowToTakeResourcesPhase()
-    {
-        errorDevText.setVisible(false);
-        slotBox.setVisible(false);
-        selectHowPickResourcesText.setVisible(true);
-        showRequiredResources();
-    }
-
     @FXML
     public void goToPayment() {
         switchToHowToTakeResourcesPhase();
@@ -440,11 +433,20 @@ public class BuyDevCardController extends Controller{
         return client.getGame().getPlayer(client.getUser()).getPersonalBoard().isAvailableEffectOfType(Effect.EXTRADEPOT,resource);
     }
 
+
+    public void switchToHowToTakeResourcesPhase()
+    {
+        errorDevText.setVisible(false);
+        slotBox.setVisible(false);
+        selectHowPickResourcesText.setVisible(true);
+        showRequiredResources();
+    }
+
     public void showRequiredResources() {
-        List<ResourceType> neededResources = developmentCard.getCost().entrySet().stream().filter(x -> x.getValue() > 0).map(Map.Entry::getKey).collect(Collectors.toList());
+        neededResources = developmentCard.getCost().entrySet().stream().filter(x -> x.getValue() > 0).map( x -> new Pair<>(x.getKey(),x.getValue())).collect(Collectors.toList());
         for(int i = 0; i < neededResources.size(); i++) {
             if(i == 0) {
-                resource1Cost.setImage(new Image(ResourceLocator.retrieveResourceTypeImage(neededResources.get(0))));
+                resource1Cost.setImage(new Image(ResourceLocator.retrieveResourceTypeImage(neededResources.get(0).getKey())));
                 resource1Cost.setVisible(true);
                 resDepot1Text.setVisible(true);
                 resStronbox1Text.setVisible(true);
@@ -454,7 +456,7 @@ public class BuyDevCardController extends Controller{
                 minusStrRes1.setVisible(true);
                 textField1.setVisible(true);
                 textField2.setVisible(true);
-                if(isAvailableExtraDepotOfType(neededResources.get(i))) {
+                if(isAvailableExtraDepotOfType(neededResources.get(i).getKey())) {
                     resExtra1Text.setVisible(true);
                     plusExtraRes1.setVisible(true);
                     minusExtraRes1.setVisible(true);
@@ -462,7 +464,7 @@ public class BuyDevCardController extends Controller{
                 }
             }
             if(i == 1) {
-                resource2Cost.setImage(new Image(ResourceLocator.retrieveResourceTypeImage(neededResources.get(1))));
+                resource2Cost.setImage(new Image(ResourceLocator.retrieveResourceTypeImage(neededResources.get(1).getKey())));
                 resource2Cost.setVisible(true);
                 resDepot2Text.setVisible(true);
                 resStronbox2Text.setVisible(true);
@@ -472,7 +474,7 @@ public class BuyDevCardController extends Controller{
                 minusStrRes2.setVisible(true);
                 textField4.setVisible(true);
                 textField5.setVisible(true);
-                if(isAvailableExtraDepotOfType(neededResources.get(i))) {
+                if(isAvailableExtraDepotOfType(neededResources.get(i).getKey())) {
                     resExtra2Text.setVisible(true);
                     plusExtraRes2.setVisible(true);
                     minusExtraRes2.setVisible(true);
@@ -480,7 +482,7 @@ public class BuyDevCardController extends Controller{
                 }
             }
             if(i == 2) {
-                resource3Cost.setImage(new Image(ResourceLocator.retrieveResourceTypeImage(neededResources.get(2))));
+                resource3Cost.setImage(new Image(ResourceLocator.retrieveResourceTypeImage(neededResources.get(2).getKey())));
                 resource3Cost.setVisible(true);
                 resDepot3Text.setVisible(true);
                 resStronbox3Text.setVisible(true);
@@ -490,7 +492,7 @@ public class BuyDevCardController extends Controller{
                 minusStrRes3.setVisible(true);
                 textField7.setVisible(true);
                 textField8.setVisible(true);
-                if(isAvailableExtraDepotOfType(neededResources.get(i))) {
+                if(isAvailableExtraDepotOfType(neededResources.get(i).getKey())) {
                     resExtra3Text.setVisible(true);
                     plusExtraRes3.setVisible(true);
                     minusExtraRes3.setVisible(true);
@@ -498,6 +500,5 @@ public class BuyDevCardController extends Controller{
                 }
             }
         }
-        switchToHowToTakeResourcesPhase();
     }
 }
