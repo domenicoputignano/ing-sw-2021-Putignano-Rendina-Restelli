@@ -4,9 +4,11 @@ import it.polimi.ingsw.Client.clientstates.gui.TakeResourcesFromMarketGUI;
 import it.polimi.ingsw.Client.reducedmodel.ReducedMarble;
 import it.polimi.ingsw.Client.reducedmodel.ReducedMarketTray;
 import it.polimi.ingsw.Commons.ColorMarble;
+import it.polimi.ingsw.Commons.ResourceType;
 import it.polimi.ingsw.Utils.MarbleDestination;
 import it.polimi.ingsw.Utils.MarketChoice;
 import it.polimi.ingsw.Utils.Pair;
+import it.polimi.ingsw.Utils.ResourceLocator;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -131,18 +133,18 @@ public class TakeResourcesController extends Controller{
     private void setSelectedMarbles(){
         chosenMarbles = state.getSelectedMarbles();
         selMarble1.setImage(new Image(chosenMarbles.get(0).toImage()));
-        selResources1.setImage(new Image(chosenMarbles.get(0).toImage()));
         selMarble2.setImage(new Image(chosenMarbles.get(1).toImage()));
-        selResources2.setImage(new Image(chosenMarbles.get(1).toImage()));
         selMarble3.setImage(new Image(chosenMarbles.get(2).toImage()));
-        selResources3.setImage(new Image(chosenMarbles.get(2).toImage()));
         indRes1.setVisible(true);
         indRes2.setVisible(true);
         indRes3.setVisible(true);
+        selResources1.setImage(new Image(getConvertedResources(chosenMarbles.get(0).getColorMarble())));
+        selResources2.setImage(new Image(getConvertedResources(chosenMarbles.get(1).getColorMarble())));
+        selResources3.setImage(new Image(getConvertedResources(chosenMarbles.get(2).getColorMarble())));
         if(chosenMarbles.size()==4) {
             selMarble4.setImage(new Image(chosenMarbles.get(3).toImage()));
-            selResources4.setImage(new Image(chosenMarbles.get(3).toImage()));
             indRes4.setVisible(true);
+            selResources4.setImage(new Image(getConvertedResources(chosenMarbles.get(3).getColorMarble())));
         }
         else {
             selMarble4.setImage(null);
@@ -150,6 +152,27 @@ public class TakeResourcesController extends Controller{
             indRes4.setVisible(false);
         }
     }
+
+    private boolean haveToChooseConvertMarbleEffect(){
+        return state.getConvertMarbleActiveEffects().size() == 2;
+    }
+
+    private String getConvertedResources(ColorMarble color){
+        switch (color){
+            case RED: return "gui/img/faith.png";
+            case BLUE: return ResourceLocator.retrieveResourceTypeImage(ResourceType.shield);
+            case GREY: return ResourceLocator.retrieveResourceTypeImage(ResourceType.stone);
+            case PURPLE: return ResourceLocator.retrieveResourceTypeImage(ResourceType.servant);
+            case YELLOW: return ResourceLocator.retrieveResourceTypeImage(ResourceType.coin);
+            case WHITE: {
+                if(state.getConvertMarbleActiveEffects().size() == 1) return ResourceLocator.retrieveResourceTypeImage(state.getConvertMarbleActiveEffects().get(0));
+                else return "gui/img/marbles/whiteMarble.png"; // TODO aggiungere immagine nessuna conversione possibile
+            }
+            default: return "gui/img/marbles/whiteMarble.png"; // Resource not found
+        }
+    }
+
+
 
     @FXML
     public void handleCloseChooseAction()
