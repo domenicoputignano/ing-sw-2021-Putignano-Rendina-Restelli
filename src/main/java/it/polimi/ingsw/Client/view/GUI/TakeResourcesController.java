@@ -6,6 +6,7 @@ import it.polimi.ingsw.Client.reducedmodel.ReducedMarketTray;
 import it.polimi.ingsw.Utils.MarbleDestination;
 import it.polimi.ingsw.Utils.MarketChoice;
 import it.polimi.ingsw.Utils.Pair;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuButton;
@@ -648,7 +649,9 @@ public class TakeResourcesController extends Controller{
     @FXML
     public void handleOkChoice()
     {
-
+        parseWarehouseChoices();
+        state.manageUserInteraction();
+        handleCloseChooseAction();
     }
 
     private void pressedButton(Button target){

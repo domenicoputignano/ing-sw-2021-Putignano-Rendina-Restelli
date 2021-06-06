@@ -17,7 +17,7 @@ public class TakeResourcesFromMarketGUI extends AbstractTakeResourcesFromMarket 
 
     @Override
     public void manageUserInteraction() {
-
+        client.sendMessage(message);
     }
 
     public void setMarketChoice(MarketChoice choice, int index) {

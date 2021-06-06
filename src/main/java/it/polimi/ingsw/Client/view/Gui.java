@@ -108,7 +108,9 @@ public class Gui extends UI{
 
     @Override
     public void render(TakeResourcesFromMarketUpdate message) {
-
+        if(isReceiverAction(message.getUser())){
+            Platform.runLater(() -> GUIApp.showScene("/gui/FXML/PlayerBoard.fxml"));
+        }
     }
 
     @Override
