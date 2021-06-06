@@ -1,5 +1,6 @@
 package it.polimi.ingsw.Client.view.GUI;
 
+import it.polimi.ingsw.Commons.ColorCard;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
@@ -24,7 +25,7 @@ public class ActivateProductionController extends Controller{
     @Override
     public void initialize() {
 
-
+        this.client = GUIApp.client;
         anchorActivateProd.setBackground(new Background(new BackgroundImage(new Image("/gui/img/exit_tab.png"),
                 BackgroundRepeat.NO_REPEAT,
                 BackgroundRepeat.NO_REPEAT,
@@ -32,6 +33,17 @@ public class ActivateProductionController extends Controller{
                 new BackgroundSize(100, 100, true, true, true, false))));
         activateProdText.setStyle("-fx-text-fill: rgb(35, 25, 22);");
         setFont(activateProdText,39);
+        initializeSlotsImages();
+    }
+
+    private void initializeSlotsImages()
+    {
+        slot1.setStyle("-fx-background-image: url(" +
+                client.getGame().getDeckTopCard(3, ColorCard.green).toImage() + ")");
+        slot2.setStyle("-fx-background-image: url(" +
+                client.getGame().getDeckTopCard(3, ColorCard.yellow).toImage() + ")");
+        slot3.setStyle("-fx-background-image: url(" +
+                client.getGame().getDeckTopCard(3, ColorCard.purple).toImage() + ")");
     }
 
     @FXML

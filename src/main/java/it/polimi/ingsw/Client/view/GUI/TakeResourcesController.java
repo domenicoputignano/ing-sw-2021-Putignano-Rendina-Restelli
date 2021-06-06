@@ -42,7 +42,8 @@ public class TakeResourcesController extends Controller{
                         ,marble31,marble32,marble33,marble34,slidingMarble;
 
     @FXML
-    public ImageView selResources1,selResources2,selResources3,selResources4;
+    public ImageView selResources1,selResources2,selResources3,selResources4,
+                    selMarble1,selMarble2,selMarble3,selMarble4;
 
     @FXML
     public Button row1,row2,row3;
@@ -167,10 +168,11 @@ public class TakeResourcesController extends Controller{
 
     private void setSelectedMarbles(){
         chosenMarbles = state.getSelectedMarbles();
-        selResources1.setImage(new Image(chosenMarbles.get(0).toImage()));
-        selResources2.setImage(new Image(chosenMarbles.get(1).toImage()));
-        selResources3.setImage(new Image(chosenMarbles.get(2).toImage()));
-        if(chosenMarbles.size()==4) selResources4.setImage(new Image(chosenMarbles.get(3).toImage()));
+        selMarble1.setImage(new Image(chosenMarbles.get(0).toImage()));
+        selMarble2.setImage(new Image(chosenMarbles.get(1).toImage()));
+        selMarble3.setImage(new Image(chosenMarbles.get(2).toImage()));
+        if(chosenMarbles.size()==4) selMarble4.setImage(new Image(chosenMarbles.get(3).toImage()));
+        else selMarble4.setImage(null);
     }
 
     @FXML
