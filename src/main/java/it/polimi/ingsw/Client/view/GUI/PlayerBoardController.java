@@ -1,12 +1,15 @@
 package it.polimi.ingsw.Client.view.GUI;
 
 import it.polimi.ingsw.Commons.ResourceType;
+import it.polimi.ingsw.Utils.Messages.ClientMessages.TakeResourcesFromMarketMessage;
+import it.polimi.ingsw.Utils.Messages.ServerMessages.Updates.TakeResourcesFromMarketUpdate;
 import it.polimi.ingsw.Utils.ResourceLocator;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.ImageCursor;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -194,5 +197,14 @@ public class PlayerBoardController extends Controller {
             e.printStackTrace();
         }
         move.show();
+    }
+
+    public void showTakeResourcesFromMarketUpdate(TakeResourcesFromMarketUpdate update){
+        Alert alertUpdate = new Alert(Alert.AlertType.INFORMATION);
+        alertUpdate.setTitle("Take resources from market correctly performed!");
+        alertUpdate.setX(400);
+        alertUpdate.setY(200);
+        alertUpdate.setContentText("You correctly performed you action: \n" + "You got " + update.getEarnedResources());
+        alertUpdate.show();
     }
 }

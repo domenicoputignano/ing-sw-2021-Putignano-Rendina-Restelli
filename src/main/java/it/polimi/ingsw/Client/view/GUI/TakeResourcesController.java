@@ -3,6 +3,7 @@ package it.polimi.ingsw.Client.view.GUI;
 import it.polimi.ingsw.Client.clientstates.gui.TakeResourcesFromMarketGUI;
 import it.polimi.ingsw.Client.reducedmodel.ReducedMarble;
 import it.polimi.ingsw.Client.reducedmodel.ReducedMarketTray;
+import it.polimi.ingsw.Commons.ColorMarble;
 import it.polimi.ingsw.Utils.MarbleDestination;
 import it.polimi.ingsw.Utils.MarketChoice;
 import it.polimi.ingsw.Utils.Pair;
@@ -63,6 +64,8 @@ public class TakeResourcesController extends Controller{
                 sel1ExtraDepot,sel2ExtraDepot,sel3ExtraDepot,sel4ExtraDepot,
                 discard1,discard2,discard3,discard4;
 
+    private MarbleDestination marble1Choice, marble2Choice, marble3Choice, marble4Choice;
+
     private boolean depot1Marble1, depot2Marble1, depot3Marble1, extraMarble1, discardMarble1,
                 depot1Marble2, depot2Marble2, depot3Marble2, extraMarble2, discardMarble2,
                 depot1Marble3, depot2Marble3, depot3Marble3, extraMarble3, discardMarble3,
@@ -118,53 +121,16 @@ public class TakeResourcesController extends Controller{
     private void parseWarehouseChoices(){
         List<ReducedMarble> marbles = state.getSelectedMarbles();
 
-        if(depot1Marble1){
-            state.addMarbleChoice(new Pair<>(marbles.get(0), MarbleDestination.DEPOT1));
-        } else if(depot2Marble1) {
-            state.addMarbleChoice(new Pair<>(marbles.get(0), MarbleDestination.DEPOT2));
-        } else if(depot3Marble1) {
-            state.addMarbleChoice(new Pair<>(marbles.get(0), MarbleDestination.DEPOT3));
-        } else if(extraMarble1) {
-            state.addMarbleChoice(new Pair<>(marbles.get(0), MarbleDestination.EXTRA));
-        } else if(discardMarble1) {
-            state.addMarbleChoice(new Pair<>(marbles.get(0), MarbleDestination.DISCARD));
+        state.addMarbleChoice(new Pair<>(marbles.get(0), marble1Choice));
+
+        state.addMarbleChoice(new Pair<>(marbles.get(1), marble2Choice));
+
+        state.addMarbleChoice(new Pair<>(marbles.get(2), marble3Choice));
+
+        if(marbles.size() == 4){
+            state.addMarbleChoice(new Pair<>(marbles.get(3), marble4Choice));
         }
 
-        if(depot1Marble2){
-            state.addMarbleChoice(new Pair<>(marbles.get(1), MarbleDestination.DEPOT1));
-        } else if(depot2Marble2) {
-            state.addMarbleChoice(new Pair<>(marbles.get(1), MarbleDestination.DEPOT2));
-        } else if(depot3Marble2) {
-            state.addMarbleChoice(new Pair<>(marbles.get(1), MarbleDestination.DEPOT3));
-        } else if(extraMarble2) {
-            state.addMarbleChoice(new Pair<>(marbles.get(1), MarbleDestination.EXTRA));
-        } else if(discardMarble2) {
-            state.addMarbleChoice(new Pair<>(marbles.get(1), MarbleDestination.DISCARD));
-        }
-
-        if(depot1Marble3){
-            state.addMarbleChoice(new Pair<>(marbles.get(2), MarbleDestination.DEPOT1));
-        } else if(depot2Marble3) {
-            state.addMarbleChoice(new Pair<>(marbles.get(2), MarbleDestination.DEPOT2));
-        } else if(depot3Marble3) {
-            state.addMarbleChoice(new Pair<>(marbles.get(2), MarbleDestination.DEPOT3));
-        } else if(extraMarble3) {
-            state.addMarbleChoice(new Pair<>(marbles.get(2), MarbleDestination.EXTRA));
-        } else if(discardMarble3) {
-            state.addMarbleChoice(new Pair<>(marbles.get(2), MarbleDestination.DISCARD));
-        }
-
-        if(depot1Marble4){
-            state.addMarbleChoice(new Pair<>(marbles.get(3), MarbleDestination.DEPOT1));
-        } else if(depot2Marble4) {
-            state.addMarbleChoice(new Pair<>(marbles.get(3), MarbleDestination.DEPOT2));
-        } else if(depot3Marble4) {
-            state.addMarbleChoice(new Pair<>(marbles.get(3), MarbleDestination.DEPOT3));
-        } else if(extraMarble4) {
-            state.addMarbleChoice(new Pair<>(marbles.get(3), MarbleDestination.EXTRA));
-        } else if(discardMarble4) {
-            state.addMarbleChoice(new Pair<>(marbles.get(3), MarbleDestination.DISCARD));
-        }
     }
 
     private void setSelectedMarbles(){
@@ -323,26 +289,38 @@ public class TakeResourcesController extends Controller{
     }
     public void setPositionButton()
     {
-        sel1Depot1.setVisible(true);
-        sel1Depot2.setVisible(true);
-        sel1Depot3.setVisible(true);
-        sel2Depot1.setVisible(true);
-        sel2Depot2.setVisible(true);
-        sel2Depot3.setVisible(true);
-        sel3Depot1.setVisible(true);
-        sel3Depot2.setVisible(true);
-        sel3Depot3.setVisible(true);
-        sel4Depot1.setVisible(true);
-        sel4Depot2.setVisible(true);
-        sel4Depot3.setVisible(true);
-        sel1ExtraDepot.setVisible(true);
-        sel2ExtraDepot.setVisible(true);
-        sel3ExtraDepot.setVisible(true);
-        sel4ExtraDepot.setVisible(true);
-        discard1.setVisible(true);
-        discard2.setVisible(true);
-        discard3.setVisible(true);
-        discard4.setVisible(true);
+        if(chosenMarbles.get(0).getColorMarble() != ColorMarble.WHITE && chosenMarbles.get(2).getColorMarble() != ColorMarble.RED){
+            sel1Depot1.setVisible(true);
+            sel1Depot2.setVisible(true);
+            sel1Depot3.setVisible(true);
+            sel1ExtraDepot.setVisible(true);
+            discard1.setVisible(true);
+        } else marble1Choice = MarbleDestination.NOTNEEDED;
+
+        if(chosenMarbles.get(1).getColorMarble() != ColorMarble.WHITE && chosenMarbles.get(2).getColorMarble() != ColorMarble.RED){
+            sel2Depot1.setVisible(true);
+            sel2Depot2.setVisible(true);
+            sel2Depot3.setVisible(true);
+            sel2ExtraDepot.setVisible(true);
+            discard2.setVisible(true);
+        } else marble2Choice = MarbleDestination.NOTNEEDED;
+
+        if(chosenMarbles.get(2).getColorMarble() != ColorMarble.WHITE && chosenMarbles.get(2).getColorMarble() != ColorMarble.RED){
+            sel3Depot1.setVisible(true);
+            sel3Depot2.setVisible(true);
+            sel3Depot3.setVisible(true);
+            sel3ExtraDepot.setVisible(true);
+            discard3.setVisible(true);
+        } else marble3Choice = MarbleDestination.NOTNEEDED;
+
+        if(chosenMarbles.size() == 4 && chosenMarbles.get(3).getColorMarble() != ColorMarble.WHITE && chosenMarbles.get(3).getColorMarble() != ColorMarble.RED){
+            sel4Depot1.setVisible(true);
+            sel4Depot2.setVisible(true);
+            sel4Depot3.setVisible(true);
+            sel4ExtraDepot.setVisible(true);
+            discard4.setVisible(true);
+        } else marble4Choice = MarbleDestination.NOTNEEDED;
+
         okButton.setVisible(true);
     }
 
@@ -373,11 +351,7 @@ public class TakeResourcesController extends Controller{
         clearButtonSelection(sel1Depot3);
         clearButtonSelection(sel1ExtraDepot);
         clearButtonSelection(discard1);
-        depot1Marble1 = true;
-        depot2Marble1 = false;
-        depot3Marble1 = false;
-        extraMarble1 = false;
-        discardMarble1 = false;
+        marble1Choice = MarbleDestination.DEPOT1;
     }
 
     @FXML
@@ -387,11 +361,7 @@ public class TakeResourcesController extends Controller{
         clearButtonSelection(sel1Depot3);
         clearButtonSelection(sel1ExtraDepot);
         clearButtonSelection(discard1);
-        depot1Marble1 = false;
-        depot2Marble1 = true;
-        depot3Marble1 = false;
-        extraMarble1 = false;
-        discardMarble1 = false;
+        marble1Choice = MarbleDestination.DEPOT2;
     }
 
     @FXML
@@ -401,11 +371,7 @@ public class TakeResourcesController extends Controller{
         clearButtonSelection(sel1Depot2);
         clearButtonSelection(sel1ExtraDepot);
         clearButtonSelection(discard1);
-        depot1Marble1 = false;
-        depot2Marble1 = false;
-        depot3Marble1 = true;
-        extraMarble1 = false;
-        discardMarble1 = false;
+        marble1Choice = MarbleDestination.DEPOT3;
     }
 
     @FXML
@@ -415,11 +381,7 @@ public class TakeResourcesController extends Controller{
         clearButtonSelection(sel1Depot2);
         clearButtonSelection(sel1Depot3);
         clearButtonSelection(discard1);
-        depot1Marble1 = false;
-        depot2Marble1 = false;
-        depot3Marble1 = false;
-        extraMarble1 = true;
-        discardMarble1 = false;
+        marble1Choice = MarbleDestination.EXTRA;
     }
 
     @FXML
@@ -429,11 +391,7 @@ public class TakeResourcesController extends Controller{
         clearButtonSelection(sel1Depot2);
         clearButtonSelection(sel1Depot3);
         clearButtonSelection(sel1ExtraDepot);
-        depot1Marble1 = false;
-        depot2Marble1 = false;
-        depot3Marble1 = false;
-        extraMarble1 = false;
-        discardMarble1 = true;
+        marble1Choice = MarbleDestination.DISCARD;
     }
 
     @FXML
@@ -443,11 +401,7 @@ public class TakeResourcesController extends Controller{
         clearButtonSelection(sel2Depot3);
         clearButtonSelection(sel2ExtraDepot);
         clearButtonSelection(discard2);
-        depot1Marble2 = true;
-        depot2Marble2 = false;
-        depot3Marble2 = false;
-        extraMarble2 = false;
-        discardMarble2 = false;
+        marble2Choice = MarbleDestination.DEPOT1;
     }
 
     @FXML
@@ -457,11 +411,7 @@ public class TakeResourcesController extends Controller{
         clearButtonSelection(sel2Depot3);
         clearButtonSelection(sel2ExtraDepot);
         clearButtonSelection(discard2);
-        depot1Marble2 = false;
-        depot2Marble2 = true;
-        depot3Marble2 = false;
-        extraMarble2 = false;
-        discardMarble2 = false;
+        marble2Choice = MarbleDestination.DEPOT2;
     }
 
     @FXML
@@ -471,11 +421,7 @@ public class TakeResourcesController extends Controller{
         clearButtonSelection(sel2Depot2);
         clearButtonSelection(sel2ExtraDepot);
         clearButtonSelection(discard2);
-        depot1Marble2 = false;
-        depot2Marble2 = false;
-        depot3Marble2 = true;
-        extraMarble2 = false;
-        discardMarble2 = false;
+        marble2Choice = MarbleDestination.DEPOT3;
     }
 
     @FXML
@@ -485,11 +431,7 @@ public class TakeResourcesController extends Controller{
         clearButtonSelection(sel2Depot2);
         clearButtonSelection(sel2Depot3);
         clearButtonSelection(discard2);
-        depot1Marble2 = false;
-        depot2Marble2 = false;
-        depot3Marble2 = false;
-        extraMarble2 = true;
-        discardMarble2 = false;
+        marble2Choice = MarbleDestination.EXTRA;
     }
 
     @FXML
@@ -499,11 +441,7 @@ public class TakeResourcesController extends Controller{
         clearButtonSelection(sel2Depot2);
         clearButtonSelection(sel2Depot3);
         clearButtonSelection(sel2ExtraDepot);
-        depot1Marble2 = false;
-        depot2Marble2 = false;
-        depot3Marble2 = false;
-        extraMarble2 = false;
-        discardMarble2 = true;
+        marble2Choice = MarbleDestination.DISCARD;
     }
 
     @FXML
@@ -513,11 +451,7 @@ public class TakeResourcesController extends Controller{
         clearButtonSelection(sel3Depot3);
         clearButtonSelection(sel3ExtraDepot);
         clearButtonSelection(discard3);
-        depot1Marble3 = true;
-        depot2Marble3 = false;
-        depot3Marble3 = false;
-        extraMarble3 = false;
-        discardMarble3 = false;
+        marble3Choice = MarbleDestination.DEPOT1;
     }
 
     @FXML
@@ -527,11 +461,7 @@ public class TakeResourcesController extends Controller{
         clearButtonSelection(sel3Depot3);
         clearButtonSelection(sel3ExtraDepot);
         clearButtonSelection(discard3);
-        depot1Marble3 = false;
-        depot2Marble3 = true;
-        depot3Marble3 = false;
-        extraMarble3 = false;
-        discardMarble3 = false;
+        marble3Choice = MarbleDestination.DEPOT2;
     }
 
     @FXML
@@ -541,11 +471,7 @@ public class TakeResourcesController extends Controller{
         clearButtonSelection(sel3Depot2);
         clearButtonSelection(sel3ExtraDepot);
         clearButtonSelection(discard3);
-        depot1Marble3 = false;
-        depot2Marble3 = false;
-        depot3Marble3 = true;
-        extraMarble3 = false;
-        discardMarble3 = false;
+        marble3Choice = MarbleDestination.DEPOT3;
     }
 
     @FXML
@@ -555,11 +481,7 @@ public class TakeResourcesController extends Controller{
         clearButtonSelection(sel3Depot2);
         clearButtonSelection(sel3Depot3);
         clearButtonSelection(discard3);
-        depot1Marble3 = false;
-        depot2Marble3 = false;
-        depot3Marble3 = false;
-        extraMarble3 = true;
-        discardMarble3 = false;
+        marble3Choice = MarbleDestination.EXTRA;
     }
 
     @FXML
@@ -569,11 +491,7 @@ public class TakeResourcesController extends Controller{
         clearButtonSelection(sel3Depot2);
         clearButtonSelection(sel3Depot3);
         clearButtonSelection(sel3ExtraDepot);
-        depot1Marble3 = false;
-        depot2Marble3 = false;
-        depot3Marble3 = false;
-        extraMarble3 = false;
-        discardMarble3 = true;
+        marble3Choice = MarbleDestination.DISCARD;
     }
 
     @FXML
@@ -583,11 +501,7 @@ public class TakeResourcesController extends Controller{
         clearButtonSelection(sel4Depot3);
         clearButtonSelection(sel4ExtraDepot);
         clearButtonSelection(discard4);
-        depot1Marble4 = true;
-        depot2Marble4 = false;
-        depot3Marble4 = false;
-        extraMarble4 = false;
-        discardMarble4 = false;
+        marble4Choice = MarbleDestination.DEPOT1;
     }
 
     @FXML
@@ -597,11 +511,7 @@ public class TakeResourcesController extends Controller{
         clearButtonSelection(sel4Depot3);
         clearButtonSelection(sel4ExtraDepot);
         clearButtonSelection(discard4);
-        depot1Marble4 = false;
-        depot2Marble4 = true;
-        depot3Marble4 = false;
-        extraMarble4 = false;
-        discardMarble4 = false;
+        marble4Choice = MarbleDestination.DEPOT2;
     }
 
     @FXML
@@ -611,11 +521,7 @@ public class TakeResourcesController extends Controller{
         clearButtonSelection(sel4Depot2);
         clearButtonSelection(sel4ExtraDepot);
         clearButtonSelection(discard4);
-        depot1Marble4 = false;
-        depot2Marble4 = false;
-        depot3Marble4 = true;
-        extraMarble4 = false;
-        discardMarble4 = false;
+        marble4Choice = MarbleDestination.DEPOT3;
     }
 
     @FXML
@@ -625,11 +531,7 @@ public class TakeResourcesController extends Controller{
         clearButtonSelection(sel4Depot2);
         clearButtonSelection(sel4Depot3);
         clearButtonSelection(discard4);
-        depot1Marble4 = false;
-        depot2Marble4 = false;
-        depot3Marble4 = false;
-        extraMarble4 = true;
-        discardMarble4 = false;
+        marble4Choice = MarbleDestination.EXTRA;
     }
 
     @FXML
@@ -639,11 +541,7 @@ public class TakeResourcesController extends Controller{
         clearButtonSelection(sel4Depot2);
         clearButtonSelection(sel4Depot3);
         clearButtonSelection(sel4ExtraDepot);
-        depot1Marble4 = false;
-        depot2Marble4 = false;
-        depot3Marble4 = false;
-        extraMarble4 = false;
-        discardMarble4 = true;
+        marble4Choice = MarbleDestination.DISCARD;
     }
 
     @FXML

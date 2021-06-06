@@ -3,6 +3,8 @@ package it.polimi.ingsw.Client.view;
 import it.polimi.ingsw.Client.clientstates.AbstractClientState;
 import it.polimi.ingsw.Client.view.GUI.GUIApp;
 import it.polimi.ingsw.Client.view.GUI.LobbyController;
+import it.polimi.ingsw.Client.view.GUI.PlayerBoardController;
+import it.polimi.ingsw.Client.view.GUI.TakeResourcesController;
 import it.polimi.ingsw.Commons.User;
 import it.polimi.ingsw.Network.Client;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.*;
@@ -109,7 +111,11 @@ public class Gui extends UI{
     @Override
     public void render(TakeResourcesFromMarketUpdate message) {
         if(isReceiverAction(message.getUser())){
-            Platform.runLater(() -> GUIApp.showScene("/gui/FXML/PlayerBoard.fxml"));
+            Platform.runLater(() -> {
+                GUIApp.showScene("/gui/FXML/PlayerBoard.fxml");
+                ((PlayerBoardController)GUIApp.controller).showTakeResourcesFromMarketUpdate(message);
+            });
+
         }
     }
 
