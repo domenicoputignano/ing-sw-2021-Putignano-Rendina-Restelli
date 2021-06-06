@@ -118,13 +118,13 @@
             <Image url="@../img/resourceSupply.png" />
          </image>
       </ImageView>
-      <Text fx:id="resourcesText" layoutX="544.0" layoutY="111.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="381.0" />
-      <Button fx:id="yesResources" layoutX="574.0" layoutY="260.0" mnemonicParsing="false" onAction="#handleYesResources" prefHeight="55.0" prefWidth="120.0" styleClass="chooseYesNo" stylesheets="@../css/button.css" text="Yes" visible="false" />
-      <Button fx:id="noResources" layoutX="734.0" layoutY="260.0" mnemonicParsing="false" onAction="#handleNoResources" prefHeight="55.0" prefWidth="120.0" styleClass="chooseYesNo" stylesheets="@../css/button.css" text="No" visible="false" />
+      <Text fx:id="resourcesText" layoutX="544.0" layoutY="350.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="381.0" />
+      <Button fx:id="yesResources" layoutX="576.0" layoutY="360.0" mnemonicParsing="false" onAction="#handleYesResources" prefHeight="55.0" prefWidth="120.0" styleClass="chooseYesNo" stylesheets="@../css/button.css" text="Yes" visible="false" />
+      <Button fx:id="noResources" layoutX="735.0" layoutY="360.0" mnemonicParsing="false" onAction="#handleNoResources" prefHeight="55.0" prefWidth="120.0" styleClass="chooseYesNo" stylesheets="@../css/button.css" text="No" visible="false" />
       <ImageView fx:id="selMarble1" fitHeight="71.0" fitWidth="71.0" layoutX="565.0" layoutY="136.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="selMarble2" fitHeight="71.0" fitWidth="71.0" layoutX="672.0" layoutY="136.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="selMarble3" fitHeight="71.0" fitWidth="71.0" layoutX="781.0" layoutY="136.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="selMarble4" fitHeight="71.0" fitWidth="71.0" layoutX="888.0" layoutY="136.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="selMarble3" fitHeight="71.0" fitWidth="71.0" layoutX="776.0" layoutY="136.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="selMarble4" fitHeight="71.0" fitWidth="71.0" layoutX="883.0" layoutY="136.0" pickOnBounds="true" preserveRatio="true" />
       <Button fx:id="sel1Depot1" layoutX="529.0" layoutY="351.0" mnemonicParsing="false" onAction="#selectedDepot1Marble1" prefHeight="38.0" prefWidth="114.0" styleClass="selPosition" stylesheets="@../css/button.css" text="Depot1" visible="false" />
       <Button fx:id="sel1Depot2" layoutX="529.0" layoutY="394.0" mnemonicParsing="false" onAction="#selectedDepot2Marble1" prefHeight="38.0" prefWidth="114.0" styleClass="selPosition" stylesheets="@../css/button.css" text="Depot2" visible="false" />
       <Button fx:id="sel1Depot3" layoutX="529.0" layoutY="434.0" mnemonicParsing="false" onAction="#selectedDepot3Marble1" prefHeight="38.0" prefWidth="114.0" styleClass="selPosition" stylesheets="@../css/button.css" text="Depot3" visible="false" />
@@ -146,9 +146,29 @@
       <Button fx:id="sel4Depot3" layoutX="874.0" layoutY="434.0" mnemonicParsing="false" onAction="#selectedDepot3Marble4" prefHeight="38.0" prefWidth="114.0" styleClass="selPosition" stylesheets="@../css/button.css" text="Depot3" visible="false" />
       <Button fx:id="sel4Depot2" layoutX="874.0" layoutY="394.0" mnemonicParsing="false" onAction="#selectedDepot2Marble4" prefHeight="38.0" prefWidth="114.0" styleClass="selPosition" stylesheets="@../css/button.css" text="Depot2" visible="false" />
       <Button fx:id="okButton" layoutX="844.0" layoutY="563.0" mnemonicParsing="false" onAction="#handleOkChoice" prefHeight="71.0" prefWidth="158.0" styleClass="chooseYesNo" stylesheets="@../css/button.css" text="OK" visible="false" />
-      <ImageView fx:id="selResources1" fitHeight="71.0" fitWidth="71.0" layoutX="557.0" layoutY="252.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="selResources2" fitHeight="71.0" fitWidth="71.0" layoutX="670.0" layoutY="252.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="selResources3" fitHeight="71.0" fitWidth="71.0" layoutX="783.0" layoutY="252.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="selResources4" fitHeight="71.0" fitWidth="71.0" layoutX="896.0" layoutY="252.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="selResources1" fitHeight="71.0" fitWidth="71.0" layoutX="557.0" layoutY="253.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="selResources2" fitHeight="71.0" fitWidth="71.0" layoutX="670.0" layoutY="253.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="selResources3" fitHeight="71.0" fitWidth="71.0" layoutX="776.0" layoutY="253.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="selResources4" fitHeight="71.0" fitWidth="71.0" layoutX="883.0" layoutY="253.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="indRes1" fitHeight="32.0" fitWidth="40.0" layoutX="572.0" layoutY="224.0" pickOnBounds="true" preserveRatio="true" rotate="-90.0" visible="false">
+         <image>
+            <Image url="@../img/indicatorMarket.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="indRes2" fitHeight="32.0" fitWidth="40.0" layoutX="690.0" layoutY="224.0" pickOnBounds="true" preserveRatio="true" rotate="-90.0" visible="false">
+         <image>
+            <Image url="@../img/indicatorMarket.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="indRes3" fitHeight="32.0" fitWidth="40.0" layoutX="796.0" layoutY="224.0" pickOnBounds="true" preserveRatio="true" rotate="-90.0" visible="false">
+         <image>
+            <Image url="@../img/indicatorMarket.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="indRes4" fitHeight="32.0" fitWidth="40.0" layoutX="903.0" layoutY="224.0" pickOnBounds="true" preserveRatio="true" rotate="-90.0" visible="false">
+         <image>
+            <Image url="@../img/indicatorMarket.png" />
+         </image>
+      </ImageView>
     </children>
 </AnchorPane>

@@ -43,7 +43,7 @@ public class TakeResourcesController extends Controller{
 
     @FXML
     public ImageView selResources1,selResources2,selResources3,selResources4,
-                    selMarble1,selMarble2,selMarble3,selMarble4;
+                    selMarble1,selMarble2,selMarble3,selMarble4,indRes1,indRes2,indRes3,indRes4;
 
     @FXML
     public Button row1,row2,row3;
@@ -169,10 +169,24 @@ public class TakeResourcesController extends Controller{
     private void setSelectedMarbles(){
         chosenMarbles = state.getSelectedMarbles();
         selMarble1.setImage(new Image(chosenMarbles.get(0).toImage()));
+        selResources1.setImage(new Image(chosenMarbles.get(0).toImage()));
         selMarble2.setImage(new Image(chosenMarbles.get(1).toImage()));
+        selResources2.setImage(new Image(chosenMarbles.get(1).toImage()));
         selMarble3.setImage(new Image(chosenMarbles.get(2).toImage()));
-        if(chosenMarbles.size()==4) selMarble4.setImage(new Image(chosenMarbles.get(3).toImage()));
-        else selMarble4.setImage(null);
+        selResources3.setImage(new Image(chosenMarbles.get(2).toImage()));
+        indRes1.setVisible(true);
+        indRes2.setVisible(true);
+        indRes3.setVisible(true);
+        if(chosenMarbles.size()==4) {
+            selMarble4.setImage(new Image(chosenMarbles.get(3).toImage()));
+            selResources4.setImage(new Image(chosenMarbles.get(3).toImage()));
+            indRes4.setVisible(true);
+        }
+        else {
+            selMarble4.setImage(null);
+            selResources4.setImage(null);
+            indRes4.setVisible(false);
+        }
     }
 
     @FXML
@@ -277,6 +291,14 @@ public class TakeResourcesController extends Controller{
         selResources2.setImage(null);
         selResources3.setImage(null);
         selResources4.setImage(null);
+        selMarble1.setImage(null);
+        selMarble2.setImage(null);
+        selMarble3.setImage(null);
+        selMarble4.setImage(null);
+        indRes1.setVisible(false);
+        indRes2.setVisible(false);
+        indRes3.setVisible(false);
+        indRes4.setVisible(false);
     }
     @FXML
     public void handleNoResources()

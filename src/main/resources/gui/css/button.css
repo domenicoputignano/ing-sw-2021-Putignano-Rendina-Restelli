@@ -113,11 +113,11 @@
     -fx-text-fill: red;
 }
 .chooseLeaderCard{
-    -fx-background-size: 90% auto;
-    -fx-border-radius: 0.5;
+    -fx-background-size: 95% auto;
+    -fx-border-radius: 1;
 }
 .chooseLeaderCard:hover{
-    -fx-background-size: 100% auto;
+    -fx-background-size: 98% auto;
     -fx-border-color: rgb(231,156,48);
     -fx-border-width: 5;
 }
