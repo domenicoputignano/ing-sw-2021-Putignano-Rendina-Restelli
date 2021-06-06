@@ -270,12 +270,17 @@
     -fx-background-size: 105% auto;
 }
 .slotButton{
-    -fx-background-size: 100% auto;
+    -fx-background-size: 95% auto;
+    -fx-border-radius: 0.5;
     -fx-background-image: url("/gui/img/leaderCard1.png");
 }
 .slotButton:hover{
-    -fx-background-size: 105% auto;
+    -fx-background-size: 100% auto;
+    -fx-border-color: rgb(231,156,48);
+    -fx-border-width: 5;
 }
+
 .slotButton:pressed{
-    -fx-background-size: 95% auto;
+    -fx-background-size: 90% auto;
 }
+

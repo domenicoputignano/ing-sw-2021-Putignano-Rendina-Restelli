@@ -50,7 +50,7 @@ public class TakeResourcesController extends Controller{
     public Button column1,column2,column3,column4;
 
     @FXML
-    public Button yesResources,noResources;
+    public Button yesResources,noResources,okButton;
 
 
     @FXML
@@ -88,6 +88,7 @@ public class TakeResourcesController extends Controller{
         state = new TakeResourcesFromMarketGUI(client);
 
         setFont(resourcesText,27);
+        setFont(okButton,27);
         setFont(yesResources,23);
         setFont(noResources,23);
         setFont(sel1Depot1,21);
@@ -316,7 +317,8 @@ public class TakeResourcesController extends Controller{
         discard1.setVisible(true);
         discard2.setVisible(true);
         discard3.setVisible(true);
-        discard4.setVisible(true);;
+        discard4.setVisible(true);
+        okButton.setVisible(true);
     }
 
     private void setMarbleImages() {
@@ -617,6 +619,12 @@ public class TakeResourcesController extends Controller{
         depot3Marble4 = false;
         extraMarble4 = false;
         discardMarble4 = true;
+    }
+
+    @FXML
+    public void handleOkChoice()
+    {
+
     }
 
     private void pressedButton(Button target){

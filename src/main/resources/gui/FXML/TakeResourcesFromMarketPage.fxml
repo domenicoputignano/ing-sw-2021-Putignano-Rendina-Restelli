@@ -145,5 +145,6 @@
       <Button fx:id="sel4ExtraDepot" layoutX="873.0" layoutY="395.0" mnemonicParsing="false" onAction="#selectedExtraDepotMarble4" prefHeight="38.0" prefWidth="114.0" styleClass="selPosition" stylesheets="@../css/button.css" text="Extra Depot" visible="false" />
       <Button fx:id="sel4Depot3" layoutX="873.0" layoutY="349.0" mnemonicParsing="false" onAction="#selectedDepot3Marble4" prefHeight="38.0" prefWidth="114.0" styleClass="selPosition" stylesheets="@../css/button.css" text="Depot3" visible="false" />
       <Button fx:id="sel4Depot2" layoutX="873.0" layoutY="309.0" mnemonicParsing="false" onAction="#selectedDepot2Marble4" prefHeight="38.0" prefWidth="114.0" styleClass="selPosition" stylesheets="@../css/button.css" text="Depot2" visible="false" />
+      <Button fx:id="okButton" layoutX="844.0" layoutY="563.0" mnemonicParsing="false" onAction="#handleOkChoice" prefHeight="71.0" prefWidth="158.0" styleClass="chooseYesNo" stylesheets="@../css/button.css" text="OK" visible="false" />
     </children>
 </AnchorPane>
