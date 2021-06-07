@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane fx:id="takeRespopup" prefHeight="380.0" prefWidth="570.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.Client.view.GUI.TakeResPopupController">
+    <children>
+       <Text fx:id="takeResPopupText1" layoutX="85.0" layoutY="71.0" mouseTransparent="true" text="You correctly took resources from Market ! " />
+      <Text fx:id="takeResPopupText2" layoutX="112.0" layoutY="95.0" mouseTransparent="true" text="You got the following resources:" />
+      <ImageView fx:id="res1" fitHeight="40.0" fitWidth="40.0" layoutX="143.0" layoutY="106.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="res2" fitHeight="40.0" fitWidth="40.0" layoutX="222.0" layoutY="106.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="res4" fitHeight="40.0" fitWidth="40.0" layoutX="222.0" layoutY="150.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="res3" fitHeight="40.0" fitWidth="40.0" layoutX="143.0" layoutY="150.0" pickOnBounds="true" preserveRatio="true" />
+      <Button fx:id="okButton" layoutX="150.0" layoutY="190.0" mnemonicParsing="false" onAction="#handleOkButton" prefHeight="40.0" prefWidth="110.0" styleClass="okButton" stylesheets="@../css/button.css" text="OK" />
+    </children>
+</AnchorPane>

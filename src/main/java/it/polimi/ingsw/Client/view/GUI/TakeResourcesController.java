@@ -307,7 +307,7 @@ public class TakeResourcesController extends Controller{
     }
     public void setPositionButton()
     {
-        if(chosenMarbles.get(0).getColorMarble() != ColorMarble.WHITE && chosenMarbles.get(2).getColorMarble() != ColorMarble.RED){
+        if(chosenMarbles.get(0).getColorMarble() != ColorMarble.WHITE && chosenMarbles.get(0).getColorMarble() != ColorMarble.RED){
             sel1Depot1.setVisible(true);
             sel1Depot2.setVisible(true);
             sel1Depot3.setVisible(true);
@@ -315,7 +315,7 @@ public class TakeResourcesController extends Controller{
             discard1.setVisible(true);
         } else marble1Choice = MarbleDestination.NOTNEEDED;
 
-        if(chosenMarbles.get(1).getColorMarble() != ColorMarble.WHITE && chosenMarbles.get(2).getColorMarble() != ColorMarble.RED){
+        if(chosenMarbles.get(1).getColorMarble() != ColorMarble.WHITE && chosenMarbles.get(1).getColorMarble() != ColorMarble.RED){
             sel2Depot1.setVisible(true);
             sel2Depot2.setVisible(true);
             sel2Depot3.setVisible(true);

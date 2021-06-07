@@ -30,4 +30,7 @@ public class ReducedFaithTrack implements Serializable {
         return resultBuilder.toString();
     }
 
+    public int getFaithMarker() {
+        return faithMarker;
+    }
 }

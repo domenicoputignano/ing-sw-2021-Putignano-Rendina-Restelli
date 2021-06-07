@@ -1,6 +1,7 @@
 package it.polimi.ingsw.Client.view.GUI;
 
 import it.polimi.ingsw.Commons.ResourceType;
+import it.polimi.ingsw.Utils.Messages.ClientMessages.EndTurnMessage;
 import it.polimi.ingsw.Utils.Messages.ClientMessages.TakeResourcesFromMarketMessage;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.Updates.TakeResourcesFromMarketUpdate;
 import it.polimi.ingsw.Utils.ResourceLocator;
@@ -30,7 +31,7 @@ public class PlayerBoardController extends Controller {
     public ImageView leaderCard1;
 
     @FXML
-    public Button chooseAction,moveAction;
+    public Button chooseAction,moveAction,endTurn,otherPlayers;
 
     @FXML
     public ImageView leaderCard2;
@@ -62,6 +63,10 @@ public class PlayerBoardController extends Controller {
                 bSize)));
         setFont(chooseAction,24);
         setFont(moveAction,24);
+        setFont(endTurn,24);
+        setFont(otherPlayers,21);
+        otherPlayers.setStyle("-fx-text-fill: rgb(35, 25, 22);");
+        endTurn.setStyle("-fx-text-fill: rgb(35, 25, 22);");
         chooseAction.setStyle("-fx-text-fill: rgb(35, 25, 22);");
         moveAction.setStyle("-fx-text-fill: rgb(35, 25, 22);");
 
@@ -72,6 +77,10 @@ public class PlayerBoardController extends Controller {
         leaderCard2.setImage(new Image(client.getGame().getPlayer(client.getUser()).getAvailableLeaderCards().get(1).toImage()));
         initializeCells();
         initializeDepots();
+        initializeFaithMarker();
+        if(!client.getUI().hasDoneNormalAction())
+            endTurn.setVisible(false);
+        else endTurn.setVisible(true);
     }
 
     private void initializeCells()
@@ -108,6 +117,18 @@ public class PlayerBoardController extends Controller {
         favorTiles[1].setImage(new Image("/gui/img/favorTile2D.png"));
         favorTiles[2].setImage(new Image("/gui/img/favorTile3D.png"));
         cells[0].setImage(new Image("/gui/img/faith.png"));
+    }
+
+    private void initializeFaithMarker()
+    {
+        clearFaithMarker();
+        cells[client.getGame().getPlayer(client.getUser()).getPersonalBoard().getFaithTrack().getFaithMarker()].setImage(new Image("/gui/img/faith.png"));
+    }
+
+    private void clearFaithMarker()
+    {
+        for(int i=0;i<25;i++)
+            cells[i].setImage(null);
     }
 
     private void initializeDepots(){
@@ -197,6 +218,12 @@ public class PlayerBoardController extends Controller {
             e.printStackTrace();
         }
         move.show();
+    }
+
+    @FXML
+    public void handleEndTurn()
+    {
+        client.sendMessage(new EndTurnMessage());
     }
 
     public void showTakeResourcesFromMarketUpdate(TakeResourcesFromMarketUpdate update){

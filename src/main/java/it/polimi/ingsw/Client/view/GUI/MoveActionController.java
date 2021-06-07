@@ -28,7 +28,7 @@ public class MoveActionController extends Controller{
     @FXML
     @Override
     public void initialize() {
-
+        this.client = GUIApp.client;
 
         anchorMoveAction.setBackground(new Background(new BackgroundImage(new Image("/gui/img/exit_tab.png"),
                 BackgroundRepeat.NO_REPEAT,
@@ -39,6 +39,7 @@ public class MoveActionController extends Controller{
         setFont(moveActionText,39);
         extraDepotsText.setStyle("-fx-text-fill: rgb(35, 25, 22);");
         setFont(extraDepotsText,30);
+        initializeDepots();
     }
 
     private void initializeDepots(){

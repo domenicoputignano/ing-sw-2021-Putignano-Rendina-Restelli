@@ -49,6 +49,7 @@ public class Controller {
     Stage exit;
     Stage infoStage;
     Stage mainstage;
+    Stage takeResPopup;
 
 
 
@@ -97,6 +98,31 @@ public class Controller {
         exit.show();
 
     }
+
+    public void handleTakeResourcesFromMarketUpdate()
+    {
+        takeResPopup = new Stage();
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/FXML/TakeResourcesPopup.fxml"));
+            Parent root = loader.load();
+            GUIApp.controller = loader.getController();
+            Scene scene = new Scene(Objects.requireNonNull(root), 420, 280, Color.TRANSPARENT);
+            scene.setCursor(new ImageCursor(new Image(CURSOR), 36, 45));
+            takeResPopup.initStyle(StageStyle.TRANSPARENT);
+            takeResPopup.setAlwaysOnTop(true);
+            scene.setUserData(loader);
+            takeResPopup.initModality(Modality.WINDOW_MODAL);
+            takeResPopup.initOwner(GUIApp.getStage());
+            scene.setUserData(loader);
+            takeResPopup.setScene(scene);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        takeResPopup.show();
+
+    }
+
     @FXML
     void info()
     {
@@ -119,7 +145,6 @@ public class Controller {
             e.printStackTrace();
         }
         infoStage.show();
-
     }
 
     public void setClient(Client client) {
