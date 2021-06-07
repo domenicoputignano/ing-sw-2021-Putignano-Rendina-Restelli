@@ -1,12 +1,14 @@
 package it.polimi.ingsw.Client.view.GUI;
 
 import it.polimi.ingsw.Client.Checker;
+import it.polimi.ingsw.Client.clientstates.gui.BuyDevCardGUI;
 import it.polimi.ingsw.Commons.ColorCard;
 import it.polimi.ingsw.Commons.DevelopmentCard;
 import it.polimi.ingsw.Commons.Effect;
 import it.polimi.ingsw.Commons.ResourceType;
 import it.polimi.ingsw.Utils.Pair;
 import it.polimi.ingsw.Utils.ResourceLocator;
+import it.polimi.ingsw.Utils.ResourceSource;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
@@ -16,8 +18,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class BuyDevCardController extends Controller{
@@ -43,7 +44,7 @@ public class BuyDevCardController extends Controller{
     public ImageView selectedCard;
 
     @FXML
-    public Button buyCard, toPayment;
+    public Button buyCard, toPayment, concludeAction;
 
     @FXML
     public ImageView deck1,deck2,deck3,deck4,deck5,deck6,deck7,deck8,deck9,deck10,deck11,deck12;
@@ -68,8 +69,11 @@ public class BuyDevCardController extends Controller{
 
     DevelopmentCard developmentCard;
     boolean isCardBuyable;
+    int slotIndex;
     List<Pair<ResourceType,Integer>> neededResources = new ArrayList<>();
     List<Pair<ResourceType,Integer>> startingCost = new ArrayList<>();
+    Map<ResourceSource, EnumMap<ResourceType,Integer>> paymentInstruction = new HashMap<>();
+    BuyDevCardGUI buyDevCardAction;
 
 
     @FXML
@@ -77,7 +81,7 @@ public class BuyDevCardController extends Controller{
     public void initialize() {
 
         this.client = GUIApp.client;
-
+        buyDevCardAction = new BuyDevCardGUI(client);
         anchorBuyDevCard.setBackground(new Background(new BackgroundImage(new Image("/gui/img/exit_tab.png"),
                 BackgroundRepeat.NO_REPEAT,
                 BackgroundRepeat.NO_REPEAT,
@@ -103,12 +107,12 @@ public class BuyDevCardController extends Controller{
         setFont(errorDevText,30);
         buyCard.setStyle("-fx-text-fill: rgb(35, 25, 22);");
         setFont(buyCard,24);
+        concludeAction.setStyle("-fx-text-fill: rgb(35, 25, 22);");
+        setFont(concludeAction,24);
         selectHowPickResourcesText.setStyle("-fx-text-fill: rgb(35, 25, 22);");
         setFont(selectHowPickResourcesText,35);
         resDepot1Text.setStyle("-fx-text-fill: rgb(35, 25, 22);");
         setFont(resDepot1Text,30);
-        resDepot2Text.setStyle("-fx-text-fill: rgb(35, 25, 22);");
-        setFont(resDepot2Text,30);
         resDepot2Text.setStyle("-fx-text-fill: rgb(35, 25, 22);");
         setFont(resDepot2Text,30);
         resDepot3Text.setStyle("-fx-text-fill: rgb(35, 25, 22);");
@@ -196,7 +200,7 @@ public class BuyDevCardController extends Controller{
     private void setErrorDevTextKO(String error){
         errorDevText.setText(error);
         errorDevText.setVisible(true);
-        buyCard.setVisible(true);
+        //buyCard.setVisible(true);
     }
 
     @FXML
@@ -209,6 +213,8 @@ public class BuyDevCardController extends Controller{
         } else {
             isCardBuyable = false;
             setErrorDevTextKO("You don't have \nenough resources \nto purchase \nselected card");
+            //TODO da togliere
+            buyCard.setVisible(true);
         }
     }
 
@@ -222,6 +228,8 @@ public class BuyDevCardController extends Controller{
         } else {
             isCardBuyable = false;
             setErrorDevTextKO("You don't have \nenough resources \nto purchase \nselected card");
+            //TODO da togliere
+            buyCard.setVisible(true);
         }
     }
 
@@ -234,6 +242,8 @@ public class BuyDevCardController extends Controller{
         } else {
             isCardBuyable = false;
             setErrorDevTextKO("You don't have \nenough resources \nto purchase \nselected card");
+            //TODO da togliere
+            buyCard.setVisible(true);
         }
     }
 
@@ -247,6 +257,8 @@ public class BuyDevCardController extends Controller{
         } else {
             isCardBuyable = false;
             setErrorDevTextKO("You don't have \nenough resources \nto purchase \nselected card");
+            //TODO da togliere
+            buyCard.setVisible(true);
         }
     }
 
@@ -260,6 +272,8 @@ public class BuyDevCardController extends Controller{
         } else {
             isCardBuyable = false;
             setErrorDevTextKO("You don't have \nenough resources \nto purchase \nselected card");
+            //TODO da togliere
+            buyCard.setVisible(true);
         }
     }
 
@@ -273,6 +287,8 @@ public class BuyDevCardController extends Controller{
         } else {
             isCardBuyable = false;
             setErrorDevTextKO("You don't have \nenough resources \nto purchase \nselected card");
+            //TODO da togliere
+            buyCard.setVisible(true);
         }
     }
 
@@ -286,6 +302,8 @@ public class BuyDevCardController extends Controller{
         } else {
             isCardBuyable = false;
             setErrorDevTextKO("You don't have \nenough resources \nto purchase \nselected card");
+            //TODO da togliere
+            buyCard.setVisible(true);
         }
     }
 
@@ -299,6 +317,8 @@ public class BuyDevCardController extends Controller{
         } else {
             isCardBuyable = false;
             setErrorDevTextKO("You don't have \nenough resources \nto purchase \nselected card");
+            //TODO da togliere
+            buyCard.setVisible(true);
         }
     }
 
@@ -312,6 +332,8 @@ public class BuyDevCardController extends Controller{
         } else {
             isCardBuyable = false;
             setErrorDevTextKO("You don't have \nenough resources \nto purchase \nselected card");
+            //TODO da togliere
+            buyCard.setVisible(true);
         }
     }
 
@@ -325,6 +347,8 @@ public class BuyDevCardController extends Controller{
         } else {
             isCardBuyable = false;
             setErrorDevTextKO("You don't have \nenough resources \nto purchase \nselected card");
+            //TODO da togliere
+            buyCard.setVisible(true);
         }
     }
 
@@ -339,6 +363,8 @@ public class BuyDevCardController extends Controller{
 
             isCardBuyable = false;
             setErrorDevTextKO("You don't have \nenough resources \nto purchase \nselected card");
+            //TODO da togliere
+            buyCard.setVisible(true);
         }
     }
 
@@ -352,6 +378,8 @@ public class BuyDevCardController extends Controller{
         } else {
             isCardBuyable = false;
             setErrorDevTextKO("You don't have \nenough resources \nto purchase \nselected card");
+            //TODO da togliere
+            buyCard.setVisible(true);
         }
     }
 
@@ -417,9 +445,10 @@ public class BuyDevCardController extends Controller{
     }
 
     @FXML
-    public void handleButtonSelection() {
+    public void handleSlotSelection() {
         RadioButton slot = (RadioButton) availableSlot.getSelectedToggle();
-        int slotIndex = Integer.parseInt(String.valueOf(slot.getText().charAt(slot.getText().length()-1)));
+        slotIndex = Integer.parseInt(String.valueOf(slot.getText().charAt(slot.getText().length()-1)));
+        //if(buyDevCardAction.canBuyCardOfLevel(developmentCard.getType().getLevel())) {
         if (client.getGame().getPlayer(client.getUser()).getPersonalBoard().canPutCardInSlot(slotIndex, developmentCard.getType().getLevel())) {
             setDevelopmentCardTextOK("Now we need instruction on\nhow you want to pay the card");
             buyCard.setVisible(false);
@@ -470,8 +499,8 @@ public class BuyDevCardController extends Controller{
                     textField3.setVisible(true);
                     textField3.setText("0");
                 }
-                textField1.setText(""+ firstCurrentValueDepot);
-                textField2.setText(""+ firstCurrentValueDepot);
+                textField1.setText("0");
+                textField2.setText("0");
             }
             if(i == 1) {
                 resource2Cost.setImage(new Image(ResourceLocator.retrieveResourceTypeImage(neededResources.get(1).getKey())));
@@ -488,11 +517,11 @@ public class BuyDevCardController extends Controller{
                     resExtra2Text.setVisible(true);
                     plusExtraRes2.setVisible(true);
                     minusExtraRes2.setVisible(true);
-                    textField6.setVisible(true);
                     textField6.setText("0");
+                    textField6.setVisible(true);
                 }
-                textField4.setText(""+ firstCurrentValueDepot);
-                textField5.setText(""+ firstCurrentValueDepot);
+                textField4.setText("0");
+                textField5.setText("0");
 
             }
             if(i == 2) {
@@ -513,43 +542,91 @@ public class BuyDevCardController extends Controller{
                     textField9.setText("0");
                     textField9.setVisible(true);
                 }
-                textField7.setText(""+ firstCurrentValueDepot);
-                textField8.setText(""+ firstCurrentValueDepot);
+                textField7.setText("0");
+                textField8.setText("0");
             }
         }
+        toPayment.setVisible(false);
     }
+
+    @FXML
+    public void minusFirstResourceFromDepot() {
+        makeTextInvisible(errorDevText);
+        firstCurrentValueDepot--;
+        if(!addToCostList(1, 1, firstCurrentValueDepot, textField1)) firstCurrentValueDepot++;
+    }
+
+    @FXML
+    public void minusSecondResourceFromDepot() {
+        makeTextInvisible(errorDevText);
+        secondCurrentValueDepot--;
+        if(!addToCostList(2, 1, secondCurrentValueDepot, textField4)) secondCurrentValueDepot++;
+    }
+
+    @FXML
+    public void minusThirdResourceFromDepot() {
+        makeTextInvisible(errorDevText);
+        thirdCurrentValueDepot--;
+        if(!addToCostList(3,1, thirdCurrentValueDepot, textField7)) thirdCurrentValueDepot++;
+    }
+
+    @FXML
+    public void minusFirstResourceFromStrongbox() {
+        makeTextInvisible(errorDevText);
+        firstCurrentValueStrongbox--;
+        if(!addToCostList(1,1, firstCurrentValueStrongbox, textField2)) firstCurrentValueStrongbox++;
+    }
+    @FXML
+    public void minusSecondResourceFromStrongbox() {
+        makeTextInvisible(errorDevText);
+        secondCurrentValueStrongbox--;
+        if(!addToCostList(2,1, secondCurrentValueStrongbox, textField5)) secondCurrentValueStrongbox++;
+    }
+    @FXML
+    public void minusThirdResourceFromStrongbox() {
+        makeTextInvisible(errorDevText);
+        thirdCurrentValueStrongbox--;
+        if(!addToCostList(3,1,thirdCurrentValueStrongbox, textField8)) thirdCurrentValueStrongbox++;
+    }
+
+
 
     @FXML
     public void plusFirstResourceFromDepot() {
-        editCostList(1, 1, firstCurrentValueDepot);
+        firstCurrentValueDepot++;
+        if(!editedCostList(1, 1, firstCurrentValueDepot, textField1)) firstCurrentValueDepot--;
     }
+
 
     @FXML
     public void plusSecondResourceFromDepot(){
-        editCostList(2, 1, secondCurrentValueDepot);
+        secondCurrentValueDepot++;
+        if(!editedCostList(2, 1, secondCurrentValueDepot, textField4)) secondCurrentValueDepot--;
     }
 
     @FXML
     public void plusThirdResourceFromDepot(){
-        editCostList(3, 1, thirdCurrentValueDepot);
+        thirdCurrentValueDepot++;
+        if(!editedCostList(3, 1, thirdCurrentValueDepot, textField7)) thirdCurrentValueDepot--;
     }
 
     @FXML
     public void plusFirstResourceFromStrongbox() {
-        editCostList(1, 1, firstCurrentValueStrongbox);
+        firstCurrentValueStrongbox++;
+        if(!editedCostList(1, 1, firstCurrentValueStrongbox, textField2)) firstCurrentValueStrongbox--;
     }
 
     @FXML
     public void plusSecondResourceFromStrongbox(){
-        editCostList(2, 1, secondCurrentValueStronbox);
+        secondCurrentValueStrongbox++;
+        if(!editedCostList(2, 1,secondCurrentValueStrongbox , textField5)) secondCurrentValueStrongbox--;
     }
 
     @FXML
     public void plusThirdResourceFromStrongbox(){
-        editCostList(3, 1, thirdCurrentValueStrongbox);
+        thirdCurrentValueStrongbox++;
+        if(!editedCostList(3, 1, thirdCurrentValueStrongbox, textField8)) thirdCurrentValueStrongbox--;
     }
-
-
 
 
     int firstCurrentValueDepot = 0;
@@ -557,22 +634,85 @@ public class BuyDevCardController extends Controller{
     int thirdCurrentValueDepot = 0;
 
 
-
     int firstCurrentValueStrongbox = 0;
-    int secondCurrentValueStronbox = 0;
+    int secondCurrentValueStrongbox = 0;
     int thirdCurrentValueStrongbox = 0;
 
+    int firstCurrentValueExtra = 0;
+    int secondCurrentValueExtra = 0;
+    int thirdCurrentValueExtra = 0;
 
 
-    private void editCostList(int resourceIndex, int taken, int currentValue) {
+    private boolean editedCostList(int resourceIndex, int taken, int currentValue, TextField resource) {
         int required = neededResources.get(resourceIndex-1).getValue();
         if(required>=taken) {
-            currentValue = currentValue + taken;
-            firstCurrentValueDepot++;
+            errorDevText.setVisible(false);
             neededResources.get(resourceIndex-1).setValue(required-taken);
-            textField1.setText(""+currentValue);
+            resource.setText(""+currentValue);
+            showFinishButton();
+            return true;
         } else {
             setErrorDevTextKO("Maximum number selected!");
+            showFinishButton();
+            return false;
+        }
+    }
+
+    private boolean addToCostList(int resourceIndex, int taken, int currentValue, TextField resource) {
+        if(currentValue >= 0) {
+            neededResources.get(resourceIndex-1).setValue(neededResources.get(resourceIndex-1).getValue()+taken);
+            resource.setText(""+currentValue);
+            showFinishButton();
+            return true;
+        } else {
+            showFinishButton();
+            return false;
+        }
+    }
+
+    public void handleActionConclusion() {
+        initializeMap();
+        for(int i = 0; i < neededResources.size(); i++) {
+            if (i == 0)
+                createInstructionEntry(i, firstCurrentValueDepot, firstCurrentValueStrongbox, firstCurrentValueExtra);
+            if (i == 1)
+                createInstructionEntry(i, secondCurrentValueDepot, secondCurrentValueStrongbox, secondCurrentValueExtra);
+            if (i == 2)
+                createInstructionEntry(i, thirdCurrentValueDepot, thirdCurrentValueStrongbox, thirdCurrentValueExtra);
+        }
+        buyDevCardAction.compileMessage(developmentCard.getType(),paymentInstruction, slotIndex);
+        buyDevCardAction.manageUserInteraction();
+    }
+
+
+    public void showFinishButton() {
+        concludeAction.setVisible(isPaymentDone());
+    }
+
+    public void makeTextInvisible(Text text) {
+        text.setVisible(false);
+    }
+
+    private boolean isPaymentDone() {
+        return neededResources.stream().allMatch(x -> x.getValue() == 0);
+    }
+
+    private void initializeMap() {
+        paymentInstruction.put(ResourceSource.DEPOT, new EnumMap<>(ResourceType.class));
+        paymentInstruction.put(ResourceSource.STRONGBOX, new EnumMap<>(ResourceType.class));
+        paymentInstruction.put(ResourceSource.EXTRA, new EnumMap<>(ResourceType.class));
+
+    }
+
+    private void createInstructionEntry(int resourceIndex,int sourceDepot, int sourceStrongbox, int sourceExtra) {
+        if(sourceDepot > 0) {
+            paymentInstruction.get(ResourceSource.DEPOT).put(neededResources.get(resourceIndex).getKey(),sourceDepot);
+        }
+        if(sourceStrongbox > 0) {
+            paymentInstruction.get(ResourceSource.STRONGBOX).put(neededResources.get(resourceIndex).getKey(),sourceStrongbox);
+        }
+        if(sourceExtra > 0) {
+            paymentInstruction.get(ResourceSource.EXTRA).put(neededResources.get(resourceIndex).getKey(),sourceExtra);
         }
     }
 

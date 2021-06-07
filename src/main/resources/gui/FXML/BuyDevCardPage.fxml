@@ -123,8 +123,8 @@
       <Text fx:id="resExtra1Text" layoutX="392.0" layoutY="290.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Extra Depot:" visible="false" />
       <Text fx:id="resExtra2Text" layoutX="392.0" layoutY="430.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Extra Depot:" visible="false" />
       <Text fx:id="resExtra3Text" layoutX="392.0" layoutY="580.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Extra Depot:" visible="false" />
-      <Button fx:id="minusDepotRes1" alignment="CENTER" contentDisplay="CENTER" layoutX="503.0" layoutY="180.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="46.0" styleClass="minusButton" stylesheets="@../css/button.css" visible="false" />
-      <Button fx:id="minusStrRes1" layoutX="503.0" layoutY="220.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="46.0" styleClass="minusButton" stylesheets="@../css/button.css" visible="false" />
+      <Button fx:id="minusDepotRes1" alignment="CENTER" contentDisplay="CENTER" layoutX="503.0" layoutY="180.0" mnemonicParsing="false" onAction="#minusFirstResourceFromDepot" prefHeight="46.0" prefWidth="46.0" styleClass="minusButton" stylesheets="@../css/button.css" visible="false" />
+      <Button fx:id="minusStrRes1" layoutX="503.0" layoutY="220.0" mnemonicParsing="false" onAction="#minusFirstResourceFromStrongbox" prefHeight="46.0" prefWidth="46.0" styleClass="minusButton" stylesheets="@../css/button.css" visible="false" />
       <Button fx:id="minusExtraRes1" layoutX="503.0" layoutY="260.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="46.0" styleClass="minusButton" stylesheets="@../css/button.css" visible="false" />
       <Button fx:id="plusDepotRes1" layoutX="597.0" layoutY="180.0" mnemonicParsing="false" onAction="#plusFirstResourceFromDepot" prefHeight="46.0" prefWidth="46.0" styleClass="plusButton" stylesheets="@../css/button.css" visible="false" />
       <Button fx:id="plusStrRes1" layoutX="597.0" layoutY="220.0" mnemonicParsing="false" onAction="#plusFirstResourceFromStrongbox" prefHeight="46.0" prefWidth="46.0" styleClass="plusButton" stylesheets="@../css/button.css" visible="false" />
@@ -135,18 +135,18 @@
       <Button fx:id="plusDepotRes2" layoutX="597.0" layoutY="320.0" mnemonicParsing="false" onAction="#plusSecondResourceFromDepot" prefHeight="46.0" prefWidth="46.0" styleClass="plusButton" stylesheets="@../css/button.css" visible="false" />
       <Button fx:id="plusExtraRes2" layoutX="597.0" layoutY="400.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="46.0" styleClass="plusButton" stylesheets="@../css/button.css" visible="false" />
       <Button fx:id="plusStrRes2" layoutX="597.0" layoutY="360.0" mnemonicParsing="false" onAction="#plusSecondResourceFromStrongbox" prefHeight="46.0" prefWidth="46.0" styleClass="plusButton" stylesheets="@../css/button.css" visible="false" />
-      <Button fx:id="minusStrRes2" layoutX="503.0" layoutY="360.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="46.0" styleClass="minusButton" stylesheets="@../css/button.css" visible="false" />
+      <Button fx:id="minusStrRes2" layoutX="503.0" layoutY="360.0" mnemonicParsing="false" onAction="#minusSecondResourceFromStrongbox" prefHeight="46.0" prefWidth="46.0" styleClass="minusButton" stylesheets="@../css/button.css" visible="false" />
       <TextField fx:id="textField4" alignment="CENTER" editable="false" layoutX="551.0" layoutY="324.0" mouseTransparent="true" prefHeight="35.0" prefWidth="44.0" styleClass="textFieldResources" stylesheets="@../css/text.css" visible="false" />
       <TextField fx:id="textField5" alignment="CENTER" editable="false" layoutX="551.0" layoutY="364.0" mouseTransparent="true" prefHeight="35.0" prefWidth="44.0" styleClass="textFieldResources" stylesheets="@../css/text.css" visible="false" />
       <TextField fx:id="textField6" alignment="CENTER" editable="false" layoutX="551.0" layoutY="404.0" mouseTransparent="true" prefHeight="35.0" prefWidth="44.0" styleClass="textFieldResources" stylesheets="@../css/text.css" visible="false" />
       <Button fx:id="minusExtraRes2" layoutX="503.0" layoutY="400.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="46.0" styleClass="minusButton" stylesheets="@../css/button.css" visible="false" />
-      <Button fx:id="minusDepotRes2" layoutX="503.0" layoutY="320.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="46.0" styleClass="minusButton" stylesheets="@../css/button.css" visible="false" />
+      <Button fx:id="minusDepotRes2" layoutX="503.0" layoutY="320.0" mnemonicParsing="false" onAction="#minusSecondResourceFromDepot" prefHeight="46.0" prefWidth="46.0" styleClass="minusButton" stylesheets="@../css/button.css" visible="false" />
       <TextField fx:id="textField8" alignment="CENTER" editable="false" layoutX="551.0" layoutY="516.0" mouseTransparent="true" prefHeight="35.0" prefWidth="44.0" styleClass="textFieldResources" stylesheets="@../css/text.css" visible="false" />
-      <Button fx:id="minusDepotRes3" layoutX="503.0" layoutY="472.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="46.0" styleClass="minusButton" stylesheets="@../css/button.css" visible="false" />
+      <Button fx:id="minusDepotRes3" layoutX="503.0" layoutY="472.0" mnemonicParsing="false" onAction="#minusThirdResourceFromDepot" prefHeight="46.0" prefWidth="46.0" styleClass="minusButton" stylesheets="@../css/button.css" visible="false" />
       <TextField fx:id="textField7" alignment="CENTER" editable="false" layoutX="551.0" layoutY="476.0" mouseTransparent="true" prefHeight="35.0" prefWidth="44.0" styleClass="textFieldResources" stylesheets="@../css/text.css" visible="false" />
       <TextField fx:id="textField9" alignment="CENTER" editable="false" layoutX="551.0" layoutY="556.0" mouseTransparent="true" prefHeight="35.0" prefWidth="44.0" styleClass="textFieldResources" stylesheets="@../css/text.css" visible="false" />
       <Button fx:id="minusExtraRes3" layoutX="503.0" layoutY="552.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="46.0" styleClass="minusButton" stylesheets="@../css/button.css" visible="false" />
-      <Button fx:id="minusStrRes3" layoutX="503.0" layoutY="512.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="46.0" styleClass="minusButton" stylesheets="@../css/button.css" visible="false" />
+      <Button fx:id="minusStrRes3" layoutX="503.0" layoutY="512.0" mnemonicParsing="false" onAction="#minusThirdResourceFromStrongbox" prefHeight="46.0" prefWidth="46.0" styleClass="minusButton" stylesheets="@../css/button.css" visible="false" />
       <Button fx:id="plusDepotRes3" layoutX="597.0" layoutY="472.0" mnemonicParsing="false" onAction="#plusThirdResourceFromDepot" prefHeight="46.0" prefWidth="46.0" styleClass="plusButton" stylesheets="@../css/button.css" visible="false" />
       <Button fx:id="plusExtraRes3" layoutX="597.0" layoutY="552.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="46.0" styleClass="plusButton" stylesheets="@../css/button.css" visible="false" />
       <Button fx:id="plusStrRes3" layoutX="597.0" layoutY="512.0" mnemonicParsing="false" onAction="#plusThirdResourceFromStrongbox" prefHeight="46.0" prefWidth="46.0" styleClass="plusButton" stylesheets="@../css/button.css" visible="false" />
@@ -157,23 +157,24 @@
                   <Font size="40.0" />
                </font>
             </Label>
-            <RadioButton alignment="TOP_LEFT" contentDisplay="TOP" mnemonicParsing="false" onAction="#handleButtonSelection" text="Slot 1">
+            <RadioButton alignment="TOP_LEFT" contentDisplay="TOP" mnemonicParsing="false" onAction="#handleSlotSelection" text="Slot 1">
                <font>
                   <Font name="System Bold" size="25.0" />
                </font>
                <toggleGroup>
                   <ToggleGroup fx:id="availableSlot" />
                </toggleGroup></RadioButton>
-            <RadioButton mnemonicParsing="false" onAction="#handleButtonSelection" text="Slot 2" toggleGroup="$availableSlot">
+            <RadioButton mnemonicParsing="false" onAction="#handleSlotSelection" text="Slot 2" toggleGroup="$availableSlot">
                <font>
                   <Font name="System Bold" size="25.0" />
                </font></RadioButton>
-            <RadioButton mnemonicParsing="false" onAction="#handleButtonSelection" text="Slot 3" toggleGroup="$availableSlot">
+            <RadioButton mnemonicParsing="false" onAction="#handleSlotSelection" text="Slot 3" toggleGroup="$availableSlot">
                <font>
                   <Font name="System Bold" size="25.0" />
                </font></RadioButton>
          </children>
       </VBox>
       <Button fx:id="toPayment" layoutX="842.0" layoutY="568.0" mnemonicParsing="false" onAction="#goToPayment" prefHeight="69.0" prefWidth="137.0" styleClass="okButton" stylesheets="@../css/button.css" text="Next Step" visible="false" />
+      <Button fx:id="concludeAction" contentDisplay="CENTER" layoutX="842.0" layoutY="568.0" mnemonicParsing="false" onAction="#handleActionConclusion" prefHeight="69.0" prefWidth="137.0" styleClass="okButton" stylesheets="@../css/button.css" text="Finish" visible="false" />
     </children>
 </AnchorPane>

@@ -22,12 +22,12 @@ public abstract class AbstractBuyDevCard extends AbstractClientState{
         return takeDeckFromCardType(messageToSend.getType()).isEmpty();
     }
 
-    protected boolean checkCostRequiredCardType(Map<ResourceType, Integer> cost) {
+    public boolean checkCostRequiredCardType(Map<ResourceType, Integer> cost) {
         ReducedPlayer player = client.getGame().getCurrPlayer();
         return Checker.checkResources(cost, player.getPersonalBoard());
     }
 
-    protected void computeActualCost(Deck requiredDeck) {
+    public void computeActualCost(Deck requiredDeck) {
         ReducedPlayer player = client.getGame().getCurrPlayer();
         actualCost = new EnumMap<>(requiredDeck.getTop().getCost());
 
@@ -36,7 +36,8 @@ public abstract class AbstractBuyDevCard extends AbstractClientState{
                 actualCost.put(x.getLeaderEffect().getType(), actualCost.get(x.getLeaderEffect().getType())-1));
     }
 
-    protected boolean canBuyCardOfLevel(int level) {
+
+    public boolean canBuyCardOfLevel(int level) {
         return client.getGame().getCurrPlayer().getPersonalBoard().canBuyCardOfLevel(level);
     }
 
