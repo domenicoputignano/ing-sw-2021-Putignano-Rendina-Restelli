@@ -45,6 +45,23 @@ public class LeaderActionController extends Controller{
 
         this.client = GUIApp.client;
 
+        if(client.getGame().getCurrPlayer().getNumOfAvailableLeaderCards()==1) {
+            leaderCard1.setX(210);
+            active1.setTranslateX(205);
+            discard1.setTranslateX(210);
+            active2.setVisible(false);
+            discard2.setVisible(false);
+        }
+        if(client.getGame().getCurrPlayer().getNumOfAvailableLeaderCards()==0) {
+            active1.setVisible(false);
+            discard1.setVisible(false);
+            leaderCard1.setVisible(false);
+            leaderCard2.setVisible(false);
+            okButton.setText("Close");
+            active2.setVisible(false);
+            discard2.setVisible(false);
+        }
+
         if(client.getGame().getPlayer(client.getUser()).getNumOfAvailableLeaderCards()==2){
             leaderCard1.setImage(new Image(client.getGame().getPlayer(client.getUser()).getAvailableLeaderCards()
                     .stream().filter(x->!x.isActive()).collect(Collectors.toList()).get(0).toImage()));

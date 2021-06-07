@@ -282,4 +282,14 @@
 .slotButton:pressed{
     -fx-background-size: 93% auto;
 }
+.basicProduction{
+    -fx-background-image: url("/gui/img/basicProduction.png");
+    -fx-background-size: 97% auto;
+}
+.basicProduction:hover{
+    -fx-background-size: 103% auto;
+}
+.basicProduction:pressed{
+    -fx-background-size: 90% auto;
+}
 

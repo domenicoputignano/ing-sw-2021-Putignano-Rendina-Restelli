@@ -19,7 +19,7 @@ public class ActivateProductionController extends Controller{
     public Button closeActivateProd;
 
     @FXML
-    public Button slot1,slot2,slot3;
+    public Button slot1,slot2,slot3,basicProduction;
 
     @FXML
     @Override
@@ -38,13 +38,13 @@ public class ActivateProductionController extends Controller{
 
     private void initializeSlotsImages()
     {
-        slot1.setStyle("-fx-background-image: url(" +
-                client.getGame().getDeckTopCard(3, ColorCard.green).toImage() + ")");
+       /* slot1.setStyle("-fx-background-image: url(" +
+                client.getGame().getCurrPlayer().getPersonalBoard().peekTopCardInSlot(1).toImage() + ")");
         slot2.setStyle("-fx-background-image: url(" +
-                client.getGame().getDeckTopCard(3, ColorCard.yellow).toImage() + ")");
+                client.getGame().getCurrPlayer().getPersonalBoard().peekTopCardInSlot(2).toImage() + ")");
         slot3.setStyle("-fx-background-image: url(" +
-                client.getGame().getDeckTopCard(3, ColorCard.purple).toImage() + ")");
-    }
+                client.getGame().getCurrPlayer().getPersonalBoard().peekTopCardInSlot(3).toImage() + ")");
+    */}
 
     @FXML
     public void handleCloseChooseAction()
