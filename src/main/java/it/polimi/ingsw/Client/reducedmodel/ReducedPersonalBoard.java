@@ -34,7 +34,9 @@ public class ReducedPersonalBoard implements Serializable {
         return warehouse.getAvailableResources();
     }
 
-    public int getNumOfAvailableLeaderCards() { return leaderCards.size()-(int)leaderCards.stream().filter(LeaderCard::isActive).count(); }
+    public int getNumOfNotActiveLeaderCards() { return leaderCards.size()-(int)leaderCards.stream().filter(LeaderCard::isActive).count(); }
+
+    public int getNumOfLeaderCards() { return leaderCards.size(); }
 
     public Slot[] getSlots() {
         return slots;

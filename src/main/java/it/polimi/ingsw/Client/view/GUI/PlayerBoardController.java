@@ -2,7 +2,6 @@ package it.polimi.ingsw.Client.view.GUI;
 
 import it.polimi.ingsw.Commons.ResourceType;
 import it.polimi.ingsw.Utils.Messages.ClientMessages.EndTurnMessage;
-import it.polimi.ingsw.Utils.Messages.ClientMessages.TakeResourcesFromMarketMessage;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.Updates.TakeResourcesFromMarketUpdate;
 import it.polimi.ingsw.Utils.ResourceLocator;
 import javafx.fxml.FXML;
@@ -72,9 +71,12 @@ public class PlayerBoardController extends Controller {
 
         this.client = GUIApp.client;
 
-        leaderCard1.setImage(new Image(client.getGame().getPlayer(client.getUser()).getAvailableLeaderCards().get(0).toImage()));
+        if(client.getGame().getPlayer(client.getUser()).getNumOfLeaderCards() > 0)
+            leaderCard1.setImage(new Image(client.getGame().getPlayer(client.getUser()).getAvailableLeaderCards().get(0).toImage()));
 
-        leaderCard2.setImage(new Image(client.getGame().getPlayer(client.getUser()).getAvailableLeaderCards().get(1).toImage()));
+        if(client.getGame().getPlayer(client.getUser()).getNumOfLeaderCards() > 1)
+            leaderCard2.setImage(new Image(client.getGame().getPlayer(client.getUser()).getAvailableLeaderCards().get(1).toImage()));
+
         initializeCells();
         initializeDepots();
         initializeFaithMarker();

@@ -8,7 +8,6 @@ import it.polimi.ingsw.Utils.Messages.ServerMessages.*;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.Updates.*;
 import javafx.application.Platform;
 
-import javax.print.DocFlavor;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -110,7 +109,7 @@ public class Gui extends UI{
         if(isReceiverAction(message.getUser())){
             Platform.runLater(() -> {
                 GUIApp.showScene("/gui/FXML/PlayerBoard.fxml");
-                GUIApp.controller.handleTakeResourcesFromMarketUpdate();
+                GUIApp.controller.showTakeResourcesFromMarketUpdate();
                 ((TakeResPopupController)GUIApp.controller).setImages(message);
             });
 
@@ -129,7 +128,14 @@ public class Gui extends UI{
 
     @Override
     public void render(LeaderActionUpdate message) {
+        if(isReceiverAction(message.getUser())){
+            Platform.runLater(() -> {
+                GUIApp.showScene("/gui/FXML/PlayerBoard.fxml");
+                GUIApp.controller.showLeaderActionUpdate();
+                ((LeaderActionPopupController)GUIApp.controller).setImage(message);
+            });
 
+        }
     }
 
     @Override

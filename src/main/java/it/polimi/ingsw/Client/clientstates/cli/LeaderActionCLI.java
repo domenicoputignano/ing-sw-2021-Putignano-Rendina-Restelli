@@ -4,7 +4,6 @@ import it.polimi.ingsw.Client.clientstates.AbstractLeaderAction;
 import it.polimi.ingsw.Client.view.CLI;
 import it.polimi.ingsw.Network.Client;
 
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class LeaderActionCLI extends AbstractLeaderAction {
@@ -25,7 +24,7 @@ public class LeaderActionCLI extends AbstractLeaderAction {
                 String leaderActionChosen = chooseLeaderAction();
                 messageToSend.setToDiscard(leaderActionChosen.equalsIgnoreCase("discard"));
                 System.out.printf("Well, you have %d leader card available, which one do you want to %s (value in [1 - %d]) ? ",
-                        client.getGame().getCurrPlayer().getNumOfAvailableLeaderCards(), leaderActionChosen, client.getGame().getCurrPlayer().getNumOfAvailableLeaderCards());
+                        client.getGame().getCurrPlayer().getNumOfNotActiveLeaderCards(), leaderActionChosen, client.getGame().getCurrPlayer().getNumOfNotActiveLeaderCards());
                 int chosenIndex = chooseCardIndex();
                 messageToSend.setIndex(chosenIndex);
                 client.sendMessage(messageToSend);
@@ -67,14 +66,14 @@ public class LeaderActionCLI extends AbstractLeaderAction {
                 }
             }
             catch(NumberFormatException e){
-                System.out.printf("Invalid chosen index, please select again index between [1 - %d] : ", client.getGame().getCurrPlayer().getNumOfAvailableLeaderCards());
+                System.out.printf("Invalid chosen index, please select again index between [1 - %d] : ", client.getGame().getCurrPlayer().getNumOfNotActiveLeaderCards());
             }
         } while(indexNotInRange(chosenIndex));
         return chosenIndex;
     }
 
     private boolean indexNotInRange(int chosenIndex) {
-        return (chosenIndex < 1) || chosenIndex > client.getGame().getCurrPlayer().getNumOfAvailableLeaderCards();
+        return (chosenIndex < 1) || chosenIndex > client.getGame().getCurrPlayer().getNumOfNotActiveLeaderCards();
     }
 
 

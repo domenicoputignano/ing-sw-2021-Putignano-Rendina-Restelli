@@ -50,6 +50,7 @@ public class ChooseActionController extends Controller{
     @Override
     public void initialize() {
 
+        this.client = GUIApp.client;
 
         anchorChoose.setBackground(new Background(new BackgroundImage(new Image("/gui/img/exit_tab.png"),
                 BackgroundRepeat.NO_REPEAT,
@@ -67,6 +68,12 @@ public class ChooseActionController extends Controller{
         activateProd.setStyle("-fx-text-fill: rgb(35, 25, 22);");
         setFont(takeResources,35);
         takeResources.setStyle("-fx-text-fill: rgb(35, 25, 22);");
+
+        if(client.getUI().hasDoneNormalAction()) {
+            buyDevCard.setVisible(false);
+            activateProd.setVisible(false);
+            takeResources.setVisible(false);
+        }
     }
 
     @FXML

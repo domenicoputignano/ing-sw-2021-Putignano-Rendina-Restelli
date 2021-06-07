@@ -1,6 +1,5 @@
 package it.polimi.ingsw.Client.reducedmodel;
 
-import it.polimi.ingsw.Client.reducedmodel.ReducedPersonalBoard;
 import it.polimi.ingsw.Commons.Effect;
 import it.polimi.ingsw.Commons.LeaderCard;
 import it.polimi.ingsw.Commons.User;
@@ -31,7 +30,9 @@ public class ReducedPlayer implements Serializable {
         return personalBoard;
     }
 
-    public int getNumOfAvailableLeaderCards() {  return personalBoard.getNumOfAvailableLeaderCards(); }
+    public int getNumOfNotActiveLeaderCards() {  return personalBoard.getNumOfNotActiveLeaderCards(); }
+
+    public int getNumOfLeaderCards() { return personalBoard.getNumOfLeaderCards(); }
 
     public void updatePersonalBoard(ReducedPersonalBoard personalBoard) {
         this.personalBoard = personalBoard;

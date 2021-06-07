@@ -45,14 +45,14 @@ public class LeaderActionController extends Controller{
 
         this.client = GUIApp.client;
 
-        if(client.getGame().getCurrPlayer().getNumOfAvailableLeaderCards()==1) {
+        if(client.getGame().getCurrPlayer().getNumOfNotActiveLeaderCards()==1) {
             leaderCard1.setX(210);
             active1.setTranslateX(205);
             discard1.setTranslateX(210);
             active2.setVisible(false);
             discard2.setVisible(false);
         }
-        if(client.getGame().getCurrPlayer().getNumOfAvailableLeaderCards()==0) {
+        if(client.getGame().getCurrPlayer().getNumOfNotActiveLeaderCards()==0) {
             active1.setVisible(false);
             discard1.setVisible(false);
             leaderCard1.setVisible(false);
@@ -62,13 +62,13 @@ public class LeaderActionController extends Controller{
             discard2.setVisible(false);
         }
 
-        if(client.getGame().getPlayer(client.getUser()).getNumOfAvailableLeaderCards()==2){
+        if(client.getGame().getPlayer(client.getUser()).getNumOfNotActiveLeaderCards()==2){
             leaderCard1.setImage(new Image(client.getGame().getPlayer(client.getUser()).getAvailableLeaderCards()
                     .stream().filter(x->!x.isActive()).collect(Collectors.toList()).get(0).toImage()));
             leaderCard2.setImage(new Image(client.getGame().getPlayer(client.getUser()).getAvailableLeaderCards()
                     .stream().filter(x->!x.isActive()).collect(Collectors.toList()).get(1).toImage()));
 
-        } else if(client.getGame().getPlayer(client.getUser()).getNumOfAvailableLeaderCards()==1){
+        } else if(client.getGame().getPlayer(client.getUser()).getNumOfNotActiveLeaderCards()==1){
             leaderCard1.setImage(new Image(client.getGame().getPlayer(client.getUser()).getAvailableLeaderCards()
                     .stream().filter(x->!x.isActive()).collect(Collectors.toList()).get(0).toImage()));
             // TODO centrare l'immagine e rendere i bottoni della seconda carta invisibili
@@ -143,11 +143,11 @@ public class LeaderActionController extends Controller{
 
 
     private void editLeaderAction(int leaderIndex, boolean toDiscard) {
-        if(client.getGame().getCurrPlayer().getNumOfAvailableLeaderCards()==1) {
+        if(client.getGame().getCurrPlayer().getNumOfNotActiveLeaderCards()==1) {
             leaderAction.setLeaderAction(toDiscard);
             //TODO setta ad 1 per evitare side effect o problemi lato server
             leaderAction.setLeaderIndex(1);
-        } else if(client.getGame().getCurrPlayer().getNumOfAvailableLeaderCards() == 2) {
+        } else if(client.getGame().getCurrPlayer().getNumOfNotActiveLeaderCards() == 2) {
             leaderAction.setLeaderAction(toDiscard);
             leaderAction.setLeaderIndex(leaderIndex);
         }

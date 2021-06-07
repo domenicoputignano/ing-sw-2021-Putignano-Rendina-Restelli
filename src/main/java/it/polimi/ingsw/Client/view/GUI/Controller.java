@@ -50,6 +50,7 @@ public class Controller {
     Stage infoStage;
     Stage mainstage;
     Stage takeResPopup;
+    Stage leaderActionPopup;
 
 
 
@@ -99,7 +100,7 @@ public class Controller {
 
     }
 
-    public void handleTakeResourcesFromMarketUpdate()
+    public void showTakeResourcesFromMarketUpdate()
     {
         takeResPopup = new Stage();
         try {
@@ -121,6 +122,28 @@ public class Controller {
         }
         takeResPopup.show();
 
+    }
+
+    public void showLeaderActionUpdate(){
+        leaderActionPopup = new Stage();
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/FXML/LeaderActionPopup.fxml"));
+            Parent root = loader.load();
+            GUIApp.controller = loader.getController();
+            Scene scene = new Scene(Objects.requireNonNull(root), 500, 400, Color.TRANSPARENT);
+            scene.setCursor(new ImageCursor(new Image(CURSOR), 36, 45));
+            leaderActionPopup.initStyle(StageStyle.TRANSPARENT);
+            leaderActionPopup.setAlwaysOnTop(true);
+            scene.setUserData(loader);
+            leaderActionPopup.initModality(Modality.WINDOW_MODAL);
+            leaderActionPopup.initOwner(GUIApp.getStage());
+            scene.setUserData(loader);
+            leaderActionPopup.setScene(scene);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        leaderActionPopup.show();
     }
 
     @FXML
