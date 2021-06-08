@@ -230,7 +230,8 @@ public class BuyDevCardController extends Controller{
     public void checkIfCanBuyCard3Green() {
         developmentCard = client.getGame().getDeckTopCard(3,ColorCard.green);
         setSelectedCardImage(developmentCard);
-        if(Checker.checkResources(developmentCard.getCost(),client.getGame().getPlayer(client.getUser()).getPersonalBoard())) {
+        if(Checker.checkResources(buyDevCardAction.computeActualCost(developmentCard),client.getGame().getPlayer(client.getUser()).getPersonalBoard())){
+        //if(Checker.checkResources(developmentCard.getCost(),client.getGame().getPlayer(client.getUser()).getPersonalBoard())) {
             isCardBuyable = true;
             setFeasiblePurchaseOK();
         } else {
@@ -243,7 +244,8 @@ public class BuyDevCardController extends Controller{
     public void checkIfCanBuyCard2Green() {
         developmentCard = client.getGame().getDeckTopCard(2,ColorCard.green);
         setSelectedCardImage(developmentCard);
-        if(Checker.checkResources(developmentCard.getCost(),client.getGame().getPlayer(client.getUser()).getPersonalBoard())) {
+        if(Checker.checkResources(buyDevCardAction.computeActualCost(developmentCard),client.getGame().getPlayer(client.getUser()).getPersonalBoard())){
+        //if(Checker.checkResources(developmentCard.getCost(),client.getGame().getPlayer(client.getUser()).getPersonalBoard())) {
             isCardBuyable = true;
             setFeasiblePurchaseOK();
         } else {
@@ -256,7 +258,9 @@ public class BuyDevCardController extends Controller{
     public void checkIfCanBuyCard1Green() {
         developmentCard = client.getGame().getDeckTopCard(1,ColorCard.green);
         setSelectedCardImage(developmentCard);
-        if(Checker.checkResources(developmentCard.getCost(),client.getGame().getPlayer(client.getUser()).getPersonalBoard())) {
+
+        if(Checker.checkResources(buyDevCardAction.computeActualCost(developmentCard),client.getGame().getPlayer(client.getUser()).getPersonalBoard())){
+        //if(Checker.checkResources(developmentCard.getCost(),client.getGame().getPlayer(client.getUser()).getPersonalBoard())) {
             setFeasiblePurchaseOK();
             isCardBuyable = true;
         } else {
@@ -269,7 +273,8 @@ public class BuyDevCardController extends Controller{
     public void checkIfCanBuyCard3Blue() {
         developmentCard = client.getGame().getDeckTopCard(3,ColorCard.blue);
         setSelectedCardImage(developmentCard);
-        if(Checker.checkResources(developmentCard.getCost(),client.getGame().getPlayer(client.getUser()).getPersonalBoard())) {
+        //if(Checker.checkResources(developmentCard.getCost(),client.getGame().getPlayer(client.getUser()).getPersonalBoard())) {
+        if(Checker.checkResources(buyDevCardAction.computeActualCost(developmentCard),client.getGame().getPlayer(client.getUser()).getPersonalBoard())){
             isCardBuyable = true;
             setFeasiblePurchaseOK();
         } else {
@@ -282,7 +287,8 @@ public class BuyDevCardController extends Controller{
     public void checkIfCanBuyCard2Blue() {
         developmentCard = client.getGame().getDeckTopCard(2,ColorCard.blue);
         setSelectedCardImage(developmentCard);
-        if(Checker.checkResources(developmentCard.getCost(),client.getGame().getPlayer(client.getUser()).getPersonalBoard())) {
+        //if(Checker.checkResources(developmentCard.getCost(),client.getGame().getPlayer(client.getUser()).getPersonalBoard())) {
+        if(Checker.checkResources(buyDevCardAction.computeActualCost(developmentCard),client.getGame().getPlayer(client.getUser()).getPersonalBoard())){
             isCardBuyable = true;
             setFeasiblePurchaseOK();
         } else {
@@ -295,7 +301,8 @@ public class BuyDevCardController extends Controller{
     public void checkIfCanBuyCard1Blue() {
         developmentCard = client.getGame().getDeckTopCard(1,ColorCard.blue);
         setSelectedCardImage(developmentCard);
-        if(Checker.checkResources(developmentCard.getCost(),client.getGame().getPlayer(client.getUser()).getPersonalBoard())) {
+        //if(Checker.checkResources(developmentCard.getCost(),client.getGame().getPlayer(client.getUser()).getPersonalBoard())) {
+        if(Checker.checkResources(buyDevCardAction.computeActualCost(developmentCard),client.getGame().getPlayer(client.getUser()).getPersonalBoard())){
             isCardBuyable = true;
             setFeasiblePurchaseOK();
         } else {
@@ -308,7 +315,9 @@ public class BuyDevCardController extends Controller{
     public void checkIfCanBuyCard3Yellow() {
         developmentCard = client.getGame().getDeckTopCard(3,ColorCard.yellow);
         setSelectedCardImage(developmentCard);
-        if(Checker.checkResources(developmentCard.getCost(),client.getGame().getPlayer(client.getUser()).getPersonalBoard())) {
+        //if(Checker.checkResources(developmentCard.getCost(),client.getGame().getPlayer(client.getUser()).getPersonalBoard())) {
+
+        if(Checker.checkResources(buyDevCardAction.computeActualCost(developmentCard),client.getGame().getPlayer(client.getUser()).getPersonalBoard())){
             isCardBuyable = true;
             setFeasiblePurchaseOK();
         } else {
@@ -321,7 +330,8 @@ public class BuyDevCardController extends Controller{
     public void checkIfCanBuyCard2Yellow() {
         developmentCard = client.getGame().getDeckTopCard(2,ColorCard.yellow);
         setSelectedCardImage(developmentCard);
-        if(Checker.checkResources(developmentCard.getCost(),client.getGame().getPlayer(client.getUser()).getPersonalBoard())) {
+        //if(Checker.checkResources(developmentCard.getCost(),client.getGame().getPlayer(client.getUser()).getPersonalBoard())) {
+        if(Checker.checkResources(buyDevCardAction.computeActualCost(developmentCard),client.getGame().getPlayer(client.getUser()).getPersonalBoard())){
             isCardBuyable = true;
             setFeasiblePurchaseOK();
         } else {
@@ -334,7 +344,8 @@ public class BuyDevCardController extends Controller{
     public void checkIfCanBuyCard1Yellow() {
         developmentCard = client.getGame().getDeckTopCard(1,ColorCard.yellow);
         setSelectedCardImage(developmentCard);
-        if(Checker.checkResources(developmentCard.getCost(),client.getGame().getPlayer(client.getUser()).getPersonalBoard())) {
+        //if(Checker.checkResources(developmentCard.getCost(),client.getGame().getPlayer(client.getUser()).getPersonalBoard())) {
+        if(Checker.checkResources(buyDevCardAction.computeActualCost(developmentCard),client.getGame().getPlayer(client.getUser()).getPersonalBoard())){
             isCardBuyable = true;
             setFeasiblePurchaseOK();
         } else {
@@ -347,7 +358,8 @@ public class BuyDevCardController extends Controller{
     public void checkIfCanBuyCard3Purple() {
         developmentCard = client.getGame().getDeckTopCard(3,ColorCard.purple);
         setSelectedCardImage(developmentCard);
-        if(Checker.checkResources(developmentCard.getCost(),client.getGame().getPlayer(client.getUser()).getPersonalBoard())) {
+        //if(Checker.checkResources(developmentCard.getCost(),client.getGame().getPlayer(client.getUser()).getPersonalBoard())) {
+        if(Checker.checkResources(buyDevCardAction.computeActualCost(developmentCard),client.getGame().getPlayer(client.getUser()).getPersonalBoard())){
             isCardBuyable = true;
             setFeasiblePurchaseOK();
         } else {
@@ -360,7 +372,9 @@ public class BuyDevCardController extends Controller{
     public void checkIfCanBuyCard2Purple() {
         developmentCard = client.getGame().getDeckTopCard(2,ColorCard.purple);
         setSelectedCardImage(developmentCard);
-        if(Checker.checkResources(developmentCard.getCost(),client.getGame().getPlayer(client.getUser()).getPersonalBoard())) {
+        //if(Checker.checkResources(developmentCard.getCost(),client.getGame().getPlayer(client.getUser()).getPersonalBoard())) {
+
+        if(Checker.checkResources(buyDevCardAction.computeActualCost(developmentCard),client.getGame().getPlayer(client.getUser()).getPersonalBoard())){
             isCardBuyable = true;
             setFeasiblePurchaseOK();
         } else {
@@ -374,7 +388,8 @@ public class BuyDevCardController extends Controller{
     public void checkIfCanBuyCard1Purple() {
         developmentCard = client.getGame().getDeckTopCard(1,ColorCard.purple);
         setSelectedCardImage(developmentCard);
-        if(Checker.checkResources(developmentCard.getCost(),client.getGame().getPlayer(client.getUser()).getPersonalBoard())) {
+        //if(Checker.checkResources(developmentCard.getCost(),client.getGame().getPlayer(client.getUser()).getPersonalBoard())) {
+        if(Checker.checkResources(buyDevCardAction.computeActualCost(developmentCard),client.getGame().getPlayer(client.getUser()).getPersonalBoard())){
             isCardBuyable = true;
             setFeasiblePurchaseOK();
         } else {
@@ -469,6 +484,7 @@ public class BuyDevCardController extends Controller{
     public boolean isAvailableExtraDepotOfType(ResourceType resource) {
         return client.getGame().getPlayer(client.getUser()).getPersonalBoard().isAvailableEffectOfType(Effect.EXTRADEPOT,resource);
     }
+
 
 
     public void switchToHowToTakeResourcesPhase()
@@ -712,6 +728,8 @@ public class BuyDevCardController extends Controller{
         }
     }
 
+
+    @FXML
     public void handleActionConclusion() {
         initializeMap();
         for(int i = 0; i < neededResources.size(); i++) {
@@ -724,8 +742,13 @@ public class BuyDevCardController extends Controller{
         }
         buyDevCardAction.compileMessage(developmentCard.getType(),paymentInstruction, slotIndex);
         buyDevCardAction.manageUserInteraction();
+        closeAction();
     }
 
+    private void closeAction() {
+        Stage stage = (Stage) concludeAction.getScene().getWindow();
+        stage.close();
+    }
 
     public void showFinishButton() {
         concludeAction.setVisible(isPaymentDone());

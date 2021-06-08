@@ -31,7 +31,7 @@ public class BuyDevCardMessage implements TurnControllerHandleable {
         return destinationSlot;
     }
 
-    //Da implementare in ciascuna classe messaggio
+
     public boolean isValidMessage()
     {
         if(type == null || type.getLevel() <=0 || type.getLevel() > 3 || type.getColor() == null)
