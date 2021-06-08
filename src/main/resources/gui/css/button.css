@@ -183,7 +183,7 @@
     -fx-background-size: 85% auto;
 }
 .leaderAction{
-    -fx-background-image: url("/gui/img/userButton.png");
+    -fx-background-image: url("/gui/img/okButton.png");
     -fx-background-size: 90% auto;
 }
 .leaderAction:hover{
@@ -223,7 +223,7 @@
     -fx-background-size: 85% auto;
 }
 .selPosition{
-    -fx-background-image: url("/gui/img/userButton.png");
+    -fx-background-image: url("/gui/img/okButton.png");
     -fx-background-size: 90% auto;
 }
 .selPosition:hover{

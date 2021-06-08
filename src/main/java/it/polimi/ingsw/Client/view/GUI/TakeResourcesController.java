@@ -27,7 +27,7 @@ public class TakeResourcesController extends Controller{
     public AnchorPane anchorBuyDevCard;
 
     @FXML
-    public TextField takeResourcesText;
+    public Text takeResourcesText;
 
     @FXML
     public Text resourcesText;
@@ -89,6 +89,8 @@ public class TakeResourcesController extends Controller{
 
         state = new TakeResourcesFromMarketGUI(client);
 
+        takeResourcesText.setStyle("-fx-text-fill: rgb(35, 25, 22);");
+        setFont(takeResourcesText,39);
         setFont(resourcesText,27);
         setFont(okButton,27);
         setFont(yesResources,23);
