@@ -8,7 +8,7 @@ import javafx.scene.layout.*;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-public class ActivateProductionController extends Controller{
+public class ActivateProductionController extends Controller implements PaymentController{
     @FXML
     public AnchorPane anchorActivateProd;
 
@@ -52,4 +52,20 @@ public class ActivateProductionController extends Controller{
         Stage stage = (Stage) closeActivateProd.getScene().getWindow();
         stage.close();
     }
+
+    @Override
+    public void setVisibleFirstResource() {
+
+    }
+
+    @Override
+    public void setVisibleSecondResource() {
+
+    }
+
+    @Override
+    public void setVisibleThirdResource() {
+
+    }
+
 }

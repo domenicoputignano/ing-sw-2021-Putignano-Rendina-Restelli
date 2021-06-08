@@ -21,7 +21,7 @@ import javafx.stage.Stage;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class BuyDevCardController extends Controller{
+public class BuyDevCardController extends Controller implements PaymentController {
     @FXML
     public AnchorPane anchorBuyDevCard;
 
@@ -492,78 +492,78 @@ public class BuyDevCardController extends Controller{
         errorDevText.setVisible(false);
         slotBox.setVisible(false);
         selectHowPickResourcesText.setVisible(true);
-        showRequiredResources();
+        neededResources = developmentCard.getCost().entrySet().stream().filter(x -> x.getValue() > 0).map( x -> new Pair<>(x.getKey(),x.getValue())).collect(Collectors.toList());
+        showRequiredResources(neededResources);
+        toPayment.setVisible(false);
     }
 
-    public void showRequiredResources() {
-        neededResources = developmentCard.getCost().entrySet().stream().filter(x -> x.getValue() > 0).map( x -> new Pair<>(x.getKey(),x.getValue())).collect(Collectors.toList());
-        for(int i = 0; i < neededResources.size(); i++) {
-            if(i == 0) {
-                resource1Cost.setImage(new Image(ResourceLocator.retrieveResourceTypeImage(neededResources.get(0).getKey())));
-                resource1Cost.setVisible(true);
-                resDepot1Text.setVisible(true);
-                resStronbox1Text.setVisible(true);
-                plusDepotRes1.setVisible(true);
-                plusStrRes1.setVisible(true);
-                minusDepotRes1.setVisible(true);
-                minusStrRes1.setVisible(true);
-                textField1.setVisible(true);
-                textField2.setVisible(true);
-                if(isAvailableExtraDepotOfType(neededResources.get(i).getKey())) {
-                    resExtra1Text.setVisible(true);
-                    plusExtraRes1.setVisible(true);
-                    minusExtraRes1.setVisible(true);
-                    textField3.setVisible(true);
-                    textField3.setText("0");
-                }
-                textField1.setText("0");
-                textField2.setText("0");
-            }
-            if(i == 1) {
-                resource2Cost.setImage(new Image(ResourceLocator.retrieveResourceTypeImage(neededResources.get(1).getKey())));
-                resource2Cost.setVisible(true);
-                resDepot2Text.setVisible(true);
-                resStronbox2Text.setVisible(true);
-                plusDepotRes2.setVisible(true);
-                plusStrRes2.setVisible(true);
-                minusDepotRes2.setVisible(true);
-                minusStrRes2.setVisible(true);
-                textField4.setVisible(true);
-                textField5.setVisible(true);
-                if(isAvailableExtraDepotOfType(neededResources.get(i).getKey())) {
-                    resExtra2Text.setVisible(true);
-                    plusExtraRes2.setVisible(true);
-                    minusExtraRes2.setVisible(true);
-                    textField6.setText("0");
-                    textField6.setVisible(true);
-                }
-                textField4.setText("0");
-                textField5.setText("0");
 
-            }
-            if(i == 2) {
-                resource3Cost.setImage(new Image(ResourceLocator.retrieveResourceTypeImage(neededResources.get(2).getKey())));
-                resource3Cost.setVisible(true);
-                resDepot3Text.setVisible(true);
-                resStronbox3Text.setVisible(true);
-                plusDepotRes3.setVisible(true);
-                plusStrRes3.setVisible(true);
-                minusDepotRes3.setVisible(true);
-                minusStrRes3.setVisible(true);
-                textField7.setVisible(true);
-                textField8.setVisible(true);
-                if(isAvailableExtraDepotOfType(neededResources.get(i).getKey())) {
-                    resExtra3Text.setVisible(true);
-                    plusExtraRes3.setVisible(true);
-                    minusExtraRes3.setVisible(true);
-                    textField9.setText("0");
-                    textField9.setVisible(true);
-                }
-                textField7.setText("0");
-                textField8.setText("0");
-            }
+
+
+    public void setVisibleFirstResource() {
+        resource1Cost.setImage(new Image(ResourceLocator.retrieveResourceTypeImage(neededResources.get(0).getKey())));
+        resource1Cost.setVisible(true);
+        resDepot1Text.setVisible(true);
+        resStronbox1Text.setVisible(true);
+        plusDepotRes1.setVisible(true);
+        plusStrRes1.setVisible(true);
+        minusDepotRes1.setVisible(true);
+        minusStrRes1.setVisible(true);
+        textField1.setVisible(true);
+        textField2.setVisible(true);
+        if(isAvailableExtraDepotOfType(neededResources.get(0).getKey())) {
+            resExtra1Text.setVisible(true);
+            plusExtraRes1.setVisible(true);
+            minusExtraRes1.setVisible(true);
+            textField3.setVisible(true);
+            textField3.setText("0");
         }
-        toPayment.setVisible(false);
+        textField1.setText("0");
+        textField2.setText("0");
+    }
+
+    public void setVisibleSecondResource() {
+        resource2Cost.setImage(new Image(ResourceLocator.retrieveResourceTypeImage(neededResources.get(1).getKey())));
+        resource2Cost.setVisible(true);
+        resDepot2Text.setVisible(true);
+        resStronbox2Text.setVisible(true);
+        plusDepotRes2.setVisible(true);
+        plusStrRes2.setVisible(true);
+        minusDepotRes2.setVisible(true);
+        minusStrRes2.setVisible(true);
+        textField4.setVisible(true);
+        textField5.setVisible(true);
+        if(isAvailableExtraDepotOfType(neededResources.get(1).getKey())) {
+            resExtra2Text.setVisible(true);
+            plusExtraRes2.setVisible(true);
+            minusExtraRes2.setVisible(true);
+            textField6.setText("0");
+            textField6.setVisible(true);
+        }
+        textField4.setText("0");
+        textField5.setText("0");
+    }
+
+    public void setVisibleThirdResource() {
+        resource3Cost.setImage(new Image(ResourceLocator.retrieveResourceTypeImage(neededResources.get(2).getKey())));
+        resource3Cost.setVisible(true);
+        resDepot3Text.setVisible(true);
+        resStronbox3Text.setVisible(true);
+        plusDepotRes3.setVisible(true);
+        plusStrRes3.setVisible(true);
+        minusDepotRes3.setVisible(true);
+        minusStrRes3.setVisible(true);
+        textField7.setVisible(true);
+        textField8.setVisible(true);
+        if(isAvailableExtraDepotOfType(neededResources.get(2).getKey())) {
+            resExtra3Text.setVisible(true);
+            plusExtraRes3.setVisible(true);
+            minusExtraRes3.setVisible(true);
+            textField9.setText("0");
+            textField9.setVisible(true);
+        }
+        textField7.setText("0");
+        textField8.setText("0");
     }
 
     @FXML
