@@ -15,6 +15,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -23,6 +24,7 @@ import java.io.IOException;
 import java.util.Objects;
 
 public class PlayerBoardController extends Controller {
+    public HBox strongboxResources;
     Stage actions;
     Stage move;
 
@@ -53,6 +55,9 @@ public class PlayerBoardController extends Controller {
     @FXML
     public ImageView depot1, depot21, depot22, depot31, depot32, depot33;
 
+    @FXML
+    Text numCoinStrongbox, numServantStrongbox, numShieldStrongbox, numStoneStrongbox;
+
     public void initialize() {
         super.initialize();
 
@@ -67,6 +72,10 @@ public class PlayerBoardController extends Controller {
         setFont(moveAction,24);
         setFont(endTurn,24);
         setFont(otherPlayers,21);
+        setFont(numCoinStrongbox, 22);
+        setFont(numServantStrongbox, 22);
+        setFont(numShieldStrongbox, 22);
+        setFont(numStoneStrongbox, 22);
         otherPlayers.setStyle("-fx-text-fill: rgb(35, 25, 22);");
         endTurn.setStyle("-fx-text-fill: rgb(35, 25, 22);");
         chooseAction.setStyle("-fx-text-fill: rgb(35, 25, 22);");
@@ -79,7 +88,7 @@ public class PlayerBoardController extends Controller {
 
         if(client.getGame().getPlayer(client.getUser()).getNumOfLeaderCards() > 1)
             leaderCard2.setImage(new Image(client.getGame().getPlayer(client.getUser()).getAvailableLeaderCards().get(1).toImage()));
-
+        strongboxResources.setVisible(true);
         initializeCells();
         initializeDepots();
         initializeFaithMarker();

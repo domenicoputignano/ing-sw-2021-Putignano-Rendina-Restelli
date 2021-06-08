@@ -224,7 +224,6 @@ public class BuyDevCardController extends Controller{
     private void setErrorDevTextKO(String error){
         errorDevText.setText(error);
         errorDevText.setVisible(true);
-        //buyCard.setVisible(true);
     }
 
     @FXML
@@ -237,8 +236,6 @@ public class BuyDevCardController extends Controller{
         } else {
             isCardBuyable = false;
             setErrorDevTextKO("You don't have \nenough resources \nto purchase \nselected card");
-            //TODO da togliere
-            buyCard.setVisible(true);
         }
     }
 
@@ -252,8 +249,6 @@ public class BuyDevCardController extends Controller{
         } else {
             isCardBuyable = false;
             setErrorDevTextKO("You don't have \nenough resources \nto purchase \nselected card");
-            //TODO da togliere
-            buyCard.setVisible(true);
         }
     }
 
@@ -267,8 +262,6 @@ public class BuyDevCardController extends Controller{
         } else {
             isCardBuyable = false;
             setErrorDevTextKO("You don't have \nenough resources \nto purchase \nselected card");
-            //TODO da togliere
-            buyCard.setVisible(true);
         }
     }
 
@@ -282,8 +275,6 @@ public class BuyDevCardController extends Controller{
         } else {
             isCardBuyable = false;
             setErrorDevTextKO("You don't have \nenough resources \nto purchase \nselected card");
-            //TODO da togliere
-            buyCard.setVisible(true);
         }
     }
 
@@ -297,8 +288,6 @@ public class BuyDevCardController extends Controller{
         } else {
             isCardBuyable = false;
             setErrorDevTextKO("You don't have \nenough resources \nto purchase \nselected card");
-            //TODO da togliere
-            buyCard.setVisible(true);
         }
     }
 
@@ -312,8 +301,6 @@ public class BuyDevCardController extends Controller{
         } else {
             isCardBuyable = false;
             setErrorDevTextKO("You don't have \nenough resources \nto purchase \nselected card");
-            //TODO da togliere
-            buyCard.setVisible(true);
         }
     }
 
@@ -327,8 +314,6 @@ public class BuyDevCardController extends Controller{
         } else {
             isCardBuyable = false;
             setErrorDevTextKO("You don't have \nenough resources \nto purchase \nselected card");
-            //TODO da togliere
-            buyCard.setVisible(true);
         }
     }
 
@@ -342,8 +327,6 @@ public class BuyDevCardController extends Controller{
         } else {
             isCardBuyable = false;
             setErrorDevTextKO("You don't have \nenough resources \nto purchase \nselected card");
-            //TODO da togliere
-            buyCard.setVisible(true);
         }
     }
 
@@ -357,8 +340,6 @@ public class BuyDevCardController extends Controller{
         } else {
             isCardBuyable = false;
             setErrorDevTextKO("You don't have \nenough resources \nto purchase \nselected card");
-            //TODO da togliere
-            buyCard.setVisible(true);
         }
     }
 
@@ -372,8 +353,6 @@ public class BuyDevCardController extends Controller{
         } else {
             isCardBuyable = false;
             setErrorDevTextKO("You don't have \nenough resources \nto purchase \nselected card");
-            //TODO da togliere
-            buyCard.setVisible(true);
         }
     }
 
@@ -388,8 +367,6 @@ public class BuyDevCardController extends Controller{
 
             isCardBuyable = false;
             setErrorDevTextKO("You don't have \nenough resources \nto purchase \nselected card");
-            //TODO da togliere
-            buyCard.setVisible(true);
         }
     }
 
@@ -403,8 +380,6 @@ public class BuyDevCardController extends Controller{
         } else {
             isCardBuyable = false;
             setErrorDevTextKO("You don't have \nenough resources \nto purchase \nselected card");
-            //TODO da togliere
-            buyCard.setVisible(true);
         }
     }
 
@@ -653,6 +628,47 @@ public class BuyDevCardController extends Controller{
         thirdCurrentValueStrongbox++;
         if(!editedCostList(3, 1, thirdCurrentValueStrongbox, textField8)) thirdCurrentValueStrongbox--;
     }
+
+    @FXML
+    public void plusFirstResourceFromExtra() {
+        firstCurrentValueExtra++;
+        if(!editedCostList(1, 1, firstCurrentValueExtra, textField3)) firstCurrentValueExtra--;
+    }
+
+    @FXML
+    public void plusSecondResourceFromExtra() {
+        secondCurrentValueExtra++;
+        if(!editedCostList(2, 1, secondCurrentValueExtra, textField6)) secondCurrentValueExtra--;
+    }
+
+    @FXML
+    public void plusThirdResourceFromExtra() {
+        thirdCurrentValueExtra++;
+        if(!editedCostList(3, 1, thirdCurrentValueExtra, textField9)) thirdCurrentValueExtra--;
+    }
+
+    @FXML
+    public void minusFirstResourceFromExtra() {
+        makeTextInvisible(errorDevText);
+        firstCurrentValueExtra--;
+        if(!addToCostList(1, 1, firstCurrentValueExtra, textField3)) firstCurrentValueExtra++;
+    }
+
+    @FXML
+    public void minusSecondResourceFromExtra() {
+        makeTextInvisible(errorDevText);
+        secondCurrentValueExtra--;
+        if(!addToCostList(2,1,secondCurrentValueExtra, textField6)) secondCurrentValueExtra++;
+    }
+
+    @FXML
+    public void minusThirdResourceFromExtra() {
+        makeTextInvisible(errorDevText);
+        thirdCurrentValueExtra--;
+        if (!addToCostList(3,1,thirdCurrentValueExtra, textField9)) thirdCurrentValueExtra++;
+    }
+
+
 
 
     int firstCurrentValueDepot = 0;
