@@ -143,12 +143,13 @@ public class TurnController {
     }
 
     public synchronized void handleEndTurnMessage(EndTurnMessage message, RemoteView sender) {
-        if(isSenderTurn(sender.getPlayer())) {
-            model.nextTurn();
-            this.currPlayer = model.getCurrPlayer();
-        }
-        else sender.sendError(new WrongTurnError(sender.getPlayer().getUser()));
-
+        if(model.getTurn().isDoneNormalAction()){
+            if(isSenderTurn(sender.getPlayer())) {
+                model.nextTurn();
+                this.currPlayer = model.getCurrPlayer();
+            }
+            else sender.sendError(new WrongTurnError(sender.getPlayer().getUser()));
+        } else sender.sendError(new ActionError(sender.getPlayer().getUser(), ActionError.Trigger.NORMALACTIONNOTDONEYET));
     }
 
     private boolean isSenderTurn(Player sender) {

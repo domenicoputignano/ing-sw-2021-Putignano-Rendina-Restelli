@@ -217,7 +217,7 @@ public class BuyDevCardController extends Controller{
     }
 
     private void setFeasiblePurchaseOK(){
-        setDevelopmentCardTextOK("You have have \nenough resources \nto purchase \nselected card");
+        setDevelopmentCardTextOK("You have \nenough resources \nto purchase \nselected card");
         buyCard.setVisible(true);
     }
 
