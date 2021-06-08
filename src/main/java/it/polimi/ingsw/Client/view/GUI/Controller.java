@@ -52,6 +52,7 @@ public class Controller {
     Stage takeResPopup;
     Stage leaderActionPopup;
     Stage buyDevCardPopup;
+    Stage errorMessage;
 
 
     @FXML
@@ -166,6 +167,28 @@ public class Controller {
             e.printStackTrace();
         }
         buyDevCardPopup.show();
+    }
+
+    public void showErrorMessage(){
+        errorMessage = new Stage();
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/FXML/ErrorPopup.fxml"));
+            Parent root = loader.load();
+            GUIApp.controller = loader.getController();
+            Scene scene = new Scene(Objects.requireNonNull(root), 500, 400, Color.TRANSPARENT);
+            scene.setCursor(new ImageCursor(new Image(CURSOR), 36, 45));
+            errorMessage.initStyle(StageStyle.TRANSPARENT);
+            errorMessage.setAlwaysOnTop(true);
+            scene.setUserData(loader);
+            errorMessage.initModality(Modality.WINDOW_MODAL);
+            errorMessage.initOwner(GUIApp.getStage());
+            scene.setUserData(loader);
+            errorMessage.setScene(scene);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        errorMessage.show();
     }
 
     @FXML

@@ -199,6 +199,9 @@ public class Gui extends UI{
 
     @Override
     public void renderError(String errorMessage) {
-
+        Platform.runLater(() -> {
+            GUIApp.controller.showErrorMessage();
+            ((ErrorPopupController) GUIApp.controller).setErrorText(errorMessage);
+        });
     }
 }
