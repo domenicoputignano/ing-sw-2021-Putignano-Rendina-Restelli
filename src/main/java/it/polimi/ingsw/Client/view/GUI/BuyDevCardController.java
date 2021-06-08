@@ -431,9 +431,7 @@ public class BuyDevCardController extends Controller{
     @FXML
     public void handleOkBuyDevCard()
     {
-        if(isCardBuyable) {}
-        else {
-            //TODO da spostare opportunamente
+        if(isCardBuyable) {
             setInvisible();
             Label label = (Label) slotBox.getChildren().get(0);
             label.setFont(Font.loadFont(getClass().getResourceAsStream("/gui/font/Enchanted-Land.otf"),40));
@@ -441,6 +439,9 @@ public class BuyDevCardController extends Controller{
             setFont((RadioButton)availableSlot.getToggles().get(1), 35);
             setFont((RadioButton)availableSlot.getToggles().get(2), 35);
             slotBox.setVisible(true);
+        }
+        else {
+            //TODO da spostare opportunamente
         }
     }
 
