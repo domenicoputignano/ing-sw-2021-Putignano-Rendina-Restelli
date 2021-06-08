@@ -239,6 +239,7 @@ public class BuyDevCardController extends Controller{
         setSelectedCardImage(developmentCard);
         if(Checker.checkResources(developmentCard.getCost(),client.getGame().getPlayer(client.getUser()).getPersonalBoard())) {
             setFeasiblePurchaseOK();
+            isCardBuyable = true;
         } else {
             isCardBuyable = false;
             setErrorDevTextKO("You don't have \nenough resources \nto purchase \nselected card");
