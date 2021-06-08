@@ -155,54 +155,54 @@ public class BuyDevCardController extends Controller{
         if(client.getGame().isAnyCardPresentInDeck(3, ColorCard.green)) {
             green3.setStyle("-fx-background-image: url(" +
                     client.getGame().getDeckTopCard(3, ColorCard.green).toImage() + ")");
-        }
+        } else green3.setVisible(false);
         if(client.getGame().isAnyCardPresentInDeck(2, ColorCard.green)) {
             green2.setStyle("-fx-background-image: url(" +
                     client.getGame().getDeckTopCard(2, ColorCard.green).toImage() + ")");
-        }
+        } else green2.setVisible(false);
         if(client.getGame().isAnyCardPresentInDeck(1, ColorCard.green)) {
             green1.setStyle("-fx-background-image: url(" +
                     client.getGame().getDeckTopCard(1, ColorCard.green).toImage() + ")");
-        }
+        } else green1.setVisible(false);
 
         if(client.getGame().isAnyCardPresentInDeck(3, ColorCard.blue)) {
             blue3.setStyle("-fx-background-image: url(" +
                     client.getGame().getDeckTopCard(3, ColorCard.blue).toImage() + ")");
-        }
+        } else blue3.setVisible(false);
         if(client.getGame().isAnyCardPresentInDeck(2, ColorCard.blue)) {
             blue2.setStyle("-fx-background-image: url(" +
                     client.getGame().getDeckTopCard(2, ColorCard.blue).toImage() + ")");
-        }
+        } else blue2.setVisible(false);
         if(client.getGame().isAnyCardPresentInDeck(1, ColorCard.blue)) {
             blue1.setStyle("-fx-background-image: url(" +
                     client.getGame().getDeckTopCard(1, ColorCard.blue).toImage() + ")");
-        }
+        } else blue1.setVisible(false);
 
         if(client.getGame().isAnyCardPresentInDeck(3, ColorCard.yellow)) {
             yellow3.setStyle("-fx-background-image: url(" +
                     client.getGame().getDeckTopCard(3, ColorCard.yellow).toImage() + ")");
-        }
+        } else yellow3.setVisible(false);
         if(client.getGame().isAnyCardPresentInDeck(2, ColorCard.yellow)) {
             yellow2.setStyle("-fx-background-image: url(" +
                     client.getGame().getDeckTopCard(2, ColorCard.yellow).toImage() + ")");
-        }
+        } else yellow2.setVisible(false);
         if(client.getGame().isAnyCardPresentInDeck(1, ColorCard.yellow)) {
             yellow1.setStyle("-fx-background-image: url(" +
                     client.getGame().getDeckTopCard(1, ColorCard.yellow).toImage() + ")");
-        }
+        } else yellow1.setVisible(false);
 
         if(client.getGame().isAnyCardPresentInDeck(3, ColorCard.purple)) {
             purple3.setStyle("-fx-background-image: url(" +
                     client.getGame().getDeckTopCard(3, ColorCard.purple).toImage() + ")");
-        }
+        } else purple3.setVisible(false);
         if(client.getGame().isAnyCardPresentInDeck(2, ColorCard.purple)) {
             purple2.setStyle("-fx-background-image: url(" +
                     client.getGame().getDeckTopCard(2, ColorCard.purple).toImage() + ")");
-        }
+        } else purple2.setVisible(false);
         if(client.getGame().isAnyCardPresentInDeck(1, ColorCard.purple)) {
             purple1.setStyle("-fx-background-image: url(" +
                     client.getGame().getDeckTopCard(1, ColorCard.purple).toImage() + ")");
-        }
+        } else purple1.setVisible(false);
 
     }
 
