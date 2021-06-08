@@ -11,6 +11,7 @@ public class ActionError extends ErrorMessage {
 
     public enum Trigger {
         NORMALACTIONALREADYDONE("Normal action has been already done for this turn!"),
+        NORMALACTIONNOTDONEYET("You have to do a normal action before ending the turn!"),
         WRONGTURNPHASE("Required action cannot be accomplished in this context!"),
         WRONGGAMEPHASE("Required action cannot be accomplished in this game phase!"),
         RESOURCECHOICEMISMATCH("Number of selected resources is not compliant with Game rules!"),
