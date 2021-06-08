@@ -150,7 +150,13 @@ public class Gui extends UI{
 
     @Override
     public void render(BuyDevCardPerformedUpdate message) {
-
+        if(isReceiverAction(message.getUser())){
+            Platform.runLater(() -> {
+                GUIApp.showScene("/gui/FXML/PlayerBoard.fxml");
+                GUIApp.controller.showBuyDevCardUpdate();
+                ((BuyDevCardPopupController)GUIApp.controller).setImage(message);
+            });
+        }
     }
 
     @Override

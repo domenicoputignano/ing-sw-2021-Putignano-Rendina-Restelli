@@ -51,7 +51,7 @@ public class Controller {
     Stage mainstage;
     Stage takeResPopup;
     Stage leaderActionPopup;
-
+    Stage buyDevCardPopup;
 
 
     @FXML
@@ -144,6 +144,28 @@ public class Controller {
             e.printStackTrace();
         }
         leaderActionPopup.show();
+    }
+
+    public void showBuyDevCardUpdate(){
+        buyDevCardPopup = new Stage();
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/FXML/BuyDevCardPopup.fxml"));
+            Parent root = loader.load();
+            GUIApp.controller = loader.getController();
+            Scene scene = new Scene(Objects.requireNonNull(root), 500, 400, Color.TRANSPARENT);
+            scene.setCursor(new ImageCursor(new Image(CURSOR), 36, 45));
+            buyDevCardPopup.initStyle(StageStyle.TRANSPARENT);
+            buyDevCardPopup.setAlwaysOnTop(true);
+            scene.setUserData(loader);
+            buyDevCardPopup.initModality(Modality.WINDOW_MODAL);
+            buyDevCardPopup.initOwner(GUIApp.getStage());
+            scene.setUserData(loader);
+            buyDevCardPopup.setScene(scene);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        buyDevCardPopup.show();
     }
 
     @FXML
