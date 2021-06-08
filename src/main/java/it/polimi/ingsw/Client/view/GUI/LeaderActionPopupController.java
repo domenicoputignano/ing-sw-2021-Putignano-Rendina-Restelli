@@ -28,7 +28,7 @@ public class LeaderActionPopupController extends Controller{
     @FXML
     @Override
     public void initialize() {
-        leaderActionpopup.setBackground(new Background(new BackgroundImage(new Image("/gui/img/exit_tab.png"),
+        leaderActionpopup.setBackground(new Background(new BackgroundImage(new Image("/gui/img/vertical_tab.png"),
                 BackgroundRepeat.NO_REPEAT,
                 BackgroundRepeat.NO_REPEAT,
                 BackgroundPosition.CENTER,

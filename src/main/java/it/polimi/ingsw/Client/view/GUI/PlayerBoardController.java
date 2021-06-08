@@ -48,6 +48,9 @@ public class PlayerBoardController extends Controller {
     public ImageView favorTile1,favorTile2,favorTile3;
 
     @FXML
+    public ImageView topCard1,topCard2,topCard3,bgSlots1,bgSlots2,bgSlots3;
+
+    @FXML
     public ImageView depot1, depot21, depot22, depot31, depot32, depot33;
 
     public void initialize() {
@@ -80,6 +83,7 @@ public class PlayerBoardController extends Controller {
         initializeCells();
         initializeDepots();
         initializeFaithMarker();
+        initializeSlots();
         if(!client.getUI().hasDoneNormalAction())
             endTurn.setVisible(false);
         else endTurn.setVisible(true);
@@ -119,6 +123,25 @@ public class PlayerBoardController extends Controller {
         favorTiles[1].setImage(new Image("/gui/img/favorTile2D.png"));
         favorTiles[2].setImage(new Image("/gui/img/favorTile3D.png"));
         cells[0].setImage(new Image("/gui/img/faith.png"));
+    }
+
+    private void initializeSlots()
+    {
+        if(!client.getGame().getPlayer(client.getUser()).getPersonalBoard().isEmptySlot(0)){
+            topCard1.setImage(new Image(client.getGame().getPlayer(client.getUser()).getPersonalBoard().peekTopCardInSlot(0).toImage()));
+            if(client.getGame().getPlayer(client.getUser()).getPersonalBoard().getSlot(0).getNumOfStackedCards()>1)
+                bgSlots1.setVisible(true);
+        }
+        if(!client.getGame().getPlayer(client.getUser()).getPersonalBoard().isEmptySlot(1)){
+            topCard2.setImage(new Image(client.getGame().getPlayer(client.getUser()).getPersonalBoard().peekTopCardInSlot(1).toImage()));
+            if(client.getGame().getPlayer(client.getUser()).getPersonalBoard().getSlot(1).getNumOfStackedCards()>1)
+                bgSlots2.setVisible(true);
+        }
+        if(!client.getGame().getPlayer(client.getUser()).getPersonalBoard().isEmptySlot(2)){
+            topCard3.setImage(new Image(client.getGame().getPlayer(client.getUser()).getPersonalBoard().peekTopCardInSlot(2).toImage()));
+            if(client.getGame().getPlayer(client.getUser()).getPersonalBoard().getSlot(2).getNumOfStackedCards()>1)
+                bgSlots3.setVisible(true);
+        }
     }
 
     private void initializeFaithMarker()

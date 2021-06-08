@@ -12,7 +12,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="anchorBuyDevCard" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.Client.view.GUI.BuyDevCardController">
+<AnchorPane fx:id="anchorBuyDevCard" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.Client.view.GUI.BuyDevCardController">
     <children>
         <Button fx:id="closeBuyDevCard" layoutX="975.0" layoutY="50.0" mnemonicParsing="false" onAction="#handleCloseChooseAction" prefHeight="65.0" prefWidth="70.0" styleClass="button, exit" stylesheets="@../css/button.css" />
       <ImageView fx:id="deck1" fitHeight="150.0" fitWidth="100.0" layoutX="255.0" layoutY="155.0" pickOnBounds="true" preserveRatio="true">

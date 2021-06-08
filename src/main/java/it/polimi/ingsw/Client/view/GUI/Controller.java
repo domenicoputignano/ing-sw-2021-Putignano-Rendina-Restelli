@@ -130,7 +130,7 @@ public class Controller {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/FXML/LeaderActionPopup.fxml"));
             Parent root = loader.load();
             GUIApp.controller = loader.getController();
-            Scene scene = new Scene(Objects.requireNonNull(root), 500, 400, Color.TRANSPARENT);
+            Scene scene = new Scene(Objects.requireNonNull(root), 360, 443, Color.TRANSPARENT);
             scene.setCursor(new ImageCursor(new Image(CURSOR), 36, 45));
             leaderActionPopup.initStyle(StageStyle.TRANSPARENT);
             leaderActionPopup.setAlwaysOnTop(true);
