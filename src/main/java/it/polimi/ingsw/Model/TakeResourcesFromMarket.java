@@ -43,11 +43,11 @@ public class TakeResourcesFromMarket implements AbstractTurnPhase {
 
             handlePositioning(turn.getPlayer().getPersonalBoard().getWarehouse());
             turn.getGame().getMarketTray().clearWhiteMarbleEffect();
-            turn.normalActionDone();
             moveCurrPlayerMarker(turn);
             if(pendingResources.size()>0)
                 throw new NeedPositioningException(pendingResources);
             else {
+                turn.normalActionDone();
                 turn.getGame().notifyUpdate(new TakeResourcesFromMarketUpdate(turn.getPlayer().getUser(),
                         turn.getPlayer().getReducedPersonalBoard(),
                         turn.getGame().getMarketTray().getReducedVersion(),
