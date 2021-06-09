@@ -154,6 +154,7 @@ public abstract class Game extends Observable<ServerMessage> implements Observer
         return playerList;
     }
 
+    public abstract void moveOtherPlayers(Player triggeringPlayer, int discardedResources);
 
     public void notifyUpdate(UpdateMessage message) {
         notify(message);

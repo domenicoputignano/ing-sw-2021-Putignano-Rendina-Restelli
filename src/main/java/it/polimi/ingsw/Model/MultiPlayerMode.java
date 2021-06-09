@@ -9,6 +9,7 @@ import it.polimi.ingsw.Model.ConclusionEvents.SeventhDevCardBought;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.GameSetupMessage;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.LastTurnMessage;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.RankMessage;
+import it.polimi.ingsw.Utils.Messages.ServerMessages.Updates.FaithMarkerUpdate;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.Updates.NewTurnUpdate;
 import it.polimi.ingsw.Utils.Pair;
 
@@ -80,6 +81,19 @@ public class MultiPlayerMode extends Game {
     public void endGame(SeventhDevCardBought event){
         isLastTurn = true;
         notify(new LastTurnMessage(this.currPlayer.getUser(),event));
+    }
+
+    @Override
+    public void moveOtherPlayers(Player triggeringPlayer, int discardedResources) {
+        for(Player p : playerList) {
+            if(!p.equals(triggeringPlayer)) {
+                p.getPersonalBoard().getFaithTrack().moveMarker(discardedResources);
+            }
+            turn.getGame().notifyUpdate(new FaithMarkerUpdate(p.getUser(),
+                    p.getReducedPersonalBoard(),
+                    triggeringPlayer.getUser(),
+                    discardedResources));
+        }
     }
 
     // returns rank only for test purposes

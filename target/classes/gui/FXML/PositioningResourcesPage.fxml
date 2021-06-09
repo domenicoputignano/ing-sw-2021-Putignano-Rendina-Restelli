@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+
+
+<AnchorPane prefHeight="800.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.FXML.PositioningResourcesController">
+   <children>
+      <Button layoutX="596.0" layoutY="619.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="OK" styleClass="chooseYesNo" stylesheets="@../css/button.css"/>
+      <HBox layoutX="438.0" layoutY="372.0" prefHeight="205.0" prefWidth="415.0" spacing="10.0">
+         <children>
+            <VBox prefHeight="178.0" prefWidth="100.0" spacing="20.0">
+               <children>
+                  <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="112.0" text="Depot 1" styleClass="selPosition" stylesheets="@../css/button.css"/>
+                  <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="157.0" text="Depot 2" styleClass="selPosition" stylesheets="@../css/button.css"/>
+                  <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="103.0" text="Depot 3" styleClass="selPosition" stylesheets="@../css/button.css"/>
+                  <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="132.0" text="Extra" styleClass="selPosition" stylesheets="@../css/button.css"/>
+                  <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="115.0" text="Discard" styleClass="selPosition" stylesheets="@../css/button.css"/>
+               </children>
+            </VBox>
+            <VBox prefHeight="200.0" prefWidth="100.0" spacing="20.0">
+               <children>
+                  <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="98.0" text="Depot 1" styleClass="selPosition" stylesheets="@../css/button.css"/>
+                  <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="147.0" text="Depot 2" styleClass="selPosition" stylesheets="@../css/button.css"/>
+                  <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="133.0" text="Depot 3" styleClass="selPosition" stylesheets="@../css/button.css"/>
+                  <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="113.0" text="Extra" styleClass="selPosition" stylesheets="@../css/button.css"/>
+                  <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="156.0" text="Discard" styleClass="selPosition" stylesheets="@../css/button.css"/>
+               </children>
+            </VBox>
+            <VBox prefHeight="102.0" prefWidth="100.0" spacing="20.0">
+               <children>
+                  <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="120.0" text="Depot 1" styleClass="selPosition" stylesheets="@../css/button.css"/>
+                  <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="157.0" text="Depot 2" styleClass="selPosition" stylesheets="@../css/button.css"/>
+                  <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="157.0" text="Depot 3" styleClass="selPosition" stylesheets="@../css/button.css"/>
+                  <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="115.0" text="Extra" styleClass="selPosition" stylesheets="@../css/button.css"/>
+                  <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="132.0" text="Discard" styleClass="selPosition" stylesheets="@../css/button.css"/>
+               </children>
+            </VBox>
+            <VBox layoutX="210.0" layoutY="10.0" prefHeight="102.0" prefWidth="100.0" spacing="20.0">
+               <children>
+                  <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="120.0" text="Depot 1" styleClass="selPosition" stylesheets="@../css/button.css"/>
+                  <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="157.0" text="Depot 2" styleClass="selPosition" stylesheets="@../css/button.css"/>
+                  <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="157.0" text="Depot 3" styleClass="selPosition" stylesheets="@../css/button.css"/>
+                  <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="162.0" text="Extra" styleClass="selPosition" stylesheets="@../css/button.css"/>
+                  <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="110.0" text="Discard" styleClass="selPosition" stylesheets="@../css/button.css"/>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+      <ImageView fitHeight="70.0" fitWidth="70.0" layoutX="450.0" layoutY="210.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fitHeight="70.0" fitWidth="70.0" layoutX="561.0" layoutY="210.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fitHeight="70.0" fitWidth="70.0" layoutX="661.0" layoutY="210.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fitHeight="70.0" fitWidth="70.0" layoutX="768.0" layoutY="210.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fitHeight="332.0" fitWidth="304.0" layoutX="78.0" layoutY="245.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/depots.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="215.0" layoutY="322.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="180.0" layoutY="392.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="250.0" layoutY="392.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="155.0" layoutY="468.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="215.0" layoutY="468.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="275.0" layoutY="468.0" pickOnBounds="true" preserveRatio="true" />
+      <Text layoutX="240.0" layoutY="79.0" strokeType="OUTSIDE" strokeWidth="0.0" text="You have some resources to settle!" textAlignment="CENTER" wrappingWidth="449.13671875" />
+      <Text layoutX="186.0" layoutY="215.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Here are your depots" />
+      <Text layoutX="541.0" layoutY="142.0" strokeType="OUTSIDE" strokeWidth="0.0" text="For each resource select the destination" />
+   </children>
+</AnchorPane>

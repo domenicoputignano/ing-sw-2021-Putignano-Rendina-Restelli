@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="950.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.Client.view.GUI.ResourceChoiceController">
+    <top>
+        <AnchorPane fx:id="top" prefHeight="104.0" prefWidth="950.0" BorderPane.alignment="CENTER" />
+    </top>
+    <center>
+        <AnchorPane fx:id="center" prefHeight="470.0" prefWidth="950.0" BorderPane.alignment="CENTER">
+            <children>
+                <Button fx:id="infoButton" layoutX="796.0" layoutY="8.0" mnemonicParsing="false" onAction="#info" prefHeight="85.0" prefWidth="73.0" styleClass="button, info" stylesheets="@../css/button.css" />
+                <Button fx:id="exitButton" layoutX="869.0" layoutY="8.0" mnemonicParsing="false" onAction="#exit" prefHeight="85.0" prefWidth="73.0" styleClass="button, exit" stylesheets="@../css/button.css" />
+                <ImageView fitHeight="514.0" fitWidth="699.0" layoutX="93.0" layoutY="78.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../img/leaderChoiceTab.png" />
+                    </image>
+                </ImageView>
+                <TextField fx:id="chooseResourceText" editable="false" layoutX="238.0" layoutY="129.0" mouseTransparent="true" prefHeight="45.0" prefWidth="576.0" styleClass="chooseLeaderCard" stylesheets="@../css/text.css" />
+                <Button fx:id="okButton" layoutX="619.0" layoutY="473.0" mnemonicParsing="false" onAction="#handleOkChoice" prefHeight="69.0" prefWidth="137.0" styleClass="okButton" stylesheets="@../css/button.css" text="OK" />
+            <TextField fx:id="coinText" editable="false" layoutX="271.0" layoutY="200.0" mouseTransparent="true" prefHeight="37.0" prefWidth="95.0" styleClass="resourcesText" stylesheets="@../css/text.css" text="Coin :" />
+            <TextField fx:id="servantText" editable="false" layoutX="271.0" layoutY="275.0" mouseTransparent="true" prefHeight="37.0" prefWidth="95.0" styleClass="resourcesText" stylesheets="@../css/text.css" text="Servant :" />
+            <TextField fx:id="shieldText" editable="false" layoutX="271.0" layoutY="350.0" mouseTransparent="true" prefHeight="37.0" prefWidth="95.0" styleClass="resourcesText" stylesheets="@../css/text.css" text="Shield :" />
+            <TextField fx:id="stoneText" editable="false" layoutX="271.0" layoutY="425.0" mouseTransparent="true" prefHeight="37.0" prefWidth="95.0" styleClass="resourcesText" stylesheets="@../css/text.css" text="Stone :" />
+            <ImageView fx:id="resource1Img" fitHeight="65.0" fitWidth="77.0" layoutX="177.0" layoutY="186.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/resources/coin.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="resource2Img" fitHeight="65.0" fitWidth="77.0" layoutX="177.0" layoutY="261.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/resources/servant.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="resource3Img" fitHeight="65.0" fitWidth="77.0" layoutX="185.0" layoutY="336.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/resources/shield.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="resource4Img" fitHeight="65.0" fitWidth="77.0" layoutX="177.0" layoutY="411.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/resources/stone.png" />
+               </image>
+            </ImageView>
+            <Button fx:id="clearButton" alignment="CENTER" contentDisplay="CENTER" layoutX="667.0" layoutY="127.0" mnemonicParsing="false" onAction="#clearResources" prefHeight="50.0" prefWidth="81.0" styleClass="clearButton" stylesheets="@../css/button.css" text="Clear" />
+            <Button fx:id="minusButton1" layoutX="450.0" layoutY="176.0" mnemonicParsing="false" onAction="#minusCoin" prefHeight="85.0" prefWidth="73.0" styleClass="minusButton" stylesheets="@../css/button.css" />
+            <Button fx:id="minusButton2" layoutX="450.0" layoutY="251.0" mnemonicParsing="false" onAction="#minusServant" prefHeight="85.0" prefWidth="73.0" styleClass="minusButton" stylesheets="@../css/button.css" />
+            <Button fx:id="minusButton3" layoutX="450.0" layoutY="326.0" mnemonicParsing="false" onAction="#minusShield" prefHeight="85.0" prefWidth="73.0" styleClass="minusButton" stylesheets="@../css/button.css" />
+            <Button fx:id="minusButton4" layoutX="450.0" layoutY="401.0" mnemonicParsing="false" onAction="#minusStone" prefHeight="85.0" prefWidth="73.0" styleClass="minusButton" stylesheets="@../css/button.css" />
+            <Button fx:id="plusButton1" layoutX="640.0" layoutY="176.0" mnemonicParsing="false" onAction="#plusCoin" prefHeight="85.0" prefWidth="73.0" styleClass="plusButton" stylesheets="@../css/button.css" />
+            <Button fx:id="plusButton2" layoutX="640.0" layoutY="251.0" mnemonicParsing="false" onAction="#plusServant" prefHeight="85.0" prefWidth="73.0" styleClass="plusButton" stylesheets="@../css/button.css" />
+            <Button fx:id="plusButton3" layoutX="640.0" layoutY="327.0" mnemonicParsing="false" onAction="#plusShield" prefHeight="85.0" prefWidth="73.0" styleClass="plusButton" stylesheets="@../css/button.css" />
+            <Button fx:id="plusButton4" layoutX="640.0" layoutY="401.0" mnemonicParsing="false" onAction="#plusStone" prefHeight="85.0" prefWidth="73.0" styleClass="plusButton" stylesheets="@../css/button.css" />
+            <TextField fx:id="numCoin" alignment="CENTER" editable="false" layoutX="533.0" layoutY="187.0" mouseTransparent="true" prefHeight="58.0" prefWidth="97.0" styleClass="textFieldResources" stylesheets="@../css/text.css" />
+            <TextField fx:id="numServant" alignment="CENTER" layoutX="533.0" layoutY="265.0" prefHeight="58.0" prefWidth="97.0" styleClass="textFieldResources" stylesheets="@../css/text.css" />
+            <TextField fx:id="numShield" alignment="CENTER" layoutX="533.0" layoutY="340.0" prefHeight="58.0" prefWidth="97.0" styleClass="textFieldResources" stylesheets="@../css/text.css" />
+            <TextField fx:id="numStone" alignment="CENTER" layoutX="533.0" layoutY="415.0" prefHeight="58.0" prefWidth="97.0" styleClass="textFieldResources" stylesheets="@../css/text.css" />
+            <TextField fx:id="errorResources" editable="false" layoutX="314.0" layoutY="464.0" mouseTransparent="true" prefHeight="40.0" prefWidth="335.0" styleClass="errorResourcesText" stylesheets="@../css/text.css" />
+            <TextField fx:id="errorMismatch" editable="false" layoutX="342.0" layoutY="484.0" mouseTransparent="true" prefHeight="30.0" prefWidth="325.0" styleClass="errorResourcesText" stylesheets="@../css/text.css" />
+            <Button fx:id="buttonDepot1" layoutX="260.0" layoutY="185.0" mnemonicParsing="false" onAction="#selectedButtonDepot11" prefHeight="60.0" prefWidth="170.0" styleClass="buttonDepot" stylesheets="@../css/button.css" text="Depot 1" visible="false" />
+            <Button fx:id="buttonDepot2" layoutX="260.0" layoutY="250.0" mnemonicParsing="false" onAction="#selectedButtonDepot21" prefHeight="60.0" prefWidth="170.0" styleClass="buttonDepot" stylesheets="@../css/button.css" text="Depot 2" visible="false" />
+            <Button fx:id="buttonDepot3" layoutX="260.0" layoutY="315.0" mnemonicParsing="false" onAction="#selectedButtonDepot31" prefHeight="60.0" prefWidth="170.0" styleClass="buttonDepot" stylesheets="@../css/button.css" text="Depot 3" visible="false" />
+            <Button fx:id="buttonDepot1pl4" layoutX="524.0" layoutY="185.0" mnemonicParsing="false" onAction="#selectedButtonDepot12" prefHeight="60.0" prefWidth="170.0" styleClass="buttonDepot" stylesheets="@../css/button.css" text="Depot 1" visible="false" />
+            <Button fx:id="buttonDepot2pl4" layoutX="524.0" layoutY="250.0" mnemonicParsing="false" onAction="#selectedButtonDepot22" prefHeight="60.0" prefWidth="170.0" styleClass="buttonDepot" stylesheets="@../css/button.css" text="Depot 2" visible="false" />
+            <Button fx:id="buttonDepot3pl4" layoutX="524.0" layoutY="315.0" mnemonicParsing="false" onAction="#selectedButtonDepot32" prefHeight="60.0" prefWidth="170.0" styleClass="buttonDepot" stylesheets="@../css/button.css" text="Depot 3" visible="false" />
+            <ImageView fx:id="resource1Imgpl4" fitHeight="65.0" fitWidth="77.0" layoutX="441.0" layoutY="184.0" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@../img/resources/coin.png" />
+               </image>
+            </ImageView>
+            <Button fx:id="okButton1" layoutX="619.0" layoutY="473.0" mnemonicParsing="false" onAction="#submitInitialResourceChoice" prefHeight="69.0" prefWidth="137.0" styleClass="okButton" stylesheets="@../css/button.css" text="OK" visible="false" />
+            </children>
+        </AnchorPane>
+    </center>
+    <bottom>
+        <AnchorPane fx:id="bottom" prefHeight="91.0" prefWidth="950.0" BorderPane.alignment="CENTER" />
+    </bottom>
+</BorderPane>

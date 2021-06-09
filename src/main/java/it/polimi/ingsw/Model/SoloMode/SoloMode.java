@@ -11,6 +11,7 @@ import it.polimi.ingsw.Model.Player;
 import it.polimi.ingsw.Model.Turn;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.GameSetupMessage;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.SoloModeMatchWinnerMessage;
+import it.polimi.ingsw.Utils.Messages.ServerMessages.Updates.BlackCrossMoveUpdate;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.Updates.LorenzoPlayedUpdate;
 
 import java.util.*;
@@ -67,6 +68,12 @@ public class SoloMode extends Game {
     @Override
     public void endGame(BlackCrossHitLastSpace event) {
         concludeGame(false,event);
+    }
+
+    @Override
+    public void moveOtherPlayers(Player triggeringPlayer, int discardedResources) {
+        lorenzoIlMagnifico.moveBlackCross(discardedResources);
+        notify(new BlackCrossMoveUpdate(this.lorenzoIlMagnifico.getBlackCross()));
     }
 
     @Override
