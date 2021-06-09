@@ -273,13 +273,13 @@
     -fx-border-radius: 5;
 }
 .slotButton:hover{
-    -fx-background-size: 103% auto;
+    -fx-background-size: 105% auto;
     -fx-border-color: #f6f2d7;
     -fx-border-width: 5;
 }
 
 .slotButton:pressed{
-    -fx-background-size: 93% auto;
+    -fx-background-size: 90% auto;
 }
 .basicProduction{
     -fx-background-image: url("/gui/img/basicProduction.png");

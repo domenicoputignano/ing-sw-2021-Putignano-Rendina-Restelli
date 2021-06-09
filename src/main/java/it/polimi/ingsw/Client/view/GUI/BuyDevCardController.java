@@ -4,7 +4,6 @@ import it.polimi.ingsw.Client.Checker;
 import it.polimi.ingsw.Client.clientstates.gui.BuyDevCardGUI;
 import it.polimi.ingsw.Commons.ColorCard;
 import it.polimi.ingsw.Commons.DevelopmentCard;
-import it.polimi.ingsw.Commons.Effect;
 import it.polimi.ingsw.Commons.ResourceType;
 import it.polimi.ingsw.Utils.Pair;
 import it.polimi.ingsw.Utils.ResourceLocator;
@@ -481,10 +480,6 @@ public class BuyDevCardController extends Controller implements PaymentControlle
         switchToHowToTakeResourcesPhase();
     }
 
-    public boolean isAvailableExtraDepotOfType(ResourceType resource) {
-        return client.getGame().getPlayer(client.getUser()).getPersonalBoard().isAvailableEffectOfType(Effect.EXTRADEPOT,resource);
-    }
-
 
 
     public void switchToHowToTakeResourcesPhase()
@@ -511,7 +506,7 @@ public class BuyDevCardController extends Controller implements PaymentControlle
         minusStrRes1.setVisible(true);
         textField1.setVisible(true);
         textField2.setVisible(true);
-        if(isAvailableExtraDepotOfType(neededResources.get(0).getKey())) {
+        if(isAvailableExtraDepotOfType(neededResources.get(0).getKey(), client)) {
             resExtra1Text.setVisible(true);
             plusExtraRes1.setVisible(true);
             minusExtraRes1.setVisible(true);
@@ -533,7 +528,7 @@ public class BuyDevCardController extends Controller implements PaymentControlle
         minusStrRes2.setVisible(true);
         textField4.setVisible(true);
         textField5.setVisible(true);
-        if(isAvailableExtraDepotOfType(neededResources.get(1).getKey())) {
+        if(isAvailableExtraDepotOfType(neededResources.get(1).getKey(),client)) {
             resExtra2Text.setVisible(true);
             plusExtraRes2.setVisible(true);
             minusExtraRes2.setVisible(true);
@@ -555,7 +550,7 @@ public class BuyDevCardController extends Controller implements PaymentControlle
         minusStrRes3.setVisible(true);
         textField7.setVisible(true);
         textField8.setVisible(true);
-        if(isAvailableExtraDepotOfType(neededResources.get(2).getKey())) {
+        if(isAvailableExtraDepotOfType(neededResources.get(2).getKey(), client)) {
             resExtra3Text.setVisible(true);
             plusExtraRes3.setVisible(true);
             minusExtraRes3.setVisible(true);
@@ -731,14 +726,14 @@ public class BuyDevCardController extends Controller implements PaymentControlle
 
     @FXML
     public void handleActionConclusion() {
-        initializeMap();
+        paymentInstruction = initializeMap();
         for(int i = 0; i < neededResources.size(); i++) {
             if (i == 0)
-                createInstructionEntry(i, firstCurrentValueDepot, firstCurrentValueStrongbox, firstCurrentValueExtra);
+                createInstructionEntry(paymentInstruction, neededResources, i, firstCurrentValueDepot, firstCurrentValueStrongbox, firstCurrentValueExtra);
             if (i == 1)
-                createInstructionEntry(i, secondCurrentValueDepot, secondCurrentValueStrongbox, secondCurrentValueExtra);
+                createInstructionEntry(paymentInstruction, neededResources, i, secondCurrentValueDepot, secondCurrentValueStrongbox, secondCurrentValueExtra);
             if (i == 2)
-                createInstructionEntry(i, thirdCurrentValueDepot, thirdCurrentValueStrongbox, thirdCurrentValueExtra);
+                createInstructionEntry(paymentInstruction, neededResources, i, thirdCurrentValueDepot, thirdCurrentValueStrongbox, thirdCurrentValueExtra);
         }
         buyDevCardAction.compileMessage(developmentCard.getType(),paymentInstruction, slotIndex);
         buyDevCardAction.manageUserInteraction();
@@ -751,34 +746,8 @@ public class BuyDevCardController extends Controller implements PaymentControlle
     }
 
     public void showFinishButton() {
-        concludeAction.setVisible(isPaymentDone());
+        concludeAction.setVisible(isPaymentDone(neededResources));
     }
 
-    public void makeTextInvisible(Text text) {
-        text.setVisible(false);
-    }
-
-    private boolean isPaymentDone() {
-        return neededResources.stream().allMatch(x -> x.getValue() == 0);
-    }
-
-    private void initializeMap() {
-        paymentInstruction.put(ResourceSource.DEPOT, new EnumMap<>(ResourceType.class));
-        paymentInstruction.put(ResourceSource.STRONGBOX, new EnumMap<>(ResourceType.class));
-        paymentInstruction.put(ResourceSource.EXTRA, new EnumMap<>(ResourceType.class));
-
-    }
-
-    private void createInstructionEntry(int resourceIndex,int sourceDepot, int sourceStrongbox, int sourceExtra) {
-        if(sourceDepot > 0) {
-            paymentInstruction.get(ResourceSource.DEPOT).put(neededResources.get(resourceIndex).getKey(),sourceDepot);
-        }
-        if(sourceStrongbox > 0) {
-            paymentInstruction.get(ResourceSource.STRONGBOX).put(neededResources.get(resourceIndex).getKey(),sourceStrongbox);
-        }
-        if(sourceExtra > 0) {
-            paymentInstruction.get(ResourceSource.EXTRA).put(neededResources.get(resourceIndex).getKey(),sourceExtra);
-        }
-    }
 
 }

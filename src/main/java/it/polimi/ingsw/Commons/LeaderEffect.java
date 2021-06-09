@@ -1,5 +1,7 @@
 package it.polimi.ingsw.Commons;
 
+import it.polimi.ingsw.Utils.ResourceLocator;
+
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -39,5 +41,9 @@ public class LeaderEffect implements Serializable {
                 "" + effect +
                 ", type=" + type +
                 '}';
+    }
+
+    public String toImage() {
+        return ResourceLocator.retrieveLeaderEffect(this);
     }
 }

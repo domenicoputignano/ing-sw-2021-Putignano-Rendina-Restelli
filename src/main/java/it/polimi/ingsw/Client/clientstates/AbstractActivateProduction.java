@@ -3,6 +3,8 @@ package it.polimi.ingsw.Client.clientstates;
 import it.polimi.ingsw.Client.Checker;
 import it.polimi.ingsw.Client.reducedmodel.ReducedPersonalBoard;
 import it.polimi.ingsw.Commons.Effect;
+import it.polimi.ingsw.Commons.LeaderCard;
+import it.polimi.ingsw.Commons.LeaderEffect;
 import it.polimi.ingsw.Commons.ResourceType;
 import it.polimi.ingsw.Model.ActiveProductions;
 import it.polimi.ingsw.Network.Client;
@@ -11,7 +13,9 @@ import it.polimi.ingsw.Utils.ResourceSource;
 
 import java.util.EnumMap;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public abstract class AbstractActivateProduction extends AbstractClientState {
 
@@ -25,17 +29,22 @@ public abstract class AbstractActivateProduction extends AbstractClientState {
 
     public boolean areValidRequestedProductions(){
         ReducedPersonalBoard playerBoard = client.getGame().getCurrPlayer().getPersonalBoard();
-        if(requiredProduction.isSlot1() && playerBoard.isEmptySlot(0)) return false;
-        if(requiredProduction.isSlot2() && playerBoard.isEmptySlot(1)) return false;
-        if(requiredProduction.isSlot3() && playerBoard.isEmptySlot(2)) return false;
+        if(requiredProduction.isSlot1() && !canActivateSlot(0)) return false;
+        if(requiredProduction.isSlot2() && !canActivateSlot(1)) return false;
+        if(requiredProduction.isSlot3() && !canActivateSlot(2)) return false;
         if(requiredProduction.isExtraSlot1() && playerBoard.findEffect(Effect.EXTRAPRODUCTION).size() < 1) return false;
         if(requiredProduction.isExtraSlot2() && playerBoard.findEffect(Effect.EXTRAPRODUCTION).size() < 2) return false;
         return true;
     }
 
+    public boolean canActivateSlot(int index) {
+        return !client.getGame().getCurrPlayer().getPersonalBoard().isEmptySlot(index);
+    }
 
-    public int countExtraProductionEffect() {
-        return client.getGame().getPlayer(client.getUser()).getCompatibleLeaderEffect(Effect.EXTRAPRODUCTION).size();
+
+    public List<LeaderEffect> listExtraProductionEffect() {
+        return client.getGame().getCurrPlayer().getCompatibleLeaderEffect(Effect.EXTRAPRODUCTION).stream().
+                map(LeaderCard::getLeaderEffect).collect(Collectors.toList());
     }
 
 
@@ -44,7 +53,7 @@ public abstract class AbstractActivateProduction extends AbstractClientState {
                 get(leaderCardIndex).getLeaderEffect().getType();
     }
 
-    protected Map<ResourceType, Integer> calculateInputResources() {
+    public Map<ResourceType, Integer> calculateInputResources() {
         ReducedPersonalBoard playerBoard = client.getGame().getCurrPlayer().getPersonalBoard();
         EnumMap<ResourceType, Integer> result = new EnumMap<ResourceType, Integer>(ResourceType.class);
         result.put(ResourceType.coin,0);
@@ -84,4 +93,14 @@ public abstract class AbstractActivateProduction extends AbstractClientState {
         return Checker.checkResources(neededResources, client.getGame().getCurrPlayer().getPersonalBoard());
     }
 
+    public void setSlot(int index, boolean status) {
+        messageToSend.setProductions(requiredProduction);
+        if(index == 0) requiredProduction.setSlot1(status);
+        if(index == 1) requiredProduction.setSlot2(status);
+        if(index == 2) requiredProduction.setSlot3(status);
+    }
+
+    public void clearSlot() {
+        requiredProduction.setDefault();
+    }
 }

@@ -20,7 +20,7 @@
                   <Image url="@../img/leaderChoiceTab.png" />
                </image>
             </ImageView>
-            <TextField fx:id="chooseCardText" editable="false" layoutX="157.0" layoutY="122.0" mouseTransparent="true" prefHeight="24.0" prefWidth="573.0" styleClass="chooseLeaderCard" stylesheets="@../css/text.css" text="You have received these leadercards. Choose 2 leader cards to discard !" />
+            <TextField fx:id="chooseCardText" editable="false" layoutX="157.0" layoutY="122.0" mouseTransparent="true" prefHeight="24.0" prefWidth="573.0" styleClass="chooseLeaderCard" stylesheets="@../css/text.css" text="You have received these leader cards. Choose 2 leader cards to discard !" />
             <Button fx:id="leaderCard1" layoutX="125.0" layoutY="189.0" mnemonicParsing="false" onAction="#discardLeaderCard1" prefHeight="215.0" prefWidth="147.0" styleClass="chooseLeaderCard" stylesheets="@../css/button.css" />
             <Button fx:id="leaderCard2" layoutX="275.0" layoutY="189.0" mnemonicParsing="false" onAction="#discardLeaderCard2" prefHeight="215.0" prefWidth="147.0" styleClass="chooseLeaderCard" stylesheets="@../css/button.css" />
             <Button fx:id="leaderCard3" layoutX="425.0" layoutY="189.0" mnemonicParsing="false" onAction="#discardLeaderCard3" prefHeight="215.0" prefWidth="147.0" styleClass="chooseLeaderCard" stylesheets="@../css/button.css" />
