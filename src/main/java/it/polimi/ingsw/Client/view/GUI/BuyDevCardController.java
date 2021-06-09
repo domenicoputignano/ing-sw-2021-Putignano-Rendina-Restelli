@@ -481,10 +481,6 @@ public class BuyDevCardController extends Controller implements PaymentControlle
         switchToHowToTakeResourcesPhase();
     }
 
-    public boolean isAvailableExtraDepotOfType(ResourceType resource) {
-        return client.getGame().getPlayer(client.getUser()).getPersonalBoard().isAvailableEffectOfType(Effect.EXTRADEPOT,resource);
-    }
-
 
 
     public void switchToHowToTakeResourcesPhase()
@@ -511,7 +507,7 @@ public class BuyDevCardController extends Controller implements PaymentControlle
         minusStrRes1.setVisible(true);
         textField1.setVisible(true);
         textField2.setVisible(true);
-        if(isAvailableExtraDepotOfType(neededResources.get(0).getKey())) {
+        if(isAvailableExtraDepotOfType(neededResources.get(0).getKey(), client)) {
             resExtra1Text.setVisible(true);
             plusExtraRes1.setVisible(true);
             minusExtraRes1.setVisible(true);
@@ -533,7 +529,7 @@ public class BuyDevCardController extends Controller implements PaymentControlle
         minusStrRes2.setVisible(true);
         textField4.setVisible(true);
         textField5.setVisible(true);
-        if(isAvailableExtraDepotOfType(neededResources.get(1).getKey())) {
+        if(isAvailableExtraDepotOfType(neededResources.get(1).getKey(),client)) {
             resExtra2Text.setVisible(true);
             plusExtraRes2.setVisible(true);
             minusExtraRes2.setVisible(true);
@@ -555,7 +551,7 @@ public class BuyDevCardController extends Controller implements PaymentControlle
         minusStrRes3.setVisible(true);
         textField7.setVisible(true);
         textField8.setVisible(true);
-        if(isAvailableExtraDepotOfType(neededResources.get(2).getKey())) {
+        if(isAvailableExtraDepotOfType(neededResources.get(2).getKey(), client)) {
             resExtra3Text.setVisible(true);
             plusExtraRes3.setVisible(true);
             minusExtraRes3.setVisible(true);

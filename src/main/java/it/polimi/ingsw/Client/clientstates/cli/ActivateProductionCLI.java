@@ -2,7 +2,6 @@ package it.polimi.ingsw.Client.clientstates.cli;
 
 import it.polimi.ingsw.Client.clientstates.AbstractActivateProduction;
 import it.polimi.ingsw.Client.view.CLI;
-import it.polimi.ingsw.Client.view.UI;
 import it.polimi.ingsw.Commons.ResourceType;
 import it.polimi.ingsw.Exceptions.BackToMenuException;
 import it.polimi.ingsw.Exceptions.InterruptedActionException;
@@ -69,13 +68,13 @@ public class ActivateProductionCLI extends AbstractActivateProduction {
             if(i == 2) requiredProduction.setSlot2(input.nextBoolean());
             if(i == 3) requiredProduction.setSlot3(input.nextBoolean());
         }
-        if(countExtraProductionEffect() == 1) {
+        if(listExtraProductionEffect().size() == 1) {
             System.out.printf("One extra production of type %s available, do you want to activate it? (yes/no) ", getExtraProductionType(0));
             answer = input.nextLine();
             requiredProduction.setExtraSlot1(answer.equalsIgnoreCase("yes"));
             requiredProduction.setExtraSlot2(false);
         }
-        if(countExtraProductionEffect() == 2) {
+        if(listExtraProductionEffect().size() == 2) {
             System.out.printf("Two extra productions available, one of type: %s, do you want to activate it? (yes/no) ", getExtraProductionType(0));
             answer = input.nextLine();
             requiredProduction.setExtraSlot1(answer.equalsIgnoreCase("yes"));

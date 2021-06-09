@@ -1,6 +1,7 @@
 package it.polimi.ingsw.Utils;
 
 import it.polimi.ingsw.Commons.ColorMarble;
+import it.polimi.ingsw.Commons.LeaderEffect;
 import it.polimi.ingsw.Commons.ResourceType;
 
 public final class ResourceLocator {
@@ -491,5 +492,20 @@ public final class ResourceLocator {
             case coin : return "gui/img/resources/coin.png";
             default: return null;
         }
+    }
+
+    public static String retrieveLeaderEffect(LeaderEffect effect) {
+        switch (effect.getEffect()) {
+            case EXTRAPRODUCTION: switch (effect.getType()) {
+                case coin: return "/gui/img/coinProduction.png";
+                case servant: return "/gui/img/servantProduction.png";
+                case shield: return "/gui/img/shieldProduction.png";
+                case stone: return "/gui/img/stoneProduction.png";
+            }
+            case EXTRADEPOT: {
+
+            }
+        }
+        return "";
     }
 }

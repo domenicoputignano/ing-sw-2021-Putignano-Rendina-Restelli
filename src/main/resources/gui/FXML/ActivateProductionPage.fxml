@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.text.*?>
-<?import java.lang.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="anchorActivateProd" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.Client.view.GUI.ActivateProductionController">
+<AnchorPane fx:id="anchorActivateProd" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.Client.view.GUI.ActivateProductionController">
     <children>
         <Button fx:id="closeActivateProd" layoutX="975.0" layoutY="50.0" mnemonicParsing="false" onAction="#handleCloseChooseAction" prefHeight="65.0" prefWidth="70.0" styleClass="button, exit" stylesheets="@../css/button.css" />
       <ImageView fitHeight="431.0" fitWidth="701.0" layoutX="240.0" layoutY="155.0" opacity="0.84" pickOnBounds="true" preserveRatio="true">
@@ -15,9 +16,63 @@
          </image>
       </ImageView>
       <Text fx:id="activateProdText" layoutX="514.0" layoutY="122.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Activate Production" />
-      <Button fx:id="slot1" layoutX="386.0" layoutY="250.0" mnemonicParsing="false" prefHeight="239.0" prefWidth="156.0" styleClass="slotButton" stylesheets="@../css/button.css" />
-      <Button fx:id="slot2" layoutX="559.0" layoutY="250.0" mnemonicParsing="false" prefHeight="239.0" prefWidth="156.0" styleClass="slotButton" stylesheets="@../css/button.css" />
-      <Button fx:id="slot3" layoutX="737.0" layoutY="250.0" mnemonicParsing="false" prefHeight="239.0" prefWidth="156.0" styleClass="slotButton" stylesheets="@../css/button.css" />
+      <Button fx:id="slot1" layoutX="386.0" layoutY="250.0" mnemonicParsing="false" onAction="#handleFirstSlotSelection" prefHeight="239.0" prefWidth="156.0" styleClass="slotButton" stylesheets="@../css/button.css" />
+      <Button fx:id="slot2" layoutX="559.0" layoutY="250.0" mnemonicParsing="false" onAction="#handleSecondSlotSelection" prefHeight="239.0" prefWidth="156.0" styleClass="slotButton" stylesheets="@../css/button.css" />
+      <Button fx:id="slot3" layoutX="737.0" layoutY="250.0" mnemonicParsing="false" onAction="#handleThirdSlotSelection" prefHeight="239.0" prefWidth="156.0" styleClass="slotButton" stylesheets="@../css/button.css" />
       <Button fx:id="basicProduction" layoutX="244.0" layoutY="378.0" mnemonicParsing="false" prefHeight="130.0" prefWidth="138.0" styleClass="basicProduction" stylesheets="@../css/button.css" />
+      <HBox alignment="CENTER" layoutX="387.0" layoutY="575.0" prefHeight="54.0" prefWidth="417.0" visible="false">
+         <children>
+            <Button fx:id="firstExtraSlot" alignment="CENTER" mnemonicParsing="false" prefHeight="52.0" prefWidth="216.0" styleClass="slotButton" stylesheets="@../css/button.css" visible="false" />
+            <Button fx:id="secondExtraSlot" mnemonicParsing="false" prefHeight="52.0" prefWidth="216.0" styleClass="slotButton" stylesheets="@../css/button.css" visible="false" />
+         </children>
+      </HBox>
+      <Text layoutX="392.0" layoutY="220.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Depot" />
+      <Text layoutX="392.0" layoutY="330.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Depot " />
+      <Text layoutX="392.0" layoutY="440.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Depot " />
+      <Text layoutX="392.0" layoutY="550.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Depot " />
+      <Text layoutX="392.0" layoutY="250.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Strongbox" />
+      <Text layoutX="392.0" layoutY="360.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Strongbox" />
+      <Text layoutX="392.0" layoutY="470.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Strongbox" />
+      <Text layoutX="392.0" layoutY="580.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Strongbox" />
+      <Text layoutX="392.0" layoutY="280.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Extra" />
+      <Text layoutX="392.0" layoutY="500.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Extra" />
+      <Text layoutX="392.0" layoutY="610.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Extra" />
+      <Text layoutX="392.0" layoutY="390.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Extra" />
+      <Button alignment="CENTER" layoutX="514.0" layoutY="200.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" text="Button" />
+      <Button alignment="CENTER" layoutX="600.0" layoutY="200.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" text="Button" />
+      <Button alignment="CENTER" layoutX="514.0" layoutY="230.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" text="Button" />
+      <Button alignment="CENTER" layoutX="600.0" layoutY="230.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" text="Button" />
+      <Button alignment="CENTER" layoutX="514.0" layoutY="310.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" text="Button" />
+      <Button alignment="CENTER" layoutX="600.0" layoutY="260.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" text="Button" />
+      <Button alignment="CENTER" layoutX="600.0" layoutY="311.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" text="Button" />
+      <Button alignment="CENTER" layoutX="514.0" layoutY="340.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" text="Button" />
+      <Button alignment="CENTER" layoutX="600.0" layoutY="340.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" text="Button" />
+      <Button alignment="CENTER" layoutX="514.0" layoutY="370.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" text="Button" />
+      <Button alignment="CENTER" layoutX="600.0" layoutY="370.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" text="Button" />
+      <Button alignment="CENTER" layoutX="514.0" layoutY="420.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" text="Button" />
+      <Button alignment="CENTER" layoutX="600.0" layoutY="420.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" text="Button" />
+      <Button alignment="CENTER" layoutX="514.0" layoutY="450.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" text="Button" />
+      <Button alignment="CENTER" layoutX="600.0" layoutY="450.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" text="Button" />
+      <Button alignment="CENTER" layoutX="514.0" layoutY="480.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" text="Button" />
+      <Button alignment="CENTER" layoutX="600.0" layoutY="480.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" text="Button" />
+      <Button alignment="CENTER" layoutX="514.0" layoutY="530.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" text="Button" />
+      <Button alignment="CENTER" layoutX="600.0" layoutY="530.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" text="Button" />
+      <Button alignment="CENTER" layoutX="514.0" layoutY="560.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" text="Button" />
+      <Button alignment="CENTER" layoutX="600.0" layoutY="560.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" text="Button" />
+      <Button alignment="CENTER" layoutX="514.0" layoutY="590.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" text="Button" />
+      <Button alignment="CENTER" layoutX="600.0" layoutY="590.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" text="Button" />
+      <Button layoutX="514.0" layoutY="260.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" text="Button" />
+      <Text fx:id="firstDepotOcc" layoutX="572.0" layoutY="224.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" />
+      <Text fx:id="firstStrongboxOcc" layoutX="572.0" layoutY="250.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" />
+      <Text fx:id="firstExtraOcc" layoutX="572.0" layoutY="284.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" />
+      <Text fx:id="secondDepotOcc" layoutX="572.0" layoutY="334.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" />
+      <Text fx:id="secondStrongboxOcc" layoutX="572.0" layoutY="364.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" />
+      <Text fx:id="secondExtraOcc" layoutX="572.0" layoutY="394.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" />
+      <Text fx:id="thirdDepotOcc" layoutX="572.0" layoutY="444.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" />
+      <Text fx:id="thirdStrongboxOcc" layoutX="572.0" layoutY="474.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" />
+      <Text fx:id="thirdExtraOcc" layoutX="572.0" layoutY="504.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" />
+      <Text fx:id="fourthDepotOcc" layoutX="572.0" layoutY="554.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" />
+      <Text fx:id="fourthStrongboxOcc" layoutX="572.0" layoutY="584.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" />
+      <Text fx:id="fourthExtraOcc" layoutX="572.0" layoutY="614.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" />
     </children>
 </AnchorPane>
