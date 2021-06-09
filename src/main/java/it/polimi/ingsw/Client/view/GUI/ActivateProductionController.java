@@ -38,13 +38,19 @@ public class ActivateProductionController extends Controller implements PaymentC
 
     private void initializeSlotsImages()
     {
-       /* slot1.setStyle("-fx-background-image: url(" +
-                client.getGame().getCurrPlayer().getPersonalBoard().peekTopCardInSlot(1).toImage() + ")");
-        slot2.setStyle("-fx-background-image: url(" +
-                client.getGame().getCurrPlayer().getPersonalBoard().peekTopCardInSlot(2).toImage() + ")");
-        slot3.setStyle("-fx-background-image: url(" +
-                client.getGame().getCurrPlayer().getPersonalBoard().peekTopCardInSlot(3).toImage() + ")");
-    */}
+        if(!client.getGame().getPlayer(client.getUser()).getPersonalBoard().isEmptySlot(0)) {
+            slot1.setStyle("-fx-background-image: url(" +
+                    client.getGame().getPlayer(client.getUser()).getPersonalBoard().peekTopCardInSlot(0).toImage() + ")");
+        }
+        if(!client.getGame().getPlayer(client.getUser()).getPersonalBoard().isEmptySlot(1)) {
+            slot2.setStyle("-fx-background-image: url(" +
+                    client.getGame().getPlayer(client.getUser()).getPersonalBoard().peekTopCardInSlot(1).toImage() + ")");
+        }
+        if(!client.getGame().getPlayer(client.getUser()).getPersonalBoard().isEmptySlot(2)) {
+            slot3.setStyle("-fx-background-image: url(" +
+                    client.getGame().getPlayer(client.getUser()).getPersonalBoard().peekTopCardInSlot(2).toImage() + ")");
+        }
+    }
 
     @FXML
     public void handleCloseChooseAction()
