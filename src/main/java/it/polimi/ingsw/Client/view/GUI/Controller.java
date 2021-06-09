@@ -46,14 +46,8 @@ public class Controller {
 
     protected AbstractClientState clientState;
 
-    Stage exit;
-    Stage infoStage;
     Stage mainstage;
-    Stage takeResPopup;
-    Stage leaderActionPopup;
-    Stage buyDevCardPopup;
-    Stage errorMessage;
-
+    Stage popup;
 
     @FXML
     public void initialize() {
@@ -79,140 +73,52 @@ public class Controller {
     @FXML
     void exit()
     {
-        exit = new Stage();
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/FXML/ExitPage.fxml"));
-            Parent root = loader.load();
-            GUIApp.controller = loader.getController();
-            Scene scene = new Scene(Objects.requireNonNull(root), 570, 380, Color.TRANSPARENT);
-            scene.setCursor(new ImageCursor(new Image(CURSOR), 36, 45));
-            exit.initStyle(StageStyle.TRANSPARENT);
-            exit.setAlwaysOnTop(true);
-            scene.setUserData(loader);
-            exit.initModality(Modality.WINDOW_MODAL);
-            exit.initOwner(GUIApp.getStage());
-            scene.setUserData(loader);
-            exit.setScene(scene);
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        exit.show();
-
+        showPopup("/gui/FXML/ExitPage.fxml", 570, 380);
     }
 
     public void showTakeResourcesFromMarketUpdate()
     {
-        takeResPopup = new Stage();
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/FXML/TakeResourcesPopup.fxml"));
-            Parent root = loader.load();
-            GUIApp.controller = loader.getController();
-            Scene scene = new Scene(Objects.requireNonNull(root), 420, 280, Color.TRANSPARENT);
-            scene.setCursor(new ImageCursor(new Image(CURSOR), 36, 45));
-            takeResPopup.initStyle(StageStyle.TRANSPARENT);
-            takeResPopup.setAlwaysOnTop(true);
-            scene.setUserData(loader);
-            takeResPopup.initModality(Modality.WINDOW_MODAL);
-            takeResPopup.initOwner(GUIApp.getStage());
-            scene.setUserData(loader);
-            takeResPopup.setScene(scene);
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        takeResPopup.show();
-
+        showPopup("/gui/FXML/TakeResourcesPopup.fxml", 420, 280);
     }
 
     public void showLeaderActionUpdate(){
-        leaderActionPopup = new Stage();
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/FXML/LeaderActionPopup.fxml"));
-            Parent root = loader.load();
-            GUIApp.controller = loader.getController();
-            Scene scene = new Scene(Objects.requireNonNull(root), 300, 369, Color.TRANSPARENT);
-            scene.setCursor(new ImageCursor(new Image(CURSOR), 36, 45));
-            leaderActionPopup.initStyle(StageStyle.TRANSPARENT);
-            leaderActionPopup.setAlwaysOnTop(true);
-            scene.setUserData(loader);
-            leaderActionPopup.initModality(Modality.WINDOW_MODAL);
-            leaderActionPopup.initOwner(GUIApp.getStage());
-            scene.setUserData(loader);
-            leaderActionPopup.setScene(scene);
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        leaderActionPopup.show();
+        showPopup("/gui/FXML/LeaderActionPopup.fxml", 300, 369);
     }
 
     public void showBuyDevCardUpdate(){
-        buyDevCardPopup = new Stage();
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/FXML/BuyDevCardPopup.fxml"));
-            Parent root = loader.load();
-            GUIApp.controller = loader.getController();
-            Scene scene = new Scene(Objects.requireNonNull(root), 500, 400, Color.TRANSPARENT);
-            scene.setCursor(new ImageCursor(new Image(CURSOR), 36, 45));
-            buyDevCardPopup.initStyle(StageStyle.TRANSPARENT);
-            buyDevCardPopup.setAlwaysOnTop(true);
-            scene.setUserData(loader);
-            buyDevCardPopup.initModality(Modality.WINDOW_MODAL);
-            buyDevCardPopup.initOwner(GUIApp.getStage());
-            scene.setUserData(loader);
-            buyDevCardPopup.setScene(scene);
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        buyDevCardPopup.show();
+        showPopup("/gui/FXML/BuyDevCardPopup.fxml", 500, 400);
     }
 
     public void showErrorMessage(){
-        errorMessage = new Stage();
+        showPopup("/gui/FXML/ErrorPopup.fxml", 500, 400);
+    }
+
+    public void showPopup(String FXMLFile, int width, int height){
+        popup = new Stage();
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/FXML/ErrorPopup.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(FXMLFile));
             Parent root = loader.load();
             GUIApp.controller = loader.getController();
-            Scene scene = new Scene(Objects.requireNonNull(root), 500, 400, Color.TRANSPARENT);
+            Scene scene = new Scene(Objects.requireNonNull(root), width, height, Color.TRANSPARENT);
             scene.setCursor(new ImageCursor(new Image(CURSOR), 36, 45));
-            errorMessage.initStyle(StageStyle.TRANSPARENT);
-            errorMessage.setAlwaysOnTop(true);
+            popup.initStyle(StageStyle.TRANSPARENT);
+            popup.setAlwaysOnTop(true);
             scene.setUserData(loader);
-            errorMessage.initModality(Modality.WINDOW_MODAL);
-            errorMessage.initOwner(GUIApp.getStage());
+            popup.initModality(Modality.WINDOW_MODAL);
+            popup.initOwner(GUIApp.getStage());
             scene.setUserData(loader);
-            errorMessage.setScene(scene);
+            popup.setScene(scene);
 
         } catch (IOException e) {
             e.printStackTrace();
         }
-        errorMessage.show();
+        popup.show();
     }
 
     @FXML
     void info()
     {
-        infoStage = new Stage();
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/FXML/InfoPage.fxml"));
-            Parent root = loader.load();
-            GUIApp.controller = loader.getController();
-            Scene scene = new Scene(Objects.requireNonNull(root), 1180, 750, Color.TRANSPARENT);
-            scene.setCursor(new ImageCursor(new Image(CURSOR), 36, 45));
-            infoStage.initStyle(StageStyle.TRANSPARENT);
-            infoStage.setAlwaysOnTop(true);
-            scene.setUserData(loader);
-            infoStage.initModality(Modality.WINDOW_MODAL);
-            infoStage.initOwner(GUIApp.getStage());
-            scene.setUserData(loader);
-            infoStage.setScene(scene);
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        infoStage.show();
+        showPopup("/gui/FXML/InfoPage.fxml", 1180, 750);
     }
 
     public void setClient(Client client) {

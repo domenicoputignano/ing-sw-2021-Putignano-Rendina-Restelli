@@ -71,8 +71,8 @@ public class GUIApp extends Application {
     }
 
     public static void showScene(String FXMLfile) {
-            stage.setScene(loadScene(FXMLfile));
-            stage.show();
+        stage.setScene(loadScene(FXMLfile));
+        stage.show();
     }
 
     public static Stage getStage() {
