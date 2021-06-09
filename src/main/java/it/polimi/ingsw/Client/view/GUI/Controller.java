@@ -93,6 +93,10 @@ public class Controller {
         showPopup("/gui/FXML/ErrorPopup.fxml", 500, 400);
     }
 
+    public void showLorenzoPlayedPopup(){
+        showPopup("/gui/FXML/LorenzoPlayedPopup.fxml", 500, 400);
+    }
+
     public void showPopup(String FXMLFile, int width, int height){
         popup = new Stage();
         try {

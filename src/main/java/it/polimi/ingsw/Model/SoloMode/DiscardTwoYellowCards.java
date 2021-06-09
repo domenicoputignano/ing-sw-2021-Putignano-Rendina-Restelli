@@ -8,6 +8,11 @@ public class DiscardTwoYellowCards implements TokenEffect{
     }
 
     @Override
+    public String renderTokenImage() {
+        return "gui/img/tokens/discard2yellow.png";
+    }
+
+    @Override
     public String renderTokenEffect() {
         return "Lorenzo discarded two yellow cards from the decks";
     }
