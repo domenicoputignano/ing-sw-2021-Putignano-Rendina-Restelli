@@ -1,5 +1,6 @@
 package it.polimi.ingsw.Client.view.GUI;
 
+import it.polimi.ingsw.Client.reducedmodel.ReducedSoloMode;
 import it.polimi.ingsw.Commons.ResourceType;
 import it.polimi.ingsw.Utils.Messages.ClientMessages.EndTurnMessage;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.Updates.TakeResourcesFromMarketUpdate;
@@ -91,7 +92,10 @@ public class PlayerBoardController extends Controller {
         strongboxResources.setVisible(true);
         initializeCells();
         initializeDepots();
-        initializeFaithMarker();
+        if(client.getUI().isSoloMode())
+            initializeFaithTrackWithBlackCross();
+        else
+            initializeFaithMarker();
         initializeSlots();
         if(!client.getUI().hasDoneNormalAction())
             endTurn.setVisible(false);
@@ -153,6 +157,18 @@ public class PlayerBoardController extends Controller {
         }
     }
 
+    private void initializeFaithTrackWithBlackCross()
+    {
+        clearFaithMarker();
+        int faith = client.getGame().getPlayer(client.getUser()).getPersonalBoard().getFaithTrack().getFaithMarker();
+        int blackCross = ((ReducedSoloMode) client.getGame()).getBlackCross();
+        if(faith == blackCross)
+            cells[faith].setImage(new Image("/gui/img/blackCross&Faith.png"));
+        else{
+            cells[faith].setImage(new Image("/gui/img/faith.png"));
+            cells[blackCross].setImage(new Image("/gui/img/blackCross.png"));
+        }
+    }
     private void initializeFaithMarker()
     {
         clearFaithMarker();

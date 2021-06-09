@@ -71,8 +71,8 @@
                 <ImageView fx:id="depot21" fitHeight="40.0" fitWidth="40.0" layoutX="63.0" layoutY="286.0" pickOnBounds="true" preserveRatio="true" />
                 <ImageView fx:id="depot22" fitHeight="40.0" fitWidth="40.0" layoutX="105.0" layoutY="286.0" pickOnBounds="true" preserveRatio="true" />
                 <ImageView fx:id="depot31" fitHeight="40.0" fitWidth="40.0" layoutX="42.0" layoutY="335.0" pickOnBounds="true" preserveRatio="true" />
-                <ImageView fx:id="depot32" fitHeight="40.0" fitWidth="40.0" layoutX="85.0" layoutY="335.0" pickOnBounds="true" preserveRatio="true" />
-                <ImageView fx:id="depot33" fitHeight="40.0" fitWidth="40.0" layoutX="123.0" layoutY="337.0" pickOnBounds="true" preserveRatio="true" />
+                <ImageView fx:id="depot32" fitHeight="40.0" fitWidth="40.0" layoutX="81.0" layoutY="335.0" pickOnBounds="true" preserveRatio="true" />
+                <ImageView fx:id="depot33" fitHeight="40.0" fitWidth="40.0" layoutX="120.0" layoutY="335.0" pickOnBounds="true" preserveRatio="true" />
                 <Button fx:id="endTurn" layoutX="570.0" layoutY="545.0" mnemonicParsing="false" onAction="#handleEndTurn" prefHeight="60.0" prefWidth="161.0" styleClass="chooseAction" stylesheets="@../css/button.css" text="End Turn" />
                 <Button fx:id="otherPlayers" layoutX="252.0" layoutY="545.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="161.0" styleClass="chooseAction" stylesheets="@../css/button.css" text="View other players" />
             <ImageView fx:id="bgSlots1" fitHeight="212.0" fitWidth="135.0" layoutX="288.0" layoutY="242.0" pickOnBounds="true" preserveRatio="true" visible="false">

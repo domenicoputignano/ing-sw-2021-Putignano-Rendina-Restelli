@@ -25,5 +25,7 @@ public class ReducedSoloMode extends ReducedGame {
         this.blackCross = message.getBlackCross();
     }
 
-
+    public int getBlackCross() {
+        return blackCross;
+    }
 }
