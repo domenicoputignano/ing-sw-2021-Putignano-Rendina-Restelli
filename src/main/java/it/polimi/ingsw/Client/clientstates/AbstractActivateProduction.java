@@ -94,6 +94,7 @@ public abstract class AbstractActivateProduction extends AbstractClientState {
     }
 
     public void setSlot(int index, boolean status) {
+        messageToSend.setProductions(requiredProduction);
         if(index == 0) requiredProduction.setSlot1(status);
         if(index == 1) requiredProduction.setSlot2(status);
         if(index == 2) requiredProduction.setSlot3(status);

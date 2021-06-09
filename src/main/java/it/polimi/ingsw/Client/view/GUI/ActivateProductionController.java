@@ -1,22 +1,26 @@
 package it.polimi.ingsw.Client.view.GUI;
 
-import it.polimi.ingsw.Client.Checker;
 import it.polimi.ingsw.Client.clientstates.gui.ActivateProductionGUI;
 import it.polimi.ingsw.Commons.*;
 import it.polimi.ingsw.Utils.Pair;
+import it.polimi.ingsw.Utils.ResourceSource;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 
+import java.util.EnumMap;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
 public class ActivateProductionController extends Controller implements PaymentController {
+
     @FXML
     public AnchorPane anchorActivateProd;
 
@@ -30,9 +34,18 @@ public class ActivateProductionController extends Controller implements PaymentC
     public Button slot1,slot2,slot3,basicProduction, firstExtraSlot, secondExtraSlot;
 
     @FXML
-    public Button firstResourceDepot, secondResourceDepot, thirdResourceDepot, fourthResourceDepot;
-    public Button firstResourceStrongbox, secondResourceStrongbox, thirdResourceStrongbox, fourthResourceStrongbox;
-    public Button firstResourceExtra, secondResourceExtra, thirdResourceExtra, fourthResourceExtra;
+    public Button plusFirstResourceDepot, plusSecondResourceDepot, plusThirdResourceDepot, plusFourthResourceDepot;
+    public Button plusFirstResourceStrongbox, plusSecondResourceStrongbox, plusThirdResourceStrongbox, plusFourthResourceStrongbox;
+    public Button plusFirstResourceExtra, plusSecondResourceExtra, plusThirdResourceExtra, plusFourthResourceExtra;
+
+
+    public Button minusFirstResourceDepot, minusSecondResourceDepot, minusThirdResourceDepot, minusFourthResourceDepot;
+    public Button minusFirstResourceStrongbox, minusSecondResourceStrongbox, minusThirdResourceStrongbox, minusFourthResourceStrongbox;
+    public Button minusFirstResourceExtra, minusSecondResourceExtra, minusThirdResourceExtra, minusFourthResourceExtra;
+
+    public Button toPayment;
+
+    public ImageView slotsBackground;
 
     @FXML
     public Text firstDepotOcc, secondDepotOcc, thirdDepotOcc, fourthDepotOcc;
@@ -55,7 +68,24 @@ public class ActivateProductionController extends Controller implements PaymentC
                 new BackgroundSize(100, 100, true, true, true, false))));
         setFont(activateProdText,30);
         activateProdText.setStyle("-fx-text-fill: rgb(230,230,180);");
+        setText();
         initializeSlotsImages();
+    }
+
+
+    private void setText() {
+        setFont(firstDepotOcc, 20);
+        setFont(secondDepotOcc,20);
+        setFont(thirdDepotOcc,20);
+        setFont(fourthDepotOcc, 20);
+        setFont(firstStrongboxOcc, 20);
+        setFont(secondStrongboxOcc,20);
+        setFont(thirdStrongboxOcc,20);
+        setFont(fourthStrongboxOcc,20);
+        setFont(firstExtraOcc,20);
+        setFont(secondExtraOcc, 20);
+        setFont(thirdExtraOcc,20);
+        setFont(fourthExtraOcc,20);
     }
 
     private void initializeSlotsImages()
@@ -90,6 +120,7 @@ public class ActivateProductionController extends Controller implements PaymentC
         if(activateProductionAction.canActivateSlot(0)) {
             slot1.setStyle("-fx-border-color: rgb(230,230,180);-fx-border-width: 5;");
             activateProductionAction.setSlot(0,true);
+            toPayment.setVisible(true);
         } else {
             showErrorInSlotsSelection();
         }
@@ -100,6 +131,7 @@ public class ActivateProductionController extends Controller implements PaymentC
         if(activateProductionAction.canActivateSlot(1)) {
             slot2.setStyle("-fx-border-color: rgb(230,230,180);-fx-border-width: 5;");
             activateProductionAction.setSlot(1,true);
+            toPayment.setVisible(true);
         } else {
             showErrorInSlotsSelection();
         }
@@ -110,6 +142,7 @@ public class ActivateProductionController extends Controller implements PaymentC
         if(activateProductionAction.canActivateSlot(2)) {
             slot3.setStyle("-fx-border-color: rgb(230,230,180);-fx-border-width: 5;");
             activateProductionAction.setSlot(2, true);
+            toPayment.setVisible(true);
         } else {
             showErrorInSlotsSelection();
         }
@@ -131,6 +164,8 @@ public class ActivateProductionController extends Controller implements PaymentC
         requiredResources = inputResources.entrySet().stream().
                 map(x -> new Pair<>(x.getKey(),x.getValue())).collect(Collectors.toList());
         if(activateProductionAction.checkRequiredResources()) {
+            toPayment.setVisible(false);
+            switchToHowToTakeResources();
             showRequiredResources(requiredResources);
         } else {
 
@@ -138,38 +173,116 @@ public class ActivateProductionController extends Controller implements PaymentC
     }
 
 
+    public void switchToHowToTakeResources() {
+        plusFirstResourceDepot.setVisible(false);
+        plusFirstResourceStrongbox.setVisible(false);
+        minusFirstResourceDepot.setVisible(false);
+        minusFirstResourceStrongbox.setVisible(false);
+        firstDepotOcc.setVisible(false);
+        firstStrongboxOcc.setVisible(false);
+        plusFirstResourceExtra.setVisible(false);
+        minusFirstResourceExtra.setVisible(false);
+        firstExtraOcc.setVisible(false);
+
+
+        plusSecondResourceDepot.setVisible(false);
+        plusSecondResourceStrongbox.setVisible(false);
+        minusSecondResourceDepot.setVisible(false);
+        minusSecondResourceStrongbox.setVisible(false);
+        secondDepotOcc.setVisible(false);
+        secondStrongboxOcc.setVisible(false);
+        plusSecondResourceExtra.setVisible(false);
+        minusSecondResourceExtra.setVisible(false);
+        secondExtraOcc.setVisible(false);
+
+
+        plusThirdResourceDepot.setVisible(false);
+        plusThirdResourceStrongbox.setVisible(false);
+        minusThirdResourceDepot.setVisible(false);
+        minusThirdResourceStrongbox.setVisible(false);
+        thirdDepotOcc.setVisible(false);
+        thirdStrongboxOcc.setVisible(false);
+        plusThirdResourceExtra.setVisible(false);
+        minusThirdResourceExtra.setVisible(false);
+        thirdExtraOcc.setVisible(false);
+
+
+        plusFourthResourceDepot.setVisible(false);
+        plusFourthResourceStrongbox.setVisible(false);
+        minusFourthResourceDepot.setVisible(false);
+        minusFourthResourceStrongbox.setVisible(false);
+        fourthDepotOcc.setVisible(false);
+        fourthStrongboxOcc.setVisible(false);
+        plusFourthResourceExtra.setVisible(false);
+        minusFourthResourceExtra.setVisible(false);
+        fourthExtraOcc.setVisible(false);
+
+        slotsBackground.setVisible(false);
+
+
+    }
+
+
+
     @Override
     public void setVisibleFirstResource() {
-        firstResourceDepot.setVisible(true);
-        firstResourceStrongbox.setVisible(true);
+        plusFirstResourceDepot.setVisible(true);
+        plusFirstResourceStrongbox.setVisible(true);
+        minusFirstResourceDepot.setVisible(true);
+        minusFirstResourceStrongbox.setVisible(true);
+        firstDepotOcc.setVisible(true);
+        firstStrongboxOcc.setVisible(true);
         if(isAvailableExtraDepotOfType(requiredResources.get(0).getKey(), client)) {
-            firstResourceExtra.setVisible(true);
+            plusFirstResourceExtra.setVisible(true);
+            minusFirstResourceExtra.setVisible(true);
+            firstExtraOcc.setVisible(true);
         }
     }
 
     @Override
     public void setVisibleSecondResource() {
-        secondResourceDepot.setVisible(true);
-        secondResourceStrongbox.setVisible(true);
+        plusSecondResourceDepot.setVisible(true);
+        plusSecondResourceStrongbox.setVisible(true);
+        minusSecondResourceDepot.setVisible(true);
+        minusSecondResourceStrongbox.setVisible(true);
+        secondDepotOcc.setVisible(true);
+        secondStrongboxOcc.setVisible(true);
         if(isAvailableExtraDepotOfType(requiredResources.get(1).getKey(), client)) {
-            secondResourceExtra.setVisible(true);
+            plusSecondResourceExtra.setVisible(true);
+            minusSecondResourceExtra.setVisible(true);
+            secondExtraOcc.setVisible(true);
         }
     }
 
     @Override
     public void setVisibleThirdResource() {
-        thirdResourceDepot.setVisible(true);
-        thirdResourceStrongbox.setVisible(true);
+        plusThirdResourceDepot.setVisible(true);
+        plusThirdResourceStrongbox.setVisible(true);
+        minusThirdResourceDepot.setVisible(true);
+        minusThirdResourceStrongbox.setVisible(true);
+        thirdDepotOcc.setVisible(true);
+        thirdStrongboxOcc.setVisible(true);
         if(isAvailableExtraDepotOfType(requiredResources.get(2).getKey(), client)) {
-            thirdResourceExtra.setVisible(true);
+            plusThirdResourceExtra.setVisible(true);
+            minusThirdResourceExtra.setVisible(true);
+            thirdExtraOcc.setVisible(true);
+        }
+        if(requiredResources.size()>3) {
+            setVisibleFourthResource();
         }
     }
 
     public void setVisibleFourthResource() {
-        fourthResourceDepot.setVisible(true);
-        fourthResourceStrongbox.setVisible(true);
+        plusFourthResourceDepot.setVisible(true);
+        plusFourthResourceStrongbox.setVisible(true);
+        minusFourthResourceDepot.setVisible(true);
+        minusFourthResourceStrongbox.setVisible(true);
+        fourthDepotOcc.setVisible(true);
+        fourthStrongboxOcc.setVisible(true);
         if(isAvailableExtraDepotOfType(requiredResources.get(3).getKey(),client)) {
-            fourthResourceExtra.setVisible(true);
+            plusFourthResourceExtra.setVisible(true);
+            minusFourthResourceExtra.setVisible(true);
+            fourthExtraOcc.setVisible(true);
         }
     }
 
@@ -182,7 +295,9 @@ public class ActivateProductionController extends Controller implements PaymentC
         stage.close();
     }
 
+    public void goToPayment() {
 
+    }
 
 
 }
