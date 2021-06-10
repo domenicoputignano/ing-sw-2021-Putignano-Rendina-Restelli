@@ -252,13 +252,14 @@
     -fx-background-size: 75% auto;
 }
 .resDepot{
-    -fx-background-size: 96% auto;
+    -fx-background-size: 100% auto;
 }
 .resDepot:hover{
-    -fx-background-size: 98% auto;
+    -fx-background-size: 100% auto;
+    -fx-background-color: #e7f3ef;
 }
 .resDepot:pressed{
-    -fx-background-size: 90% auto;
+    -fx-background-size: 95% auto;
 }
 .buyDevCard{
     -fx-background-size: 107% auto;

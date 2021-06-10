@@ -68,6 +68,8 @@ public class ActivateProductionController extends Controller implements PaymentC
                 new BackgroundSize(100, 100, true, true, true, false))));
         setFont(activateProdText,30);
         activateProdText.setStyle("-fx-text-fill: rgb(230,230,180);");
+        setFont(toPayment,25);
+        toPayment.setStyle("-fx-text-fill: rgb(35, 25, 22);");
         setText();
         initializeSlotsImages();
     }

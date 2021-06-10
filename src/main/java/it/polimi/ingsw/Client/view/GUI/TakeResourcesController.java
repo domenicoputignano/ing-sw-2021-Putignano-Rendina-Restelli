@@ -9,11 +9,8 @@ import it.polimi.ingsw.Utils.MarbleDestination;
 import it.polimi.ingsw.Utils.MarketChoice;
 import it.polimi.ingsw.Utils.Pair;
 import it.polimi.ingsw.Utils.ResourceLocator;
-import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.MenuButton;
-import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
@@ -33,7 +30,7 @@ public class TakeResourcesController extends Controller{
     public Text resourcesText;
 
     @FXML
-    public Button closeBuyDevCard;
+    public Button closeTakeRes;
 
     @FXML
     public ImageView light1rows,light2rows,light3rows;
@@ -179,7 +176,7 @@ public class TakeResourcesController extends Controller{
     @FXML
     public void handleCloseChooseAction()
     {
-        Stage stage = (Stage) closeBuyDevCard.getScene().getWindow();
+        Stage stage = (Stage) closeTakeRes.getScene().getWindow();
         stage.close();
     }
 
