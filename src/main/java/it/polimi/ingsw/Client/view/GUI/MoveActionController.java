@@ -187,6 +187,7 @@ public class MoveActionController extends Controller{
         messageToSend.setMoveAction(new MoveFromNormalToNormalAction(normalDepotIndexSource,normalDepotIndexDestination));
         state.setMessage(messageToSend);
         state.manageUserInteraction();
+        handleCloseMoveAction();
     }
     private void sendFromNormalToExtraMessage()
     {
@@ -194,6 +195,7 @@ public class MoveActionController extends Controller{
         messageToSend.setMoveAction(new MoveFromNormalToExtraAction(normalDepotIndexSource,0,extraDepotIndexDestination));
         state.setMessage(messageToSend);
         state.manageUserInteraction();
+        handleCloseMoveAction();
     }
 
     @FXML
