@@ -292,3 +292,26 @@
     -fx-background-size: 90% auto;
 }
 
+
+.coin {
+    -fx-background-image: url("/gui/img/resources/coin.png");
+}
+.servant {
+    -fx-background-image: url("/gui/img/resources/servant.png");
+}
+.shield {
+    -fx-background-image: url("/gui/img/resources/shield.png");
+}
+.stone {
+    -fx-background-image: url("/gui/img/resources/stone.png");
+}
+.resourceButton {
+    -fx-background-size: 97% auto;
+}
+.resourceButton:hover {
+    -fx-background-size: 107% auto;
+}
+.resourceButton:pressed {
+    -fx-background-size: 91%;
+}
+

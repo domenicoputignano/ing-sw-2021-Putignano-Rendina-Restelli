@@ -100,7 +100,42 @@ public abstract class AbstractActivateProduction extends AbstractClientState {
         if(index == 2) requiredProduction.setSlot3(status);
     }
 
+
+
+    public void setBasicSlot() {
+        requiredProduction.setBasic(true);
+        messageToSend.setProductions(requiredProduction);
+    }
+
+    public void setInput(int basicInputIndex, ResourceType resource) {
+        if(basicInputIndex == 1) messageToSend.setInput1(resource);
+        if(basicInputIndex == 2) messageToSend.setInput2(resource);
+    }
+    public void setOutput(String outputType, int outputIndex, ResourceType resource) {
+        if(outputType.equalsIgnoreCase("extra")) {
+            if (outputIndex == 1) messageToSend.setOutputExtra1(resource);
+            if (outputIndex == 2) messageToSend.setOutputExtra2(resource);
+        }
+        if(outputType.equalsIgnoreCase("normal")) {
+            messageToSend.setOutput(resource);
+        }
+    }
+
+    public boolean isBasicSettingDone() {
+        return messageToSend.getInput1()!=null&&messageToSend.getInput2()!=null&&messageToSend.getOutput()!=null;
+    }
+
     public void clearSlot() {
         requiredProduction.setDefault();
+    }
+
+    public void clearBasicChoices() {
+        messageToSend.setInput1(null);
+        messageToSend.setInput2(null);
+        messageToSend.setOutput(null);
+    }
+
+    public boolean isBasicProduction() {
+        return messageToSend.getProductions().isBasic();
     }
 }

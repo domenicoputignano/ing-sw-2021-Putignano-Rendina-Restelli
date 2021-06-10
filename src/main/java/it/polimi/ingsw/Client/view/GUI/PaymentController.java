@@ -5,6 +5,7 @@ import it.polimi.ingsw.Commons.ResourceType;
 import it.polimi.ingsw.Network.Client;
 import it.polimi.ingsw.Utils.Pair;
 import it.polimi.ingsw.Utils.ResourceSource;
+import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 
 import java.util.EnumMap;
@@ -60,5 +61,38 @@ public interface PaymentController {
         text.setVisible(false);
     }
 
+
+    default boolean editedCostList(List<Pair<ResourceType,Integer>> neededResources,int resourceIndex, int taken, int currentValue, TextField resource) {
+        int required = neededResources.get(resourceIndex-1).getValue();
+        if(required>=taken) {
+            hideError();
+            neededResources.get(resourceIndex-1).setValue(required-taken);
+            resource.setText(""+currentValue);
+            showFinishButton();
+            return true;
+        } else {
+            setErrorDevTextKO("Maximum number selected!");
+            showFinishButton();
+            return false;
+        }
+    }
+
+    default boolean addToCostList(List<Pair<ResourceType,Integer>> neededResources,int resourceIndex, int taken, int currentValue, TextField resource) {
+        if(currentValue >= 0) {
+            neededResources.get(resourceIndex-1).setValue(neededResources.get(resourceIndex-1).getValue()+taken);
+            resource.setText(""+currentValue);
+            showFinishButton();
+            return true;
+        } else {
+            showFinishButton();
+            return false;
+        }
+    }
+
+
+
+    void showFinishButton();
+    void hideError();
+    void setErrorDevTextKO(String s);
 
 }

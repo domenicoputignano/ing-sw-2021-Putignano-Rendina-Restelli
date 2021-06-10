@@ -220,7 +220,7 @@ public class BuyDevCardController extends Controller implements PaymentControlle
         buyCard.setVisible(true);
     }
 
-    private void setErrorDevTextKO(String error){
+    public void setErrorDevTextKO(String error){
         errorDevText.setText(error);
         errorDevText.setVisible(true);
     }
@@ -455,7 +455,7 @@ public class BuyDevCardController extends Controller implements PaymentControlle
             slotBox.setVisible(true);
         }
         else {
-            //TODO da spostare opportunamente
+
         }
     }
 
@@ -565,40 +565,40 @@ public class BuyDevCardController extends Controller implements PaymentControlle
     public void minusFirstResourceFromDepot() {
         makeTextInvisible(errorDevText);
         firstCurrentValueDepot--;
-        if(!addToCostList(1, 1, firstCurrentValueDepot, textField1)) firstCurrentValueDepot++;
+        if(!addToCostList(neededResources,1, 1, firstCurrentValueDepot, textField1)) firstCurrentValueDepot++;
     }
 
     @FXML
     public void minusSecondResourceFromDepot() {
         makeTextInvisible(errorDevText);
         secondCurrentValueDepot--;
-        if(!addToCostList(2, 1, secondCurrentValueDepot, textField4)) secondCurrentValueDepot++;
+        if(!addToCostList(neededResources,2, 1, secondCurrentValueDepot, textField4)) secondCurrentValueDepot++;
     }
 
     @FXML
     public void minusThirdResourceFromDepot() {
         makeTextInvisible(errorDevText);
         thirdCurrentValueDepot--;
-        if(!addToCostList(3,1, thirdCurrentValueDepot, textField7)) thirdCurrentValueDepot++;
+        if(!addToCostList(neededResources,3,1, thirdCurrentValueDepot, textField7)) thirdCurrentValueDepot++;
     }
 
     @FXML
     public void minusFirstResourceFromStrongbox() {
         makeTextInvisible(errorDevText);
         firstCurrentValueStrongbox--;
-        if(!addToCostList(1,1, firstCurrentValueStrongbox, textField2)) firstCurrentValueStrongbox++;
+        if(!addToCostList(neededResources,1,1, firstCurrentValueStrongbox, textField2)) firstCurrentValueStrongbox++;
     }
     @FXML
     public void minusSecondResourceFromStrongbox() {
         makeTextInvisible(errorDevText);
         secondCurrentValueStrongbox--;
-        if(!addToCostList(2,1, secondCurrentValueStrongbox, textField5)) secondCurrentValueStrongbox++;
+        if(!addToCostList(neededResources,2,1, secondCurrentValueStrongbox, textField5)) secondCurrentValueStrongbox++;
     }
     @FXML
     public void minusThirdResourceFromStrongbox() {
         makeTextInvisible(errorDevText);
         thirdCurrentValueStrongbox--;
-        if(!addToCostList(3,1,thirdCurrentValueStrongbox, textField8)) thirdCurrentValueStrongbox++;
+        if(!addToCostList(neededResources, 3,1,thirdCurrentValueStrongbox, textField8)) thirdCurrentValueStrongbox++;
     }
 
 
@@ -606,77 +606,77 @@ public class BuyDevCardController extends Controller implements PaymentControlle
     @FXML
     public void plusFirstResourceFromDepot() {
         firstCurrentValueDepot++;
-        if(!editedCostList(1, 1, firstCurrentValueDepot, textField1)) firstCurrentValueDepot--;
+        if(!editedCostList(neededResources,1, 1, firstCurrentValueDepot, textField1)) firstCurrentValueDepot--;
     }
 
 
     @FXML
     public void plusSecondResourceFromDepot(){
         secondCurrentValueDepot++;
-        if(!editedCostList(2, 1, secondCurrentValueDepot, textField4)) secondCurrentValueDepot--;
+        if(!editedCostList(neededResources,2, 1, secondCurrentValueDepot, textField4)) secondCurrentValueDepot--;
     }
 
     @FXML
     public void plusThirdResourceFromDepot(){
         thirdCurrentValueDepot++;
-        if(!editedCostList(3, 1, thirdCurrentValueDepot, textField7)) thirdCurrentValueDepot--;
+        if(!editedCostList(neededResources,3, 1, thirdCurrentValueDepot, textField7)) thirdCurrentValueDepot--;
     }
 
     @FXML
     public void plusFirstResourceFromStrongbox() {
         firstCurrentValueStrongbox++;
-        if(!editedCostList(1, 1, firstCurrentValueStrongbox, textField2)) firstCurrentValueStrongbox--;
+        if(!editedCostList(neededResources,1, 1, firstCurrentValueStrongbox, textField2)) firstCurrentValueStrongbox--;
     }
 
     @FXML
     public void plusSecondResourceFromStrongbox(){
         secondCurrentValueStrongbox++;
-        if(!editedCostList(2, 1,secondCurrentValueStrongbox , textField5)) secondCurrentValueStrongbox--;
+        if(!editedCostList(neededResources,2, 1,secondCurrentValueStrongbox , textField5)) secondCurrentValueStrongbox--;
     }
 
     @FXML
     public void plusThirdResourceFromStrongbox(){
         thirdCurrentValueStrongbox++;
-        if(!editedCostList(3, 1, thirdCurrentValueStrongbox, textField8)) thirdCurrentValueStrongbox--;
+        if(!editedCostList(neededResources,3, 1, thirdCurrentValueStrongbox, textField8)) thirdCurrentValueStrongbox--;
     }
 
     @FXML
     public void plusFirstResourceFromExtra() {
         firstCurrentValueExtra++;
-        if(!editedCostList(1, 1, firstCurrentValueExtra, textField3)) firstCurrentValueExtra--;
+        if(!editedCostList(neededResources,1, 1, firstCurrentValueExtra, textField3)) firstCurrentValueExtra--;
     }
 
     @FXML
     public void plusSecondResourceFromExtra() {
         secondCurrentValueExtra++;
-        if(!editedCostList(2, 1, secondCurrentValueExtra, textField6)) secondCurrentValueExtra--;
+        if(!editedCostList(neededResources,2, 1, secondCurrentValueExtra, textField6)) secondCurrentValueExtra--;
     }
 
     @FXML
     public void plusThirdResourceFromExtra() {
         thirdCurrentValueExtra++;
-        if(!editedCostList(3, 1, thirdCurrentValueExtra, textField9)) thirdCurrentValueExtra--;
+        if(!editedCostList(neededResources,3, 1, thirdCurrentValueExtra, textField9)) thirdCurrentValueExtra--;
     }
 
     @FXML
     public void minusFirstResourceFromExtra() {
         makeTextInvisible(errorDevText);
         firstCurrentValueExtra--;
-        if(!addToCostList(1, 1, firstCurrentValueExtra, textField3)) firstCurrentValueExtra++;
+        if(!addToCostList(neededResources,1, 1, firstCurrentValueExtra, textField3)) firstCurrentValueExtra++;
     }
 
     @FXML
     public void minusSecondResourceFromExtra() {
         makeTextInvisible(errorDevText);
         secondCurrentValueExtra--;
-        if(!addToCostList(2,1,secondCurrentValueExtra, textField6)) secondCurrentValueExtra++;
+        if(!addToCostList(neededResources,2,1,secondCurrentValueExtra, textField6)) secondCurrentValueExtra++;
     }
 
     @FXML
     public void minusThirdResourceFromExtra() {
         makeTextInvisible(errorDevText);
         thirdCurrentValueExtra--;
-        if (!addToCostList(3,1,thirdCurrentValueExtra, textField9)) thirdCurrentValueExtra++;
+        if (!addToCostList(neededResources,3,1,thirdCurrentValueExtra, textField9)) thirdCurrentValueExtra++;
     }
 
 
@@ -696,32 +696,6 @@ public class BuyDevCardController extends Controller implements PaymentControlle
     int thirdCurrentValueExtra = 0;
 
 
-    private boolean editedCostList(int resourceIndex, int taken, int currentValue, TextField resource) {
-        int required = neededResources.get(resourceIndex-1).getValue();
-        if(required>=taken) {
-            errorDevText.setVisible(false);
-            neededResources.get(resourceIndex-1).setValue(required-taken);
-            resource.setText(""+currentValue);
-            showFinishButton();
-            return true;
-        } else {
-            setErrorDevTextKO("Maximum number selected!");
-            showFinishButton();
-            return false;
-        }
-    }
-
-    private boolean addToCostList(int resourceIndex, int taken, int currentValue, TextField resource) {
-        if(currentValue >= 0) {
-            neededResources.get(resourceIndex-1).setValue(neededResources.get(resourceIndex-1).getValue()+taken);
-            resource.setText(""+currentValue);
-            showFinishButton();
-            return true;
-        } else {
-            showFinishButton();
-            return false;
-        }
-    }
 
 
     @FXML
@@ -747,6 +721,11 @@ public class BuyDevCardController extends Controller implements PaymentControlle
 
     public void showFinishButton() {
         concludeAction.setVisible(isPaymentDone(neededResources));
+    }
+
+    @Override
+    public void hideError() {
+        errorDevText.setVisible(false);
     }
 
 
