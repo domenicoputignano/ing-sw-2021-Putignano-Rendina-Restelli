@@ -37,17 +37,19 @@
       </ImageView>
       <Text fx:id="extraDepotsText" layoutX="639.0" layoutY="378.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Extra Depots" />
       <ImageView fx:id="res1Depot1" fitHeight="74.0" fitWidth="75.0" layoutX="370.0" layoutY="215.0" pickOnBounds="true" preserveRatio="true" />
-      <Button fx:id="depot1" layoutX="332.0" layoutY="216.0" mnemonicParsing="false" opacity="0.3" prefHeight="71.0" prefWidth="150.0" styleClass="resDepot" stylesheets="@../css/button.css" />
+      <Button fx:id="depot1" layoutX="332.0" layoutY="216.0" mnemonicParsing="false" onAction="#handleDepot1" opacity="0.3" prefHeight="71.0" prefWidth="150.0" styleClass="resDepot" stylesheets="@../css/button.css" />
       <ImageView fx:id="res1Depot2" fitHeight="74.0" fitWidth="75.0" layoutX="323.0" layoutY="313.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="res2Depot2" fitHeight="74.0" fitWidth="75.0" layoutX="413.0" layoutY="313.0" pickOnBounds="true" preserveRatio="true" />
-      <Button fx:id="depot2" layoutX="282.0" layoutY="313.0" mnemonicParsing="false" opacity="0.3" prefHeight="83.0" prefWidth="237.0" styleClass="resDepot" stylesheets="@../css/button.css" />
+      <Button fx:id="depot2" layoutX="282.0" layoutY="313.0" mnemonicParsing="false" onAction="#handleDepot2" opacity="0.3" prefHeight="83.0" prefWidth="237.0" styleClass="resDepot" stylesheets="@../css/button.css" />
       <ImageView fx:id="res1Depot3" fitHeight="74.0" fitWidth="75.0" layoutX="294.0" layoutY="412.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="res2Depot3" fitHeight="74.0" fitWidth="75.0" layoutX="370.0" layoutY="412.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="res3Depot3" fitHeight="74.0" fitWidth="75.0" layoutX="446.0" layoutY="412.0" pickOnBounds="true" preserveRatio="true" />
-      <Button fx:id="depot3" layoutX="260.0" layoutY="406.0" mnemonicParsing="false" opacity="0.3" prefHeight="93.0" prefWidth="275.0" styleClass="resDepot" stylesheets="@../css/button.css" />
+      <Button fx:id="depot3" layoutX="260.0" layoutY="406.0" mnemonicParsing="false" onAction="#handleDepot3" opacity="0.3" prefHeight="93.0" prefWidth="275.0" styleClass="resDepot" stylesheets="@../css/button.css" />
       <Text fx:id="typeOfMoveText" layoutX="601.0" layoutY="165.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Select what type of Move you want to make:" />
-      <Button fx:id="fromNormalToNormal" layoutX="609.0" layoutY="177.0" mnemonicParsing="false" prefHeight="65.0" prefWidth="176.0" styleClass="okButton" stylesheets="@../css/button.css" text="Normal to Normal" />
-      <Button fx:id="fromNormalToExtra" layoutX="798.0" layoutY="177.0" mnemonicParsing="false" prefHeight="65.0" prefWidth="176.0" styleClass="okButton" stylesheets="@../css/button.css" text="Normal to Extra" />
-      <Button fx:id="fromExtraToNormal" layoutX="705.0" layoutY="257.0" mnemonicParsing="false" prefHeight="65.0" prefWidth="176.0" styleClass="okButton" stylesheets="@../css/button.css" text="Extra to Normal" />
+      <Button fx:id="fromNormalToNormal" layoutX="609.0" layoutY="177.0" mnemonicParsing="false" onAction="#handleNormaltoNormal" prefHeight="65.0" prefWidth="176.0" styleClass="okButton" stylesheets="@../css/button.css" text="Normal to Normal" />
+      <Button fx:id="fromNormalToExtra" layoutX="798.0" layoutY="177.0" mnemonicParsing="false" onAction="#handleNormaltoExtra" prefHeight="65.0" prefWidth="176.0" styleClass="okButton" stylesheets="@../css/button.css" text="Normal to Extra" />
+      <Button fx:id="fromExtraToNormal" layoutX="705.0" layoutY="257.0" mnemonicParsing="false" onAction="#handleExtratoNormal" prefHeight="65.0" prefWidth="176.0" styleClass="okButton" stylesheets="@../css/button.css" text="Extra to Normal" />
+      <Button fx:id="resExtraDepot1" onAction="#handleExtraDepot1" layoutX="746.0" layoutY="428.0" mnemonicParsing="false" prefHeight="65.0" prefWidth="170.0" styleClass="resDepot" stylesheets="@../css/button.css" />
+      <Button fx:id="resExtraDepot2" onAction="#handleExtraDepot1" layoutX="746.0" layoutY="542.0" mnemonicParsing="false" prefHeight="65.0" prefWidth="170.0" styleClass="resDepot" stylesheets="@../css/button.css" />
     </children>
 </AnchorPane>

@@ -12,7 +12,7 @@ public abstract class AbstractMoveResources extends AbstractClientState {
         super(client);
     }
 
-    protected int getNumOfExtraDepots() {
+    public int getNumOfExtraDepots() {
         return client.getGame().getPlayer(client.getUser()).getCompatibleLeaderEffect(Effect.EXTRADEPOT).size();
     }
 

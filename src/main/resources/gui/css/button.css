@@ -256,7 +256,6 @@
 }
 .resDepot:hover{
     -fx-background-size: 100% auto;
-    -fx-background-color: #e7f3ef;
 }
 .resDepot:pressed{
     -fx-background-size: 95% auto;
