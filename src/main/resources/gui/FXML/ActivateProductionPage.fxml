@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
@@ -10,7 +15,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="anchorActivateProd" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.Client.view.GUI.ActivateProductionController">
+<AnchorPane fx:id="anchorActivateProd" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.Client.view.GUI.ActivateProductionController">
     <children>
         <Button fx:id="closeActivateProd" layoutX="975.0" layoutY="50.0" mnemonicParsing="false" onAction="#handleCloseChooseAction" prefHeight="65.0" prefWidth="70.0" styleClass="button, exit" stylesheets="@../css/button.css" />
       <ImageView fx:id="slotsBackground" fitHeight="431.0" fitWidth="701.0" layoutX="240.0" layoutY="155.0" opacity="0.84" pickOnBounds="true" preserveRatio="true">
@@ -54,60 +59,63 @@
             <Button fx:id="stoneOutput" alignment="CENTER" mnemonicParsing="false" onAction="#stoneOutputChosen" prefHeight="52.0" prefWidth="58.0" styleClass="resourceButton,button,stone" stylesheets="@../css/button.css" />
          </children>
       </VBox>
-      <Label fx:id="firstInputLabel" layoutX="281.0" layoutY="190.0" text="First Input" visible="false" />
-      <Label fx:id="secondInputLabel" layoutX="423.0" layoutY="210.0" text="Second Input" visible="false" />
-      <Label fx:id="outputLabel" layoutX="618.0" layoutY="230.0" text="Output" visible="false" />
-      <Text fx:id="firstResourceDepot" layoutX="402.0" layoutY="220.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Depot:" visible="false" />
-      <Text fx:id="firstResourceStrongbox" layoutX="402.0" layoutY="260.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Strongbox:" visible="false" />
-      <Text fx:id="secondResourceDepot" layoutX="402.0" layoutY="360.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Depot:" visible="false" />
-      <Text fx:id="secondResourceStrongbox" layoutX="402.0" layoutY="400.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Strongbox:" visible="false" />
-      <Text fx:id="thirdResourceDepot" layoutX="402.0" layoutY="510.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Depot:" visible="false" />
-      <Text fx:id="thirdResourceStrongbox" layoutX="402.0" layoutY="550.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Strongbox:" visible="false" />
-      <Text fx:id="firstResourceExtra" layoutX="402.0" layoutY="300.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Extra Depot:" visible="false" />
-      <Text fx:id="secondResourceExtra" layoutX="402.0" layoutY="440.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Extra Depot:" visible="false" />
-      <Text fx:id="thirdResourceExtra" layoutX="402.0" layoutY="590.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Extra Depot:" visible="false" />
-      <Button fx:id="minusFirstResourceDepot" alignment="CENTER" contentDisplay="CENTER" layoutX="513.0" layoutY="190.0" mnemonicParsing="false" onAction="#minusFirstResourceFromDepot" prefHeight="46.0" prefWidth="46.0" styleClass="minusButton" stylesheets="@../css/button.css" visible="false" />
-      <Button fx:id="minusFirstResourceStrongbox" layoutX="513.0" layoutY="230.0" mnemonicParsing="false" onAction="#minusFirstResourceFromStrongbox" prefHeight="46.0" prefWidth="46.0" styleClass="minusButton" stylesheets="@../css/button.css" visible="false" />
-      <Button fx:id="minusFirstResourceExtra" layoutX="513.0" layoutY="270.0" mnemonicParsing="false" onAction="#minusFirstResourceFromExtra" prefHeight="46.0" prefWidth="46.0" styleClass="minusButton" stylesheets="@../css/button.css" visible="false" />
-      <Button fx:id="plusFirstResourceDepot" layoutX="607.0" layoutY="190.0" mnemonicParsing="false" onAction="#plusFirstResourceFromDepot" prefHeight="46.0" prefWidth="46.0" styleClass="plusButton" stylesheets="@../css/button.css" visible="false" />
-      <Button fx:id="plusFirstResourceStrongbox" layoutX="607.0" layoutY="230.0" mnemonicParsing="false" onAction="#plusFirstResourceFromStrongbox" prefHeight="46.0" prefWidth="46.0" styleClass="plusButton" stylesheets="@../css/button.css" visible="false" />
-      <Button fx:id="plusFirstResourceExtra" layoutX="607.0" layoutY="270.0" mnemonicParsing="false" onAction="#plusFirstResourceFromExtra" prefHeight="46.0" prefWidth="46.0" styleClass="plusButton" stylesheets="@../css/button.css" visible="false" />
-      <TextField fx:id="firstDepotOcc" alignment="CENTER" editable="false" layoutX="561.0" layoutY="194.0" mouseTransparent="true" prefHeight="35.0" prefWidth="44.0" styleClass="textFieldResources" stylesheets="@../css/text.css" visible="false" />
-      <TextField fx:id="firstStrongboxOcc" alignment="CENTER" editable="false" layoutX="561.0" layoutY="234.0" mouseTransparent="true" prefHeight="35.0" prefWidth="44.0" styleClass="textFieldResources" stylesheets="@../css/text.css" visible="false" />
-      <TextField fx:id="firstExtraOcc" alignment="CENTER" editable="false" layoutX="561.0" layoutY="274.0" mouseTransparent="true" prefHeight="35.0" prefWidth="44.0" styleClass="textFieldResources" stylesheets="@../css/text.css" visible="false" />
-      <Button fx:id="plusSecondResourceDepot" layoutX="607.0" layoutY="330.0" mnemonicParsing="false" onAction="#plusSecondResourceFromDepot" prefHeight="46.0" prefWidth="46.0" styleClass="plusButton" stylesheets="@../css/button.css" visible="false" />
-      <Button fx:id="plusSecondResourceExtra" layoutX="607.0" layoutY="410.0" mnemonicParsing="false" onAction="#plusSecondResourceFromExtra" prefHeight="46.0" prefWidth="46.0" styleClass="plusButton" stylesheets="@../css/button.css" visible="false" />
-      <Button fx:id="plusSecondResourceStrongbox" layoutX="607.0" layoutY="370.0" mnemonicParsing="false" onAction="#plusSecondResourceFromStrongbox" prefHeight="46.0" prefWidth="46.0" styleClass="plusButton" stylesheets="@../css/button.css" visible="false" />
-      <Button fx:id="minusSecondResourceStrongbox" layoutX="513.0" layoutY="370.0" mnemonicParsing="false" onAction="#minusSecondResourceFromStrongbox" prefHeight="46.0" prefWidth="46.0" styleClass="minusButton" stylesheets="@../css/button.css" visible="false" />
-      <TextField fx:id="secondDepotOcc" alignment="CENTER" editable="false" layoutX="561.0" layoutY="334.0" mouseTransparent="true" prefHeight="35.0" prefWidth="44.0" styleClass="textFieldResources" stylesheets="@../css/text.css" visible="false" />
-      <TextField fx:id="secondStrongboxOcc" alignment="CENTER" editable="false" layoutX="561.0" layoutY="374.0" mouseTransparent="true" prefHeight="35.0" prefWidth="44.0" styleClass="textFieldResources" stylesheets="@../css/text.css" visible="false" />
-      <TextField fx:id="secondExtraOcc" alignment="CENTER" editable="false" layoutX="561.0" layoutY="414.0" mouseTransparent="true" prefHeight="35.0" prefWidth="44.0" styleClass="textFieldResources" stylesheets="@../css/text.css" visible="false" />
-      <Button fx:id="minusSecondResourceExtra" layoutX="513.0" layoutY="410.0" mnemonicParsing="false" onAction="#minusSecondResourceFromExtra" prefHeight="46.0" prefWidth="46.0" styleClass="minusButton" stylesheets="@../css/button.css" visible="false" />
-      <Button fx:id="minusSecondResourceDepot" layoutX="513.0" layoutY="330.0" mnemonicParsing="false" onAction="#minusSecondResourceFromDepot" prefHeight="46.0" prefWidth="46.0" styleClass="minusButton" stylesheets="@../css/button.css" visible="false" />
-      <TextField fx:id="thirdStrongboxOcc" alignment="CENTER" editable="false" layoutX="561.0" layoutY="526.0" mouseTransparent="true" prefHeight="35.0" prefWidth="44.0" styleClass="textFieldResources" stylesheets="@../css/text.css" visible="false" />
-      <Button fx:id="minusThirdResourceDepot" layoutX="513.0" layoutY="482.0" mnemonicParsing="false" onAction="#minusThirdResourceFromDepot" prefHeight="46.0" prefWidth="46.0" styleClass="minusButton" stylesheets="@../css/button.css" visible="false" />
-      <TextField fx:id="thirdDepotOcc" alignment="CENTER" editable="false" layoutX="561.0" layoutY="486.0" mouseTransparent="true" prefHeight="35.0" prefWidth="44.0" styleClass="textFieldResources" stylesheets="@../css/text.css" visible="false" />
-      <TextField fx:id="thirdExtraOcc" alignment="CENTER" editable="false" layoutX="561.0" layoutY="566.0" mouseTransparent="true" prefHeight="35.0" prefWidth="44.0" styleClass="textFieldResources" stylesheets="@../css/text.css" visible="false" />
-      <Button fx:id="minusThirdResourceExtra" layoutX="513.0" layoutY="562.0" mnemonicParsing="false" onAction="#minusThirdResourceFromExtra" prefHeight="46.0" prefWidth="46.0" styleClass="minusButton" stylesheets="@../css/button.css" visible="false" />
-      <Button fx:id="minusThirdResourceStrongbox" layoutX="513.0" layoutY="522.0" mnemonicParsing="false" onAction="#minusThirdResourceFromStrongbox" prefHeight="46.0" prefWidth="46.0" styleClass="minusButton" stylesheets="@../css/button.css" visible="false" />
-      <Button fx:id="plusThirdResourceDepot" layoutX="607.0" layoutY="482.0" mnemonicParsing="false" onAction="#plusThirdResourceFromDepot" prefHeight="46.0" prefWidth="46.0" styleClass="plusButton" stylesheets="@../css/button.css" visible="false" />
-      <Button fx:id="plusThirdResourceExtra" layoutX="607.0" layoutY="562.0" mnemonicParsing="false" onAction="#plusThirdResourceFromExtra" prefHeight="46.0" prefWidth="46.0" styleClass="plusButton" stylesheets="@../css/button.css" visible="false" />
-      <Button fx:id="plusThirdResourceStrongbox" layoutX="607.0" layoutY="522.0" mnemonicParsing="false" onAction="#plusThirdResourceFromStrongbox" prefHeight="46.0" prefWidth="46.0" styleClass="plusButton" stylesheets="@../css/button.css" visible="false" />
+      <Label fx:id="firstInputLabel" layoutX="260.0" layoutY="190.0" text="First Input" visible="false" />
+      <Label fx:id="secondInputLabel" layoutX="400.0" layoutY="190.0" text="Second Input" visible="false" />
+      <Label fx:id="outputLabel" layoutX="580.0" layoutY="190.0" text="Output" visible="false" />
+      <Text fx:id="firstResourceDepot" layoutX="240.0" layoutY="220.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Depot:" visible="false" />
+      <Text fx:id="firstResourceStrongbox" layoutX="240.0" layoutY="270.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Strongbox:" visible="false" />
+      <Text fx:id="secondResourceDepot" layoutX="680.0" layoutY="220.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Depot:" visible="false" />
+      <Text fx:id="secondResourceStrongbox" layoutX="680.0" layoutY="270.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Strongbox:" visible="false" />
+      <Text fx:id="thirdResourceDepot" layoutX="240.0" layoutY="440.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Depot:" visible="false" />
+      <Text fx:id="thirdResourceStrongbox" layoutX="240.0" layoutY="490.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Strongbox:" visible="false" />
+      <Text fx:id="fourthResourceDepot" layoutX="680.0" layoutY="440.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Depot:" visible="false" />
+      <Text fx:id="fourthResourceStrongbox" layoutX="680.0" layoutY="490.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Strongbox:" visible="false" />
+      <Text fx:id="firstResourceExtra" layoutX="240.0" layoutY="320.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Extra Depot:" visible="false" />
+      <Text fx:id="secondResourceExtra" layoutX="680.0" layoutY="320.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Extra Depot:" visible="false" />
+      <Text fx:id="thirdResourceExtra" layoutX="240.0" layoutY="540.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Extra Depot:" visible="false" />
+      <Text fx:id="fourthResourceExtra" layoutX="680.0" layoutY="540.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Extra Depot:" visible="false" />
+      <Button fx:id="minusFirstResourceDepot" alignment="CENTER" contentDisplay="CENTER" layoutX="353.0" layoutY="190.0" mnemonicParsing="false" onAction="#minusFirstResourceFromDepot" prefHeight="46.0" prefWidth="46.0" styleClass="minusButton" stylesheets="@../css/button.css" visible="false" />
+      <Button fx:id="minusFirstResourceStrongbox" layoutX="353.0" layoutY="240.0" mnemonicParsing="false" onAction="#minusFirstResourceFromStrongbox" prefHeight="46.0" prefWidth="46.0" styleClass="minusButton" stylesheets="@../css/button.css" visible="false" />
+      <Button fx:id="minusFirstResourceExtra" layoutX="413.0" layoutY="290.0" mnemonicParsing="false" onAction="#minusFirstResourceFromExtra" prefHeight="46.0" prefWidth="46.0" styleClass="minusButton" stylesheets="@../css/button.css" visible="false" />
+      <Button fx:id="plusFirstResourceDepot" layoutX="447.0" layoutY="190.0" mnemonicParsing="false" onAction="#plusFirstResourceFromDepot" prefHeight="46.0" prefWidth="46.0" styleClass="plusButton" stylesheets="@../css/button.css" visible="false" />
+      <Button fx:id="plusFirstResourceStrongbox" layoutX="447.0" layoutY="240.0" mnemonicParsing="false" onAction="#plusFirstResourceFromStrongbox" prefHeight="46.0" prefWidth="46.0" styleClass="plusButton" stylesheets="@../css/button.css" visible="false" />
+      <Button fx:id="plusFirstResourceExtra" layoutX="447.0" layoutY="290.0" mnemonicParsing="false" onAction="#plusFirstResourceFromExtra" prefHeight="46.0" prefWidth="46.0" styleClass="plusButton" stylesheets="@../css/button.css" visible="false" />
+      <TextField fx:id="firstDepotOcc" alignment="CENTER" editable="false" layoutX="401.0" layoutY="194.0" mouseTransparent="true" prefHeight="35.0" prefWidth="44.0" styleClass="textFieldResources" stylesheets="@../css/text.css" visible="false" />
+      <TextField fx:id="firstStrongboxOcc" alignment="CENTER" editable="false" layoutX="401.0" layoutY="244.0" mouseTransparent="true" prefHeight="35.0" prefWidth="44.0" styleClass="textFieldResources" stylesheets="@../css/text.css" visible="false" />
+      <TextField fx:id="firstExtraOcc" alignment="CENTER" editable="false" layoutX="401.0" layoutY="294.0" mouseTransparent="true" prefHeight="35.0" prefWidth="44.0" styleClass="textFieldResources" stylesheets="@../css/text.css" visible="false" />
+      <Button fx:id="plusSecondResourceDepot" layoutX="892.0" layoutY="190.0" mnemonicParsing="false" onAction="#plusSecondResourceFromDepot" prefHeight="46.0" prefWidth="46.0" styleClass="plusButton" stylesheets="@../css/button.css" visible="false" />
+      <Button fx:id="plusSecondResourceExtra" layoutX="892.0" layoutY="290.0" mnemonicParsing="false" onAction="#plusSecondResourceFromExtra" prefHeight="46.0" prefWidth="46.0" styleClass="plusButton" stylesheets="@../css/button.css" visible="false" />
+      <Button fx:id="plusSecondResourceStrongbox" layoutX="892.0" layoutY="240.0" mnemonicParsing="false" onAction="#plusSecondResourceFromStrongbox" prefHeight="46.0" prefWidth="46.0" styleClass="plusButton" stylesheets="@../css/button.css" visible="false" />
+      <Button fx:id="minusSecondResourceStrongbox" layoutX="798.0" layoutY="240.0" mnemonicParsing="false" onAction="#minusSecondResourceFromStrongbox" prefHeight="46.0" prefWidth="46.0" styleClass="minusButton" stylesheets="@../css/button.css" visible="false" />
+      <TextField fx:id="secondDepotOcc" alignment="CENTER" editable="false" layoutX="846.0" layoutY="194.0" mouseTransparent="true" prefHeight="35.0" prefWidth="44.0" styleClass="textFieldResources" stylesheets="@../css/text.css" visible="false" />
+      <TextField fx:id="secondStrongboxOcc" alignment="CENTER" editable="false" layoutX="846.0" layoutY="244.0" mouseTransparent="true" prefHeight="35.0" prefWidth="44.0" styleClass="textFieldResources" stylesheets="@../css/text.css" visible="false" />
+      <TextField fx:id="secondExtraOcc" alignment="CENTER" editable="false" layoutX="846.0" layoutY="294.0" mouseTransparent="true" prefHeight="35.0" prefWidth="44.0" styleClass="textFieldResources" stylesheets="@../css/text.css" visible="false" />
+      <Button fx:id="minusSecondResourceExtra" layoutX="798.0" layoutY="290.0" mnemonicParsing="false" onAction="#minusSecondResourceFromExtra" prefHeight="46.0" prefWidth="46.0" styleClass="minusButton" stylesheets="@../css/button.css" visible="false" />
+      <Button fx:id="minusSecondResourceDepot" layoutX="798.0" layoutY="190.0" mnemonicParsing="false" onAction="#minusSecondResourceFromDepot" prefHeight="46.0" prefWidth="46.0" styleClass="minusButton" stylesheets="@../css/button.css" visible="false" />
+      <TextField fx:id="thirdStrongboxOcc" alignment="CENTER" editable="false" layoutX="401.0" layoutY="454.0" mouseTransparent="true" prefHeight="35.0" prefWidth="44.0" styleClass="textFieldResources" stylesheets="@../css/text.css" visible="false" />
+      <Button fx:id="minusThirdResourceDepot" layoutX="353.0" layoutY="400.0" mnemonicParsing="false" onAction="#minusThirdResourceFromDepot" prefHeight="46.0" prefWidth="46.0" styleClass="minusButton" stylesheets="@../css/button.css" visible="false" />
+      <TextField fx:id="thirdDepotOcc" alignment="CENTER" editable="false" layoutX="400.0" layoutY="404.0" mouseTransparent="true" prefHeight="35.0" prefWidth="44.0" styleClass="textFieldResources" stylesheets="@../css/text.css" visible="false" />
+      <TextField fx:id="thirdExtraOcc" alignment="CENTER" editable="false" layoutX="401.0" layoutY="504.0" mouseTransparent="true" prefHeight="35.0" prefWidth="44.0" styleClass="textFieldResources" stylesheets="@../css/text.css" visible="false" />
+      <Button fx:id="minusThirdResourceExtra" layoutX="353.0" layoutY="500.0" mnemonicParsing="false" onAction="#minusThirdResourceFromExtra" prefHeight="46.0" prefWidth="46.0" styleClass="minusButton" stylesheets="@../css/button.css" visible="false" />
+      <Button fx:id="minusThirdResourceStrongbox" layoutX="353.0" layoutY="450.0" mnemonicParsing="false" onAction="#minusThirdResourceFromStrongbox" prefHeight="46.0" prefWidth="46.0" styleClass="minusButton" stylesheets="@../css/button.css" visible="false" />
+      <Button fx:id="plusThirdResourceDepot" layoutX="447.0" layoutY="400.0" mnemonicParsing="false" onAction="#plusThirdResourceFromDepot" prefHeight="46.0" prefWidth="46.0" styleClass="plusButton" stylesheets="@../css/button.css" visible="false" />
+      <Button fx:id="plusThirdResourceExtra" layoutX="447.0" layoutY="500.0" mnemonicParsing="false" onAction="#plusThirdResourceFromExtra" prefHeight="46.0" prefWidth="46.0" styleClass="plusButton" stylesheets="@../css/button.css" visible="false" />
+      <Button fx:id="plusThirdResourceStrongbox" layoutX="447.0" layoutY="450.0" mnemonicParsing="false" onAction="#plusThirdResourceFromStrongbox" prefHeight="46.0" prefWidth="46.0" styleClass="plusButton" stylesheets="@../css/button.css" visible="false" />
 
-      <Button fx:id="plusFourthResourceDepot" layoutX="607.0" layoutY="634.0" mnemonicParsing="false" onAction="#plusFourthResourceDepot" prefHeight="46.0" prefWidth="46.0" styleClass="plusButton" stylesheets="@../css/button.css" visible="false" />
-      <Button fx:id="plusFourthResourceStrongbox" layoutX="607.0" layoutY="674.0" mnemonicParsing="false" onAction="#plusFourthResourceStrongbox" prefHeight="46.0" prefWidth="46.0" styleClass="plusButton" stylesheets="@../css/button.css" visible="false" />
-      <Button fx:id="plusFourthResourceExtra" layoutX="607.0" layoutY="714.0" mnemonicParsing="false" onAction="#plusFourthResourceExtra" prefHeight="46.0" prefWidth="46.0" styleClass="plusButton" stylesheets="@../css/button.css" visible="false" />
-      <Button fx:id="minusFourthResourceDepot" layoutX="607.0" layoutY="634.0" mnemonicParsing="false" onAction="#minusFourthResourceDepot" prefHeight="46.0" prefWidth="46.0" styleClass="plusButton" stylesheets="@../css/button.css" visible="false" />
-      <Button fx:id="minusFourthResourceStrongbox" layoutX="607.0" layoutY="674.0" mnemonicParsing="false" onAction="#minusFourthResourceStrongbox" prefHeight="46.0" prefWidth="46.0" styleClass="plusButton" stylesheets="@../css/button.css" visible="false" />
-      <Button fx:id="minusFourthResourceExtra" layoutX="607.0" layoutY="714.0" mnemonicParsing="false" onAction="#minusFourthResourceExtra" prefHeight="46.0" prefWidth="46.0" styleClass="plusButton" stylesheets="@../css/button.css" visible="false" />
-      <TextField fx:id="fourthDepotOcc" alignment="CENTER" editable="false" layoutX="561.0" layoutY="566.0" mouseTransparent="true" prefHeight="35.0" prefWidth="44.0" styleClass="textFieldResources" stylesheets="@../css/text.css" visible="false" />
-      <TextField fx:id="fourthStrongboxOcc" alignment="CENTER" editable="false" layoutX="561.0" layoutY="566.0" mouseTransparent="true" prefHeight="35.0" prefWidth="44.0" styleClass="textFieldResources" stylesheets="@../css/text.css" visible="false" />
-      <TextField fx:id="fourthExtraOcc" alignment="CENTER" editable="false" layoutX="561.0" layoutY="566.0" mouseTransparent="true" prefHeight="35.0" prefWidth="44.0" styleClass="textFieldResources" stylesheets="@../css/text.css" visible="false" />
+      <Button fx:id="plusFourthResourceDepot" layoutX="892.0" layoutY="400.0" mnemonicParsing="false" onAction="#plusFourthResourceDepot" prefHeight="46.0" prefWidth="46.0" styleClass="plusButton" stylesheets="@../css/button.css" visible="false" />
+      <Button fx:id="plusFourthResourceStrongbox" layoutX="892.0" layoutY="450.0" mnemonicParsing="false" onAction="#plusFourthResourceStrongbox" prefHeight="46.0" prefWidth="46.0" styleClass="plusButton" stylesheets="@../css/button.css" visible="false" />
+      <Button fx:id="plusFourthResourceExtra" layoutX="892.0" layoutY="500.0" mnemonicParsing="false" onAction="#plusFourthResourceExtra" prefHeight="46.0" prefWidth="46.0" styleClass="plusButton" stylesheets="@../css/button.css" visible="false" />
+      <Button fx:id="minusFourthResourceDepot" layoutX="798.0" layoutY="400.0" mnemonicParsing="false" onAction="#minusFourthResourceDepot" prefHeight="46.0" prefWidth="46.0" styleClass="plusButton" stylesheets="@../css/button.css" visible="false" />
+      <Button fx:id="minusFourthResourceStrongbox" layoutX="798.0" layoutY="450.0" mnemonicParsing="false" onAction="#minusFourthResourceStrongbox" prefHeight="46.0" prefWidth="46.0" styleClass="plusButton" stylesheets="@../css/button.css" visible="false" />
+      <Button fx:id="minusFourthResourceExtra" layoutX="798.0" layoutY="500.0" mnemonicParsing="false" onAction="#minusFourthResourceExtra" prefHeight="46.0" prefWidth="46.0" styleClass="plusButton" stylesheets="@../css/button.css" visible="false" />
+      <TextField fx:id="fourthDepotOcc" alignment="CENTER" editable="false" layoutX="846.0" layoutY="404.0" mouseTransparent="true" prefHeight="35.0" prefWidth="44.0" styleClass="textFieldResources" stylesheets="@../css/text.css" visible="false" />
+      <TextField fx:id="fourthStrongboxOcc" alignment="CENTER" editable="false" layoutX="846.0" layoutY="454.0" mouseTransparent="true" prefHeight="35.0" prefWidth="44.0" styleClass="textFieldResources" stylesheets="@../css/text.css" visible="false" />
+      <TextField fx:id="fourthExtraOcc" alignment="CENTER" editable="false" layoutX="846.0" layoutY="504.0" mouseTransparent="true" prefHeight="35.0" prefWidth="44.0" styleClass="textFieldResources" stylesheets="@../css/text.css" visible="false" />
 
       <Button fx:id="nextStep" alignment="CENTER" layoutX="842.0" layoutY="568.0" mnemonicParsing="false" onAction="#ifBasicShowInputOrElseSkip" prefHeight="69.0" prefWidth="137.0" styleClass="okButton" stylesheets="@../css/button.css" text="Next Step" visible="false" />
       <Button fx:id="clear" alignment="CENTER" layoutX="650" layoutY="568.0" mnemonicParsing="false" onAction="#clearSelection" prefHeight="69.0" prefWidth="137.0" styleClass="okButton" stylesheets="@../css/button.css" text="Clear" visible="false" />
       <Button fx:id="concludeAction" contentDisplay="CENTER" layoutX="842.0" layoutY="568.0" mnemonicParsing="false" prefHeight="69.0" prefWidth="137.0" styleClass="okButton, exit" stylesheets="@../css/button.css" text="Finish" visible="false" />
-      <Button fx:id="toPayment" alignment="CENTER" layoutX="842.0" layoutY="568.0" mnemonicParsing="false" prefHeight="69.0" prefWidth="137.0" styleClass="okButton" stylesheets="@../css/button.css" text="To Payment" visible="false" />
+      <Button fx:id="toPayment" alignment="CENTER" layoutX="842.0" layoutY="568.0" mnemonicParsing="false" onAction="#concludeProductionsSelection" prefHeight="69.0" prefWidth="137.0" styleClass="okButton" stylesheets="@../css/button.css" text="To Payment" visible="false" />
 
     </children>
 </AnchorPane>

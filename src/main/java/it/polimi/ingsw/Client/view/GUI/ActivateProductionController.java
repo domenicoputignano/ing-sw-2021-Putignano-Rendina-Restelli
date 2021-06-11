@@ -143,6 +143,18 @@ public class ActivateProductionController extends Controller implements PaymentC
         setFont(firstInputLabel, 30);
         setFont(secondInputLabel, 30);
         setFont(outputLabel, 30);
+        setFont(firstResourceDepot,27);
+        setFont(firstResourceStrongbox,27);
+        setFont(firstResourceExtra,27);
+        setFont(secondResourceDepot,27);
+        setFont(secondResourceStrongbox,27);
+        setFont(secondResourceExtra,27);
+        setFont(thirdResourceDepot,27);
+        setFont(thirdResourceStrongbox,27);
+        setFont(thirdResourceExtra,27);
+        setFont(fourthResourceDepot,27);
+        setFont(fourthResourceStrongbox,27);
+        setFont(fourthResourceExtra,27);
     }
 
     private void initializeSlotsImages()
