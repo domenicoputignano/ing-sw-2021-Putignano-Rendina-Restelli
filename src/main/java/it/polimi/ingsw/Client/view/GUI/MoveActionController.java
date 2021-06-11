@@ -4,11 +4,13 @@ import it.polimi.ingsw.Client.clientstates.gui.MoveResourcesGUI;
 import it.polimi.ingsw.Client.reducedmodel.ReducedDepot;
 import it.polimi.ingsw.Commons.ResourceType;
 import it.polimi.ingsw.Utils.Messages.ClientMessages.MoveResourcesMessage;
+import it.polimi.ingsw.Utils.MoveFromExtraToNormalAction;
 import it.polimi.ingsw.Utils.MoveFromNormalToExtraAction;
 import it.polimi.ingsw.Utils.MoveFromNormalToNormalAction;
 import it.polimi.ingsw.Utils.ResourceLocator;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
@@ -37,9 +39,15 @@ public class MoveActionController extends Controller{
     @FXML
     public Text extraDepotsText;
 
+    @FXML
+    public TextField depotExtraOcc;
+
+    @FXML
+    public Button minusResourceExtra,plusResourceExtra,okButtonExtraDepotOcc;
+
     boolean sourceAlreadySelected = false,isNormalToNormal = false,isExtraToNormal = false,isNormalToExtra = false;
     private int normalDepotIndexSource,normalDepotIndexDestination,extraDepotIndexDestination;
-    private int occ;
+    private int occ=1;
 
     private MoveResourcesGUI state;
 
@@ -65,9 +73,14 @@ public class MoveActionController extends Controller{
         setFont(fromNormalToNormal,24);
         fromNormalToExtra.setStyle("-fx-text-fill: rgb(35, 25, 22);");
         setFont(fromNormalToExtra,25);
+        setFont(okButtonExtraDepotOcc,27);
         depot1.setVisible(false);
         depot2.setVisible(false);
         depot3.setVisible(false);
+        depotExtraOcc.setVisible(false);
+        minusResourceExtra.setVisible(false);
+        plusResourceExtra.setVisible(false);
+        setFont(depotExtraOcc,18);
         resExtraDepot1.setVisible(false);
         resExtraDepot2.setVisible(false);
         initializeDepots();
@@ -193,7 +206,15 @@ public class MoveActionController extends Controller{
     private void sendFromNormalToExtraMessage()
     {
         MoveResourcesMessage messageToSend = new MoveResourcesMessage();
-        messageToSend.setMoveAction(new MoveFromNormalToExtraAction(normalDepotIndexSource,0,extraDepotIndexDestination));
+        messageToSend.setMoveAction(new MoveFromNormalToExtraAction(normalDepotIndexSource,occ,extraDepotIndexDestination));
+        state.setMessage(messageToSend);
+        state.manageUserInteraction();
+        handleCloseMoveAction();
+    }
+    private void sendFromExtraToNormalMessage()
+    {
+        MoveResourcesMessage messageToSend = new MoveResourcesMessage();
+        messageToSend.setMoveAction(new MoveFromExtraToNormalAction(extraDepotIndexDestination,occ,normalDepotIndexDestination));
         state.setMessage(messageToSend);
         state.manageUserInteraction();
         handleCloseMoveAction();
@@ -328,7 +349,44 @@ public class MoveActionController extends Controller{
 
         if(normalDepotSource.getOcc() > 1){
             typeOfMoveText.setText("How many resources do you want to move?");
+            minusResourceExtra.setVisible(true);
+            plusResourceExtra.setVisible(true);
+            depotExtraOcc.setVisible(true);
             // TODO rendere visibile minus e plus buttons per la scelta delle occorrenze
-        } else this.occ = 1;
+        }
+        else this.occ = 1;
+    }
+
+    @FXML
+    public void minusDepotOcc()
+    {
+        if(occ > 1)
+        {
+            occ--;
+            depotExtraOcc.setText("" + occ);
+        }
+    }
+
+    @FXML
+    public void plusDepotOcc()
+    {
+        ReducedDepot normalDepotSource = client.getGame().getPlayer(client.getUser()).getPersonalBoard().getWarehouse().getNormalDepots()[normalDepotIndexSource-1];
+        ReducedDepot extraDepotDestination = client.getGame().getPlayer(client.getUser()).getPersonalBoard().getWarehouse().getExtraDepots()[extraDepotIndexDestination-1];
+
+        if(occ == 1 && normalDepotSource.getOcc()>1 && extraDepotDestination.getOcc() == 0)
+        {
+            occ++;
+            depotExtraOcc.setText("" + occ);
+        }
+    }
+
+    @FXML
+    public void handleOkButtonDepotOcc()
+    {
+        if(isNormalToExtra)
+            sendFromNormalToExtraMessage();
+        else
+            if(isExtraToNormal)
+                sendFromExtraToNormalMessage();
     }
 }

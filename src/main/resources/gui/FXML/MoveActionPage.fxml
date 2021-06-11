@@ -49,7 +49,11 @@
       <Button fx:id="fromNormalToNormal" layoutX="609.0" layoutY="177.0" mnemonicParsing="false" onAction="#handleNormaltoNormal" prefHeight="65.0" prefWidth="176.0" styleClass="okButton" stylesheets="@../css/button.css" text="Normal to Normal" />
       <Button fx:id="fromNormalToExtra" layoutX="798.0" layoutY="177.0" mnemonicParsing="false" onAction="#handleNormaltoExtra" prefHeight="65.0" prefWidth="176.0" styleClass="okButton" stylesheets="@../css/button.css" text="Normal to Extra" />
       <Button fx:id="fromExtraToNormal" layoutX="705.0" layoutY="257.0" mnemonicParsing="false" onAction="#handleExtratoNormal" prefHeight="65.0" prefWidth="176.0" styleClass="okButton" stylesheets="@../css/button.css" text="Extra to Normal" />
-      <Button fx:id="resExtraDepot1" onAction="#handleExtraDepot1" layoutX="746.0" layoutY="428.0" mnemonicParsing="false" prefHeight="65.0" prefWidth="170.0" styleClass="resDepot" stylesheets="@../css/button.css" />
-      <Button fx:id="resExtraDepot2" onAction="#handleExtraDepot1" layoutX="746.0" layoutY="542.0" mnemonicParsing="false" prefHeight="65.0" prefWidth="170.0" styleClass="resDepot" stylesheets="@../css/button.css" />
+      <Button fx:id="resExtraDepot1" layoutX="746.0" layoutY="428.0" mnemonicParsing="false" onAction="#handleExtraDepot1" prefHeight="65.0" prefWidth="170.0" styleClass="resDepot" stylesheets="@../css/button.css" />
+      <Button fx:id="resExtraDepot2" layoutX="746.0" layoutY="542.0" mnemonicParsing="false" onAction="#handleExtraDepot1" prefHeight="65.0" prefWidth="170.0" styleClass="resDepot" stylesheets="@../css/button.css" />
+      <TextField fx:id="depotExtraOcc" alignment="CENTER" editable="false" layoutX="746.0" layoutY="185.0" mouseTransparent="true" prefHeight="46.0" prefWidth="53.0" styleClass="textFieldResources" stylesheets="@../css/text.css" text="1" />
+      <Button fx:id="minusResourceExtra" onAction="#minusDepotOcc" layoutX="686.0" layoutY="180.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" styleClass="minusButton" stylesheets="@../css/button.css" visible="false" />
+      <Button fx:id="plusResourceExtra" onAction="#plusDepotOcc" layoutX="796.0" layoutY="180.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" styleClass="plusButton" stylesheets="@../css/button.css" visible="false" />
+      <Button fx:id="okButtonExtraDepotOcc" onAction="#handleOkButtonDepotOcc" layoutX="708.0" layoutY="252.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="129.0" styleClass="okButton" stylesheets="@../css/text.css" text="OK" visible="false" />
     </children>
 </AnchorPane>
