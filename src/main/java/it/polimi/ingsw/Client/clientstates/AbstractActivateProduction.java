@@ -10,6 +10,7 @@ import it.polimi.ingsw.Model.ActiveProductions;
 import it.polimi.ingsw.Network.Client;
 import it.polimi.ingsw.Utils.Messages.ClientMessages.ActivateProductionMessage;
 import it.polimi.ingsw.Utils.ResourceSource;
+import org.apache.maven.model.Resource;
 
 import java.util.EnumMap;
 import java.util.HashMap;
@@ -138,4 +139,9 @@ public abstract class AbstractActivateProduction extends AbstractClientState {
     public boolean isBasicProduction() {
         return messageToSend.getProductions().isBasic();
     }
+
+    public void setPaymentInstructions(Map<ResourceSource, EnumMap<ResourceType, Integer>> requiredResources) {
+        messageToSend.setHowToTakeResources(requiredResources);
+    }
+
 }

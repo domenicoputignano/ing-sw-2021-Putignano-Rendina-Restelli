@@ -2,9 +2,9 @@ package it.polimi.ingsw.Client.view.GUI;
 
 import it.polimi.ingsw.Client.clientstates.gui.ActivateProductionGUI;
 import it.polimi.ingsw.Commons.*;
-import it.polimi.ingsw.Network.Server;
 import it.polimi.ingsw.Utils.Pair;
 import it.polimi.ingsw.Utils.ResourceLocator;
+import it.polimi.ingsw.Utils.ResourceSource;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -17,6 +17,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 
+import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -68,6 +69,10 @@ public class ActivateProductionController extends Controller implements PaymentC
     public Button clear;
     public Button toPayment, extraProduction;
     public Label firstInputLabel, secondInputLabel, outputLabel;
+
+    public Text errorText;
+
+    public ImageView firstResourceImage, secondResourceImage, thirdResourceImage, fourthResourceImage;
 
 
     int firstCurrentValueDepot = 0;
@@ -126,35 +131,37 @@ public class ActivateProductionController extends Controller implements PaymentC
 
 
     private void setText() {
-        setFont(firstDepotOcc, 20);
-        setFont(secondDepotOcc, 20);
-        setFont(thirdDepotOcc, 20);
-        setFont(fourthDepotOcc, 20);
-        setFont(firstStrongboxOcc, 20);
-        setFont(secondStrongboxOcc, 20);
-        setFont(thirdStrongboxOcc, 20);
-        setFont(fourthStrongboxOcc, 20);
-        setFont(firstExtraOcc, 20);
-        setFont(secondExtraOcc, 20);
-        setFont(thirdExtraOcc, 20);
-        setFont(fourthExtraOcc, 20);
+        setFont(firstDepotOcc, 25);
+        setFont(secondDepotOcc, 25);
+        setFont(thirdDepotOcc, 25);
+        setFont(fourthDepotOcc, 25);
+        setFont(firstStrongboxOcc, 25);
+        setFont(secondStrongboxOcc, 25);
+        setFont(thirdStrongboxOcc, 25);
+        setFont(fourthStrongboxOcc, 25);
+        setFont(firstExtraOcc, 25);
+        setFont(secondExtraOcc, 25);
+        setFont(thirdExtraOcc, 25);
+        setFont(fourthExtraOcc, 25);
         setFont(activateProdText, 30);
         setFont(clear, 25);
         setFont(firstInputLabel, 30);
         setFont(secondInputLabel, 30);
         setFont(outputLabel, 30);
-        setFont(firstResourceDepot,27);
-        setFont(firstResourceStrongbox,27);
-        setFont(firstResourceExtra,27);
-        setFont(secondResourceDepot,27);
-        setFont(secondResourceStrongbox,27);
-        setFont(secondResourceExtra,27);
-        setFont(thirdResourceDepot,27);
-        setFont(thirdResourceStrongbox,27);
-        setFont(thirdResourceExtra,27);
-        setFont(fourthResourceDepot,27);
-        setFont(fourthResourceStrongbox,27);
-        setFont(fourthResourceExtra,27);
+        setFont(firstResourceDepot,20);
+        setFont(firstResourceStrongbox,20);
+        setFont(firstResourceExtra,20);
+        setFont(secondResourceDepot,20);
+        setFont(secondResourceStrongbox,20);
+        setFont(secondResourceExtra,20);
+        setFont(thirdResourceDepot,20);
+        setFont(thirdResourceStrongbox,20);
+        setFont(thirdResourceExtra,20);
+        setFont(fourthResourceDepot,20);
+        setFont(fourthResourceStrongbox,20);
+        setFont(fourthResourceExtra,20);
+        setFont(concludeAction, 27);
+        setFont(errorText, 30);
     }
 
     private void initializeSlotsImages()
@@ -318,10 +325,9 @@ public class ActivateProductionController extends Controller implements PaymentC
 
 
 
-
-
     @FXML
     public void handleFirstSlotSelection() {
+        hideError();
         if(activateProductionAction.canActivateSlot(0)) {
             buttonSelection(slot1);
             activateProductionAction.setSlot(0,true);
@@ -333,6 +339,7 @@ public class ActivateProductionController extends Controller implements PaymentC
 
     @FXML
     public void handleSecondSlotSelection() {
+        hideError();
         if(activateProductionAction.canActivateSlot(1)) {
             buttonSelection(slot2);
             activateProductionAction.setSlot(1,true);
@@ -344,6 +351,7 @@ public class ActivateProductionController extends Controller implements PaymentC
 
     @FXML
     public void handleThirdSlotSelection() {
+        hideError();
         if(activateProductionAction.canActivateSlot(2)) {
             buttonSelection(slot3);
             activateProductionAction.setSlot(2, true);
@@ -367,7 +375,7 @@ public class ActivateProductionController extends Controller implements PaymentC
     public void concludeProductionsSelection() {
         cleanPane();
         Map<ResourceType, Integer> inputResources = activateProductionAction.calculateInputResources();
-        requiredResources = inputResources.entrySet().stream().
+        requiredResources = inputResources.entrySet().stream().filter(x -> x.getValue()>0).
                 map(x -> new Pair<>(x.getKey(),x.getValue())).collect(Collectors.toList());
         setActivateProdText("It's time to choose from where pick resources needed for production");
         showRequiredResources(requiredResources);
@@ -431,7 +439,6 @@ public class ActivateProductionController extends Controller implements PaymentC
         slot2.setVisible(false);
         slot3.setVisible(false);
 
-        nextStep.setVisible(false);
         activateProdText.setVisible(false);
         firstInputLabel.setVisible(false);
         secondInputLabel.setVisible(false);
@@ -439,12 +446,25 @@ public class ActivateProductionController extends Controller implements PaymentC
         input.setVisible(false);
         inputSecond.setVisible(false);
         output.setVisible(false);
+        toPayment.setVisible(false);
+
+
+        firstResourceImage.setVisible(false);
+        secondResourceImage.setVisible(false);
+        thirdResourceImage.setVisible(false);
+        fourthResourceImage.setVisible(false);
+
+        nextStep.setVisible(false);
+        clear.setVisible(false);
+        concludeAction.setVisible(false);
     }
 
 
 
     @Override
     public void setVisibleFirstResource() {
+        firstResourceImage.setImage(new Image(ResourceLocator.retrieveResourceTypeImage(requiredResources.get(0).getKey())));
+        firstResourceImage.setVisible(true);
         plusFirstResourceDepot.setVisible(true);
         plusFirstResourceStrongbox.setVisible(true);
         minusFirstResourceDepot.setVisible(true);
@@ -453,6 +473,7 @@ public class ActivateProductionController extends Controller implements PaymentC
         firstStrongboxOcc.setVisible(true);
         firstResourceDepot.setVisible(true);
         firstResourceStrongbox.setVisible(true);
+
         if(isAvailableExtraDepotOfType(requiredResources.get(0).getKey(), client)) {
             plusFirstResourceExtra.setVisible(true);
             minusFirstResourceExtra.setVisible(true);
@@ -463,6 +484,8 @@ public class ActivateProductionController extends Controller implements PaymentC
 
     @Override
     public void setVisibleSecondResource() {
+        secondResourceImage.setImage(new Image(ResourceLocator.retrieveResourceTypeImage(requiredResources.get(1).getKey())));
+        secondResourceImage.setVisible(true);
         plusSecondResourceDepot.setVisible(true);
         plusSecondResourceStrongbox.setVisible(true);
         minusSecondResourceDepot.setVisible(true);
@@ -481,6 +504,8 @@ public class ActivateProductionController extends Controller implements PaymentC
 
     @Override
     public void setVisibleThirdResource() {
+        thirdResourceImage.setImage(new Image(ResourceLocator.retrieveResourceTypeImage(requiredResources.get(2).getKey())));
+        thirdResourceImage.setVisible(true);
         plusThirdResourceDepot.setVisible(true);
         plusThirdResourceStrongbox.setVisible(true);
         minusThirdResourceDepot.setVisible(true);
@@ -500,7 +525,9 @@ public class ActivateProductionController extends Controller implements PaymentC
         }
     }
 
-    public void setVisibleFourthResource() {
+    private void setVisibleFourthResource() {
+        fourthResourceImage.setImage(new Image(ResourceLocator.retrieveResourceTypeImage(requiredResources.get(3).getKey())));
+        fourthResourceImage.setVisible(true);
         plusFourthResourceDepot.setVisible(true);
         plusFourthResourceStrongbox.setVisible(true);
         minusFourthResourceDepot.setVisible(true);
@@ -689,7 +716,9 @@ public class ActivateProductionController extends Controller implements PaymentC
             outputLabel.setVisible(true);
             clear.setVisible(true);
         } else {
-
+            //TODO vedere se ci sono effetti di tipo extraProduction attivati e cambiare implementazione
+            showActionRequired("Now it's time to select how to take resources from your warehouse complete your productions");
+            concludeProductionsSelection();
         }
     }
 
@@ -697,7 +726,7 @@ public class ActivateProductionController extends Controller implements PaymentC
 
     private void showActionRequired(String output) {
         activateProdText.setText(output);
-        activateProdText.setVisible(false);
+        activateProdText.setVisible(true);
     }
 
 
@@ -712,17 +741,18 @@ public class ActivateProductionController extends Controller implements PaymentC
 
     @Override
     public void showFinishButton() {
-
+        concludeAction.setVisible(isPaymentDone(requiredResources));
     }
 
     @Override
     public void hideError() {
-
+        errorText.setVisible(false);
     }
 
     @Override
-    public void setErrorDevTextKO(String s) {
-
+    public void maxOccurrencesSet(String error) {
+        errorText.setText(error);
+        errorText.setVisible(true);
     }
 
 
@@ -733,5 +763,23 @@ public class ActivateProductionController extends Controller implements PaymentC
     private void deselect(VBox vBox) {
         List<Node> buttons = vBox.getChildren();
         buttons.forEach(x -> x.setStyle("-fx-background-size: 97% auto"));
+    }
+
+
+    public void handleActionConclusion() {
+        Map<ResourceSource, EnumMap<ResourceType, Integer>> paymentInstructions = initializeMap();
+        for(int i = 0; i < requiredResources.size(); i++) {
+            if (i == 0)
+                createInstructionEntry(paymentInstructions, requiredResources, i, firstCurrentValueDepot, firstCurrentValueStrongbox, firstCurrentValueExtra);
+            if (i == 1)
+                createInstructionEntry(paymentInstructions, requiredResources, i, secondCurrentValueDepot, secondCurrentValueStrongbox, secondCurrentValueExtra);
+            if (i == 2)
+                createInstructionEntry(paymentInstructions, requiredResources, i, thirdCurrentValueDepot, thirdCurrentValueStrongbox, thirdCurrentValueExtra);
+            if (i == 3)
+                createInstructionEntry(paymentInstructions, requiredResources, i, fourthCurrentValueDepot, fourthCurrentValueStrongbox, fourthCurrentValueExtra);
+        }
+        activateProductionAction.setPaymentInstructions(paymentInstructions);
+        activateProductionAction.manageUserInteraction();
+        closeAction(concludeAction);
     }
 }

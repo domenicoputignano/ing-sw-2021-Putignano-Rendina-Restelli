@@ -13,6 +13,10 @@ public class ReducedStrongbox implements Serializable {
         this.resources = resources;
     }
 
+    public int getOccurrencesOfResource(ResourceType resource){
+        return resources.get(resource);
+    }
+
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
         resources.forEach((key, value) -> stringBuilder.append(ANSI_Color.escape(key)).

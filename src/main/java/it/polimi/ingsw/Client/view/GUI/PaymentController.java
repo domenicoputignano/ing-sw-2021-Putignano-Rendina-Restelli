@@ -5,8 +5,10 @@ import it.polimi.ingsw.Commons.ResourceType;
 import it.polimi.ingsw.Network.Client;
 import it.polimi.ingsw.Utils.Pair;
 import it.polimi.ingsw.Utils.ResourceSource;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
 import java.util.EnumMap;
 import java.util.HashMap;
@@ -71,7 +73,7 @@ public interface PaymentController {
             showFinishButton();
             return true;
         } else {
-            setErrorDevTextKO("Maximum number selected!");
+            maxOccurrencesSet("Maximum number selected!");
             showFinishButton();
             return false;
         }
@@ -91,8 +93,14 @@ public interface PaymentController {
 
 
 
+    default void closeAction(Button concludeButton) {
+        Stage stage = (Stage) concludeButton.getScene().getWindow();
+        stage.close();
+    }
+
+
     void showFinishButton();
     void hideError();
-    void setErrorDevTextKO(String s);
+    void maxOccurrencesSet(String s);
 
 }

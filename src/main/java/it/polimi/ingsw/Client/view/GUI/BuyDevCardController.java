@@ -70,7 +70,7 @@ public class BuyDevCardController extends Controller implements PaymentControlle
     boolean isCardBuyable;
     int slotIndex;
     List<Pair<ResourceType,Integer>> neededResources = new ArrayList<>();
-    List<Pair<ResourceType,Integer>> startingCost = new ArrayList<>();
+    Map<ResourceType, Integer> startingCost = new EnumMap<>(ResourceType.class);
     Map<ResourceSource, EnumMap<ResourceType,Integer>> paymentInstruction = new HashMap<>();
     BuyDevCardGUI buyDevCardAction;
 
@@ -215,12 +215,14 @@ public class BuyDevCardController extends Controller implements PaymentControlle
         buyCard.setVisible(true);
     }
 
-    private void setFeasiblePurchaseOK(){
+    private void setFeasiblePurchase(){
+        if(isCardBuyable) {
         setDevelopmentCardTextOK("You have \nenough resources \nto purchase \nselected card");
         buyCard.setVisible(true);
+        } else buyCard.setVisible(false);
     }
 
-    public void setErrorDevTextKO(String error){
+    public void maxOccurrencesSet(String error){
         errorDevText.setText(error);
         errorDevText.setVisible(true);
     }
@@ -232,11 +234,12 @@ public class BuyDevCardController extends Controller implements PaymentControlle
         if(Checker.checkResources(buyDevCardAction.computeActualCost(developmentCard),client.getGame().getPlayer(client.getUser()).getPersonalBoard())){
         //if(Checker.checkResources(developmentCard.getCost(),client.getGame().getPlayer(client.getUser()).getPersonalBoard())) {
             isCardBuyable = true;
-            setFeasiblePurchaseOK();
+
         } else {
             isCardBuyable = false;
-            setErrorDevTextKO("You don't have \nenough resources \nto purchase \nselected card");
+            maxOccurrencesSet("You don't have \nenough resources \nto purchase \nselected card");
         }
+        setFeasiblePurchase();
     }
 
     @FXML
@@ -246,11 +249,11 @@ public class BuyDevCardController extends Controller implements PaymentControlle
         if(Checker.checkResources(buyDevCardAction.computeActualCost(developmentCard),client.getGame().getPlayer(client.getUser()).getPersonalBoard())){
         //if(Checker.checkResources(developmentCard.getCost(),client.getGame().getPlayer(client.getUser()).getPersonalBoard())) {
             isCardBuyable = true;
-            setFeasiblePurchaseOK();
         } else {
             isCardBuyable = false;
-            setErrorDevTextKO("You don't have \nenough resources \nto purchase \nselected card");
+            maxOccurrencesSet("You don't have \nenough resources \nto purchase \nselected card");
         }
+        setFeasiblePurchase();
     }
 
     @FXML
@@ -260,12 +263,13 @@ public class BuyDevCardController extends Controller implements PaymentControlle
 
         if(Checker.checkResources(buyDevCardAction.computeActualCost(developmentCard),client.getGame().getPlayer(client.getUser()).getPersonalBoard())){
         //if(Checker.checkResources(developmentCard.getCost(),client.getGame().getPlayer(client.getUser()).getPersonalBoard())) {
-            setFeasiblePurchaseOK();
+            setFeasiblePurchase();
             isCardBuyable = true;
         } else {
             isCardBuyable = false;
-            setErrorDevTextKO("You don't have \nenough resources \nto purchase \nselected card");
+            maxOccurrencesSet("You don't have \nenough resources \nto purchase \nselected card");
         }
+        setFeasiblePurchase();
     }
 
     @FXML
@@ -275,11 +279,11 @@ public class BuyDevCardController extends Controller implements PaymentControlle
         //if(Checker.checkResources(developmentCard.getCost(),client.getGame().getPlayer(client.getUser()).getPersonalBoard())) {
         if(Checker.checkResources(buyDevCardAction.computeActualCost(developmentCard),client.getGame().getPlayer(client.getUser()).getPersonalBoard())){
             isCardBuyable = true;
-            setFeasiblePurchaseOK();
         } else {
             isCardBuyable = false;
-            setErrorDevTextKO("You don't have \nenough resources \nto purchase \nselected card");
+            maxOccurrencesSet("You don't have \nenough resources \nto purchase \nselected card");
         }
+        setFeasiblePurchase();
     }
 
     @FXML
@@ -289,11 +293,11 @@ public class BuyDevCardController extends Controller implements PaymentControlle
         //if(Checker.checkResources(developmentCard.getCost(),client.getGame().getPlayer(client.getUser()).getPersonalBoard())) {
         if(Checker.checkResources(buyDevCardAction.computeActualCost(developmentCard),client.getGame().getPlayer(client.getUser()).getPersonalBoard())){
             isCardBuyable = true;
-            setFeasiblePurchaseOK();
         } else {
             isCardBuyable = false;
-            setErrorDevTextKO("You don't have \nenough resources \nto purchase \nselected card");
+            maxOccurrencesSet("You don't have \nenough resources \nto purchase \nselected card");
         }
+        setFeasiblePurchase();
     }
 
     @FXML
@@ -303,11 +307,11 @@ public class BuyDevCardController extends Controller implements PaymentControlle
         //if(Checker.checkResources(developmentCard.getCost(),client.getGame().getPlayer(client.getUser()).getPersonalBoard())) {
         if(Checker.checkResources(buyDevCardAction.computeActualCost(developmentCard),client.getGame().getPlayer(client.getUser()).getPersonalBoard())){
             isCardBuyable = true;
-            setFeasiblePurchaseOK();
         } else {
             isCardBuyable = false;
-            setErrorDevTextKO("You don't have \nenough resources \nto purchase \nselected card");
+            maxOccurrencesSet("You don't have \nenough resources \nto purchase \nselected card");
         }
+        setFeasiblePurchase();
     }
 
     @FXML
@@ -318,11 +322,13 @@ public class BuyDevCardController extends Controller implements PaymentControlle
 
         if(Checker.checkResources(buyDevCardAction.computeActualCost(developmentCard),client.getGame().getPlayer(client.getUser()).getPersonalBoard())){
             isCardBuyable = true;
-            setFeasiblePurchaseOK();
+
         } else {
             isCardBuyable = false;
-            setErrorDevTextKO("You don't have \nenough resources \nto purchase \nselected card");
+            maxOccurrencesSet("You don't have \nenough resources \nto purchase \nselected card");
+
         }
+        setFeasiblePurchase();
     }
 
     @FXML
@@ -332,11 +338,12 @@ public class BuyDevCardController extends Controller implements PaymentControlle
         //if(Checker.checkResources(developmentCard.getCost(),client.getGame().getPlayer(client.getUser()).getPersonalBoard())) {
         if(Checker.checkResources(buyDevCardAction.computeActualCost(developmentCard),client.getGame().getPlayer(client.getUser()).getPersonalBoard())){
             isCardBuyable = true;
-            setFeasiblePurchaseOK();
+
         } else {
             isCardBuyable = false;
-            setErrorDevTextKO("You don't have \nenough resources \nto purchase \nselected card");
+            maxOccurrencesSet("You don't have \nenough resources \nto purchase \nselected card");
         }
+        setFeasiblePurchase();
     }
 
     @FXML
@@ -346,11 +353,12 @@ public class BuyDevCardController extends Controller implements PaymentControlle
         //if(Checker.checkResources(developmentCard.getCost(),client.getGame().getPlayer(client.getUser()).getPersonalBoard())) {
         if(Checker.checkResources(buyDevCardAction.computeActualCost(developmentCard),client.getGame().getPlayer(client.getUser()).getPersonalBoard())){
             isCardBuyable = true;
-            setFeasiblePurchaseOK();
+
         } else {
             isCardBuyable = false;
-            setErrorDevTextKO("You don't have \nenough resources \nto purchase \nselected card");
+            maxOccurrencesSet("You don't have \nenough resources \nto purchase \nselected card");
         }
+        setFeasiblePurchase();
     }
 
     @FXML
@@ -360,11 +368,12 @@ public class BuyDevCardController extends Controller implements PaymentControlle
         //if(Checker.checkResources(developmentCard.getCost(),client.getGame().getPlayer(client.getUser()).getPersonalBoard())) {
         if(Checker.checkResources(buyDevCardAction.computeActualCost(developmentCard),client.getGame().getPlayer(client.getUser()).getPersonalBoard())){
             isCardBuyable = true;
-            setFeasiblePurchaseOK();
+
         } else {
             isCardBuyable = false;
-            setErrorDevTextKO("You don't have \nenough resources \nto purchase \nselected card");
+            maxOccurrencesSet("You don't have \nenough resources \nto purchase \nselected card");
         }
+        setFeasiblePurchase();
     }
 
     @FXML
@@ -375,12 +384,13 @@ public class BuyDevCardController extends Controller implements PaymentControlle
 
         if(Checker.checkResources(buyDevCardAction.computeActualCost(developmentCard),client.getGame().getPlayer(client.getUser()).getPersonalBoard())){
             isCardBuyable = true;
-            setFeasiblePurchaseOK();
+
         } else {
 
             isCardBuyable = false;
-            setErrorDevTextKO("You don't have \nenough resources \nto purchase \nselected card");
+            maxOccurrencesSet("You don't have \nenough resources \nto purchase \nselected card");
         }
+        setFeasiblePurchase();
     }
 
     @FXML
@@ -390,11 +400,12 @@ public class BuyDevCardController extends Controller implements PaymentControlle
         //if(Checker.checkResources(developmentCard.getCost(),client.getGame().getPlayer(client.getUser()).getPersonalBoard())) {
         if(Checker.checkResources(buyDevCardAction.computeActualCost(developmentCard),client.getGame().getPlayer(client.getUser()).getPersonalBoard())){
             isCardBuyable = true;
-            setFeasiblePurchaseOK();
+
         } else {
             isCardBuyable = false;
-            setErrorDevTextKO("You don't have \nenough resources \nto purchase \nselected card");
+            maxOccurrencesSet("You don't have \nenough resources \nto purchase \nselected card");
         }
+        setFeasiblePurchase();
     }
 
 
@@ -470,7 +481,8 @@ public class BuyDevCardController extends Controller implements PaymentControlle
             setFont(toPayment, 24);
             toPayment.setVisible(true);
         } else {
-            setErrorDevTextKO("Selected slot is not available");
+            maxOccurrencesSet("Selected slot is not available");
+            toPayment.setVisible(false);
         }
     }
 
@@ -487,7 +499,8 @@ public class BuyDevCardController extends Controller implements PaymentControlle
         errorDevText.setVisible(false);
         slotBox.setVisible(false);
         selectHowPickResourcesText.setVisible(true);
-        neededResources = developmentCard.getCost().entrySet().stream().filter(x -> x.getValue() > 0).map( x -> new Pair<>(x.getKey(),x.getValue())).collect(Collectors.toList());
+        startingCost = buyDevCardAction.computeActualCost(developmentCard);
+        neededResources = startingCost.entrySet().stream().filter(x -> x.getValue() > 0).map( x -> new Pair<>(x.getKey(),x.getValue())).collect(Collectors.toList());
         showRequiredResources(neededResources);
         toPayment.setVisible(false);
     }
@@ -711,13 +724,9 @@ public class BuyDevCardController extends Controller implements PaymentControlle
         }
         buyDevCardAction.compileMessage(developmentCard.getType(),paymentInstruction, slotIndex);
         buyDevCardAction.manageUserInteraction();
-        closeAction();
+        closeAction(concludeAction);
     }
 
-    private void closeAction() {
-        Stage stage = (Stage) concludeAction.getScene().getWindow();
-        stage.close();
-    }
 
     public void showFinishButton() {
         concludeAction.setVisible(isPaymentDone(neededResources));

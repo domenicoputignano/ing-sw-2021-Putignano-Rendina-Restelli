@@ -1,6 +1,7 @@
 package it.polimi.ingsw.Client.view.GUI;
 
 import it.polimi.ingsw.Client.reducedmodel.ReducedSoloMode;
+import it.polimi.ingsw.Client.reducedmodel.ReducedStrongbox;
 import it.polimi.ingsw.Commons.ResourceType;
 import it.polimi.ingsw.Utils.Messages.ClientMessages.EndTurnMessage;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.Updates.TakeResourcesFromMarketUpdate;
@@ -92,6 +93,7 @@ public class PlayerBoardController extends Controller {
         strongboxResources.setVisible(true);
         initializeCells();
         initializeDepots();
+        initializeStrongbox();
         if(client.getUI().isSoloMode())
             initializeFaithTrackWithBlackCross();
         else
@@ -218,6 +220,15 @@ public class PlayerBoardController extends Controller {
                     getPersonalBoard().getWarehouse().getNormalDepots()[2].getType());
         }
     }
+
+    private void initializeStrongbox() {
+        ReducedStrongbox strongbox = client.getGame().getPlayer(client.getUser()).getPersonalBoard().getWarehouse().getStrongbox();
+        numCoinStrongbox.setText(""+strongbox.getOccurrencesOfResource(ResourceType.coin));
+        numServantStrongbox.setText(""+strongbox.getOccurrencesOfResource(ResourceType.servant));
+        numShieldStrongbox.setText(""+strongbox.getOccurrencesOfResource(ResourceType.shield));
+        numStoneStrongbox.setText(""+strongbox.getOccurrencesOfResource(ResourceType.stone));
+    }
+
 
     private void loadImageResource(ImageView target, ResourceType resourceType){
         target.setImage(new Image(ResourceLocator.retrieveResourceTypeImage(resourceType)));
