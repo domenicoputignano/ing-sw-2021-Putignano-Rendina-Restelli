@@ -39,6 +39,7 @@ public class MoveActionController extends Controller{
 
     boolean sourceAlreadySelected = false,isNormalToNormal = false,isExtraToNormal = false,isNormalToExtra = false;
     private int normalDepotIndexSource,normalDepotIndexDestination,extraDepotIndexDestination;
+    private int occ;
 
     private MoveResourcesGUI state;
 
@@ -303,7 +304,7 @@ public class MoveActionController extends Controller{
         }
         else{
             extraDepotIndexDestination = 1;
-            //TODO inserire il numero di occorrenze da muovere nell'extra depot
+            setOccFromNormalToExtra();
             sendFromNormalToExtraMessage();
         }
     }
@@ -316,8 +317,18 @@ public class MoveActionController extends Controller{
         }
         else{
             extraDepotIndexDestination = 2;
-            //TODO inserire il numero di occorrenze da muovere nell'extra depot
+            setOccFromNormalToExtra();
             sendFromNormalToExtraMessage();
         }
+    }
+
+    private void setOccFromNormalToExtra(){
+        ReducedDepot normalDepotSource = client.getGame().getPlayer(client.getUser()).getPersonalBoard().getWarehouse().getNormalDepots()[normalDepotIndexSource-1];
+        ReducedDepot extraDepotDestination = client.getGame().getPlayer(client.getUser()).getPersonalBoard().getWarehouse().getExtraDepots()[extraDepotIndexDestination-1];
+
+        if(normalDepotSource.getOcc() > 1){
+            typeOfMoveText.setText("How many resources do you want to move?");
+            // TODO rendere visibile minus e plus buttons per la scelta delle occorrenze
+        } else this.occ = 1;
     }
 }
