@@ -16,5 +16,4 @@ public class GameResumedMessage extends GameSetupMessage {
         ClientStatesController.updateClientState(this, handler.getUI());
     }
 
-
 }

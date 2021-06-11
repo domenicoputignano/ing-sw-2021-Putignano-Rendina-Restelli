@@ -427,7 +427,43 @@ public class ResourceChoiceController extends Controller{
             }
         }
         (new InitialResourceChoiceGUI(client, resourcesWithDepotDestination)).manageUserInteraction();
+        cleanPane();
+        chooseResourceText.setText("Setup completed\nYou are the "+client.getGame().getPlayer(client.getUser()).getPosition()+"°" +
+                " player\nPlease wait for your opponents to complete.");
     }
 
-
+    private void cleanPane() {
+        clearButton.setVisible(false);
+        okButton.setVisible(false);
+        okButton1.setVisible(false);
+        coinText.setVisible(false);
+        stoneText.setVisible(false);
+        shieldText.setVisible(false);
+        servantText.setVisible(false);
+        numCoin.setVisible(false);
+        numShield.setVisible(false);
+        numStone.setVisible(false);
+        numServant.setVisible(false);
+        errorResources.setVisible(false);
+        errorMismatch.setVisible(false);
+        minusButton1.setVisible(false);
+        minusButton2.setVisible(false);
+        minusButton3.setVisible(false);
+        minusButton4.setVisible(false);
+        plusButton1.setVisible(false);
+        plusButton2.setVisible(false);
+        plusButton3.setVisible(false);
+        plusButton4.setVisible(false);
+        resource1Img.setVisible(false);
+        resource2Img.setVisible(false);
+        resource3Img.setVisible(false);
+        resource4Img.setVisible(false);
+        resource1Imgpl4.setVisible(false);
+        buttonDepot1.setVisible(false);
+        buttonDepot2.setVisible(false);
+        buttonDepot3.setVisible(false);
+        buttonDepot1pl4.setVisible(false);
+        buttonDepot2pl4.setVisible(false);
+        buttonDepot3pl4.setVisible(false);
+    }
 }

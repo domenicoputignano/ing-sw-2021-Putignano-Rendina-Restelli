@@ -1,6 +1,7 @@
 package it.polimi.ingsw.Client.view.GUI;
 
 import it.polimi.ingsw.Client.clientstates.gui.InitialLeaderChoiceGUI;
+import it.polimi.ingsw.Model.MultiPlayerMode;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
@@ -200,5 +201,33 @@ public class LeaderChoiceController extends Controller{
             clientState = new InitialLeaderChoiceGUI(client, toDiscard.get(0), toDiscard.get(1));
             clientState.manageUserInteraction();
         }
+        showWaitingSceneForFirstPlayer();
+    }
+
+    private void showWaitingSceneForFirstPlayer() {
+        if(client.getGame().getPlayer(client.getUser()).equals(client.getGame().getCurrPlayer())) {
+            cleanPane();
+            if(!client.getUI().isSoloMode()) {
+                chooseCardText.setText("You are the first player,\nYour opponents are completing initial setup\n" +
+                        "Match will start soon...");
+                chooseCardText.setVisible(true);
+            }
+        } else cleanPane();
+    }
+
+
+    private void cleanPane() {
+        leaderCard1.setVisible(false);
+        leaderCard2.setVisible(false);
+        leaderCard3.setVisible(false);
+        leaderCard4.setVisible(false);
+        indicator1.setVisible(false);
+        indicator2.setVisible(false);
+        indicator3.setVisible(false);
+        indicator4.setVisible(false);
+        okButton.setVisible(false);
+        clearButton.setVisible(false);
+        errorChoiceText.setVisible(false);
+        chooseCardText.setVisible(false);
     }
 }

@@ -6,6 +6,7 @@ import it.polimi.ingsw.Utils.Pair;
 import it.polimi.ingsw.Utils.ResourceLocator;
 import it.polimi.ingsw.Utils.ResourceSource;
 import javafx.fxml.FXML;
+import javafx.scene.AccessibleRole;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -94,18 +95,18 @@ public class ActivateProductionController extends Controller implements PaymentC
 
 
     public HBox extraProductions;
-    public Text firstResourceDepot;
-    public Text secondResourceDepot;
-    public Text thirdResourceDepot;
-    public Text fourthResourceDepot;
-    public Text firstResourceStrongbox;
-    public Text secondResourceStrongbox;
-    public Text thirdResourceStrongbox;
-    public Text fourthResourceStrongbox;
-    public Text firstResourceExtra;
-    public Text secondResourceExtra;
-    public Text thirdResourceExtra;
-    public Text fourthResourceExtra;
+    public TextField firstResourceDepot;
+    public TextField secondResourceDepot;
+    public TextField thirdResourceDepot;
+    public TextField fourthResourceDepot;
+    public TextField firstResourceStrongbox;
+    public TextField secondResourceStrongbox;
+    public TextField thirdResourceStrongbox;
+    public TextField fourthResourceStrongbox;
+    public TextField firstResourceExtra;
+    public TextField secondResourceExtra;
+    public TextField thirdResourceExtra;
+    public TextField fourthResourceExtra;
 
 
     @FXML
@@ -131,53 +132,44 @@ public class ActivateProductionController extends Controller implements PaymentC
 
 
     private void setText() {
-        setFont(firstDepotOcc, 25);
-        setFont(secondDepotOcc, 25);
-        setFont(thirdDepotOcc, 25);
-        setFont(fourthDepotOcc, 25);
-        setFont(firstStrongboxOcc, 25);
-        setFont(secondStrongboxOcc, 25);
-        setFont(thirdStrongboxOcc, 25);
-        setFont(fourthStrongboxOcc, 25);
-        setFont(firstExtraOcc, 25);
-        setFont(secondExtraOcc, 25);
-        setFont(thirdExtraOcc, 25);
-        setFont(fourthExtraOcc, 25);
-        setFont(activateProdText, 30);
+        setFont(firstDepotOcc, 18);
+        setFont(secondDepotOcc, 18);
+        setFont(thirdDepotOcc, 18);
+        setFont(fourthDepotOcc, 18);
+        setFont(firstStrongboxOcc, 18);
+        setFont(secondStrongboxOcc, 18);
+        setFont(thirdStrongboxOcc, 18);
+        setFont(fourthStrongboxOcc, 18);
+        setFont(firstExtraOcc, 18);
+        setFont(secondExtraOcc, 18);
+        setFont(thirdExtraOcc, 18);
+        setFont(fourthExtraOcc, 18);
+        setFont(activateProdText, 35);
         setFont(clear, 25);
-        setFont(firstInputLabel, 30);
-        setFont(secondInputLabel, 30);
-        setFont(outputLabel, 30);
-        setFont(firstResourceDepot,20);
-        setFont(firstResourceStrongbox,20);
-        setFont(firstResourceExtra,20);
-        setFont(secondResourceDepot,20);
-        setFont(secondResourceStrongbox,20);
-        setFont(secondResourceExtra,20);
-        setFont(thirdResourceDepot,20);
-        setFont(thirdResourceStrongbox,20);
-        setFont(thirdResourceExtra,20);
-        setFont(fourthResourceDepot,20);
-        setFont(fourthResourceStrongbox,20);
-        setFont(fourthResourceExtra,20);
+        setFont(firstInputLabel, 35);
+        setFont(secondInputLabel, 35);
+        setFont(outputLabel, 35);
+        setFont(firstResourceDepot,30);
+        setFont(firstResourceStrongbox,30);
+        setFont(firstResourceExtra,30);
+        setFont(secondResourceDepot,30);
+        setFont(secondResourceStrongbox,30);
+        setFont(secondResourceExtra,30);
+        setFont(thirdResourceDepot,30);
+        setFont(thirdResourceStrongbox,30);
+        setFont(thirdResourceExtra,30);
+        setFont(fourthResourceDepot,30);
+        setFont(fourthResourceStrongbox,30);
+        setFont(fourthResourceExtra,30);
         setFont(concludeAction, 27);
         setFont(errorText, 30);
     }
 
     private void initializeSlotsImages()
     {
-        if(!client.getGame().getPlayer(client.getUser()).getPersonalBoard().isEmptySlot(0)) {
-            slot1.setStyle("-fx-background-image: url(" +
-                    client.getGame().getPlayer(client.getUser()).getPersonalBoard().peekTopCardInSlot(0).toImage() + ")");
-        }
-        if(!client.getGame().getPlayer(client.getUser()).getPersonalBoard().isEmptySlot(1)) {
-            slot2.setStyle("-fx-background-image: url(" +
-                    client.getGame().getPlayer(client.getUser()).getPersonalBoard().peekTopCardInSlot(1).toImage() + ")");
-        }
-        if(!client.getGame().getPlayer(client.getUser()).getPersonalBoard().isEmptySlot(2)) {
-            slot3.setStyle("-fx-background-image: url(" +
-                    client.getGame().getPlayer(client.getUser()).getPersonalBoard().peekTopCardInSlot(2).toImage() + ")");
-        }
+        initializeSlotImage(0);
+        initializeSlotImage(1);
+        initializeSlotImage(2);
         List<LeaderEffect> extraProduction = activateProductionAction.listExtraProductionEffect();
         for(int i = 0; i < extraProduction.size(); i++) {
             if(i == 0) {
@@ -187,6 +179,40 @@ public class ActivateProductionController extends Controller implements PaymentC
             if(i == 1) {
                 secondExtraSlot.setStyle("-fx-background-image: url("+extraProduction.get(i).toImage()+")");
                 secondExtraSlot.setVisible(true);
+            }
+        }
+    }
+
+    private void initializeSlotImage(int slotIndex) {
+        switch (slotIndex) {
+            case(0) : {
+                if(!client.getGame().getPlayer(client.getUser()).getPersonalBoard().isEmptySlot(0)) {
+                    slot1.setStyle("-fx-background-image: url(" +
+                            client.getGame().getPlayer(client.getUser()).getPersonalBoard().peekTopCardInSlot(0).toImage() + ")");
+                    slot1.setVisible(true);
+                } else {
+                    slot1.setVisible(false);
+                }
+                return;
+            }
+            case(1) : {
+                if(!client.getGame().getPlayer(client.getUser()).getPersonalBoard().isEmptySlot(1)) {
+                    slot2.setStyle("-fx-background-image: url(" +
+                            client.getGame().getPlayer(client.getUser()).getPersonalBoard().peekTopCardInSlot(1).toImage() + ")");
+                    slot2.setVisible(true);
+                } else {
+                    slot2.setVisible(false);
+                }
+                return;
+            }
+            case (2) : {
+                if(!client.getGame().getPlayer(client.getUser()).getPersonalBoard().isEmptySlot(2)) {
+                    slot3.setStyle("-fx-background-image: url(" +
+                            client.getGame().getPlayer(client.getUser()).getPersonalBoard().peekTopCardInSlot(2).toImage() + ")");
+                    slot3.setVisible(true);
+                } else {
+                    slot3.setVisible(false);
+                }
             }
         }
     }
@@ -329,7 +355,9 @@ public class ActivateProductionController extends Controller implements PaymentC
     public void handleFirstSlotSelection() {
         hideError();
         if(activateProductionAction.canActivateSlot(0)) {
-            buttonSelection(slot1);
+            slotSelection(slot1,0);
+            slot1.setStyle("-fx-background-image: url("+client.getGame().getPlayer(client.getUser()).
+                    getPersonalBoard().getSlot(0).peekTopCard().toImage()+")");
             activateProductionAction.setSlot(0,true);
             nextStep.setVisible(true);
         } else {
@@ -341,7 +369,7 @@ public class ActivateProductionController extends Controller implements PaymentC
     public void handleSecondSlotSelection() {
         hideError();
         if(activateProductionAction.canActivateSlot(1)) {
-            buttonSelection(slot2);
+            slotSelection(slot2, 1);
             activateProductionAction.setSlot(1,true);
             nextStep.setVisible(true);
         } else {
@@ -353,7 +381,7 @@ public class ActivateProductionController extends Controller implements PaymentC
     public void handleThirdSlotSelection() {
         hideError();
         if(activateProductionAction.canActivateSlot(2)) {
-            buttonSelection(slot3);
+            slotSelection(slot3, 2);
             activateProductionAction.setSlot(2, true);
             nextStep.setVisible(true);
         } else {
@@ -484,6 +512,7 @@ public class ActivateProductionController extends Controller implements PaymentC
 
     @Override
     public void setVisibleSecondResource() {
+
         secondResourceImage.setImage(new Image(ResourceLocator.retrieveResourceTypeImage(requiredResources.get(1).getKey())));
         secondResourceImage.setVisible(true);
         plusSecondResourceDepot.setVisible(true);
@@ -757,8 +786,15 @@ public class ActivateProductionController extends Controller implements PaymentC
 
 
     private void buttonSelection(Button button) {
-        button.setStyle("-fx-background-size: 85% auto; -fx-border-color: rgb(255,255,0)");
+        button.setStyle("-fx-border-color: rgb(231,156,48);-fx-border-width: 5;");
     }
+
+    private void slotSelection(Button slot, int slotIndex) {
+        buttonSelection(slot);
+        initializeSlotImage(slotIndex);
+
+    }
+
 
     private void deselect(VBox vBox) {
         List<Node> buttons = vBox.getChildren();

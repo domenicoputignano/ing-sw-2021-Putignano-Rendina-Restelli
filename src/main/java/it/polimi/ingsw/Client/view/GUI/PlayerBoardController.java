@@ -88,6 +88,7 @@ public class PlayerBoardController extends Controller {
 
         this.client = GUIApp.client;
         initializePersonalBoard(client.getGame().getPlayer(client.getUser()));
+
         if(playerToShow.getNumOfLeaderCards() > 0)
             leaderCard1.setImage(new Image(client.getGame().getPlayer(client.getUser()).getAvailableLeaderCards().get(0).toImage()));
 
@@ -102,10 +103,8 @@ public class PlayerBoardController extends Controller {
         else
             initializeFaithMarker();
         setAvailableActions();
-        initializeSlots();/*
-        if(!client.getUI().hasDoneNormalAction())
-            endTurn.setVisible(false);
-        else endTurn.setVisible(true);*/
+        initializeSlots();
+        setAvailableActions();
     }
 
     private void initializeCells()
@@ -281,14 +280,7 @@ public class PlayerBoardController extends Controller {
         client.sendMessage(new EndTurnMessage());
     }
 
-    public void showTakeResourcesFromMarketUpdate(TakeResourcesFromMarketUpdate update){
-        Alert alertUpdate = new Alert(Alert.AlertType.INFORMATION);
-        alertUpdate.setTitle("Take resources from market correctly performed!");
-        alertUpdate.setX(400);
-        alertUpdate.setY(200);
-        alertUpdate.setContentText("You correctly performed you action: \n" + "You got " + update.getEarnedResources());
-        alertUpdate.show();
-    }
+
 
     public void initializePersonalBoard(ReducedPlayer player) {
         this.playerToShow = player;
@@ -300,7 +292,7 @@ public class PlayerBoardController extends Controller {
             chooseAction.setVisible(false);
             endTurn.setVisible(false);
         } else {
-            endTurn.setVisible(!client.getUI().hasDoneNormalAction());
+            endTurn.setVisible(client.getUI().hasDoneNormalAction());
             moveAction.setVisible(true);
             chooseAction.setVisible(true);
         }

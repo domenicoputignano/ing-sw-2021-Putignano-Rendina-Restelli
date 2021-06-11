@@ -18,7 +18,7 @@
             <Image url="@../img/slots.png" />
          </image>
       </ImageView>
-      <Text fx:id="activateProdText" layoutX="430.0" layoutY="122.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Activate Production" />
+      <Text fx:id="activateProdText" layoutX="370.0" layoutY="122.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Activate Production" />
       <Button fx:id="slot1" layoutX="386.0" layoutY="250.0" mnemonicParsing="false" onAction="#handleFirstSlotSelection" prefHeight="239.0" prefWidth="156.0" styleClass="slotButton, button" stylesheets="@../css/button.css" />
       <Button fx:id="slot2" layoutX="559.0" layoutY="250.0" mnemonicParsing="false" onAction="#handleSecondSlotSelection" prefHeight="239.0" prefWidth="156.0" styleClass="slotButton, button" stylesheets="@../css/button.css" />
       <Button fx:id="slot3" layoutX="737.0" layoutY="250.0" mnemonicParsing="false" onAction="#handleThirdSlotSelection" prefHeight="239.0" prefWidth="156.0" styleClass="slotButton, button" stylesheets="@../css/button.css" />
@@ -29,7 +29,6 @@
             <Button fx:id="secondExtraSlot" mnemonicParsing="false" prefHeight="52.0" prefWidth="216.0" styleClass="slotButton" stylesheets="@../css/button.css" visible="false" />
          </children>
       </HBox>
-
       <VBox fx:id="input" alignment="CENTER" layoutX="250.0" layoutY="233.0" prefHeight="310.0" prefWidth="115.0" spacing="30.0" visible="false">
          <children>
             <Button fx:id="coinInput" alignment="CENTER" mnemonicParsing="false" onAction="#coinInputChosen" prefHeight="54.0" prefWidth="53.0" styleClass="resourceButton, button,coin" stylesheets="@../css/button.css" />
@@ -57,36 +56,36 @@
       <Label fx:id="firstInputLabel" layoutX="260.0" layoutY="190.0" text="First Input" visible="false" />
       <Label fx:id="secondInputLabel" layoutX="400.0" layoutY="190.0" text="Second Input" visible="false" />
       <Label fx:id="outputLabel" layoutX="580.0" layoutY="190.0" text="Output" visible="false" />
-      <Text fx:id="firstResourceDepot" layoutX="297.0" layoutY="220.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Depot:" visible="false" />
-      <Text fx:id="firstResourceStrongbox" layoutX="297.0" layoutY="270.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Strongbox:" visible="false" />
-      <Text fx:id="secondResourceDepot" layoutX="691.0" layoutY="220.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Depot:" visible="false" />
-      <Text fx:id="secondResourceStrongbox" layoutX="691.0" layoutY="270.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Strongbox:" visible="false" />
-      <Text fx:id="thirdResourceDepot" layoutX="297.0" layoutY="440.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Depot:" visible="false" />
-      <Text fx:id="thirdResourceStrongbox" layoutX="297.0" layoutY="490.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Strongbox:" visible="false" />
-      <Text fx:id="fourthResourceDepot" layoutX="691.0" layoutY="440.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Depot:" visible="false" />
-      <Text fx:id="fourthResourceStrongbox" layoutX="691.0" layoutY="490.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Strongbox:" visible="false" />
-      <Text fx:id="firstResourceExtra" layoutX="297.0" layoutY="320.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Extra Depot:" visible="false" />
-      <Text fx:id="secondResourceExtra" layoutX="691.0" layoutY="320.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Extra Depot:" visible="false" />
-      <Text fx:id="thirdResourceExtra" layoutX="297.0" layoutY="540.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Extra Depot:" visible="false" />
-      <Text fx:id="fourthResourceExtra" layoutX="691.0" layoutY="540.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Extra Depot:" visible="false" />
+      <TextField fx:id="firstResourceDepot" layoutX="290.0" layoutY="180.0" editable="false"  text="Depot:" styleClass="resourcesText" stylesheets="@../css/text.css" visible="false"  />
+      <TextField fx:id="firstResourceStrongbox" layoutX="290.0" layoutY="230.0" editable="false" text="Strongbox:" styleClass="resourcesText" stylesheets="@../css/text.css" visible="false" />
+      <TextField fx:id="secondResourceDepot" layoutX="670.0" layoutY="180.0" editable="false" text="Depot:" styleClass="resourcesText" stylesheets="@../css/text.css" visible="false" />
+      <TextField fx:id="secondResourceStrongbox" layoutX="670.0" layoutY="230.0" editable="false" text="Strongbox: " styleClass="resourcesText" stylesheets="@../css/text.css" visible="false" />
+      <TextField fx:id="thirdResourceDepot" layoutX="290.0" layoutY="400.0" editable="false" text="Depot:" styleClass="resourcesText" stylesheets="@../css/text.css" visible="false" />
+      <TextField fx:id="thirdResourceStrongbox" layoutX="290.0" layoutY="450.0" editable="false" text="Strongbox:" styleClass="resourcesText" stylesheets="@../css/text.css" visible="false" />
+      <TextField fx:id="fourthResourceDepot" layoutX="670.0" layoutY="400.0" editable="false" text="Depot:" styleClass="resourcesText" stylesheets="@../css/text.css" visible="false" />
+      <TextField fx:id="fourthResourceStrongbox" layoutX="670.0" layoutY="450.0" editable="false" text="Strongbox:" styleClass="resourcesText" stylesheets="@../css/text.css" visible="false" />
+      <TextField fx:id="firstResourceExtra" layoutX="290.0" layoutY="280.0" editable="false" text="Extra Depot:" styleClass="resourcesText" stylesheets="@../css/text.css" visible="false" />
+      <TextField fx:id="secondResourceExtra" layoutX="670.0" layoutY="280.0" editable="false" text="Extra Depot:" styleClass="resourcesText" stylesheets="@../css/text.css" visible="false" />
+      <TextField fx:id="thirdResourceExtra" layoutX="290.0" layoutY="500.0" editable="false" text="Extra Depot:" styleClass="resourcesText" stylesheets="@../css/text.css" visible="false" />
+      <TextField fx:id="fourthResourceExtra" layoutX="670.0" layoutY="500.0" editable="false" text="Extra Depot:" styleClass="resourcesText" stylesheets="@../css/text.css" visible="false" />
       <Button fx:id="minusFirstResourceDepot" alignment="CENTER" contentDisplay="CENTER" layoutX="410.0" layoutY="190.0" mnemonicParsing="false" onAction="#minusFirstResourceFromDepot" prefHeight="46.0" prefWidth="46.0" styleClass="minusButton" stylesheets="@../css/button.css" visible="false" />
       <Button fx:id="minusFirstResourceStrongbox" layoutX="410.0" layoutY="240.0" mnemonicParsing="false" onAction="#minusFirstResourceFromStrongbox" prefHeight="46.0" prefWidth="46.0" styleClass="minusButton" stylesheets="@../css/button.css" visible="false" />
-      <Button fx:id="minusFirstResourceExtra" layoutX="470.0" layoutY="290.0" mnemonicParsing="false" onAction="#minusFirstResourceFromExtra" prefHeight="46.0" prefWidth="46.0" styleClass="minusButton" stylesheets="@../css/button.css" visible="false" />
+      <Button fx:id="minusFirstResourceExtra" layoutX="410.0" layoutY="290.0" mnemonicParsing="false" onAction="#minusFirstResourceFromExtra" prefHeight="46.0" prefWidth="46.0" styleClass="minusButton" stylesheets="@../css/button.css" visible="false" />
       <Button fx:id="plusFirstResourceDepot" layoutX="504.0" layoutY="190.0" mnemonicParsing="false" onAction="#plusFirstResourceFromDepot" prefHeight="46.0" prefWidth="46.0" styleClass="plusButton" stylesheets="@../css/button.css" visible="false" />
       <Button fx:id="plusFirstResourceStrongbox" layoutX="504.0" layoutY="240.0" mnemonicParsing="false" onAction="#plusFirstResourceFromStrongbox" prefHeight="46.0" prefWidth="46.0" styleClass="plusButton" stylesheets="@../css/button.css" visible="false" />
       <Button fx:id="plusFirstResourceExtra" layoutX="504.0" layoutY="290.0" mnemonicParsing="false" onAction="#plusFirstResourceFromExtra" prefHeight="46.0" prefWidth="46.0" styleClass="plusButton" stylesheets="@../css/button.css" visible="false" />
       <TextField fx:id="firstDepotOcc" alignment="CENTER" editable="false" layoutX="458.0" layoutY="194.0" mouseTransparent="true" prefHeight="35.0" prefWidth="44.0" styleClass="textFieldResources" stylesheets="@../css/text.css" text="0" visible="false" />
       <TextField fx:id="firstStrongboxOcc" alignment="CENTER" editable="false" layoutX="458.0" layoutY="244.0" mouseTransparent="true" prefHeight="35.0" prefWidth="44.0" styleClass="textFieldResources" stylesheets="@../css/text.css" text="0" visible="false" />
       <TextField fx:id="firstExtraOcc" alignment="CENTER" editable="false" layoutX="458.0" layoutY="294.0" mouseTransparent="true" prefHeight="35.0" prefWidth="44.0" styleClass="textFieldResources" stylesheets="@../css/text.css" text="0" visible="false" />
-      <Button fx:id="plusSecondResourceDepot" layoutX="898.0" layoutY="189.0" mnemonicParsing="false" onAction="#plusSecondResourceFromDepot" prefHeight="46.0" prefWidth="46.0" styleClass="plusButton" stylesheets="@../css/button.css" visible="false" />
-      <Button fx:id="plusSecondResourceExtra" layoutX="898.0" layoutY="289.0" mnemonicParsing="false" onAction="#plusSecondResourceFromExtra" prefHeight="46.0" prefWidth="46.0" styleClass="plusButton" stylesheets="@../css/button.css" visible="false" />
-      <Button fx:id="plusSecondResourceStrongbox" layoutX="898.0" layoutY="239.0" mnemonicParsing="false" onAction="#plusSecondResourceFromStrongbox" prefHeight="46.0" prefWidth="46.0" styleClass="plusButton" stylesheets="@../css/button.css" visible="false" />
-      <Button fx:id="minusSecondResourceStrongbox" layoutX="804.0" layoutY="239.0" mnemonicParsing="false" onAction="#minusSecondResourceFromStrongbox" prefHeight="46.0" prefWidth="46.0" styleClass="minusButton" stylesheets="@../css/button.css" visible="false" />
+      <Button fx:id="plusSecondResourceDepot" layoutX="898.0" layoutY="190.0" mnemonicParsing="false" onAction="#plusSecondResourceFromDepot" prefHeight="46.0" prefWidth="46.0" styleClass="plusButton" stylesheets="@../css/button.css" visible="false" />
+      <Button fx:id="plusSecondResourceExtra" layoutX="898.0" layoutY="290.0" mnemonicParsing="false" onAction="#plusSecondResourceFromExtra" prefHeight="46.0" prefWidth="46.0" styleClass="plusButton" stylesheets="@../css/button.css" visible="false" />
+      <Button fx:id="plusSecondResourceStrongbox" layoutX="898.0" layoutY="240.0" mnemonicParsing="false" onAction="#plusSecondResourceFromStrongbox" prefHeight="46.0" prefWidth="46.0" styleClass="plusButton" stylesheets="@../css/button.css" visible="false" />
+      <Button fx:id="minusSecondResourceStrongbox" layoutX="804.0" layoutY="240.0" mnemonicParsing="false" onAction="#minusSecondResourceFromStrongbox" prefHeight="46.0" prefWidth="46.0" styleClass="minusButton" stylesheets="@../css/button.css" visible="false" />
       <TextField fx:id="secondDepotOcc" alignment="CENTER" editable="false" layoutX="852.0" layoutY="193.0" mouseTransparent="true" prefHeight="35.0" prefWidth="44.0" styleClass="textFieldResources" stylesheets="@../css/text.css" text="0" visible="false" />
       <TextField fx:id="secondStrongboxOcc" alignment="CENTER" editable="false" layoutX="852.0" layoutY="243.0" mouseTransparent="true" prefHeight="35.0" prefWidth="44.0" styleClass="textFieldResources" stylesheets="@../css/text.css" text="0" visible="false" />
       <TextField fx:id="secondExtraOcc" alignment="CENTER" editable="false" layoutX="852.0" layoutY="293.0" mouseTransparent="true" prefHeight="35.0" prefWidth="44.0" styleClass="textFieldResources" stylesheets="@../css/text.css" text="0" visible="false" />
-      <Button fx:id="minusSecondResourceExtra" layoutX="804.0" layoutY="289.0" mnemonicParsing="false" onAction="#minusSecondResourceFromExtra" prefHeight="46.0" prefWidth="46.0" styleClass="minusButton" stylesheets="@../css/button.css" visible="false" />
-      <Button fx:id="minusSecondResourceDepot" layoutX="804.0" layoutY="189.0" mnemonicParsing="false" onAction="#minusSecondResourceFromDepot" prefHeight="46.0" prefWidth="46.0" styleClass="minusButton" stylesheets="@../css/button.css" visible="false" />
+      <Button fx:id="minusSecondResourceExtra" layoutX="804.0" layoutY="290.0" mnemonicParsing="false" onAction="#minusSecondResourceFromExtra" prefHeight="46.0" prefWidth="46.0" styleClass="minusButton" stylesheets="@../css/button.css" visible="false" />
+      <Button fx:id="minusSecondResourceDepot" layoutX="804.0" layoutY="190.0" mnemonicParsing="false" onAction="#minusSecondResourceFromDepot" prefHeight="46.0" prefWidth="46.0" styleClass="minusButton" stylesheets="@../css/button.css" visible="false" />
       <TextField fx:id="thirdStrongboxOcc" alignment="CENTER" editable="false" layoutX="458.0" layoutY="454.0" mouseTransparent="true" prefHeight="35.0" prefWidth="44.0" styleClass="textFieldResources" stylesheets="@../css/text.css" text="0" visible="false" />
       <Button fx:id="minusThirdResourceDepot" layoutX="410.0" layoutY="400.0" mnemonicParsing="false" onAction="#minusThirdResourceFromDepot" prefHeight="46.0" prefWidth="46.0" styleClass="minusButton" stylesheets="@../css/button.css" visible="false" />
       <TextField fx:id="thirdDepotOcc" alignment="CENTER" editable="false" layoutX="458.0" layoutY="404.0" mouseTransparent="true" prefHeight="35.0" prefWidth="44.0" styleClass="textFieldResources" stylesheets="@../css/text.css" text="0" visible="false" />
@@ -119,6 +118,5 @@
       </ImageView>
       <ImageView fx:id="fourthResourceImage" fitHeight="60.0" fitWidth="60.0" layoutX="223.0" layoutY="405.0" pickOnBounds="true" preserveRatio="true" visible="false">
       </ImageView>
-
     </children>
 </AnchorPane>

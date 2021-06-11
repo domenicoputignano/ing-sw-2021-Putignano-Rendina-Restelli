@@ -70,7 +70,6 @@ public class Gui extends UI{
 
     @Override
     public void render(GameResumedMessage message) {
-
     }
 
     @Override
@@ -108,13 +107,12 @@ public class Gui extends UI{
 
     @Override
     public void render(TakeResourcesFromMarketUpdate message) {
-        if(isReceiverAction(message.getUser())){
+        if(isReceiverAction(message.getUser())) {
             Platform.runLater(() -> {
                 GUIApp.showScene("/gui/FXML/PlayerBoard.fxml");
                 GUIApp.controller.showTakeResourcesFromMarketUpdate();
                 ((TakeResPopupController)GUIApp.controller).setImages(message);
             });
-
         }
     }
 
