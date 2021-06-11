@@ -15,7 +15,8 @@
             <children>
                 <Button fx:id="exitButton" layoutX="892.0" layoutY="49.0" mnemonicParsing="false" onAction="#exit" prefHeight="55.0" prefWidth="55.0" styleClass="button, exit" stylesheets="@../css/button.css" />
                 <Button fx:id="infoButton" layoutX="837.0" layoutY="49.0" mnemonicParsing="false" onAction="#info" prefHeight="55.0" prefWidth="55.0" styleClass="button, info" stylesheets="@../css/button.css" />
-            </children></AnchorPane>
+            </children>
+        </AnchorPane>
     </top>
     <center>
         <AnchorPane fx:id="center" prefHeight="470.0" prefWidth="950.0" BorderPane.alignment="CENTER">
@@ -93,7 +94,6 @@
             <ImageView fx:id="topCard1" fitHeight="195.0" fitWidth="127.0" layoutX="292.0" layoutY="247.0" pickOnBounds="true" preserveRatio="true" />
             <ImageView fx:id="topCard2" fitHeight="195.0" fitWidth="127.0" layoutX="432.0" layoutY="247.0" pickOnBounds="true" preserveRatio="true" />
             <ImageView fx:id="topCard3" fitHeight="195.0" fitWidth="127.0" layoutX="578.0" layoutY="247.0" pickOnBounds="true" preserveRatio="true" />
-            </children>
             <HBox fx:id="strongboxResources" alignment="CENTER" layoutX="33.0" layoutY="406.0" prefHeight="94.0" prefWidth="126.0" visible="false">
                 <children>
                     <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0">
@@ -130,6 +130,7 @@
             <Text fx:id="numShieldStrongbox" layoutX="48.0" layoutY="488.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" wrappingWidth="30.13671875" />
             <Text fx:id="numServantStrongbox" fill="WHITE" layoutX="114.0" layoutY="440.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" wrappingWidth="30.13671875" />
             <Text fx:id="numStoneStrongbox" layoutX="114.0" layoutY="485.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" wrappingWidth="30.13671875" />
+            </children>
         </AnchorPane>
     </center>
     <bottom>

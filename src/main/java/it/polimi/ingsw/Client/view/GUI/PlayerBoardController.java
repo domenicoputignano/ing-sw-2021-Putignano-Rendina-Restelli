@@ -1,5 +1,6 @@
 package it.polimi.ingsw.Client.view.GUI;
 
+import it.polimi.ingsw.Client.reducedmodel.ReducedPlayer;
 import it.polimi.ingsw.Client.reducedmodel.ReducedSoloMode;
 import it.polimi.ingsw.Client.reducedmodel.ReducedStrongbox;
 import it.polimi.ingsw.Commons.ResourceType;
@@ -60,6 +61,8 @@ public class PlayerBoardController extends Controller {
     @FXML
     Text numCoinStrongbox, numServantStrongbox, numShieldStrongbox, numStoneStrongbox;
 
+    ReducedPlayer playerToShow;
+
     public void initialize() {
         super.initialize();
 
@@ -84,11 +87,11 @@ public class PlayerBoardController extends Controller {
         moveAction.setStyle("-fx-text-fill: rgb(35, 25, 22);");
 
         this.client = GUIApp.client;
-
-        if(client.getGame().getPlayer(client.getUser()).getNumOfLeaderCards() > 0)
+        initializePersonalBoard(client.getGame().getPlayer(client.getUser()));
+        if(playerToShow.getNumOfLeaderCards() > 0)
             leaderCard1.setImage(new Image(client.getGame().getPlayer(client.getUser()).getAvailableLeaderCards().get(0).toImage()));
 
-        if(client.getGame().getPlayer(client.getUser()).getNumOfLeaderCards() > 1)
+        if(playerToShow.getNumOfLeaderCards() > 1)
             leaderCard2.setImage(new Image(client.getGame().getPlayer(client.getUser()).getAvailableLeaderCards().get(1).toImage()));
         strongboxResources.setVisible(true);
         initializeCells();
@@ -98,10 +101,11 @@ public class PlayerBoardController extends Controller {
             initializeFaithTrackWithBlackCross();
         else
             initializeFaithMarker();
-        initializeSlots();
+        setAvailableActions();
+        initializeSlots();/*
         if(!client.getUI().hasDoneNormalAction())
             endTurn.setVisible(false);
-        else endTurn.setVisible(true);
+        else endTurn.setVisible(true);*/
     }
 
     private void initializeCells()
@@ -142,19 +146,19 @@ public class PlayerBoardController extends Controller {
 
     private void initializeSlots()
     {
-        if(!client.getGame().getPlayer(client.getUser()).getPersonalBoard().isEmptySlot(0)){
-            topCard1.setImage(new Image(client.getGame().getPlayer(client.getUser()).getPersonalBoard().peekTopCardInSlot(0).toImage()));
-            if(client.getGame().getPlayer(client.getUser()).getPersonalBoard().getSlot(0).getNumOfStackedCards()>1)
+        if(!playerToShow.getPersonalBoard().isEmptySlot(0)){
+            topCard1.setImage(new Image(playerToShow.getPersonalBoard().peekTopCardInSlot(0).toImage()));
+            if(playerToShow.getPersonalBoard().getSlot(0).getNumOfStackedCards()>1)
                 bgSlots1.setVisible(true);
         }
-        if(!client.getGame().getPlayer(client.getUser()).getPersonalBoard().isEmptySlot(1)){
-            topCard2.setImage(new Image(client.getGame().getPlayer(client.getUser()).getPersonalBoard().peekTopCardInSlot(1).toImage()));
-            if(client.getGame().getPlayer(client.getUser()).getPersonalBoard().getSlot(1).getNumOfStackedCards()>1)
+        if(!playerToShow.getPersonalBoard().isEmptySlot(1)){
+            topCard2.setImage(new Image(playerToShow.getPersonalBoard().peekTopCardInSlot(1).toImage()));
+            if(playerToShow.getPersonalBoard().getSlot(1).getNumOfStackedCards()>1)
                 bgSlots2.setVisible(true);
         }
-        if(!client.getGame().getPlayer(client.getUser()).getPersonalBoard().isEmptySlot(2)){
-            topCard3.setImage(new Image(client.getGame().getPlayer(client.getUser()).getPersonalBoard().peekTopCardInSlot(2).toImage()));
-            if(client.getGame().getPlayer(client.getUser()).getPersonalBoard().getSlot(2).getNumOfStackedCards()>1)
+        if(!playerToShow.getPersonalBoard().isEmptySlot(2)){
+            topCard3.setImage(new Image(playerToShow.getPersonalBoard().peekTopCardInSlot(2).toImage()));
+            if(playerToShow.getPersonalBoard().getSlot(2).getNumOfStackedCards()>1)
                 bgSlots3.setVisible(true);
         }
     }
@@ -162,7 +166,7 @@ public class PlayerBoardController extends Controller {
     private void initializeFaithTrackWithBlackCross()
     {
         clearFaithMarker();
-        int faith = client.getGame().getPlayer(client.getUser()).getPersonalBoard().getFaithTrack().getFaithMarker();
+        int faith = playerToShow.getPersonalBoard().getFaithTrack().getFaithMarker();
         int blackCross = ((ReducedSoloMode) client.getGame()).getBlackCross();
         if(faith == blackCross)
             cells[faith].setImage(new Image("/gui/img/blackCross&Faith.png"));
@@ -174,7 +178,7 @@ public class PlayerBoardController extends Controller {
     private void initializeFaithMarker()
     {
         clearFaithMarker();
-        cells[client.getGame().getPlayer(client.getUser()).getPersonalBoard().getFaithTrack().getFaithMarker()].setImage(new Image("/gui/img/faith.png"));
+        cells[playerToShow.getPersonalBoard().getFaithTrack().getFaithMarker()].setImage(new Image("/gui/img/faith.png"));
     }
 
     private void clearFaithMarker()
@@ -186,43 +190,33 @@ public class PlayerBoardController extends Controller {
     private void initializeDepots(){
 
         // SETUP DEPOT 1
-        if(client.getGame().getPlayer(client.getUser()).getPersonalBoard().getWarehouse().getNormalDepots()[0].getOcc()==1){
-            loadImageResource(depot1, client.getGame().getPlayer(client.getUser()).
-                    getPersonalBoard().getWarehouse().getNormalDepots()[0].getType());
+        if(playerToShow.getPersonalBoard().getWarehouse().getNormalDepots()[0].getOcc()==1){
+            loadImageResource(depot1, playerToShow.getPersonalBoard().getWarehouse().getNormalDepots()[0].getType());
         }
 
         // SETUP DEPOT 2
-        if(client.getGame().getPlayer(client.getUser()).getPersonalBoard().getWarehouse().getNormalDepots()[1].getOcc()==2){
-            loadImageResource(depot21, client.getGame().getPlayer(client.getUser()).
-                    getPersonalBoard().getWarehouse().getNormalDepots()[1].getType());
-            loadImageResource(depot22, client.getGame().getPlayer(client.getUser()).
-                    getPersonalBoard().getWarehouse().getNormalDepots()[1].getType());
-        } else if(client.getGame().getPlayer(client.getUser()).getPersonalBoard().getWarehouse().getNormalDepots()[1].getOcc()==1){
-            loadImageResource(depot21, client.getGame().getPlayer(client.getUser()).
-                    getPersonalBoard().getWarehouse().getNormalDepots()[1].getType());
+        if(playerToShow.getPersonalBoard().getWarehouse().getNormalDepots()[1].getOcc()==2){
+            loadImageResource(depot21, playerToShow.getPersonalBoard().getWarehouse().getNormalDepots()[1].getType());
+            loadImageResource(depot22, playerToShow.getPersonalBoard().getWarehouse().getNormalDepots()[1].getType());
+        } else if(playerToShow.getPersonalBoard().getWarehouse().getNormalDepots()[1].getOcc()==1){
+            loadImageResource(depot21, playerToShow.getPersonalBoard().getWarehouse().getNormalDepots()[1].getType());
         }
 
         // SETUP DEPOT 3
-        if(client.getGame().getPlayer(client.getUser()).getPersonalBoard().getWarehouse().getNormalDepots()[2].getOcc()==3){
-            loadImageResource(depot31, client.getGame().getPlayer(client.getUser()).
-                    getPersonalBoard().getWarehouse().getNormalDepots()[2].getType());
-            loadImageResource(depot32, client.getGame().getPlayer(client.getUser()).
-                    getPersonalBoard().getWarehouse().getNormalDepots()[2].getType());
-            loadImageResource(depot33, client.getGame().getPlayer(client.getUser()).
-                    getPersonalBoard().getWarehouse().getNormalDepots()[2].getType());
-        } else if(client.getGame().getPlayer(client.getUser()).getPersonalBoard().getWarehouse().getNormalDepots()[2].getOcc()==2){
-            loadImageResource(depot31, client.getGame().getPlayer(client.getUser()).
-                    getPersonalBoard().getWarehouse().getNormalDepots()[2].getType());
-            loadImageResource(depot32, client.getGame().getPlayer(client.getUser()).
-                    getPersonalBoard().getWarehouse().getNormalDepots()[2].getType());
-        } else if(client.getGame().getPlayer(client.getUser()).getPersonalBoard().getWarehouse().getNormalDepots()[2].getOcc()==1){
-            loadImageResource(depot31, client.getGame().getPlayer(client.getUser()).
-                    getPersonalBoard().getWarehouse().getNormalDepots()[2].getType());
+        if(playerToShow.getPersonalBoard().getWarehouse().getNormalDepots()[2].getOcc()==3){
+            loadImageResource(depot31, playerToShow.getPersonalBoard().getWarehouse().getNormalDepots()[2].getType());
+            loadImageResource(depot32, playerToShow.getPersonalBoard().getWarehouse().getNormalDepots()[2].getType());
+            loadImageResource(depot33, playerToShow.getPersonalBoard().getWarehouse().getNormalDepots()[2].getType());
+        } else if(playerToShow.getPersonalBoard().getWarehouse().getNormalDepots()[2].getOcc()==2){
+            loadImageResource(depot31, playerToShow.getPersonalBoard().getWarehouse().getNormalDepots()[2].getType());
+            loadImageResource(depot32, playerToShow.getPersonalBoard().getWarehouse().getNormalDepots()[2].getType());
+        } else if(playerToShow.getPersonalBoard().getWarehouse().getNormalDepots()[2].getOcc()==1){
+            loadImageResource(depot31, playerToShow.getPersonalBoard().getWarehouse().getNormalDepots()[2].getType());
         }
     }
 
     private void initializeStrongbox() {
-        ReducedStrongbox strongbox = client.getGame().getPlayer(client.getUser()).getPersonalBoard().getWarehouse().getStrongbox();
+        ReducedStrongbox strongbox = playerToShow.getPersonalBoard().getWarehouse().getStrongbox();
         numCoinStrongbox.setText(""+strongbox.getOccurrencesOfResource(ResourceType.coin));
         numServantStrongbox.setText(""+strongbox.getOccurrencesOfResource(ResourceType.servant));
         numShieldStrongbox.setText(""+strongbox.getOccurrencesOfResource(ResourceType.shield));
@@ -295,4 +289,21 @@ public class PlayerBoardController extends Controller {
         alertUpdate.setContentText("You correctly performed you action: \n" + "You got " + update.getEarnedResources());
         alertUpdate.show();
     }
+
+    public void initializePersonalBoard(ReducedPlayer player) {
+        this.playerToShow = player;
+    }
+
+    private void setAvailableActions() {
+        if(!client.getGame().getCurrPlayer().equals(playerToShow)) {
+            moveAction.setVisible(false);
+            chooseAction.setVisible(false);
+            endTurn.setVisible(false);
+        } else {
+            endTurn.setVisible(!client.getUI().hasDoneNormalAction());
+            moveAction.setVisible(true);
+            chooseAction.setVisible(true);
+        }
+    }
+
 }

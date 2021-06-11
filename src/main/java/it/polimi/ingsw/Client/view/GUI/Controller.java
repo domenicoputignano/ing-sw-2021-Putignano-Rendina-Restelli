@@ -148,6 +148,7 @@ public class Controller {
         Font fontText = Font.loadFont(getClass().getResourceAsStream("/gui/font/Enchanted-Land.otf"),dim);
         text.setFont(fontText);
     }
+
     public void setFont(Label label, int dim){
         Font fontText = Font.loadFont(getClass().getResourceAsStream("/gui/font/Enchanted-Land.otf"),dim);
         label.setFont(fontText);
