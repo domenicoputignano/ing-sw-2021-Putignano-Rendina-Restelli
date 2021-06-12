@@ -251,7 +251,7 @@ public class MoveActionController extends Controller{
     private void sendFromExtraToNormalMessage()
     {
         MoveResourcesMessage messageToSend = new MoveResourcesMessage();
-        messageToSend.setMoveAction(new MoveFromExtraToNormalAction(extraDepotIndexDestination,occ,normalDepotIndexDestination));
+        messageToSend.setMoveAction(new MoveFromExtraToNormalAction(extraDepotIndexSource, occ, normalDepotIndexDestination));
         state.setMessage(messageToSend);
         state.manageUserInteraction();
         handleCloseMoveAction();
@@ -274,7 +274,6 @@ public class MoveActionController extends Controller{
                 sendFromNormalToNormalMessage();
             else if(isExtraToNormal){
                 setOccExtraToNormal();
-                sendFromExtraToNormalMessage();
             }
         }
     }
@@ -295,7 +294,6 @@ public class MoveActionController extends Controller{
                 sendFromNormalToNormalMessage();
             else if(isExtraToNormal){
                 setOccExtraToNormal();
-                sendFromExtraToNormalMessage();
             }
         }
     }
@@ -316,7 +314,6 @@ public class MoveActionController extends Controller{
                 sendFromNormalToNormalMessage();
             else if(isExtraToNormal){
                 setOccExtraToNormal();
-                sendFromExtraToNormalMessage();
             }
         }
     }
@@ -411,7 +408,10 @@ public class MoveActionController extends Controller{
             plusResourceExtra.setVisible(true);
             depotExtraOcc.setVisible(true);
             okButtonExtraDepotOcc.setVisible(true);
-        } else this.occ = 1;
+        } else {
+            this.occ = 1;
+            sendFromExtraToNormalMessage();
+        }
     }
 
     @FXML
@@ -425,7 +425,6 @@ public class MoveActionController extends Controller{
         else{
             extraDepotIndexDestination = 1;
             setOccFromNormalToExtra();
-            sendFromNormalToExtraMessage();
         }
     }
     @FXML
@@ -439,7 +438,6 @@ public class MoveActionController extends Controller{
         else{
             extraDepotIndexDestination = 2;
             setOccFromNormalToExtra();
-            sendFromNormalToExtraMessage();
         }
     }
 
@@ -452,9 +450,10 @@ public class MoveActionController extends Controller{
             plusResourceExtra.setVisible(true);
             depotExtraOcc.setVisible(true);
             okButtonExtraDepotOcc.setVisible(true);
-            // TODO rendere visibile minus e plus buttons per la scelta delle occorrenze
+        } else {
+            this.occ = 1;
+            sendFromNormalToExtraMessage();
         }
-        else this.occ = 1;
     }
 
     @FXML
