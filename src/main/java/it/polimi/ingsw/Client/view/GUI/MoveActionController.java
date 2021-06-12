@@ -37,6 +37,9 @@ public class MoveActionController extends Controller{
     public ImageView res1Depot1, res1Depot2, res2Depot2, res1Depot3, res2Depot3, res3Depot3;
 
     @FXML
+    public ImageView resourceExtraDepot1, resourceExtraDepot2, extraDepotPot1, extraDepotPot2;
+
+    @FXML
     public Text extraDepotsText;
 
     @FXML
@@ -46,7 +49,7 @@ public class MoveActionController extends Controller{
     public Button minusResourceExtra,plusResourceExtra,okButtonExtraDepotOcc;
 
     boolean sourceAlreadySelected = false,isNormalToNormal = false,isExtraToNormal = false,isNormalToExtra = false;
-    private int normalDepotIndexSource,normalDepotIndexDestination,extraDepotIndexDestination;
+    private int normalDepotIndexSource,normalDepotIndexDestination, extraDepotIndexSource, extraDepotIndexDestination;
     private int occ=1;
 
     private MoveResourcesGUI state;
@@ -55,6 +58,7 @@ public class MoveActionController extends Controller{
     @Override
     public void initialize() {
         this.client = GUIApp.client;
+        state = new MoveResourcesGUI(this.client);
 
         anchorMoveAction.setBackground(new Background(new BackgroundImage(new Image("/gui/img/exit_tab.png"),
                 BackgroundRepeat.NO_REPEAT,
@@ -84,7 +88,6 @@ public class MoveActionController extends Controller{
         resExtraDepot1.setVisible(false);
         resExtraDepot2.setVisible(false);
         initializeDepots();
-        state = new MoveResourcesGUI(this.client);
     }
 
     private void initializeDepots(){
@@ -122,6 +125,24 @@ public class MoveActionController extends Controller{
         } else if(client.getGame().getPlayer(client.getUser()).getPersonalBoard().getWarehouse().getNormalDepots()[2].getOcc()==1){
             loadImageResource(res1Depot3, client.getGame().getPlayer(client.getUser()).
                     getPersonalBoard().getWarehouse().getNormalDepots()[2].getType());
+        }
+
+        if(state.getNumOfExtraDepots() > 0){
+            extraDepotPot1.setVisible(true);
+            resourceExtraDepot1.setImage(new Image(ResourceLocator.retrieveResourceTypeImage(client.getGame()
+                    .getPlayer(client.getUser()).getPersonalBoard().getWarehouse().
+                            getExtraDepots()[0].getType())));
+            resourceExtraDepot1.setVisible(true);
+            fromNormalToExtra.setVisible(true);
+            fromExtraToNormal.setVisible(true);
+        }
+
+        if(state.getNumOfExtraDepots() > 1){
+            extraDepotPot2.setVisible(true);
+            resourceExtraDepot2.setImage(new Image(ResourceLocator.retrieveResourceTypeImage(client.getGame()
+                    .getPlayer(client.getUser()).getPersonalBoard().getWarehouse().
+                            getExtraDepots()[1].getType())));
+            resourceExtraDepot2.setVisible(true);
         }
 
     }
@@ -178,8 +199,10 @@ public class MoveActionController extends Controller{
 
     private boolean hasExtraDepotOfType(int depot)
     {
-        ResourceType typeToSearch = client.getGame().getPlayer(client.getUser()).getPersonalBoard().getWarehouse().getNormalDepots()[depot-1].getType();
-        return Arrays.stream(client.getGame().getPlayer(client.getUser()).getPersonalBoard().getWarehouse().getExtraDepots()).anyMatch(x->x!=null && x.getType() == typeToSearch);
+        ResourceType typeToSearch = client.getGame().getPlayer(client.getUser()).
+                getPersonalBoard().getWarehouse().getNormalDepots()[depot-1].getType();
+        return Arrays.stream(client.getGame().getPlayer(client.getUser()).
+                getPersonalBoard().getWarehouse().getExtraDepots()).anyMatch(x->x!=null && x.getType() == typeToSearch);
     }
 
     @FXML
@@ -189,10 +212,24 @@ public class MoveActionController extends Controller{
         fromNormalToExtra.setVisible(false);
         fromNormalToNormal.setVisible(false);
         fromExtraToNormal.setVisible(false);
-        depot1.setVisible(true);
-        depot2.setVisible(true);
-        depot3.setVisible(true);
-        isExtraToNormal = false;
+
+        if(state.getNumOfExtraDepots() > 0 && hasNormalDepotOfType(1)){
+            resExtraDepot1.setVisible(true);
+            resExtraDepot1.setStyle("-fx-background-color: #e7f3ef;");
+        }
+        if(state.getNumOfExtraDepots() > 1 && hasNormalDepotOfType(2)){
+            resExtraDepot2.setVisible(true);
+            resExtraDepot2.setStyle("-fx-background-color: #e7f3ef;");
+        }
+
+        isExtraToNormal = true;
+    }
+
+    private boolean hasNormalDepotOfType(int extraDepot){
+        ResourceType typeToSearch = client.getGame().getPlayer(client.getUser()).
+                getPersonalBoard().getWarehouse().getExtraDepots()[extraDepot-1].getType();
+        return Arrays.stream(client.getGame().getPlayer(client.getUser()).
+                getPersonalBoard().getWarehouse().getNormalDepots()).anyMatch(x -> x.getType() == null || x.getType() == typeToSearch);
     }
 
     private void sendFromNormalToNormalMessage()
@@ -233,7 +270,12 @@ public class MoveActionController extends Controller{
         }
         else{
             normalDepotIndexDestination = 1;
-            sendFromNormalToNormalMessage();
+            if(isNormalToNormal)
+                sendFromNormalToNormalMessage();
+            else if(isExtraToNormal){
+                setOccExtraToNormal();
+                sendFromExtraToNormalMessage();
+            }
         }
     }
     @FXML
@@ -249,7 +291,12 @@ public class MoveActionController extends Controller{
         }
         else{
             normalDepotIndexDestination = 2;
-            sendFromNormalToNormalMessage();
+            if(isNormalToNormal)
+                sendFromNormalToNormalMessage();
+            else if(isExtraToNormal){
+                setOccExtraToNormal();
+                sendFromExtraToNormalMessage();
+            }
         }
     }
     @FXML
@@ -265,7 +312,12 @@ public class MoveActionController extends Controller{
         }
         else{
             normalDepotIndexDestination = 3;
-            sendFromNormalToNormalMessage();
+            if(isNormalToNormal)
+                sendFromNormalToNormalMessage();
+            else if(isExtraToNormal){
+                setOccExtraToNormal();
+                sendFromExtraToNormalMessage();
+            }
         }
     }
     private void nextStepSelectedSourceNormalToNormal()
@@ -300,7 +352,8 @@ public class MoveActionController extends Controller{
         depot1.setVisible(false);
         depot2.setVisible(false);
         depot3.setVisible(false);
-        ResourceType resourceSelectedSource = client.getGame().getPlayer(client.getUser()).getPersonalBoard().getWarehouse().getNormalDepots()[normalDepotIndexSource].getType();
+        ResourceType resourceSelectedSource = client.getGame().getPlayer(client.getUser()).
+                getPersonalBoard().getWarehouse().getNormalDepots()[normalDepotIndexSource-1].getType();
         if (state.getNumOfExtraDepots() > 0) {
             ReducedDepot extraDepot = client.getGame().getPlayer(client.getUser()).getPersonalBoard().getWarehouse().getExtraDepots()[0];
             if (extraDepot.getType() == resourceSelectedSource && extraDepot.getOcc() < 2) {
@@ -316,12 +369,58 @@ public class MoveActionController extends Controller{
             }
         }
     }
+
+    private void nextStepSelectedSourceExtraToNormal() {
+        sourceAlreadySelected = true;
+        typeOfMoveText.setText("Select the normal depot destination!");
+        ResourceType resourceToSearch = client.getGame().getPlayer(client.getUser()).
+                getPersonalBoard().getWarehouse().getExtraDepots()[extraDepotIndexSource-1].getType();
+
+        ReducedDepot normalDepot = client.getGame().getPlayer(client.getUser()).getPersonalBoard().getWarehouse().getNormalDepots()[0];
+        if(normalDepot.getType() == null || normalDepot.getType() == resourceToSearch){
+            if(normalDepot.getOcc() < normalDepot.getSize()){
+                depot1.setVisible(true);
+                depot1.setStyle("-fx-background-color: #e7f3ef;");
+            }
+        }
+
+        normalDepot = client.getGame().getPlayer(client.getUser()).getPersonalBoard().getWarehouse().getNormalDepots()[1];
+        if(normalDepot.getType() == null || normalDepot.getType() == resourceToSearch){
+            if(normalDepot.getOcc() < normalDepot.getSize()) {
+                depot2.setVisible(true);
+                depot2.setStyle("-fx-background-color: #e7f3ef;");
+            }
+        }
+
+        normalDepot = client.getGame().getPlayer(client.getUser()).getPersonalBoard().getWarehouse().getNormalDepots()[2];
+        if(normalDepot.getType() == null || normalDepot.getType() == resourceToSearch){
+            if(normalDepot.getOcc() < normalDepot.getSize()){
+                depot3.setVisible(true);
+                depot3.setStyle("-fx-background-color: #e7f3ef;");
+            }
+        }
+    }
+
+    private void setOccExtraToNormal(){
+        ReducedDepot extraDepotSource = client.getGame().getPlayer(client.getUser()).
+                getPersonalBoard().getWarehouse().getExtraDepots()[extraDepotIndexSource-1];
+
+        if(extraDepotSource.getOcc() > 1){
+            typeOfMoveText.setText("How many resources do you want to move?");
+            minusResourceExtra.setVisible(true);
+            plusResourceExtra.setVisible(true);
+            depotExtraOcc.setVisible(true);
+            okButtonExtraDepotOcc.setVisible(true);
+        } else this.occ = 1;
+    }
+
     @FXML
     public void handleExtraDepot1()
     {
         if(!sourceAlreadySelected)
         {
-
+            extraDepotIndexSource = 1;
+            nextStepSelectedSourceExtraToNormal();
         }
         else{
             extraDepotIndexDestination = 1;
@@ -334,7 +433,8 @@ public class MoveActionController extends Controller{
     {
         if(!sourceAlreadySelected)
         {
-
+            extraDepotIndexSource = 2;
+            nextStepSelectedSourceExtraToNormal();
         }
         else{
             extraDepotIndexDestination = 2;
@@ -345,13 +445,13 @@ public class MoveActionController extends Controller{
 
     private void setOccFromNormalToExtra(){
         ReducedDepot normalDepotSource = client.getGame().getPlayer(client.getUser()).getPersonalBoard().getWarehouse().getNormalDepots()[normalDepotIndexSource-1];
-        ReducedDepot extraDepotDestination = client.getGame().getPlayer(client.getUser()).getPersonalBoard().getWarehouse().getExtraDepots()[extraDepotIndexDestination-1];
 
         if(normalDepotSource.getOcc() > 1){
             typeOfMoveText.setText("How many resources do you want to move?");
             minusResourceExtra.setVisible(true);
             plusResourceExtra.setVisible(true);
             depotExtraOcc.setVisible(true);
+            okButtonExtraDepotOcc.setVisible(true);
             // TODO rendere visibile minus e plus buttons per la scelta delle occorrenze
         }
         else this.occ = 1;
@@ -370,14 +470,25 @@ public class MoveActionController extends Controller{
     @FXML
     public void plusDepotOcc()
     {
-        ReducedDepot normalDepotSource = client.getGame().getPlayer(client.getUser()).getPersonalBoard().getWarehouse().getNormalDepots()[normalDepotIndexSource-1];
-        ReducedDepot extraDepotDestination = client.getGame().getPlayer(client.getUser()).getPersonalBoard().getWarehouse().getExtraDepots()[extraDepotIndexDestination-1];
+        if(isNormalToExtra){
+            ReducedDepot normalDepotSource = client.getGame().getPlayer(client.getUser()).getPersonalBoard().getWarehouse().getNormalDepots()[normalDepotIndexSource-1];
+            ReducedDepot extraDepotDestination = client.getGame().getPlayer(client.getUser()).getPersonalBoard().getWarehouse().getExtraDepots()[extraDepotIndexDestination-1];
 
-        if(occ == 1 && normalDepotSource.getOcc()>1 && extraDepotDestination.getOcc() == 0)
-        {
-            occ++;
-            depotExtraOcc.setText("" + occ);
+            if(occ == 1 && normalDepotSource.getOcc()>1 && extraDepotDestination.getOcc() == 0)
+            {
+                occ++;
+                depotExtraOcc.setText("" + occ);
+            }
+        } else if(isExtraToNormal){
+            ReducedDepot extraDepotSource = client.getGame().getPlayer(client.getUser()).getPersonalBoard().getWarehouse().getExtraDepots()[extraDepotIndexSource-1];
+            ReducedDepot normalDepotDestination = client.getGame().getPlayer(client.getUser()).getPersonalBoard().getWarehouse().getNormalDepots()[normalDepotIndexDestination-1];
+
+            if(occ == 1 && extraDepotSource.getOcc()>1 && (normalDepotDestination.getSize()-normalDepotDestination.getOcc())>1){
+                occ++;
+                depotExtraOcc.setText("" + occ);
+            }
         }
+
     }
 
     @FXML
@@ -385,8 +496,7 @@ public class MoveActionController extends Controller{
     {
         if(isNormalToExtra)
             sendFromNormalToExtraMessage();
-        else
-            if(isExtraToNormal)
+        else if(isExtraToNormal)
                 sendFromExtraToNormalMessage();
     }
 }

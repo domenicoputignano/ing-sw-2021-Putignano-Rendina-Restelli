@@ -15,25 +15,19 @@
             </image>
         </ImageView>
         <Text fx:id="moveActionText" layoutX="514.0" layoutY="122.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Move Action" />
-      <ImageView fitHeight="93.0" fitWidth="217.0" layoutX="731.0" layoutY="415.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="extraDepotPot1" fitHeight="93.0" fitWidth="217.0" layoutX="731.0" layoutY="415.0" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
             <Image url="@../img/extraDepot.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="93.0" fitWidth="217.0" layoutX="731.0" layoutY="528.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="extraDepotPot2"  fitHeight="93.0" fitWidth="217.0" layoutX="731.0" layoutY="528.0" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
             <Image url="@../img/extraDepot.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="78.0" fitWidth="79.0" layoutX="628.0" layoutY="423.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../img/resources/coin.png" />
-         </image>
+      <ImageView fx:id="resourceExtraDepot1" fitHeight="78.0" fitWidth="79.0" layoutX="628.0" layoutY="423.0" pickOnBounds="true" preserveRatio="true" visible="false">
       </ImageView>
-      <ImageView fitHeight="78.0" fitWidth="79.0" layoutX="628.0" layoutY="539.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../img/resources/servant.png" />
-         </image>
+      <ImageView fx:id="resourceExtraDepot2" fitHeight="78.0" fitWidth="79.0" layoutX="628.0" layoutY="539.0" pickOnBounds="true" preserveRatio="true" visible="false">
       </ImageView>
       <Text fx:id="extraDepotsText" layoutX="639.0" layoutY="378.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Extra Depots" />
       <ImageView fx:id="res1Depot1" fitHeight="74.0" fitWidth="75.0" layoutX="370.0" layoutY="215.0" pickOnBounds="true" preserveRatio="true" />
@@ -47,8 +41,8 @@
       <Button fx:id="depot3" layoutX="260.0" layoutY="406.0" mnemonicParsing="false" onAction="#handleDepot3" opacity="0.3" prefHeight="93.0" prefWidth="275.0" styleClass="resDepot" stylesheets="@../css/button.css" />
       <Text fx:id="typeOfMoveText" layoutX="601.0" layoutY="165.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Select what type of Move you want to make:" />
       <Button fx:id="fromNormalToNormal" layoutX="609.0" layoutY="177.0" mnemonicParsing="false" onAction="#handleNormaltoNormal" prefHeight="65.0" prefWidth="176.0" styleClass="okButton" stylesheets="@../css/button.css" text="Normal to Normal" />
-      <Button fx:id="fromNormalToExtra" layoutX="798.0" layoutY="177.0" mnemonicParsing="false" onAction="#handleNormaltoExtra" prefHeight="65.0" prefWidth="176.0" styleClass="okButton" stylesheets="@../css/button.css" text="Normal to Extra" />
-      <Button fx:id="fromExtraToNormal" layoutX="705.0" layoutY="257.0" mnemonicParsing="false" onAction="#handleExtratoNormal" prefHeight="65.0" prefWidth="176.0" styleClass="okButton" stylesheets="@../css/button.css" text="Extra to Normal" />
+      <Button fx:id="fromNormalToExtra" layoutX="798.0" layoutY="177.0" mnemonicParsing="false" onAction="#handleNormaltoExtra" prefHeight="65.0" prefWidth="176.0" styleClass="okButton" stylesheets="@../css/button.css" text="Normal to Extra" visible="false"/>
+      <Button fx:id="fromExtraToNormal" layoutX="705.0" layoutY="257.0" mnemonicParsing="false" onAction="#handleExtratoNormal" prefHeight="65.0" prefWidth="176.0" styleClass="okButton" stylesheets="@../css/button.css" text="Extra to Normal" visible="false"/>
       <Button fx:id="resExtraDepot1" layoutX="746.0" layoutY="428.0" mnemonicParsing="false" onAction="#handleExtraDepot1" prefHeight="65.0" prefWidth="170.0" styleClass="resDepot" stylesheets="@../css/button.css" />
       <Button fx:id="resExtraDepot2" layoutX="746.0" layoutY="542.0" mnemonicParsing="false" onAction="#handleExtraDepot1" prefHeight="65.0" prefWidth="170.0" styleClass="resDepot" stylesheets="@../css/button.css" />
       <TextField fx:id="depotExtraOcc" alignment="CENTER" editable="false" layoutX="746.0" layoutY="185.0" mouseTransparent="true" prefHeight="46.0" prefWidth="53.0" styleClass="textFieldResources" stylesheets="@../css/text.css" text="1" />
