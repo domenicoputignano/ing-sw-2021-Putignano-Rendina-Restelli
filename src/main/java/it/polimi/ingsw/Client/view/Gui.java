@@ -70,7 +70,7 @@ public class Gui extends UI{
 
     @Override
     public void render(GameResumedMessage message) {
-
+        Platform.runLater(() -> GUIApp.showScene("/gui/FXML/PlayerBoard.fxml"));
     }
 
     @Override

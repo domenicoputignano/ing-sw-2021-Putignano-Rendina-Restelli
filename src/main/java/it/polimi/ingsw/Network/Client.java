@@ -7,6 +7,7 @@ import it.polimi.ingsw.Client.view.Gui;
 import it.polimi.ingsw.Client.view.UI;
 import it.polimi.ingsw.Commons.User;
 import it.polimi.ingsw.Utils.Messages.ClientMessages.ClientMessage;
+import it.polimi.ingsw.Utils.Messages.ServerMessages.GameResumedMessage;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.ServerMessage;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.GameSetupMessage;
 import javafx.application.Application;
@@ -87,6 +88,11 @@ public class Client {
 
 
     public void setupGame(GameSetupMessage message) {
+        game = message.getGame();
+    }
+
+    public void setupGame(GameResumedMessage message) {
+        bindUser(message.getSavedUserInstance().getNickname());
         game = message.getGame();
     }
 

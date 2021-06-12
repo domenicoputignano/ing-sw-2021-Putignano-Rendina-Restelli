@@ -19,14 +19,14 @@
          </image>
       </ImageView>
       <Text fx:id="activateProdText" layoutX="370.0" layoutY="122.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Activate Production" />
-      <Button fx:id="slot1" layoutX="386.0" layoutY="250.0" mnemonicParsing="false" onAction="#handleFirstSlotSelection" prefHeight="239.0" prefWidth="156.0" styleClass="slotButton, button" stylesheets="@../css/button.css" />
-      <Button fx:id="slot2" layoutX="559.0" layoutY="250.0" mnemonicParsing="false" onAction="#handleSecondSlotSelection" prefHeight="239.0" prefWidth="156.0" styleClass="slotButton, button" stylesheets="@../css/button.css" />
-      <Button fx:id="slot3" layoutX="737.0" layoutY="250.0" mnemonicParsing="false" onAction="#handleThirdSlotSelection" prefHeight="239.0" prefWidth="156.0" styleClass="slotButton, button" stylesheets="@../css/button.css" />
+      <Button fx:id="slot1" layoutX="386.0" layoutY="250.0" mnemonicParsing="false" onAction="#handleFirstSlotSelection" prefHeight="239.0" prefWidth="156.0" styleClass="button, chooseLeaderCard" stylesheets="@../css/button.css" />
+      <Button fx:id="slot2" layoutX="559.0" layoutY="250.0" mnemonicParsing="false" onAction="#handleSecondSlotSelection" prefHeight="239.0" prefWidth="156.0" styleClass="button, chooseLeaderCard" stylesheets="@../css/button.css" />
+      <Button fx:id="slot3" layoutX="737.0" layoutY="250.0" mnemonicParsing="false" onAction="#handleThirdSlotSelection" prefHeight="239.0" prefWidth="156.0" styleClass="button, chooseLeaderCard" stylesheets="@../css/button.css" />
       <Button fx:id="basicProduction" layoutX="244.0" layoutY="378.0" mnemonicParsing="false" onAction="#handleBasicSelection" prefHeight="130.0" prefWidth="138.0" styleClass="basicProduction" stylesheets="@../css/button.css" />
       <HBox fx:id="extraProductions" alignment="CENTER" layoutX="387.0" layoutY="575.0" prefHeight="54.0" prefWidth="417.0" visible="false">
          <children>
-            <Button fx:id="firstExtraSlot" alignment="CENTER" mnemonicParsing="false" prefHeight="52.0" prefWidth="216.0" styleClass="slotButton" stylesheets="@../css/button.css" visible="false" />
-            <Button fx:id="secondExtraSlot" mnemonicParsing="false" prefHeight="52.0" prefWidth="216.0" styleClass="slotButton" stylesheets="@../css/button.css" visible="false" />
+            <Button fx:id="firstExtraSlot" onAction="#firstExtraProductionSelected" alignment="CENTER" mnemonicParsing="false" prefHeight="52.0" prefWidth="216.0" styleClass="button, chooseLeaderCard" stylesheets="@../css/button.css" visible="false" />
+            <Button fx:id="secondExtraSlot" onAction="#secondExtraProductionSelected" mnemonicParsing="false" prefHeight="52.0" prefWidth="216.0" styleClass="button, chooseLeaderCard" stylesheets="@../css/button.css" visible="false" />
          </children>
       </HBox>
       <VBox fx:id="input" alignment="CENTER" layoutX="250.0" layoutY="233.0" prefHeight="310.0" prefWidth="115.0" spacing="30.0" visible="false">
@@ -105,7 +105,8 @@
       <TextField fx:id="fourthDepotOcc" alignment="CENTER" editable="false" layoutX="852.0" layoutY="404.0" mouseTransparent="true" prefHeight="35.0" prefWidth="44.0" styleClass="textFieldResources" stylesheets="@../css/text.css" text="0" visible="false" />
       <TextField fx:id="fourthStrongboxOcc" alignment="CENTER" editable="false" layoutX="852.0" layoutY="454.0" mouseTransparent="true" prefHeight="35.0" prefWidth="44.0" styleClass="textFieldResources" stylesheets="@../css/text.css" text="0" visible="false" />
       <TextField fx:id="fourthExtraOcc" alignment="CENTER" editable="false" layoutX="852.0" layoutY="504.0" mouseTransparent="true" prefHeight="35.0" prefWidth="44.0" styleClass="textFieldResources" stylesheets="@../css/text.css" text="0" visible="false" />
-      <Button fx:id="nextStep" alignment="CENTER" layoutX="842.0" layoutY="568.0" mnemonicParsing="false" onAction="#ifBasicShowInputOrElseSkip" prefHeight="69.0" prefWidth="137.0" styleClass="okButton" stylesheets="@../css/button.css" text="Next Step" visible="false" />
+      <Button fx:id="nextStep" alignment="CENTER" layoutX="842.0" layoutY="568.0" mnemonicParsing="false" onAction="#ifBasicShowInputOrElseCheckExtra" prefHeight="69.0" prefWidth="137.0" styleClass="okButton" stylesheets="@../css/button.css" text="Next Step" visible="false" />
+      <Button fx:id="extraOutputChoice"  alignment="CENTER" layoutX="842.0" layoutY="568.0" mnemonicParsing="false" prefHeight="69.0" prefWidth="137.0" styleClass="okButton" stylesheets="@../css/button.css" text="Next Step" visible="false" />
       <Button fx:id="clear" alignment="CENTER" layoutX="650" layoutY="568.0" mnemonicParsing="false" onAction="#clearSelection" prefHeight="69.0" prefWidth="137.0" styleClass="okButton" stylesheets="@../css/button.css" text="Clear" visible="false" />
       <Button fx:id="concludeAction" onAction="#handleActionConclusion" contentDisplay="CENTER" layoutX="842.0" layoutY="568.0" mnemonicParsing="false" prefHeight="69.0" prefWidth="137.0" styleClass="okButton, exit" stylesheets="@../css/button.css" text="Finish" visible="false" />
       <Button fx:id="toPayment" alignment="CENTER" layoutX="842.0" layoutY="568.0" mnemonicParsing="false" onAction="#concludeProductionsSelection" prefHeight="69.0" prefWidth="137.0" styleClass="okButton" stylesheets="@../css/button.css" text="To Payment" visible="false" />

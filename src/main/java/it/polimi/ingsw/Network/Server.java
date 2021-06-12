@@ -1,5 +1,6 @@
 package it.polimi.ingsw.Network;
 
+import it.polimi.ingsw.Commons.User;
 import it.polimi.ingsw.Controller.GameController;
 import it.polimi.ingsw.Model.MultiPlayerMode;
 import it.polimi.ingsw.Model.Player;
@@ -154,7 +155,7 @@ public class Server {
         RemoteView newRemoteView = new RemoteView(oldRemoteView, newClientStatus);
         newClientStatus.bindRemoteView(newRemoteView);
         accounts.put(client.getNickname(), newClientStatus);
-        newRemoteView.getModel().notifyGameResumed();
+        newRemoteView.getModel().notifyGameResumed(new User(client.getNickname()));
     }
 
 }
