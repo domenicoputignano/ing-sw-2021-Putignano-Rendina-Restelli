@@ -10,6 +10,7 @@ import it.polimi.ingsw.Utils.Messages.ServerMessages.*;
 
 import java.io.*;
 import java.net.Socket;
+import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -37,7 +38,7 @@ public class ClientSetupConnection implements Runnable {
             inputStream = new ObjectInputStream(clientSocket.getInputStream());
             nicknameChoice();
             if (server.inactivePlayerAlreadyRegistered(nickname)) {
-                LOGGER.log(Level.INFO, "Player already existing but not playing");
+                LOGGER.log(Level.INFO, "User "+nickname+" wants to resume game");
                 //TODO correctly resuming of the game. Check what happens if player in turn disconnects
                 server.resumeGame(this);
             }
@@ -55,6 +56,7 @@ public class ClientSetupConnection implements Runnable {
 
             }
         } catch (IOException | ClassNotFoundException e) {
+            server.removeNotSetupPlayer(this);
             LOGGER.log(Level.INFO, "Reset connection");
         }
     }
@@ -128,6 +130,20 @@ public class ClientSetupConnection implements Runnable {
         outputStream.flush();
     }
 
+
+    //Todo eventualmente da togliere, fatto per svuotare le waiting connections dei player che non hanno completato la configurazione
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ClientSetupConnection that = (ClientSetupConnection) o;
+        return Objects.equals(nickname, that.nickname);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(nickname);
+    }
 }
 
 

@@ -206,10 +206,9 @@ public class LeaderChoiceController extends Controller{
 
     private void showWaitingSceneForFirstPlayer() {
         if(client.getGame().getPlayer(client.getUser()).equals(client.getGame().getCurrPlayer())) {
-            cleanPane();
             if(!client.getUI().isSoloMode()) {
-                chooseCardText.setText("You are the first player,\nYour opponents are completing initial setup\n" +
-                        "Match will start soon...");
+                cleanPane();
+                chooseCardText.setText("You are the first player, match will start soon...");
                 chooseCardText.setVisible(true);
             }
         } else cleanPane();

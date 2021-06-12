@@ -151,11 +151,18 @@ public class Server {
     public void resumeGame(ClientSetupConnection client) {
         ClientStatus oldClientStatus = accounts.get(client.getNickname());
         RemoteView oldRemoteView = oldClientStatus.getRemoteView();
+        oldRemoteView.getModel().removeObserver(oldRemoteView);
         ClientStatus newClientStatus = new ClientStatus(client.getClientSocket(), client.getInputStream(), client.getOutputStream());
         RemoteView newRemoteView = new RemoteView(oldRemoteView, newClientStatus);
         newClientStatus.bindRemoteView(newRemoteView);
         accounts.put(client.getNickname(), newClientStatus);
         newRemoteView.getModel().notifyGameResumed(new User(client.getNickname()));
+        new Thread(newClientStatus).start();
+    }
+
+    //TODO da togliere, metodo fatto per creare togliere un'istanza di un giocatore che non ha completato la configurazione
+    public void removeNotSetupPlayer(ClientSetupConnection clientNotSetup) {
+        waitingConnections.remove(clientNotSetup);
     }
 
 }

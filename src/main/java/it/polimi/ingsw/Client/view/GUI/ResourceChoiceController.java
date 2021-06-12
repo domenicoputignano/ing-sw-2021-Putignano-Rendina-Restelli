@@ -428,8 +428,7 @@ public class ResourceChoiceController extends Controller{
         }
         (new InitialResourceChoiceGUI(client, resourcesWithDepotDestination)).manageUserInteraction();
         cleanPane();
-        chooseResourceText.setText("Setup completed\nYou are the "+client.getGame().getPlayer(client.getUser()).getPosition()+"°" +
-                " player\nPlease wait for your opponents to complete.");
+        chooseResourceText.setText("Setup completed\nYou are the "+client.getGame().getPlayer(client.getUser()).getPosition()+"° player");
     }
 
     private void cleanPane() {
