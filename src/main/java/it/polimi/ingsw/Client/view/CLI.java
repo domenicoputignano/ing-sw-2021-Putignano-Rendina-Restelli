@@ -128,7 +128,7 @@ public class CLI extends UI {
     public void render(ServerAskForNumOfPlayer message) {
         System.out.print("Choose the number of players [2-4]: ");
     }
-    public void render(GameSetupMessage message) { System.out.println("Game setup has been done, now you need to choose two leader cards to discard "); }
+    public void render(GameSetupMessage message) {  System.out.println("Game setup has been done, now you need to choose two leader cards to discard "); }
     public void render(InitialLeaderChoiceUpdate message) {
         if(isReceiverAction(message.getUser())) {
             System.out.println("You have successfully discarded two leader cards ");
@@ -175,7 +175,7 @@ public class CLI extends UI {
             System.out.printf("User "+message.getTriggeringUser()+" has performed action" +
                     " involving faith track, you got %d faith points\n", message.getPoints());
         }
-
+        printFaithTrack(message.getUserPersonalBoard());
     }
 
     public void render(MoveUpdate message) {
@@ -211,7 +211,7 @@ public class CLI extends UI {
     }
 
     public void render(GameResumedMessage message) {
-        System.out.println("Game resumed..");
+        System.out.println("Game resumed");
     }
 
     public void render(LorenzoPlayedUpdate message){
@@ -251,12 +251,23 @@ public class CLI extends UI {
 
     @Override
     public void render(ActivateVaticanReportUpdate message) {
+        if(isReceiverAction(message.getUser())&&isReceiverAction(message.getTriggeringUser())) {
+            System.out.println("You activated a Vatican Report, your faith track has been updated as follows ");
+            printFaithTrack(message.getUserPersonalBoard());
+        }
+        else if(isReceiverAction(message.getUser())) {
+            System.out.println("User "+message.getTriggeringUser()+" activated a Vatican Report, your faith track has been updated as follows ");
+            printFaithTrack(message.getUserPersonalBoard());
+        }
+        /*
         if(isReceiverAction(client.getUser())) {
             System.out.println("You activated a Vatican Report on section + "+message.getSection()+"."
                     +"\nYour tile is now face up ");
-        }
-        System.out.println("User "+message.getTriggeringUser()+" activated a Vatican Report on section "+message.getSection()+"."
-        +"\nYour tile is "+message.getState());
+            System.out.println("Faith track has been updated as follows");
+        } else {
+            System.out.println("User " + message.getTriggeringUser() + " activated a Vatican Report on section " + message.getSection() + "."
+                    + "\nYour tile is " + message.getState());
+        }*/
     }
 
     @Override
@@ -436,4 +447,23 @@ public class CLI extends UI {
         System.out.println("'---------------------------''---------------------------''---------------------------'");
     }
 
+    public void printFaithTrack(ReducedPersonalBoard playerBoard) {
+        System.out.print("                              ! Vatican Section  ");
+        System.out.print(""+playerBoard.getFaithTrack().getFavourTile(0));
+        System.out.print("                 !  Vatican Section       ");
+        System.out.print(""+playerBoard.getFaithTrack().getFavourTile(1));
+        System.out.print("           !   Vatican Section            ");
+        System.out.print(""+playerBoard.getFaithTrack().getFavourTile(2));
+        System.out.println();
+        System.out.println("   0     1     2     3     4     5     6     7     8     9     10    11    12    13    14    15    16    17    18    19    20    21    22    23   24");
+        System.out.println(".-----.-----.-----.-----.-----.-----.-----.-----.-----.-----.-----.-----.-----.-----.-----.-----.-----.-----.-----.-----.-----.-----.-----.-----.-----.");
+        System.out.print("|");
+        for(int i = 0; i < 25; i++) {
+            System.out.print(playerBoard.getFaithTrack().getFaithMarkerCell(i));
+        }
+        System.out.println();
+        System.out.println("'-----'-----'-----'-----'-----'-----'-----'-----'-----'-----'-----'-----'-----'-----'-----'-----'-----'-----'-----'-----'-----'-----'-----'-----'-----'");
+        System.out.println("                   PV=1              PV=2        POPE  PV=4              PV=6              PV=9  POPE        PV=12             PV=16             PV=20");
+        System.out.println("                                                                                                                                                 POPE  ");
+    }
 }

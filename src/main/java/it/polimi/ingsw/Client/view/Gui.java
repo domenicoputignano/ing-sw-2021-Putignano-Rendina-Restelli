@@ -70,6 +70,7 @@ public class Gui extends UI{
 
     @Override
     public void render(GameResumedMessage message) {
+
     }
 
     @Override
@@ -107,7 +108,7 @@ public class Gui extends UI{
 
     @Override
     public void render(TakeResourcesFromMarketUpdate message) {
-        if(isReceiverAction(message.getUser())) {
+        if(isReceiverAction(message.getUser())){
             Platform.runLater(() -> {
                 GUIApp.showScene("/gui/FXML/PlayerBoard.fxml");
                 GUIApp.controller.showTakeResourcesFromMarketUpdate();
@@ -118,7 +119,6 @@ public class Gui extends UI{
 
     @Override
     public void render(FaithMarkerUpdate message) {
-
     }
 
     @Override
@@ -160,7 +160,7 @@ public class Gui extends UI{
 
     @Override
     public void render(BuyDevCardPerformedUpdate message) {
-        if(isReceiverAction(message.getUser())){
+        if(isReceiverAction(message.getUser())) {
             Platform.runLater(() -> {
                 GUIApp.showScene("/gui/FXML/PlayerBoard.fxml");
                 GUIApp.controller.showBuyDevCardUpdate();
@@ -185,7 +185,6 @@ public class Gui extends UI{
 
     @Override
     public void render(ActivateVaticanReportUpdate message) {
-
     }
 
     @Override

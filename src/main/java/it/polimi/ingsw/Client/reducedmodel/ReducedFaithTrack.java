@@ -30,6 +30,17 @@ public class ReducedFaithTrack implements Serializable {
         return resultBuilder.toString();
     }
 
+    public String getFaithMarkerCell(int cellIndex) {
+        if(cellIndex != faithMarker) return "     |";
+        else {
+            return "  *  |";
+        }
+    }
+
+    public String getFavourTile(int tileIndex) {
+        return favorTiles[tileIndex].getTileState(tileIndex);
+    }
+
     public int getFaithMarker() {
         return faithMarker;
     }
