@@ -126,6 +126,7 @@ public class TakeResourcesFromMarket implements AbstractTurnPhase {
             }
         }
         pendingResources.clear();
+        turn.normalActionDone();
         turn.getGame().notifyUpdate(new PositioningUpdate(turn.getPlayer().getUser(),
                 turn.getPlayer().getReducedPersonalBoard(), discardedResourcesList));
         concludeTurnPhase(turn);
