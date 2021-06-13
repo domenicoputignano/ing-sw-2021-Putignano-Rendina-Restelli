@@ -230,48 +230,12 @@ public class PlayerBoardController extends Controller {
     @FXML
     public void handleChooseActionButton()
     {
-        actions = new Stage();
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/fxml/ChooseActionPage.fxml"));
-            Parent root = loader.load();
-            GUIApp.controller = loader.getController();
-            Scene scene = new Scene(Objects.requireNonNull(root), 820, 520, Color.TRANSPARENT);
-            scene.setCursor(new ImageCursor(new Image(CURSOR), 36, 45));
-            actions.initStyle(StageStyle.TRANSPARENT);
-            actions.setAlwaysOnTop(true);
-            scene.setUserData(loader);
-            actions.initModality(Modality.WINDOW_MODAL);
-            actions.initOwner(GUIApp.getStage());
-            scene.setUserData(loader);
-            actions.setScene(scene);
-
-        } catch (IOException e) {
-                e.printStackTrace();
-            }
-        actions.show();
+        showPopup("/gui/fxml/ChooseActionPage.fxml", 820, 520);
     }
     @FXML
     public void handleMoveActionButton()
     {
-        move = new Stage();
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/fxml/MoveActionPage.fxml"));
-            Parent root = loader.load();
-            GUIApp.controller = loader.getController();
-            Scene scene = new Scene(Objects.requireNonNull(root), 1180, 750, Color.TRANSPARENT);
-            scene.setCursor(new ImageCursor(new Image(CURSOR), 36, 45));
-            move.initStyle(StageStyle.TRANSPARENT);
-            move.setAlwaysOnTop(true);
-            scene.setUserData(loader);
-            move.initModality(Modality.WINDOW_MODAL);
-            move.initOwner(GUIApp.getStage());
-            scene.setUserData(loader);
-            move.setScene(scene);
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        move.show();
+        showPopup("/gui/fxml/MoveActionPage.fxml", 1180, 750);
     }
 
     @FXML

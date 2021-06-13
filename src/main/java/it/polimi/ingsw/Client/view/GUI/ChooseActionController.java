@@ -87,97 +87,25 @@ public class ChooseActionController extends Controller{
     {
         Stage stage = (Stage) closeChoose.getScene().getWindow();
         stage.close();
-        leaderStage = new Stage();
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/FXML/LeaderActionPage.fxml"));
-            Parent root = loader.load();
-            GUIApp.controller = loader.getController();
-            Scene scene = new Scene(Objects.requireNonNull(root), 1180, 750, Color.TRANSPARENT);
-            scene.setCursor(new ImageCursor(new Image(CURSOR), 36, 45));
-            leaderStage.initStyle(StageStyle.TRANSPARENT);
-            leaderStage.setAlwaysOnTop(true);
-            scene.setUserData(loader);
-            leaderStage.initModality(Modality.WINDOW_MODAL);
-            leaderStage.initOwner(GUIApp.getStage());
-            scene.setUserData(loader);
-            leaderStage.setScene(scene);
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        leaderStage.show();
+        showPopup("/GUI/FXML/LeaderActionPage.fxml", 1180, 750);
     }
     public void handleActivateProduction()
     {
         Stage stageChoose = (Stage) closeChoose.getScene().getWindow();
         stageChoose.close();
-        activateProdStage = new Stage();
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/FXML/ActivateProductionPage.fxml"));
-            Parent root = loader.load();
-            GUIApp.controller = loader.getController();
-            Scene scene = new Scene(Objects.requireNonNull(root), 1180, 750, Color.TRANSPARENT);
-            scene.setCursor(new ImageCursor(new Image(CURSOR), 36, 45));
-            activateProdStage.initStyle(StageStyle.TRANSPARENT);
-            activateProdStage.setAlwaysOnTop(true);
-            scene.setUserData(loader);
-            activateProdStage.initModality(Modality.WINDOW_MODAL);
-            activateProdStage.initOwner(GUIApp.getStage());
-            scene.setUserData(loader);
-            activateProdStage.setScene(scene);
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        activateProdStage.show();
+        showPopup("/GUI/FXML/ActivateProductionPage.fxml", 1180, 750);
     }
     public void handleBuyDevCard()
     {
         Stage stage = (Stage) closeChoose.getScene().getWindow();
         stage.close();
-        buyDevCardStage = new Stage();
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/FXML/BuyDevCardPage.fxml"));
-            Parent root = loader.load();
-            GUIApp.controller = loader.getController();
-            Scene scene = new Scene(Objects.requireNonNull(root), 1180, 750, Color.TRANSPARENT);
-            scene.setCursor(new ImageCursor(new Image(CURSOR), 36, 45));
-            buyDevCardStage.initStyle(StageStyle.TRANSPARENT);
-            buyDevCardStage.setAlwaysOnTop(true);
-            scene.setUserData(loader);
-            buyDevCardStage.initModality(Modality.WINDOW_MODAL);
-            buyDevCardStage.initOwner(GUIApp.getStage());
-            scene.setUserData(loader);
-            buyDevCardStage.setScene(scene);
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        buyDevCardStage.show();
+        showPopup("/GUI/FXML/BuyDevCardPage.fxml", 1180, 750);
     }
     public void handleTakeResources()
     {
         Stage stage = (Stage) closeChoose.getScene().getWindow();
         stage.close();
-        takeResourcesStage = new Stage();
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/fxml/TakeResourcesFromMarketPage.fxml"));
-            Parent root = loader.load();
-            GUIApp.controller = loader.getController();
-            Scene scene = new Scene(Objects.requireNonNull(root), 1180, 750, Color.TRANSPARENT);
-            scene.setCursor(new ImageCursor(new Image(CURSOR), 36, 45));
-            takeResourcesStage.initStyle(StageStyle.TRANSPARENT);
-            takeResourcesStage.setAlwaysOnTop(true);
-            scene.setUserData(loader);
-            takeResourcesStage.initModality(Modality.WINDOW_MODAL);
-            takeResourcesStage.initOwner(GUIApp.getStage());
-            scene.setUserData(loader);
-            takeResourcesStage.setScene(scene);
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        takeResourcesStage.show();
+        showPopup("/gui/fxml/TakeResourcesFromMarketPage.fxml", 1180, 750);
     }
 }
 

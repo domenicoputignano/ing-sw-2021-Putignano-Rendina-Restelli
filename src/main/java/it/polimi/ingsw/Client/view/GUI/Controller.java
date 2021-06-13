@@ -2,6 +2,7 @@ package it.polimi.ingsw.Client.view.GUI;
 
 import it.polimi.ingsw.Client.clientstates.AbstractClientState;
 import it.polimi.ingsw.Network.Client;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.ImageCursor;
@@ -9,6 +10,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -43,6 +45,9 @@ public class Controller {
     protected Client client;
 
     protected AbstractClientState clientState;
+
+    protected double xOffset = 0;
+    protected double yOffset = 0;
 
     Stage mainstage;
     Stage popup;
@@ -105,9 +110,23 @@ public class Controller {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(FXMLFile));
             Parent root = loader.load();
             GUIApp.controller = loader.getController();
+            popup.initStyle(StageStyle.TRANSPARENT);
+            root.setOnMousePressed(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent event) {
+                    xOffset = event.getSceneX();
+                    yOffset = event.getSceneY();
+                }
+            });
+            root.setOnMouseDragged(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent event) {
+                    popup.setX(event.getScreenX() - xOffset);
+                    popup.setY(event.getScreenY() - yOffset);
+                }
+            });
             Scene scene = new Scene(Objects.requireNonNull(root), width, height, Color.TRANSPARENT);
             scene.setCursor(new ImageCursor(new Image(CURSOR), 36, 45));
-            popup.initStyle(StageStyle.TRANSPARENT);
             popup.setAlwaysOnTop(true);
             scene.setUserData(loader);
             popup.initModality(Modality.WINDOW_MODAL);
