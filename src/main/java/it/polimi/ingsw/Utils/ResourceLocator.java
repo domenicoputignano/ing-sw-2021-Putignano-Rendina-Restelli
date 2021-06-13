@@ -81,17 +81,220 @@ public final class ResourceLocator {
         }
     }
 
-    public static String retrieveMarbleImage(ColorMarble colorMarble){
-        switch (colorMarble) {
-            case RED : return "gui/img/marbles/redMarble.png";
-            case BLUE: return "gui/img/marbles/blueMarble.png";
-            case GREY: return "gui/img/marbles/greyMarble.png";
-            case PURPLE: return "gui/img/marbles/purpleMarble.png";
-            case WHITE: return "gui/img/marbles/whiteMarble.png";
-            case YELLOW: return "gui/img/marbles/yellowMarble.png";
-            default: return null;
+    public static void printLeaderCardASCII(String ID) {
+        switch (ID) {
+            case "SA-SE" : {
+                System.out.println(".----------------------------.");
+                System.out.println("|       1 " +ANSI_Color.YELLOW.escape() +"YELLOW CARD"+ ANSI_Color.RESET +"        |");
+                System.out.println("|       1  " + ANSI_Color.GREEN.escape()+ "GREEN CARD" + ANSI_Color.RESET + "        |");
+                System.out.println("|      .--------------.      |");
+                System.out.println("|      |    EFFECT    |      |");
+                System.out.println("|      |   DISCOUNT   |      |"); //FA: funzionalità aggiuntiva
+                System.out.println("|      |  -1 " + ANSI_Color.PURPLE.escape() + "SERVANT "+ ANSI_Color.RESET+" |      |");
+                System.out.println("|      '--------------'      |");
+                System.out.println("|            VP:2            |");
+                System.out.println("'----------------------------'");
+                return;
+            }
+            case "SA-SH" : {
+                System.out.println(".----------------------------.");
+                System.out.println("|       1 " +ANSI_Color.BLUE.escape() +"  BLUE CARD"+ ANSI_Color.RESET +"        |");
+                System.out.println("|       1 " + ANSI_Color.PURPLE.escape()+ "PURPLE CARD" + ANSI_Color.RESET + "        |");
+                System.out.println("|      .--------------.      |");
+                System.out.println("|      |    EFFECT    |      |");
+                System.out.println("|      |   DISCOUNT   |      |");
+                System.out.println("|      |  -1 " + ANSI_Color.BLUE.escape() + "SHIELD  "+ ANSI_Color.RESET+" |      |");
+                System.out.println("|      '--------------'      |");
+                System.out.println("|            VP:2            |");
+                System.out.println("'----------------------------'");
+                return;
+            }
+            case "SA-ST" : {
+                System.out.println(".----------------------------.");
+                System.out.println("|       1 " +ANSI_Color.BLUE.escape() +"  BLUE CARD"+ ANSI_Color.RESET +"        |");
+                System.out.println("|       1  " + ANSI_Color.GREEN.escape()+ "GREEN CARD" + ANSI_Color.RESET + "        |");
+                System.out.println("|      .--------------.      |");
+                System.out.println("|      |    EFFECT    |      |");
+                System.out.println("|      |   DISCOUNT   |      |");
+                System.out.println("|      |  -1 " + ANSI_Color.GREY.escape() + "STONE   "+ ANSI_Color.RESET+" |      |");
+                System.out.println("|      '--------------'      |");
+                System.out.println("|            VP:2            |");
+                System.out.println("'----------------------------'");
+                return;
+            }
+            case "SA-CO" : {
+                System.out.println(".----------------------------.");
+                System.out.println("|       1 " +ANSI_Color.YELLOW.escape() +"YELLOW CARD"+ ANSI_Color.RESET +"        |");
+                System.out.println("|       1 " + ANSI_Color.PURPLE.escape()+ "PURPLE CARD" + ANSI_Color.RESET + "        |");
+                System.out.println("|      .--------------.      |");
+                System.out.println("|      |    EFFECT    |      |");
+                System.out.println("|      |   DISCOUNT   |      |");
+                System.out.println("|      |  -1 " + ANSI_Color.YELLOW.escape() + "COIN    "+ ANSI_Color.RESET+" |      |");
+                System.out.println("|      '--------------'      |");
+                System.out.println("|            VP:2            |");
+                System.out.println("'----------------------------'");
+                return;
+            }
+            case "ED-SE" : {
+                System.out.println(".----------------------------.");
+                System.out.println("|          REQUIRED          |");
+                System.out.println("|       5 " +ANSI_Color.GREY.escape() +"      STONE"+ ANSI_Color.RESET +"        |");
+                System.out.println("|      .--------------.      |");
+                System.out.println("|      |    EFFECT    |      |");
+                System.out.println("|      |  EXTRADEPOT  |      |");
+                System.out.println("|      |  2 " + ANSI_Color.PURPLE.escape() + " SERVANT "+ ANSI_Color.RESET+" |      |");
+                System.out.println("|      '--------------'      |");
+                System.out.println("|            VP:3            |");
+                System.out.println("'----------------------------'");
+                return;
+            }
+            case "ED-ST" : {
+                System.out.println(".----------------------------.");
+                System.out.println("|          REQUIRED          |");
+                System.out.println("|       5 " +ANSI_Color.YELLOW.escape() +"       COIN"+ ANSI_Color.RESET +"        |");
+                System.out.println("|      .--------------.      |");
+                System.out.println("|      |    EFFECT    |      |");
+                System.out.println("|      |  EXTRADEPOT  |      |");
+                System.out.println("|      |  2 " + ANSI_Color.GREY.escape() + " STONE   "+ ANSI_Color.RESET+" |      |");
+                System.out.println("|      '--------------'      |");
+                System.out.println("|            VP:3            |");
+                System.out.println("'----------------------------'");
+                return;
+            }
+            case "ED-SH" : {
+                System.out.println(".----------------------------.");
+                System.out.println("|          REQUIRED          |");
+                System.out.println("|       5 " +ANSI_Color.PURPLE.escape() +"    SERVANT"+ ANSI_Color.RESET +"        |");
+                System.out.println("|      .--------------.      |");
+                System.out.println("|      |    EFFECT    |      |");
+                System.out.println("|      |  EXTRADEPOT  |      |");
+                System.out.println("|      |  2  " + ANSI_Color.BLUE.escape() + " SHIELD "+ ANSI_Color.RESET+" |      |");
+                System.out.println("|      '--------------'      |");
+                System.out.println("|            VP:3            |");
+                System.out.println("'----------------------------'");
+                return;
+            }
+            case "ED-CO" : {
+                System.out.println(".----------------------------.");
+                System.out.println("|          REQUIRED          |");
+                System.out.println("|       5 " +ANSI_Color.BLUE.escape() +"    SHIELD "+ ANSI_Color.RESET +"        |");
+                System.out.println("|      .--------------.      |");
+                System.out.println("|      |    EFFECT    |      |");
+                System.out.println("|      |  EXTRADEPOT  |      |");
+                System.out.println("|      |  2  " + ANSI_Color.YELLOW.escape() + "  COIN  "+ ANSI_Color.RESET+" |      |");
+                System.out.println("|      '--------------'      |");
+                System.out.println("|            VP:3            |");
+                System.out.println("'----------------------------'");
+                return;
+            }
+            case "CM-SE" : {
+                System.out.println(".----------------------------.");
+                System.out.println("|       2 " +ANSI_Color.YELLOW.escape() +"YELLOW CARD"+ ANSI_Color.RESET +"        |");
+                System.out.println("|       1 " + ANSI_Color.BLUE.escape()+ "  BLUE CARD" + ANSI_Color.RESET + "        |");
+                System.out.println("|      .--------------.      |");
+                System.out.println("|      |    EFFECT    |      |");
+                System.out.println("|      | WHITE MARBLE |      |");
+                System.out.println("|      |   " + ANSI_Color.PURPLE.escape() + "SERVANT  "+ ANSI_Color.RESET+"  |      |");
+                System.out.println("|      '--------------'      |");
+                System.out.println("|            VP:5            |");
+                System.out.println("'----------------------------'");
+                return;
+            }
+            case "CM-SH" : {
+                System.out.println(".----------------------------.");
+                System.out.println("|       2 " +ANSI_Color.GREEN.escape() +" GREEN CARD"+ ANSI_Color.RESET +"        |");
+                System.out.println("|       1 " + ANSI_Color.PURPLE.escape()+ "PURPLE CARD" + ANSI_Color.RESET + "        |");
+                System.out.println("|      .--------------.      |");
+                System.out.println("|      |    EFFECT    |      |");
+                System.out.println("|      | WHITE MARBLE |      |");
+                System.out.println("|      |   " + ANSI_Color.BLUE.escape() + " SHIELD  "+ ANSI_Color.RESET+"  |      |");
+                System.out.println("|      '--------------'      |");
+                System.out.println("|            VP:5            |");
+                System.out.println("'----------------------------'");
+                return;
+            }
+            case "CM-ST" : {
+                System.out.println(".----------------------------.");
+                System.out.println("|       2 " +ANSI_Color.BLUE.escape() +"  BLUE CARD"+ ANSI_Color.RESET +"        |");
+                System.out.println("|       1 " + ANSI_Color.YELLOW.escape()+ "YELLOW CARD" + ANSI_Color.RESET + "        |");
+                System.out.println("|      .--------------.      |");
+                System.out.println("|      |    EFFECT    |      |");
+                System.out.println("|      | WHITE MARBLE |      |");
+                System.out.println("|      |   " + ANSI_Color.GREY.escape() + " STONE   "+ ANSI_Color.RESET+"  |      |");
+                System.out.println("|      '--------------'      |");
+                System.out.println("|            VP:5            |");
+                System.out.println("'----------------------------'");
+                return;
+            }
+            case "CM-CO" : {
+                System.out.println(".----------------------------.");
+                System.out.println("|       2 " +ANSI_Color.PURPLE.escape() +"PURPLE CARD"+ ANSI_Color.RESET +"        |");
+                System.out.println("|       1 " + ANSI_Color.GREEN.escape()+ " GREEN CARD" + ANSI_Color.RESET + "        |");
+                System.out.println("|      .--------------.      |");
+                System.out.println("|      |    EFFECT    |      |");
+                System.out.println("|      | WHITE MARBLE |      |");
+                System.out.println("|      |   " + ANSI_Color.YELLOW.escape() + "  COIN   "+ ANSI_Color.RESET+"  |      |");
+                System.out.println("|      '--------------'      |");
+                System.out.println("|            VP:5            |");
+                System.out.println("'----------------------------'");
+                return;
+            }
+            case "EP-SH" : {
+                System.out.println(".----------------------------.");
+                System.out.println("|     1 " + ANSI_Color.YELLOW.escape()+ "YELLOW CARD lv.2"+ANSI_Color.RESET+"     |");
+                System.out.println("|      .--------------.      |");
+                System.out.println("|      |  PRODUCTION  |      |");
+                System.out.println("|      |  1 "+ANSI_Color.BLUE.escape()+"  SHIELD"+ANSI_Color.RESET+"  |      |");
+                System.out.println("|      |     into     |      |");
+                System.out.println("|      |"+ANSI_Color.RED.escape()+"  1 FAITH "+ANSI_Color.RESET+"+ ? |      |");
+                System.out.println("|      '--------------'      |");
+                System.out.println("|            VP:4            |");
+                System.out.println("'----------------------------'");
+                return;
+            }
+            case "EP-SE" : {
+                System.out.println(".----------------------------.");
+                System.out.println("|     1 " + ANSI_Color.BLUE.escape()+ "  BLUE CARD lv.2"+ANSI_Color.RESET+"     |");
+                System.out.println("|      .--------------.      |");
+                System.out.println("|      |  PRODUCTION  |      |");
+                System.out.println("|      |  1 "+ANSI_Color.PURPLE.escape()+" SERVANT"+ANSI_Color.RESET+"  |      |");
+                System.out.println("|      |     into     |      |");
+                System.out.println("|      |"+ANSI_Color.RED.escape()+"  1 FAITH "+ANSI_Color.RESET+"+ ? |      |");
+                System.out.println("|      '--------------'      |");
+                System.out.println("|            VP:4            |");
+                System.out.println("'----------------------------'");
+                return;
+
+            }
+            case "EP-ST" : {
+                System.out.println(".----------------------------.");
+                System.out.println("|     1 " + ANSI_Color.PURPLE.escape()+ "PURPLE CARD lv.2"+ANSI_Color.RESET+"     |");
+                System.out.println("|      .--------------.      |");
+                System.out.println("|      |  PRODUCTION  |      |");
+                System.out.println("|      |  1 "+ANSI_Color.GREY.escape()+"   STONE"+ANSI_Color.RESET+"  |      |");
+                System.out.println("|      |     into     |      |");
+                System.out.println("|      |"+ANSI_Color.RED.escape()+"  1 FAITH "+ANSI_Color.RESET+"+ ? |      |");
+                System.out.println("|      '--------------'      |");
+                System.out.println("|            VP:4            |");
+                System.out.println("'----------------------------'");
+                return;
+            }
+            case "EP-CO" : {
+                System.out.println(".----------------------------.");
+                System.out.println("|     1 " + ANSI_Color.GREEN.escape()+ " GREEN CARD lv.2"+ANSI_Color.RESET+"     |");
+                System.out.println("|      .--------------.      |");
+                System.out.println("|      |  PRODUCTION  |      |");
+                System.out.println("|      |  1 "+ANSI_Color.YELLOW.escape()+"    COIN"+ANSI_Color.RESET+"  |      |");
+                System.out.println("|      |     into     |      |");
+                System.out.println("|      |"+ANSI_Color.RED.escape()+"  1 FAITH "+ANSI_Color.RESET+"+ ? |      |");
+                System.out.println("|      '--------------'      |");
+                System.out.println("|            VP:4            |");
+                System.out.println("'----------------------------'");
+            }
         }
     }
+
+
 
     public static String retrieveDevCardASCII(String ID, int row){
         switch (ID) {
@@ -507,5 +710,17 @@ public final class ResourceLocator {
             }
         }
         return "";
+    }
+
+    public static String retrieveMarbleImage(ColorMarble colorMarble){
+        switch (colorMarble) {
+            case RED : return "gui/img/marbles/redMarble.png";
+            case BLUE: return "gui/img/marbles/blueMarble.png";
+            case GREY: return "gui/img/marbles/greyMarble.png";
+            case PURPLE: return "gui/img/marbles/purpleMarble.png";
+            case WHITE: return "gui/img/marbles/whiteMarble.png";
+            case YELLOW: return "gui/img/marbles/yellowMarble.png";
+            default: return null;
+        }
     }
 }
