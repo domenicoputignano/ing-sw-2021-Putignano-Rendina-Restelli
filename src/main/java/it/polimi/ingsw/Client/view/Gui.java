@@ -96,7 +96,13 @@ public class Gui extends UI{
 
     @Override
     public void render(ServerAsksForPositioning message) {
+        if(isReceiverAction(message.getUser())){
+            Platform.runLater(() -> {
+                GUIApp.controller.showPopup("/gui/FXML/PositioningResourcesPage.fxml", 1180, 750);
+                ((PositioningResourcesController)GUIApp.controller).setResourcesToSettle(message.getResourcesToSettle());
+            });
 
+        }
     }
 
     @Override
