@@ -115,8 +115,13 @@ public class ClientStatesController {
 
     public static void updateClientState(GameResumedMessage message, UI ui) {
         if(ui.isCLI()) {
+            if(message.getGame().isSoloMode()) {
+                ui.changeClientState(new ActionChoiceCLI(ui.getClient()));
+                ui.manageUserInteraction();
+            } else {
             ui.changeClientState(new WaitForTurnCLI(ui.getClient()));
             ui.manageUserInteraction();
+            }
         }
     }
 

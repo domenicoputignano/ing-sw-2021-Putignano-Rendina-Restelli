@@ -26,6 +26,8 @@ public class ActionChoiceCLI extends AbstractActionChoice {
     }
 
     private boolean actionChoice() {
+        System.out.println("Here is your personal board");
+        cli.printPersonalBoard(client.getGame().getPlayer(client.getUser()).getPersonalBoard());
         if(normalActionAlreadyDone()) {
             System.out.println("Choose between Leader Action (L), Move Resources (M) and End Turn (E) ");
         } else {

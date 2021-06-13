@@ -106,8 +106,10 @@ public class Client {
                     // handle of Received message
                     message.handleMessage(this);
                 } catch (IOException e) {
+                    isActive = false;
                     LOGGER.log(Level.SEVERE, "Client disconnected!");
                 } catch (ClassNotFoundException e) {
+                    isActive = false;
                     LOGGER.log(Level.SEVERE, "Error occurred in receiving thread");
                 }
             }

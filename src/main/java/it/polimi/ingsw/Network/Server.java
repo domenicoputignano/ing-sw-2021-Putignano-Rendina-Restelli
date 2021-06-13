@@ -151,7 +151,6 @@ public class Server {
     public void resumeGame(ClientSetupConnection client) {
         ClientStatus oldClientStatus = accounts.get(client.getNickname());
         RemoteView oldRemoteView = oldClientStatus.getRemoteView();
-        oldRemoteView.getModel().removeObserver(oldRemoteView);
         ClientStatus newClientStatus = new ClientStatus(client.getClientSocket(), client.getInputStream(), client.getOutputStream());
         RemoteView newRemoteView = new RemoteView(oldRemoteView, newClientStatus);
         newClientStatus.bindRemoteView(newRemoteView);

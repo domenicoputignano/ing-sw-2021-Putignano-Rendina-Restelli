@@ -51,6 +51,11 @@ public class SoloMode extends Game {
     }
 
     @Override
+    public void handlePlayerDisconnection(Player disconnectedPlayer) {
+        //TODO sospendere il gioco.
+    }
+
+    @Override
     public void endGame(HitLastSpace event) {
         concludeGame(true,event);
     }

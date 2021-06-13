@@ -52,6 +52,9 @@ public class MultiPlayerMode extends Game {
         }
     }
 
+
+
+
     public Player nextPlayer(Player currPlayer)
     {
         Player nextPlayer = playerList.get((playerList.indexOf(currPlayer)+1) % playerList.size());
@@ -106,6 +109,15 @@ public class MultiPlayerMode extends Game {
                 collect(Collectors.toList());
         notify(new RankMessage(rank));
         return rank;
+    }
+
+    @Override
+    public void handlePlayerDisconnection(Player disconnectedPlayer) {
+        if(playerList.stream().anyMatch(x -> x.getUser().isActive()))
+            nextTurn();
+        else {
+            //TODO sospendere il gioco.
+        }
     }
 }
 

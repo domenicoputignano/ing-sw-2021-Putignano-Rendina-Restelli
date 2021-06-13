@@ -156,6 +156,8 @@ public abstract class Game extends Observable<ServerMessage> implements Observer
 
     public abstract void moveOtherPlayers(Player triggeringPlayer, int discardedResources);
 
+    public abstract void handlePlayerDisconnection(Player disconnectedPlayer);
+
     public void notifyUpdate(UpdateMessage message) {
         notify(message);
     }
