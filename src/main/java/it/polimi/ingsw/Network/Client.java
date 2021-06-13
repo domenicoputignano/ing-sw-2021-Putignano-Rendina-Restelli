@@ -7,6 +7,7 @@ import it.polimi.ingsw.Client.view.Gui;
 import it.polimi.ingsw.Client.view.UI;
 import it.polimi.ingsw.Commons.User;
 import it.polimi.ingsw.Utils.Messages.ClientMessages.ClientMessage;
+import it.polimi.ingsw.Utils.Messages.ServerMessages.GameResumedMessage;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.ServerMessage;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.GameSetupMessage;
 import javafx.application.Application;
@@ -90,6 +91,11 @@ public class Client {
         game = message.getGame();
     }
 
+    public void setupGame(GameResumedMessage message) {
+        bindUser(message.getSavedUserInstance().getNickname());
+        game = message.getGame();
+    }
+
 
     private Thread createListeningThread() {
         Thread t = new Thread(() -> {
@@ -100,8 +106,10 @@ public class Client {
                     // handle of Received message
                     message.handleMessage(this);
                 } catch (IOException e) {
+                    isActive = false;
                     LOGGER.log(Level.SEVERE, "Client disconnected!");
                 } catch (ClassNotFoundException e) {
+                    isActive = false;
                     LOGGER.log(Level.SEVERE, "Error occurred in receiving thread");
                 }
             }

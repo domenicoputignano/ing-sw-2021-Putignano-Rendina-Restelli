@@ -36,8 +36,10 @@ public class LorenzoIlMagnifico extends Observable<GameEvent> {
                 if(passedSection < 2)// controllo se ho sorpassato la vaticanReportSection attuale
                     this.passedSection++;
             }
-            if(blackCross == 24)
+            if(blackCross == 24) {
                 notify(new BlackCrossHitLastSpace());
+                break;
+            }
         }
     }
 

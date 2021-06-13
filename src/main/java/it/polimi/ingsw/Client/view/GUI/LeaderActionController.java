@@ -1,6 +1,7 @@
 package it.polimi.ingsw.Client.view.GUI;
 
 import it.polimi.ingsw.Client.clientstates.gui.LeaderActionGUI;
+import it.polimi.ingsw.Commons.LeaderCard;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
@@ -9,6 +10,7 @@ import javafx.scene.layout.*;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+import java.util.List;
 import java.util.stream.Collectors;
 
 public class LeaderActionController extends Controller{
@@ -71,9 +73,6 @@ public class LeaderActionController extends Controller{
         } else if(client.getGame().getPlayer(client.getUser()).getNumOfNotActiveLeaderCards()==1){
             leaderCard1.setImage(new Image(client.getGame().getPlayer(client.getUser()).getAvailableLeaderCards()
                     .stream().filter(x->!x.isActive()).collect(Collectors.toList()).get(0).toImage()));
-            // TODO centrare l'immagine e rendere i bottoni della seconda carta invisibili
-            // leaderCard1.setX(467)
-            // bottoni.setX(467)
         }
 
         leaderActionText.setStyle("-fx-text-fill: rgb(35, 25, 22);");
@@ -115,8 +114,14 @@ public class LeaderActionController extends Controller{
     @FXML
     public void handleFirstLeaderActivation() {
         clearSelection();
+        int leaderIndex;
         active1.setStyle("-fx-background-size: 77% auto;");
-        editLeaderAction(1, false);
+        if(client.getGame().getPlayer(client.getUser()).getAvailableLeaderCards().size() > 1 &&
+                client.getGame().getPlayer(client.getUser()).getAvailableLeaderCards().get(0).isActive() &&
+                !client.getGame().getPlayer(client.getUser()).getAvailableLeaderCards().get(1).isActive())
+            leaderIndex = 2;
+        else leaderIndex = 1;
+        editLeaderAction(leaderIndex, false);
     }
 
     @FXML
@@ -145,8 +150,7 @@ public class LeaderActionController extends Controller{
     private void editLeaderAction(int leaderIndex, boolean toDiscard) {
         if(client.getGame().getCurrPlayer().getNumOfNotActiveLeaderCards()==1) {
             leaderAction.setLeaderAction(toDiscard);
-            //TODO setta ad 1 per evitare side effect o problemi lato server
-            leaderAction.setLeaderIndex(1);
+            leaderAction.setLeaderIndex(leaderIndex);
         } else if(client.getGame().getCurrPlayer().getNumOfNotActiveLeaderCards() == 2) {
             leaderAction.setLeaderAction(toDiscard);
             leaderAction.setLeaderIndex(leaderIndex);

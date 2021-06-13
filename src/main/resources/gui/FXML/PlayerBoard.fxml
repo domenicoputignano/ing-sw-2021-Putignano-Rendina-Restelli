@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -9,7 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="950.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.Client.view.GUI.PlayerBoardController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="950.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.Client.view.GUI.PlayerBoardController">
     <top>
         <AnchorPane fx:id="top" prefHeight="104.0" prefWidth="950.0" BorderPane.alignment="CENTER">
             <children>
@@ -37,7 +42,7 @@
                         <Image url="@../img/leaderCard_cover.png" />
                     </image>
                 </ImageView>
-                <ImageView fx:id="leaderCard2" fitHeight="258.0" fitWidth="168.0" layoutX="758.0" layoutY="297.0" pickOnBounds="true" preserveRatio="true" />
+                <ImageView fx:id="leaderCard2" fitHeight="258.0" fitWidth="168.0" layoutX="760.0" layoutY="297.0" pickOnBounds="true" preserveRatio="true" />
                 <Button fx:id="chooseAction" layoutX="411.0" layoutY="545.0" mnemonicParsing="false" onAction="#handleChooseActionButton" prefHeight="60.0" prefWidth="161.0" styleClass="chooseAction" stylesheets="@../css/button.css" text="Choose Action" />
                 <Button fx:id="moveAction" layoutX="14.0" layoutY="545.0" mnemonicParsing="false" onAction="#handleMoveActionButton" prefHeight="60.0" prefWidth="161.0" styleClass="chooseAction" stylesheets="@../css/button.css" text="Move Action" />
                 <ImageView fx:id="cell0" fitHeight="35.0" fitWidth="33.0" layoutX="37.0" layoutY="121.0" pickOnBounds="true" preserveRatio="true" />
@@ -130,6 +135,10 @@
             <Text fx:id="numShieldStrongbox" layoutX="48.0" layoutY="488.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" wrappingWidth="30.13671875" />
             <Text fx:id="numServantStrongbox" fill="WHITE" layoutX="114.0" layoutY="440.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" wrappingWidth="30.13671875" />
             <Text fx:id="numStoneStrongbox" layoutX="114.0" layoutY="485.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" wrappingWidth="30.13671875" />
+            <ImageView fx:id="resource1LeaderCard1" fitHeight="47.0" fitWidth="45.0" layoutX="792.0" layoutY="214.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="resource2LeaderCard1" fitHeight="47.0" fitWidth="45.0" layoutX="854.0" layoutY="214.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="resource1LeaderCard2" fitHeight="47.0" fitWidth="45.0" layoutX="792.0" layoutY="492.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="resource2LeaderCard2" fitHeight="47.0" fitWidth="45.0" layoutX="854.0" layoutY="492.0" pickOnBounds="true" preserveRatio="true" />
             </children>
         </AnchorPane>
     </center>

@@ -1,12 +1,12 @@
 package it.polimi.ingsw.Client.view.GUI;
 
+import it.polimi.ingsw.Client.Checker;
 import it.polimi.ingsw.Client.clientstates.gui.ActivateProductionGUI;
 import it.polimi.ingsw.Commons.*;
 import it.polimi.ingsw.Utils.Pair;
 import it.polimi.ingsw.Utils.ResourceLocator;
 import it.polimi.ingsw.Utils.ResourceSource;
 import javafx.fxml.FXML;
-import javafx.scene.AccessibleRole;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -68,12 +68,16 @@ public class ActivateProductionController extends Controller implements PaymentC
     public Button coinInput, servantInput, shieldInput, stoneInput, coinOutput, servantOutput, shieldOutput, stoneOutput;
     public Button coinInputSecond, servantInputSecond, shieldInputSecond, stoneInputSecond;
     public Button clear;
-    public Button toPayment, extraProduction;
+    public Button toPayment, extraOutputChoice;
     public Label firstInputLabel, secondInputLabel, outputLabel;
 
     public Text errorText;
 
     public ImageView firstResourceImage, secondResourceImage, thirdResourceImage, fourthResourceImage;
+
+
+
+    private boolean basicHasToBeDone, firstExtraHasToBeDone, secondExtraHasToBeDone;
 
 
     int firstCurrentValueDepot = 0;
@@ -172,6 +176,7 @@ public class ActivateProductionController extends Controller implements PaymentC
         initializeSlotImage(2);
         List<LeaderEffect> extraProduction = activateProductionAction.listExtraProductionEffect();
         for(int i = 0; i < extraProduction.size(); i++) {
+            extraProductions.setVisible(true);
             if(i == 0) {
                 firstExtraSlot.setStyle("-fx-background-image: url("+extraProduction.get(i).toImage()+")");
                 firstExtraSlot.setVisible(true);
@@ -229,18 +234,36 @@ public class ActivateProductionController extends Controller implements PaymentC
 
     }
 
-    private void nextButton() {
-        if(activateProductionAction.isBasicProduction()){
-            if(activateProductionAction.isBasicSettingDone()) {
-                //TODO da cambiare con l'aggiunta delle extra production
-                toPayment.setVisible(true);
+    private void nextScene() {
+        if(basicHasToBeDone) {
+                showActionRequired("Select two input and one output to complete basic production");
+                input.setVisible(true);
+                inputSecond.setVisible(true);
+                output.setVisible(true);
+                firstInputLabel.setVisible(true);
+                secondInputLabel.setVisible(true);
+                outputLabel.setVisible(true);
+                clear.setVisible(true);
             }
-            else toPayment.setVisible(false);
-        }
+        else if(firstExtraHasToBeDone) {
+            cleanPane();
+            showActionRequired("You selected an extra production, choose its output resource");
+            outputLabel.setVisible(true);
+            deselect(output);
+            output.setVisible(true);
+        } else if(secondExtraHasToBeDone) {
+            cleanPane();
+            showActionRequired("You selected an extra production, choose its output resource");
+            outputLabel.setVisible(true);
+            deselect(output);
+            output.setVisible(true);
+        } else concludeProductionsSelection();
     }
+
 
     @FXML
     public void handleBasicSelection() {
+        basicHasToBeDone = true;
         activateProductionAction.setBasicSlot();
         buttonSelection(basicProduction);
         nextStep.setVisible(true);
@@ -260,7 +283,8 @@ public class ActivateProductionController extends Controller implements PaymentC
         deselect(input);
         buttonSelection(coinInput);
         activateProductionAction.setInput(1,ResourceType.coin);
-        nextButton();
+        if(activateProductionAction.isBasicSettingDone()) basicHasToBeDone = false;
+        nextScene();
     }
 
     @FXML
@@ -268,7 +292,8 @@ public class ActivateProductionController extends Controller implements PaymentC
         deselect(inputSecond);
         buttonSelection(coinInputSecond);
         activateProductionAction.setInput(2, ResourceType.coin);
-        nextButton();
+        if(activateProductionAction.isBasicSettingDone()) basicHasToBeDone = false;
+        nextScene();
     }
 
     @FXML
@@ -276,7 +301,8 @@ public class ActivateProductionController extends Controller implements PaymentC
         deselect(input);
         buttonSelection(servantInput);
         activateProductionAction.setInput(1, ResourceType.servant);
-        nextButton();
+        if(activateProductionAction.isBasicSettingDone()) basicHasToBeDone = false;
+        nextScene();
     }
 
     @FXML
@@ -284,7 +310,8 @@ public class ActivateProductionController extends Controller implements PaymentC
         deselect(inputSecond);
         buttonSelection(servantInputSecond);
         activateProductionAction.setInput(2, ResourceType.servant);
-        nextButton();
+        if(activateProductionAction.isBasicSettingDone()) basicHasToBeDone = false;
+        nextScene();
     }
 
     @FXML
@@ -292,7 +319,8 @@ public class ActivateProductionController extends Controller implements PaymentC
         deselect(input);
         buttonSelection(shieldInput);
         activateProductionAction.setInput(1, ResourceType.shield);
-        nextButton();
+        if(activateProductionAction.isBasicSettingDone()) basicHasToBeDone = false;
+        nextScene();
     }
 
     @FXML
@@ -300,7 +328,8 @@ public class ActivateProductionController extends Controller implements PaymentC
         deselect(inputSecond);
         buttonSelection(shieldInputSecond);
         activateProductionAction.setInput(2, ResourceType.shield);
-        nextButton();
+        if(activateProductionAction.isBasicSettingDone()) basicHasToBeDone = false;
+        nextScene();
     }
 
     @FXML
@@ -308,7 +337,8 @@ public class ActivateProductionController extends Controller implements PaymentC
         deselect(input);
         buttonSelection(stoneInput);
         activateProductionAction.setInput(1, ResourceType.stone);
-        nextButton();
+        if(activateProductionAction.isBasicSettingDone()) basicHasToBeDone = false;
+        nextScene();
     }
 
     @FXML
@@ -316,37 +346,82 @@ public class ActivateProductionController extends Controller implements PaymentC
         deselect(inputSecond);
         buttonSelection(stoneInputSecond);
         activateProductionAction.setInput(2, ResourceType.stone);
-        nextButton();
+        if(activateProductionAction.isBasicSettingDone()) basicHasToBeDone = false;
+        nextScene();
     }
 
     @FXML
     public void coinOutputChosen() {
         deselect(output);
         buttonSelection(coinOutput);
-        activateProductionAction.setOutput("normal",1,ResourceType.coin);
-        nextButton();
+        if(activateProductionAction.isBasicProduction()&&!activateProductionAction.isBasicSettingDone()) {
+            activateProductionAction.setOutput("normal",1,ResourceType.coin);
+            if(activateProductionAction.isBasicSettingDone()) basicHasToBeDone = false;
+        } else {
+            if(firstExtraHasToBeDone) {
+                activateProductionAction.setOutput("extra",1, ResourceType.coin);
+                firstExtraHasToBeDone = false;
+            } else if(secondExtraHasToBeDone) {
+                activateProductionAction.setOutput("extra",2, ResourceType.coin);
+                secondExtraHasToBeDone = false;
+            }
+        }
+        nextScene();
     }
 
     @FXML
     public void servantOutputChosen(){
         deselect(output);
         buttonSelection(servantOutput);
-        activateProductionAction.setOutput("normal", 1,ResourceType.servant);
-        nextButton();
+        if(activateProductionAction.isBasicProduction()&&!activateProductionAction.isBasicSettingDone()) {
+            activateProductionAction.setOutput("normal",1,ResourceType.servant);
+            if(activateProductionAction.isBasicSettingDone()) basicHasToBeDone = false;
+        } else {
+            if(firstExtraHasToBeDone) {
+                activateProductionAction.setOutput("extra",1, ResourceType.servant);
+                firstExtraHasToBeDone = false;
+            } else if(secondExtraHasToBeDone) {
+                activateProductionAction.setOutput("extra",2, ResourceType.servant);
+                secondExtraHasToBeDone = false;
+            }
+        }
+        nextScene();
     }
     @FXML
     public void shieldOutputChosen() {
         deselect(output);
         buttonSelection(shieldOutput);
-        activateProductionAction.setOutput("normal", 1,ResourceType.shield);
-        nextButton();
+        if(activateProductionAction.isBasicProduction()&&!activateProductionAction.isBasicSettingDone()) {
+            activateProductionAction.setOutput("normal",1,ResourceType.shield);
+            if(activateProductionAction.isBasicSettingDone()) basicHasToBeDone = false;
+        } else {
+            if(firstExtraHasToBeDone) {
+                activateProductionAction.setOutput("extra",1, ResourceType.shield);
+                firstExtraHasToBeDone = false;
+            } else if(secondExtraHasToBeDone) {
+                activateProductionAction.setOutput("extra",2, ResourceType.shield);
+                secondExtraHasToBeDone = false;
+            }
+        }
+        nextScene();
     }
     @FXML
     public void stoneOutputChosen() {
         deselect(output);
         buttonSelection(stoneOutput);
-        activateProductionAction.setOutput("normal", 1, ResourceType.stone);
-        nextButton();
+        if(activateProductionAction.isBasicProduction()&&!activateProductionAction.isBasicSettingDone()) {
+            activateProductionAction.setOutput("normal",1,ResourceType.stone);
+            if(activateProductionAction.isBasicSettingDone()) basicHasToBeDone = false;
+        } else {
+            if(firstExtraHasToBeDone) {
+                activateProductionAction.setOutput("extra",1, ResourceType.stone);
+                firstExtraHasToBeDone = false;
+            } else if(secondExtraHasToBeDone) {
+                activateProductionAction.setOutput("extra",2, ResourceType.stone);
+                secondExtraHasToBeDone = false;
+            }
+        }
+        nextScene();
     }
 
 
@@ -355,9 +430,9 @@ public class ActivateProductionController extends Controller implements PaymentC
     public void handleFirstSlotSelection() {
         hideError();
         if(activateProductionAction.canActivateSlot(0)) {
-            slotSelection(slot1,0);
-            slot1.setStyle("-fx-background-image: url("+client.getGame().getPlayer(client.getUser()).
-                    getPersonalBoard().getSlot(0).peekTopCard().toImage()+")");
+            slot1.setStyle("-fx-border-color: rgb(231,156,48); -fx-border-width: 5;" +
+                    "-fx-background-image: url("+client.getGame().getPlayer(client.getUser()).
+                    getPersonalBoard().getSlot(0).peekTopCard().toImage()+");");
             activateProductionAction.setSlot(0,true);
             nextStep.setVisible(true);
         } else {
@@ -369,7 +444,9 @@ public class ActivateProductionController extends Controller implements PaymentC
     public void handleSecondSlotSelection() {
         hideError();
         if(activateProductionAction.canActivateSlot(1)) {
-            slotSelection(slot2, 1);
+            slot2.setStyle("-fx-border-color: rgb(231,156,48) -fx-border-width: 5;" +
+                    "-fx-background-image: url("+client.getGame().getPlayer(client.getUser()).
+                    getPersonalBoard().getSlot(1).peekTopCard().toImage()+");");
             activateProductionAction.setSlot(1,true);
             nextStep.setVisible(true);
         } else {
@@ -381,13 +458,36 @@ public class ActivateProductionController extends Controller implements PaymentC
     public void handleThirdSlotSelection() {
         hideError();
         if(activateProductionAction.canActivateSlot(2)) {
-            slotSelection(slot3, 2);
+            slot3.setStyle("-fx-border-color: rgb(231,156,48); -fx-border-width: 5;" +
+                    "-fx-background-image: url("+client.getGame().getPlayer(client.getUser()).
+                    getPersonalBoard().getSlot(2).peekTopCard().toImage()+");");
             activateProductionAction.setSlot(2, true);
             nextStep.setVisible(true);
         } else {
             showErrorInSlotsSelection();
         }
     }
+
+    @FXML
+    public void firstExtraProductionSelected() {
+        activateProductionAction.setExtra(1);
+        firstExtraHasToBeDone = true;
+        firstExtraSlot.setStyle("-fx-border-color: rgb(231,156,48); -fx-border-width: 5;" +
+                "-fx-background-image: url("+client.getGame().getPlayer(client.getUser()).
+                getCompatibleLeaderEffect(Effect.EXTRAPRODUCTION).get(0).getLeaderEffect().toImage()+");");
+        nextStep.setVisible(true);
+    }
+
+    @FXML
+    public void secondExtraProductionSelected() {
+        activateProductionAction.setExtra(2);
+        secondExtraHasToBeDone = true;
+        secondExtraSlot.setStyle("-fx-border-color: rgb(231,156,48); -fx-border-width: 5;" +
+                "-fx-background-image: url("+client.getGame().getPlayer(client.getUser()).
+                getCompatibleLeaderEffect(Effect.EXTRAPRODUCTION).get(1).getLeaderEffect().toImage()+");");
+        nextStep.setVisible(true);
+    }
+
 
     private void showErrorInSlotsSelection() {
         setActivateProdText("You can't activate this production because the slot is empty");
@@ -399,22 +499,6 @@ public class ActivateProductionController extends Controller implements PaymentC
     }
 
 
-    @FXML
-    public void concludeProductionsSelection() {
-        cleanPane();
-        Map<ResourceType, Integer> inputResources = activateProductionAction.calculateInputResources();
-        requiredResources = inputResources.entrySet().stream().filter(x -> x.getValue()>0).
-                map(x -> new Pair<>(x.getKey(),x.getValue())).collect(Collectors.toList());
-        setActivateProdText("It's time to choose from where pick resources needed for production");
-        showRequiredResources(requiredResources);
-        /*if(activateProductionAction.checkRequiredResources()) {
-            nextStep.setVisible(false);
-            cleanPane();
-            showRequiredResources(requiredResources);
-        } else {
-
-        }*/
-    }
 
 
     public void cleanPane() {
@@ -485,6 +569,7 @@ public class ActivateProductionController extends Controller implements PaymentC
         nextStep.setVisible(false);
         clear.setVisible(false);
         concludeAction.setVisible(false);
+        extraProductions.setVisible(false);
     }
 
 
@@ -729,26 +814,27 @@ public class ActivateProductionController extends Controller implements PaymentC
     }
 
 
+    @FXML
+    public void concludeProductionsSelection() {
+        cleanPane();
+        Map<ResourceType, Integer> inputResources = activateProductionAction.calculateInputResources();
+        requiredResources = inputResources.entrySet().stream().filter(x -> x.getValue()>0).
+                map(x -> new Pair<>(x.getKey(),x.getValue())).collect(Collectors.toList());
+        if(Checker.checkResources(inputResources, client.getGame().getPlayer(client.getUser()).getPersonalBoard())){
+            showActionRequired("It's time to choose from where pick resources needed for production");
+            showRequiredResources(requiredResources);
+        } else {
+            showActionRequired("Oh no, seems that you can't perform selected productions!");
+        }
+    }
+
 
 
 
     @FXML
-    public void ifBasicShowInputOrElseSkip() {
+    public void ifBasicShowInputOrElseCheckExtra() {
         cleanPane();
-        if(activateProductionAction.isBasicProduction()) {
-            showActionRequired("Select two input and one output to complete basic production");
-            input.setVisible(true);
-            inputSecond.setVisible(true);
-            output.setVisible(true);
-            firstInputLabel.setVisible(true);
-            secondInputLabel.setVisible(true);
-            outputLabel.setVisible(true);
-            clear.setVisible(true);
-        } else {
-            //TODO vedere se ci sono effetti di tipo extraProduction attivati e cambiare implementazione
-            showActionRequired("Now it's time to select how to take resources from your warehouse complete your productions");
-            concludeProductionsSelection();
-        }
+        nextScene();
     }
 
 
@@ -790,8 +876,8 @@ public class ActivateProductionController extends Controller implements PaymentC
     }
 
     private void slotSelection(Button slot, int slotIndex) {
-        buttonSelection(slot);
         initializeSlotImage(slotIndex);
+        buttonSelection(slot);
 
     }
 

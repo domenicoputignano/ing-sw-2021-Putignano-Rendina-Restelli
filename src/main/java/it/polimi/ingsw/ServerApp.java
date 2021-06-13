@@ -14,7 +14,7 @@ public class ServerApp {
 
         try {
 
-            Server server = new Server(12345);
+            Server server = new Server(1234);
             server.start();
 
         } catch (IOException e) {

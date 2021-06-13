@@ -156,6 +156,8 @@ public abstract class Game extends Observable<ServerMessage> implements Observer
 
     public abstract void moveOtherPlayers(Player triggeringPlayer, int discardedResources);
 
+    public abstract void handlePlayerDisconnection(Player disconnectedPlayer);
+
     public void notifyUpdate(UpdateMessage message) {
         notify(message);
     }
@@ -192,7 +194,7 @@ public abstract class Game extends Observable<ServerMessage> implements Observer
         notify(message);
     }
 
-    public void notifyGameResumed() { notify(new GameResumedMessage(this.getReducedVersion())); }
+    public void notifyGameResumed(User savedUserInstance) { notify(new GameResumedMessage(this.getReducedVersion(), savedUserInstance)); }
 
     public GameState getGameState() {
         return gameState;

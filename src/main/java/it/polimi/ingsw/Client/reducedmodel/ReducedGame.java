@@ -94,5 +94,8 @@ public abstract class ReducedGame implements Serializable {
             return null;
     }
 
+    public boolean isSoloMode() {
+        return isSoloMode;
+    }
 }
 

@@ -274,10 +274,10 @@ public class Warehouse implements Cloneable {
         ReducedDepot[] reducedNormalDepots = Arrays.stream(normalDepots).map(NormalDepot::getReducedVersion).toArray(ReducedDepot[]::new);
         ReducedDepot[] reducedExtraDepots = new ReducedDepot[2];
 
-        for(int i = 0; i < extraDepots.length; i++)
-            if(extraDepots[i]!=null)
+        for(int i = 0; i < extraDepots.length; i++) {
+            if (extraDepots[i] != null)
                 reducedExtraDepots[i] = extraDepots[i].getReducedVersion();
-
+        }
         ReducedStrongbox reducedStrongbox = strongbox.getReducedVersion();
         return new ReducedWarehouse(reducedNormalDepots, reducedExtraDepots, reducedStrongbox, availableResources);
     }

@@ -3,6 +3,8 @@ package it.polimi.ingsw.Client.view.GUI;
 import it.polimi.ingsw.Client.reducedmodel.ReducedPlayer;
 import it.polimi.ingsw.Client.reducedmodel.ReducedSoloMode;
 import it.polimi.ingsw.Client.reducedmodel.ReducedStrongbox;
+import it.polimi.ingsw.Commons.Effect;
+import it.polimi.ingsw.Commons.LeaderCard;
 import it.polimi.ingsw.Commons.ResourceType;
 import it.polimi.ingsw.Utils.Messages.ClientMessages.EndTurnMessage;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.Updates.TakeResourcesFromMarketUpdate;
@@ -24,7 +26,10 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class PlayerBoardController extends Controller {
     public HBox strongboxResources;
@@ -51,6 +56,9 @@ public class PlayerBoardController extends Controller {
             cell22,cell23,cell24;
     @FXML
     public ImageView favorTile1,favorTile2,favorTile3;
+
+    @FXML
+    public ImageView resource1LeaderCard1,resource2LeaderCard1,resource1LeaderCard2,resource2LeaderCard2;
 
     @FXML
     public ImageView topCard1,topCard2,topCard3,bgSlots1,bgSlots2,bgSlots3;
@@ -105,6 +113,7 @@ public class PlayerBoardController extends Controller {
         setAvailableActions();
         initializeSlots();
         setAvailableActions();
+        initializeExtraDepots();
     }
 
     private void initializeCells()
@@ -160,6 +169,42 @@ public class PlayerBoardController extends Controller {
             if(playerToShow.getPersonalBoard().getSlot(2).getNumOfStackedCards()>1)
                 bgSlots3.setVisible(true);
         }
+    }
+
+    private void initializeExtraDepots()
+    {
+        List<LeaderCard> leaderCards = client.getGame().getPlayer(client.getUser()).getAvailableLeaderCards();
+
+        if(leaderCards.size() > 0)
+        {
+            LeaderCard l1 = leaderCards.get(0);
+            if(l1.getLeaderEffect().getEffect() == Effect.EXTRADEPOT && l1.isActive())
+            {
+                int occLeaderCard1 = Arrays.stream(client.getGame().getPlayer(client.getUser()).getPersonalBoard().getWarehouse().getExtraDepots())
+                        .filter(x->x!=null && x.getType()==l1.getLeaderEffect().getType()).collect(Collectors.toList()).get(0)
+                    .getOcc();
+                if(occLeaderCard1 > 0)
+                    resource1LeaderCard1.setImage(new Image(ResourceLocator.retrieveResourceTypeImage(l1.getLeaderEffect().getType())));
+                if(occLeaderCard1 > 1)
+                    resource2LeaderCard1.setImage(new Image(ResourceLocator.retrieveResourceTypeImage(l1.getLeaderEffect().getType())));
+            }
+        }
+        if(leaderCards.size() > 1)
+        {
+            LeaderCard l2 = leaderCards.get(1);
+            if(l2.getLeaderEffect().getEffect() == Effect.EXTRADEPOT && l2.isActive())
+            {
+                int occLeaderCard2 = Arrays.stream(client.getGame().getPlayer(client.getUser()).getPersonalBoard().getWarehouse().getExtraDepots())
+                        .filter(x->x!=null && x.getType()==l2.getLeaderEffect().getType()).collect(Collectors.toList()).get(0)
+                        .getOcc();
+                if(occLeaderCard2 > 0)
+                    resource1LeaderCard2.setImage(new Image(ResourceLocator.retrieveResourceTypeImage(l2.getLeaderEffect().getType())));
+                if(occLeaderCard2 > 1)
+                    resource2LeaderCard2.setImage(new Image(ResourceLocator.retrieveResourceTypeImage(l2.getLeaderEffect().getType())));
+            }
+        }
+
+
     }
 
     private void initializeFaithTrackWithBlackCross()

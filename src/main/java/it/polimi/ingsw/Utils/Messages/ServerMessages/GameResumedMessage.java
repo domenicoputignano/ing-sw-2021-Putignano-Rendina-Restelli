@@ -3,11 +3,17 @@ package it.polimi.ingsw.Utils.Messages.ServerMessages;
 
 import it.polimi.ingsw.Client.ClientStatesController;
 import it.polimi.ingsw.Client.reducedmodel.ReducedGame;
+import it.polimi.ingsw.Client.reducedmodel.ReducedPlayer;
+import it.polimi.ingsw.Commons.User;
 import it.polimi.ingsw.Network.Client;
 
 public class GameResumedMessage extends GameSetupMessage {
-    public GameResumedMessage(ReducedGame game) {
+
+    private User savedUserInstance;
+
+    public GameResumedMessage(ReducedGame game, User savedUserInstance) {
         super(game);
+        this.savedUserInstance = savedUserInstance;
     }
 
     public void handleMessage(Client handler) {
@@ -16,4 +22,7 @@ public class GameResumedMessage extends GameSetupMessage {
         ClientStatesController.updateClientState(this, handler.getUI());
     }
 
+    public User getSavedUserInstance() {
+        return savedUserInstance;
+    }
 }

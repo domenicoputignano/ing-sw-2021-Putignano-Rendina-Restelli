@@ -3,6 +3,7 @@ package it.polimi.ingsw.Commons;
 
 import java.io.Serializable;
 import java.util.Objects;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 /* This class provides a representation
  * of the player needed at network level, when player's methods defined
@@ -11,11 +12,11 @@ import java.util.Objects;
 public class User implements Serializable {
 
     private final String nickname;
-    private transient boolean isActive;
+    private AtomicBoolean isActive;
 
     public User(String nickname) {
         this.nickname = nickname;
-        isActive = true;
+        isActive = new AtomicBoolean(true);
     }
 
     @Override
@@ -35,12 +36,12 @@ public class User implements Serializable {
         return nickname;
     }
 
-    public synchronized boolean isActive() {
-        return isActive;
+    public boolean isActive() {
+        return isActive.get();
     }
 
-    public synchronized void setActive(boolean active) {
-        isActive = active;
+    public void setActive(boolean active) {
+        isActive.getAndSet(active);
     }
 
     @Override

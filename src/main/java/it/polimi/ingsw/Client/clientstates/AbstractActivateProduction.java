@@ -95,15 +95,22 @@ public abstract class AbstractActivateProduction extends AbstractClientState {
     }
 
     public void setSlot(int index, boolean status) {
-        messageToSend.setProductions(requiredProduction);
+        if(messageToSend.getProductions()==null) messageToSend.setProductions(requiredProduction);
         if(index == 0) requiredProduction.setSlot1(status);
         if(index == 1) requiredProduction.setSlot2(status);
         if(index == 2) requiredProduction.setSlot3(status);
     }
 
+    public void setExtra(int extraIndex) {
+        if(messageToSend.getProductions()==null) messageToSend.setProductions(requiredProduction);
+        messageToSend.setProductions(requiredProduction);
+        if(extraIndex == 1) requiredProduction.setExtraSlot1(true);
+        if(extraIndex == 2) requiredProduction.setExtraSlot2(true);
+    }
 
 
     public void setBasicSlot() {
+        if(messageToSend.getProductions()==null) messageToSend.setProductions(requiredProduction);
         requiredProduction.setBasic(true);
         messageToSend.setProductions(requiredProduction);
     }

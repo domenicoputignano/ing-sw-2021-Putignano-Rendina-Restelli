@@ -92,6 +92,10 @@ public class LeaderCard implements Serializable {
         else return "inactive";
     }
 
+    public void displayASCII() {
+        ResourceLocator.printLeaderCardASCII(this.ID);
+    }
+
     public String toImage(){
         return ResourceLocator.retrieveLeaderCardImage(this.ID);
     }
