@@ -46,6 +46,9 @@ public class MoveActionController extends Controller{
     public TextField depotExtraOcc;
 
     @FXML
+    public ImageView resource1ExtraDepot1,resource2ExtraDepot1,resource1ExtraDepot2,resource2ExtraDepot2;
+
+    @FXML
     public Button minusResourceExtra,plusResourceExtra,okButtonExtraDepotOcc;
 
     boolean sourceAlreadySelected = false,isNormalToNormal = false,isExtraToNormal = false,isNormalToExtra = false;
@@ -128,21 +131,31 @@ public class MoveActionController extends Controller{
         }
 
         if(state.getNumOfExtraDepots() > 0){
-            extraDepotPot1.setVisible(true);
-            resourceExtraDepot1.setImage(new Image(ResourceLocator.retrieveResourceTypeImage(client.getGame()
+            ReducedDepot extraDepot1 = client.getGame()
                     .getPlayer(client.getUser()).getPersonalBoard().getWarehouse().
-                            getExtraDepots()[0].getType())));
+                            getExtraDepots()[0];
+            extraDepotPot1.setVisible(true);
+            resourceExtraDepot1.setImage(new Image(ResourceLocator.retrieveResourceTypeImage(extraDepot1.getType())));
             resourceExtraDepot1.setVisible(true);
             fromNormalToExtra.setVisible(true);
             fromExtraToNormal.setVisible(true);
+            if(extraDepot1.getOcc() > 0)
+                resource1ExtraDepot1.setImage(new Image(ResourceLocator.retrieveResourceTypeImage(extraDepot1.getType())));
+            if(extraDepot1.getOcc() > 1)
+                resource2ExtraDepot1.setImage(new Image(ResourceLocator.retrieveResourceTypeImage(extraDepot1.getType())));
         }
 
         if(state.getNumOfExtraDepots() > 1){
-            extraDepotPot2.setVisible(true);
-            resourceExtraDepot2.setImage(new Image(ResourceLocator.retrieveResourceTypeImage(client.getGame()
+            ReducedDepot extraDepot2 = client.getGame()
                     .getPlayer(client.getUser()).getPersonalBoard().getWarehouse().
-                            getExtraDepots()[1].getType())));
+                            getExtraDepots()[1];
+            extraDepotPot2.setVisible(true);
+            resourceExtraDepot2.setImage(new Image(ResourceLocator.retrieveResourceTypeImage(extraDepot2.getType())));
             resourceExtraDepot2.setVisible(true);
+            if(extraDepot2.getOcc() > 0)
+                resource1ExtraDepot2.setImage(new Image(ResourceLocator.retrieveResourceTypeImage(extraDepot2.getType())));
+            if(extraDepot2.getOcc() > 1)
+                resource2ExtraDepot2.setImage(new Image(ResourceLocator.retrieveResourceTypeImage(extraDepot2.getType())));
         }
 
     }
