@@ -101,7 +101,7 @@ public class Controller {
     }
 
     public void showMoveResourcesUpdate(){
-        showPopup("/gui/FXML/MoveResourcesUpdatePopup.fxml", 500, 400);
+        showPopup("/gui/FXML/GenericPopup.fxml", 500, 400);
     }
 
     public void showPopup(String FXMLFile, int width, int height){

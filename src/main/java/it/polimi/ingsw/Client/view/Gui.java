@@ -136,6 +136,13 @@ public class Gui extends UI{
             Platform.runLater(() -> {
                 GUIApp.showScene("/gui/FXML/PlayerBoard.fxml");
                 GUIApp.controller.showMoveResourcesUpdate();
+                ((GenericPopupController)GUIApp.controller).setText("You move action has been correctly performed");
+            });
+        } else {
+            Platform.runLater(() -> {
+                GUIApp.showScene("/gui/FXML/PlayerBoard.fxml");
+                GUIApp.controller.showMoveResourcesUpdate();
+                ((GenericPopupController)GUIApp.controller).setText("User " + message.getUser() + " has moved resources");
             });
         }
     }

@@ -7,7 +7,7 @@ import javafx.scene.layout.*;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-public class MoveResourcesUpdatePopupController extends Controller{
+public class GenericPopupController extends Controller{
 
     @FXML
     public AnchorPane movePopup;
@@ -30,6 +30,10 @@ public class MoveResourcesUpdatePopupController extends Controller{
         title.setStyle("-fx-text-fill: rgb(62,11,11);");
         setFont(okButton,24);
         okButton.setStyle("-fx-text-fill: rgb(35, 25, 22);");
+    }
+
+    public void setText(String text){
+        title.setText(text);
     }
 
     @FXML
