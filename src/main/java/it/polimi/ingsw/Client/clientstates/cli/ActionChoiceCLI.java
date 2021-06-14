@@ -1,7 +1,9 @@
 package it.polimi.ingsw.Client.clientstates.cli;
 
 import it.polimi.ingsw.Client.clientstates.AbstractActionChoice;
+import it.polimi.ingsw.Client.reducedmodel.ReducedPlayer;
 import it.polimi.ingsw.Client.view.CLI;
+import it.polimi.ingsw.Commons.User;
 import it.polimi.ingsw.Network.Client;
 
 import java.util.Scanner;
@@ -31,8 +33,8 @@ public class ActionChoiceCLI extends AbstractActionChoice {
         if(normalActionAlreadyDone()) {
             System.out.println("Choose between Leader Action (L), Move Resources (M) and End Turn (E) ");
         } else {
-            System.out.print("Choose between Activate Production (A)," +
-                    " Buy (B), Take Resources (T), Leader Action (L) and Move Resources (M) ");
+            System.out.println("Choose between Activate Production (A)," +
+                    " Buy (B), Take Resources (T), Leader Action (L), Move Resources (M) ");
         }
         String choice = input.next().toUpperCase();
         switch(choice) {
@@ -77,8 +79,8 @@ public class ActionChoiceCLI extends AbstractActionChoice {
                 }
             }
             case "PB" : {
-                System.out.println("List of players is shown below");
-                System.out.print("Insert player username to see his personal board: ");
+                cli.askAndShowPlayerBoard();
+                return false;
             }
             default: {
                 System.out.println("Invalid choice, try again");
@@ -91,4 +93,6 @@ public class ActionChoiceCLI extends AbstractActionChoice {
         System.out.println("You have already done the normal action for this turn, please choose another action");
         return false;
     }
+
+
 }

@@ -17,7 +17,10 @@ public class ReducedMultiPlayerMode extends ReducedGame {
     }
 
     @Override
-    public void getPlayers() {
-
+    public void printPlayers() {
+        System.out.println("Here there are players that are currently playing");
+        players.stream().filter(x -> x.getNickname().isActive()).forEach(
+                x -> System.out.println("User : "+x.getNickname().getNickname())
+        );
     }
 }

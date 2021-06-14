@@ -4,13 +4,13 @@ import it.polimi.ingsw.Client.clientstates.AbstractClientState;
 import it.polimi.ingsw.Client.clientstates.cli.ActionChoiceCLI;
 import it.polimi.ingsw.Client.reducedmodel.ReducedDepot;
 import it.polimi.ingsw.Client.reducedmodel.ReducedPersonalBoard;
+import it.polimi.ingsw.Client.reducedmodel.ReducedPlayer;
 import it.polimi.ingsw.Commons.*;
 import it.polimi.ingsw.Exceptions.BackToMenuException;
 import it.polimi.ingsw.Network.Client;
 import it.polimi.ingsw.Utils.MarbleDestination;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.*;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.Updates.*;
-import it.polimi.ingsw.Utils.ResourceLocator;
 import it.polimi.ingsw.Utils.ResourceSource;
 
 import java.util.*;
@@ -171,7 +171,7 @@ public class CLI extends UI {
         if (isReceiverAction(message.getCurrentUser())) {
             System.out.println("It's now your turn, make the move ");
         } else {
-            System.out.printf("It's %s's turn, please wait\n", message.getCurrentUser());
+            System.out.println("User "+message.getCurrentUser()+" is now playing");
         }
     }
 
@@ -187,13 +187,13 @@ public class CLI extends UI {
 
     }
 
-    //TODO da cambiare
+
     public void render(FaithMarkerUpdate message) {
         if (isReceiverAction(message.getUser()) && !isReceiverAction(message.getTriggeringUser())) {
             System.out.printf("User " + message.getTriggeringUser() + " has performed action" +
                     " involving faith track, you got %d faith points\n", message.getPoints());
         }
-        printFaithTrack(message.getUserPersonalBoard());
+        //printFaithTrack(message.getUserPersonalBoard());
     }
 
     public void render(MoveUpdate message) {
@@ -416,6 +416,27 @@ public class CLI extends UI {
         }
     }
 
+    public void showPlayers() {
+        client.getGame().printPlayers();
+    }
+
+    private ReducedPlayer playerMatching(String requiredUsername) {
+        return client.getGame().getPlayer(new User(requiredUsername));
+    }
+
+    public void askAndShowPlayerBoard() {
+        showPlayers();
+        System.out.print("Choose the player to see his personal board: ");
+        ReducedPlayer requiredPlayer = playerMatching(input.next());
+        if(requiredPlayer.getNickname()!=null) {
+            printPersonalBoard(requiredPlayer.getPersonalBoard());
+        } else {
+            System.out.println("Invalid username!");
+        }
+    }
+
+
+
     public void showMarketTray() {
         System.out.println(client.getGame().getMarketTray());
     }
@@ -474,11 +495,11 @@ public class CLI extends UI {
 
     public void printFaithTrack(ReducedPersonalBoard playerBoard) {
         System.out.print("                              ! Vatican Section  ");
-        System.out.print("" + playerBoard.getFaithTrack().getFavourTile(0));
+        System.out.print("" + playerBoard.getFaithTrack().getFavorTile(0));
         System.out.print("                 !  Vatican Section       ");
-        System.out.print("" + playerBoard.getFaithTrack().getFavourTile(1));
+        System.out.print("" + playerBoard.getFaithTrack().getFavorTile(1));
         System.out.print("           !   Vatican Section            ");
-        System.out.print("" + playerBoard.getFaithTrack().getFavourTile(2));
+        System.out.print("" + playerBoard.getFaithTrack().getFavorTile(2));
         System.out.println();
         System.out.println("   0     1     2     3     4     5     6     7     8     9     10    11    12    13    14    15    16    17    18    19    20    21    22    23   24");
         System.out.println(".-----.-----.-----.-----.-----.-----.-----.-----.-----.-----.-----.-----.-----.-----.-----.-----.-----.-----.-----.-----.-----.-----.-----.-----.-----.");

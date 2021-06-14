@@ -57,6 +57,7 @@ public abstract class ReducedGame implements Serializable {
     }
 
 
+
     public void updatePersonalBoard(UpdateMessage message) {
         getPlayer(message.getUser()).updatePersonalBoard(message.getUserPersonalBoard());
     }
@@ -98,6 +99,6 @@ public abstract class ReducedGame implements Serializable {
         return isSoloMode;
     }
 
-    public abstract void getPlayers();
+    public abstract void printPlayers();
 }
 

@@ -12,9 +12,12 @@ import it.polimi.ingsw.Model.ConclusionEvents.GameEvent;
 import it.polimi.ingsw.Model.ConclusionEvents.SeventhDevCardBought;
 import it.polimi.ingsw.Observable;
 import it.polimi.ingsw.Utils.Pair;
+
+import java.awt.*;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.*;
+import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.stream.Collectors;
 
@@ -119,13 +122,23 @@ public class PersonalBoard extends Observable<GameEvent> {
         List<Pair<CardType, Integer>> activeCardTypes = convertToCardTypeOccurrences(activeCards);
         List<Pair<CardType, Integer>> requirementsCard = convertToCardTypeOccurrences(requirements);
         AtomicBoolean result = new AtomicBoolean(true);
-        for(Pair<CardType, Integer> p : requirementsCard){
-            activeCardTypes.stream().filter(x -> x.getKey().equals(p.getKey())).findFirst().ifPresentOrElse(x -> {
-                if(x.getValue() < p.getValue()) result.set(false);
-            }, ()->result.set(false));
-            /*if(activeCardTypes.stream().anyMatch(x -> x.getKey().equals(p.getKey()))){
-                if(activeCardTypes.stream().filter(x -> x.getKey().equals(p.getKey())).findFirst().get().getValue() < p.getValue()) return false;
-            } else return false;*/
+        for(Pair<CardType, Integer> p : requirementsCard) {
+            if(p.getKey().getLevel() > 1) {
+                activeCardTypes.stream().filter(x -> x.getKey().equals(p.getKey())).findFirst().ifPresentOrElse(x -> {
+                    if(x.getValue() < p.getValue()) result.set(false);
+                }, ()->result.set(false));
+            } else {
+                List<Pair<ColorCard, Integer>> colorsRequirements = convertToColoredCardOccurrences(requirements);
+                List<Pair<ColorCard, Integer>> colorsOwned = convertToColoredCardOccurrences(activeCards);
+
+                Pair<ColorCard,Integer> pair =
+                        colorsRequirements.stream().filter(x -> x.getKey().equals(p.getKey().getColor())).collect(Collectors.toList()).get(0);
+                colorsOwned.stream().filter(x -> x.getKey().equals(pair.getKey())).findFirst().ifPresentOrElse(
+                        x -> {
+                            if(x.getValue() < pair.getValue())
+                                result.set(false);
+                        }, () -> result.set(false));
+            }
         }
         return result.get();
     }
@@ -140,6 +153,18 @@ public class PersonalBoard extends Observable<GameEvent> {
             }
         }
         return cardTypeOccurrences;
+    }
+
+    private List<Pair<ColorCard, Integer>> convertToColoredCardOccurrences(List<CardType> cardTypes) {
+        List<Pair<ColorCard,Integer>> coloredCardOccurrences = new ArrayList<>();
+        List<ColorCard> colors = cardTypes.stream().map(CardType::getColor).collect(Collectors.toList());
+        for(ColorCard color : colors) {
+            if(coloredCardOccurrences.stream().noneMatch(x -> x.getKey().equals(color))) {
+                int occurrences = (int) colors.stream().filter(x -> x.equals(color)).count();
+                coloredCardOccurrences.add(new Pair<>(color,occurrences));
+            }
+        }
+        return coloredCardOccurrences;
     }
 
 

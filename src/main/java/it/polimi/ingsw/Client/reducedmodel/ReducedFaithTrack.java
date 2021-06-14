@@ -14,6 +14,8 @@ public class ReducedFaithTrack implements Serializable {
         this.favorTiles = favorTiles;
     }
 
+
+    @Override
     public String toString() {
         StringBuilder resultBuilder = new StringBuilder();
         for(int i = 0; i < 2; i++) {
@@ -42,7 +44,7 @@ public class ReducedFaithTrack implements Serializable {
         return favorTiles[vatican_index-1];
     }
 
-    public String getFavourTile(int tileIndex) {
+    public String getFavorTile(int tileIndex) {
         return favorTiles[tileIndex].getTileState(tileIndex);
     }
 

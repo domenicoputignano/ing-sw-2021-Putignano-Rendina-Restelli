@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+
 public class LorenzoIlMagnifico extends Observable<GameEvent> {
     private int blackCross = 0;
     private int passedSection = 0;

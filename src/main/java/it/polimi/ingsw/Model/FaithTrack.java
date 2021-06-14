@@ -6,6 +6,7 @@ import it.polimi.ingsw.Commons.StateFavorTiles;
 import it.polimi.ingsw.Model.ConclusionEvents.ActivateVaticanReportEvent;
 import it.polimi.ingsw.Model.ConclusionEvents.GameEvent;
 import it.polimi.ingsw.Model.ConclusionEvents.HitLastSpace;
+import it.polimi.ingsw.Model.SoloMode.LorenzoIlMagnifico;
 import it.polimi.ingsw.Observable;
 
 import java.util.Arrays;
@@ -60,6 +61,9 @@ public class FaithTrack extends Observable<GameEvent> {
         if (this.sections[vatican_index].getState() == StateFavorTiles.FACEDOWN)
             notify(new ActivateVaticanReportEvent(triggerPlayer,vatican_index));
     }
+
+
+
 
     public void setFavorTile(int index, StateFavorTiles state)
     {

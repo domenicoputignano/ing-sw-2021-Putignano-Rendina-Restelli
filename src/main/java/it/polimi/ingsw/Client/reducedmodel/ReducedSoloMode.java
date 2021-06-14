@@ -34,7 +34,7 @@ public class ReducedSoloMode extends ReducedGame {
         return blackCross;
     }
 
-    public void getPlayers() {
+    public void printPlayers() {
         System.out.println("You are competing versus Lorenzo Il Magnifico whose black cross is in "+blackCross+"° position!");
     }
 

@@ -25,11 +25,13 @@ public class WaitForTurnCLI extends AbstractWaitForTurn {
         waiterThread = new Thread(()-> {
             while(!waiterThread.isInterrupted()){
                 try{
-                    while(!input.ready()){
+                    System.out.println("You have to wait until your turn will start," +
+                            " you can see player's board by typing (PB), market tray (M) or decks (D)");
+                    while(!input.ready()) {
                         Thread.sleep(50);
                     }
-                    stringToIgnore = input.readLine();
-                    System.out.println("It's not your turn, please wait..");
+                    String command = input.readLine();
+                    parseAndExecuteCommand(command);
                 } catch (IOException e) {
                     System.out.println("Buffered Reader accidentally cancelled, program will be shut down.");
                 } catch (InterruptedException e) {
@@ -41,11 +43,16 @@ public class WaitForTurnCLI extends AbstractWaitForTurn {
         waiterThread.start();
     }
 
+    public void parseAndExecuteCommand(String input) {
+        if(input.equalsIgnoreCase("PB")) cli.askAndShowPlayerBoard();
+        if(input.equalsIgnoreCase("M")) cli.showMarketTray();
+        if(input.equalsIgnoreCase("D")) cli.printDecks();
+        else System.out.println("Invalid command");
+    }
+
     public void shutDownWaiterThread() {
         waiterThread.interrupt();
     }
-
-
 
 
 }
