@@ -37,6 +37,11 @@ public class ReducedFaithTrack implements Serializable {
         }
     }
 
+    public StateFavorTiles getStateFavorTile(int vatican_index)
+    {
+        return favorTiles[vatican_index-1];
+    }
+
     public String getFavourTile(int tileIndex) {
         return favorTiles[tileIndex].getTileState(tileIndex);
     }

@@ -1,11 +1,13 @@
 package it.polimi.ingsw.Client.view.GUI;
 
+import it.polimi.ingsw.Client.reducedmodel.ReducedFaithTrack;
 import it.polimi.ingsw.Client.reducedmodel.ReducedPlayer;
 import it.polimi.ingsw.Client.reducedmodel.ReducedSoloMode;
 import it.polimi.ingsw.Client.reducedmodel.ReducedStrongbox;
 import it.polimi.ingsw.Commons.Effect;
 import it.polimi.ingsw.Commons.LeaderCard;
 import it.polimi.ingsw.Commons.ResourceType;
+import it.polimi.ingsw.Commons.StateFavorTiles;
 import it.polimi.ingsw.Utils.Messages.ClientMessages.EndTurnMessage;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.Updates.TakeResourcesFromMarketUpdate;
 import it.polimi.ingsw.Utils.ResourceLocator;
@@ -16,6 +18,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
@@ -67,6 +70,12 @@ public class PlayerBoardController extends Controller {
     public ImageView depot1, depot21, depot22, depot31, depot32, depot33;
 
     @FXML
+    public TextField username;
+
+    @FXML
+    public ImageView lightActive1,lightActive2;
+
+    @FXML
     Text numCoinStrongbox, numServantStrongbox, numShieldStrongbox, numStoneStrongbox;
 
     ReducedPlayer playerToShow;
@@ -81,6 +90,9 @@ public class PlayerBoardController extends Controller {
                 BackgroundRepeat.NO_REPEAT,
                 BackgroundPosition.CENTER,
                 bSize)));
+        lightActive1.setImage(new Image("/gui/img/activeLeaderCardLight.png"));
+        lightActive2.setImage(new Image("/gui/img/activeLeaderCardLight.png"));
+        setFont(username,23);
         setFont(chooseAction,24);
         setFont(moveAction,24);
         setFont(endTurn,24);
@@ -94,14 +106,11 @@ public class PlayerBoardController extends Controller {
         chooseAction.setStyle("-fx-text-fill: rgb(35, 25, 22);");
         moveAction.setStyle("-fx-text-fill: rgb(35, 25, 22);");
 
+
         this.client = GUIApp.client;
         initializePersonalBoard(client.getGame().getPlayer(client.getUser()));
-
-        if(playerToShow.getNumOfLeaderCards() > 0)
-            leaderCard1.setImage(new Image(client.getGame().getPlayer(client.getUser()).getAvailableLeaderCards().get(0).toImage()));
-
-        if(playerToShow.getNumOfLeaderCards() > 1)
-            leaderCard2.setImage(new Image(client.getGame().getPlayer(client.getUser()).getAvailableLeaderCards().get(1).toImage()));
+        username.setText(""+client.getGame().getPlayer(client.getUser()).getNickname());
+        initializeLeaderCards();
         strongboxResources.setVisible(true);
         initializeCells();
         initializeDepots();
@@ -114,6 +123,22 @@ public class PlayerBoardController extends Controller {
         initializeSlots();
         setAvailableActions();
         initializeExtraDepots();
+    }
+
+    private void initializeLeaderCards()
+    {
+        if(playerToShow.getNumOfLeaderCards() > 0) {
+            LeaderCard l1 = client.getGame().getPlayer(client.getUser()).getAvailableLeaderCards().get(0);
+            leaderCard1.setImage(new Image(l1.toImage()));
+            if(l1.isActive())
+                lightActive1.setVisible(true);
+        }
+        if(playerToShow.getNumOfLeaderCards() > 1) {
+            LeaderCard l2 = client.getGame().getPlayer(client.getUser()).getAvailableLeaderCards().get(1);
+            leaderCard2.setImage(new Image(l2.toImage()));
+            if(l2.isActive())
+                lightActive2.setVisible(true);
+        }
     }
 
     private void initializeCells()
@@ -143,13 +168,32 @@ public class PlayerBoardController extends Controller {
         cells[22] = cell22;
         cells[23] = cell23;
         cells[24] = cell24;
+        cells[0].setImage(new Image("/gui/img/faith.png"));
         favorTiles[0] = favorTile1;
         favorTiles[1] = favorTile2;
         favorTiles[2] = favorTile3;
-        favorTiles[0].setImage(new Image("/gui/img/favorTile1D.png"));
-        favorTiles[1].setImage(new Image("/gui/img/favorTile2D.png"));
-        favorTiles[2].setImage(new Image("/gui/img/favorTile3D.png"));
-        cells[0].setImage(new Image("/gui/img/faith.png"));
+        ReducedFaithTrack faithTrack = client.getGame().getPlayer(client.getUser()).getPersonalBoard().getFaithTrack();
+
+        if(faithTrack.getStateFavorTile(1) == StateFavorTiles.FACEDOWN)
+            favorTiles[0].setImage(new Image("/gui/img/favorTile1D.png"));
+        else
+            if(faithTrack.getStateFavorTile(1) == StateFavorTiles.FACEUP)
+                favorTiles[0].setImage(new Image("/gui/img/favorTile1.png"));
+            else favorTiles[0].setImage(null);
+
+        if(faithTrack.getStateFavorTile(2) == StateFavorTiles.FACEDOWN)
+            favorTiles[1].setImage(new Image("/gui/img/favorTile2D.png"));
+        else
+            if(faithTrack.getStateFavorTile(2) == StateFavorTiles.FACEUP)
+                favorTiles[1].setImage(new Image("/gui/img/favorTile2.png"));
+            else favorTiles[1].setImage(null);
+
+        if(faithTrack.getStateFavorTile(3) == StateFavorTiles.FACEDOWN)
+            favorTiles[2].setImage(new Image("/gui/img/favorTile3D.png"));
+        else
+        if(faithTrack.getStateFavorTile(3) == StateFavorTiles.FACEUP)
+            favorTiles[2].setImage(new Image("/gui/img/favorTile3.png"));
+        else favorTiles[2].setImage(null);
     }
 
     private void initializeSlots()
