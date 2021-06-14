@@ -99,6 +99,10 @@ public abstract class ReducedGame implements Serializable {
         return isSoloMode;
     }
 
+    public List<ReducedPlayer> getPlayers() {
+        return players;
+    }
+
     public abstract void printPlayers();
 }
 

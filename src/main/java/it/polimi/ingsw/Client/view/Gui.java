@@ -70,15 +70,21 @@ public class Gui extends UI{
 
     @Override
     public void render(GameResumedMessage message) {
-        Platform.runLater(() -> GUIApp.showScene("/gui/FXML/PlayerBoard.fxml"));
+        Platform.runLater(() -> {
+            GUIApp.showScene("/gui/FXML/PlayerBoard.fxml");
+            ((PlayerBoardController)GUIApp.controller).initializePersonalBoard(client.getGame().getPlayer(client.getUser()));
+        });
     }
 
     @Override
     public void render(InitialLeaderChoiceUpdate message) {
         if(isReceiverAction(message.getUser())){
             if(isSoloMode()){
-                Platform.runLater(() -> GUIApp.showScene("/gui/FXML/PlayerBoard.fxml"));
-            } else {
+                Platform.runLater(() -> {
+                    GUIApp.showScene("/gui/FXML/PlayerBoard.fxml");
+                    ((PlayerBoardController)GUIApp.controller).initializePersonalBoard(client.getGame().getPlayer(client.getUser()));
+                });
+                } else {
                 if(client.getUserPosition() > 1) {
                     Platform.runLater(() -> GUIApp.showScene("/gui/FXML/ResourceChoicePage.fxml"));
                 } else {
@@ -109,6 +115,7 @@ public class Gui extends UI{
     public void render(NewTurnUpdate message) {
         Platform.runLater(() -> {
             GUIApp.showScene("/gui/FXML/PlayerBoard.fxml");
+            ((PlayerBoardController)GUIApp.controller).initializePersonalBoard(client.getGame().getPlayer(client.getUser()));
         });
     }
 
@@ -117,6 +124,7 @@ public class Gui extends UI{
         if(isReceiverAction(message.getUser())){
             Platform.runLater(() -> {
                 GUIApp.showScene("/gui/FXML/PlayerBoard.fxml");
+                ((PlayerBoardController)GUIApp.controller).initializePersonalBoard(client.getGame().getPlayer(client.getUser()));
                 GUIApp.controller.showTakeResourcesFromMarketUpdate();
                 ((TakeResPopupController)GUIApp.controller).setImages(message);
             });
@@ -126,7 +134,11 @@ public class Gui extends UI{
     @Override
     public void render(FaithMarkerUpdate message) {
         if(isReceiverAction(message.getUser())) {
-            Platform.runLater(() -> GUIApp.showScene("/gui/FXML/PlayerBoard.fxml"));
+            Platform.runLater(() -> {
+                GUIApp.showScene("/gui/FXML/PlayerBoard.fxml");
+                ((PlayerBoardController)GUIApp.controller).initializePersonalBoard(client.getGame().getPlayer(client.getUser()));
+        });
+
         }
     }
 
@@ -135,12 +147,14 @@ public class Gui extends UI{
         if(isReceiverAction(message.getUser())){
             Platform.runLater(() -> {
                 GUIApp.showScene("/gui/FXML/PlayerBoard.fxml");
+                ((PlayerBoardController)GUIApp.controller).initializePersonalBoard(client.getGame().getPlayer(client.getUser()));
                 GUIApp.controller.showMoveResourcesUpdate();
                 ((GenericPopupController)GUIApp.controller).setText("You move action has been correctly performed");
             });
         } else {
             Platform.runLater(() -> {
                 GUIApp.showScene("/gui/FXML/PlayerBoard.fxml");
+                ((PlayerBoardController)GUIApp.controller).initializePersonalBoard(client.getGame().getPlayer(client.getUser()));
                 GUIApp.controller.showMoveResourcesUpdate();
                 ((GenericPopupController)GUIApp.controller).setText("User " + message.getUser() + " has moved resources");
             });
@@ -152,6 +166,7 @@ public class Gui extends UI{
         if(isReceiverAction(message.getUser())){
             Platform.runLater(() -> {
                 GUIApp.showScene("/gui/FXML/PlayerBoard.fxml");
+                ((PlayerBoardController)GUIApp.controller).initializePersonalBoard(client.getGame().getPlayer(client.getUser()));
                 GUIApp.controller.showLeaderActionUpdate();
                 ((LeaderActionPopupController)GUIApp.controller).setImage(message);
             });
@@ -164,6 +179,7 @@ public class Gui extends UI{
         if(isReceiverAction(message.getUser())){
             Platform.runLater(() -> {
                 GUIApp.showScene("/gui/FXML/PlayerBoard.fxml");
+                ((PlayerBoardController)GUIApp.controller).initializePersonalBoard(client.getGame().getPlayer(client.getUser()));
                 // TODO aggiungere popup
             });
 
@@ -174,6 +190,7 @@ public class Gui extends UI{
     public void render(LorenzoPlayedUpdate message) {
         Platform.runLater(() -> {
             GUIApp.showScene("/gui/FXML/PlayerBoard.fxml");
+            ((PlayerBoardController)GUIApp.controller).initializePersonalBoard(client.getGame().getPlayer(client.getUser()));
             GUIApp.controller.showLorenzoPlayedPopup();
             ((LorenzoPlayedPopupController)GUIApp.controller).setTokenRender(message);
         });
@@ -185,6 +202,7 @@ public class Gui extends UI{
         if(isReceiverAction(message.getUser())) {
             Platform.runLater(() -> {
                 GUIApp.showScene("/gui/FXML/PlayerBoard.fxml");
+                ((PlayerBoardController)GUIApp.controller).initializePersonalBoard(client.getGame().getPlayer(client.getUser()));
                 GUIApp.controller.showBuyDevCardUpdate();
                 ((BuyDevCardPopupController)GUIApp.controller).setImage(message);
             });
@@ -196,6 +214,7 @@ public class Gui extends UI{
         if(isReceiverAction(message.getUser())) {
             Platform.runLater(() -> {
                 GUIApp.showScene("/gui/FXML/PlayerBoard.fxml");
+                ((PlayerBoardController)GUIApp.controller).initializePersonalBoard(client.getGame().getPlayer(client.getUser()));
             });
         }
     }

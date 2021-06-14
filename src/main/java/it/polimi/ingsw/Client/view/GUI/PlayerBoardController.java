@@ -81,15 +81,6 @@ public class PlayerBoardController extends Controller {
     ReducedPlayer playerToShow;
 
     public void initialize() {
-        super.initialize();
-
-        BackgroundSize bSize = new BackgroundSize(80, 80, true, true, true, true);
-
-        center.setBackground(new Background(new BackgroundImage(new Image("/gui/img/background.jpg"),
-                BackgroundRepeat.NO_REPEAT,
-                BackgroundRepeat.NO_REPEAT,
-                BackgroundPosition.CENTER,
-                bSize)));
         lightActive1.setImage(new Image("/gui/img/activeLeaderCardLight.png"));
         lightActive2.setImage(new Image("/gui/img/activeLeaderCardLight.png"));
         setFont(username,23);
@@ -106,35 +97,20 @@ public class PlayerBoardController extends Controller {
         chooseAction.setStyle("-fx-text-fill: rgb(35, 25, 22);");
         moveAction.setStyle("-fx-text-fill: rgb(35, 25, 22);");
 
-
         this.client = GUIApp.client;
-        initializePersonalBoard(client.getGame().getPlayer(client.getUser()));
-        username.setText(""+client.getGame().getPlayer(client.getUser()).getNickname());
-        initializeLeaderCards();
-        strongboxResources.setVisible(true);
-        initializeCells();
-        initializeDepots();
-        initializeStrongbox();
-        if(client.getUI().isSoloMode())
-            initializeFaithTrackWithBlackCross();
-        else
-            initializeFaithMarker();
-        setAvailableActions();
-        initializeSlots();
-        setAvailableActions();
-        initializeExtraDepots();
+
     }
 
     private void initializeLeaderCards()
     {
         if(playerToShow.getNumOfLeaderCards() > 0) {
-            LeaderCard l1 = client.getGame().getPlayer(client.getUser()).getAvailableLeaderCards().get(0);
+            LeaderCard l1 = playerToShow.getAvailableLeaderCards().get(0);
             leaderCard1.setImage(new Image(l1.toImage()));
             if(l1.isActive())
                 lightActive1.setVisible(true);
         }
         if(playerToShow.getNumOfLeaderCards() > 1) {
-            LeaderCard l2 = client.getGame().getPlayer(client.getUser()).getAvailableLeaderCards().get(1);
+            LeaderCard l2 = playerToShow.getAvailableLeaderCards().get(1);
             leaderCard2.setImage(new Image(l2.toImage()));
             if(l2.isActive())
                 lightActive2.setVisible(true);
@@ -172,7 +148,7 @@ public class PlayerBoardController extends Controller {
         favorTiles[0] = favorTile1;
         favorTiles[1] = favorTile2;
         favorTiles[2] = favorTile3;
-        ReducedFaithTrack faithTrack = client.getGame().getPlayer(client.getUser()).getPersonalBoard().getFaithTrack();
+        ReducedFaithTrack faithTrack = playerToShow.getPersonalBoard().getFaithTrack();
 
         if(faithTrack.getStateFavorTile(1) == StateFavorTiles.FACEDOWN)
             favorTiles[0].setImage(new Image("/gui/img/favorTile1D.png"));
@@ -217,14 +193,14 @@ public class PlayerBoardController extends Controller {
 
     private void initializeExtraDepots()
     {
-        List<LeaderCard> leaderCards = client.getGame().getPlayer(client.getUser()).getAvailableLeaderCards();
+        List<LeaderCard> leaderCards = playerToShow.getAvailableLeaderCards();
 
         if(leaderCards.size() > 0)
         {
             LeaderCard l1 = leaderCards.get(0);
             if(l1.getLeaderEffect().getEffect() == Effect.EXTRADEPOT && l1.isActive())
             {
-                int occLeaderCard1 = Arrays.stream(client.getGame().getPlayer(client.getUser()).getPersonalBoard().getWarehouse().getExtraDepots())
+                int occLeaderCard1 = Arrays.stream(playerToShow.getPersonalBoard().getWarehouse().getExtraDepots())
                         .filter(x->x!=null && x.getType()==l1.getLeaderEffect().getType()).collect(Collectors.toList()).get(0)
                     .getOcc();
                 if(occLeaderCard1 > 0)
@@ -238,7 +214,7 @@ public class PlayerBoardController extends Controller {
             LeaderCard l2 = leaderCards.get(1);
             if(l2.getLeaderEffect().getEffect() == Effect.EXTRADEPOT && l2.isActive())
             {
-                int occLeaderCard2 = Arrays.stream(client.getGame().getPlayer(client.getUser()).getPersonalBoard().getWarehouse().getExtraDepots())
+                int occLeaderCard2 = Arrays.stream(playerToShow.getPersonalBoard().getWarehouse().getExtraDepots())
                         .filter(x->x!=null && x.getType()==l2.getLeaderEffect().getType()).collect(Collectors.toList()).get(0)
                         .getOcc();
                 if(occLeaderCard2 > 0)
@@ -337,6 +313,35 @@ public class PlayerBoardController extends Controller {
 
     public void initializePersonalBoard(ReducedPlayer player) {
         this.playerToShow = player;
+        if(!playerToShow.getNickname().equals(client.getGame().getPlayer(client.getUser()).getNickname())) {
+            chooseAction.setVisible(false);
+            moveAction.setVisible(false);
+            endTurn.setVisible(false);
+            otherPlayers.setVisible(false);
+        }
+        else {
+            super.initialize();
+            BackgroundSize bSize = new BackgroundSize(80, 80, true, true, true, true);
+            center.setBackground(new Background(new BackgroundImage(new Image("/gui/img/background.jpg"),
+                    BackgroundRepeat.NO_REPEAT,
+                    BackgroundRepeat.NO_REPEAT,
+                    BackgroundPosition.CENTER,
+                    bSize)));
+        }
+        username.setText(""+playerToShow.getNickname());
+        initializeLeaderCards();
+        strongboxResources.setVisible(true);
+        initializeCells();
+        initializeDepots();
+        initializeStrongbox();
+        if(client.getUI().isSoloMode())
+            initializeFaithTrackWithBlackCross();
+        else
+            initializeFaithMarker();
+        setAvailableActions();
+        initializeSlots();
+        setAvailableActions();
+        initializeExtraDepots();
     }
 
     private void setAvailableActions() {
@@ -349,6 +354,12 @@ public class PlayerBoardController extends Controller {
             moveAction.setVisible(true);
             chooseAction.setVisible(true);
         }
+    }
+
+    @FXML
+    public void handleViewOtherPlayers()
+    {
+        showPopup("/gui/fxml/ViewOtherPlayersPage.fxml", 820, 520);
     }
 
 }
