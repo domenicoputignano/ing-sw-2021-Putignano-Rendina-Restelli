@@ -13,7 +13,6 @@ import it.polimi.ingsw.Utils.MoveActionInterface;
 import it.polimi.ingsw.Utils.Pair;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -69,7 +68,7 @@ public class Player {
     public LeaderCard discardLeaderCard(int index) {
         if (!this.leaderCards.get(index).isActive())
         {
-            this.personalBoard.getFaithTrack().moveMarker(1);
+            this.personalBoard.getFaithTrack().moveMarker(this, 1);
             return this.leaderCards.remove(index);
         }
         else return null;

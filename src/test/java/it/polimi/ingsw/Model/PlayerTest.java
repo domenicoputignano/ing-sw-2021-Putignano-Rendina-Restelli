@@ -137,7 +137,7 @@ class PlayerTest {
 
         player.getLeaderCards().get(0).setIsActive();//5 VP
 
-        player.getPersonalBoard().getFaithTrack().moveMarker(19);//12 VP
+        player.getPersonalBoard().moveMarker(player, 19);//12 VP
 
         Map<ResourceType, Integer> cost = new EnumMap<ResourceType, Integer>(ResourceType.class);
         cost.put(ResourceType.servant,0);

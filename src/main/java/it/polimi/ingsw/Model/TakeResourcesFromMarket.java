@@ -8,7 +8,6 @@ import it.polimi.ingsw.Exceptions.*;
 import it.polimi.ingsw.Commons.Effect;
 import it.polimi.ingsw.Model.MarketTray.*;
 import it.polimi.ingsw.Utils.MarbleDestination;
-import it.polimi.ingsw.Utils.Messages.ServerMessages.Updates.FaithMarkerUpdate;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.Updates.PositioningUpdate;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.Updates.TakeResourcesFromMarketUpdate;
 import it.polimi.ingsw.Utils.Pair;
@@ -139,7 +138,7 @@ public class TakeResourcesFromMarket implements AbstractTurnPhase {
 
     private void moveCurrPlayerMarker(Turn turn)
     {
-        turn.getPlayer().getPersonalBoard().getFaithTrack().moveMarker(faith);
+        turn.getPlayer().getPersonalBoard().moveMarker(turn.getPlayer(), faith);
     }
 
     public void concludeTurnPhase(Turn turn) {

@@ -2,7 +2,6 @@ package it.polimi.ingsw.Model.SoloMode;
 
 import it.polimi.ingsw.Model.FaithTrack;
 import it.polimi.ingsw.Model.Player;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -19,7 +18,7 @@ class LorenzoIlMagnificoTest {
         LorenzoIlMagnifico lorenzo = new LorenzoIlMagnifico(game.getCurrPlayer().getPersonalBoard().getFaithTrack(),game);
         FaithTrack faithTrack = game.getCurrPlayer().getPersonalBoard().getFaithTrack();
         int start = faithTrack.getFaithMarker();
-        faithTrack.moveMarker(23);
+        faithTrack.moveMarker(game.getCurrPlayer(), 23);
         assertEquals(start + 23,faithTrack.getFaithMarker());
         assertEquals(2, faithTrack.getPassedSection());
     }

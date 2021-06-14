@@ -1,17 +1,20 @@
 package it.polimi.ingsw.Model.ConclusionEvents;
 
 import it.polimi.ingsw.Model.Game;
+import it.polimi.ingsw.Model.Player;
 
 public class ActivateVaticanReportEvent implements GameEvent{
     private final Integer vatican_index;
+    private final Player triggeringPlayer;
 
-    public ActivateVaticanReportEvent(Integer vatican_index) {
+    public ActivateVaticanReportEvent(Player trigger, Integer vatican_index) {
         this.vatican_index = vatican_index;
+        this.triggeringPlayer = trigger;
     }
 
     @Override
     public void handleEvent(Game game) {
-        game.activateVaticanReport(vatican_index);
+        game.activateVaticanReport(triggeringPlayer, vatican_index);
     }
 
     @Override

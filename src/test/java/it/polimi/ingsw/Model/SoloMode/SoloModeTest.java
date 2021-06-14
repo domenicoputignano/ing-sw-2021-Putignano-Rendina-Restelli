@@ -118,7 +118,7 @@ class SoloModeTest {
         SoloMode game = new SoloMode(playerList.get(0));
         game.setup();
         assertEquals(StateFavorTiles.FACEDOWN, game.getCurrPlayer().getPersonalBoard().getFaithTrack().getSections()[0].getState());
-        game.getCurrPlayer().getPersonalBoard().getFaithTrack().moveMarker(8);
+        game.getCurrPlayer().getPersonalBoard().moveMarker(game.getCurrPlayer(), 8);
         assertEquals(StateFavorTiles.FACEUP, game.getCurrPlayer().getPersonalBoard().getFaithTrack().getSections()[0].getState());
     }
 
@@ -180,7 +180,7 @@ class SoloModeTest {
         LeaderActionMessage leaderActionMessage = new LeaderActionMessage();
         leaderActionMessage.setIndex(1);
         leaderActionMessage.setToDiscard(true);
-        game.getTurn().getPlayer().getPersonalBoard().getFaithTrack().moveMarker(8);
+        game.getTurn().getPlayer().getPersonalBoard().moveMarker(game.getTurn().getPlayer(), 8);
         int start = game.getTurn().getPlayer().getPersonalBoard().getFaithTrack().getFaithMarker();
         game.getTurn().setTurnState(TurnState.ActionType.LEADERACTION);
         game.getTurn().getTurnPhase().leaderAction(game.getTurn(),leaderActionMessage);

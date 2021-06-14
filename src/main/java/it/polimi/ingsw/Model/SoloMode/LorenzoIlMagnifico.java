@@ -30,7 +30,7 @@ public class LorenzoIlMagnifico extends Observable<GameEvent> {
         for(int i=0; i<pos; i++){
             this.blackCross++;
             if(faithTrack.isPopeSpace(passedSection,blackCross)){
-                this.faithTrack.activeVaticanReport(passedSection);// attiva rapporto in vaticano
+                this.faithTrack.activeVaticanReport(soloGame.getCurrPlayer(),passedSection);// attiva rapporto in vaticano
             }
             if(this.blackCross >= faithTrack.getPopeSpace(passedSection)){
                 if(passedSection < 2)// controllo se ho sorpassato la vaticanReportSection attuale

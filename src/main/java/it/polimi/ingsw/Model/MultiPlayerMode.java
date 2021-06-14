@@ -90,7 +90,7 @@ public class MultiPlayerMode extends Game {
     public void moveOtherPlayers(Player triggeringPlayer, int discardedResources) {
         for(Player p : playerList) {
             if(!p.equals(triggeringPlayer)) {
-                p.getPersonalBoard().getFaithTrack().moveMarker(discardedResources);
+                p.getPersonalBoard().moveMarker(p,discardedResources);
             }
             turn.getGame().notifyUpdate(new FaithMarkerUpdate(p.getUser(),
                     p.getReducedPersonalBoard(),

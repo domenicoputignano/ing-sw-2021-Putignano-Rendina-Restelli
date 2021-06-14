@@ -40,7 +40,7 @@ public class ActivateProduction implements AbstractTurnPhase {
                 try {
                     PaymentHandler.performPayment(playerWarehouse, activateProductionMessage.getHowToTakeResources(), turn);
                     playerWarehouse.addResourcesToStrongbox(outputResources);
-                    turn.getPlayer().getPersonalBoard().getFaithTrack().moveMarker(faith);
+                    turn.getPlayer().getPersonalBoard().moveMarker(turn.getPlayer(),faith);
                     turn.normalActionDone();
                     turn.getGame().notifyUpdate(new ActivateProductionUpdate(turn.getPlayer().getUser(), turn.getPlayer().getReducedPersonalBoard(),
                             inputResources, outputResources, faith));

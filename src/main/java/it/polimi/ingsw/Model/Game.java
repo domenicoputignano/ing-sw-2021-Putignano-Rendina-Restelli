@@ -45,7 +45,7 @@ public abstract class Game extends Observable<ServerMessage> implements Observer
             p.getPersonalBoard().addObserver(this);
             p.getPersonalBoard().getFaithTrack().addObserver(this);
             if (p.getPosition() == 3 || p.getPosition() == 4) {
-                p.getPersonalBoard().getFaithTrack().moveMarker(1);
+                p.getPersonalBoard().moveMarker(p, 1);
             }
         }
         this.turn = new Turn(this,inkwell);
@@ -112,9 +112,8 @@ public abstract class Game extends Observable<ServerMessage> implements Observer
     }
 
 
-    public void activateVaticanReport(int vatican_index) {
+    public void activateVaticanReport(Player triggeringPlayer,int vatican_index) {
         int start = currPlayer.getPersonalBoard().getFaithTrack().getSections()[vatican_index].getStartSpace();
-
         for(Player p: playerList)
         {
             int position = p.getPersonalBoard().getFaithTrack().getFaithMarker();
@@ -123,7 +122,7 @@ public abstract class Game extends Observable<ServerMessage> implements Observer
             else p.getPersonalBoard().getFaithTrack().setFavorTile(vatican_index,StateFavorTiles.DISCARDED);
 
             notifyUpdate(new ActivateVaticanReportUpdate(p.getUser(),
-                    p.getReducedPersonalBoard(), currPlayer.getUser(),
+                    p.getReducedPersonalBoard(), triggeringPlayer.getUser(),
                     p.getPersonalBoard().getFaithTrack().getStateFavorTile(vatican_index), vatican_index));
         }
 

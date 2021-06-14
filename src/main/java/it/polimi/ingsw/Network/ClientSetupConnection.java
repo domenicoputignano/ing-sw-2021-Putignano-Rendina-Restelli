@@ -68,11 +68,7 @@ public class ClientSetupConnection implements Runnable {
         sendConfigurationMessage(new ServerAsksForNickname());
         do {
             UsernameChoiceMessage messageFromClient = (UsernameChoiceMessage) inputStream.readObject();
-            nickname = messageFromClient.getNickname();/*
-            if(server.isNicknameAvailableBeforeStarting(nickname)) {
-                sendConfigurationMessage(new NotAvailableNicknameMessage());
-            }*/
-            //else {
+            nickname = messageFromClient.getNickname();
                 if (server.isPlayerWithSameNicknamePlaying(nickname)) {
                     sendConfigurationMessage(new NotAvailableNicknameMessage());
                     LOGGER.log(Level.INFO, "Player has chosen an unavailable nickname, connection refused ");

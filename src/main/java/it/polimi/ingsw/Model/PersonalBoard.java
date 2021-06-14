@@ -150,6 +150,10 @@ public class PersonalBoard extends Observable<GameEvent> {
     }
 
 
+    public void moveMarker(Player movingPlayer, int positions) {
+        faithTrack.moveMarker(movingPlayer, positions);
+    }
+
 
 
     public Warehouse getWarehouse() {

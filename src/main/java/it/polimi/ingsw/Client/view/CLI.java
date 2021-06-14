@@ -177,8 +177,7 @@ public class CLI extends UI {
 
     public void render(TakeResourcesFromMarketUpdate message) {
         if (isReceiverAction(message.getUser())) {
-            System.out.printf("You got following resources from market: " + message.getEarnedResources() + " and %d faith points\n" +
-                    "Your depots are show below\n", message.getFaithPoints());
+            System.out.printf("You got following resources from market: " + message.getEarnedResources() + " and %d faith points\n", message.getFaithPoints());
             showDepots();
         } else {
             System.out.println("User " + message.getUser() + "" +
@@ -261,8 +260,6 @@ public class CLI extends UI {
                     " ( " + message.getPayedResources() + " )");
             System.out.println("Following resources have been stored in your strongbox: " +
                     message.getReceivedResources());
-            //TODO rivedere questa parte anche negli altri render
-            System.out.println("Here is your warehouse updated\n" + message.getUserPersonalBoard().getWarehouse());
             if (message.getFaithPoints() > 0)
                 System.out.printf("You got also %d faith points\n", message.getFaithPoints());
         } else {

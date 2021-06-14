@@ -2,8 +2,6 @@ package it.polimi.ingsw.Model;
 
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class FaithTrackTest {
@@ -24,14 +22,14 @@ class FaithTrackTest {
     @Test
     void moveMarker() {
         int start = faithTrack.getFaithMarker();
-        faithTrack.moveMarker(23);
+        faithTrack.moveMarker(owner, 23);
         assertEquals(start + 23,faithTrack.getFaithMarker());
         assertEquals(2, faithTrack.getPassedSection());
     }
 
     @Test
     void calcVictoryPoints(){
-        faithTrack.moveMarker(22);
+        faithTrack.moveMarker(owner, 22);
         assertEquals(16, faithTrack.calcVictoryPoints());
     }
 

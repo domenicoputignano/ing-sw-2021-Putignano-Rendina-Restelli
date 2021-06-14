@@ -37,7 +37,7 @@ class LeaderActionTest {
         leaderActionMessage.setIndex(1);
         leaderActionMessage.setToDiscard(true);
         int start = multiPlayerMode.getTurn().getPlayer().getPersonalBoard().getFaithTrack().getFaithMarker();
-        multiPlayerMode.getTurn().getPlayer().getPersonalBoard().getFaithTrack().moveMarker(8);
+        multiPlayerMode.getTurn().getPlayer().getPersonalBoard().moveMarker(multiPlayerMode.currPlayer, 8);
         multiPlayerMode.getTurn().setTurnState(TurnState.ActionType.LEADERACTION);
         multiPlayerMode.getTurn().getTurnPhase().leaderAction(multiPlayerMode.getTurn(),leaderActionMessage);
         assertEquals(1, multiPlayerMode.getTurn().getPlayer().getLeaderCards().size());
@@ -49,7 +49,7 @@ class LeaderActionTest {
         leaderActionMessage.setIndex(1);
         leaderActionMessage.setToDiscard(true);
         int start = multiPlayerMode.getTurn().getPlayer().getPersonalBoard().getFaithTrack().getFaithMarker();
-        multiPlayerMode.getTurn().getPlayer().getPersonalBoard().getFaithTrack().moveMarker(8);
+        multiPlayerMode.getTurn().getPlayer().getPersonalBoard().moveMarker(multiPlayerMode.currPlayer, 8);
         multiPlayerMode.getTurn().getPlayer().getLeaderCards().get(0).setIsActive();
         multiPlayerMode.getTurn().setTurnState(TurnState.ActionType.LEADERACTION);
         assertThrows(LeaderStatusException.class,()-> multiPlayerMode.getTurn().getTurnPhase().leaderAction(multiPlayerMode.getTurn(),leaderActionMessage));

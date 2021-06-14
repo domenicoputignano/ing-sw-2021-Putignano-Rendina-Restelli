@@ -4,7 +4,6 @@ import it.polimi.ingsw.Commons.*;
 import it.polimi.ingsw.Exceptions.DepotOutOfBoundsException;
 import it.polimi.ingsw.Exceptions.IncompatibleResourceTypeException;
 import it.polimi.ingsw.Utils.Pair;
-import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 
 import java.util.*;
@@ -50,7 +49,7 @@ class MultiPlayerModeTest {
         assertEquals(StateFavorTiles.FACEDOWN, multiPlayerMode.getCurrPlayer().getPersonalBoard().getFaithTrack().getSections()[0].getState());
         assertEquals(StateFavorTiles.FACEDOWN, multiPlayerMode.getPlayerList().get(1).getPersonalBoard().getFaithTrack().getSections()[0].getState());
         assertEquals(StateFavorTiles.FACEDOWN, multiPlayerMode.getPlayerList().get(2).getPersonalBoard().getFaithTrack().getSections()[0].getState());
-        multiPlayerMode.getCurrPlayer().getPersonalBoard().getFaithTrack().moveMarker(8);
+        multiPlayerMode.getCurrPlayer().getPersonalBoard().moveMarker(multiPlayerMode.currPlayer, 8);
         assertEquals(StateFavorTiles.FACEUP, multiPlayerMode.getCurrPlayer().getPersonalBoard().getFaithTrack().getSections()[0].getState());
         assertEquals(StateFavorTiles.DISCARDED, multiPlayerMode.getPlayerList().get(1).getPersonalBoard().getFaithTrack().getSections()[0].getState());
         assertEquals(StateFavorTiles.DISCARDED, multiPlayerMode.getPlayerList().get(2).getPersonalBoard().getFaithTrack().getSections()[0].getState());
@@ -104,10 +103,10 @@ class MultiPlayerModeTest {
         playerList.get(3).getLeaderCards().add(new LeaderCard(new LeaderEffect(Effect.EXTRAPRODUCTION, ResourceType.coin), null, null, 2));
         playerList.get(3).getLeaderCards().get(0).setIsActive();
 
-        playerList.get(0).getPersonalBoard().getFaithTrack().moveMarker(8);
-        playerList.get(3).getPersonalBoard().getFaithTrack().moveMarker(11);
-        playerList.get(1).getPersonalBoard().getFaithTrack().moveMarker(5);
-        playerList.get(2).getPersonalBoard().getFaithTrack().moveMarker(15);
+        playerList.get(0).getPersonalBoard().moveMarker(playerList.get(0), 8);
+        playerList.get(3).getPersonalBoard().moveMarker(playerList.get(3), 11);
+        playerList.get(1).getPersonalBoard().moveMarker(playerList.get(1), 5);
+        playerList.get(2).getPersonalBoard().moveMarker(playerList.get(2), 15);
 
         Map<ResourceType, Integer> cost = new EnumMap<ResourceType, Integer>(ResourceType.class);
         cost.put(ResourceType.servant,0);
