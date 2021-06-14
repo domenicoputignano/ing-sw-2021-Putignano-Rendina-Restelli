@@ -67,6 +67,10 @@ public class Server {
 
     //method to detect if a player with the same nickname is already playing
     public boolean isPlayerWithSameNicknamePlaying(String nickname) {
+        if(accounts.containsKey(nickname)&&accounts.get(nickname).isActive()) {
+            LOGGER.log(Level.INFO, "Player "+nickname+" is currently playing");
+        }
+
         return accounts.containsKey(nickname) && accounts.get(nickname).isActive();
     }
 
@@ -74,9 +78,9 @@ public class Server {
         return accounts.containsKey(nickname) && !accounts.get(nickname).isActive();
     }
 
-    public boolean isNicknameAvailableBeforeStarting(String nickname) {
+    /*public boolean isNicknameAvailableBeforeStarting(String nickname) {
         return waitingConnections.stream().anyMatch(x -> x.getNickname().equals(nickname));
-    }
+    }*/
 
     public int getNumOfMissingPlayers(int numOfPlayersChosen) {
         return numOfPlayersChosen - getSuitableConnections(numOfPlayersChosen).size();
@@ -154,9 +158,10 @@ public class Server {
         ClientStatus newClientStatus = new ClientStatus(client.getClientSocket(), client.getInputStream(), client.getOutputStream());
         RemoteView newRemoteView = new RemoteView(oldRemoteView, newClientStatus);
         newClientStatus.bindRemoteView(newRemoteView);
+        accounts.remove(client.getNickname());
         accounts.put(client.getNickname(), newClientStatus);
-        newRemoteView.getModel().notifyGameResumed(new User(client.getNickname()));
         new Thread(newClientStatus).start();
+        newRemoteView.getModel().notifyGameResumed(new User(client.getNickname()));
     }
 
     //TODO da togliere, metodo fatto per creare togliere un'istanza di un giocatore che non ha completato la configurazione

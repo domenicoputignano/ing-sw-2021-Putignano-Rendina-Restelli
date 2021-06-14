@@ -18,9 +18,7 @@ import it.polimi.ingsw.Utils.Messages.ServerMessages.Updates.UpdateMessage;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.InputStreamReader;
 import java.lang.reflect.Type;
-import java.nio.charset.StandardCharsets;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -54,6 +52,8 @@ public abstract class Game extends Observable<ServerMessage> implements Observer
         //DISTRIBUZIONE RISORSE A SCELTA E SCELTA CARTE LEADER PASSANDO IN RESOURCECHOICE E LEADER CHOICE
         //Inviare notifica alle view interessate per le risorse a scelta
     }
+
+
 
     protected abstract void notifyGameSetup();
 

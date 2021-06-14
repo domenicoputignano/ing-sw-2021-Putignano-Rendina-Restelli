@@ -19,6 +19,7 @@ public class PositioningUpdate extends UpdateMessage{
 
     @Override
     public void handleMessage(Client handler) {
+        if(handler.getUI().isReceiverAction(user)) handler.getUI().setNormalActionDone(true);
         handler.getGame().updatePersonalBoard(this);
         handler.getUI().render(this);
         ClientStatesController.updateClientState(this, handler.getUI());

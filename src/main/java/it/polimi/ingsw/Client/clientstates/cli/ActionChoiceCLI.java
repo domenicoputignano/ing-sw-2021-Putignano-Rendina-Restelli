@@ -76,6 +76,10 @@ public class ActionChoiceCLI extends AbstractActionChoice {
                     return true;
                 }
             }
+            case "PB" : {
+                System.out.println("List of players is shown below");
+                System.out.print("Insert player username to see his personal board: ");
+            }
             default: {
                 System.out.println("Invalid choice, try again");
                 return false;

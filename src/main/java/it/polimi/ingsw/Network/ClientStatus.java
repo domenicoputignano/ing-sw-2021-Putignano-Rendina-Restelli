@@ -35,7 +35,7 @@ public class ClientStatus implements Runnable {
         } catch (IOException e) {
             e.printStackTrace(System.out);
             //TODO modificare come se trovassimo una disconnessione
-            LOGGER.log(Level.SEVERE, "Disconnection detected!");
+            LOGGER.log(Level.SEVERE, "Disconnection detected while sending a message");
             isActive = false;
         }
     }
@@ -49,7 +49,7 @@ public class ClientStatus implements Runnable {
                 remoteView.handleClientMessage(messageFromClient);
             }
         } catch (IOException e) {
-            LOGGER.log(Level.SEVERE, "Disconnection detected");
+            LOGGER.log(Level.SEVERE, "Disconnection detected while receiving a message");
             isActive = false;
             remoteView.handlePlayerDisconnection();
 

@@ -68,11 +68,11 @@ public class ClientSetupConnection implements Runnable {
         sendConfigurationMessage(new ServerAsksForNickname());
         do {
             UsernameChoiceMessage messageFromClient = (UsernameChoiceMessage) inputStream.readObject();
-            nickname = messageFromClient.getNickname();
+            nickname = messageFromClient.getNickname();/*
             if(server.isNicknameAvailableBeforeStarting(nickname)) {
                 sendConfigurationMessage(new NotAvailableNicknameMessage());
-            }
-            else {
+            }*/
+            //else {
                 if (server.isPlayerWithSameNicknamePlaying(nickname)) {
                     sendConfigurationMessage(new NotAvailableNicknameMessage());
                     LOGGER.log(Level.INFO, "Player has chosen an unavailable nickname, connection refused ");
@@ -81,10 +81,10 @@ public class ClientSetupConnection implements Runnable {
                     availableNickname = true;
                 }
             }
-        } while (!availableNickname);
+            while (!availableNickname);
         this.nickname = nickname;
         server.addWaitingPlayer(this);
-    }
+        }
 
     private void numOfPlayersChoice() throws IOException, ClassNotFoundException {
         sendConfigurationMessage(new ServerAskForNumOfPlayer());
