@@ -22,6 +22,8 @@ import java.lang.reflect.Type;
 import java.util.*;
 import java.util.stream.Collectors;
 
+
+
 public abstract class Game extends Observable<ServerMessage> implements Observer<GameEvent> {
     protected Player inkwell;
     protected Player currPlayer;

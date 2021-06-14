@@ -12,13 +12,33 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
+
+/**
+ * The type activate production
+ */
 public class ActivateProduction implements AbstractTurnPhase {
     private final Logger LOGGER = Logger.getLogger(ActivateProduction.class.getName());
     private ActivateProductionMessage activateProductionMessage;
+
+    /**
+     * Resources that player pays to perform productions.
+     */
     private final Map<ResourceType, Integer> inputResources;
+
+    /**
+     * Resources that player gets from productions.
+     */
     private final Map<ResourceType, Integer> outputResources;
+
+    /**
+     * Number of faith points gained from productions.
+     */
     private int faith = 0;
 
+
+    /**
+     * Constructor sets up properly maps.
+     */
     public ActivateProduction() {
         inputResources = new EnumMap<>(ResourceType.class);
         inputResources.put(ResourceType.coin, 0);
@@ -27,6 +47,19 @@ public class ActivateProduction implements AbstractTurnPhase {
         inputResources.put(ResourceType.stone, 0);
         outputResources = new EnumMap<>(inputResources);
     }
+
+
+    /**
+     * This is the main method of the class that performs the action picking a
+     * @param turn in which the action is performed end an
+     * @param activateProductionMessage contains instruction on how to make it.
+     *
+     * Different kind of exception are thrown to inform the controller that will properly handle them.
+     * @throws InvalidActionException, in case of an attempt to do a normal action twice in the same turn
+     * @throws PaymentErrorException, in case of an error occurred while picking resources from warehouse
+     * @throws NotEnoughResourcesException, in case of lack of resources
+     * @throws ResourceMismatchException, if required resources are different from those indicated in the message.
+     */
 
     public void activateProduction(Turn turn, ActivateProductionMessage activateProductionMessage) throws InvalidActionException, PaymentErrorException, NotEnoughResourcesException, ResourceMismatchException {
         if(turn.isDoneNormalAction())
@@ -53,6 +86,12 @@ public class ActivateProduction implements AbstractTurnPhase {
 
     }
 
+    /**
+     * Builds input and output maps, based on
+     * @param requestedProductions productions chosen by player and
+     * @param turn in which action has to be performed
+     *
+     */
     private void calculateResources(Turn turn, ActiveProductions requestedProductions) {
         PersonalBoard personalBoard = turn.getPlayer().getPersonalBoard();
 
@@ -81,14 +120,14 @@ public class ActivateProduction implements AbstractTurnPhase {
     }
 
 
-
+    /**
+     * Adds to input and output resources occurrences of resources coming from an extra production effect
+     */
     private void performExtraProductionEffect(Turn turn, ActiveProductions requestedProductions) {
         if(requestedProductions.isExtraSlot1()) {
             ResourceType extraType1 = turn.getPlayer().getActiveEffects().stream().filter(x -> x.getEffect() == Effect.EXTRAPRODUCTION).collect(Collectors.toList()).
                     get(0).getType();
             ResourceType extraOutput1 = activateProductionMessage.getOutputExtra1();
-
-            //TODO cambiare questa parte
             inputResources.put(extraType1, inputResources.get(extraType1)+1);
             outputResources.put(extraOutput1, outputResources.get(extraOutput1)+1);
             faith++;

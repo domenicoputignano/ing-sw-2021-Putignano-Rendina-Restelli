@@ -3,7 +3,6 @@ package it.polimi.ingsw.Model.SoloMode;
 import it.polimi.ingsw.Commons.ColorCard;
 import it.polimi.ingsw.Commons.Deck;
 import it.polimi.ingsw.Model.ConclusionEvents.BlackCrossHitLastSpace;
-import it.polimi.ingsw.Model.ConclusionEvents.ConclusionEvent;
 import it.polimi.ingsw.Model.ConclusionEvents.DevCardColorEnded;
 import it.polimi.ingsw.Model.ConclusionEvents.GameEvent;
 import it.polimi.ingsw.Model.FaithTrack;

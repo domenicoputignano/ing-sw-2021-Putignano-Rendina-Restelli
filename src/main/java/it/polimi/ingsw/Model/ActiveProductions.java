@@ -2,6 +2,10 @@ package it.polimi.ingsw.Model;
 
 import java.io.Serializable;
 
+
+/**
+ * This class represents all the productions that can be requested by a player in a turn
+ */
 public class ActiveProductions implements Serializable {
     private boolean slot1;
     private boolean slot2;

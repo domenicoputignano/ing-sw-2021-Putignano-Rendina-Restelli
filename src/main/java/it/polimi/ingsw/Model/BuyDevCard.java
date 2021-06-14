@@ -12,9 +12,26 @@ import java.util.stream.Collectors;
 
 public class BuyDevCard implements AbstractTurnPhase {
     private final Logger LOGGER = Logger.getLogger(BuyDevCard.class.getName());
+
+    /**
+     * This map represents the cost a development card
+     */
     private Map<ResourceType, Integer> actualCost = new EnumMap<>(ResourceType.class);
 
 
+    /**
+     * Main method of the class used to perform the action in the game. It retrieves chosen card from deck, calculate
+     * resources required to buy it and calls methods from PaymentHandler class to make consistency check and perform
+     * payment.
+     *
+     * see @PaymentHandler for further details
+     *
+     * @throws InvalidActionException
+     * @throws PaymentErrorException
+     * @throws ResourceMismatchException
+     * @throws NotEnoughResourcesException
+     *
+     */
     public void buyDevCard(Turn turn, BuyDevCardMessage message) throws InvalidActionException, PaymentErrorException, ResourceMismatchException, NotEnoughResourcesException {
         if(turn.isDoneNormalAction())
             throw new InvalidActionException();
@@ -24,7 +41,6 @@ public class BuyDevCard implements AbstractTurnPhase {
             List<LeaderEffect> sales = turn.getPlayer().getActiveEffects().stream().filter(x -> x.getEffect() == Effect.SALES).collect(Collectors.toList());
             for (LeaderEffect effect : sales) {
                 if (actualCost.get(effect.getType()) > 0) {
-                    //actual effect perform -- need to update if FA editing parameters is chosen
                     actualCost.put(effect.getType(), actualCost.get(effect.getType()) - 1);
                 }
             }
@@ -47,6 +63,13 @@ public class BuyDevCard implements AbstractTurnPhase {
         }
     }
 
+
+    /**
+     * Put the card that has been just bought in the slot according to player indication
+     * @param developmentCard card bought by player
+     * @param personalBoard game board of player performing this action
+     * @param destinationSlot slot that will hold the card
+     */
     private void performPurchasingCard(DevelopmentCard developmentCard, PersonalBoard personalBoard, int destinationSlot) {
         personalBoard.putCardOnTop(developmentCard,destinationSlot);
     }
