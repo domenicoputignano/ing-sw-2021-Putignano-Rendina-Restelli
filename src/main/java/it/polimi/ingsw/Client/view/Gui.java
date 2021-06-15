@@ -107,7 +107,6 @@ public class Gui extends UI{
                 GUIApp.controller.showPopup("/gui/FXML/PositioningResourcesPage.fxml", 1180, 750);
                 ((PositioningResourcesController)GUIApp.controller).setResourcesToSettle(message.getResourcesToSettle());
             });
-
         }
     }
 
@@ -116,6 +115,14 @@ public class Gui extends UI{
         Platform.runLater(() -> {
             GUIApp.showScene("/gui/FXML/PlayerBoard.fxml");
             ((PlayerBoardController)GUIApp.controller).initializePersonalBoard(client.getGame().getPlayer(client.getUser()));
+            if(isReceiverAction(message.getCurrentUser())){
+                GUIApp.controller.showPopup("/gui/FXML/GenericPopup.fxml", 500, 400);
+                ((GenericPopupController)GUIApp.controller).setText("It's your turn!");
+            } else {
+                GUIApp.controller.showPopup("/gui/FXML/GenericPopup.fxml", 500, 400);
+                ((GenericPopupController)GUIApp.controller).setText("It's " + message.getCurrentUser().getNickname() + "'s turn!\n" +
+                        "You can see his personal board by clicking on \"view other players\" button");
+            }
         });
     }
 
@@ -128,6 +135,14 @@ public class Gui extends UI{
                 GUIApp.controller.showTakeResourcesFromMarketUpdate();
                 ((TakeResPopupController)GUIApp.controller).setImages(message);
             });
+        } else {
+            Platform.runLater(() -> {
+                GUIApp.showScene("/gui/FXML/PlayerBoard.fxml");
+                ((PlayerBoardController)GUIApp.controller).initializePersonalBoard(client.getGame().getPlayer(client.getUser()));
+                GUIApp.controller.showPopup("/gui/FXML/GenericPopup.fxml", 500, 400);
+                ((GenericPopupController)GUIApp.controller).setText("User " + " has correctly taken resources from market. " +
+                        "Click \"view other players\" to see the results");
+            });
         }
     }
 
@@ -137,8 +152,7 @@ public class Gui extends UI{
             Platform.runLater(() -> {
                 GUIApp.showScene("/gui/FXML/PlayerBoard.fxml");
                 ((PlayerBoardController)GUIApp.controller).initializePersonalBoard(client.getGame().getPlayer(client.getUser()));
-        });
-
+            });
         }
     }
 
@@ -170,7 +184,17 @@ public class Gui extends UI{
                 GUIApp.controller.showLeaderActionUpdate();
                 ((LeaderActionPopupController)GUIApp.controller).setImage(message);
             });
-
+        } else {
+            Platform.runLater(() -> {
+                GUIApp.showScene("/gui/FXML/PlayerBoard.fxml");
+                ((PlayerBoardController)GUIApp.controller).initializePersonalBoard(client.getGame().getPlayer(client.getUser()));
+                GUIApp.controller.showPopup("/gui/FXML/GenericPopup.fxml", 500, 400);
+                if(message.hasBeenDiscarded()){
+                    ((GenericPopupController)GUIApp.controller).setText("User " + message.getUser() + " has discarded a leader card!");
+                } else {
+                    ((GenericPopupController)GUIApp.controller).setText("User " + message.getUser() + " has activated a leader card!");
+                }
+            });
         }
     }
 
@@ -205,6 +229,12 @@ public class Gui extends UI{
                 ((PlayerBoardController)GUIApp.controller).initializePersonalBoard(client.getGame().getPlayer(client.getUser()));
                 GUIApp.controller.showBuyDevCardUpdate();
                 ((BuyDevCardPopupController)GUIApp.controller).setImage(message);
+            });
+        } else {
+            Platform.runLater(() -> {
+                GUIApp.controller.showPopup("/gui/FXML/GenericPopup.fxml", 500, 400);
+                ((GenericPopupController)GUIApp.controller).setText("User " + " has correctly bought a card. " +
+                        "Click \"view other players\" on your player board to see the results");
             });
         }
     }
