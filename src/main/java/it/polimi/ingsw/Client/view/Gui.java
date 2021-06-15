@@ -253,7 +253,10 @@ public class Gui extends UI{
 
     @Override
     public void render(NotAvailableNicknameMessage message) {
-
+        Platform.runLater(() -> {
+            GUIApp.showScene("/gui/FXML/UserName.fxml");
+            ((UserNameController) GUIApp.controller).setErrorText("Nickname not available, choose another");
+        });
     }
 
     @Override

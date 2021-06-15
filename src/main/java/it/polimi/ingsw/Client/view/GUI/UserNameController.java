@@ -62,4 +62,8 @@ public class UserNameController extends Controller {
         clientState.manageUserInteraction();
     }
 
+    public void setErrorText(String error){
+        errorText.setText(error);
+    }
+
 }
