@@ -43,7 +43,7 @@ public class PlayerBoardController extends Controller {
     public ImageView leaderCard1;
 
     @FXML
-    public Button chooseAction,moveAction,endTurn,otherPlayers;
+    public Button chooseAction,moveAction,endTurn,otherPlayers,closePopup;
 
     @FXML
     public ImageView leaderCard2;
@@ -318,6 +318,12 @@ public class PlayerBoardController extends Controller {
             moveAction.setVisible(false);
             endTurn.setVisible(false);
             otherPlayers.setVisible(false);
+            BackgroundSize bSize = new BackgroundSize(80, 80, true, true, true, true);
+            center.setBackground(new Background(new BackgroundImage(new Image("/gui/img/exit_tab.png"),
+                    BackgroundRepeat.NO_REPEAT,
+                    BackgroundRepeat.NO_REPEAT,
+                    BackgroundPosition.CENTER,
+                    bSize)));
         }
         else {
             super.initialize();
@@ -354,6 +360,13 @@ public class PlayerBoardController extends Controller {
             moveAction.setVisible(true);
             chooseAction.setVisible(true);
         }
+    }
+
+    @FXML
+    public void handleCloseViewOthers()
+    {
+        Stage stage = (Stage) closePopup.getScene().getWindow();
+        stage.close();
     }
 
     @FXML
