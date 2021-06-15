@@ -43,7 +43,7 @@ public class PlayerBoardController extends Controller {
     public ImageView leaderCard1;
 
     @FXML
-    public Button chooseAction,moveAction,endTurn,otherPlayers,closePopup;
+    public Button chooseAction,moveAction,endTurn,otherPlayers,seeDashboard,closePopup;
 
     @FXML
     public ImageView leaderCard2;
@@ -87,6 +87,7 @@ public class PlayerBoardController extends Controller {
         setFont(chooseAction,24);
         setFont(moveAction,24);
         setFont(endTurn,24);
+        setFont(seeDashboard,24);
         setFont(otherPlayers,21);
         setFont(numCoinStrongbox, 22);
         setFont(numServantStrongbox, 22);
@@ -96,9 +97,9 @@ public class PlayerBoardController extends Controller {
         endTurn.setStyle("-fx-text-fill: rgb(35, 25, 22);");
         chooseAction.setStyle("-fx-text-fill: rgb(35, 25, 22);");
         moveAction.setStyle("-fx-text-fill: rgb(35, 25, 22);");
+        seeDashboard.setStyle("-fx-text-fill: rgb(35, 25, 22);");
 
         this.client = GUIApp.client;
-
     }
 
     private void initializeLeaderCards()
@@ -327,6 +328,7 @@ public class PlayerBoardController extends Controller {
         }
         else {
             super.initialize();
+            setAvailableActions();
             BackgroundSize bSize = new BackgroundSize(80, 80, true, true, true, true);
             center.setBackground(new Background(new BackgroundImage(new Image("/gui/img/background.jpg"),
                     BackgroundRepeat.NO_REPEAT,
@@ -344,9 +346,7 @@ public class PlayerBoardController extends Controller {
             initializeFaithTrackWithBlackCross();
         else
             initializeFaithMarker();
-        setAvailableActions();
         initializeSlots();
-        setAvailableActions();
         initializeExtraDepots();
     }
 
@@ -355,9 +355,11 @@ public class PlayerBoardController extends Controller {
             moveAction.setVisible(false);
             chooseAction.setVisible(false);
             endTurn.setVisible(false);
+            seeDashboard.setVisible(true);
         } else {
             endTurn.setVisible(client.getUI().hasDoneNormalAction());
             moveAction.setVisible(true);
+            seeDashboard.setVisible(false);
             chooseAction.setVisible(true);
         }
     }
@@ -375,4 +377,9 @@ public class PlayerBoardController extends Controller {
         showPopup("/gui/fxml/ViewOtherPlayersPage.fxml", 820, 520);
     }
 
+    @FXML
+    public void handleViewDashboard()
+    {
+        showPopup("/gui/FXML/ViewDashboardPage.fxml", 820, 520);
+    }
 }

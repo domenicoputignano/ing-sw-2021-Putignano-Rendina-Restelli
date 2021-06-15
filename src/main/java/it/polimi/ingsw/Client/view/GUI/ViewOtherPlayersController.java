@@ -77,6 +77,20 @@ public class ViewOtherPlayersController extends Controller{
     {
         showPopup("/gui/FXML/PlayerBoardOtherPlayer.fxml", 1110, 810);
         ((PlayerBoardController)GUIApp.controller).initializePersonalBoard(playerList.get(0));
+        handleCloseChooseAction();
     }
-
+    @FXML
+    public void handleViewPlayer2()
+    {
+        showPopup("/gui/FXML/PlayerBoardOtherPlayer.fxml", 1110, 810);
+        ((PlayerBoardController)GUIApp.controller).initializePersonalBoard(playerList.get(1));
+        handleCloseChooseAction();
+    }
+    @FXML
+    public void handleViewPlayer3()
+    {
+        showPopup("/gui/FXML/PlayerBoardOtherPlayer.fxml", 1110, 810);
+        ((PlayerBoardController)GUIApp.controller).initializePersonalBoard(playerList.get(2));
+        handleCloseChooseAction();
+    }
 }

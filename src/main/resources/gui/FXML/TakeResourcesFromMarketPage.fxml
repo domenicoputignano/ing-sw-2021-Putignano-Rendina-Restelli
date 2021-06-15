@@ -9,7 +9,7 @@
 <AnchorPane fx:id="anchorBuyDevCard" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.Client.view.GUI.TakeResourcesController">
     <children>
         <Button fx:id="closeTakeRes" layoutX="975.0" layoutY="50.0" mnemonicParsing="false" onAction="#handleCloseChooseAction" prefHeight="65.0" prefWidth="70.0" styleClass="button, exit" stylesheets="@../css/button.css" />
-        <ImageView fitHeight="446.0" fitWidth="320.0" layoutX="202.0" layoutY="131.0" pickOnBounds="true" preserveRatio="true">
+        <ImageView fx:id="marketTrayImage" fitHeight="446.0" fitWidth="320.0" layoutX="202.0" layoutY="131.0" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@../img/marketTray.png" />
             </image>
@@ -75,7 +75,7 @@
       </ImageView>
       <ImageView fx:id="slidingMarble" fitHeight="38.0" fitWidth="38.0" layoutX="430.0" layoutY="183.0" pickOnBounds="true" preserveRatio="true">
       </ImageView>
-      <ImageView fitHeight="110.0" fitWidth="453.0" layoutX="533.0" layoutY="132.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="resourceSupply" fitHeight="110.0" fitWidth="453.0" layoutX="533.0" layoutY="132.0" pickOnBounds="true" preserveRatio="true">
           <image>
               <Image url="@../img/resourceSupply.png" />
           </image>

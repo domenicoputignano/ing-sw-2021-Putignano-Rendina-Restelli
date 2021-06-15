@@ -10,7 +10,7 @@
         <Button fx:id="closeView" layoutX="670.0" layoutY="20.0" mnemonicParsing="false" onAction="#handleCloseChooseAction" prefHeight="77.0" prefWidth="59.0" styleClass="button, exit" stylesheets="@../css/button.css" />
         <Text fx:id="ViewOtherPlayersText" layoutX="216.0" layoutY="102.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Select a player to see his PersonalBoard:" wrappingWidth="522.8034210205078" />
         <Button fx:id="player1" alignment="CENTER" onAction="#handleViewPlayer1" layoutX="236.0" layoutY="115.0" mnemonicParsing="false" prefHeight="77.0" prefWidth="377.0" styleClass="actions" stylesheets="@../css/button.css" visible="false" />
-        <Button fx:id="player2" alignment="CENTER" layoutX="236.0" layoutY="190.0" mnemonicParsing="false" prefHeight="77.0" prefWidth="377.0" styleClass="actions" stylesheets="@../css/button.css" visible="false" />
-        <Button fx:id="player3" alignment="CENTER" layoutX="236.0" layoutY="265.0" mnemonicParsing="false" prefHeight="77.0" prefWidth="377.0" styleClass="actions" stylesheets="@../css/button.css" visible="false" />
+        <Button fx:id="player2" alignment="CENTER" onAction="#handleViewPlayer2" layoutX="236.0" layoutY="190.0" mnemonicParsing="false" prefHeight="77.0" prefWidth="377.0" styleClass="actions" stylesheets="@../css/button.css" visible="false" />
+        <Button fx:id="player3" alignment="CENTER" onAction="#handleViewPlayer3" layoutX="236.0" layoutY="265.0" mnemonicParsing="false" prefHeight="77.0" prefWidth="377.0" styleClass="actions" stylesheets="@../css/button.css" visible="false" />
     </children>
 </AnchorPane>

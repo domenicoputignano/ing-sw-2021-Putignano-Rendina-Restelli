@@ -43,7 +43,7 @@ public class TakeResourcesController extends Controller{
                         ,marble31,marble32,marble33,marble34,slidingMarble;
 
     @FXML
-    public ImageView selResources1,selResources2,selResources3,selResources4,
+    public ImageView marketTrayImage,resourceSupply,selResources1,selResources2,selResources3,selResources4,
                     selMarble1,selMarble2,selMarble3,selMarble4,indRes1,indRes2,indRes3,indRes4;
 
     @FXML
