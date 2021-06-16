@@ -22,8 +22,8 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.stream.Collectors;
 
 public class PersonalBoard extends Observable<GameEvent> {
-    private Player owner;
-    private Slot[] slots;
+    private final Player owner;
+    private final Slot[] slots;
     private ProductionRule basicProductionPower;
     private FaithTrack faithTrack;
     private final Warehouse warehouse;
@@ -39,30 +39,53 @@ public class PersonalBoard extends Observable<GameEvent> {
         initializeFaithTrack();
     }
 
-
+    /**
+     * Gets the development card on top of the specified slot
+     *
+     * @param slot index of the slow where to get the card
+     * @return the card on top of the slot
+     */
     public DevelopmentCard peekTopCard(int slot) {
         if(this.slots[slot - 1].getNumOfStackedCards() > 0)
             return this.slots[slot - 1].peekTopCard();
         else return null;
     }
 
-    private int calcVictoryPointsDevCards()
-    {
+    /**
+     * Calculates the victory points obtained from all the development card in the slots
+     * @return the sum calculated
+     */
+    private int calcVictoryPointsDevCards() {
         return Arrays.stream(slots).map(Slot::getVictoryPointsSlot).reduce(0,Integer::sum);
     }
 
-    public int calcVictoryPoints()
-    {
+    /**
+     * Calculates the victory points obtained by summing the victory points obtained from the
+     * development cards, from the cells passed on the faith marker and from the resources contained
+     * in the warehouse.
+     * @return the sum calculated
+     */
+    public int calcVictoryPoints() {
         return calcVictoryPointsDevCards()+this.faithTrack.calcVictoryPoints()+this.warehouse.calcVictoryPointsWarehouse();
     }
+
+    /**
+     * Puts a development card on top of the specified slot
+     * @param developmentCard the development card to put on top of the slot
+     * @param slot the slot where to put the card
+     */
     public void putCardOnTop(DevelopmentCard developmentCard, int slot) {
         this.slots[slot - 1].putCardOnTop(developmentCard);
         if(isSeventhCard())
             notify(new SeventhDevCardBought());
     }
 
-    private boolean isSeventhCard()
-    {
+    /**
+     * Every time a development card is put on top of a slot, this method is called in order to check
+     * if a winning condition has been reached.
+     * @return if the winning condition is reached
+     */
+    private boolean isSeventhCard() {
         if(Arrays.stream(slots).map(Slot::getNumOfStackedCards).reduce(0,Integer::sum).equals(7) ) return true;
         else return false;
     }
@@ -71,6 +94,10 @@ public class PersonalBoard extends Observable<GameEvent> {
         return faithTrack;
     }
 
+    /**
+     * Initializes the faith track parsing its standard structure from a json file contained
+     * in the resources folder of the project.
+     */
     private void initializeFaithTrack(){
         String path = "src/main/resources/json/faithTrack.json";
 
@@ -85,6 +112,14 @@ public class PersonalBoard extends Observable<GameEvent> {
         }
     }
 
+    /**
+     * Checks if a card of the specified level can be placed on the slot specified,
+     * according to the game rules. A card of level 1 can be placed only on an empty slot.
+     * A card of level 2 or 3 can be placed only on a slot where the card on top is of level = level -1.
+     * @param level of the card to check
+     * @param slotIndex the slot where the user wants to put the card
+     * @return the check validity
+     */
     public boolean isCompatibleSlot(int level, int slotIndex) {
         if(level == 1) {
             if(slots[slotIndex - 1].getNumOfStackedCards()!=0) return false;
@@ -99,6 +134,13 @@ public class PersonalBoard extends Observable<GameEvent> {
         }
     }
 
+    /**
+     * Checks if the requested productions specified are valid according to the personal board.
+     * A player can't activate a production on an empty slot. A player can activate extra productions
+     * only if he has any extra production active effect.
+     * @param requestedProductions the mask containing the productions the player wants to activate
+     * @return the check validity
+     */
     public boolean isValidRequestedProduction(ActiveProductions requestedProductions) {
         if (requestedProductions.isSlot1()&&!(slots[0].getNumOfStackedCards()>0)) return false;
             if(requestedProductions.isSlot2()&&!(slots[1].getNumOfStackedCards()>0)) return false;
@@ -109,6 +151,12 @@ public class PersonalBoard extends Observable<GameEvent> {
                         return true;
     }
 
+    /**
+     * Checks if the requirements of a leader card are satisfied by checking if the requirements on resources
+     * and on development cards are satisfied.
+     * @param leaderCard to check
+     * @return the check validity
+     */
     public boolean checkLeaderRequirements(LeaderCard leaderCard){
         if(warehouse.checkResources(leaderCard.getRequirementsResources()) && checkSlotsCards(leaderCard.getRequirementsCards())){
             return true;

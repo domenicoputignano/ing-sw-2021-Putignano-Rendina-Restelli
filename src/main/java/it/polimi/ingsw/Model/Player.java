@@ -58,7 +58,7 @@ public class Player {
 
     /**
      * Calculates victory points obtained from the player summing the victory points obtained from
-     * the leader cards and from the resources in the personal board.
+     * the leader cards and from personal board.
      * @return the result calculated
      */
     public int calcVictoryPointsPlayer() {
