@@ -36,11 +36,19 @@ public class Player {
         return leaderCards.stream().filter(LeaderCard::isActive).map(LeaderCard::getVictoryPoints).reduce(0,Integer::sum);
     }
 
-    public int calcVictoryPointsPlayer()
-    {
+    public int calcVictoryPointsPlayer() {
         return calcVictoryPointsLeaderCard()+this.personalBoard.calcVictoryPoints();
     }
 
+    /**
+     * Performs the move action specified calling the handleMove method passing the
+     * player's warehouse where to perform the move.
+     *
+     * @param game the game instance, used to notify clients sending them an update
+     *             when the move action has been correctly performed
+     * @param move the move action object, containing all the infos needed to perform the move
+     * @throws MoveResourcesException when an error occurred while performing the move action
+     */
     public void moveResources(Game game, MoveActionInterface move) throws MoveResourcesException {
         if(move.handleMove(this.personalBoard.getWarehouse())){
             game.notifyUpdate(new MoveUpdate(user, personalBoard.getReducedVersion()));
@@ -48,32 +56,59 @@ public class Player {
         else throw new MoveResourcesException();
     }
 
-    public boolean checkLeaderActivation(int index)
-    {
+    public boolean checkLeaderActivation(int index) {
         return personalBoard.checkLeaderRequirements(leaderCards.get(index));
     }
 
-    public boolean checkLeaderStatus(int index)
-    {
+    /**
+     * Checks if a leader card can be activated. A leader card that is already active cannot
+     * be activated again.
+     *
+     * @param index the index of the leader card to check
+     */
+    public boolean checkLeaderStatus(int index) {
         if(index>=leaderCards.size()) return false;
         if(this.leaderCards.get(index).isActive()) return false;
         return true;
     }
 
+    /**
+     * Activates a leader card. If the leader card has an effect of type EXTRADEPOT,
+     * instantiates the extra depot in the player's warehouse.
+     * This method is called only after having checked all the requirements are satisfied.
+     *
+     * @param index the index of the leader card to activate
+     */
     public void activateLeaderCard(int index) {
             this.leaderCards.get(index).setIsActive();
             if (leaderCards.get(index).getLeaderEffect().getEffect() == Effect.EXTRADEPOT)
                 this.personalBoard.getWarehouse().initializeExtraDepot(leaderCards.get(index).getLeaderEffect().getType());
     }
+
+
+    /**
+     * Discards a leader card only if it isn't active. If the card is correctly discarded,
+     * also moves the faith marker of the player by one according to game rules.
+     *
+     * @param index the index of the leader card to discard
+     * @return the leader card discarded
+     */
     public LeaderCard discardLeaderCard(int index) {
-        if (!this.leaderCards.get(index).isActive())
-        {
+        if (!this.leaderCards.get(index).isActive()) {
             this.personalBoard.getFaithTrack().moveMarker(this, 1);
             return this.leaderCards.remove(index);
         }
         else return null;
     }
 
+    /**
+     * Performs the initial leader choice discarding two leader cards specified by the
+     * two indexes passed as parameters
+     *
+     * @param game the game instance, used to notify the clients sending them an update
+     * @param firstLeader the index of the first leader card to discard
+     * @param secondLeader the index of the second leader card to discard
+     */
     public void performInitialLeaderChoice(Game game ,int firstLeader, int secondLeader) {
         throwLeaderCard(firstLeader);
         throwLeaderCard(secondLeader);
@@ -82,6 +117,12 @@ public class Player {
                 firstLeader, secondLeader));
     }
 
+    /**
+     * Performs the initial resources choice positioning each resource in the depot specified
+     *
+     * @param game the game instance, used to notify the clients sending them an update
+     * @param chosenResources list containing, for each resource, the depot index where to put the resource
+     */
     public void performInitialResourcesChoice(Game game,List<Pair<ResourceType,Integer>> chosenResources) {
         chosenResources.forEach( x -> {
                     try {
@@ -95,15 +136,27 @@ public class Player {
                 getChosenResources(chosenResources)));
     }
 
+    /**
+     * Method used to retrieve only the chosen resources from the list of pair containing also
+     * the depot index where to put the resource. This method has been used in order to clear the
+     * infos to notify to the client from unnecessary data.
+     *
+     * @param chosenResources list containing, for each resource, the depot index where to put the resource
+     * @return the list of the chosen resources
+     */
     private List<ResourceType> getChosenResources(List<Pair<ResourceType,Integer>> chosenResources) {
         return chosenResources.stream().map(Pair::getKey).collect(Collectors.toList());
     }
 
-    public ReducedPersonalBoard getReducedPersonalBoard()
-    {
+    public ReducedPersonalBoard getReducedPersonalBoard() {
         return this.getPersonalBoard().getReducedVersion();
     }
 
+    /**
+     * throws a leader card
+     *
+     * @param leader the index of the leader card to throw
+     */
     private void throwLeaderCard(int leader) {
         leaderCards.remove(leader - 1);
     }
