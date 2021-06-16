@@ -21,9 +21,25 @@ import java.util.stream.Collectors;
 
 public class Player {
     private final Logger LOGGER = Logger.getLogger(Player.class.getName());
+
+    /**
+     * the player's user identity
+     */
     private final User user;
+
+    /**
+     * the player's position in the turn logic
+     */
     private int position;
+
+    /**
+     * the player's personal board
+     */
     private final PersonalBoard personalBoard;
+
+    /**
+     * the player's leader cards
+     */
     private final List<LeaderCard> leaderCards = new ArrayList<>();
 
     public Player(String username){
@@ -31,11 +47,20 @@ public class Player {
         this.personalBoard = new PersonalBoard(this);
     }
 
-    private int calcVictoryPointsLeaderCard()
-    {
+    /**
+     * Calculates victory points obtained from the leader cards summing the victory points given
+     * from each leader card.
+     * @return the result calculated
+     */
+    private int calcVictoryPointsLeaderCard() {
         return leaderCards.stream().filter(LeaderCard::isActive).map(LeaderCard::getVictoryPoints).reduce(0,Integer::sum);
     }
 
+    /**
+     * Calculates victory points obtained from the player summing the victory points obtained from
+     * the leader cards and from the resources in the personal board.
+     * @return the result calculated
+     */
     public int calcVictoryPointsPlayer() {
         return calcVictoryPointsLeaderCard()+this.personalBoard.calcVictoryPoints();
     }
@@ -56,6 +81,10 @@ public class Player {
         else throw new MoveResourcesException();
     }
 
+    /**
+     * Checks if the requirements of the card specified are satisfied by the player
+     * @param index of the leader card to check
+     */
     public boolean checkLeaderActivation(int index) {
         return personalBoard.checkLeaderRequirements(leaderCards.get(index));
     }
@@ -181,10 +210,18 @@ public class Player {
     }
 
 
+    /**
+     * Gets only the active leader effects of the player
+     * @return the list of active leader effects
+     */
     public List<LeaderEffect> getActiveEffects () {
         return leaderCards.stream().filter(LeaderCard::isActive).map(LeaderCard::getLeaderEffect).collect(Collectors.toList());
     }
 
+    /**
+     * Gets the serializable version of this player class instance
+     * @return the serializable version of the player to send through network
+     */
     public ReducedPlayer getReducedVersion() {
         return new ReducedPlayer(user,personalBoard.getReducedVersion(),position);
     }
