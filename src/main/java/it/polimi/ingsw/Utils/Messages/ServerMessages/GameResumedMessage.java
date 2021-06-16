@@ -9,11 +9,13 @@ import it.polimi.ingsw.Network.Client;
 
 public class GameResumedMessage extends GameSetupMessage {
 
-    private User savedUserInstance;
+    private final User savedUserInstance;
+    private final User currentUser;
 
-    public GameResumedMessage(ReducedGame game, User savedUserInstance) {
+    public GameResumedMessage(ReducedGame game, User savedUserInstance, User playerInTurn) {
         super(game);
         this.savedUserInstance = savedUserInstance;
+        this.currentUser = playerInTurn;
     }
 
     public void handleMessage(Client handler) {
@@ -25,4 +27,6 @@ public class GameResumedMessage extends GameSetupMessage {
     public User getSavedUserInstance() {
         return savedUserInstance;
     }
+
+    public User getCurrentUser() { return currentUser; }
 }

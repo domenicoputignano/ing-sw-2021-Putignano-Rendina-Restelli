@@ -5,7 +5,7 @@ import java.io.Serializable;
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-/* This class provides a representation
+/** This class provides a representation
  * of the player needed at network level, when player's methods defined
  * in model classes are not required.
  */

@@ -22,7 +22,7 @@ public class InitialLeaderChoiceCLI extends AbstractInitialLeaderChoice {
     @Override
     public void manageUserInteraction() {
         System.out.println("\n\n\nTake a look to these cards, you need to discard two of them\nRemaining will follow you during the game");
-        cli.showLeaderCards();
+        cli.showLeaderCards(client.getGame().getPlayer(client.getUser()).getPersonalBoard());
         setLeaderCardsIndexes();
         messageToSend = new LeaderChoiceMessage(leaderCard1Index, leaderCard2Index);
         client.sendMessage(messageToSend);

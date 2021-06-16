@@ -7,6 +7,8 @@ import it.polimi.ingsw.Commons.User;
 import it.polimi.ingsw.Network.Client;
 
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class ActionChoiceCLI extends AbstractActionChoice {
 
@@ -20,73 +22,76 @@ public class ActionChoiceCLI extends AbstractActionChoice {
     }
 
     public void manageUserInteraction() {
-        boolean choiceOK;
-        do {
-            choiceOK = actionChoice();
-        } while(!choiceOK);
-        cli.manageUserInteraction();
+        synchronized (WaitForTurnCLI.occupied) {
+            boolean choiceOK;
+            do {
+                choiceOK = actionChoice();
+            } while (!choiceOK);
+            cli.manageUserInteraction();
+        }
     }
 
     private boolean actionChoice() {
         System.out.println("Here is your personal board");
         cli.printPersonalBoard(client.getGame().getPlayer(client.getUser()).getPersonalBoard());
-        if(normalActionAlreadyDone()) {
-            System.out.println("Choose between Leader Action (L), Move Resources (M) and End Turn (E) ");
-        } else {
-            System.out.println("Choose between Activate Production (A)," +
-                    " Buy (B), Take Resources (T), Leader Action (L), Move Resources (M) ");
-        }
-        String choice = input.next().toUpperCase();
-        switch(choice) {
-            case "A" : {
-                if(normalActionAlreadyDone()) {
-                    return normalActionAlreadyDoneMessage();
-                } else {
-                    cli.changeClientState(new ActivateProductionCLI(client));
+            Logger.getLogger(this.getClass().getName()).log(Level.INFO, "Sono nella action choice e sto leggendo da input");
+            if(normalActionAlreadyDone()) {
+                System.out.println("Choose between Leader Action (L), Move Resources (M) and End Turn (E) ");
+            } else {
+                System.out.println("Choose between Activate Production (A)," +
+                        " Buy (B), Take Resources (T), Leader Action (L), Move Resources (M) ");
+            }
+            String choice = input.next().toUpperCase();
+            switch(choice) {
+                case "A" : {
+                    if(normalActionAlreadyDone()) {
+                        return normalActionAlreadyDoneMessage();
+                    } else {
+                        cli.changeClientState(new ActivateProductionCLI(client));
+                        return true;
+                    }
+                }
+                case "B" : {
+                    if(normalActionAlreadyDone()) return normalActionAlreadyDoneMessage();
+                    else {
+                        cli.changeClientState(new BuyDevCardCLI(client));
+                        return true;
+                    }
+                }
+                case "T" : {
+                    if(normalActionAlreadyDone()) return normalActionAlreadyDoneMessage();
+                    else {
+                        cli.changeClientState(new TakeResourcesFromMarketCLI(client));
+                        return true;
+                    }
+                }
+                case "L" : {
+                    cli.changeClientState(new LeaderActionCLI(client));
                     return true;
                 }
-            }
-            case "B" : {
-                if(normalActionAlreadyDone()) return normalActionAlreadyDoneMessage();
-                else {
-                    cli.changeClientState(new BuyDevCardCLI(client));
+                case "M" : {
+                    cli.changeClientState(new MoveResourcesCLI(client));
                     return true;
                 }
-            }
-            case "T" : {
-                if(normalActionAlreadyDone()) return normalActionAlreadyDoneMessage();
-                else {
-                    cli.changeClientState(new TakeResourcesFromMarketCLI(client));
-                    return true;
+                case "E" : {
+                    if(!normalActionAlreadyDone()) {
+                        System.out.println("You can't end you turn now, you have to do a normal action before");
+                        return false;
+                    } else {
+                        endTurn();
+                        cli.changeClientState(new WaitForTurnCLI(client));
+                        return true;
+                    }
                 }
-            }
-            case "L" : {
-                cli.changeClientState(new LeaderActionCLI(client));
-                return true;
-            }
-            case "M" : {
-                cli.changeClientState(new MoveResourcesCLI(client));
-                return true;
-            }
-            case "E" : {
-                if(!normalActionAlreadyDone()) {
-                    System.out.println("You can't end you turn now, you have to do a normal action before");
+                case "PB" : {
+                    cli.askAndShowPlayerBoard();
                     return false;
-                } else {
-                    endTurn();
-                    cli.changeClientState(new WaitForTurnCLI(client));
-                    return true;
+                }
+                default: {
+                    System.out.println("Invalid choice, try again");
+                    return false;
                 }
             }
-            case "PB" : {
-                cli.askAndShowPlayerBoard();
-                return false;
-            }
-            default: {
-                System.out.println("Invalid choice, try again");
-                return false;
-            }
-        }
     }
 
     private boolean normalActionAlreadyDoneMessage(){

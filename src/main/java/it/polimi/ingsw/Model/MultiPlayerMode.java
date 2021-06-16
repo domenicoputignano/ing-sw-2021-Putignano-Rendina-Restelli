@@ -14,9 +14,12 @@ import it.polimi.ingsw.Utils.Messages.ServerMessages.Updates.NewTurnUpdate;
 import it.polimi.ingsw.Utils.Pair;
 
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 public class MultiPlayerMode extends Game {
+    Logger LOGGER = Logger.getLogger(this.getClass().getName());
     private final int numOfPlayers;
     private boolean isLastTurn = false;
 
@@ -112,11 +115,31 @@ public class MultiPlayerMode extends Game {
     }
 
     @Override
-    public void handlePlayerDisconnection(Player disconnectedPlayer) {
-        if(playerList.stream().anyMatch(x -> x.getUser().isActive()))
-            nextTurn();
+    public synchronized void handlePlayerDisconnection(Player disconnectedPlayer) {
+        if(playerList.stream().anyMatch(x -> x.getUser().isActive())) {
+            if(disconnectedPlayer.equals(currPlayer)) {
+                nextTurn();
+            }
+        }
         else {
-            //TODO sospendere il gioco.
+            nextState(GameState.PAUSED);
+        }
+    }
+
+    @Override
+    public synchronized void handlePlayerReconnection(User reconnectingUser) {
+        if(gameState==GameState.PAUSED) {
+            users.keySet().stream().filter( x-> x.equals(reconnectingUser)).findFirst().ifPresent(x -> x.setActive(true));
+            LOGGER.log(Level.INFO, "First player reconnected");
+            nextState(GameState.GAMEFLOW);
+            currPlayer = getPlayer(reconnectingUser);
+            turn = new Turn(turn.getGame(), currPlayer);
+            notifyGameResumed(reconnectingUser);
+        } else {
+            LOGGER.log(Level.INFO, "Player reconnected while others are playing");
+            if(gameState == GameState.GAMEFLOW) {
+                notifyGameResumed(reconnectingUser, currPlayer.getUser());
+            }
         }
     }
 }

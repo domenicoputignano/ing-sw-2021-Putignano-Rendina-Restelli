@@ -1,5 +1,6 @@
 package it.polimi.ingsw.Network;
 
+import it.polimi.ingsw.Client.clientstates.cli.WaitForTurnCLI;
 import it.polimi.ingsw.Client.reducedmodel.ReducedGame;
 import it.polimi.ingsw.Client.view.CLI;
 import it.polimi.ingsw.Client.view.GUI.GUIApp;
@@ -50,27 +51,6 @@ public class Client {
         else
             ui = new CLI(this);
         createListeningThread();
-        /*String socketLine;
-        try{
-            socketLine = socketInObj.readUTF();
-            System.out.print(socketLine);
-            while (isActive) {
-                String inputLine = stdin.nextLine();
-                socketOutObj.writeUTF(inputLine);
-                socketOutObj.flush();
-                socketLine = socketInObj.readUTF();
-                //TODO chiamare opportuni metodi di CLI/GUIApp
-                System.out.print(socketLine);
-            }
-        } catch(NoSuchElementException e){
-            System.out.println("Connection closed from the client side");
-            isActive = false;
-        } finally {
-            stdin.close();
-            socketInObj.close();
-            socketOutObj.close();
-            socket.close();
-        }*/
     }
 
 
@@ -92,8 +72,13 @@ public class Client {
     }
 
     public void setupGame(GameResumedMessage message) {
-        bindUser(message.getSavedUserInstance().getNickname());
-        game = message.getGame();
+            if(this.getUser()==null) {
+                LOGGER.log(Level.INFO, "Sono il client che si è riconnesso");
+                bindUser(message.getSavedUserInstance().getNickname());
+                game = message.getGame();
+            } else {
+                LOGGER.log(Level.INFO, "Sono il client che stava già giocando");
+            }
     }
 
 

@@ -1,5 +1,6 @@
 package it.polimi.ingsw.Controller;
 
+import it.polimi.ingsw.Commons.User;
 import it.polimi.ingsw.Exceptions.*;
 import it.polimi.ingsw.Model.*;
 import it.polimi.ingsw.Network.RemoteView;
@@ -149,6 +150,16 @@ public class TurnController {
             }
             else sender.sendError(new WrongTurnError(sender.getPlayer().getUser()));
         } else sender.sendError(new ActionError(sender.getPlayer().getUser(), ActionError.Trigger.NORMALACTIONNOTDONEYET));
+    }
+
+    public synchronized void handlePlayerReconnection(User reconnectingUser) {
+        model.handlePlayerReconnection(reconnectingUser);
+        this.currPlayer = model.getCurrPlayer();
+    }
+
+    public synchronized void handlePlayerDisconnection(User disconnectingUser) {
+        model.handlePlayerDisconnection(model.getPlayer(disconnectingUser));
+        this.currPlayer = model.getCurrPlayer();
     }
 
     private boolean isSenderTurn(Player sender) {

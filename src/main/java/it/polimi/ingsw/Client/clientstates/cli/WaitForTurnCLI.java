@@ -7,6 +7,9 @@ import it.polimi.ingsw.Network.Client;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class WaitForTurnCLI extends AbstractWaitForTurn {
 
@@ -14,6 +17,7 @@ public class WaitForTurnCLI extends AbstractWaitForTurn {
     private final BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
     private String stringToIgnore;
     private Thread waiterThread;
+    public final static AtomicBoolean occupied = new AtomicBoolean(false);
 
     public WaitForTurnCLI(Client client) {
         super(client);
@@ -30,8 +34,11 @@ public class WaitForTurnCLI extends AbstractWaitForTurn {
                     while(!input.ready()) {
                         Thread.sleep(50);
                     }
-                    String command = input.readLine();
-                    parseAndExecuteCommand(command);
+                    synchronized (occupied) {
+                        Logger.getLogger(this.getClass().getName()).log(Level.INFO, "Sono il thread della wait for turn e sto leggendo l'input");
+                        String command = input.readLine();
+                        parseAndExecuteCommand(command);
+                    }
                 } catch (IOException e) {
                     System.out.println("Buffered Reader accidentally cancelled, program will be shut down.");
                 } catch (InterruptedException e) {
@@ -44,10 +51,21 @@ public class WaitForTurnCLI extends AbstractWaitForTurn {
     }
 
     public void parseAndExecuteCommand(String input) {
-        if(input.equalsIgnoreCase("PB")) cli.askAndShowPlayerBoard();
-        if(input.equalsIgnoreCase("M")) cli.showMarketTray();
-        if(input.equalsIgnoreCase("D")) cli.printDecks();
-        else System.out.println("Invalid command");
+        switch (input.toUpperCase())  {
+            case "PB" : {
+                cli.askAndShowPlayerBoard();
+                return;
+            }
+            case "M" : {
+                cli.showMarketTray();
+                return;
+            } case "D" : {
+                cli.printDecks();
+                return;
+            }
+            default:
+                System.out.println("Invalid command");
+        }
     }
 
     public void shutDownWaiterThread() {

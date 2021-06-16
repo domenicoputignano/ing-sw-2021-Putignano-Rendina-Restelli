@@ -4,6 +4,7 @@ import it.polimi.ingsw.Client.reducedmodel.ReducedGame;
 import it.polimi.ingsw.Client.reducedmodel.ReducedMarketTray;
 import it.polimi.ingsw.Client.reducedmodel.ReducedPlayer;
 import it.polimi.ingsw.Client.reducedmodel.ReducedSoloMode;
+import it.polimi.ingsw.Commons.User;
 import it.polimi.ingsw.Model.ConclusionEvents.*;
 import it.polimi.ingsw.Model.Game;
 import it.polimi.ingsw.Model.GameState;
@@ -113,5 +114,10 @@ public class SoloMode extends Game {
 
     public void concludeGame(boolean playerWon, ConclusionEvent event) {
         notify(new SoloModeMatchWinnerMessage(playerWon, currPlayer.calcVictoryPointsPlayer(),event));
+    }
+
+    @Override
+    public void handlePlayerReconnection(User reconnectingUser) {
+        notifyGameResumed(reconnectingUser);
     }
 }

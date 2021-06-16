@@ -119,8 +119,13 @@ public class ClientStatesController {
                 ui.changeClientState(new ActionChoiceCLI(ui.getClient()));
                 ui.manageUserInteraction();
             } else {
-            ui.changeClientState(new WaitForTurnCLI(ui.getClient()));
-            ui.manageUserInteraction();
+                if(ui.getClient().getUser().equals(message.getCurrentUser())) {
+                    ui.changeClientState(new ActionChoiceCLI(ui.getClient()));
+                    ui.manageUserInteraction();
+                    } else {
+                    ui.changeClientState(new WaitForTurnCLI(ui.getClient()));
+                    ui.getClientState().manageUserInteraction();
+                }
             }
         }
     }

@@ -22,7 +22,6 @@ public abstract class UI {
 
     public abstract void changeClientState(AbstractClientState clientState);
 
-    public abstract void showLeaderCards();
 
     public boolean isCLI() {
         return this instanceof CLI;

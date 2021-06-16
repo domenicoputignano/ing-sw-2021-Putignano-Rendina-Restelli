@@ -236,7 +236,7 @@ public class CLI extends UI {
     }
 
     public void render(GameResumedMessage message) {
-        System.out.println("Game resumed");
+        System.out.println("User "+message.getSavedUserInstance()+" has rejoined the game");
     }
 
     public void render(LorenzoPlayedUpdate message) {
@@ -337,8 +337,8 @@ public class CLI extends UI {
     }
 
 
-    public void showLeaderCards() {
-        for (LeaderCard card : client.getGame().getPlayer(client.getUser()).getAvailableLeaderCards()) {
+    public void showLeaderCards(ReducedPersonalBoard playerBoard) {
+        for (LeaderCard card : playerBoard.getAvailableLeaderCards()) {
             System.out.printf("Card n.%d\n", client.getGame().getPlayer(client.getUser()).getAvailableLeaderCards().indexOf(card) + 1);
             card.displayASCII();
         }
@@ -518,7 +518,7 @@ public class CLI extends UI {
         printFaithTrack(playerBoard);
         printSlots(playerBoard);
         printWarehouse(playerBoard);
-        showLeaderCards();
+        showLeaderCards(playerBoard);
     }
 
     public void printWarehouse(ReducedPersonalBoard playerBoard) {

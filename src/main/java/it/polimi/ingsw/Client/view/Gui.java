@@ -28,10 +28,6 @@ public class Gui extends UI{
 
     }
 
-    @Override
-    public void showLeaderCards() {
-
-    }
 
     @Override
     public void render(ServerAsksForNickname message) {

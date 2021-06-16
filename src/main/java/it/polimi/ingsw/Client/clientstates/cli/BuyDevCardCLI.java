@@ -53,19 +53,21 @@ public class BuyDevCardCLI extends AbstractBuyDevCard {
         int attempts = 1;
         boolean slotDestinationChoiceOK = false;
         do {
-            choice = input.nextInt();
-            if(choice==1||choice==2||choice==3){
-                if(canActivateCardOnThisSlot(choice)) {
-                    slotDestinationChoiceOK = true;
-                    messageToSend.setDestinationSlot(choice);
-                } else {
-                    System.out.println("You can't put the card on this slot, choose another slot. [1-3]");
-                    attempts = attempts + 1;
-                    if(attempts == 4) {
-                        throw new InterruptedActionException();
+            try {
+                choice = Integer.parseInt(input.next());
+                if (choice == 1 || choice == 2 || choice == 3) {
+                    if (canActivateCardOnThisSlot(choice - 1)) {
+                        slotDestinationChoiceOK = true;
+                        messageToSend.setDestinationSlot(choice);
+                    } else {
+                        System.out.println("You can't put the card on this slot, choose another slot. [1-3]");
+                        attempts = attempts + 1;
+                        if (attempts == 4) {
+                            throw new InterruptedActionException();
+                        }
                     }
                 }
-            } else {
+            } catch(NumberFormatException e) {
                 System.out.println("Invalid choice, which slot do you want to put the card on? [1-3]");
             }
         } while (!slotDestinationChoiceOK);

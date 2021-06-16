@@ -161,7 +161,11 @@ public class Server {
         accounts.remove(client.getNickname());
         accounts.put(client.getNickname(), newClientStatus);
         new Thread(newClientStatus).start();
+        newRemoteView.handlePlayerReconnection(new User(client.getNickname()));
+        //newRemoteView.getModel().handlePlayerReconnection(new User(client.getNickname()));
+        /*
         newRemoteView.getModel().notifyGameResumed(new User(client.getNickname()));
+        */
     }
 
     //TODO da togliere, metodo fatto per creare togliere un'istanza di un giocatore che non ha completato la configurazione

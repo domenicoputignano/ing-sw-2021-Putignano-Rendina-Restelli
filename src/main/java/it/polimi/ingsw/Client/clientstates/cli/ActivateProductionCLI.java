@@ -7,6 +7,7 @@ import it.polimi.ingsw.Exceptions.BackToMenuException;
 import it.polimi.ingsw.Exceptions.InterruptedActionException;
 import it.polimi.ingsw.Network.Client;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import static it.polimi.ingsw.Client.view.UI.fromStringToResourceType;
@@ -63,10 +64,14 @@ public class ActivateProductionCLI extends AbstractActivateProduction {
         System.out.println("Choose which productions you want to activate");
         System.out.println("Basic\tSlot1\tSlot2\tSlot3");
         for(int i = 0; i < 4; i++) {
-            if(i == 0) requiredProduction.setBasic(input.nextBoolean());
-            if(i == 1) requiredProduction.setSlot1(input.nextBoolean());
-            if(i == 2) requiredProduction.setSlot2(input.nextBoolean());
-            if(i == 3) requiredProduction.setSlot3(input.nextBoolean());
+            try {
+                if(i == 0) requiredProduction.setBasic(input.nextBoolean());
+                if(i == 1) requiredProduction.setSlot1(input.nextBoolean());
+                if(i == 2) requiredProduction.setSlot2(input.nextBoolean());
+                if(i == 3) requiredProduction.setSlot3(input.nextBoolean());
+            } catch (InputMismatchException e) {
+                System.out.println("Invalid choice, type true/false");
+            }
         }
         if(listExtraProductionEffect().size() == 1) {
             System.out.printf("One extra production of type %s available, do you want to activate it? (yes/no) ", getExtraProductionType(0));
