@@ -5,6 +5,7 @@ import it.polimi.ingsw.Client.clientstates.cli.ActionChoiceCLI;
 import it.polimi.ingsw.Client.reducedmodel.ReducedDepot;
 import it.polimi.ingsw.Client.reducedmodel.ReducedPersonalBoard;
 import it.polimi.ingsw.Client.reducedmodel.ReducedPlayer;
+import it.polimi.ingsw.Client.reducedmodel.ReducedSoloMode;
 import it.polimi.ingsw.Commons.*;
 import it.polimi.ingsw.Exceptions.BackToMenuException;
 import it.polimi.ingsw.Network.Client;
@@ -242,6 +243,14 @@ public class CLI extends UI {
     public void render(LorenzoPlayedUpdate message) {
         System.out.println(message.getPlayedToken().getTokenEffect().renderTokenEffect());
         System.out.println("Now, it's your turn...");
+    }
+
+    public void render(BlackCrossMoveUpdate message) {
+        if(message.isVaticanReportTriggered()) {
+            System.out.println("Pay attention! Lorenzo has just activated a Vatica Report!");
+        } else {
+            System.out.println("Lorenzo reached "+message.getBlackCross()+"° position!");
+        }
     }
 
     public void render(BuyDevCardPerformedUpdate message) {
@@ -511,6 +520,8 @@ public class CLI extends UI {
         System.out.println("'-----'-----'-----'-----'-----'-----'-----'-----'-----'-----'-----'-----'-----'-----'-----'-----'-----'-----'-----'-----'-----'-----'-----'-----'-----'");
         System.out.println("                   PV=1              PV=2        POPE  PV=4              PV=6              PV=9  POPE        PV=12             PV=16             PV=20");
         System.out.println("                                                                                                                                                 POPE  ");
+        if(client.getGame().isSoloMode())
+            System.out.println(" Lorenzo's position : "+((ReducedSoloMode)client.getGame()).getBlackCross());
     }
 
 
@@ -524,5 +535,6 @@ public class CLI extends UI {
     public void printWarehouse(ReducedPersonalBoard playerBoard) {
         System.out.println(playerBoard.getWarehouse());
     }
+
 
 }

@@ -26,11 +26,18 @@ public class LorenzoIlMagnifico extends Observable<GameEvent> {
         this.addObserver(this.soloGame);
     }
 
-    public void moveBlackCross(int pos) {
+
+    /**
+     * Moves Lorenzo's cross forward in player board.
+     * @param pos indicates number of cells that has been covered.
+     * @return true value if Lorenzo has activated a Vatican Report
+     */
+    public boolean moveBlackCross(int pos) {
+        boolean isAVaticanReportTriggered = false;
         for(int i=0; i<pos; i++){
             this.blackCross++;
             if(faithTrack.isPopeSpace(passedSection,blackCross)){
-                this.faithTrack.activeVaticanReport(soloGame.getCurrPlayer(),passedSection);// attiva rapporto in vaticano
+                isAVaticanReportTriggered = true;// attiva rapporto in vaticano
             }
             if(this.blackCross >= faithTrack.getPopeSpace(passedSection)){
                 if(passedSection < 2)// controllo se ho sorpassato la vaticanReportSection attuale
@@ -41,11 +48,17 @@ public class LorenzoIlMagnifico extends Observable<GameEvent> {
                 break;
             }
         }
+        return isAVaticanReportTriggered;
     }
 
+    /**
+     * Perform Lorenzo's action of discarding two development cards from decks. Player loses the possibility to buy them,
+     * If cards of a certain color finish, notifies Game instance that the event occurred.
+     * @param color represents color of the cards to be discarded.
+     */
     public void throwDevCards(ColorCard color)
     {
-        for(int i=0;i<2;i++) {
+        for(int i=0; i<2 ; i++) {
                List<Deck> decksInvolved = this.soloGame.getDecks().stream().filter(x -> x.getCardType().getColor() == color).collect(Collectors.toList());
                Optional<Deck> deckInvolved = decksInvolved.stream().filter(x -> x.getCardType().getLevel()==1 && x.getSize()>0).findFirst();
                if(deckInvolved.isPresent())

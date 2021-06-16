@@ -78,8 +78,8 @@ public class SoloMode extends Game {
 
     @Override
     public void moveOtherPlayers(Player triggeringPlayer, int discardedResources) {
-        lorenzoIlMagnifico.moveBlackCross(discardedResources);
-        notify(new BlackCrossMoveUpdate(this.lorenzoIlMagnifico.getBlackCross()));
+        boolean hasBeenActivatedAReport = lorenzoIlMagnifico.moveBlackCross(discardedResources);
+        notify(new BlackCrossMoveUpdate(this.lorenzoIlMagnifico.getBlackCross(), hasBeenActivatedAReport));
     }
 
     @Override

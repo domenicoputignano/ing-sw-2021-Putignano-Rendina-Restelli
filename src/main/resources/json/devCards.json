@@ -841,8 +841,8 @@
         "cost": {
           "shield": 0,
           "coin": 3,
-          "servant": 3,
-          "stone": 0
+          "servant": 0,
+          "stone": 3
         },
         "victoryPoints": 8,
         "type": {

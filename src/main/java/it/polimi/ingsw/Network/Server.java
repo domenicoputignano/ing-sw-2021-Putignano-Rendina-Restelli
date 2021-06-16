@@ -147,7 +147,6 @@ public class Server {
         GameController gameController = new GameController(soloMode);
         RemoteView remoteView = new RemoteView(player.getUser(), gameController, clientStatus);
         accounts.get(player.getUser().getNickname()).bindRemoteView(remoteView);
-        LOGGER.log(Level.INFO, "Starting a new SoloMode game...");
         soloMode.notifyGameSetup();
         LOGGER.log(Level.INFO, "SoloMode game setup done");
     }
@@ -162,11 +161,8 @@ public class Server {
         accounts.put(client.getNickname(), newClientStatus);
         new Thread(newClientStatus).start();
         newRemoteView.handlePlayerReconnection(new User(client.getNickname()));
-        //newRemoteView.getModel().handlePlayerReconnection(new User(client.getNickname()));
-        /*
-        newRemoteView.getModel().notifyGameResumed(new User(client.getNickname()));
-        */
     }
+
 
     //TODO da togliere, metodo fatto per creare togliere un'istanza di un giocatore che non ha completato la configurazione
     public void removeNotSetupPlayer(ClientSetupConnection clientNotSetup) {
