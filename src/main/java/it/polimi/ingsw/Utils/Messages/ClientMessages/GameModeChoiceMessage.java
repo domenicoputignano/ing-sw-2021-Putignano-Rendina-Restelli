@@ -1,7 +1,7 @@
 package it.polimi.ingsw.Utils.Messages.ClientMessages;
 
 
-import it.polimi.ingsw.Network.ClientSetupConnection;
+import it.polimi.ingsw.Network.ClientStatus;
 
 import java.io.IOException;
 
@@ -18,7 +18,7 @@ public class GameModeChoiceMessage implements ConfigurationMessage {
     }
 
     @Override
-    public void handleConfigurationMessage(ClientSetupConnection connection) throws IOException {
-        connection.gameChoice(this);
+    public void handleConfigurationMessage(ClientStatus clientStatus) throws IOException {
+        clientStatus.gameChoice(this);
     }
 }

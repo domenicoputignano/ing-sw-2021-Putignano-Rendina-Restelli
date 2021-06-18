@@ -8,6 +8,7 @@ import it.polimi.ingsw.Client.view.Gui;
 import it.polimi.ingsw.Client.view.UI;
 import it.polimi.ingsw.Commons.User;
 import it.polimi.ingsw.Utils.Messages.ClientMessages.ClientMessage;
+import it.polimi.ingsw.Utils.Messages.ClientMessages.PingMessage;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.GameResumedMessage;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.ServerMessage;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.GameSetupMessage;
@@ -93,11 +94,11 @@ public class Client {
         heartbeatSender = new ScheduledThreadPoolExecutor(1);
         heartbeatSender.scheduleAtFixedRate(() -> {
             try {
-                sendObject("Connected");
+                sendObject(new PingMessage());
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        },0,5000, TimeUnit.MILLISECONDS);
+        },0,500, TimeUnit.MILLISECONDS);
     }
 
 

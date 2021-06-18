@@ -1,8 +1,6 @@
 package it.polimi.ingsw.Utils.Messages.ClientMessages;
 
-import it.polimi.ingsw.Controller.GameController;
-import it.polimi.ingsw.Network.ClientSetupConnection;
-import it.polimi.ingsw.Network.RemoteView;
+import it.polimi.ingsw.Network.ClientStatus;
 
 import java.io.IOException;
 
@@ -11,8 +9,8 @@ public class UsernameChoiceMessage implements ConfigurationMessage {
 
 
     @Override
-    public void handleConfigurationMessage(ClientSetupConnection connection) throws IOException {
-        connection.nicknameChoice(this);
+    public void handleConfigurationMessage(ClientStatus clientStatus) throws IOException {
+        clientStatus.nicknameChoice(this);
     }
 
     public String getNickname() {

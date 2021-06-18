@@ -14,9 +14,7 @@ public class ClientStatesController {
     public static void updateClientState(ServerAsksForNickname message, UI ui) {
         if(ui.isCLI()){
             ui.changeClientState(new UsernameChoiceCLI(ui.getClient()));
-
         }
-        //todo con i metodi della GUIApp
         ui.manageUserInteraction();
     }
 

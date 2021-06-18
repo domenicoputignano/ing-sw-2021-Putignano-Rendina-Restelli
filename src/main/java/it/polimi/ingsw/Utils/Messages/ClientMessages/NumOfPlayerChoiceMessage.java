@@ -1,8 +1,8 @@
 package it.polimi.ingsw.Utils.Messages.ClientMessages;
 
-import it.polimi.ingsw.Controller.GameController;
-import it.polimi.ingsw.Network.ClientSetupConnection;
-import it.polimi.ingsw.Network.RemoteView;
+
+import it.polimi.ingsw.Network.ClientStatus;
+
 
 import java.io.IOException;
 
@@ -21,7 +21,7 @@ public class NumOfPlayerChoiceMessage implements ConfigurationMessage {
     }
 
     @Override
-    public void handleConfigurationMessage(ClientSetupConnection connection) throws IOException {
-        connection.numOfPlayersChoice(this);
+    public void handleConfigurationMessage(ClientStatus clientStatus) throws IOException {
+        clientStatus.numOfPlayersChoice(this);
     }
 }
