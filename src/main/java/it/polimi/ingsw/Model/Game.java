@@ -185,7 +185,9 @@ public abstract class Game extends Observable<ServerMessage> implements Observer
         notify(message);
     }
 
-    public void notifyGameResumed(User savedUserInstance) { notify(new GameResumedMessage(this.getReducedVersion(), savedUserInstance, currPlayer.getUser())); }
+    public void notifyGameResumed(User savedUserInstance) {
+        notify(new GameResumedMessage(this.getReducedVersion(), savedUserInstance, currPlayer.getUser()));
+    }
 
     public void notifyGameResumed(User savedUserInstance, User userInTurn) {
         notify(new GameResumedMessage(this.getReducedVersion(), savedUserInstance, userInTurn));

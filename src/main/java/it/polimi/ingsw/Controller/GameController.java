@@ -22,8 +22,8 @@ public class GameController {
     private final Logger LOGGER = Logger.getLogger(GameController.class.getName());
     private final Game model;
     private final TurnController turnController;
-    private final AtomicInteger receivedChoiceMessage = new AtomicInteger(0);
-
+    private final AtomicInteger receivedLeaderChoices = new AtomicInteger(0);
+    private final AtomicInteger receivedResourceChoices = new AtomicInteger(0);
 
     public GameController(Game game) {
         this.model = game;
@@ -39,27 +39,27 @@ public class GameController {
     }
 
     public synchronized void handleResourceChoiceMessage(ResourceChoiceMessage message, RemoteView sender) {
-        while (model.getGameState() != GameState.RESOURCECHOICE) {
+        /*while (model.getGameState() != GameState.RESOURCECHOICE) {
             try { wait(); }
             catch (InterruptedException e) {
                 LOGGER.log(Level.SEVERE, "Thread accidentally interrupted");
                 Thread.currentThread().interrupt();
             }
-        }
+        }*/
         if(message.isValidMessage()) {
             if(checkPlayerResourceChoice(message, sender.getPlayer())){
                 if(sender.getPlayer().getPosition()==4) {
                     if (isValidFourthPlayerPositioning(message.getChosenResources())) {
                         sender.getPlayer().performInitialResourcesChoice(model, message.getChosenResources());
-                        receivedChoiceMessage.getAndIncrement();
-                        checkAllResourceChoiceDone(receivedChoiceMessage);
+                        receivedResourceChoices.getAndIncrement();
+                        checkAllResourceChoiceDone(receivedResourceChoices);
                     } else {
                         sender.sendError(new ActionError(sender.getPlayer().getUser(), ActionError.Trigger.INITIALRESOURCEPOSITIONINGERROR));
                     }
                 } else {
                     sender.getPlayer().performInitialResourcesChoice(model, message.getChosenResources());
-                    receivedChoiceMessage.getAndIncrement();
-                    checkAllResourceChoiceDone(receivedChoiceMessage);
+                    receivedResourceChoices.getAndIncrement();
+                    checkAllResourceChoiceDone(receivedResourceChoices);
                 }
             } else {
                 sender.sendError(new ActionError(sender.getPlayer().getUser(),ActionError.Trigger.RESOURCECHOICEMISMATCH));
@@ -70,18 +70,12 @@ public class GameController {
     }
 
     public synchronized void handleLeaderChoiceMessage(LeaderChoiceMessage message, RemoteView sender) {
-        if(model.getGameState() == GameState.LEADERCHOICE){
-            if(message.isValidMessage()) {
-                sender.getPlayer().performInitialLeaderChoice(model,message.getLeader1ToDiscard(), message.getLeader2ToDiscard());
-                receivedChoiceMessage.getAndIncrement();
-                if(checkAllLeaderChoicesDone(receivedChoiceMessage)) {
-                    notifyAll();
-                }
-            } else {
-                sender.sendError(new InvalidMessageError(sender.getPlayer().getUser()));
-            }
+        if (message.isValidMessage()) {
+            sender.getPlayer().performInitialLeaderChoice(model, message.getLeader1ToDiscard(), message.getLeader2ToDiscard());
+            receivedLeaderChoices.getAndIncrement();
+            checkAllResourceChoiceDone(receivedResourceChoices);
         } else {
-            sender.sendError(new ActionError(sender.getPlayer().getUser(),ActionError.Trigger.WRONGGAMEPHASE));
+            sender.sendError(new InvalidMessageError(sender.getPlayer().getUser()));
         }
     }
 
@@ -95,17 +89,14 @@ public class GameController {
 
     private boolean checkAllLeaderChoicesDone(AtomicInteger leaderChoicesDone) {
         if(leaderChoicesDone.get() == model.getNumOfPlayers()){
-            model.nextState(GameState.RESOURCECHOICE);
-            receivedChoiceMessage.set(0);
             return true;
         }
         return false;
     }
 
     private void checkAllResourceChoiceDone(AtomicInteger resourceChoiceDone) {
-        if(resourceChoiceDone.get() == model.getNumOfPlayers()-1){
+        if((resourceChoiceDone.get() == model.getNumOfPlayers()-1)&&checkAllLeaderChoicesDone(receivedLeaderChoices)){
             model.nextState(GameState.GAMEFLOW);
-            receivedChoiceMessage.set(0);
             model.notifyTurn(new NewTurnUpdate(model.getCurrPlayer().getUser()));
         }
     }

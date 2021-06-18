@@ -9,6 +9,9 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.net.SocketException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -36,7 +39,7 @@ public class ClientStatus implements Runnable {
 
 
 
-    public void send(ServerMessage serverMessage) {
+    public synchronized void send(ServerMessage serverMessage) {
         try {
             outputStreamToClient.reset();
             outputStreamToClient.writeObject(serverMessage);
@@ -58,8 +61,11 @@ public class ClientStatus implements Runnable {
             inputFromClient = new ObjectInputStream(socket.getInputStream());
             send(new ServerAsksForNickname());
             while(isActive) {
-                Object message =  inputFromClient.readObject();
+                Object message = inputFromClient.readObject();
                 if(message instanceof PingMessage) {
+                    server.reply(() -> {
+                        send(new PongMessage());
+                    });
                 }
                 else {
                     LOGGER.log(Level.INFO, ""+message.getClass().getName());
@@ -72,20 +78,27 @@ public class ClientStatus implements Runnable {
                             remoteView.handleClientMessage(messageFromClient);
                             LOGGER.log(Level.INFO, "Message from client of type "+messageFromClient.getClass().getName()+"");
                         }
-                        if(connectionState == ConnectionStates.DISCONNECTED) {
-                            //TODO
-                        }
                     } catch (ClassCastException e) {
                         LOGGER.log(Level.INFO, "Wrong message type");
                     }
                 }
             }
+        } catch (SocketException e) {
+            if(this.connectionState == ConnectionStates.INGAME) {
+                isActive = false;
+                this.connectionState = ConnectionStates.DISCONNECTED;
+                remoteView.handlePlayerDisconnection();
+                LOGGER.log(Level.SEVERE, "Client disconnected while playing a match");
+            }
+            if(this.connectionState == ConnectionStates.CONFIGURATION) {
+                isActive = false;
+                this.connectionState = ConnectionStates.DISCONNECTED;
+                server.removeNotSetupPlayer(this);
+                LOGGER.log(Level.INFO, "Client disconnected while waiting for a game to start");
+            }
         } catch (IOException e) {
-            LOGGER.log(Level.SEVERE, "Disconnection detected while receiving a message");
-            isActive = false;
-            this.connectionState = ConnectionStates.DISCONNECTED;
-            remoteView.handlePlayerDisconnection();
-        }  catch (ClassNotFoundException e) {
+        }
+        catch (ClassNotFoundException e) {
             LOGGER.log(Level.SEVERE, "Error in receiving message from client");
         }
     }

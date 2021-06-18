@@ -12,6 +12,8 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketException;
 import java.util.*;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
@@ -21,11 +23,16 @@ public class Server {
     private final ServerSocket serverSocket;
     private final Logger LOGGER = Logger.getLogger(Server.class.getName());
     private final Set<ClientStatus> waitingConnections = new HashSet<>();
+    private final ExecutorService pingSenders = Executors.newCachedThreadPool();
 
     //username of players involved in one match (connected or not)
     private final Map<String, ClientStatus> accounts = new HashMap<>();
 
     private boolean active = false;
+
+    public void reply(Runnable pingSend) {
+        pingSenders.submit(pingSend);
+    }
 
 
     public Server(int PORT) throws IOException {
@@ -39,7 +46,7 @@ public class Server {
         while(active) {
             try {
                 Socket socket = serverSocket.accept();
-                socket.setSoTimeout(100);
+                socket.setSoTimeout(5000);
                 new Thread(new ClientStatus(socket,this)).start();
                 LOGGER.log(Level.INFO, "Connection established");
             } catch (IOException e) {
@@ -63,7 +70,7 @@ public class Server {
     }
 
     //method to detect if a player with the same nickname is already playing
-    public boolean isPlayerWithSameNicknamePlaying(String nickname) {
+    public synchronized boolean isPlayerWithSameNicknamePlaying(String nickname) {
         if(accounts.containsKey(nickname)&&accounts.get(nickname).isActive()) {
             LOGGER.log(Level.INFO, "Player "+nickname+" is currently playing");
         }
@@ -84,7 +91,7 @@ public class Server {
         return getSuitableConnections(numOfPlayersChosen).stream().map(ClientStatus::getNickname).collect(Collectors.toList());
     }
 
-    public void notifyLobbyJoin(int numOfPlayersChosen, String guest) {
+    public synchronized void notifyLobbyJoin(int numOfPlayersChosen, String guest) {
         for(ClientStatus awaitingConnection : getSuitableConnections(numOfPlayersChosen)) {
             awaitingConnection.send(new JoinLobbyMessage(guest,getAwaitingGuests(numOfPlayersChosen), getNumOfMissingPlayers(numOfPlayersChosen)));
         }
@@ -139,9 +146,9 @@ public class Server {
     }
 
 
-    //TODO da togliere, metodo fatto per creare togliere un'istanza di un giocatore che non ha completato la configurazione
-    public void removeNotSetupPlayer(ClientStatus clientNotSetup) {
+    public synchronized void removeNotSetupPlayer(ClientStatus clientNotSetup) {
         waitingConnections.remove(clientNotSetup);
+        accounts.remove(clientNotSetup.getNickname());
     }
 
     public synchronized void registerClientStatus(String nickname, ClientStatus clientStatus) {

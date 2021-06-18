@@ -50,6 +50,7 @@ public class Client {
         socketOutObj = new ObjectOutputStream(socket.getOutputStream());
         socketOutObj.flush();
         socketInObj = new ObjectInputStream(socket.getInputStream());
+        socket.setSoTimeout(5000);
         if(startAsGui) {
             ui = new Gui(this);
             new Thread(GUIApp::launchGUI).start();
@@ -69,7 +70,6 @@ public class Client {
             }
             //LOGGER.log(Level.INFO, "Message sent ");
         } catch (IOException e) {
-            e.printStackTrace();
             //System.out.println(e.getMessage());
             LOGGER.log(Level.SEVERE, "Error: unable to process messageToSend sending");
         }
@@ -96,7 +96,8 @@ public class Client {
             try {
                 sendObject(new PingMessage());
             } catch (IOException e) {
-                e.printStackTrace();
+                isActive = false;
+                LOGGER.log(Level.INFO, "Server unreachable");
             }
         },0,500, TimeUnit.MILLISECONDS);
     }
@@ -115,12 +116,13 @@ public class Client {
             while (isActive) {
                 try {
                     ServerMessage message = (ServerMessage) socketInObj.readObject();
-                    LOGGER.log(Level.INFO, "Received message from Server of "+message.getClass().getName()+" type");
+                    //LOGGER.log(Level.INFO, "Received message from Server of "+message.getClass().getName()+" type");
                     // handle of Received message
                     message.handleMessage(this);
                 } catch (IOException e) {
                     isActive = false;
                     LOGGER.log(Level.SEVERE, "Client disconnected!");
+                    closeConnection();
                 } catch (ClassNotFoundException e) {
                     isActive = false;
                     LOGGER.log(Level.SEVERE, "Error occurred in receiving thread");
