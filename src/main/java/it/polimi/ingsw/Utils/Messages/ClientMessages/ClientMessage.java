@@ -7,8 +7,9 @@ import it.polimi.ingsw.Network.RemoteView;
 
 import java.io.Serializable;
 
-/* Interface that provides an abstraction of messages expected from client, handleable by Controller classes */
+/**
+ *  Interface that provides an abstraction of messages expected from client
+ */
 public interface ClientMessage extends Serializable {
-
 
 }

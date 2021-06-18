@@ -56,6 +56,7 @@ public class Client {
         else
             ui = new CLI(this);
         createListeningThread();
+        createHeartBeat();
     }
 
 
@@ -88,24 +89,24 @@ public class Client {
             }
     }
 
-    public void createHeartBeat() throws IOException {
+    public void createHeartBeat() {
         heartbeatSender = new ScheduledThreadPoolExecutor(1);
         heartbeatSender.scheduleAtFixedRate(() -> {
-            synchronized (socketOutObj) {
-                try {
-                    socketOutObj.writeObject("Connected");
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                try {
-                    socketOutObj.flush();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+            try {
+                sendObject("Connected");
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-        },0,500, TimeUnit.MILLISECONDS);
+        },0,5000, TimeUnit.MILLISECONDS);
     }
 
+
+    private void sendObject(Object o) throws IOException {
+        synchronized (socketOutObj) {
+            socketOutObj.writeObject(o);
+            socketOutObj.flush();
+        }
+    }
 
 
     private Thread createListeningThread() {

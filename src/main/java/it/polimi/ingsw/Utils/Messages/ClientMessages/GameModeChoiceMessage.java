@@ -1,9 +1,11 @@
 package it.polimi.ingsw.Utils.Messages.ClientMessages;
 
-import it.polimi.ingsw.Controller.GameController;
-import it.polimi.ingsw.Network.RemoteView;
 
-public class GameModeChoiceMessage implements ClientMessage {
+import it.polimi.ingsw.Network.ClientSetupConnection;
+
+import java.io.IOException;
+
+public class GameModeChoiceMessage implements ConfigurationMessage {
 
     private final String gameModeChoice;
 
@@ -13,5 +15,10 @@ public class GameModeChoiceMessage implements ClientMessage {
 
     public String getGameModeChoice() {
         return gameModeChoice;
+    }
+
+    @Override
+    public void handleConfigurationMessage(ClientSetupConnection connection) throws IOException {
+        connection.gameChoice(this);
     }
 }

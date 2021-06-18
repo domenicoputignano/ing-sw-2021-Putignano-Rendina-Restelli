@@ -2,6 +2,7 @@ package it.polimi.ingsw.Network;
 
 
 import it.polimi.ingsw.Utils.Messages.ClientMessages.ClientMessage;
+import it.polimi.ingsw.Utils.Messages.ClientMessages.GameControllerHandleable;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.ServerMessage;
 
 import java.io.IOException;
@@ -44,9 +45,14 @@ public class ClientStatus implements Runnable {
     public void run(){
         try {
             while(isActive) {
-                ClientMessage messageFromClient = (ClientMessage) inputFromClient.readObject();
-                LOGGER.log(Level.INFO, "Message from client of type "+messageFromClient.getClass().getName()+"");
-                remoteView.handleClientMessage(messageFromClient);
+                Object o = inputFromClient.readObject();
+                if(o instanceof String) {
+                    LOGGER.log(Level.INFO, "client connected");
+                } else {
+                    GameControllerHandleable messageFromClient = (GameControllerHandleable) o;
+                    LOGGER.log(Level.INFO, "Message from client of type "+messageFromClient.getClass().getName()+"");
+                    remoteView.handleClientMessage(messageFromClient);
+                }
             }
         } catch (IOException e) {
             LOGGER.log(Level.SEVERE, "Disconnection detected while receiving a message");

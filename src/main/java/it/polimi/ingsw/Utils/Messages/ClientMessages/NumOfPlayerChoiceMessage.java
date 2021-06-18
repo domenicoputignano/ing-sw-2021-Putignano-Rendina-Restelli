@@ -1,9 +1,12 @@
 package it.polimi.ingsw.Utils.Messages.ClientMessages;
 
 import it.polimi.ingsw.Controller.GameController;
+import it.polimi.ingsw.Network.ClientSetupConnection;
 import it.polimi.ingsw.Network.RemoteView;
 
-public class NumOfPlayerChoiceMessage implements ClientMessage {
+import java.io.IOException;
+
+public class NumOfPlayerChoiceMessage implements ConfigurationMessage {
 
 
     private final int numOfPlayers;
@@ -12,15 +15,13 @@ public class NumOfPlayerChoiceMessage implements ClientMessage {
         this.numOfPlayers = numOfPlayers;
     }
 
-    @Override
-    public void handleMessage(GameController gameController, RemoteView sender) { }
-
-    @Override
-    public boolean isValidMessage() {
-        return true;
-    }
 
     public int getNumOfPlayers() {
         return numOfPlayers;
+    }
+
+    @Override
+    public void handleConfigurationMessage(ClientSetupConnection connection) throws IOException {
+        connection.numOfPlayersChoice(this);
     }
 }

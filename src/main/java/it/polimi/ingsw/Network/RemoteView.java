@@ -6,6 +6,7 @@ import it.polimi.ingsw.Model.Game;
 import it.polimi.ingsw.Model.Player;
 import it.polimi.ingsw.Observer;
 import it.polimi.ingsw.Utils.Messages.ClientMessages.ClientMessage;
+import it.polimi.ingsw.Utils.Messages.ClientMessages.GameControllerHandleable;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.Errors.ErrorMessage;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.ServerMessage;
 
@@ -41,7 +42,7 @@ public class RemoteView implements Observer<ServerMessage> {
         clientStatus.send(errorMessage);
      }
 
-    public void handleClientMessage(ClientMessage message) {  message.handleMessage(gameController, this); }
+    public void handleClientMessage(GameControllerHandleable message) {  message.handleMessage(gameController, this); }
 
     public void handlePlayerDisconnection() {
         user.setActive(false);
