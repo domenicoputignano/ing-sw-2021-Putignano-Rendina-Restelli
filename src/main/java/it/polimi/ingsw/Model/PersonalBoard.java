@@ -164,6 +164,16 @@ public class PersonalBoard extends Observable<GameEvent> {
         return false;
     }
 
+    /**
+     * Checks if the player satisfies the requirements needed to activate a leader card
+     * concerning only development cards. The method gets the stream of all active cards card type
+     * and the stream of requirements card type and compares them to check if the second is a
+     * subset of the first. In doing this method we assumed as a game rule that leader cards which
+     * require a card of level 2 can be activated only if the player has a card of that level and that color
+     * in his slots.
+     * @param requirements of the card as a list of couples level-color needed to activate the leader card
+     * @return the check validity
+     */
     private boolean checkSlotsCards(List<CardType> requirements){
         List<CardType> activeCards = new ArrayList<>();
         Arrays.stream(slots).forEach(x -> activeCards.addAll(x.getDevelopmentCardStack().stream().map(DevelopmentCard::getType).collect(Collectors.toList())));
@@ -191,6 +201,12 @@ public class PersonalBoard extends Observable<GameEvent> {
         return result.get();
     }
 
+    /**
+     * Gets a stream of card types and converts it to a stream containing, for each card type, the
+     * occurrences of that card type in the original stream.
+     * @param cardTypes the stream to convert
+     * @return the list converted
+     */
     private List<Pair<CardType, Integer>> convertToCardTypeOccurrences(List<CardType> cardTypes){
         List<Pair<CardType, Integer>> cardTypeOccurrences = new ArrayList<>();
         for(CardType cardType : cardTypes){
@@ -203,6 +219,12 @@ public class PersonalBoard extends Observable<GameEvent> {
         return cardTypeOccurrences;
     }
 
+    /**
+     * Gets a stream of card types and converts it to a stream containing, for each color present in the
+     * original card types, the occurrences of that color in the original stream of card types.
+     * @param cardTypes the stream to convert
+     * @return the list converted
+     */
     private List<Pair<ColorCard, Integer>> convertToColoredCardOccurrences(List<CardType> cardTypes) {
         List<Pair<ColorCard,Integer>> coloredCardOccurrences = new ArrayList<>();
         List<ColorCard> colors = cardTypes.stream().map(CardType::getColor).collect(Collectors.toList());
@@ -223,6 +245,11 @@ public class PersonalBoard extends Observable<GameEvent> {
     }
 
 
+    /**
+     * Moves the player's faith marker on the faith track
+     * @param movingPlayer the player to move
+     * @param positions the number of positions to move the marker of
+     */
     public void moveMarker(Player movingPlayer, int positions) {
         faithTrack.moveMarker(movingPlayer, positions);
     }
