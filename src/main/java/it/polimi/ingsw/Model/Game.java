@@ -12,7 +12,6 @@ import it.polimi.ingsw.Observer;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.Errors.ErrorMessage;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.GameResumedMessage;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.ServerMessage;
-import it.polimi.ingsw.Utils.Messages.ServerMessages.Updates.ActivateVaticanReportUpdate;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.Updates.NewTurnUpdate;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.Updates.UpdateMessage;
 
@@ -114,21 +113,10 @@ public abstract class Game extends Observable<ServerMessage> implements Observer
     }
 
 
-    public void activateVaticanReport(Player triggeringPlayer,int vatican_index) {
-        int start = currPlayer.getPersonalBoard().getFaithTrack().getSections()[vatican_index].getStartSpace();
-        for(Player p: playerList)
-        {
-            int position = p.getPersonalBoard().getFaithTrack().getFaithMarker();
-            if(position >= start)
-                p.getPersonalBoard().getFaithTrack().setFavorTile(vatican_index, StateFavorTiles.FACEUP);
-            else p.getPersonalBoard().getFaithTrack().setFavorTile(vatican_index,StateFavorTiles.DISCARDED);
+    //TODO da cambiare
+    public abstract void activateVaticanReport(Player triggeringPlayer,int vatican_index) ;
 
-            notifyUpdate(new ActivateVaticanReportUpdate(p.getUser(),
-                    p.getReducedPersonalBoard(), triggeringPlayer.getUser(),
-                    p.getPersonalBoard().getFaithTrack().getStateFavorTile(vatican_index), vatican_index));
-        }
 
-    }
 
     public boolean isEmptyDeck(CardType cardType) {
         return this.decks.stream().anyMatch(x -> x.getCardType().equals(cardType) && x.getSize()<=0);

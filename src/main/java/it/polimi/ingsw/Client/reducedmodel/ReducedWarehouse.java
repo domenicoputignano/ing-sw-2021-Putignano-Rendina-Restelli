@@ -46,7 +46,7 @@ public class ReducedWarehouse implements Serializable {
                     .append(" ").append(d).append(ANSI_Color.RESET).append('\n');
         for(ReducedDepot extraD : extraDepots)
             if (extraD != null){
-                result.append("Extra depot of type ").append(ANSI_Color.escape(extraD.getType())).append(extraD.getType()).append(ANSI_Color.RESET).append(" :");
+                result.append("Extra depot of type ").append(extraD.getType()).append(ANSI_Color.RESET).append(" :");
                 result.append(extraD).append(ANSI_Color.RESET).append("\n");
             }
         result.append("Strongbox\n").append(strongbox);

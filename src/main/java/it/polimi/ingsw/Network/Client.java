@@ -15,6 +15,9 @@ import javafx.application.Application;
 
 import java.io.*;
 import java.net.Socket;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -30,6 +33,8 @@ public class Client {
     private final Logger LOGGER = Logger.getLogger(Client.class.getName());
     private UI ui;
     private Socket socket;
+    private ScheduledExecutorService heartbeatSender;
+
 
     public Client(String ip, int port){
         this.ip = ip;
@@ -56,8 +61,10 @@ public class Client {
 
     public void sendMessage(ClientMessage message) {
         try {
-            socketOutObj.writeObject(message);
-            socketOutObj.flush();
+            synchronized (socketOutObj) {
+                socketOutObj.writeObject(message);
+                socketOutObj.flush();
+            }
             //LOGGER.log(Level.INFO, "Message sent ");
         } catch (IOException e) {
             e.printStackTrace();
@@ -80,6 +87,25 @@ public class Client {
                 LOGGER.log(Level.INFO, "Sono il client che stava già giocando");
             }
     }
+
+    public void createHeartBeat() throws IOException {
+        heartbeatSender = new ScheduledThreadPoolExecutor(1);
+        heartbeatSender.scheduleAtFixedRate(() -> {
+            synchronized (socketOutObj) {
+                try {
+                    socketOutObj.writeObject("Connected");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    socketOutObj.flush();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        },0,500, TimeUnit.MILLISECONDS);
+    }
+
 
 
     private Thread createListeningThread() {

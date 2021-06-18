@@ -39,7 +39,6 @@ public class ClientSetupConnection implements Runnable {
             nicknameChoice();
             if (server.inactivePlayerAlreadyRegistered(nickname)) {
                 LOGGER.log(Level.INFO, "User "+nickname+" wants to resume game");
-                //TODO correctly resuming of the game. Check what happens if player in turn disconnects
                 server.resumeGame(this);
             }
             else {
@@ -57,7 +56,7 @@ public class ClientSetupConnection implements Runnable {
             }
         } catch (IOException | ClassNotFoundException e) {
             server.removeNotSetupPlayer(this);
-            LOGGER.log(Level.INFO, "Reset connection");
+            LOGGER.log(Level.INFO, "Class not found exception");
         }
     }
 
@@ -76,10 +75,9 @@ public class ClientSetupConnection implements Runnable {
                 else {
                     availableNickname = true;
                 }
-            }
-            while (!availableNickname);
-        this.nickname = nickname;
-        server.addWaitingPlayer(this);
+            } while (!availableNickname);
+            this.nickname = nickname;
+            server.addWaitingPlayer(this);
         }
 
     private void numOfPlayersChoice() throws IOException, ClassNotFoundException {

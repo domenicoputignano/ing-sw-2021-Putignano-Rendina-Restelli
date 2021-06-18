@@ -61,17 +61,82 @@ public class ActivateProductionCLI extends AbstractActivateProduction {
 
 
     private void selectProductions() {
-        System.out.println("Choose which productions you want to activate");
-        System.out.println("Basic\tSlot1\tSlot2\tSlot3");
-        for(int i = 0; i < 4; i++) {
-            try {
-                if(i == 0) requiredProduction.setBasic(input.nextBoolean());
-                if(i == 1) requiredProduction.setSlot1(input.nextBoolean());
-                if(i == 2) requiredProduction.setSlot2(input.nextBoolean());
-                if(i == 3) requiredProduction.setSlot3(input.nextBoolean());
-            } catch (InputMismatchException e) {
-                System.out.println("Invalid choice, type true/false");
-            }
+        boolean doneSelection = false;
+        System.out.println("Choose which productions you want to activate (please type yes/no) for each one.");
+        for(int i = 0; i < 4; ) {
+            do {
+                System.out.print("Basic: ");
+                if(i == 0){
+                    try {
+                        String choice = input.next();
+                        if (choice.equalsIgnoreCase("yes") || choice.equalsIgnoreCase("no")) {
+                            requiredProduction.setBasic(choice.equalsIgnoreCase("yes"));
+                            doneSelection = true;
+                            i++;
+                        } else {
+                            throw new InputMismatchException();
+                        }
+                    } catch(InputMismatchException e) {
+                        System.out.println("Invalid choice, please select yes/no for each slot");
+                    }
+                }
+            } while (!doneSelection);
+            doneSelection = false;
+
+            do {
+                if(i==1){
+                    System.out.print("Slot 1: ");
+                    try {
+                        String choice = input.next();
+                        if (choice.equalsIgnoreCase("yes") || choice.equalsIgnoreCase("no")) {
+                            requiredProduction.setSlot1(choice.equalsIgnoreCase("yes"));
+                            doneSelection = true;
+                            i++;
+                        } else {
+                            throw new InputMismatchException();
+                        }
+                    } catch(InputMismatchException e) {
+                        System.out.println("Invalid choice, please select yes/no for slot 1");
+                    }
+                }
+            } while(!doneSelection);
+            doneSelection = false;
+            do {
+                if(i==2){
+
+                    System.out.print("Slot 2: ");
+                    try {
+                        String choice = input.next();
+                        if (choice.equalsIgnoreCase("yes") || choice.equalsIgnoreCase("no")) {
+                            requiredProduction.setSlot2(choice.equalsIgnoreCase("yes"));
+                            doneSelection = true;
+                            i++;
+                        } else {
+                            throw new InputMismatchException();
+                        }
+                    } catch(InputMismatchException e) {
+                        System.out.println("Invalid choice, please select yes/no for slot 2");
+                    }
+                }
+            } while(!doneSelection);
+            doneSelection = false;
+            do {
+                if(i==3){
+                    System.out.print("Slot 3: ");
+                    try {
+                        String choice = input.next();
+                        if (choice.equalsIgnoreCase("yes") || choice.equalsIgnoreCase("no")) {
+                            requiredProduction.setSlot3(choice.equalsIgnoreCase("yes"));
+                            doneSelection = true;
+                            i++;
+                        } else {
+                            throw new InputMismatchException();
+                        }
+                    } catch(InputMismatchException e) {
+                        System.out.println("Invalid choice, please select yes/no for slot 3");
+                    }
+                }
+            } while(!doneSelection);
         }
         if(listExtraProductionEffect().size() == 1) {
             System.out.printf("One extra production of type %s available, do you want to activate it? (yes/no) ", getExtraProductionType(0));
@@ -88,6 +153,13 @@ public class ActivateProductionCLI extends AbstractActivateProduction {
             requiredProduction.setExtraSlot2(answer.equalsIgnoreCase("yes"));
         }
         messageToSend.setProductions(requiredProduction);
+    }
+
+    private boolean parseValidChoice(String choice) {
+        if (choice.equalsIgnoreCase("yes") || choice.equalsIgnoreCase("no")) {
+            requiredProduction.setBasic(choice.equalsIgnoreCase("yes"));
+        } else throw new InputMismatchException();
+        return true;
     }
 
 

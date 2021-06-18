@@ -33,7 +33,7 @@ public class CLI extends UI {
         boolean availableExtraDepot = client.getGame().getCurrPlayer().getCompatibleLeaderEffect(Effect.EXTRADEPOT).size() > 0;
         System.out.println("Following resources are available in your warehouse\n" +
                 client.getGame().getPlayer(client.getUser()).getPersonalBoard().getWarehouse());
-        do {
+        /*do {
             showPossibleSources(neededResources, availableExtraDepot);
             ResourceSource source;
             do {
@@ -66,7 +66,42 @@ public class CLI extends UI {
                 howToTakeResources.get(source).merge(resource, number, Integer::sum);
             } else howToTakeResources.get(source).put(resource, number);
             neededResources.put(resource, neededResources.get(resource) - number);
-        } while (!neededResources.values().stream().allMatch(x -> x == 0));
+        } while (!neededResources.values().stream().allMatch(x -> x == 0));*/
+
+        while (!neededResources.values().stream().allMatch(x -> x == 0)) {
+            showPossibleSources(neededResources, availableExtraDepot);
+            ResourceSource source;
+            do {
+                source = fromStringToResourceSource(input.next());
+            } while (source == null);
+            System.out.print("Choose the resource [Coin (C), Servant (SE), Shield (SH), Stone(ST)]:  ");
+            ResourceType resource;
+            do {
+                resource = fromStringToResourceType(input.next());
+                if (resource != null) {
+                    if (neededResources.get(resource) == 0) {
+                        System.out.println("You don't need this type of resources, please select again resource ");
+                        resource = null;
+                    }
+                }
+            } while (resource == null);
+            System.out.print("Choose the number: ");
+            int number;
+            boolean isRightNumber = false;
+            do {
+                number = input.nextInt();
+                if (neededResources.get(resource) < number) {
+                    System.out.print("Error detected, select again number of occurrences you want to pick: ");
+                    isRightNumber = false;
+                } else {
+                    isRightNumber = true;
+                }
+            } while (!isRightNumber);
+            if (howToTakeResources.get(source).containsKey(resource)) {
+                howToTakeResources.get(source).merge(resource, number, Integer::sum);
+            } else howToTakeResources.get(source).put(resource, number);
+            neededResources.put(resource, neededResources.get(resource) - number);
+        }
         return howToTakeResources;
     }
 
@@ -247,7 +282,7 @@ public class CLI extends UI {
 
     public void render(BlackCrossMoveUpdate message) {
         if(message.isVaticanReportTriggered()) {
-            System.out.println("Pay attention! Lorenzo has just activated a Vatica Report!");
+            System.out.println("Pay attention! Lorenzo has just activated a Vatican Report!");
         } else {
             System.out.println("Lorenzo reached "+message.getBlackCross()+"° position!");
         }
@@ -446,7 +481,7 @@ public class CLI extends UI {
 
 
 
-    public void showMarketTray() {
+    public synchronized void showMarketTray() {
         System.out.println(client.getGame().getMarketTray());
     }
 

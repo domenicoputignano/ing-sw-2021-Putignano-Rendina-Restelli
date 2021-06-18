@@ -48,15 +48,14 @@ public class Server {
                 LOGGER.log(Level.INFO, "Unable to connect to client");
                 active = false;
             }
-
         }
     }
 
-    public void addWaitingPlayer(ClientSetupConnection awaitingConnection) {
+    public synchronized void addWaitingPlayer(ClientSetupConnection awaitingConnection) {
         waitingConnections.add(awaitingConnection);
     }
 
-    public void lobby(ClientSetupConnection clientSetupConnection) {
+    public synchronized void lobby(ClientSetupConnection clientSetupConnection) {
         Set<ClientSetupConnection> suitableConnections = getSuitableConnections(clientSetupConnection.getNumOfPlayers());
         if(suitableConnections.size() == clientSetupConnection.getNumOfPlayers()) {
             initializeGame(suitableConnections);
@@ -78,9 +77,6 @@ public class Server {
         return accounts.containsKey(nickname) && !accounts.get(nickname).isActive();
     }
 
-    /*public boolean isNicknameAvailableBeforeStarting(String nickname) {
-        return waitingConnections.stream().anyMatch(x -> x.getNickname().equals(nickname));
-    }*/
 
     public int getNumOfMissingPlayers(int numOfPlayersChosen) {
         return numOfPlayersChosen - getSuitableConnections(numOfPlayersChosen).size();
@@ -128,7 +124,6 @@ public class Server {
         }
         //todo AGGIUNTO da Piero
         multiPlayerMode.notifyGameSetup();
-        LOGGER.log(Level.INFO, "MultiPlayerMode game setup done");
 
     }
 

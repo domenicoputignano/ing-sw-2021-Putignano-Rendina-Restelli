@@ -4,6 +4,7 @@ import it.polimi.ingsw.Client.reducedmodel.ReducedGame;
 import it.polimi.ingsw.Client.reducedmodel.ReducedMarketTray;
 import it.polimi.ingsw.Client.reducedmodel.ReducedPlayer;
 import it.polimi.ingsw.Client.reducedmodel.ReducedSoloMode;
+import it.polimi.ingsw.Commons.StateFavorTiles;
 import it.polimi.ingsw.Commons.User;
 import it.polimi.ingsw.Model.ConclusionEvents.*;
 import it.polimi.ingsw.Model.Game;
@@ -12,6 +13,7 @@ import it.polimi.ingsw.Model.Player;
 import it.polimi.ingsw.Model.Turn;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.GameSetupMessage;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.SoloModeMatchWinnerMessage;
+import it.polimi.ingsw.Utils.Messages.ServerMessages.Updates.ActivateVaticanReportUpdate;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.Updates.BlackCrossMoveUpdate;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.Updates.LorenzoPlayedUpdate;
 
@@ -81,6 +83,19 @@ public class SoloMode extends Game {
         boolean hasBeenActivatedAReport = lorenzoIlMagnifico.moveBlackCross(discardedResources);
         notify(new BlackCrossMoveUpdate(this.lorenzoIlMagnifico.getBlackCross(), hasBeenActivatedAReport));
     }
+
+    public void LorenzoActivatedAVaticanReport(int vaticanIndex) {
+        int firstUsefulPosition = currPlayer.getPersonalBoard().getFaithTrack().getSections()[vaticanIndex].getStartSpace();
+        int userPosition = currPlayer.getPersonalBoard().getFaithTrack().getFaithMarker();
+        if(userPosition >= firstUsefulPosition) {
+            currPlayer.getPersonalBoard().getFaithTrack().setFavorTile(vaticanIndex, StateFavorTiles.FACEUP);
+        } else currPlayer.getPersonalBoard().getFaithTrack().setFavorTile(vaticanIndex, StateFavorTiles.DISCARDED);
+    }
+
+    public void activateVaticanReport(Player triggeringPlayer,int vatican_index) {
+        //TODO
+    }
+
 
     @Override
     public void notifyGameSetup() {

@@ -17,7 +17,6 @@ public class FaithTrack extends Observable<GameEvent> {
     private final int victoryPoints[] = new int[25];
     private final VaticanReportSection[] sections = new VaticanReportSection[3];
 
-
     public void moveMarker(Player movingPlayer,int pos) {
         for(int i=0; i<pos; i++){
             this.faithMarker++;
