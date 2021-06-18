@@ -11,14 +11,6 @@ public class GameModeChoiceMessage implements ClientMessage {
         this.gameModeChoice = gameModeChoice;
     }
 
-    @Override
-    public void handleMessage(GameController gameController, RemoteView sender) {}
-
-    @Override
-    public boolean isValidMessage() {
-        return true;
-    }
-
     public String getGameModeChoice() {
         return gameModeChoice;
     }

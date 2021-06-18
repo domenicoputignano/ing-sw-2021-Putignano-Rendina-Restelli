@@ -43,7 +43,7 @@ public class ClientStatus implements Runnable {
 
     public void run(){
         try {
-            while(isActive){
+            while(isActive) {
                 ClientMessage messageFromClient = (ClientMessage) inputFromClient.readObject();
                 LOGGER.log(Level.INFO, "Message from client of type "+messageFromClient.getClass().getName()+"");
                 remoteView.handleClientMessage(messageFromClient);
@@ -52,7 +52,6 @@ public class ClientStatus implements Runnable {
             LOGGER.log(Level.SEVERE, "Disconnection detected while receiving a message");
             isActive = false;
             remoteView.handlePlayerDisconnection();
-
         } catch (ClassNotFoundException e) {
             LOGGER.log(Level.SEVERE, "Error in receiving message from client");
         }

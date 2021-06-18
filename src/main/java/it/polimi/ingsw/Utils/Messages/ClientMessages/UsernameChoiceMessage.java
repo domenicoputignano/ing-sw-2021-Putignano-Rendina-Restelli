@@ -11,16 +11,10 @@ public class UsernameChoiceMessage implements ClientMessage {
         return nickname;
     }
 
-    @Override
-    public void handleMessage(GameController gameController, RemoteView sender) {
-    }
 
     public void setNickname(String nickname) {
         this.nickname = nickname;
     }
 
-    @Override
-    public boolean isValidMessage() {
-        return true;
-    }
+
 }

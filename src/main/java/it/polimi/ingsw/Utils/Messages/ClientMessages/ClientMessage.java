@@ -10,7 +10,5 @@ import java.io.Serializable;
 /* Interface that provides an abstraction of messages expected from client, handleable by Controller classes */
 public interface ClientMessage extends Serializable {
 
-    public void handleMessage(GameController gameController, RemoteView sender);
-    public boolean isValidMessage();
 
 }

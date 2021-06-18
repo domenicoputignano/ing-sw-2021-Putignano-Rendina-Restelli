@@ -4,7 +4,7 @@ import it.polimi.ingsw.Controller.GameController;
 import it.polimi.ingsw.Controller.TurnController;
 import it.polimi.ingsw.Network.RemoteView;
 
-public class EndTurnMessage implements TurnControllerHandleable{
+public class EndTurnMessage implements TurnControllerHandleable {
 
     @Override
     public void handleMessage(GameController gameController, RemoteView sender) {
