@@ -9,29 +9,18 @@ import it.polimi.ingsw.Commons.LeaderCard;
 import it.polimi.ingsw.Commons.ResourceType;
 import it.polimi.ingsw.Commons.StateFavorTiles;
 import it.polimi.ingsw.Utils.Messages.ClientMessages.EndTurnMessage;
-import it.polimi.ingsw.Utils.Messages.ServerMessages.Updates.TakeResourcesFromMarketUpdate;
 import it.polimi.ingsw.Utils.ResourceLocator;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.ImageCursor;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
-import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class PlayerBoardController extends Controller {
@@ -43,7 +32,7 @@ public class PlayerBoardController extends Controller {
     public ImageView leaderCard1;
 
     @FXML
-    public Button chooseAction,moveAction,endTurn,otherPlayers,seeDashboard,closePopup;
+    public Button chooseAction,moveAction,endTurn,otherPlayers,viewDashboard,closePopup;
 
     @FXML
     public ImageView leaderCard2;
@@ -87,7 +76,7 @@ public class PlayerBoardController extends Controller {
         setFont(chooseAction,24);
         setFont(moveAction,24);
         setFont(endTurn,24);
-        setFont(seeDashboard,24);
+        setFont(viewDashboard,24);
         setFont(otherPlayers,21);
         setFont(numCoinStrongbox, 22);
         setFont(numServantStrongbox, 22);
@@ -97,7 +86,7 @@ public class PlayerBoardController extends Controller {
         endTurn.setStyle("-fx-text-fill: rgb(35, 25, 22);");
         chooseAction.setStyle("-fx-text-fill: rgb(35, 25, 22);");
         moveAction.setStyle("-fx-text-fill: rgb(35, 25, 22);");
-        seeDashboard.setStyle("-fx-text-fill: rgb(35, 25, 22);");
+        viewDashboard.setStyle("-fx-text-fill: rgb(35, 25, 22);");
 
         this.client = GUIApp.client;
     }
@@ -355,11 +344,11 @@ public class PlayerBoardController extends Controller {
             moveAction.setVisible(false);
             chooseAction.setVisible(false);
             endTurn.setVisible(false);
-            seeDashboard.setVisible(true);
+            viewDashboard.setVisible(true);
         } else {
             endTurn.setVisible(client.getUI().hasDoneNormalAction());
             moveAction.setVisible(true);
-            seeDashboard.setVisible(false);
+            viewDashboard.setVisible(false);
             chooseAction.setVisible(true);
         }
     }

@@ -41,7 +41,6 @@ public class UserNameController extends Controller {
         errorText.setStyle("-fx-text-fill: #f2b535");
         submitButton.setStyle("-fx-text-fill: rgb(35, 25, 22);");
         cancelButton.setStyle("-fx-text-fill: rgb(35, 25, 22);");
-        username.setPromptText("Insert Username");
         setFont(username,29);
 
         setFont(errorText,30);

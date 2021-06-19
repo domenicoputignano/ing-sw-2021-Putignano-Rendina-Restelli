@@ -101,6 +101,7 @@ public class ResourceChoiceController extends Controller{
 
         chooseResourceText.setStyle("-fx-text-fill: rgb(35, 25, 22);");
         okButton.setStyle("-fx-text-fill: rgb(35, 25, 22);");
+        okButton1.setStyle("-fx-text-fill: rgb(35, 25, 22);");
         numCoin.setStyle("-fx-text-fill: rgb(35, 25, 22);");
         numShield.setStyle("-fx-text-fill: rgb(35, 25, 22);");
         buttonDepot1pl4.setStyle("-fx-text-fill: rgb(35, 25, 22);");
@@ -130,6 +131,7 @@ public class ResourceChoiceController extends Controller{
         setFont(errorMismatch,30);
         setFont(errorResources,30);
         setFont(okButton,20);
+        setFont(okButton1,20);
         setFont(coinText,26);
         setFont(shieldText,26);
         setFont(servantText,26);
@@ -428,7 +430,7 @@ public class ResourceChoiceController extends Controller{
         }
         (new InitialResourceChoiceGUI(client, resourcesWithDepotDestination)).manageUserInteraction();
         cleanPane();
-        chooseResourceText.setText("Setup completed\nYou are the "+client.getGame().getPlayer(client.getUser()).getPosition()+"° player");
+        chooseResourceText.setText("Setup completed!  You are the "+client.getGame().getPlayer(client.getUser()).getPosition()+"° player");
     }
 
     private void cleanPane() {

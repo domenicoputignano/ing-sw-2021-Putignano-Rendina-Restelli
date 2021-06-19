@@ -16,82 +16,83 @@
 
 <AnchorPane fx:id="center" prefHeight="800.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.Client.view.GUI.PlayerBoardController">
    <children>
-      <ImageView fitHeight="542.0" fitWidth="747.0" layoutX="97.0" layoutY="155.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="542.0" fitWidth="747.0" layoutX="92.0" layoutY="179.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../img/PlayerBoard1.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="278.0" fitWidth="212.0" layoutX="835.0" layoutY="425.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="278.0" fitWidth="212.0" layoutX="830.0" layoutY="449.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../img/leaderCard_cover.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="278.0" fitWidth="212.0" layoutX="837.0" layoutY="147.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="278.0" fitWidth="212.0" layoutX="832.0" layoutY="171.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../img/leaderCard_cover.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="lightActive2" fitHeight="276.0" fitWidth="200.0" layoutX="841.0" layoutY="428.0" opacity="0.5" pickOnBounds="true" preserveRatio="true" visible="false" />
-      <ImageView fx:id="lightActive1" fitHeight="276.0" fitWidth="200.0" layoutX="841.0" layoutY="148.0" opacity="0.5" pickOnBounds="true" preserveRatio="true" visible="false" />
-      <ImageView fx:id="leaderCard1" fitHeight="258.0" fitWidth="168.0" layoutX="857.0" layoutY="157.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="leaderCard2" fitHeight="258.0" fitWidth="168.0" layoutX="857.0" layoutY="435.0" pickOnBounds="true" preserveRatio="true" />
-      <Button fx:id="chooseAction" layoutX="508.0" layoutY="683.0" mnemonicParsing="false" onAction="#handleChooseActionButton" prefHeight="60.0" prefWidth="161.0" styleClass="chooseAction" stylesheets="@../css/button.css" text="Choose Action" />
-      <Button fx:id="moveAction" layoutX="111.0" layoutY="683.0" mnemonicParsing="false" onAction="#handleMoveActionButton" prefHeight="60.0" prefWidth="161.0" styleClass="chooseAction" stylesheets="@../css/button.css" text="Move Action" />
-      <ImageView fx:id="cell0" fitHeight="35.0" fitWidth="33.0" layoutX="134.0" layoutY="259.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="cell1" fitHeight="35.0" fitWidth="33.0" layoutX="170.0" layoutY="259.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="cell2" fitHeight="35.0" fitWidth="33.0" layoutX="205.0" layoutY="259.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="cell3" fitHeight="35.0" fitWidth="33.0" layoutX="205.0" layoutY="224.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="cell4" fitHeight="35.0" fitWidth="33.0" layoutX="205.0" layoutY="188.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="cell5" fitHeight="35.0" fitWidth="33.0" layoutX="241.0" layoutY="188.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="cell6" fitHeight="35.0" fitWidth="33.0" layoutX="277.0" layoutY="188.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="cell7" fitHeight="35.0" fitWidth="33.0" layoutX="313.0" layoutY="188.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="cell8" fitHeight="35.0" fitWidth="33.0" layoutX="348.0" layoutY="188.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="cell9" fitHeight="35.0" fitWidth="33.0" layoutX="385.0" layoutY="188.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="cell10" fitHeight="35.0" fitWidth="33.0" layoutX="385.0" layoutY="224.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="cell11" fitHeight="35.0" fitWidth="33.0" layoutX="385.0" layoutY="259.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="cell12" fitHeight="35.0" fitWidth="33.0" layoutX="420.0" layoutY="259.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="cell13" fitHeight="35.0" fitWidth="33.0" layoutX="456.0" layoutY="259.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="cell14" fitHeight="35.0" fitWidth="33.0" layoutX="491.0" layoutY="259.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="cell15" fitHeight="35.0" fitWidth="33.0" layoutX="527.0" layoutY="259.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="cell16" fitHeight="35.0" fitWidth="33.0" layoutX="563.0" layoutY="259.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="cell17" fitHeight="35.0" fitWidth="33.0" layoutX="563.0" layoutY="224.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="cell18" fitHeight="35.0" fitWidth="33.0" layoutX="563.0" layoutY="188.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="cell19" fitHeight="35.0" fitWidth="33.0" layoutX="599.0" layoutY="188.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="cell20" fitHeight="35.0" fitWidth="33.0" layoutX="635.0" layoutY="188.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="cell21" fitHeight="35.0" fitWidth="33.0" layoutX="670.0" layoutY="188.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="cell22" fitHeight="35.0" fitWidth="33.0" layoutX="706.0" layoutY="188.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="cell23" fitHeight="35.0" fitWidth="33.0" layoutX="742.0" layoutY="188.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="cell24" fitHeight="35.0" fitWidth="33.0" layoutX="777.0" layoutY="188.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="favorTile1" fitHeight="59.0" fitWidth="59.0" layoutX="282.0" layoutY="230.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="favorTile2" fitHeight="59.0" fitWidth="59.0" layoutX="461.0" layoutY="193.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="favorTile3" fitHeight="59.0" fitWidth="59.0" layoutX="675.0" layoutY="231.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="depot1" fitHeight="40.0" fitWidth="40.0" layoutX="184.0" layoutY="380.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="depot21" fitHeight="40.0" fitWidth="40.0" layoutX="160.0" layoutY="424.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="depot22" fitHeight="40.0" fitWidth="40.0" layoutX="202.0" layoutY="424.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="depot31" fitHeight="40.0" fitWidth="40.0" layoutX="139.0" layoutY="473.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="depot32" fitHeight="40.0" fitWidth="40.0" layoutX="178.0" layoutY="473.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="depot33" fitHeight="40.0" fitWidth="40.0" layoutX="217.0" layoutY="473.0" pickOnBounds="true" preserveRatio="true" />
-      <Button fx:id="endTurn" layoutX="667.0" layoutY="683.0" mnemonicParsing="false" onAction="#handleEndTurn" prefHeight="60.0" prefWidth="161.0" styleClass="chooseAction" stylesheets="@../css/button.css" text="End Turn" />
-      <Button fx:id="otherPlayers" layoutX="349.0" layoutY="683.0" mnemonicParsing="false" onAction="#handleViewOtherPlayers" prefHeight="60.0" prefWidth="161.0" styleClass="chooseAction" stylesheets="@../css/button.css" text="View other players" />
-      <ImageView fx:id="bgSlots1" fitHeight="212.0" fitWidth="135.0" layoutX="385.0" layoutY="380.0" pickOnBounds="true" preserveRatio="true" visible="false">
+      <ImageView fx:id="lightActive2" fitHeight="276.0" fitWidth="200.0" layoutX="836.0" layoutY="452.0" opacity="0.5" pickOnBounds="true" preserveRatio="true" visible="false" />
+      <ImageView fx:id="lightActive1" fitHeight="276.0" fitWidth="200.0" layoutX="836.0" layoutY="172.0" opacity="0.5" pickOnBounds="true" preserveRatio="true" visible="false" />
+      <ImageView fx:id="leaderCard1" fitHeight="258.0" fitWidth="168.0" layoutX="852.0" layoutY="181.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="leaderCard2" fitHeight="258.0" fitWidth="168.0" layoutX="852.0" layoutY="459.0" pickOnBounds="true" preserveRatio="true" />
+      <Button fx:id="viewDashboard" layoutX="503.0" layoutY="707.0" mnemonicParsing="false" onAction="#handleViewDashboard" prefHeight="60.0" prefWidth="161.0" styleClass="chooseAction" stylesheets="@../css/button.css" text="View Dashboard" visible="false" />
+      <Button fx:id="chooseAction" layoutX="503.0" layoutY="707.0" mnemonicParsing="false" onAction="#handleChooseActionButton" prefHeight="60.0" prefWidth="161.0" styleClass="chooseAction" stylesheets="@../css/button.css" text="Choose Action" />
+      <Button fx:id="moveAction" layoutX="106.0" layoutY="707.0" mnemonicParsing="false" onAction="#handleMoveActionButton" prefHeight="60.0" prefWidth="161.0" styleClass="chooseAction" stylesheets="@../css/button.css" text="Move Action" />
+      <ImageView fx:id="cell0" fitHeight="35.0" fitWidth="33.0" layoutX="129.0" layoutY="283.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="cell1" fitHeight="35.0" fitWidth="33.0" layoutX="165.0" layoutY="283.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="cell2" fitHeight="35.0" fitWidth="33.0" layoutX="200.0" layoutY="283.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="cell3" fitHeight="35.0" fitWidth="33.0" layoutX="200.0" layoutY="248.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="cell4" fitHeight="35.0" fitWidth="33.0" layoutX="200.0" layoutY="212.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="cell5" fitHeight="35.0" fitWidth="33.0" layoutX="236.0" layoutY="212.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="cell6" fitHeight="35.0" fitWidth="33.0" layoutX="272.0" layoutY="212.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="cell7" fitHeight="35.0" fitWidth="33.0" layoutX="308.0" layoutY="212.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="cell8" fitHeight="35.0" fitWidth="33.0" layoutX="343.0" layoutY="212.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="cell9" fitHeight="35.0" fitWidth="33.0" layoutX="380.0" layoutY="212.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="cell10" fitHeight="35.0" fitWidth="33.0" layoutX="380.0" layoutY="248.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="cell11" fitHeight="35.0" fitWidth="33.0" layoutX="380.0" layoutY="283.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="cell12" fitHeight="35.0" fitWidth="33.0" layoutX="415.0" layoutY="283.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="cell13" fitHeight="35.0" fitWidth="33.0" layoutX="451.0" layoutY="283.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="cell14" fitHeight="35.0" fitWidth="33.0" layoutX="486.0" layoutY="283.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="cell15" fitHeight="35.0" fitWidth="33.0" layoutX="522.0" layoutY="283.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="cell16" fitHeight="35.0" fitWidth="33.0" layoutX="558.0" layoutY="283.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="cell17" fitHeight="35.0" fitWidth="33.0" layoutX="558.0" layoutY="248.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="cell18" fitHeight="35.0" fitWidth="33.0" layoutX="558.0" layoutY="212.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="cell19" fitHeight="35.0" fitWidth="33.0" layoutX="594.0" layoutY="212.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="cell20" fitHeight="35.0" fitWidth="33.0" layoutX="630.0" layoutY="212.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="cell21" fitHeight="35.0" fitWidth="33.0" layoutX="665.0" layoutY="212.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="cell22" fitHeight="35.0" fitWidth="33.0" layoutX="701.0" layoutY="212.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="cell23" fitHeight="35.0" fitWidth="33.0" layoutX="737.0" layoutY="212.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="cell24" fitHeight="35.0" fitWidth="33.0" layoutX="772.0" layoutY="212.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="favorTile1" fitHeight="59.0" fitWidth="59.0" layoutX="277.0" layoutY="254.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="favorTile2" fitHeight="59.0" fitWidth="59.0" layoutX="456.0" layoutY="217.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="favorTile3" fitHeight="59.0" fitWidth="59.0" layoutX="670.0" layoutY="255.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="depot1" fitHeight="40.0" fitWidth="40.0" layoutX="179.0" layoutY="404.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="depot21" fitHeight="40.0" fitWidth="40.0" layoutX="155.0" layoutY="448.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="depot22" fitHeight="40.0" fitWidth="40.0" layoutX="197.0" layoutY="448.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="depot31" fitHeight="40.0" fitWidth="40.0" layoutX="134.0" layoutY="497.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="depot32" fitHeight="40.0" fitWidth="40.0" layoutX="173.0" layoutY="497.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="depot33" fitHeight="40.0" fitWidth="40.0" layoutX="212.0" layoutY="497.0" pickOnBounds="true" preserveRatio="true" />
+      <Button fx:id="endTurn" layoutX="662.0" layoutY="707.0" mnemonicParsing="false" onAction="#handleEndTurn" prefHeight="60.0" prefWidth="161.0" styleClass="chooseAction" stylesheets="@../css/button.css" text="End Turn" />
+      <Button fx:id="otherPlayers" layoutX="344.0" layoutY="707.0" mnemonicParsing="false" onAction="#handleViewOtherPlayers" prefHeight="60.0" prefWidth="161.0" styleClass="chooseAction" stylesheets="@../css/button.css" text="View other players" />
+      <ImageView fx:id="bgSlots1" fitHeight="212.0" fitWidth="135.0" layoutX="380.0" layoutY="404.0" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
             <Image url="@../img/deck_bg.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="bgSlots2" fitHeight="212.0" fitWidth="135.0" layoutX="525.0" layoutY="380.0" pickOnBounds="true" preserveRatio="true" visible="false">
+      <ImageView fx:id="bgSlots2" fitHeight="212.0" fitWidth="135.0" layoutX="520.0" layoutY="404.0" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
             <Image url="@../img/deck_bg.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="bgSlots21" fitHeight="212.0" fitWidth="135.0" layoutX="669.0" layoutY="380.0" pickOnBounds="true" preserveRatio="true" visible="false">
+      <ImageView fx:id="bgSlots21" fitHeight="212.0" fitWidth="135.0" layoutX="664.0" layoutY="404.0" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
             <Image url="@../img/deck_bg.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="topCard1" fitHeight="195.0" fitWidth="127.0" layoutX="389.0" layoutY="385.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="topCard2" fitHeight="195.0" fitWidth="127.0" layoutX="529.0" layoutY="385.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="topCard3" fitHeight="195.0" fitWidth="127.0" layoutX="675.0" layoutY="385.0" pickOnBounds="true" preserveRatio="true" />
-      <HBox fx:id="strongboxResources" alignment="CENTER" layoutX="130.0" layoutY="544.0" prefHeight="94.0" prefWidth="126.0" visible="false">
+      <ImageView fx:id="topCard1" fitHeight="195.0" fitWidth="127.0" layoutX="384.0" layoutY="409.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="topCard2" fitHeight="195.0" fitWidth="127.0" layoutX="524.0" layoutY="409.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="topCard3" fitHeight="195.0" fitWidth="127.0" layoutX="670.0" layoutY="409.0" pickOnBounds="true" preserveRatio="true" />
+      <HBox fx:id="strongboxResources" alignment="CENTER" layoutX="125.0" layoutY="568.0" prefHeight="94.0" prefWidth="126.0" visible="false">
          <children>
             <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0">
                <children>
@@ -123,15 +124,15 @@
             </VBox>
          </children>
       </HBox>
-      <Text fx:id="numCoinStrongbox" layoutX="152.0" layoutY="573.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" wrappingWidth="30.13671875" />
-      <Text fx:id="numShieldStrongbox" layoutX="145.0" layoutY="626.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" wrappingWidth="30.13671875" />
-      <Text fx:id="numServantStrongbox" fill="WHITE" layoutX="211.0" layoutY="578.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" wrappingWidth="30.13671875" />
-      <Text fx:id="numStoneStrongbox" layoutX="211.0" layoutY="623.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" wrappingWidth="30.13671875" />
-      <ImageView fx:id="resource1LeaderCard1" fitHeight="47.0" fitWidth="45.0" layoutX="889.0" layoutY="352.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="resource2LeaderCard1" fitHeight="47.0" fitWidth="45.0" layoutX="951.0" layoutY="352.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="resource1LeaderCard2" fitHeight="47.0" fitWidth="45.0" layoutX="889.0" layoutY="630.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="resource2LeaderCard2" fitHeight="47.0" fitWidth="45.0" layoutX="951.0" layoutY="630.0" pickOnBounds="true" preserveRatio="true" />
-      <TextField fx:id="username" alignment="TOP_LEFT" editable="false" layoutX="100.0" layoutY="127.0" mouseTransparent="true" prefHeight="31.0" prefWidth="120.0" styleClass="username" stylesheets="@../css/text.css" />
-      <Button fx:id="closePopup" layoutX="1016.0" layoutY="68.0" mnemonicParsing="false" onAction="#handleCloseViewOthers" prefHeight="59.0" prefWidth="59.0" styleClass="exit" stylesheets="@../css/button.css" />
+      <Text fx:id="numCoinStrongbox" layoutX="147.0" layoutY="597.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" wrappingWidth="30.13671875" />
+      <Text fx:id="numShieldStrongbox" layoutX="140.0" layoutY="650.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" wrappingWidth="30.13671875" />
+      <Text fx:id="numServantStrongbox" fill="WHITE" layoutX="206.0" layoutY="602.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" wrappingWidth="30.13671875" />
+      <Text fx:id="numStoneStrongbox" layoutX="206.0" layoutY="647.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" wrappingWidth="30.13671875" />
+      <ImageView fx:id="resource1LeaderCard1" fitHeight="47.0" fitWidth="45.0" layoutX="884.0" layoutY="376.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="resource2LeaderCard1" fitHeight="47.0" fitWidth="45.0" layoutX="946.0" layoutY="376.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="resource1LeaderCard2" fitHeight="47.0" fitWidth="45.0" layoutX="884.0" layoutY="654.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="resource2LeaderCard2" fitHeight="47.0" fitWidth="45.0" layoutX="946.0" layoutY="654.0" pickOnBounds="true" preserveRatio="true" />
+      <TextField fx:id="username" alignment="TOP_LEFT" editable="false" focusTraversable="false" layoutX="434.0" layoutY="134.0" mouseTransparent="true" prefHeight="31.0" prefWidth="120.0" styleClass="username" stylesheets="@../css/text.css" />
+      <Button fx:id="closePopup" layoutX="1019.0" layoutY="65.0" mnemonicParsing="false" onAction="#handleCloseViewOthers" prefHeight="81.0" prefWidth="84.0" styleClass="exit" stylesheets="@../css/button.css" />
    </children>
 </AnchorPane>

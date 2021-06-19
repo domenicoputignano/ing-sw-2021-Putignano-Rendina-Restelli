@@ -45,7 +45,7 @@
             <ImageView fx:id="lightActive1" fitHeight="276.0" fitWidth="200.0" layoutX="744.0" layoutY="10.0" opacity="0.5" pickOnBounds="true" preserveRatio="true" visible="false" />
                 <ImageView fx:id="leaderCard1" fitHeight="258.0" fitWidth="168.0" layoutX="760.0" layoutY="19.0" pickOnBounds="true" preserveRatio="true" />
                 <ImageView fx:id="leaderCard2" fitHeight="258.0" fitWidth="168.0" layoutX="760.0" layoutY="297.0" pickOnBounds="true" preserveRatio="true" />
-            <Button fx:id="seeDashboard" layoutX="411.0" layoutY="545.0" onAction="#handleViewDashboard" mnemonicParsing="false" prefHeight="60.0" prefWidth="161.0" styleClass="chooseAction" stylesheets="@../css/button.css" text="View Dashboard" visible="false" />
+                <Button fx:id="viewDashboard" layoutX="411.0" layoutY="545.0" mnemonicParsing="false" onAction="#handleViewDashboard" prefHeight="60.0" prefWidth="161.0" styleClass="chooseAction" stylesheets="@../css/button.css" text="View Dashboard" visible="false" />
                 <Button fx:id="chooseAction" layoutX="411.0" layoutY="545.0" mnemonicParsing="false" onAction="#handleChooseActionButton" prefHeight="60.0" prefWidth="161.0" styleClass="chooseAction" stylesheets="@../css/button.css" text="Choose Action" />
                 <Button fx:id="moveAction" layoutX="14.0" layoutY="545.0" mnemonicParsing="false" onAction="#handleMoveActionButton" prefHeight="60.0" prefWidth="161.0" styleClass="chooseAction" stylesheets="@../css/button.css" text="Move Action" />
                 <ImageView fx:id="cell0" fitHeight="35.0" fitWidth="33.0" layoutX="37.0" layoutY="121.0" pickOnBounds="true" preserveRatio="true" />
@@ -142,7 +142,7 @@
             <ImageView fx:id="resource2LeaderCard1" fitHeight="47.0" fitWidth="45.0" layoutX="854.0" layoutY="214.0" pickOnBounds="true" preserveRatio="true" />
             <ImageView fx:id="resource1LeaderCard2" fitHeight="47.0" fitWidth="45.0" layoutX="792.0" layoutY="492.0" pickOnBounds="true" preserveRatio="true" />
             <ImageView fx:id="resource2LeaderCard2" fitHeight="47.0" fitWidth="45.0" layoutX="854.0" layoutY="492.0" pickOnBounds="true" preserveRatio="true" />
-            <TextField fx:id="username" alignment="TOP_LEFT" editable="false" layoutX="1.0" layoutY="1.0" mouseTransparent="true" prefHeight="31.0" prefWidth="120.0" styleClass="username" stylesheets="@../css/text.css" />
+            <TextField fx:id="username" alignment="TOP_LEFT" editable="false" focusTraversable="false" layoutX="1.0" layoutY="1.0" mouseTransparent="true" prefHeight="31.0" prefWidth="120.0" styleClass="username" stylesheets="@../css/text.css" />
             </children>
         </AnchorPane>
     </center>

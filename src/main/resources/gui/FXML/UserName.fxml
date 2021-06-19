@@ -17,7 +17,7 @@
                      <Image url="@../img/insertNameCover.png" />
                   </image>
                </ImageView>
-               <TextField fx:id="username" layoutX="301.0" layoutY="191.0" onAction="#submitUsername" prefHeight="61.0" prefWidth="349.0" styleClass="username" stylesheets="@../css/text.css" />
+               <TextField fx:id="username" layoutX="301.0" layoutY="191.0" onAction="#submitUsername" prefHeight="61.0" prefWidth="349.0" promptText="Insert Username" styleClass="username" stylesheets="@../css/text.css" />
                <Button fx:id="exitButton" layoutX="869.0" layoutY="8.0" mnemonicParsing="false" onAction="#exit" prefHeight="85.0" prefWidth="73.0" styleClass="button, exit" stylesheets="@../css/button.css" />
                <Button fx:id="infoButton" layoutX="796.0" layoutY="8.0" mnemonicParsing="false" onAction="#info" prefHeight="85.0" prefWidth="73.0" styleClass="button, info" stylesheets="@../css/button.css" />
                <Button fx:id="cancelButton" layoutX="295.0" layoutY="365.0" mnemonicParsing="false" onAction="#cancelUsername" prefHeight="80.0" prefWidth="180.0" styleClass="button, cancel" stylesheets="@../css/button.css" text="Cancel" />
