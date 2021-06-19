@@ -125,7 +125,6 @@ public class MultiPlayerMode extends Game {
             if(position >= start)
                 p.getPersonalBoard().getFaithTrack().setFavorTile(vatican_index, StateFavorTiles.FACEUP);
             else p.getPersonalBoard().getFaithTrack().setFavorTile(vatican_index,StateFavorTiles.DISCARDED);
-
             notifyUpdate(new ActivateVaticanReportUpdate(p.getUser(),
                     p.getReducedPersonalBoard(), triggeringPlayer.getUser(),
                     p.getPersonalBoard().getFaithTrack().getStateFavorTile(vatican_index), vatican_index));

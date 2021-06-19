@@ -93,7 +93,7 @@ public class SoloMode extends Game {
     }
 
     public void activateVaticanReport(Player triggeringPlayer,int vatican_index) {
-        //TODO
+        triggeringPlayer.getPersonalBoard().getFaithTrack().setFavorTile(vatican_index,StateFavorTiles.FACEUP);
     }
 
 
