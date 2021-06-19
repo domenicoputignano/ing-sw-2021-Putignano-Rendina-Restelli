@@ -5,6 +5,7 @@ import it.polimi.ingsw.Commons.User;
 import it.polimi.ingsw.Model.Game;
 import it.polimi.ingsw.Model.GameState;
 import it.polimi.ingsw.Model.Player;
+import it.polimi.ingsw.Model.SoloMode.SoloMode;
 import it.polimi.ingsw.Network.RemoteView;
 import it.polimi.ingsw.Utils.Messages.ClientMessages.*;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.Errors.ActionError;
@@ -97,7 +98,8 @@ public class GameController {
     private void checkAllResourceChoiceDone(AtomicInteger resourceChoiceDone) {
         if((resourceChoiceDone.get() == model.getNumOfPlayers()-1)&&checkAllLeaderChoicesDone(receivedLeaderChoices)){
             model.nextState(GameState.GAMEFLOW);
-            model.notifyTurn(new NewTurnUpdate(model.getCurrPlayer().getUser()));
+            if(model.getNumOfPlayers()>1)
+                model.notifyTurn(new NewTurnUpdate(model.getCurrPlayer().getUser()));
         }
     }
 

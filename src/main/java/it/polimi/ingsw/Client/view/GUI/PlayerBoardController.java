@@ -369,6 +369,6 @@ public class PlayerBoardController extends Controller {
     @FXML
     public void handleViewDashboard()
     {
-        showPopup("/gui/FXML/ViewDashboardPage.fxml", 820, 520);
+        showPopup("/gui/fxml/ViewDashboardPage.fxml", 820, 520);
     }
 }

@@ -2,8 +2,6 @@ package it.polimi.ingsw.Client.view.GUI;
 
 import it.polimi.ingsw.Client.clientstates.AbstractClientState;
 import it.polimi.ingsw.Network.Client;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -78,32 +76,32 @@ public class Controller {
     @FXML
     void exit()
     {
-        showPopup("/gui/FXML/ExitPage.fxml", 570, 380);
+        showPopup("/gui/fxml/ExitPage.fxml", 570, 380);
     }
 
     public void showTakeResourcesFromMarketUpdate()
     {
-        showPopup("/gui/FXML/TakeResourcesPopup.fxml", 420, 280);
+        showPopup("/gui/fxml/TakeResourcesPopup.fxml", 420, 280);
     }
 
     public void showLeaderActionUpdate(){
-        showPopup("/gui/FXML/LeaderActionPopup.fxml", 300, 369);
+        showPopup("/gui/fxml/LeaderActionPopup.fxml", 300, 369);
     }
 
     public void showBuyDevCardUpdate(){
-        showPopup("/gui/FXML/BuyDevCardPopup.fxml", 500, 400);
+        showPopup("/gui/fxml/BuyDevCardPopup.fxml", 500, 400);
     }
 
     public void showErrorMessage(){
-        showPopup("/gui/FXML/ErrorPopup.fxml", 500, 400);
+        showPopup("/gui/fxml/ErrorPopup.fxml", 500, 400);
     }
 
     public void showLorenzoPlayedPopup(){
-        showPopup("/gui/FXML/LorenzoPlayedPopup.fxml", 500, 400);
+        showPopup("/gui/fxml/LorenzoPlayedPopup.fxml", 500, 400);
     }
 
     public void showMoveResourcesUpdate(){
-        showPopup("/gui/FXML/GenericPopup.fxml", 500, 400);
+        showPopup("/gui/fxml/GenericPopup.fxml", 500, 400);
     }
 
     public void showPopup(String FXMLFile, int width, int height){
@@ -145,7 +143,7 @@ public class Controller {
     @FXML
     void info()
     {
-        showPopup("/gui/FXML/InfoPage.fxml", 1180, 750);
+        showPopup("/gui/fxml/InfoPage.fxml", 1180, 750);
     }
 
     public void setClient(Client client) {

@@ -162,25 +162,25 @@ public class CLI extends UI {
     }
 
     @Override
-    public void render(ServerAsksForNickname message) {
+    public synchronized void render(ServerAsksForNickname message) {
         System.out.print("Choose your nickname: ");
     }
 
-    public void render(ServerAskForGameMode message) {
+    public synchronized void render(ServerAskForGameMode message) {
         System.out.print("Choose game mode [Multiplayer | Solo]: ");
     }
 
-    public void render(ServerAskForNumOfPlayer message) {
+    public synchronized void render(ServerAskForNumOfPlayer message) {
         System.out.print("Choose the number of players [2-4]: ");
     }
 
-    public void render(GameSetupMessage message) {
+    public synchronized void render(GameSetupMessage message) {
         System.out.println("Welcome "+client.getUser().getNickname()+" are you ready to start?\n" +
                 "Meanwhile take a look to your personal board!");
         printPersonalBoard(client.getGame().getPlayer(client.getUser()).getPersonalBoard());
     }
 
-    public void render(InitialLeaderChoiceUpdate message) {
+    public synchronized void render(InitialLeaderChoiceUpdate message) {
         if (isReceiverAction(message.getUser())) {
             System.out.println("You have successfully discarded two leader cards ");
         } else {
@@ -188,7 +188,7 @@ public class CLI extends UI {
         }
     }
 
-    public void render(InitialResourceChoiceUpdate message) {
+    public synchronized  void render(InitialResourceChoiceUpdate message) {
         if (isReceiverAction(message.getUser())) {
             System.out.println("You have chosen " + message.getChosenResources() + " resources, your depots " +
                     "have been updated as follows");
@@ -197,13 +197,13 @@ public class CLI extends UI {
                 " depots ");
     }
 
-    public void render(ServerAsksForPositioning message) {
+    public synchronized void render(ServerAsksForPositioning message) {
         if (isReceiverAction(message.getUser())) {
             System.out.println("You have not correctly positioned the following resources: " + message.getResourcesToSettle());
         } else System.out.println("User " + message.getUser() + "has not correctly positioned some resources.");
     }
 
-    public void render(NewTurnUpdate message) {
+    public synchronized void render(NewTurnUpdate message) {
         if (isReceiverAction(message.getCurrentUser())) {
             System.out.println("It's now your turn, make the move ");
         } else {
@@ -211,7 +211,7 @@ public class CLI extends UI {
         }
     }
 
-    public void render(TakeResourcesFromMarketUpdate message) {
+    public synchronized void render(TakeResourcesFromMarketUpdate message) {
         if (isReceiverAction(message.getUser())) {
             System.out.printf("You got following resources from market: " + message.getEarnedResources() + " and %d faith points\n", message.getFaithPoints());
             showDepots();
@@ -224,7 +224,7 @@ public class CLI extends UI {
     }
 
 
-    public void render(FaithMarkerUpdate message) {
+    public synchronized  void render(FaithMarkerUpdate message) {
         if (isReceiverAction(message.getUser()) && !isReceiverAction(message.getTriggeringUser())) {
             System.out.printf("User " + message.getTriggeringUser() + " has performed action" +
                     " involving faith track, you got %d faith points\n", message.getPoints());
@@ -232,14 +232,14 @@ public class CLI extends UI {
         //printFaithTrack(message.getUserPersonalBoard());
     }
 
-    public void render(MoveUpdate message) {
+    public synchronized void render(MoveUpdate message) {
         if (isReceiverAction(message.getUser())) {
             System.out.println("Your move action has been correctly performed\n" +
                     message.getUserPersonalBoard().getWarehouse());
         } else System.out.println("User " + message.getUser() + " has moved resources in his warehouse");
     }
 
-    public void render(LeaderActionUpdate message) {
+    public synchronized void render(LeaderActionUpdate message) {
         if (isReceiverAction(message.getUser())) {
             if (message.hasBeenDiscarded())
                 System.out.println("You discarded following leader card\n" + message.getLeaderCard());
@@ -253,7 +253,7 @@ public class CLI extends UI {
         }
     }
 
-    public void render(PositioningUpdate message) {
+    public synchronized void render(PositioningUpdate message) {
         if (isReceiverAction(message.getUser())) {
             if (message.getDiscardedResources().size() > 0) {
                 System.out.println("You haven't correctly positioned the following resources " + message.getDiscardedResources() +
@@ -271,16 +271,16 @@ public class CLI extends UI {
         }
     }
 
-    public void render(GameResumedMessage message) {
+    public synchronized void render(GameResumedMessage message) {
         System.out.println("User "+message.getSavedUserInstance()+" has rejoined the game");
     }
 
-    public void render(LorenzoPlayedUpdate message) {
+    public synchronized void render(LorenzoPlayedUpdate message) {
         System.out.println(message.getPlayedToken().getTokenEffect().renderTokenEffect());
         System.out.println("Now, it's your turn...");
     }
 
-    public void render(BlackCrossMoveUpdate message) {
+    public synchronized void render(BlackCrossMoveUpdate message) {
         if(message.isVaticanReportTriggered()) {
             System.out.println("Pay attention! Lorenzo has just activated a Vatican Report!");
         } else {
@@ -288,7 +288,7 @@ public class CLI extends UI {
         }
     }
 
-    public void render(BuyDevCardPerformedUpdate message) {
+    public synchronized void render(BuyDevCardPerformedUpdate message) {
         if (isReceiverAction(message.getUser())) {
             System.out.println("You successfully bought this development card\n " + message.getBoughtCard());
         } else {
@@ -298,7 +298,7 @@ public class CLI extends UI {
         }
     }
 
-    public void render(ActivateProductionUpdate message) {
+    public synchronized void render(ActivateProductionUpdate message) {
         if (isReceiverAction(message.getUser())) {
             System.out.println("You successfully activated production, these resources have been converted" +
                     " ( " + message.getPayedResources() + " )");
@@ -315,12 +315,12 @@ public class CLI extends UI {
     }
 
     @Override
-    public void render(NotAvailableNicknameMessage message) {
+    public synchronized void render(NotAvailableNicknameMessage message) {
         System.out.print("Nickname not available, select another one: ");
     }
 
     @Override
-    public void render(ActivateVaticanReportUpdate message) {
+    public synchronized void render(ActivateVaticanReportUpdate message) {
         if (isReceiverAction(message.getUser()) && isReceiverAction(message.getTriggeringUser())) {
             System.out.println("You activated a Vatican Report, your faith track has been updated as follows ");
             printFaithTrack(message.getUserPersonalBoard());
@@ -340,7 +340,7 @@ public class CLI extends UI {
     }
 
     @Override
-    public void render(JoinLobbyMessage message) {
+    public synchronized void render(JoinLobbyMessage message) {
         if (isGuestWhoHasJustJoined(message.getLastAwaitingGuest())) {
             if (message.getNumOfMissingPlayers() <= 0) {
                 System.out.println("All required players joined the lobby, game will start soon...");

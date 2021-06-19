@@ -6,7 +6,6 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import java.util.stream.Collectors;
 
 public class ViewDashBoardController extends Controller{
 
@@ -56,7 +55,7 @@ public class ViewDashBoardController extends Controller{
     {
         Stage stage = (Stage) closeViewDashboard.getScene().getWindow();
         stage.close();
-        showPopup("/gui/FXML/TakeResourcesFromMarketPage.fxml", 1180, 750);
+        showPopup("/gui/fxml/TakeResourcesFromMarketPage.fxml", 1180, 750);
         ((TakeResourcesController)GUIApp.controller).resourceSupply.setVisible(false);
         ((TakeResourcesController)GUIApp.controller).row1.setVisible(false);
         ((TakeResourcesController)GUIApp.controller).row2.setVisible(false);
@@ -87,7 +86,7 @@ public class ViewDashBoardController extends Controller{
     public void handleViewDecks(){
         Stage stage = (Stage) closeViewDashboard.getScene().getWindow();
         stage.close();
-        showPopup("/gui/FXML/BuyDevCardPage.fxml", 1180, 750);
+        showPopup("/gui/fxml/BuyDevCardPage.fxml", 1180, 750);
         ((BuyDevCardController)GUIApp.controller).buyDevCardText.setText("Decks");
         ((BuyDevCardController)GUIApp.controller).buyDevCardText.setX(60);
     }

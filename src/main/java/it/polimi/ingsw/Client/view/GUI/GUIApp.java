@@ -1,9 +1,7 @@
 package it.polimi.ingsw.Client.view.GUI;
 
-import it.polimi.ingsw.Client.view.Gui;
 import it.polimi.ingsw.Network.Client;
 import javafx.application.Application;
-import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.ImageCursor;
 import javafx.scene.Parent;
@@ -15,9 +13,6 @@ import javafx.stage.StageStyle;
 
 import java.io.IOException;
 import java.util.Objects;
-import java.util.concurrent.locks.Lock;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class GUIApp extends Application {
 
@@ -37,14 +32,14 @@ public class GUIApp extends Application {
     public void start(Stage stageD) throws InterruptedException {
         synchronized (objectLock)
         {
-        stage = stageD;
-        stage.setTitle("Masters of Renaissance");
-        stage.initStyle(StageStyle.TRANSPARENT);
-        stage.getIcons().add(new Image("/gui/img/MastersOfRenaissanceIcon.png"));
-        ok = true;
-        stage.setScene(loadScene("/gui/fxml/HomePage.fxml"));
-        stage.show();
-        objectLock.notifyAll();
+            stage = stageD;
+            stage.setTitle("Masters of Renaissance");
+            stage.initStyle(StageStyle.TRANSPARENT);
+            stage.getIcons().add(new Image("/gui/img/MastersOfRenaissanceIcon.png"));
+            ok = true;
+            stage.setScene(loadScene("/gui/fxml/HomePage.fxml"));
+            stage.show();
+            objectLock.notifyAll();
         }
 
     }

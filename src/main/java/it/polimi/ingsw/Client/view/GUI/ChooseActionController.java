@@ -87,19 +87,19 @@ public class ChooseActionController extends Controller{
     {
         Stage stage = (Stage) closeChoose.getScene().getWindow();
         stage.close();
-        showPopup("/GUI/FXML/LeaderActionPage.fxml", 1180, 750);
+        showPopup("/gui/fxml/LeaderActionPage.fxml", 1180, 750);
     }
     public void handleActivateProduction()
     {
         Stage stageChoose = (Stage) closeChoose.getScene().getWindow();
         stageChoose.close();
-        showPopup("/GUI/FXML/ActivateProductionPage.fxml", 1180, 750);
+        showPopup("/gui/fxml/ActivateProductionPage.fxml", 1180, 750);
     }
     public void handleBuyDevCard()
     {
         Stage stage = (Stage) closeChoose.getScene().getWindow();
         stage.close();
-        showPopup("/GUI/FXML/BuyDevCardPage.fxml", 1180, 750);
+        showPopup("/gui/fxml/BuyDevCardPage.fxml", 1180, 750);
     }
     public void handleTakeResources()
     {

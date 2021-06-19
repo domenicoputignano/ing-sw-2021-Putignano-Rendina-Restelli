@@ -1,7 +1,6 @@
 package it.polimi.ingsw.Client.view.GUI;
 
 import it.polimi.ingsw.Client.reducedmodel.ReducedPlayer;
-import it.polimi.ingsw.Model.Player;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
@@ -75,21 +74,21 @@ public class ViewOtherPlayersController extends Controller{
     @FXML
     public void handleViewPlayer1()
     {
-        showPopup("/gui/FXML/PlayerBoardOtherPlayer.fxml", 1110, 810);
+        showPopup("/gui/fxml/PlayerBoardOtherPlayer.fxml", 1110, 810);
         ((PlayerBoardController)GUIApp.controller).initializePersonalBoard(playerList.get(0));
         handleCloseChooseAction();
     }
     @FXML
     public void handleViewPlayer2()
     {
-        showPopup("/gui/FXML/PlayerBoardOtherPlayer.fxml", 1110, 810);
+        showPopup("/gui/fxml/PlayerBoardOtherPlayer.fxml", 1110, 810);
         ((PlayerBoardController)GUIApp.controller).initializePersonalBoard(playerList.get(1));
         handleCloseChooseAction();
     }
     @FXML
     public void handleViewPlayer3()
     {
-        showPopup("/gui/FXML/PlayerBoardOtherPlayer.fxml", 1110, 810);
+        showPopup("/gui/fxml/PlayerBoardOtherPlayer.fxml", 1110, 810);
         ((PlayerBoardController)GUIApp.controller).initializePersonalBoard(playerList.get(2));
         handleCloseChooseAction();
     }
