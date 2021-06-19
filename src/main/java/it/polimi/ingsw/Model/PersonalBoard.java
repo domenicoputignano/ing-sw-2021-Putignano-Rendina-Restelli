@@ -16,6 +16,8 @@ import it.polimi.ingsw.Utils.Pair;
 import java.awt.*;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.util.*;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -99,17 +101,12 @@ public class PersonalBoard extends Observable<GameEvent> {
      * in the resources folder of the project.
      */
     private void initializeFaithTrack(){
-        String path = "src/main/resources/json/faithTrack.json";
+        String path = "/json/faithTrack.json";
 
         Gson gson = new Gson();
 
-        try{
-            JsonReader reader = new JsonReader(new FileReader(path));
-            this.faithTrack = gson.fromJson(reader, FaithTrack.class);
-        }
-        catch (FileNotFoundException e){
-            // mandare messaggio al client "file di configurazione faithTrack.json non trovato"
-        }
+        JsonReader reader = new JsonReader(new InputStreamReader(Objects.requireNonNull(Game.class.getResourceAsStream(path)), StandardCharsets.UTF_8));
+        this.faithTrack = gson.fromJson(reader, FaithTrack.class);
     }
 
     /**

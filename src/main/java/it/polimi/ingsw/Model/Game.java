@@ -17,7 +17,9 @@ import it.polimi.ingsw.Utils.Messages.ServerMessages.Updates.UpdateMessage;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.InputStreamReader;
 import java.lang.reflect.Type;
+import java.nio.charset.StandardCharsets;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -59,20 +61,16 @@ public abstract class Game extends Observable<ServerMessage> implements Observer
     protected abstract void notifyGameSetup();
 
     private void initializeDecksDevCards() {
-        String path = "src/main/resources/json/devCards.json";
+        String path = "/json/devCards.json";
         decks = new ArrayList<>();
-        try{
-            Gson gson = new Gson();
+        Gson gson = new Gson();
 
-            JsonReader reader = new JsonReader(new FileReader(path));
-            //JsonReader reader = new JsonReader(new InputStreamReader(Objects.requireNonNull(decks.getClass().getResourceAsStream(path)), StandardCharsets.UTF_8));
-            Type listType = new TypeToken<List<Deck>>() {
-            }.getType();
-            decks = gson.fromJson(reader, listType);
-            shuffleDecksDevCards();
-        } catch (FileNotFoundException e) {
-            // mandare messaggio al client "Configuration file not found"
-        }
+        JsonReader reader = new JsonReader(new InputStreamReader(Game.class.getResourceAsStream(path), StandardCharsets.UTF_8));
+        //JsonReader reader = new JsonReader(new InputStreamReader(Objects.requireNonNull(decks.getClass().getResourceAsStream(path)), StandardCharsets.UTF_8));
+        Type listType = new TypeToken<List<Deck>>() {
+        }.getType();
+        decks = gson.fromJson(reader, listType);
+        shuffleDecksDevCards();
     }
 
     private void dealLeaderCards() {
@@ -96,20 +94,15 @@ public abstract class Game extends Observable<ServerMessage> implements Observer
     }
 
     private List<LeaderCard> initializeDeckLeaderCards() {
-        String path = "src/main/resources/json/leaderCards.json";
+        String path = "/json/leaderCards.json";
         List<LeaderCard> cards = new ArrayList<>();
 
         Gson gson = new Gson();
-        try {
-            JsonReader reader = new JsonReader(new FileReader(path));
+        JsonReader reader = new JsonReader(new InputStreamReader(Game.class.getResourceAsStream(path), StandardCharsets.UTF_8));
 
-            Type listType = new TypeToken<List<LeaderCard>>() {}.getType();
-            cards = gson.fromJson(reader, listType);
-            return cards;
-        } catch (FileNotFoundException e) {
-            // mandare messaggio al client "Configuration file not found"
-            return null;
-        }
+        Type listType = new TypeToken<List<LeaderCard>>() {}.getType();
+        cards = gson.fromJson(reader, listType);
+        return cards;
     }
 
 
