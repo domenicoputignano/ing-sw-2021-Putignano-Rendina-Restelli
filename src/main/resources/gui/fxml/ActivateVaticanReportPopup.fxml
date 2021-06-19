@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane fx:id="activateVaticanPopup" prefHeight="380.0" prefWidth="570.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.Client.view.GUI.ActivateVaticanReportPopupController">
+    <children>
+        <Text fx:id="activateVaticanPopupText1" layoutX="85.0" layoutY="71.0" mouseTransparent="true" />
+        <Text fx:id="activateVaticanPopupText2" layoutX="112.0" layoutY="95.0" mouseTransparent="true" />
+        <ImageView fx:id="favorTile" fitHeight="130.0" fitWidth="130.0" layoutX="181.0" layoutY="125.0" pickOnBounds="true" preserveRatio="true" />
+        <Button fx:id="okButton" layoutX="191.0" layoutY="300.0" mnemonicParsing="false" onAction="#handleOkButton" prefHeight="40.0" prefWidth="110.0" styleClass="okButton" stylesheets="@../css/button.css" text="OK" />
+    </children>
+</AnchorPane>

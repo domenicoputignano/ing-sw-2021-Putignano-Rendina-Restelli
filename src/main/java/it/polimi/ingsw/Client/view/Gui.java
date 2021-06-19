@@ -257,6 +257,13 @@ public class Gui extends UI{
 
     @Override
     public void render(ActivateVaticanReportUpdate message) {
+        Platform.runLater(() -> {
+            GUIApp.showScene("/gui/FXML/PlayerBoard.fxml");
+            ((PlayerBoardController)GUIApp.controller).initializePersonalBoard(client.getGame().getPlayer(client.getUser()));
+            GUIApp.controller.showPopup("/gui/FXML/ActivateVaticanReportPopup.fxml", 500, 400);
+            ((ActivateVaticanReportPopupController)GUIApp.controller).setPopup(message);
+        });
+
     }
 
     @Override

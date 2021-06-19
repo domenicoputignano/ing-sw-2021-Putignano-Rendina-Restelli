@@ -43,7 +43,7 @@ public class BuyDevCardController extends Controller implements PaymentControlle
     public ImageView selectedCard;
 
     @FXML
-    public Button buyCard, toPayment, concludeAction;
+    public Button  buyCard,toPayment, concludeAction;
 
     @FXML
     public ImageView deck1,deck2,deck3,deck4,deck5,deck6,deck7,deck8,deck9,deck10,deck11,deck12;
@@ -212,13 +212,15 @@ public class BuyDevCardController extends Controller implements PaymentControlle
     private void setDevelopmentCardTextOK(String toDisplay){
         errorDevText.setText(toDisplay);
         errorDevText.setVisible(true);
-        buyCard.setVisible(true);
+        if(client.getUser().equals(client.getGame().getCurrPlayer().getNickname()))
+            buyCard.setVisible(true);
     }
 
     private void setFeasiblePurchase(){
         if(isCardBuyable) {
         setDevelopmentCardTextOK("You have \nenough resources \nto purchase \nselected card");
-        buyCard.setVisible(true);
+        if(client.getUser().equals(client.getGame().getCurrPlayer().getNickname()))
+                buyCard.setVisible(true);
         } else buyCard.setVisible(false);
     }
 
