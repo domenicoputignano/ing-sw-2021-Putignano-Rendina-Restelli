@@ -94,7 +94,7 @@
                   <Image url="@../img/deck_bg.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="bgSlots21" fitHeight="212.0" fitWidth="135.0" layoutX="572.0" layoutY="242.0" pickOnBounds="true" preserveRatio="true" visible="false">
+            <ImageView fx:id="bgSlots3" fitHeight="212.0" fitWidth="135.0" layoutX="572.0" layoutY="242.0" pickOnBounds="true" preserveRatio="true" visible="false">
                <image>
                   <Image url="@../img/deck_bg.png" />
                </image>

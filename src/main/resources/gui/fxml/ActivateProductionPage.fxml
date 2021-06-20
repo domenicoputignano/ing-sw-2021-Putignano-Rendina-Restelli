@@ -120,9 +120,9 @@
       </ImageView>
       <ImageView fx:id="secondResourceImage" fitHeight="60.0" fitWidth="60.0" layoutX="617.0" layoutY="186.0" pickOnBounds="true" preserveRatio="true" visible="false">
       </ImageView>
-      <ImageView fx:id="thirdResourceImage" fitHeight="60.0" fitWidth="60.0" layoutX="620.0" layoutY="405.0" pickOnBounds="true" preserveRatio="true" visible="false">
+      <ImageView fx:id="fourthResourceImage" fitHeight="60.0" fitWidth="60.0" layoutX="620.0" layoutY="405.0" pickOnBounds="true" preserveRatio="true" visible="false">
       </ImageView>
-      <ImageView fx:id="fourthResourceImage" fitHeight="60.0" fitWidth="60.0" layoutX="223.0" layoutY="405.0" pickOnBounds="true" preserveRatio="true" visible="false">
+      <ImageView fx:id="thirdResourceImage" fitHeight="60.0" fitWidth="60.0" layoutX="223.0" layoutY="405.0" pickOnBounds="true" preserveRatio="true" visible="false">
       </ImageView>
     </children>
 </AnchorPane>
