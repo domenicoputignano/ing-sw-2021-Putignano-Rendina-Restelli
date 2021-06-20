@@ -661,40 +661,40 @@ public class ActivateProductionController extends Controller implements PaymentC
 
     @FXML
     public void minusFirstResourceFromDepot() {
-        makeTextInvisible(activateProdText);
+        makeTextInvisible(errorText);
         firstCurrentValueDepot--;
         if(!addToCostList(requiredResources,1, 1, firstCurrentValueDepot, firstDepotOcc)) firstCurrentValueDepot++;
     }
 
     @FXML
     public void minusSecondResourceFromDepot() {
-        makeTextInvisible(activateProdText);
+        makeTextInvisible(errorText);
         secondCurrentValueDepot--;
         if(!addToCostList(requiredResources,2, 1, secondCurrentValueDepot, secondDepotOcc)) secondCurrentValueDepot++;
     }
 
     @FXML
     public void minusThirdResourceFromDepot() {
-        makeTextInvisible(activateProdText);
+        makeTextInvisible(errorText);
         thirdCurrentValueDepot--;
         if(!addToCostList(requiredResources,3,1, thirdCurrentValueDepot, thirdDepotOcc)) thirdCurrentValueDepot++;
     }
 
     @FXML
     public void minusFirstResourceFromStrongbox() {
-        makeTextInvisible(activateProdText);
+        makeTextInvisible(errorText);
         firstCurrentValueStrongbox--;
         if(!addToCostList(requiredResources,1,1, firstCurrentValueStrongbox, firstStrongboxOcc)) firstCurrentValueStrongbox++;
     }
     @FXML
     public void minusSecondResourceFromStrongbox() {
-        makeTextInvisible(activateProdText);
+        makeTextInvisible(errorText);
         secondCurrentValueStrongbox--;
         if(!addToCostList(requiredResources,2,1, secondCurrentValueStrongbox, secondStrongboxOcc)) secondCurrentValueStrongbox++;
     }
     @FXML
     public void minusThirdResourceFromStrongbox() {
-        makeTextInvisible(activateProdText);
+        makeTextInvisible(errorText);
         thirdCurrentValueStrongbox--;
         if(!addToCostList(requiredResources, 3,1,thirdCurrentValueStrongbox, thirdStrongboxOcc)) thirdCurrentValueStrongbox++;
     }
@@ -758,21 +758,21 @@ public class ActivateProductionController extends Controller implements PaymentC
 
     @FXML
     public void minusFirstResourceFromExtra() {
-        makeTextInvisible(activateProdText);
+        makeTextInvisible(errorText);
         firstCurrentValueExtra--;
         if(!addToCostList(requiredResources,1, 1, firstCurrentValueExtra, firstExtraOcc)) firstCurrentValueExtra++;
     }
 
     @FXML
     public void minusSecondResourceFromExtra() {
-        makeTextInvisible(activateProdText);
+        makeTextInvisible(errorText);
         secondCurrentValueExtra--;
         if(!addToCostList(requiredResources,2,1,secondCurrentValueExtra, secondExtraOcc)) secondCurrentValueExtra++;
     }
 
     @FXML
     public void minusThirdResourceFromExtra() {
-        makeTextInvisible(activateProdText);
+        makeTextInvisible(errorText);
         thirdCurrentValueExtra--;
         if (!addToCostList(requiredResources,3,1,thirdCurrentValueExtra, thirdExtraOcc)) thirdCurrentValueExtra++;
     }
@@ -782,18 +782,18 @@ public class ActivateProductionController extends Controller implements PaymentC
     /*Aggiunti successivamente*/
 
     public void minusFourthResourceDepot() {
-        makeTextInvisible(activateProdText);
+        makeTextInvisible(errorText);
         fourthCurrentValueDepot--;
         if (!addToCostList(requiredResources,4,1,fourthCurrentValueDepot, fourthDepotOcc)) fourthCurrentValueDepot++;
     }
 
     public void minusFourthResourceStrongbox() {
-        makeTextInvisible(activateProdText);
+        makeTextInvisible(errorText);
         fourthCurrentValueStrongbox--;
         if (!addToCostList(requiredResources,4,1,fourthCurrentValueStrongbox, fourthStrongboxOcc)) fourthCurrentValueStrongbox++;
     }
     public void minusFourthResourceExtra() {
-        makeTextInvisible(activateProdText);
+        makeTextInvisible(errorText);
         fourthCurrentValueExtra--;
         if (!addToCostList(requiredResources,4,1,fourthCurrentValueExtra, fourthExtraOcc)) fourthCurrentValueExtra++;
     }

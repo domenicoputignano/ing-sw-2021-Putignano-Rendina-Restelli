@@ -53,7 +53,7 @@ public class MaestriDelRinascimento {
         Client client = new Client("127.0.0.1", 1234);
         try{
             client.start(startAsGui);
-        }catch (IOException e){
+        } catch (IOException e){
             LOGGER.log(Level.SEVERE, "Unable to start client");
         }
     }

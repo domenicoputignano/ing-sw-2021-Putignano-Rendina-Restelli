@@ -2,6 +2,7 @@ package it.polimi.ingsw.Network;
 
 import it.polimi.ingsw.Client.clientstates.cli.WaitForTurnCLI;
 import it.polimi.ingsw.Client.reducedmodel.ReducedGame;
+import it.polimi.ingsw.Client.reducedmodel.ReducedSoloMode;
 import it.polimi.ingsw.Client.view.CLI;
 import it.polimi.ingsw.Client.view.GUI.GUIApp;
 import it.polimi.ingsw.Client.view.Gui;
@@ -85,6 +86,7 @@ public class Client {
                 LOGGER.log(Level.INFO, "Sono il client che si è riconnesso");
                 bindUser(message.getSavedUserInstance().getNickname());
                 game = message.getGame();
+                ui.setSoloMode(game.isSoloMode());
             } else {
                 LOGGER.log(Level.INFO, "Sono il client che stava già giocando");
             }
