@@ -152,6 +152,12 @@ public class TakeResourcesController extends Controller{
         }
     }
 
+    private boolean haveToChooseMarbleDestination(ReducedMarble marble){
+        if(marble.getColorMarble() == ColorMarble.RED) return false;
+        if(marble.getColorMarble() == ColorMarble.WHITE && state.getConvertMarbleActiveEffects().size() == 0) return false;
+        else return true;
+    }
+
     private boolean haveToChooseConvertMarbleEffect(){
         return state.getConvertMarbleActiveEffects().size() == 2;
     }
@@ -303,10 +309,13 @@ public class TakeResourcesController extends Controller{
         column3.setVisible(false);
         column4.setVisible(false);
         setPositionButton();
+        if(chosenMarbles.stream().noneMatch(this::haveToChooseMarbleDestination)){
+            okButton.setVisible(true);
+        }
     }
     public void setPositionButton()
     {
-        if(chosenMarbles.get(0).getColorMarble() != ColorMarble.WHITE && chosenMarbles.get(0).getColorMarble() != ColorMarble.RED){
+        if(haveToChooseMarbleDestination(chosenMarbles.get(0))){
             sel1Depot1.setVisible(true);
             sel1Depot2.setVisible(true);
             sel1Depot3.setVisible(true);
@@ -314,7 +323,7 @@ public class TakeResourcesController extends Controller{
             discard1.setVisible(true);
         } else marble1Choice = MarbleDestination.NOTNEEDED;
 
-        if(chosenMarbles.get(1).getColorMarble() != ColorMarble.WHITE && chosenMarbles.get(1).getColorMarble() != ColorMarble.RED){
+        if(haveToChooseMarbleDestination(chosenMarbles.get(1))){
             sel2Depot1.setVisible(true);
             sel2Depot2.setVisible(true);
             sel2Depot3.setVisible(true);
@@ -322,7 +331,7 @@ public class TakeResourcesController extends Controller{
             discard2.setVisible(true);
         } else marble2Choice = MarbleDestination.NOTNEEDED;
 
-        if(chosenMarbles.get(2).getColorMarble() != ColorMarble.WHITE && chosenMarbles.get(2).getColorMarble() != ColorMarble.RED){
+        if(haveToChooseMarbleDestination(chosenMarbles.get(2))){
             sel3Depot1.setVisible(true);
             sel3Depot2.setVisible(true);
             sel3Depot3.setVisible(true);
@@ -330,7 +339,7 @@ public class TakeResourcesController extends Controller{
             discard3.setVisible(true);
         } else marble3Choice = MarbleDestination.NOTNEEDED;
 
-        if(chosenMarbles.size() == 4 && chosenMarbles.get(3).getColorMarble() != ColorMarble.WHITE && chosenMarbles.get(3).getColorMarble() != ColorMarble.RED){
+        if(chosenMarbles.size() == 4 && haveToChooseMarbleDestination(chosenMarbles.get(3))){
             sel4Depot1.setVisible(true);
             sel4Depot2.setVisible(true);
             sel4Depot3.setVisible(true);
