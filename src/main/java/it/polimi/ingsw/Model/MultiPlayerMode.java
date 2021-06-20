@@ -76,7 +76,7 @@ public class MultiPlayerMode extends Game {
     public ReducedMultiPlayerMode getReducedVersion() {
         List<ReducedPlayer> players = playerList.stream().map(Player::getReducedVersion).collect(Collectors.toList());
         ReducedMarketTray marketTray = this.marketTray.getReducedVersion();
-        return new ReducedMultiPlayerMode(players, decks, marketTray);
+        return new ReducedMultiPlayerMode(players, decks, marketTray, this.currPlayer.getReducedVersion());
     }
 
     @Override

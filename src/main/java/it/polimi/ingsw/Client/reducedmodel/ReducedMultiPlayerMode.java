@@ -8,8 +8,9 @@ import java.util.List;
 
 public class ReducedMultiPlayerMode extends ReducedGame {
 
-    public ReducedMultiPlayerMode(List<ReducedPlayer> players, List<Deck> decks, ReducedMarketTray marketTray) {
+    public ReducedMultiPlayerMode(List<ReducedPlayer> players, List<Deck> decks, ReducedMarketTray marketTray, ReducedPlayer currPlayer) {
         super(players, decks, marketTray, false);
+        this.currPlayer = currPlayer;
     }
 
     public void nextTurn(NewTurnUpdate message) {
