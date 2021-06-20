@@ -444,7 +444,7 @@ public class ActivateProductionController extends Controller implements PaymentC
     public void handleSecondSlotSelection() {
         hideError();
         if(activateProductionAction.canActivateSlot(1)) {
-            slot2.setStyle("-fx-border-color: rgb(231,156,48) -fx-border-width: 5;" +
+            slot2.setStyle("-fx-border-color: rgb(231,156,48) ;-fx-border-width: 5;" +
                     "-fx-background-image: url("+client.getGame().getPlayer(client.getUser()).
                     getPersonalBoard().getSlot(1).peekTopCard().toImage()+");");
             activateProductionAction.setSlot(1,true);
