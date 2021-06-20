@@ -101,7 +101,8 @@ public class LeaderActionController extends Controller{
     public void handleDiscardFirstLeader() {
         clearSelection();
         discard1.setStyle("-fx-background-size: 77% auto;");
-        editLeaderAction(1, true);
+        int leaderIndex = correctLeaderIndex();
+        editLeaderAction(leaderIndex, true);
     }
 
     @FXML
@@ -116,12 +117,16 @@ public class LeaderActionController extends Controller{
         clearSelection();
         int leaderIndex;
         active1.setStyle("-fx-background-size: 77% auto;");
+        leaderIndex = correctLeaderIndex();
+        editLeaderAction(leaderIndex, false);
+    }
+
+    private int correctLeaderIndex(){
         if(client.getGame().getPlayer(client.getUser()).getAvailableLeaderCards().size() > 1 &&
                 client.getGame().getPlayer(client.getUser()).getAvailableLeaderCards().get(0).isActive() &&
                 !client.getGame().getPlayer(client.getUser()).getAvailableLeaderCards().get(1).isActive())
-            leaderIndex = 2;
-        else leaderIndex = 1;
-        editLeaderAction(leaderIndex, false);
+            return 2;
+        else return  1;
     }
 
     @FXML
