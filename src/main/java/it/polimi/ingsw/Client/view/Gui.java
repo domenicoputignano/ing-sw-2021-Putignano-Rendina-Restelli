@@ -266,11 +266,13 @@ public class Gui extends UI{
                 ((ActivateProductionUpdateController)GUIApp.controller).setObtainedResources(message);
             });
         } else {
-            GUIApp.showScene("/gui/fxml/PlayerBoard.fxml");
-            ((PlayerBoardController)GUIApp.controller).initializePersonalBoard(client.getGame().getPlayer(client.getUser()));
-            GUIApp.controller.showPopup("/gui/fxml/GenericPopup.fxml", 500, 400);
-            ((GenericPopupController)GUIApp.controller).setText("User " + message.getUser() + " has correctly activated productions. " +
-                    "Click \"view other players\" on your player board to see the results");
+            Platform.runLater(() -> {
+                GUIApp.showScene("/gui/fxml/PlayerBoard.fxml");
+                ((PlayerBoardController)GUIApp.controller).initializePersonalBoard(client.getGame().getPlayer(client.getUser()));
+                GUIApp.controller.showPopup("/gui/fxml/GenericPopup.fxml", 500, 400);
+                ((GenericPopupController)GUIApp.controller).setText("User " + message.getUser() + " has correctly activated productions. " +
+                        "Click \"view other players\" on your player board to see the results");
+            });
         }
     }
 
