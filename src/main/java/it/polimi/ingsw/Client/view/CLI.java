@@ -9,9 +9,11 @@ import it.polimi.ingsw.Client.reducedmodel.ReducedSoloMode;
 import it.polimi.ingsw.Commons.*;
 import it.polimi.ingsw.Exceptions.BackToMenuException;
 import it.polimi.ingsw.Network.Client;
+import it.polimi.ingsw.Utils.ANSI_Color;
 import it.polimi.ingsw.Utils.MarbleDestination;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.*;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.Updates.*;
+import it.polimi.ingsw.Utils.Pair;
 import it.polimi.ingsw.Utils.ResourceSource;
 
 import java.util.*;
@@ -242,14 +244,13 @@ public class CLI extends UI {
     public synchronized void render(LeaderActionUpdate message) {
         if (isReceiverAction(message.getUser())) {
             if (message.hasBeenDiscarded())
-                System.out.println("You discarded following leader card\n" + message.getLeaderCard());
-            else System.out.println("You activated following leader card\n" + message.getLeaderCard());
+                System.out.println("You discarded following leader card");
+            else System.out.println("You activated following leader card");
+            message.getLeaderCard().displayASCII();
         } else {
-            if (message.hasBeenDiscarded())
-                System.out.println("User " + message.getUser() + " has discarded this leader card\n" +
+            if (message.hasBeenDiscarded()) System.out.println("User " + message.getUser() + " has discarded this leader card\n" +
                         message.getLeaderCard());
-            else
-                System.out.println("User " + message.getUser() + " has activated this leader card\n" + message.getLeaderCard());
+            else System.out.println("User " + message.getUser() + " has activated this leader card\n" + message.getLeaderCard());
         }
     }
 
@@ -361,17 +362,38 @@ public class CLI extends UI {
 
     @Override
     public void render(LastTurnMessage message){
-        // TODO
+        String haveToPlayMessage;
+        if(client.getUserPosition() > client.getGame().getPlayer(message.getTriggeringUser()).getPosition()){
+            haveToPlayMessage = "You don't have played this turn yet";
+        } else {
+            haveToPlayMessage = "You have already played this turn";
+        }
+        if(isReceiverAction(message.getTriggeringUser())) {
+            System.out.println("You triggered a conclusion event!\n" +message.getConclusionEvent().eventTrigger()+
+                    "last turn begins!");
+        } else {
+            System.out.println("User "+message.getTriggeringUser()+" triggered a conclusion event!\n" +
+                    message.getConclusionEvent().eventTrigger()+"last turn begins!\n" +haveToPlayMessage);
+        }
     }
 
     @Override
     public void render(RankMessage message){
-        //TODO
+        System.out.println("Final rank");
+        System.out.println("USER                                          POINTS");
+        for(Pair<User,Integer> userPoint : message.getRank()) {
+            System.out.println(userPoint.getKey()+"                                          "+userPoint.getValue());
+        }
     }
 
     @Override
     public void render(SoloModeMatchWinnerMessage message){
-        //TODO
+        System.out.println("Match ended because "+message.getConclusionEvent().eventTrigger());
+        if(message.isPlayerWon()) {
+            System.out.println("You win!\nYour score is: "+message.getVictoryPoints());
+        } else {
+            System.out.println("Oh no, you lost!\n");
+        }
     }
 
     @Override
@@ -398,7 +420,12 @@ public class CLI extends UI {
 
     public void showLeaderCards(ReducedPersonalBoard playerBoard) {
         for (LeaderCard card : playerBoard.getAvailableLeaderCards()) {
-            System.out.printf("Card n.%d\n", client.getGame().getPlayer(client.getUser()).getAvailableLeaderCards().indexOf(card) + 1);
+            System.out.printf("Card n.%d\t", client.getGame().getPlayer(client.getUser()).getAvailableLeaderCards().indexOf(card) + 1);
+            if(card.isActive()) {
+                System.out.print(ANSI_Color.RED+" Active\n"+ANSI_Color.RESET);
+            } else {
+                System.out.println();
+            }
             card.displayASCII();
         }
     }

@@ -13,6 +13,6 @@ public class SeventhDevCardBought extends ConclusionEvent {
     @Override
     public String eventTrigger()
     {
-        return "Seventh Card has been bought.";
+        return "seventh Card has been bought.";
     }
 }

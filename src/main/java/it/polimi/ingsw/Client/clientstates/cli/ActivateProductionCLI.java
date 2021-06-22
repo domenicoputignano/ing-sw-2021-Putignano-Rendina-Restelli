@@ -140,16 +140,16 @@ public class ActivateProductionCLI extends AbstractActivateProduction {
         }
         if(listExtraProductionEffect().size() == 1) {
             System.out.printf("One extra production of type %s available, do you want to activate it? (yes/no) ", getExtraProductionType(0));
-            answer = input.nextLine();
+            answer = input.next();
             requiredProduction.setExtraSlot1(answer.equalsIgnoreCase("yes"));
             requiredProduction.setExtraSlot2(false);
         }
         if(listExtraProductionEffect().size() == 2) {
             System.out.printf("Two extra productions available, one of type: %s, do you want to activate it? (yes/no) ", getExtraProductionType(0));
-            answer = input.nextLine();
+            answer = input.next();
             requiredProduction.setExtraSlot1(answer.equalsIgnoreCase("yes"));
             System.out.printf("Second is of type: %s, do you want to activate it? (yes/no) ", getExtraProductionType(1));
-            answer = input.nextLine();
+            answer = input.next();
             requiredProduction.setExtraSlot2(answer.equalsIgnoreCase("yes"));
         }
         messageToSend.setProductions(requiredProduction);

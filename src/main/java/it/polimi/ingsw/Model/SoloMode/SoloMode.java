@@ -35,7 +35,7 @@ public class SoloMode extends Game {
     }
 
     public void refreshTokens() {
-        this.tokens = new Stack<Token>();
+        this.tokens = new Stack<>();
         tokens.push(new Token(new DiscardTwoBlueCards()));
         tokens.push(new Token(new DiscardTwoYellowCards()));
         tokens.push(new Token(new DiscardTwoGreenCards()));
@@ -134,5 +134,8 @@ public class SoloMode extends Game {
     @Override
     public void handlePlayerReconnection(User reconnectingUser) {
         notifyGameResumed(reconnectingUser);
+        if(turn.isDoneNormalAction()) {
+            nextTurn();
+        }
     }
 }

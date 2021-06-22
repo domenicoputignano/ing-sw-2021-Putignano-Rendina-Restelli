@@ -15,6 +15,18 @@ public class SoloModeMatchWinnerMessage implements ServerMessage{
         this.conclusionEvent = conclusionEvent;
     }
 
+    public boolean isPlayerWon() {
+        return playerWon;
+    }
+
+    public int getVictoryPoints() {
+        return victoryPoints;
+    }
+
+    public ConclusionEvent getConclusionEvent() {
+        return conclusionEvent;
+    }
+
     @Override
     public void handleMessage(Client handler) {
         handler.getUI().render(this);

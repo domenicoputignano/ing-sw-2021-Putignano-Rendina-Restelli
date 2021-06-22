@@ -10,7 +10,6 @@ import it.polimi.ingsw.Commons.ResourceType;
 import it.polimi.ingsw.Exceptions.*;
 import it.polimi.ingsw.Model.*;
 
-import it.polimi.ingsw.Model.MarketTray.RedMarble;
 import it.polimi.ingsw.Network.ClientStatus;
 import it.polimi.ingsw.Network.RemoteView;
 import it.polimi.ingsw.Utils.*;
@@ -20,7 +19,6 @@ import org.junit.jupiter.api.Test;
 
 import java.util.*;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.*;
 
@@ -48,7 +46,7 @@ class TurnControllerTest {
         BuyDevCardMessage buyDevCardMessage = new BuyDevCardMessage();
         buyDevCardMessage.setType(new CardType(1, ColorCard.green));
         Map<ResourceSource, EnumMap<ResourceType, Integer>> howToTakeResources = new HashMap<>();
-        EnumMap<ResourceType,Integer> strongBox = new EnumMap<ResourceType, Integer>(ResourceType.class);
+        EnumMap<ResourceType,Integer> strongBox = new EnumMap<>(ResourceType.class);
         strongBox.put(ResourceType.shield, 2);
         EnumMap<ResourceType,Integer> depot = new EnumMap<>(ResourceType.class);
         EnumMap<ResourceType,Integer> extraDepot = new EnumMap<>(ResourceType.class);
@@ -190,7 +188,7 @@ class TurnControllerTest {
     }
 
     @Test
-    void handleTakeResourcesFromMarketTest() throws WhiteEffectMismatchException, InvalidActionException, NeedPositioningException {
+    void handleTakeResourcesFromMarketTest()  {
         List<Player> players = new ArrayList<>();
         Player first = spy(new Player("Piero"));
         Player second = spy(new Player("Andrea"));
@@ -212,10 +210,10 @@ class TurnControllerTest {
         TakeResourcesFromMarketMessage message = new TakeResourcesFromMarketMessage();
         message.setIndex(1);
         message.setPlayerChoice(MarketChoice.ROW);
-        message.addWhereToPutMarbles(new Pair<ReducedMarble, MarbleDestination>(new ReducedMarble(ColorMarble.BLUE),MarbleDestination.DEPOT1));
-        message.addWhereToPutMarbles(new Pair<ReducedMarble, MarbleDestination>(new ReducedMarble(ColorMarble.YELLOW),MarbleDestination.DEPOT2));
-        message.addWhereToPutMarbles(new Pair<ReducedMarble, MarbleDestination>(new ReducedMarble(ColorMarble.PURPLE),MarbleDestination.DEPOT3));
-        message.addWhereToPutMarbles(new Pair<ReducedMarble, MarbleDestination>(new ReducedMarble(ColorMarble.GREY),MarbleDestination.DEPOT2));
+        message.addWhereToPutMarbles(new Pair<>(new ReducedMarble(ColorMarble.BLUE),MarbleDestination.DEPOT1));
+        message.addWhereToPutMarbles(new Pair<>(new ReducedMarble(ColorMarble.YELLOW),MarbleDestination.DEPOT2));
+        message.addWhereToPutMarbles(new Pair<>(new ReducedMarble(ColorMarble.PURPLE),MarbleDestination.DEPOT3));
+        message.addWhereToPutMarbles(new Pair<>(new ReducedMarble(ColorMarble.GREY),MarbleDestination.DEPOT2));
 
 
 

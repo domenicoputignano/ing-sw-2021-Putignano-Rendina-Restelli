@@ -15,6 +15,10 @@ public class RankMessage implements ServerMessage{
         this.rank = rank;
     }
 
+    public List<Pair<User, Integer>> getRank() {
+        return rank;
+    }
+
     @Override
     public void handleMessage(Client handler) {
         handler.getUI().render(this);

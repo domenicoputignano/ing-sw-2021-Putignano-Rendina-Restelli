@@ -13,6 +13,6 @@ public class DevCardColorEnded extends ConclusionEvent {
     @Override
     public String eventTrigger()
     {
-        return "One development card color is ended.";
+        return "one development card color is ended.";
     }
 }
