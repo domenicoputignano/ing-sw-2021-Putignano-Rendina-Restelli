@@ -227,6 +227,8 @@ public class LeaderChoiceController extends Controller{
         okButton.setVisible(false);
         clearButton.setVisible(false);
         errorChoiceText.setVisible(false);
-        chooseCardText.setVisible(false);
+        if(client.getUserPosition() == 1 ){
+            chooseCardText.setText("You are the first player, wait until the other players choose the resources");
+        }
     }
 }

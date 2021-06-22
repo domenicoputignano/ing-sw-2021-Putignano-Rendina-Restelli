@@ -80,7 +80,7 @@ public class Gui extends UI{
                     GUIApp.showScene("/gui/fxml/PlayerBoard.fxml");
                     ((PlayerBoardController)GUIApp.controller).initializePersonalBoard(client.getGame().getPlayer(client.getUser()));
                 });
-                } else {
+            } else {
                 if(client.getUserPosition() > 1) {
                     Platform.runLater(() -> GUIApp.showScene("/gui/fxml/ResourceChoicePage.fxml"));
                 } else {
@@ -93,7 +93,7 @@ public class Gui extends UI{
 
     @Override
     public void render(InitialResourceChoiceUpdate message) {
-
+        // Useless in GUI because this update is followed by a NewTurnUpdate which begins the game
     }
 
     @Override

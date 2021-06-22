@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.text.*?>
-<?import java.lang.*?>
-<?import javafx.scene.image.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="950.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.Client.view.GUI.LeaderChoiceController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="950.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.Client.view.GUI.LeaderChoiceController">
     <top>
         <AnchorPane fx:id="top" prefHeight="104.0" prefWidth="950.0" BorderPane.alignment="CENTER" />
     </top>
@@ -20,7 +18,7 @@
                   <Image url="@../img/leaderChoiceTab.png" />
                </image>
             </ImageView>
-            <TextField fx:id="chooseCardText" editable="false" layoutX="157.0" layoutY="122.0" mouseTransparent="true" prefHeight="24.0" prefWidth="573.0" styleClass="chooseLeaderCard" stylesheets="@../css/text.css" text="You have received these leader cards. Choose 2 leader cards to discard !" />
+            <TextField fx:id="chooseCardText" alignment="CENTER" editable="false" layoutX="130.0" layoutY="122.0" mouseTransparent="true" prefHeight="24.0" prefWidth="600.0" styleClass="chooseLeaderCard" stylesheets="@../css/text.css" text="You have received these leader cards. Choose 2 leader cards to discard !" />
             <Button fx:id="leaderCard1" layoutX="125.0" layoutY="189.0" mnemonicParsing="false" onAction="#discardLeaderCard1" prefHeight="215.0" prefWidth="147.0" styleClass="chooseLeaderCard" stylesheets="@../css/button.css" />
             <Button fx:id="leaderCard2" layoutX="275.0" layoutY="189.0" mnemonicParsing="false" onAction="#discardLeaderCard2" prefHeight="215.0" prefWidth="147.0" styleClass="chooseLeaderCard" stylesheets="@../css/button.css" />
             <Button fx:id="leaderCard3" layoutX="425.0" layoutY="189.0" mnemonicParsing="false" onAction="#discardLeaderCard3" prefHeight="215.0" prefWidth="147.0" styleClass="chooseLeaderCard" stylesheets="@../css/button.css" />
