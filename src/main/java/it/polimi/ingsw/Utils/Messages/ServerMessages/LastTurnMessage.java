@@ -16,6 +16,14 @@ public class LastTurnMessage implements ServerMessage{
 
     @Override
     public void handleMessage(Client handler) {
+        handler.getUI().render(this);
+    }
 
+    public User getTriggeringUser() {
+        return triggeringUser;
+    }
+
+    public ConclusionEvent getConclusionEvent() {
+        return conclusionEvent;
     }
 }

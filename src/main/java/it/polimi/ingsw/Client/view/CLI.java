@@ -360,6 +360,16 @@ public class CLI extends UI {
     }
 
     @Override
+    public void render(LastTurnMessage message){
+        // TODO
+    }
+
+    @Override
+    public void render(RankMessage message){
+        //TODO
+    }
+
+    @Override
     public void renderError(String errorMessage) {
         System.out.println(errorMessage);
     }

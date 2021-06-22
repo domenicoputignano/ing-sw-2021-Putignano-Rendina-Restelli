@@ -317,6 +317,38 @@ public class Gui extends UI{
     }
 
     @Override
+    public void render(LastTurnMessage message) {
+        String haveToPlayMessage;
+        if(client.getUserPosition()>client.getGame().getPlayer(message.getTriggeringUser()).getPosition()){
+            haveToPlayMessage = "You don't have played this turn yet";
+        } else {
+            haveToPlayMessage = "You have already played this turn";
+        }
+        if(isReceiverAction(message.getTriggeringUser())){
+            Platform.runLater(() -> {
+                GUIApp.showScene("/gui/fxml/PlayerBoard.fxml");
+                ((PlayerBoardController)GUIApp.controller).initializePersonalBoard(client.getGame().getPlayer(client.getUser()));
+                GUIApp.controller.showPopup("/gui/fxml/GenericPopup.fxml", 500, 400);
+                ((GenericPopupController)GUIApp.controller).setText("You triggered a conclusion event!\n" +message.getConclusionEvent().eventTrigger()+
+                        "last turn begins!");
+            });
+        } else {
+            Platform.runLater(() -> {
+                GUIApp.showScene("/gui/fxml/PlayerBoard.fxml");
+                ((PlayerBoardController)GUIApp.controller).initializePersonalBoard(client.getGame().getPlayer(client.getUser()));
+                GUIApp.controller.showPopup("/gui/fxml/GenericPopup.fxml", 500, 400);
+                ((GenericPopupController)GUIApp.controller).setText("User " +message.getTriggeringUser()+ " triggered a conclusion event!\n" +message.getConclusionEvent().eventTrigger()+
+                        "last turn begins!\n" + haveToPlayMessage);
+            });
+        }
+    }
+
+    @Override
+    public void render(RankMessage message){
+
+    }
+
+    @Override
     public void renderError(String errorMessage) {
         Platform.runLater(() -> {
             GUIApp.controller.showErrorMessage();

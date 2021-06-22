@@ -17,6 +17,6 @@ public class RankMessage implements ServerMessage{
 
     @Override
     public void handleMessage(Client handler) {
-
+        handler.getUI().render(this);
     }
 }
