@@ -10,7 +10,7 @@ import javafx.stage.Stage;
 public class GenericPopupController extends Controller{
 
     @FXML
-    public AnchorPane movePopup;
+    public AnchorPane genericPopup;
 
     @FXML
     public Button okButton;
@@ -21,7 +21,7 @@ public class GenericPopupController extends Controller{
     @FXML
     @Override
     public void initialize() {
-        movePopup.setBackground(new Background(new BackgroundImage(new Image("/gui/img/exit_tab.png"),
+        genericPopup.setBackground(new Background(new BackgroundImage(new Image("/gui/img/exit_tab.png"),
                 BackgroundRepeat.NO_REPEAT,
                 BackgroundRepeat.NO_REPEAT,
                 BackgroundPosition.CENTER,

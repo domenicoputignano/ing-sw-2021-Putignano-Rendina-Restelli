@@ -389,7 +389,7 @@ public class CLI extends UI {
     @Override
     public void render(SoloModeMatchWinnerMessage message){
         System.out.println("Match ended because "+message.getConclusionEvent().eventTrigger());
-        if(message.isPlayerWon()) {
+        if(message.hasPlayerWon()) {
             System.out.println("You win!\nYour score is: "+message.getVictoryPoints());
         } else {
             System.out.println("Oh no, you lost!\n");

@@ -6,8 +6,8 @@ import it.polimi.ingsw.Network.Client;
 public class SoloModeMatchWinnerMessage implements ServerMessage{
 
     private final boolean playerWon;
-    private int victoryPoints;
-    private ConclusionEvent conclusionEvent;
+    private final int victoryPoints;
+    private final ConclusionEvent conclusionEvent;
 
     public SoloModeMatchWinnerMessage(boolean playerWon, int victoryPoints,ConclusionEvent conclusionEvent) {
         this.playerWon = playerWon;
@@ -15,7 +15,7 @@ public class SoloModeMatchWinnerMessage implements ServerMessage{
         this.conclusionEvent = conclusionEvent;
     }
 
-    public boolean isPlayerWon() {
+    public boolean hasPlayerWon() {
         return playerWon;
     }
 

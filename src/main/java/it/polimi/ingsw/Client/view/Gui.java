@@ -350,7 +350,10 @@ public class Gui extends UI{
 
     @Override
     public void render(SoloModeMatchWinnerMessage message){
-        // TODO aggiungere popup di fine partita in solitaria
+        Platform.runLater(() -> {
+            GUIApp.controller.showPopup("/gui/fxml/SoloModeWinnerMessage.fxml", 600, 500);
+            ((SoloModeWinnerMessageController) GUIApp.controller).setText(message);
+        });
     }
 
     @Override
