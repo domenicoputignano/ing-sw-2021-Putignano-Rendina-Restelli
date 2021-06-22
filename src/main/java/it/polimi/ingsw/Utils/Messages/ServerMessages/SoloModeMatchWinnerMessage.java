@@ -17,6 +17,6 @@ public class SoloModeMatchWinnerMessage implements ServerMessage{
 
     @Override
     public void handleMessage(Client handler) {
-
+        handler.getUI().render(this);
     }
 }

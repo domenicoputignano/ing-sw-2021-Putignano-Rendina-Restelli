@@ -54,6 +54,7 @@ public abstract class UI {
     public abstract void render(JoinLobbyMessage message);
     public abstract void render(LastTurnMessage message);
     public abstract void render(RankMessage message);
+    public abstract void render(SoloModeMatchWinnerMessage message);
     public abstract void renderError(String errorMessage);
 
     public boolean isReceiverAction(User sender) {

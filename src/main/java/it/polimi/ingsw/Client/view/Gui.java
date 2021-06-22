@@ -345,7 +345,12 @@ public class Gui extends UI{
 
     @Override
     public void render(RankMessage message){
+        // TODO aggiungere popup di fine partita multigiocatore
+    }
 
+    @Override
+    public void render(SoloModeMatchWinnerMessage message){
+        // TODO aggiungere popup di fine partita in solitaria
     }
 
     @Override

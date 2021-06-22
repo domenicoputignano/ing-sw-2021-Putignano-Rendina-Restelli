@@ -370,6 +370,11 @@ public class CLI extends UI {
     }
 
     @Override
+    public void render(SoloModeMatchWinnerMessage message){
+        //TODO
+    }
+
+    @Override
     public void renderError(String errorMessage) {
         System.out.println(errorMessage);
     }
