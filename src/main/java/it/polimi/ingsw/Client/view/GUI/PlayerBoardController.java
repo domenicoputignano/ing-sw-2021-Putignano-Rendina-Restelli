@@ -53,7 +53,7 @@ public class PlayerBoardController extends Controller {
     public ImageView resource1LeaderCard1,resource2LeaderCard1,resource1LeaderCard2,resource2LeaderCard2;
 
     @FXML
-    public ImageView topCard1,topCard2,topCard3,bgSlots1,bgSlots2,bgSlots3;
+    public ImageView slot1Card1,slot2Card1,slot3Card1,slot1Card2,slot2Card2,slot3Card2,slot1Card3,slot2Card3,slot3Card3;
 
     @FXML
     public ImageView depot1, depot21, depot22, depot31, depot32, depot33;
@@ -165,19 +165,25 @@ public class PlayerBoardController extends Controller {
     private void initializeSlots()
     {
         if(!playerToShow.getPersonalBoard().isEmptySlot(0)){
-            topCard1.setImage(new Image(playerToShow.getPersonalBoard().peekTopCardInSlot(0).toImage()));
+            slot1Card1.setImage(new Image(playerToShow.getPersonalBoard().getSlot(0).getDevelopmentCardStack().get(0).toImage()));
             if(playerToShow.getPersonalBoard().getSlot(0).getNumOfStackedCards()>1)
-                bgSlots1.setVisible(true);
+                slot1Card2.setImage(new Image(playerToShow.getPersonalBoard().getSlot(0).getDevelopmentCardStack().get(1).toImage()));
+            if(playerToShow.getPersonalBoard().getSlot(0).getNumOfStackedCards()>2)
+                slot1Card3.setImage(new Image(playerToShow.getPersonalBoard().getSlot(0).getDevelopmentCardStack().get(2).toImage()));
         }
         if(!playerToShow.getPersonalBoard().isEmptySlot(1)){
-            topCard2.setImage(new Image(playerToShow.getPersonalBoard().peekTopCardInSlot(1).toImage()));
+            slot2Card1.setImage(new Image(playerToShow.getPersonalBoard().getSlot(1).getDevelopmentCardStack().get(0).toImage()));
             if(playerToShow.getPersonalBoard().getSlot(1).getNumOfStackedCards()>1)
-                bgSlots2.setVisible(true);
+                slot2Card2.setImage(new Image(playerToShow.getPersonalBoard().getSlot(1).getDevelopmentCardStack().get(1).toImage()));
+            if(playerToShow.getPersonalBoard().getSlot(1).getNumOfStackedCards()>2)
+                slot2Card3.setImage(new Image(playerToShow.getPersonalBoard().getSlot(1).getDevelopmentCardStack().get(2).toImage()));
         }
         if(!playerToShow.getPersonalBoard().isEmptySlot(2)){
-            topCard3.setImage(new Image(playerToShow.getPersonalBoard().peekTopCardInSlot(2).toImage()));
+            slot3Card1.setImage(new Image(playerToShow.getPersonalBoard().getSlot(2).getDevelopmentCardStack().get(0).toImage()));
             if(playerToShow.getPersonalBoard().getSlot(2).getNumOfStackedCards()>1)
-                bgSlots3.setVisible(true);
+                slot3Card2.setImage(new Image(playerToShow.getPersonalBoard().getSlot(2).getDevelopmentCardStack().get(1).toImage()));
+            if(playerToShow.getPersonalBoard().getSlot(2).getNumOfStackedCards()>2)
+                slot3Card3.setImage(new Image(playerToShow.getPersonalBoard().getSlot(2).getDevelopmentCardStack().get(2).toImage()));
         }
     }
 

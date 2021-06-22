@@ -74,24 +74,16 @@
       <ImageView fx:id="depot33" fitHeight="40.0" fitWidth="40.0" layoutX="212.0" layoutY="497.0" pickOnBounds="true" preserveRatio="true" />
       <Button fx:id="endTurn" layoutX="662.0" layoutY="707.0" mnemonicParsing="false" onAction="#handleEndTurn" prefHeight="60.0" prefWidth="161.0" styleClass="chooseAction" stylesheets="@../css/button.css" text="End Turn" />
       <Button fx:id="otherPlayers" layoutX="344.0" layoutY="707.0" mnemonicParsing="false" onAction="#handleViewOtherPlayers" prefHeight="60.0" prefWidth="161.0" styleClass="chooseAction" stylesheets="@../css/button.css" text="View other players" />
-      <ImageView fx:id="bgSlots1" fitHeight="212.0" fitWidth="135.0" layoutX="380.0" layoutY="404.0" pickOnBounds="true" preserveRatio="true" visible="false">
-         <image>
-            <Image url="@../img/deck_bg.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="bgSlots2" fitHeight="212.0" fitWidth="135.0" layoutX="520.0" layoutY="404.0" pickOnBounds="true" preserveRatio="true" visible="false">
-         <image>
-            <Image url="@../img/deck_bg.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="bgSlots21" fitHeight="212.0" fitWidth="135.0" layoutX="664.0" layoutY="404.0" pickOnBounds="true" preserveRatio="true" visible="false">
-         <image>
-            <Image url="@../img/deck_bg.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="topCard1" fitHeight="195.0" fitWidth="127.0" layoutX="384.0" layoutY="409.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="topCard2" fitHeight="195.0" fitWidth="127.0" layoutX="524.0" layoutY="409.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="topCard3" fitHeight="195.0" fitWidth="127.0" layoutX="670.0" layoutY="409.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="slot1Card1" fitHeight="195.0" fitWidth="127.0" layoutX="383.0" layoutY="460.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="slot2Card1" fitHeight="195.0" fitWidth="127.0" layoutX="523.0" layoutY="460.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="slot3Card1" fitHeight="195.0" fitWidth="127.0" layoutX="667.0" layoutY="460.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="slot1Card2" fitHeight="195.0" fitWidth="127.0" layoutX="383.0" layoutY="425.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="slot1Card3" fitHeight="195.0" fitWidth="127.0" layoutX="383.0" layoutY="390.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="slot2Card2" fitHeight="195.0" fitWidth="127.0" layoutX="523.0" layoutY="425.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="slot2Card3" fitHeight="195.0" fitWidth="127.0" layoutX="523.0" layoutY="390.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="slot3Card2" fitHeight="195.0" fitWidth="127.0" layoutX="667.0" layoutY="425.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="slot3Card3" fitHeight="195.0" fitWidth="127.0" layoutX="667.0" layoutY="390.0" pickOnBounds="true" preserveRatio="true" />
+
       <HBox fx:id="strongboxResources" alignment="CENTER" layoutX="125.0" layoutY="568.0" prefHeight="94.0" prefWidth="126.0" visible="false">
          <children>
             <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0">
