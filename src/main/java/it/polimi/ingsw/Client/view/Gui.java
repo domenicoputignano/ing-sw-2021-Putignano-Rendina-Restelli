@@ -197,12 +197,31 @@ public class Gui extends UI{
     @Override
     public void render(PositioningUpdate message) {
         if(isReceiverAction(message.getUser())){
+            String targetUsers;
+            if(isSoloMode())
+                targetUsers = "Lorenzo";
+            else targetUsers = "the other players";
             Platform.runLater(() -> {
                 GUIApp.showScene("/gui/fxml/PlayerBoard.fxml");
                 ((PlayerBoardController)GUIApp.controller).initializePersonalBoard(client.getGame().getPlayer(client.getUser()));
-                // TODO aggiungere popup
-            });
+                GUIApp.controller.showPopup("/gui/fxml/GenericPopup.fxml", 500, 400);
+                if(message.getDiscardedResources().size()==0)
+                    ((GenericPopupController)GUIApp.controller).setText("You correctly positioned all the pending resources!\nLook at your depots to see the results !");
+                else
+                    ((GenericPopupController)GUIApp.controller).setText("You incorrectly positioned some pending resources!\nThe resources have been discarded and "+targetUsers+" obtained one faith point for each resource discarded ! ");
 
+            });
+        }
+        else {
+            Platform.runLater(() -> {
+                GUIApp.showScene("/gui/fxml/PlayerBoard.fxml");
+                ((PlayerBoardController) GUIApp.controller).initializePersonalBoard(client.getGame().getPlayer(client.getUser()));
+                GUIApp.controller.showPopup("/gui/fxml/GenericPopup.fxml", 500, 400);
+                if (message.getDiscardedResources().size() == 0)
+                    ((GenericPopupController) GUIApp.controller).setText("Player " + message.getUser() + " has correctly positioned all the pending resources!\nClick view other players to see the results !");
+                else
+                    ((GenericPopupController) GUIApp.controller).setText("Player " + message.getUser() + " incorrectly positioned some pending resources!\nThe resources have been discarded and you obtained " + message.getDiscardedResources().size() + " faith points ! ");
+            });
         }
     }
 
