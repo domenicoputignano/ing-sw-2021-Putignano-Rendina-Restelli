@@ -52,6 +52,6 @@
       <TextField fx:id="depotExtraOcc" alignment="CENTER" editable="false" layoutX="746.0" layoutY="185.0" mouseTransparent="true" prefHeight="46.0" prefWidth="53.0" styleClass="textFieldResources" stylesheets="@../css/text.css" text="1" />
       <Button fx:id="minusResourceExtra" layoutX="686.0" layoutY="180.0" mnemonicParsing="false" onAction="#minusDepotOcc" prefHeight="60.0" prefWidth="60.0" styleClass="minusButton" stylesheets="@../css/button.css" visible="false" />
       <Button fx:id="plusResourceExtra" layoutX="796.0" layoutY="180.0" mnemonicParsing="false" onAction="#plusDepotOcc" prefHeight="60.0" prefWidth="60.0" styleClass="plusButton" stylesheets="@../css/button.css" visible="false" />
-      <Button fx:id="okButtonExtraDepotOcc" layoutX="708.0" layoutY="252.0" mnemonicParsing="false" onAction="#handleOkButtonDepotOcc" prefHeight="53.0" prefWidth="129.0" styleClass="okButton" stylesheets="@../css/text.css" text="OK" visible="false" />
+      <Button fx:id="okButtonExtraDepotOcc" layoutX="708.0" layoutY="252.0" mnemonicParsing="false" onAction="#handleOkButtonDepotOcc" prefHeight="53.0" prefWidth="129.0" styleClass="okButton" stylesheets="@../css/button.css" text="OK" visible="false" />
     </children>
 </AnchorPane>
