@@ -1,10 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
@@ -15,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="anchorActivateProd" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.Client.view.GUI.ActivateProductionController">
+<AnchorPane fx:id="anchorActivateProd" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.Client.view.GUI.ActivateProductionController">
     <children>
         <Button fx:id="closeActivateProd" layoutX="975.0" layoutY="50.0" mnemonicParsing="false" onAction="#handleCloseChooseAction" prefHeight="65.0" prefWidth="70.0" styleClass="button, exit" stylesheets="@../css/button.css" />
       <ImageView fx:id="slotsBackground" fitHeight="431.0" fitWidth="701.0" layoutX="240.0" layoutY="155.0" opacity="0.84" pickOnBounds="true" preserveRatio="true">
@@ -124,5 +119,17 @@
       </ImageView>
       <ImageView fx:id="thirdResourceImage" fitHeight="60.0" fitWidth="60.0" layoutX="223.0" layoutY="405.0" pickOnBounds="true" preserveRatio="true" visible="false">
       </ImageView>
+      <HBox fx:id="costs" alignment="BOTTOM_LEFT" layoutX="274.0" layoutY="560.0" prefHeight="60.0" prefWidth="686.0" spacing="100.0" visible="false">
+         <children>
+            <ImageView fx:id="firstCostImg" fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="secondCostImg" fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="thirdCostImg" fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="fourthCostImg" fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" />
+         </children>
+      </HBox>
+      <Text fx:id="firstCost" layoutX="292.0" layoutY="545.0" strokeType="OUTSIDE" strokeWidth="0.0" />
+      <Text fx:id="secondCost" layoutX="450.0" layoutY="545.0" strokeType="OUTSIDE" strokeWidth="0.0" />
+      <Text fx:id="thirdCost" layoutX="605.0" layoutY="545.0" strokeType="OUTSIDE" strokeWidth="0.0" />
+      <Text fx:id="fourthCost" layoutX="757.0" layoutY="545.0" strokeType="OUTSIDE" strokeWidth="0.0" />
     </children>
 </AnchorPane>

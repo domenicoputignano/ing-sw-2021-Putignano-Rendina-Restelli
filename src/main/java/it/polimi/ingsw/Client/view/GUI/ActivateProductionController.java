@@ -65,6 +65,11 @@ public class ActivateProductionController extends Controller implements PaymentC
 
 
     public VBox input, inputSecond, output;
+
+    public HBox costs;
+    public Text firstCost, secondCost, thirdCost, fourthCost;
+    public ImageView firstCostImg, secondCostImg, thirdCostImg, fourthCostImg;
+
     public Button coinInput, servantInput, shieldInput, stoneInput, coinOutput, servantOutput, shieldOutput, stoneOutput;
     public Button coinInputSecond, servantInputSecond, shieldInputSecond, stoneInputSecond;
     public Button clear;
@@ -165,6 +170,14 @@ public class ActivateProductionController extends Controller implements PaymentC
         setFont(fourthResourceDepot,30);
         setFont(fourthResourceStrongbox,30);
         setFont(fourthResourceExtra,30);
+        setFont(firstCost,25);
+        firstCost.setStyle("-fx-text-fill: rgb(35, 25, 22);");
+        secondCost.setStyle("-fx-text-fill: rgb(35, 25, 22);");
+        thirdCost.setStyle("-fx-text-fill: rgb(35, 25, 22);");
+        fourthCost.setStyle("-fx-text-fill: rgb(35, 25, 22);");
+        setFont(secondCost,25);
+        setFont(thirdCost,25);
+        setFont(fourthCost, 25);
         setFont(concludeAction, 27);
         setFont(errorText, 30);
     }
@@ -235,6 +248,7 @@ public class ActivateProductionController extends Controller implements PaymentC
     }
 
     private void nextScene() {
+        activateProdText.setTranslateX(-180);
         if(basicHasToBeDone) {
                 showActionRequired("Select two input and one output to complete basic production");
                 input.setVisible(true);
@@ -569,7 +583,13 @@ public class ActivateProductionController extends Controller implements PaymentC
         nextStep.setVisible(false);
         clear.setVisible(false);
         concludeAction.setVisible(false);
+
         extraProductions.setVisible(false);
+        costs.setVisible(false);
+        firstCost.setVisible(false);
+        secondCost.setVisible(false);
+        thirdCost.setVisible(false);
+        fourthCost.setVisible(false);
     }
 
 
@@ -577,6 +597,12 @@ public class ActivateProductionController extends Controller implements PaymentC
     @Override
     public void setVisibleFirstResource() {
         firstResourceImage.setImage(new Image(ResourceLocator.retrieveResourceTypeImage(requiredResources.get(0).getKey())));
+
+        firstCostImg.setImage(new Image(ResourceLocator.retrieveResourceTypeImage(requiredResources.get(0).getKey())));
+        firstCost.setText(""+requiredResources.get(0).getValue());
+        firstCost.setVisible(true);
+        firstCostImg.setVisible(true);
+
         firstResourceImage.setVisible(true);
         plusFirstResourceDepot.setVisible(true);
         plusFirstResourceStrongbox.setVisible(true);
@@ -597,9 +623,14 @@ public class ActivateProductionController extends Controller implements PaymentC
 
     @Override
     public void setVisibleSecondResource() {
-
         secondResourceImage.setImage(new Image(ResourceLocator.retrieveResourceTypeImage(requiredResources.get(1).getKey())));
         secondResourceImage.setVisible(true);
+
+        secondCostImg.setImage(new Image(ResourceLocator.retrieveResourceTypeImage(requiredResources.get(1).getKey())));
+        secondCost.setText(""+requiredResources.get(1).getValue());
+        secondCost.setVisible(true);
+        secondCostImg.setVisible(true);
+
         plusSecondResourceDepot.setVisible(true);
         plusSecondResourceStrongbox.setVisible(true);
         minusSecondResourceDepot.setVisible(true);
@@ -620,6 +651,12 @@ public class ActivateProductionController extends Controller implements PaymentC
     public void setVisibleThirdResource() {
         thirdResourceImage.setImage(new Image(ResourceLocator.retrieveResourceTypeImage(requiredResources.get(2).getKey())));
         thirdResourceImage.setVisible(true);
+
+        thirdCostImg.setImage(new Image(ResourceLocator.retrieveResourceTypeImage(requiredResources.get(2).getKey())));
+        thirdCost.setVisible(true);
+        thirdCost.setText(""+requiredResources.get(2).getValue());
+        thirdCostImg.setVisible(true);
+
         plusThirdResourceDepot.setVisible(true);
         plusThirdResourceStrongbox.setVisible(true);
         minusThirdResourceDepot.setVisible(true);
@@ -642,6 +679,13 @@ public class ActivateProductionController extends Controller implements PaymentC
     private void setVisibleFourthResource() {
         fourthResourceImage.setImage(new Image(ResourceLocator.retrieveResourceTypeImage(requiredResources.get(3).getKey())));
         fourthResourceImage.setVisible(true);
+
+        fourthCostImg.setImage(new Image(ResourceLocator.retrieveResourceTypeImage(requiredResources.get(3).getKey())));
+        fourthCost.setVisible(true);
+        fourthCost.setText(""+requiredResources.get(3).getValue());
+        fourthCostImg.setVisible(true);
+
+
         plusFourthResourceDepot.setVisible(true);
         plusFourthResourceStrongbox.setVisible(true);
         minusFourthResourceDepot.setVisible(true);
@@ -822,6 +866,7 @@ public class ActivateProductionController extends Controller implements PaymentC
                 map(x -> new Pair<>(x.getKey(),x.getValue())).collect(Collectors.toList());
         if(Checker.checkResources(inputResources, client.getGame().getPlayer(client.getUser()).getPersonalBoard())){
             showActionRequired("It's time to choose from where pick resources needed for production");
+            costs.setVisible(true);
             showRequiredResources(requiredResources);
         } else {
             showActionRequired("Oh no, seems that you can't perform selected productions!");

@@ -40,13 +40,6 @@ public class GameController {
     }
 
     public synchronized void handleResourceChoiceMessage(ResourceChoiceMessage message, RemoteView sender) {
-        /*while (model.getGameState() != GameState.RESOURCECHOICE) {
-            try { wait(); }
-            catch (InterruptedException e) {
-                LOGGER.log(Level.SEVERE, "Thread accidentally interrupted");
-                Thread.currentThread().interrupt();
-            }
-        }*/
         if(message.isValidMessage()) {
             if(checkPlayerResourceChoice(message, sender.getPlayer())){
                 if(sender.getPlayer().getPosition()==4) {
