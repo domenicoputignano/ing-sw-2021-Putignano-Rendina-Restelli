@@ -87,6 +87,14 @@ public class ActionChoiceCLI extends AbstractActionChoice {
                         return true;
                     }
                 }
+                case "MARKET" : {
+                    cli.showMarketTray();
+                    return false;
+                }
+                case "DECKS" : {
+                    cli.printDecks();
+                    return false;
+                }
                 case "PB" : {
                     cli.askAndShowPlayerBoard();
                     return false;

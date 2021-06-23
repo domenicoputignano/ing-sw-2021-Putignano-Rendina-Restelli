@@ -397,6 +397,11 @@ public class CLI extends UI {
     }
 
     @Override
+    public void render(UserDisconnectedMessage message) {
+        System.out.println("User "+message.getDisconnectedUser()+" left the match");
+    }
+
+    @Override
     public void renderError(String errorMessage) {
         System.out.println(errorMessage);
     }
@@ -422,7 +427,7 @@ public class CLI extends UI {
         for (LeaderCard card : playerBoard.getAvailableLeaderCards()) {
             System.out.printf("Card n.%d\t", client.getGame().getPlayer(client.getUser()).getAvailableLeaderCards().indexOf(card) + 1);
             if(card.isActive()) {
-                System.out.print(ANSI_Color.RED+" Active\n"+ANSI_Color.RESET);
+                System.out.print(ANSI_Color.RED.escape()+"Active\n"+ANSI_Color.RESET);
             } else {
                 System.out.println();
             }

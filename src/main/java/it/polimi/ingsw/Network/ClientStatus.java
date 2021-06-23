@@ -68,18 +68,19 @@ public class ClientStatus implements Runnable {
                     });
                 }
                 else {
-                    LOGGER.log(Level.INFO, ""+message.getClass().getName());
+                    //LOGGER.log(Level.INFO, ""+message.getClass().getName());
                     try {
                         if (connectionState == ConnectionStates.CONFIGURATION) {
                             ((ConfigurationMessage)message).handleConfigurationMessage(this);
                         }
-                        if (connectionState == ConnectionStates.INGAME) {
+                        else if (connectionState == ConnectionStates.INGAME) {
                             GameControllerHandleable messageFromClient = (GameControllerHandleable) message;
                             remoteView.handleClientMessage(messageFromClient);
-                            LOGGER.log(Level.INFO, "Message from client of type "+messageFromClient.getClass().getName()+"");
+                            LOGGER.log(Level.INFO, "Message from client of type "+messageFromClient.getClass().getName());
                         }
                     } catch (ClassCastException e) {
-                        LOGGER.log(Level.INFO, "Wrong message type");
+                        LOGGER.log(Level.INFO, ""+message.getClass().getName());
+                        LOGGER.log(Level.INFO, "Wrong type message");
                     }
                 }
             }
@@ -136,7 +137,7 @@ public class ClientStatus implements Runnable {
         }
     }
 
-    public void numOfPlayersChoice(NumOfPlayerChoiceMessage message) throws IOException {
+    public void numOfPlayersChoice(NumOfPlayerChoiceMessage message) {
         numOfPlayers = message.getNumOfPlayers();
         server.notifyLobbyJoin(numOfPlayers,nickname);
         LOGGER.log(Level.INFO, "Client " + nickname + " connected and " + numOfPlayers + " players chosen");
@@ -144,7 +145,7 @@ public class ClientStatus implements Runnable {
 
     }
 
-    public void gameChoice(GameModeChoiceMessage message) throws IOException {
+    public void gameChoice(GameModeChoiceMessage message) {
         String choice = message.getGameModeChoice();
         if(choice.equalsIgnoreCase("multiplayer")) {
             mode = GameMode.MULTIPLAYER;

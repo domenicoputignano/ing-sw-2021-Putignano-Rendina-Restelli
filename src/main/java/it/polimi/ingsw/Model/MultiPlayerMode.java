@@ -13,6 +13,7 @@ import it.polimi.ingsw.Utils.Messages.ServerMessages.RankMessage;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.Updates.ActivateVaticanReportUpdate;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.Updates.FaithMarkerUpdate;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.Updates.NewTurnUpdate;
+import it.polimi.ingsw.Utils.Messages.ServerMessages.UserDisconnectedMessage;
 import it.polimi.ingsw.Utils.Pair;
 
 import java.util.*;
@@ -134,6 +135,7 @@ public class MultiPlayerMode extends Game {
     @Override
     public synchronized void handlePlayerDisconnection(Player disconnectedPlayer) {
         if(playerList.stream().anyMatch(x -> x.getUser().isActive())) {
+            notify(new UserDisconnectedMessage(disconnectedPlayer.getUser()));
             if(disconnectedPlayer.equals(currPlayer)) {
                 nextTurn();
             }

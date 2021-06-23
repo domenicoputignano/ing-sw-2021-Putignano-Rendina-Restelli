@@ -18,7 +18,7 @@ public class GameModeChoiceMessage implements ConfigurationMessage {
     }
 
     @Override
-    public void handleConfigurationMessage(ClientStatus clientStatus) throws IOException {
+    public void handleConfigurationMessage(ClientStatus clientStatus) {
         clientStatus.gameChoice(this);
     }
 }

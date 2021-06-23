@@ -131,7 +131,7 @@ public class Server {
         RemoteView remoteView = new RemoteView(player.getUser(), gameController, client);
         client.bindRemoteView(remoteView);
         soloMode.notifyGameSetup();
-        LOGGER.log(Level.INFO, "SoloMode game setup done");
+        LOGGER.log(Level.INFO, "Solo mode game setup done");
     }
 
     public void resumeGame(ClientStatus reconnectingClient) {

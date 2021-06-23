@@ -93,8 +93,10 @@ public class ClientStatesController {
 
     public static void updateClientState(LorenzoPlayedUpdate message, UI ui) {
         if(ui.isCLI()) {
-            WaitForTurnCLI state = (WaitForTurnCLI) ui.getClientState();
-            state.shutDownWaiterThread();
+            if(ui.getClientState() instanceof WaitForTurnCLI) {
+                WaitForTurnCLI state = (WaitForTurnCLI) ui.getClientState();
+                state.shutDownWaiterThread();
+            }
             ui.changeClientState(new ActionChoiceCLI(ui.getClient()));
             ui.manageUserInteraction();
         }
@@ -117,12 +119,12 @@ public class ClientStatesController {
                 ui.changeClientState(new ActionChoiceCLI(ui.getClient()));
                 ui.manageUserInteraction();
             } else {
-                if(ui.getClient().getUser().equals(message.getCurrentUser())) {
-                    ui.changeClientState(new ActionChoiceCLI(ui.getClient()));
-                    ui.manageUserInteraction();
-                    } else {
+                if(!ui.getClient().getUser().equals(message.getCurrentUser())) {
                     ui.changeClientState(new WaitForTurnCLI(ui.getClient()));
                     ui.getClientState().manageUserInteraction();
+                    } else {
+                    //ui.changeClientState(new ActionChoiceCLI(ui.getClient()));
+                    //ui.manageUserInteraction();
                 }
             }
         }

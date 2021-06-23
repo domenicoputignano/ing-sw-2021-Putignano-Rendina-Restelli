@@ -346,6 +346,11 @@ public class Gui extends UI{
     }
 
     @Override
+    public void render(UserDisconnectedMessage message) {
+        //TODO notificare con un popup che scompare dopo un deltaT.
+    }
+
+    @Override
     public void render(RankMessage message){
         // TODO aggiungere popup di fine partita multigiocatore
     }
