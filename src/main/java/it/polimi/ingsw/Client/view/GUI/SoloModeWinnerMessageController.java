@@ -43,10 +43,10 @@ public class SoloModeWinnerMessageController extends Controller{
 
     public void setText(SoloModeMatchWinnerMessage message){
         if(message.hasPlayerWon()){
-            winnerText.setText("You WON!");
+            winnerText.setText("YOU WON!");
             scoreText.setText("Score: " + message.getVictoryPoints());
         } else {
-            winnerText.setText("You LOST!");
+            winnerText.setText("YOU LOST!");
         }
 
         conclusionEvent.setText(message.getConclusionEvent().eventTrigger());
