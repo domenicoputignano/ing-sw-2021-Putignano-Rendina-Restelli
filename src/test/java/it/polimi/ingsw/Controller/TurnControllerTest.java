@@ -1,30 +1,41 @@
 package it.polimi.ingsw.Controller;
 
 import it.polimi.ingsw.Client.reducedmodel.ReducedMarble;
-import it.polimi.ingsw.Commons.CardType;
-import it.polimi.ingsw.Commons.ColorCard;
-
-import it.polimi.ingsw.Commons.ColorMarble;
-import it.polimi.ingsw.Commons.ResourceType;
+import it.polimi.ingsw.Commons.*;
 
 import it.polimi.ingsw.Exceptions.*;
 import it.polimi.ingsw.Model.*;
 
+import it.polimi.ingsw.Model.MarketTray.Coin;
+import it.polimi.ingsw.Model.MarketTray.Marble;
 import it.polimi.ingsw.Network.ClientStatus;
 import it.polimi.ingsw.Network.RemoteView;
 import it.polimi.ingsw.Utils.*;
 import it.polimi.ingsw.Utils.Messages.ClientMessages.*;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 
 import java.util.*;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.*;
 
 class TurnControllerTest {
 
 
+    Map<ResourceType,Integer> genericMap = new EnumMap<ResourceType, Integer>(ResourceType.class);
+
+
+    @BeforeEach
+    void initializeMap() {
+        genericMap.put(ResourceType.coin, 0);
+        genericMap.put(ResourceType.shield, 0);
+        genericMap.put(ResourceType.servant, 0);
+        genericMap.put(ResourceType.stone, 0);
+    }
 
     @Test
     void handleBuyDevCardMessageTest() {
@@ -188,7 +199,7 @@ class TurnControllerTest {
     }
 
     @Test
-    void handleTakeResourcesFromMarketTest()  {
+    void handleTakeResourcesFromMarketTest() {
         List<Player> players = new ArrayList<>();
         Player first = spy(new Player("Piero"));
         Player second = spy(new Player("Andrea"));
@@ -209,11 +220,10 @@ class TurnControllerTest {
 
         TakeResourcesFromMarketMessage message = new TakeResourcesFromMarketMessage();
         message.setIndex(1);
-        message.setPlayerChoice(MarketChoice.ROW);
+        message.setPlayerChoice(MarketChoice.COLUMN);
         message.addWhereToPutMarbles(new Pair<>(new ReducedMarble(ColorMarble.BLUE),MarbleDestination.DEPOT1));
         message.addWhereToPutMarbles(new Pair<>(new ReducedMarble(ColorMarble.YELLOW),MarbleDestination.DEPOT2));
         message.addWhereToPutMarbles(new Pair<>(new ReducedMarble(ColorMarble.PURPLE),MarbleDestination.DEPOT3));
-        message.addWhereToPutMarbles(new Pair<>(new ReducedMarble(ColorMarble.GREY),MarbleDestination.DEPOT2));
 
 
 
@@ -222,11 +232,62 @@ class TurnControllerTest {
 
         verify(messageSpy, times(1)).isValidMessage();
         assertTrue(messageSpy.isValidMessage());
-        verify(gameSpy,times(1)).getMarketTray();
-        when(gameSpy.getTurn().getTurnPhase()).thenCallRealMethod();
     }
 
+    @Test
+    void handleActivateProductionTest() throws DepotOutOfBoundsException, IncompatibleResourceTypeException {
 
+        List<Player> players = new ArrayList<>();
+        Player first = spy(new Player("Piero"));
+        Player second = spy(new Player("Andrea"));
+        Player third = spy(new Player("Domenico"));
+        players.add(first);
+        players.add(second);
+        players.add(third);
+        MultiPlayerMode game = new MultiPlayerMode(players);
+        game.setTurn(spy(new Turn(game, first)));
+        game.nextState(GameState.GAMEFLOW);
+        MultiPlayerMode gameSpy = spy(game);
+
+        TurnController turnController = new TurnController(gameSpy,first);
+        ClientStatus clientStatus = mock(ClientStatus.class);
+        GameController gameController = new GameController(game);
+        RemoteView spyRemoteView = spy(new RemoteView(first.getUser(),gameController,clientStatus));
+
+        ActivateProductionMessage message = new ActivateProductionMessage();
+        ActiveProductions productions = new ActiveProductions();
+        productions.setSlot1(true);
+        message.setProductions(productions);
+
+        Map<ResourceSource, EnumMap<ResourceType, Integer>> howToTakeResources = new HashMap<>();
+        EnumMap<ResourceType,Integer> strongBox = new EnumMap<>(ResourceType.class);
+        EnumMap<ResourceType,Integer> depot = new EnumMap<>(ResourceType.class);
+        EnumMap<ResourceType,Integer> extraDepot = new EnumMap<>(ResourceType.class);
+        depot.put(ResourceType.coin, 1);
+        howToTakeResources.put(ResourceSource.STRONGBOX, strongBox);
+        howToTakeResources.put(ResourceSource.DEPOT, depot);
+        howToTakeResources.put(ResourceSource.EXTRA, extraDepot);
+
+        message.setHowToTakeResources(howToTakeResources);
+
+        ActivateProductionMessage messageSpy = spy(message);
+
+        first.getPersonalBoard().getWarehouse().addResourcesToDepot(1, ResourceType.coin, 1);
+        genericMap.put(ResourceType.coin,1);
+
+        ProductionRule rule = new ProductionRule(genericMap,genericMap,1);
+
+        DevelopmentCard card = new DevelopmentCard(genericMap, 1, ColorCard.green, 3, rule);
+
+        DevelopmentCard spyCard = spy(card);
+
+        first.getPersonalBoard().putCardOnTop(spyCard,1);
+        turnController.handleActivateProductionMessage(messageSpy, spyRemoteView);
+        verify(gameSpy, atLeastOnce()).getTurn();
+        verify(gameSpy.getTurn(), atLeastOnce()).setTurnState(TurnState.ActionType.ACTIVATEPRODUCTION);
+        verify(gameSpy.getTurn(), times(1)).getTurnPhase();
+        verify(gameSpy.getTurn(), times(1)).normalActionDone();
+    }
 
 
 }

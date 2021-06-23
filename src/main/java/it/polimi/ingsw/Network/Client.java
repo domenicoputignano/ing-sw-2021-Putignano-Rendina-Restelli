@@ -98,8 +98,9 @@ public class Client {
             try {
                 sendObject(new PingMessage());
             } catch (IOException e) {
-                isActive = false;
                 LOGGER.log(Level.INFO, "Server unreachable");
+                this.isActive = false;
+                heartbeatSender.shutdown();
             }
         },0,500, TimeUnit.MILLISECONDS);
     }

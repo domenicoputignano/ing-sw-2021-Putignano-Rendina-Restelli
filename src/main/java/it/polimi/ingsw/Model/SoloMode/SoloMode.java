@@ -29,7 +29,7 @@ public class SoloMode extends Game {
         this.inkwell = player;
         this.currPlayer = player;
         this.gameState = GameState.LEADERCHOICE;
-        lorenzoIlMagnifico = new LorenzoIlMagnifico(this.getCurrPlayer().getPersonalBoard().getFaithTrack(), this);
+        this.lorenzoIlMagnifico = new LorenzoIlMagnifico(this.getCurrPlayer().getPersonalBoard().getFaithTrack(), this);
         this.refreshTokens();
         this.setup();
     }

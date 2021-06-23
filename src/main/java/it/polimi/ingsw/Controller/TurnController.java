@@ -10,10 +10,23 @@ import it.polimi.ingsw.Utils.Messages.ServerMessages.Updates.NewTurnUpdate;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.Updates.ServerAsksForPositioning;
 
 
+/**
+ * This class represents the link between player in turn and the game.
+ * It allows him to perform all the actions.
+ * All its methods basically call model methods and according to their response establish how the model
+ * will notify all the players.
+ */
+
 public class TurnController {
     private Player currPlayer;
     private final Game model;
 
+
+    /**
+     * Constructor that initialize all the attributes.
+     * @param model, the instance of the match.
+     * @param firstPlayer, player in turn at the beginning of the match.
+     */
     public TurnController(Game model, Player firstPlayer) {
         this.model = model;
         this.currPlayer = firstPlayer;
