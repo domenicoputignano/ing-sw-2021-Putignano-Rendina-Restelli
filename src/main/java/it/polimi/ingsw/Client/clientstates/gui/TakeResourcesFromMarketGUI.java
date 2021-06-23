@@ -30,6 +30,12 @@ public class TakeResourcesFromMarketGUI extends AbstractTakeResourcesFromMarket 
         return this.selectedMarbles;
     }
 
+    public void addWhiteEffect(Integer choice){
+        message.addWhiteEffect(choice);
+    }
+
+    public List<Integer> getAlreadySelectedWhiteEffects(){ return message.getWhiteEffects(); }
+
     public void addMarbleChoice(Pair<ReducedMarble, MarbleDestination> choice){
         message.addWhereToPutMarbles(choice);
     }

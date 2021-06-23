@@ -9,6 +9,7 @@ import it.polimi.ingsw.Utils.MarbleDestination;
 import it.polimi.ingsw.Utils.MarketChoice;
 import it.polimi.ingsw.Utils.Pair;
 import it.polimi.ingsw.Utils.ResourceLocator;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
@@ -18,6 +19,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.util.List;
+import java.util.Objects;
 
 public class TakeResourcesController extends Controller{
     @FXML
@@ -62,6 +64,9 @@ public class TakeResourcesController extends Controller{
                 sel4Depot1,sel4Depot2,sel4Depot3,
                 sel1ExtraDepot,sel2ExtraDepot,sel3ExtraDepot,sel4ExtraDepot,
                 discard1,discard2,discard3,discard4;
+
+    @FXML
+    public HBox convertMarbleButtons1, convertMarbleButtons2, convertMarbleButtons3, convertMarbleButtons4;
 
     private MarbleDestination marble1Choice, marble2Choice, marble3Choice, marble4Choice;
 
@@ -300,6 +305,9 @@ public class TakeResourcesController extends Controller{
     {
         yesResources.setVisible(false);
         noResources.setVisible(false);
+        if(haveToChooseConvertMarbleEffect()){
+            revealConvertMarbleChoice();
+        }
         resourcesText.setText("Select where to place the resources: ");
         row1.setVisible(false);
         row2.setVisible(false);
@@ -313,6 +321,37 @@ public class TakeResourcesController extends Controller{
             okButton.setVisible(true);
         }
     }
+
+    public void revealConvertMarbleChoice(){
+        if(chosenMarbles.get(0).getColorMarble() == ColorMarble.WHITE){
+            selResources1.setVisible(false);
+            convertMarbleButtons1.setVisible(true);
+            initializeConvertMarbleButtons(convertMarbleButtons1);
+        }
+        if(chosenMarbles.get(1).getColorMarble() == ColorMarble.WHITE){
+            selResources2.setVisible(false);
+            convertMarbleButtons2.setVisible(true);
+            initializeConvertMarbleButtons(convertMarbleButtons2);
+        }
+        if(chosenMarbles.get(2).getColorMarble() == ColorMarble.WHITE){
+            selResources3.setVisible(false);
+            convertMarbleButtons3.setVisible(true);
+            initializeConvertMarbleButtons(convertMarbleButtons3);
+        }
+        if(chosenMarbles.size()==4 && chosenMarbles.get(3).getColorMarble() == ColorMarble.WHITE){
+            selResources4.setVisible(false);
+            convertMarbleButtons4.setVisible(true);
+            initializeConvertMarbleButtons(convertMarbleButtons4);
+        }
+    }
+
+    public void initializeConvertMarbleButtons(HBox target){
+        target.getChildren().get(0).setStyle("-fx-background-image: url(" +
+                ResourceLocator.retrieveResourceTypeImage(state.getConvertMarbleActiveEffects().get(0)) + ") ; -fx-background-size: 90% auto");
+        target.getChildren().get(1).setStyle("-fx-background-image: url(" +
+                ResourceLocator.retrieveResourceTypeImage(state.getConvertMarbleActiveEffects().get(1)) + ") ; -fx-background-size: 90% auto");
+    }
+
     public void setPositionButton()
     {
         if(haveToChooseMarbleDestination(chosenMarbles.get(0))){
@@ -373,6 +412,61 @@ public class TakeResourcesController extends Controller{
         if(marble1Choice != null && marble2Choice != null && marble3Choice != null && marble4Choice != null){
             okButton.setVisible(true);
         }
+        if(haveToChooseConvertMarbleEffect() &&
+                state.getAlreadySelectedWhiteEffects().size() != chosenMarbles.stream().filter(x -> x.getColorMarble() == ColorMarble.WHITE).count()){
+            okButton.setVisible(false);
+        }
+    }
+
+    @FXML
+    public void handleFirstConvertMarbleChoice(ActionEvent actionEvent){
+        HBox pressedHBox = ((HBox)((Button)actionEvent.getSource()).getParent());
+        state.addWhiteEffect(1);
+        if(pressedHBox.equals(convertMarbleButtons1)){
+            convertMarbleButtons1.setVisible(false);
+            setupImageViewConvertedResource(selResources1, 0);
+        }
+        if(pressedHBox.equals(convertMarbleButtons2)){
+            convertMarbleButtons2.setVisible(false);
+            setupImageViewConvertedResource(selResources2, 0);
+        }
+        if(pressedHBox.equals(convertMarbleButtons3)){
+            convertMarbleButtons3.setVisible(false);
+            setupImageViewConvertedResource(selResources3, 0);
+        }
+        if(pressedHBox.equals(convertMarbleButtons4)){
+            convertMarbleButtons4.setVisible(false);
+            setupImageViewConvertedResource(selResources4, 0);
+        }
+        showOkButton();
+    }
+
+    @FXML
+    public void handleSecondConvertMarbleChoice(ActionEvent actionEvent){
+        HBox pressedHBox = ((HBox)((Button)actionEvent.getSource()).getParent());
+        state.addWhiteEffect(2);
+        if(pressedHBox.equals(convertMarbleButtons1)){
+            convertMarbleButtons1.setVisible(false);
+            setupImageViewConvertedResource(selResources1, 1);
+        }
+        if(pressedHBox.equals(convertMarbleButtons2)){
+            convertMarbleButtons2.setVisible(false);
+            setupImageViewConvertedResource(selResources2, 1);
+        }
+        if(pressedHBox.equals(convertMarbleButtons3)){
+            convertMarbleButtons3.setVisible(false);
+            setupImageViewConvertedResource(selResources3, 1);
+        }
+        if(pressedHBox.equals(convertMarbleButtons4)){
+            convertMarbleButtons4.setVisible(false);
+            setupImageViewConvertedResource(selResources4, 1);
+        }
+        showOkButton();
+    }
+
+    private void setupImageViewConvertedResource(ImageView target, int index){
+        target.setVisible(true);
+        target.setImage(new Image(Objects.requireNonNull(ResourceLocator.retrieveResourceTypeImage(state.getConvertMarbleActiveEffects().get(index)))));
     }
 
     @FXML
