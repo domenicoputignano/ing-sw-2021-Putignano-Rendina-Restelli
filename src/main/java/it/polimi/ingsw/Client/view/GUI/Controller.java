@@ -127,7 +127,7 @@ public class Controller {
             });
             Scene scene = new Scene(Objects.requireNonNull(root), width, height, Color.TRANSPARENT);
             scene.setCursor(new ImageCursor(new Image(CURSOR), 36, 45));
-            popup.setAlwaysOnTop(true);
+            popup.setAlwaysOnTop(false);
             scene.setUserData(loader);
             popup.initModality(Modality.WINDOW_MODAL);
             popup.initOwner(GUIApp.getStage());
