@@ -8,7 +8,7 @@ import java.util.Locale;
 public class ClientApp {
 
     public static void main(String[] args) {
-        Client client = new Client("127.0.0.1", 1234);
+        Client client = new Client("10.144.208.119", 1234);
         boolean startAsGui = parseArgs(args);
         try{
             client.start(startAsGui);

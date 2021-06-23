@@ -5,7 +5,6 @@ import it.polimi.ingsw.Commons.User;
 import it.polimi.ingsw.Model.Game;
 import it.polimi.ingsw.Model.GameState;
 import it.polimi.ingsw.Model.Player;
-import it.polimi.ingsw.Model.SoloMode.SoloMode;
 import it.polimi.ingsw.Network.RemoteView;
 import it.polimi.ingsw.Utils.Messages.ClientMessages.*;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.Errors.ActionError;
@@ -15,7 +14,6 @@ import it.polimi.ingsw.Utils.Pair;
 
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 
@@ -46,14 +44,14 @@ public class GameController {
                     if (isValidFourthPlayerPositioning(message.getChosenResources())) {
                         sender.getPlayer().performInitialResourcesChoice(model, message.getChosenResources());
                         receivedResourceChoices.getAndIncrement();
-                        checkAllResourceChoiceDone(receivedResourceChoices);
+                        startFirstTurn();
                     } else {
                         sender.sendError(new ActionError(sender.getPlayer().getUser(), ActionError.Trigger.INITIALRESOURCEPOSITIONINGERROR));
                     }
                 } else {
                     sender.getPlayer().performInitialResourcesChoice(model, message.getChosenResources());
                     receivedResourceChoices.getAndIncrement();
-                    checkAllResourceChoiceDone(receivedResourceChoices);
+                    startFirstTurn();
                 }
             } else {
                 sender.sendError(new ActionError(sender.getPlayer().getUser(),ActionError.Trigger.RESOURCECHOICEMISMATCH));
@@ -67,7 +65,7 @@ public class GameController {
         if (message.isValidMessage()) {
             sender.getPlayer().performInitialLeaderChoice(model, message.getLeader1ToDiscard(), message.getLeader2ToDiscard());
             receivedLeaderChoices.getAndIncrement();
-            checkAllResourceChoiceDone(receivedResourceChoices);
+            startFirstTurn();
         } else {
             sender.sendError(new InvalidMessageError(sender.getPlayer().getUser()));
         }
@@ -78,7 +76,19 @@ public class GameController {
     }
 
     public synchronized void handlePlayerDisconnection(User disconnectingUser) {
-        turnController.handlePlayerDisconnection(disconnectingUser);
+        if(model.getGameState() == GameState.INITIALCHOICES) {
+            if(model.getPlayer(disconnectingUser).getLeaderCards().size() > 2) {
+                model.getPlayer(disconnectingUser).performInitialLeaderChoice(model,4,3);
+                receivedLeaderChoices.getAndIncrement();
+            }
+            if(model.getPlayer(disconnectingUser).getPosition() > 1&&
+                    model.getPlayer(disconnectingUser).getPersonalBoard().getWarehouse().getAvailableResources().entrySet().stream().allMatch(x -> x.getValue() == 0)) {
+                receivedResourceChoices.getAndIncrement();
+            }
+            turnController.handlePlayerDisconnection(disconnectingUser);
+            startFirstTurn();
+        } else if(model.getGameState() == GameState.GAMEFLOW)
+            turnController.handlePlayerDisconnection(disconnectingUser);
     }
 
     private boolean checkAllLeaderChoicesDone(AtomicInteger leaderChoicesDone) {
@@ -88,8 +98,12 @@ public class GameController {
         return false;
     }
 
-    private void checkAllResourceChoiceDone(AtomicInteger resourceChoiceDone) {
-        if((resourceChoiceDone.get() == model.getNumOfPlayers()-1)&&checkAllLeaderChoicesDone(receivedLeaderChoices)){
+    private boolean checkAllChoicesDone(AtomicInteger resourceChoiceDone) {
+        return (resourceChoiceDone.get() == model.getNumOfPlayers()-1)&&checkAllLeaderChoicesDone(receivedLeaderChoices);
+    }
+
+    private void startFirstTurn() {
+        if (checkAllChoicesDone(receivedResourceChoices)) {
             model.nextState(GameState.GAMEFLOW);
             if(model.getNumOfPlayers()>1)
                 model.notifyTurn(new NewTurnUpdate(model.getCurrPlayer().getUser()));
@@ -107,7 +121,6 @@ public class GameController {
     }
 
     private boolean isValidFourthPlayerPositioning(List<Pair<ResourceType,Integer>> resourceDestination) {
-        //if(resourceDestination.size() != 2) return false;
         if(resourceDestination.get(0).getKey() == resourceDestination.get(1).getKey()) {
             if(resourceDestination.stream().map(Pair::getValue).anyMatch(x -> x.equals(1))) return false;
             if(!resourceDestination.get(0).getValue().equals(resourceDestination.get(1).getValue())) return false;

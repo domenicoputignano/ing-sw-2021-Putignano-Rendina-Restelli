@@ -45,7 +45,7 @@ public class MultiPlayerMode extends Game {
     private void gameSetup()
     {
         this.setup();
-        this.nextState(GameState.LEADERCHOICE);
+        this.nextState(GameState.INITIALCHOICES);
     }
 
     public synchronized void nextTurn(){
@@ -134,14 +134,23 @@ public class MultiPlayerMode extends Game {
 
     @Override
     public synchronized void handlePlayerDisconnection(Player disconnectedPlayer) {
-        if(playerList.stream().anyMatch(x -> x.getUser().isActive())) {
-            notify(new UserDisconnectedMessage(disconnectedPlayer.getUser()));
-            if(disconnectedPlayer.equals(currPlayer)) {
-                nextTurn();
+        if(this.gameState == GameState.GAMEFLOW) {
+            if(playerList.stream().anyMatch(x -> x.getUser().isActive())) {
+                notify(new UserDisconnectedMessage(disconnectedPlayer.getUser()));
+                if(disconnectedPlayer.equals(currPlayer)) {
+                    nextTurn();
+                }
+            }
+            else {
+                nextState(GameState.PAUSED);
             }
         }
-        else {
-            nextState(GameState.PAUSED);
+        else if(this.gameState == GameState.INITIALCHOICES) {
+                if(playerList.stream().anyMatch(x -> x.getUser().isActive())) {
+                    this.currPlayer = nextPlayer(this.currPlayer);
+                    this.turn = new Turn(turn.getGame(), currPlayer);
+            }
+            notify(new UserDisconnectedMessage(disconnectedPlayer.getUser()));
         }
     }
 

@@ -10,6 +10,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.net.SocketException;
+import java.net.SocketTimeoutException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.logging.Level;
@@ -84,7 +85,7 @@ public class ClientStatus implements Runnable {
                     }
                 }
             }
-        } catch (SocketException e) {
+        } catch (SocketTimeoutException e) {
             if(this.connectionState == ConnectionStates.INGAME) {
                 isActive = false;
                 this.connectionState = ConnectionStates.DISCONNECTED;
@@ -97,7 +98,20 @@ public class ClientStatus implements Runnable {
                 server.removeNotSetupPlayer(this);
                 LOGGER.log(Level.INFO, "Client disconnected while waiting for a game to start");
             }
-        } catch (IOException e) {
+        }
+        catch (IOException e) {
+            if(this.connectionState == ConnectionStates.INGAME) {
+                isActive = false;
+                this.connectionState = ConnectionStates.DISCONNECTED;
+                remoteView.handlePlayerDisconnection();
+                LOGGER.log(Level.SEVERE, "Client disconnected while playing a match");
+            }
+            if(this.connectionState == ConnectionStates.CONFIGURATION) {
+                isActive = false;
+                this.connectionState = ConnectionStates.DISCONNECTED;
+                server.removeNotSetupPlayer(this);
+                LOGGER.log(Level.INFO, "Client disconnected while waiting for a game to start");
+            }
         }
         catch (ClassNotFoundException e) {
             LOGGER.log(Level.SEVERE, "Error in receiving message from client");
