@@ -12,6 +12,6 @@ public class HitLastSpace extends ConclusionEvent {
      @Override
      public String eventTrigger()
      {
-         return "sast space has been hit.";
+         return "last space has been hit.";
      }
 }

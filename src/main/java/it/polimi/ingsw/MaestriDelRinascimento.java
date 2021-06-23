@@ -50,7 +50,7 @@ public class MaestriDelRinascimento {
     }
 
     public static void startClient(boolean startAsGui){
-        Client client = new Client("127.0.0.1", 1234);
+        Client client = new Client("10.144.208.119", 1234);
         try{
             client.start(startAsGui);
         } catch (IOException e){

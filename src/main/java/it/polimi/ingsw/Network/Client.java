@@ -149,7 +149,7 @@ public class Client {
 
     public void closeConnection() {
         try {
-            socket.close();
+           socket.close();
         } catch (IOException e) {
             LOGGER.log(Level.SEVERE, "Impossible to close connection!");
         }
