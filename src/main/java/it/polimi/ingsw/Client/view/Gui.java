@@ -352,7 +352,10 @@ public class Gui extends UI{
 
     @Override
     public void render(RankMessage message){
-        // TODO aggiungere popup di fine partita multigiocatore
+        Platform.runLater(() -> {
+            GUIApp.controller.showPopup("/gui/fxml/MultiModeWinnerMessage.fxml", 840, 700);
+            ((MultiModeWinnerMessageController) GUIApp.controller).setRank(message);
+        });
     }
 
     @Override
