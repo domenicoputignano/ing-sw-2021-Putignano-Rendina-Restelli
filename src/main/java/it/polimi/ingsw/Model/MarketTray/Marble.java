@@ -5,10 +5,17 @@ import it.polimi.ingsw.Commons.ColorMarble;
 import it.polimi.ingsw.Exceptions.NoSuchResourceTypeException;
 import it.polimi.ingsw.Commons.ResourceType;
 
+/**
+ * Basic representation of a marble.
+ */
 public abstract class Marble {
 
     protected ColorMarble colorMarble;
 
+
+    /**
+     * Return resource associated to the marble
+     */
     public ResourceType addResources() throws NoSuchResourceTypeException {
         throw new NoSuchResourceTypeException();
     }
@@ -30,6 +37,10 @@ public abstract class Marble {
         return colorMarble == marble.colorMarble;
     }
 
+
+    /**
+     * This method return a simplified instance of the marble.
+     */
     public ReducedMarble getReducedVersion() {
         return new ReducedMarble(colorMarble);
     }

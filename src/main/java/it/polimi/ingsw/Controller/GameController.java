@@ -81,8 +81,7 @@ public class GameController {
                 model.getPlayer(disconnectingUser).performInitialLeaderChoice(model,4,3);
                 receivedLeaderChoices.getAndIncrement();
             }
-            if(model.getPlayer(disconnectingUser).getPosition() > 1&&
-                    model.getPlayer(disconnectingUser).getPersonalBoard().getWarehouse().getAvailableResources().entrySet().stream().allMatch(x -> x.getValue() == 0)) {
+            if(model.getPlayer(disconnectingUser).getPosition() > 1 && hasNotDoneResourceChoice(disconnectingUser)) {
                 receivedResourceChoices.getAndIncrement();
             }
             turnController.handlePlayerDisconnection(disconnectingUser);
@@ -130,6 +129,10 @@ public class GameController {
             }
         }
         return true;
+    }
+
+    private boolean hasNotDoneResourceChoice(User disconnectingUser) {
+        return model.getPlayer(disconnectingUser).getPersonalBoard().getWarehouse().getAvailableResources().entrySet().stream().allMatch(x -> x.getValue() == 0);
     }
 
 }

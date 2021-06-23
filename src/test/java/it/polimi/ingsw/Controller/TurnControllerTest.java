@@ -225,8 +225,6 @@ class TurnControllerTest {
         message.addWhereToPutMarbles(new Pair<>(new ReducedMarble(ColorMarble.YELLOW),MarbleDestination.DEPOT2));
         message.addWhereToPutMarbles(new Pair<>(new ReducedMarble(ColorMarble.PURPLE),MarbleDestination.DEPOT3));
 
-
-
         TakeResourcesFromMarketMessage messageSpy = spy(message);
         turnController.handleTakeResourcesFromMarketMessage(messageSpy,spyRemoteView);
 

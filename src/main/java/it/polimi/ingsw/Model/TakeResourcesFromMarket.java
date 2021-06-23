@@ -20,11 +20,25 @@ import java.util.stream.Collectors;
 
 public class TakeResourcesFromMarket implements AbstractTurnPhase {
 
+    /**
+     * Each resource associated to the marble and taken from the market has a possible destination
+     */
     private List<Pair<ResourceType, MarbleDestination>> whereToPutResources = new ArrayList<>();
+    /**
+     * Resources wrongly positioned while taking resources from market
+     */
     private List<ResourceType> pendingResources = new ArrayList<>();
     private int faith = 0;
     private int discardedResources = 0;
 
+    /**
+     * This is the main method of the class. It makes consistency check to avoid corruption.
+     * @param turn represents the turn in which the action is being performed.
+     * @param takeResourcesFromMarketMessage message containing all the instructions coming from the player
+     * @throws InvalidActionException if a normal action has been already performed in the turn.
+     * @throws WhiteEffectMismatchException if the player has selected a wrong number of effects or selected ones don't match with player's leader effects.
+     * @throws NeedPositioningException if a certain resource cannot be placed in warehouse and required further actions from the player.
+     */
     @Override
     public void takeResourcesFromMarket(Turn turn, TakeResourcesFromMarketMessage takeResourcesFromMarketMessage) throws InvalidActionException, WhiteEffectMismatchException, NeedPositioningException {
         if(turn.isDoneNormalAction())
@@ -56,6 +70,13 @@ public class TakeResourcesFromMarket implements AbstractTurnPhase {
         } else throw new WhiteEffectMismatchException();
     }
 
+
+    /**
+     * Sets effect for white marbles as indicated
+     * @param turn in which the action is performed
+     * @param marbles
+     * @param whiteEffects
+     */
     private void convertWhiteMarbles(Turn turn, List<Marble> marbles, List<Integer> whiteEffects) {
         List<ResourceType> whiteMarbleEffects = turn.getPlayer().getActiveEffects().stream().filter(x -> x.getEffect()==Effect.CMARBLE).
                 map(LeaderEffect::getType).collect(Collectors.toList());
