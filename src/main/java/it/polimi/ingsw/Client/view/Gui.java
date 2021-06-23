@@ -347,7 +347,10 @@ public class Gui extends UI{
 
     @Override
     public void render(UserDisconnectedMessage message) {
-        //TODO notificare con un popup che scompare dopo un deltaT.
+        Platform.runLater(() -> {
+            GUIApp.controller.showPopup("/gui/fxml/GenericPopup.fxml", 500, 400);
+            ((GenericPopupController) GUIApp.controller).setText("User " + message.getDisconnectedUser() + " has disconnected.");
+        });
     }
 
     @Override
