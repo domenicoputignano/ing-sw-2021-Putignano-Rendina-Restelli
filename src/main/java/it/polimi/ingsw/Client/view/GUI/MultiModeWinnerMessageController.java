@@ -28,15 +28,15 @@ public class MultiModeWinnerMessageController extends Controller{
                 BackgroundRepeat.NO_REPEAT,
                 BackgroundPosition.CENTER,
                 new BackgroundSize(100, 100, true, true, true, false))));
-        setFont(winnerText,40);
+        setFont(winnerText,60);
         winnerText.setStyle("-fx-text-fill: rgb(62,11,11);");
-        setFont(scorePlayer1, 25);
+        setFont(scorePlayer1, 40);
         scorePlayer1.setStyle("-fx-text-fill: rgb(62,11,11);");
-        setFont(scorePlayer2, 25);
+        setFont(scorePlayer2, 40);
         scorePlayer2.setStyle("-fx-text-fill: rgb(62,11,11);");
-        setFont(scorePlayer3, 25);
+        setFont(scorePlayer3, 40);
         scorePlayer3.setStyle("-fx-text-fill: rgb(62,11,11);");
-        setFont(scorePlayer4, 25);
+        setFont(scorePlayer4, 40);
         scorePlayer4.setStyle("-fx-text-fill: rgb(62,11,11);");
         setFont(closeButton,24);
         closeButton.setStyle("-fx-text-fill: rgb(35, 25, 22);");
@@ -57,18 +57,18 @@ public class MultiModeWinnerMessageController extends Controller{
     private void setText(RankMessage message)
     {
         scorePlayer1.setVisible(true);
-        scorePlayer1.setText("1. "+message.getRank().get(0).getKey().getNickname()+"   Score: " + message.getRank().get(0).getValue());
+        scorePlayer1.setText("1. "+message.getRank().get(0).getKey().getNickname()+"\t\t   Score: " + message.getRank().get(0).getValue());
         if(message.getRank().size() > 1){
             scorePlayer2.setVisible(true);
-            scorePlayer2.setText("2. "+message.getRank().get(1).getKey().getNickname()+"   Score: " + message.getRank().get(1).getValue());
+            scorePlayer2.setText("2. "+message.getRank().get(1).getKey().getNickname()+"\t\t   Score: " + message.getRank().get(1).getValue());
         }
         if(message.getRank().size() > 2){
             scorePlayer3.setVisible(true);
-            scorePlayer3.setText("3. "+message.getRank().get(2).getKey().getNickname()+"   Score: " + message.getRank().get(2).getValue());
+            scorePlayer3.setText("3. "+message.getRank().get(2).getKey().getNickname()+"\t\t   Score: " + message.getRank().get(2).getValue());
         }
         if(message.getRank().size() > 3){
             scorePlayer4.setVisible(true);
-            scorePlayer4.setText("4. "+message.getRank().get(3).getKey().getNickname()+"   Score: " + message.getRank().get(3).getValue());
+            scorePlayer4.setText("4. "+message.getRank().get(3).getKey().getNickname()+"\t\t   Score: " + message.getRank().get(3).getValue());
         }
     }
 

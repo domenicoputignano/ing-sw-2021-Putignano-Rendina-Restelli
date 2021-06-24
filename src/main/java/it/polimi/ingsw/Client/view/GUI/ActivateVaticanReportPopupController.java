@@ -42,11 +42,15 @@ public class ActivateVaticanReportPopupController extends Controller{
         activateVaticanPopupText2.setStyle("-fx-text-fill: rgb(35, 25, 22);");
         setFont(okButton,24);
         okButton.setStyle("-fx-text-fill: rgb(35, 25, 22);");
+        this.client = GUIApp.client;
     }
 
     public void setPopup(ActivateVaticanReportUpdate message)
     {
-        String state;
+        String state,triggeringUser;
+        if(client.getUser().equals(message.getTriggeringUser()))
+            triggeringUser = "You have";
+        else triggeringUser = "Player "+message.getTriggeringUser().getNickname()+" has";
         int section = message.getSection()+1;
         if(message.getState()== StateFavorTiles.DISCARDED) {
             state = "discarded";
@@ -65,7 +69,7 @@ public class ActivateVaticanReportPopupController extends Controller{
             else if(section==3)
                 favorTile.setImage(new Image("/gui/img/favorTile3.png"));
         }
-        activateVaticanPopupText1.setText("Player "+message.getTriggeringUser().getNickname()+" has activated the Vatican report of section "+section+"!");
+        activateVaticanPopupText1.setText(""+triggeringUser+" activated the Vatican report of section "+section+"!");
         activateVaticanPopupText2.setText("Your favorTile has been "+ state +" !");
 
     }

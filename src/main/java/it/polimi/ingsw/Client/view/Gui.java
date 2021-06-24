@@ -357,7 +357,7 @@ public class Gui extends UI{
     @Override
     public void render(RankMessage message){
         Platform.runLater(() -> {
-            GUIApp.controller.showPopup("/gui/fxml/MultiModeWinnerMessage.fxml", 840, 700);
+            GUIApp.controller.showPopup("/gui/fxml/MultiModeWinnerMessage.fxml", 660, 550);
             ((MultiModeWinnerMessageController) GUIApp.controller).setRank(message);
         });
     }

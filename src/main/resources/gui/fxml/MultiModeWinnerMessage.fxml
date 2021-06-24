@@ -12,11 +12,11 @@
 
 <AnchorPane fx:id="popupPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.Client.view.GUI.MultiModeWinnerMessageController">
     <children>
-        <Button fx:id="closeButton" layoutX="275.0" layoutY="306.0" mnemonicParsing="false" onAction="#handleCloseButton" styleClass="chooseYesNo" stylesheets="@../css/button.css" text="CLOSE" />
-        <Text fx:id="winnerText" layoutX="132.0" layoutY="62.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="337.0" />
-        <Text fx:id="scorePlayer1" layoutX="122.0" layoutY="130.0" strokeType="OUTSIDE" strokeWidth="0.0" visible="false" wrappingWidth="356.8659782409668" />
-      <Text fx:id="scorePlayer2" layoutX="122.0" layoutY="170.0" strokeType="OUTSIDE" strokeWidth="0.0" visible="false" wrappingWidth="356.8659782409668" />
-      <Text fx:id="scorePlayer3" layoutX="122.0" layoutY="210.0" strokeType="OUTSIDE" strokeWidth="0.0" visible="false" wrappingWidth="356.8659782409668" />
-      <Text fx:id="scorePlayer4" layoutX="122.0" layoutY="250.0" strokeType="OUTSIDE" strokeWidth="0.0" visible="false" wrappingWidth="356.8659782409668" />
+        <Button fx:id="closeButton" layoutX="245.0" layoutY="395.0" mnemonicParsing="false" onAction="#handleCloseButton" prefHeight="62.0" prefWidth="179.0" styleClass="chooseYesNo" stylesheets="@../css/button.css" text="CLOSE" />
+        <Text fx:id="winnerText" layoutX="160.0" layoutY="118.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="337.0" />
+        <Text fx:id="scorePlayer1" layoutX="180.0" layoutY="240.0" strokeType="OUTSIDE" strokeWidth="0.0" visible="false" wrappingWidth="356.8659782409668" />
+      <Text fx:id="scorePlayer2" layoutX="180.0" layoutY="280.0" strokeType="OUTSIDE" strokeWidth="0.0" visible="false" wrappingWidth="356.8659782409668" />
+      <Text fx:id="scorePlayer3" layoutX="180.0" layoutY="320.0" strokeType="OUTSIDE" strokeWidth="0.0" visible="false" wrappingWidth="356.8659782409668" />
+      <Text fx:id="scorePlayer4" layoutX="180.0" layoutY="360.0" strokeType="OUTSIDE" strokeWidth="0.0" visible="false" wrappingWidth="356.8659782409668" />
     </children>
 </AnchorPane>
