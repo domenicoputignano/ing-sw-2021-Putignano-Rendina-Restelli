@@ -150,6 +150,13 @@ public class Warehouse implements Cloneable {
         updateAvailableResources();
     }
 
+    /**
+     * Removes a non-negative number of occurrences from an extra depot found on the basis of resource type chosen, at the end updates available resources.
+     * @param type type of resource to be removed.
+     * @param occ number of resource to be removed.
+     * @throws DepotNotFoundException if there is no extra depot that contains required type of resource.
+     * @throws DepotOutOfBoundsException if number of occurrences in extra depot becomes negative.
+     */
     public void takeResourceFromExtraDepot(ResourceType type, int occ) throws DepotNotFoundException, DepotOutOfBoundsException {
         int i = findExtraDepotByResourceType(type);
         extraDepots[i].take(occ);
@@ -157,11 +164,22 @@ public class Warehouse implements Cloneable {
     }
 
 
+    /**
+     * Boolean method that checks if the player has enough resources to perform a certain action by comparing map of needed resources with available ones.
+     * @param neededResources resources needed to do an action.
+     * @return the result of the comparison.
+     */
     public boolean checkResources(Map<ResourceType,Integer> neededResources)
     {
         return neededResources.keySet().stream().allMatch((key) -> (neededResources.get(key) <= this.availableResources.get(key)));
     }
 
+    /**
+     * Boolean method that checks if the warehouse has a normal depot with a non-negative number of a certain resource type.
+     * @param type  resource type required.
+     * @param occ number of resource type required.
+     * @return the result of the check.
+     */
     public boolean checkResourceFromNormalDepot(ResourceType type, int occ) {
         try {
             int i = findNormalDepotByResourceType(type);
@@ -170,12 +188,23 @@ public class Warehouse implements Cloneable {
         } catch (DepotNotFoundException e) { return false; }
     }
 
-
+    /**
+     * Boolean method that checks if strongbox has enough occurrences of a certain resource type.
+     * @param type resource type required.
+     * @param occ number of occurrences.
+     * @return the result of the check.
+     */
     public boolean checkResourceFromStrongBox(ResourceType type, int occ) {
         if(strongbox.getResources().get(type) < occ) return false;
         else return true;
     }
 
+    /**
+     * Checks whether an extra depot has enough occurrences of a certain resource type.
+     * @param type resource type required.
+     * @param occ number of occurrences.
+     * @return the result of the check.
+     */
     public boolean checkResourceFromExtraDepot(ResourceType type, int occ) {
         try {
             int i = findExtraDepotByResourceType(type);
@@ -185,20 +214,27 @@ public class Warehouse implements Cloneable {
     }
 
 
-
-    // controller needs to know if he can perform moving action
+    /**
+     * Boolean method called by turn controller over player warehouse to check whether a move action from normal depot
+     * to another normal depot is possible or not on the basis of game rules.
+     * @param depotFrom index of starting normal depot.
+     * @param depotTo index of destination normal depot.
+     * @return the result of the check.
+     */
     public boolean checkMoveFromNormalDepotToNormalDepot(int depotFrom, int depotTo) {
+        //checks if starting depot is not empty
         if(normalDepots[depotFrom - 1].getType() == null) {
             return false;
         }
         else {
             if(normalDepots[depotTo - 1].getType() == null) {
+                //checks if destination depot has less occurrences than starting one
                 if(normalDepots[depotTo - 1].getSize() < normalDepots[depotFrom - 1].getOcc()) return false;
                 else return true;
             }
             else
             {
-                //caso in cui devo switchare le risorse tra i due depot
+                //checks if it is possible to switch resources between normal depots
                 if(normalDepots[depotTo - 1].getOcc() > normalDepots[depotFrom - 1].getSize() ||
                         normalDepots[depotFrom - 1].getOcc() > normalDepots[depotTo - 1].getSize()) return false;
                 else return true;
@@ -206,7 +242,14 @@ public class Warehouse implements Cloneable {
         }
     }
 
-
+    /**
+     * Boolean method called by turn controller to check if a move action can be performed from a normal depot to an extra depot
+     * comparing number of occurrences and type of resources to be moved.
+     * @param depotFrom index of starting normal depot.
+     * @param occ number of occurrences that have to be moved.
+     * @param extraDepotTo index of extra depot destination.
+     * @return the result of the check.
+     */
     public boolean checkMoveFromNormalDepotToExtraDepot(int depotFrom,int occ, int extraDepotTo) {
         if(extraDepots[extraDepotTo-1] != null)
             if(normalDepots[depotFrom-1].getType() == extraDepots[extraDepotTo-1].getType()
@@ -216,8 +259,14 @@ public class Warehouse implements Cloneable {
         return false;
     }
 
-
-
+    /**
+     * Boolean method called by turn controller to check if a move action can be performed from an extra depot to a normal one
+     * comparing number of occurrences and ensuring that the action is compliant with game rules.
+     * @param extraDepotFrom index of starting extra depot.
+     * @param occ number of occurrences that have to be moved.
+     * @param depotTo index of normal depot destination.
+     * @return the result of the check.
+     */
     public boolean checkMoveFromExtraDepotToNormalDepot(int extraDepotFrom, int occ, int depotTo){
         if(extraDepots[extraDepotFrom-1] != null && (isValidEditing(extraDepots[extraDepotFrom - 1].getType(),depotTo))) {
             if ((normalDepots[depotTo - 1].getType() == extraDepots[extraDepotFrom - 1].getType()
@@ -281,6 +330,13 @@ public class Warehouse implements Cloneable {
         return availableResources.keySet().stream().map(x -> availableResources.get(x)).reduce(0,Integer::sum)/5;
     }
 
+    /**
+     * This method checks whether an action over normal depots breaks game rules, in particular way it ensures that at most one
+     * normal depot contains a particular type of resource.
+     * @param resourceType type of resource.
+     * @param depotTo index of the depot to be edited.
+     * @return the result of the check.
+     */
     private boolean isValidEditing(ResourceType resourceType, int depotTo)
     {
         for(NormalDepot depots: normalDepots)
