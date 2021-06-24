@@ -13,11 +13,27 @@ import it.polimi.ingsw.Utils.Pair;
 import java.util.*;
 import java.util.stream.Collectors;
 
-
+/**
+ * Class representing the actual warehouse in player board as an object made by a strongbox, three depots and
+ * two possible extra depot (depending on player's active leader effects)
+ */
 public class Warehouse implements Cloneable {
+    /**
+     * Map with all the resources available in warehouse, summing of those present into depots, strongbox and extra depots.
+     */
     private Map<ResourceType,Integer> availableResources;
+    /**
+     * Array with three instances of normal depot
+     */
     private final NormalDepot[] normalDepots;
+    /**
+     * Array of two extra depots that are set to null until an extra depot effect becomes active
+     * @see it.polimi.ingsw.Commons.LeaderEffect
+     */
     private final ExtraDepot[] extraDepots;
+    /**
+     * Instance of a strongbox
+     */
     private final Strongbox strongbox;
 
     public Warehouse(Map<ResourceType, Integer> availableResources, NormalDepot[] normalDepot, ExtraDepot[] extraDepot, Strongbox strongbox) {
@@ -43,6 +59,11 @@ public class Warehouse implements Cloneable {
     }
 
 
+    /**
+     * Initializes an extra depot
+     * @param resourceType the immutable resource that can be stored in the extra depot
+     * @see ExtraDepot
+     */
     public void initializeExtraDepot(ResourceType resourceType)
     {
         if(this.extraDepots[0] == null)
@@ -53,13 +74,24 @@ public class Warehouse implements Cloneable {
     }
 
 
-
+    /**
+     * Stores resources into the strongbox and updates available resources.
+     * @param resources map of resources with non-negative occurrences that have to be stored.
+     */
     public void addResourcesToStrongbox(Map<ResourceType,Integer> resources)
     {
         strongbox.addResources(resources);
         this.updateAvailableResources();
     }
 
+    /**
+     * Stores a non-negative amount of resource in a normal depot and updates available resources.
+     * @param depotIndex index of the required normal depot.
+     * @param type kind of resource that has to be stored.
+     * @param num occurrences to be stored.
+     * @throws DepotOutOfBoundsException if this addition is not compliant with normal depot size
+     * @throws IncompatibleResourceTypeException if we're attempting to add a type of resource different from the one that is already stored.
+     */
     /* -1 perché gli indici dati dalla CLI partono da 1*/
     public void addResourcesToDepot(int depotIndex, ResourceType type, int num) throws DepotOutOfBoundsException, IncompatibleResourceTypeException {
         if(!isValidEditing(type,depotIndex))
@@ -79,6 +111,14 @@ public class Warehouse implements Cloneable {
     }
 
 
+    /**
+     * Stores a positive number of resources in an extra depot, found on the basis of which type of resource the player wants to store in it and
+     * updates available resources.
+     * @param type type of resource to be stored.
+     * @param num positive number of occurrences to be stored.
+     * @throws DepotOutOfBoundsException if number of occurrences exceed the size of extra depot or it becomes negative.
+     * @throws DepotNotFoundException if there is no extra depot available to store required type of resource.
+     */
     public void addResourcesToExtraDepot(ResourceType type, int num) throws DepotOutOfBoundsException, DepotNotFoundException {
         List<ExtraDepot> extraDepot = Arrays.stream(extraDepots).filter(x -> x!=null&&x.getType()==type).collect(Collectors.toList());
         if(extraDepot.size() == 0) throw new DepotNotFoundException();
@@ -87,14 +127,26 @@ public class Warehouse implements Cloneable {
     }
 
 
+    /**
+     * Removes a non-negative number of occurrences from a normal depot found on the basis of which type of resource the player requires, at the end updates available resources.
+     * @param type type of resource to be removed.
+     * @param occ number of resource to be removed.
+     * @throws DepotNotFoundException if there's no normal depot associated to the kind of resource required.
+     * @throws DepotOutOfBoundsException if number of occurrences becomes negative.
+     */
     public void takeResourceFromNormalDepot(ResourceType type, int occ) throws DepotNotFoundException, DepotOutOfBoundsException {
         int i = findNormalDepotByResourceType(type);
         normalDepots[i].take(occ);
         updateAvailableResources();
     }
 
-    public void takeResourcesFromStrongbox(Map<ResourceType, Integer> occurences) throws StrongboxOutOfBoundException {
-        strongbox.takeResources(occurences);
+    /**
+     * Removes a map of non-negative occurrences from the strongbox and updates available resources.
+     * @param occurrences map containing resources to be removed.
+     * @throws StrongboxOutOfBoundException if at least of one number of occurrence of resource in the strongbox becomes negative.
+     */
+    public void takeResourcesFromStrongbox(Map<ResourceType, Integer> occurrences) throws StrongboxOutOfBoundException {
+        strongbox.takeResources(occurrences);
         updateAvailableResources();
     }
 
