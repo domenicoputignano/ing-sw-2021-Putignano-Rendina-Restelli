@@ -65,7 +65,7 @@ public class PlayerBoardController extends Controller {
     public Text active1,active2;
 
     @FXML
-    public ImageView lightActive1,lightActive2;
+    public ImageView lightActive1,lightActive2,tokens;
 
     @FXML
     Text numCoinStrongbox, numServantStrongbox, numShieldStrongbox, numStoneStrongbox;
@@ -118,6 +118,12 @@ public class PlayerBoardController extends Controller {
 
     private void initializeCells()
     {
+        if(client.getGame().isSoloMode())
+        {
+            otherPlayers.setVisible(false);
+            tokens.setImage(new Image("/gui/img/tokens/tokens.png"));
+            tokens.setVisible(true);
+        }
         cells[0] = cell0;
         cells[1] = cell1;
         cells[2] = cell2;

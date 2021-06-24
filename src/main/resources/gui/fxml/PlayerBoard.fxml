@@ -136,6 +136,7 @@
             <ImageView fx:id="slot3Card3" fitHeight="195.0" fitWidth="127.0" layoutX="578.0" layoutY="230.0" pickOnBounds="true" preserveRatio="true" />
             <Text fx:id="active1" layoutX="826.0" layoutY="285.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Active" visible="false" />
             <Text fx:id="active2" layoutX="826.0" layoutY="563.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Active" visible="false" />
+            <ImageView fx:id="tokens" fitHeight="59.0" fitWidth="149.0" layoutX="265.0" layoutY="546.0" pickOnBounds="true" preserveRatio="true" visible="false" />
             </children>
         </AnchorPane>
     </center>
