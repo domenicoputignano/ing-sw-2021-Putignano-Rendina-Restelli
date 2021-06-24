@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 
 /**
  * Class representing the actual warehouse in player board as an object made by a strongbox, three depots and
- * two possible extra depot (depending on player's active leader effects)
+ * two possible extra depots (depending on player's active leader effects).
  */
 public class Warehouse implements Cloneable {
     /**
@@ -278,7 +278,14 @@ public class Warehouse implements Cloneable {
         return false;
     }
 
-
+    /**
+     * Moves resources from a normal depot to another normal depot.
+     * It switches the number of occurrences and the resource type creating two new instances of normal depots.
+     * Each time this method is called it creates a new instances for depots involved into the move.
+     * @param depotFrom index of starting normal depot
+     * @param depotTo index of destination normal depot.
+     * @see it.polimi.ingsw.Utils.MoveFromNormalToNormalAction
+     */
     public void moveFromNormalDepotToNormalDepot(int depotFrom, int depotTo) {
         ResourceType resourceTemp = normalDepots[depotTo - 1].getType();
         int occTemp = normalDepots[depotTo - 1].getOcc();
@@ -288,7 +295,14 @@ public class Warehouse implements Cloneable {
         normalDepots[depotFrom - 1] = new NormalDepot(occTemp, resourceTemp, sizeTempFrom);
     }
 
-
+    /**
+     * Moves resources from a normal depot to an extra one. Each time this method is called it creates a new instances for
+     * depots involved into the move.
+     * @param depotFrom index of normal depot from which the resources are moved.
+     * @param occ number of occurrences to be moved.
+     * @param extraDepotTo index of extra depot destination for the resources.
+     * @see it.polimi.ingsw.Utils.MoveFromNormalToExtraAction
+     */
     public void moveFromNormalDepotToExtraDepot(int depotFrom, int occ, int extraDepotTo) {
         NormalDepot normalDepot = normalDepots[depotFrom-1];
         normalDepots[depotFrom-1] = new NormalDepot(normalDepot.getOcc()-occ, normalDepot.getType(), normalDepot.getSize());
@@ -297,6 +311,14 @@ public class Warehouse implements Cloneable {
         extraDepots[extraDepotTo-1] = new ExtraDepot(extraDepot.getOcc()+occ, extraDepot.getType());
     }
 
+    /**
+     * Moves resources from an extra depot to a normal one. Each time this method is called it creates a new instances for
+     * depots involved into the move.
+     * @param extraDepotFrom index of extra depot from which the resources are moved.
+     * @param occ number of occurrences to be moved.
+     * @param depotTo index of normal depot destination for the resources.
+     * @see it.polimi.ingsw.Utils.MoveFromExtraToNormalAction
+     */
     public void moveFromExtraDepotToNormalDepot(int extraDepotFrom, int occ, int depotTo) {
         ExtraDepot extraDepot = extraDepots[extraDepotFrom-1];
         extraDepots[extraDepotFrom-1] = new ExtraDepot(extraDepot.getOcc()-occ, extraDepot.getType());
@@ -308,7 +330,12 @@ public class Warehouse implements Cloneable {
         }
     }
 
-
+    /**
+     * Method that searches for a normal depot given a resource type.
+     * @param type resource type that has to be linked to extra depot to find.
+     * @return index of the normal depot (if present).
+     * @throws DepotNotFoundException if the player doesn't have any normal depot with the required resource type
+     */
     public int findNormalDepotByResourceType(ResourceType type) throws DepotNotFoundException {
         for(int i = 0; i < normalDepots.length; i++) {
             if (normalDepots[i].getType() == type) return i;
@@ -316,6 +343,12 @@ public class Warehouse implements Cloneable {
         throw new DepotNotFoundException();
     }
 
+    /**
+     * Method that searches for an extra depot given a resource type.
+     * @param type resource type that has to be linked to extra depot to find.
+     * @return index of extra depot (if present).
+     * @throws DepotNotFoundException if the player doesn't have any extra depot with the required resource type
+     */
     public int findExtraDepotByResourceType(ResourceType type) throws DepotNotFoundException {
         for(int i = 0; i < extraDepots.length; i++) {
             if(extraDepots[i]!=null) {
@@ -325,6 +358,10 @@ public class Warehouse implements Cloneable {
         throw new DepotNotFoundException();
     }
 
+    /**
+     * This method calculates number of points gained summing all the resources in warehouse and dividing the result by five.
+     * @return the number of points.
+     */
     public int calcVictoryPointsWarehouse()
     {
         return availableResources.keySet().stream().map(x -> availableResources.get(x)).reduce(0,Integer::sum)/5;
@@ -345,6 +382,10 @@ public class Warehouse implements Cloneable {
         return true;
     }
 
+    /**
+     * Updates map representing all the resources available in warehouse. It collects them starting from
+     * strongbox and then for each one sums occurrences coming from depots with the previous value.
+     */
     private void updateAvailableResources(){
         EnumMap<ResourceType, Integer> local = ((EnumMap<ResourceType, Integer>) strongbox.getResources()).clone();
         for(NormalDepot d : normalDepots){

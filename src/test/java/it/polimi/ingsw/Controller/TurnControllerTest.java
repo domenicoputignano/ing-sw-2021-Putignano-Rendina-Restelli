@@ -6,21 +6,16 @@ import it.polimi.ingsw.Commons.*;
 import it.polimi.ingsw.Exceptions.*;
 import it.polimi.ingsw.Model.*;
 
-import it.polimi.ingsw.Model.MarketTray.Coin;
-import it.polimi.ingsw.Model.MarketTray.Marble;
 import it.polimi.ingsw.Network.ClientStatus;
 import it.polimi.ingsw.Network.NetworkRemoteView;
 import it.polimi.ingsw.Network.RemoteView;
 import it.polimi.ingsw.Utils.*;
 import it.polimi.ingsw.Utils.Messages.ClientMessages.*;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 
 import java.util.*;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.*;
 

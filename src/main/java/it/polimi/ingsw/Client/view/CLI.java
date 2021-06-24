@@ -431,7 +431,7 @@ public class CLI extends UI {
 
     public void showLeaderCards(ReducedPersonalBoard playerBoard) {
         for (LeaderCard card : playerBoard.getAvailableLeaderCards()) {
-            System.out.printf("Card n.%d\t", client.getGame().getPlayer(client.getUser()).getAvailableLeaderCards().indexOf(card) + 1);
+            System.out.printf("Card n.%d\t", playerBoard.getAvailableLeaderCards().indexOf(card) + 1);
             if(card.isActive()) {
                 System.out.print(ANSI_Color.RED.escape()+"Active\n"+ANSI_Color.RESET);
             } else {

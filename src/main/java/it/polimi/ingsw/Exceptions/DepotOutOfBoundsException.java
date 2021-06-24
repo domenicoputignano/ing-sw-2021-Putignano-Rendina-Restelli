@@ -1,5 +1,8 @@
 package it.polimi.ingsw.Exceptions;
 
+/**
+ * Exception thrown when number of occurrences in a depot is greater than its size or less than zero.
+ */
 public class DepotOutOfBoundsException extends Exception
 {
     public DepotOutOfBoundsException()

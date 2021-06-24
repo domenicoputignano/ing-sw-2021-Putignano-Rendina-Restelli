@@ -40,7 +40,7 @@ public abstract class AbstractBuyDevCard extends AbstractClientState{
 
     public Map<ResourceType,Integer> computeActualCost(DevelopmentCard card) {
         ReducedPlayer player = client.getGame().getCurrPlayer();
-        actualCost = new EnumMap<ResourceType, Integer>(card.getCost());
+        actualCost = new EnumMap<>(card.getCost());
         player.getCompatibleLeaderEffect(Effect.SALES).forEach( x -> {
             if(actualCost.get(x.getLeaderEffect().getType()) > 0) {
                 actualCost.put(x.getLeaderEffect().getType(), actualCost.get(x.getLeaderEffect().getType())-1);

@@ -20,8 +20,7 @@ public class NormalDepot implements Depot {
             this.type = type;
             this.size = size;
         }
-        catch (InvalidParameterException e)
-        {
+        catch (InvalidParameterException e) {
            //ERRORE interno al server
         }
 
