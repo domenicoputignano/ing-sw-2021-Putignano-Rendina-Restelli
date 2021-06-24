@@ -60,7 +60,7 @@ public class MaestriDelRinascimento {
     }
 
     public static void startClient(boolean startAsGui){
-        Client client = new NetworkClient("127.0.0.1", 1234);
+        Client client = new NetworkClient("10.144.208.119", 1234);
         client.start(startAsGui);
     }
 
