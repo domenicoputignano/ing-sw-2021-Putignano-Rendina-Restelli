@@ -12,7 +12,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 public class User implements Serializable {
 
     private final String nickname;
-    private AtomicBoolean isActive;
+    private final AtomicBoolean isActive;
 
     public User(String nickname) {
         this.nickname = nickname;

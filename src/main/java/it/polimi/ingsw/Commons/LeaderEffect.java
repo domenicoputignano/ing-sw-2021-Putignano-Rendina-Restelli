@@ -6,8 +6,8 @@ import java.io.Serializable;
 import java.util.Objects;
 
 public class LeaderEffect implements Serializable {
-    private Effect effect;
-    private ResourceType type;
+    private final Effect effect;
+    private final ResourceType type;
 
     public LeaderEffect(Effect effect, ResourceType type){
         this.effect = effect;

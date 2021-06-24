@@ -8,14 +8,28 @@ import java.util.List;
 import java.util.Map;
 
 public class LeaderCard implements Serializable {
+    /**
+     * The unique ID identifying the card.
+     */
     private final String ID;
+
     private final LeaderEffect leaderEffect;
+
     private final Map<ResourceType, Integer> requirementsResources;
     private final List<CardType> requirementsCards;
+    /**
+     * The activation status of the card.
+     */
     private boolean isActive;
+    /**
+     * The number of victory points earned by the player who buys it.
+     */
     private final int victoryPoints;
 
-    // Used only for test purposes
+    /**
+     * This custom constructor is used only for test purposes.
+     * Original leader cards are instead loaded parsing them from an external json source.
+     */
     public LeaderCard(LeaderEffect leaderEffect, Map<ResourceType, Integer> requirementsResources, List<CardType> requirementsCards, int victoryPoints) {
         this.ID = "SA-SE";
         this.leaderEffect = leaderEffect;
@@ -29,12 +43,10 @@ public class LeaderCard implements Serializable {
         return new LeaderEffect(this.leaderEffect.getEffect(), this.leaderEffect.getType());
     }
 
-    // TODO DA CAMBIARE, ESPONE L'IMPLEMENTAZIONE
     public Map<ResourceType, Integer> getRequirementsResources() {
         return this.requirementsResources;
     }
 
-    // TODO DA CAMBIARE, ESPONE L'IMPLEMENTAZIONE
     public List<CardType> getRequirementsCards() {
         return requirementsCards;
     }
@@ -92,10 +104,18 @@ public class LeaderCard implements Serializable {
         else return "inactive";
     }
 
+    /**
+     * Prints the card as a string using ASCII escape codes to render colors.
+     */
     public void displayASCII() {
         ResourceLocator.printLeaderCardASCII(this.ID);
     }
 
+    /**
+     * Returns the unique image associated to this card by calling the {@link ResourceLocator} class
+     * in order to retrieve the image.
+     * @return the string of the path to the image.
+     */
     public String toImage(){
         return ResourceLocator.retrieveLeaderCardImage(this.ID);
     }

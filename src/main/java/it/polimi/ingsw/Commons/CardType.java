@@ -3,8 +3,20 @@ package it.polimi.ingsw.Commons;
 
 import java.io.Serializable;
 
+/**
+ *  This class represents a type of development card, which is a couple composed of a level and a color.
+ *  It implements the Serializable interface in order to be sent through the network.
+ */
+
 public class CardType implements Serializable {
+    /**
+     * The level of the card
+     */
     private final int level;
+
+    /**
+     * The color of the card
+     */
     private final ColorCard color;
 
     public CardType(int level, ColorCard color) {
