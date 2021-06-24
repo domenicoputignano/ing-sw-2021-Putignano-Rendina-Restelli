@@ -56,6 +56,7 @@ public abstract class UI {
     public abstract void render(RankMessage message);
     public abstract void render(UserDisconnectedMessage message);
     public abstract void render(SoloModeMatchWinnerMessage message);
+    public abstract void render(LorenzoActivatedVaticanReportUpdate message);
     public abstract void renderError(String errorMessage);
 
     public boolean isReceiverAction(User sender) {

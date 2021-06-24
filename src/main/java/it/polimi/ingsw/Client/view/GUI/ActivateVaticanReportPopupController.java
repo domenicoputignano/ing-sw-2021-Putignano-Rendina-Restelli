@@ -3,6 +3,7 @@ package it.polimi.ingsw.Client.view.GUI;
 import it.polimi.ingsw.Commons.ResourceType;
 import it.polimi.ingsw.Commons.StateFavorTiles;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.Updates.ActivateVaticanReportUpdate;
+import it.polimi.ingsw.Utils.Messages.ServerMessages.Updates.LorenzoActivatedVaticanReportUpdate;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.Updates.TakeResourcesFromMarketUpdate;
 import it.polimi.ingsw.Utils.ResourceLocator;
 import javafx.fxml.FXML;
@@ -72,6 +73,30 @@ public class ActivateVaticanReportPopupController extends Controller{
         activateVaticanPopupText1.setText(""+triggeringUser+" activated the Vatican report of section "+section+"!");
         activateVaticanPopupText2.setText("Your favorTile has been "+ state +" !");
 
+    }
+
+    public void setLorenzoActivationEffect(LorenzoActivatedVaticanReportUpdate message){
+        String state;
+        int section = message.getVatican_index();
+        if(message.getResultingStateFavorTile() == StateFavorTiles.DISCARDED) {
+            state = "discarded";
+            if(section==1)
+                favorTile.setImage(new Image("/gui/img/favorTile1D.png"));
+            else if(section==2)
+                favorTile.setImage(new Image("/gui/img/favorTile2D.png"));
+            else if(section==3)
+                favorTile.setImage(new Image("/gui/img/favorTile3D.png"));
+        } else {
+            state = "turned over";
+            if(section==1)
+                favorTile.setImage(new Image("/gui/img/favorTile1.png"));
+            else if(section==2)
+                favorTile.setImage(new Image("/gui/img/favorTile2.png"));
+            else if(section==3)
+                favorTile.setImage(new Image("/gui/img/favorTile3.png"));
+        }
+        activateVaticanPopupText1.setText("Lorenzo activated the Vatican report on section "+section+"!");
+        activateVaticanPopupText2.setText("Your favorTile has been "+ state +" !");
     }
 
     @FXML

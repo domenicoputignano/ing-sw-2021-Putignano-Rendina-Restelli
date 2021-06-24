@@ -341,6 +341,12 @@ public class CLI extends UI {
     }
 
     @Override
+    public synchronized void render(LorenzoActivatedVaticanReportUpdate message){
+        System.out.println("Lorenzo il Magnifico activated a Vatican Report, your faith track has been updated as follows ");
+        printFaithTrack(message.getUserPersonalBoard());
+    }
+
+    @Override
     public synchronized void render(JoinLobbyMessage message) {
         if (isGuestWhoHasJustJoined(message.getLastAwaitingGuest())) {
             if (message.getNumOfMissingPlayers() <= 0) {
