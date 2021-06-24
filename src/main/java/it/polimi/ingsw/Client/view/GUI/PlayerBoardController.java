@@ -62,6 +62,9 @@ public class PlayerBoardController extends Controller {
     public TextField username;
 
     @FXML
+    public Text active1,active2;
+
+    @FXML
     public ImageView lightActive1,lightActive2;
 
     @FXML
@@ -72,6 +75,8 @@ public class PlayerBoardController extends Controller {
     public void initialize() {
         lightActive1.setImage(new Image("/gui/img/activeLeaderCardLight.png"));
         lightActive2.setImage(new Image("/gui/img/activeLeaderCardLight.png"));
+        setFont(active1,15);
+        setFont(active2,15);
         setFont(username,23);
         setFont(chooseAction,24);
         setFont(moveAction,24);
@@ -96,14 +101,18 @@ public class PlayerBoardController extends Controller {
         if(playerToShow.getNumOfLeaderCards() > 0) {
             LeaderCard l1 = playerToShow.getAvailableLeaderCards().get(0);
             leaderCard1.setImage(new Image(l1.toImage()));
-            if(l1.isActive())
+            if(l1.isActive()) {
                 lightActive1.setVisible(true);
+                active1.setVisible(true);
+            }
         }
         if(playerToShow.getNumOfLeaderCards() > 1) {
             LeaderCard l2 = playerToShow.getAvailableLeaderCards().get(1);
             leaderCard2.setImage(new Image(l2.toImage()));
-            if(l2.isActive())
+            if(l2.isActive()){
                 lightActive2.setVisible(true);
+                active2.setVisible(true);
+            }
         }
     }
 

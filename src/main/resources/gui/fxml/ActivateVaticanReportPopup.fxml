@@ -8,8 +8,8 @@
 
 <AnchorPane fx:id="activateVaticanPopup" prefHeight="380.0" prefWidth="570.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.Client.view.GUI.ActivateVaticanReportPopupController">
     <children>
-        <Text fx:id="activateVaticanPopupText1" layoutX="88.0" layoutY="78.0" mouseTransparent="true" />
-        <Text fx:id="activateVaticanPopupText2" layoutX="115.0" layoutY="102.0" mouseTransparent="true" />
+        <Text fx:id="activateVaticanPopupText1" layoutX="109.0" layoutY="78.0" mouseTransparent="true" />
+        <Text fx:id="activateVaticanPopupText2" layoutX="136.0" layoutY="102.0" mouseTransparent="true" />
         <ImageView fx:id="favorTile" fitHeight="130.0" fitWidth="130.0" layoutX="198.0" layoutY="125.0" pickOnBounds="true" preserveRatio="true" />
         <Button fx:id="okButton" layoutX="208.0" layoutY="299.0" mnemonicParsing="false" onAction="#handleOkButton" prefHeight="40.0" prefWidth="110.0" styleClass="okButton" stylesheets="@../css/button.css" text="OK" />
     </children>
