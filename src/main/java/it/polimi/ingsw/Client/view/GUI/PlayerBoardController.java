@@ -368,9 +368,12 @@ public class PlayerBoardController extends Controller {
             viewDashboard.setVisible(true);
         } else {
             endTurn.setVisible(client.getUI().hasDoneNormalAction());
+            if(client.getUI().hasDoneNormalAction() && client.getGame().getPlayer(client.getUser()).getNumOfNotActiveLeaderCards()==0)
+                chooseAction.setVisible(false);
+            else
+                chooseAction.setVisible(true);
             moveAction.setVisible(true);
             viewDashboard.setVisible(false);
-            chooseAction.setVisible(true);
         }
     }
 

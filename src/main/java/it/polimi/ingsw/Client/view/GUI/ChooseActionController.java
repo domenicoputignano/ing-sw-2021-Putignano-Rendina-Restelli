@@ -73,7 +73,11 @@ public class ChooseActionController extends Controller{
             buyDevCard.setVisible(false);
             activateProd.setVisible(false);
             takeResources.setVisible(false);
+            leaderAction.setTranslateY(-224);
         }
+        if(client.getGame().getPlayer(client.getUser()).getNumOfNotActiveLeaderCards()==0)
+            leaderAction.setVisible(false);
+
     }
 
     @FXML
