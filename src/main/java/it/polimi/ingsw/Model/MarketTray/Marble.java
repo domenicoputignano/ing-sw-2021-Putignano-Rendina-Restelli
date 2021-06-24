@@ -6,7 +6,7 @@ import it.polimi.ingsw.Exceptions.NoSuchResourceTypeException;
 import it.polimi.ingsw.Commons.ResourceType;
 
 /**
- * Basic representation of a marble.
+ * Basic representation of a marble. It allows all its subclasses to be contained in market board.
  */
 public abstract class Marble {
 
@@ -14,7 +14,7 @@ public abstract class Marble {
 
 
     /**
-     * Return resource associated to the marble
+     * Returns resource associated to the marble while adding it to the depots.
      */
     public ResourceType addResources() throws NoSuchResourceTypeException {
         throw new NoSuchResourceTypeException();
