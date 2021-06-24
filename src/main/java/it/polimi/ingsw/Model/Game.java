@@ -106,8 +106,7 @@ public abstract class Game extends Observable<ServerMessage> implements Observer
     }
 
 
-    //TODO da cambiare
-    public abstract void activateVaticanReport(Player triggeringPlayer,int vatican_index) ;
+    public abstract void activateVaticanReport(Player triggeringPlayer,int vatican_index);
 
 
 

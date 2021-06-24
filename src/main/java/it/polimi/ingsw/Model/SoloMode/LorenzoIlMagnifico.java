@@ -2,6 +2,7 @@ package it.polimi.ingsw.Model.SoloMode;
 
 import it.polimi.ingsw.Commons.ColorCard;
 import it.polimi.ingsw.Commons.Deck;
+import it.polimi.ingsw.Commons.StateFavorTiles;
 import it.polimi.ingsw.Model.ConclusionEvents.*;
 import it.polimi.ingsw.Model.FaithTrack;
 import it.polimi.ingsw.Observable;
@@ -35,8 +36,10 @@ public class LorenzoIlMagnifico extends Observable<GameEvent> {
         for(int i=0; i<pos; i++){
             this.blackCross++;
             if(faithTrack.isPopeSpace(passedSection,blackCross)){
-                isAVaticanReportTriggered = true;// attiva rapporto in vaticano
-                notify(new LorenzoActivatedAVaticanReport(passedSection));
+                if(faithTrack.getStateFavorTile(passedSection) == StateFavorTiles.FACEDOWN) {
+                    isAVaticanReportTriggered = true;// attiva rapporto in vaticano
+                    notify(new LorenzoActivatedAVaticanReport(passedSection));
+                }
             }
             if(this.blackCross >= faithTrack.getPopeSpace(passedSection)){
                 if(passedSection < 2)// controllo se ho sorpassato la vaticanReportSection attuale

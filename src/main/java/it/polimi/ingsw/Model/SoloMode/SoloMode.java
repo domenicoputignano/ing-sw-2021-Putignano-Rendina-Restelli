@@ -13,9 +13,7 @@ import it.polimi.ingsw.Model.Player;
 import it.polimi.ingsw.Model.Turn;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.GameSetupMessage;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.SoloModeMatchWinnerMessage;
-import it.polimi.ingsw.Utils.Messages.ServerMessages.Updates.BlackCrossMoveUpdate;
-import it.polimi.ingsw.Utils.Messages.ServerMessages.Updates.LorenzoActivatedVaticanReportUpdate;
-import it.polimi.ingsw.Utils.Messages.ServerMessages.Updates.LorenzoPlayedUpdate;
+import it.polimi.ingsw.Utils.Messages.ServerMessages.Updates.*;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -96,6 +94,8 @@ public class SoloMode extends Game {
 
     public void activateVaticanReport(Player triggeringPlayer,int vatican_index) {
         triggeringPlayer.getPersonalBoard().getFaithTrack().setFavorTile(vatican_index,StateFavorTiles.FACEUP);
+        notify(new ActivateVaticanReportUpdate(currPlayer.getUser(),currPlayer.getReducedPersonalBoard(),
+                currPlayer.getUser(),currPlayer.getPersonalBoard().getFaithTrack().getStateFavorTile(vatican_index),vatican_index));
     }
 
 
