@@ -9,6 +9,7 @@ import it.polimi.ingsw.Model.Player;
 import it.polimi.ingsw.Model.SoloMode.SoloMode;
 import it.polimi.ingsw.Network.Client;
 import it.polimi.ingsw.Network.ClientStatus;
+import it.polimi.ingsw.Network.NetworkRemoteView;
 import it.polimi.ingsw.Network.RemoteView;
 import it.polimi.ingsw.Utils.Messages.ClientMessages.LeaderChoiceMessage;
 import it.polimi.ingsw.Utils.Messages.ClientMessages.ResourceChoiceMessage;
@@ -37,7 +38,7 @@ class GameControllerTest {
         List<Pair<ResourceType,Integer>> resource = new ArrayList<>();
         resource.add(new Pair<>(ResourceType.coin,1));
         ResourceChoiceMessage message = spy(new ResourceChoiceMessage(resource));
-        RemoteView remoteView = spy(new RemoteView(players.get(0).getUser(),gameController, mock(ClientStatus.class)));
+        NetworkRemoteView remoteView = spy(new NetworkRemoteView(players.get(0).getUser(),gameController, mock(ClientStatus.class)));
         gameController.handleResourceChoiceMessage(message, remoteView);
         verify(message, times(1)).isValidMessage();
         verify(players.get(0), times(1)).performInitialResourcesChoice(game, resource);
@@ -52,7 +53,7 @@ class GameControllerTest {
         GameController gameController = new GameController(game);
         List<Pair<ResourceType,Integer>> resource = new ArrayList<>();
         LeaderChoiceMessage message = spy(new LeaderChoiceMessage(1,2));
-        RemoteView remoteView = spy(new RemoteView(players.get(0).getUser(),gameController, mock(ClientStatus.class)));
+        NetworkRemoteView remoteView = spy(new NetworkRemoteView(players.get(0).getUser(),gameController, mock(ClientStatus.class)));
         gameController.handleLeaderChoiceMessage(message, remoteView);
         verify(message, times(1)).isValidMessage();
         verify(players.get(0), times(1)).performInitialLeaderChoice(game,2,1);

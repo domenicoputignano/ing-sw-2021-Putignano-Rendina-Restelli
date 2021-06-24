@@ -116,7 +116,7 @@ public class Server {
         MultiPlayerMode multiPlayerMode = new MultiPlayerMode(players);
         GameController gameController = new GameController(multiPlayerMode);
         for(Player player : players) {
-            RemoteView remoteView = new RemoteView(player.getUser(), gameController, accounts.get(player.getUser().getNickname()));
+            NetworkRemoteView remoteView = new NetworkRemoteView(player.getUser(), gameController, accounts.get(player.getUser().getNickname()));
             accounts.get(player.getUser().getNickname()).bindRemoteView(remoteView);
         }
         multiPlayerMode.notifyGameSetup();
@@ -128,7 +128,7 @@ public class Server {
         Player player = getClientAsPlayer(client);
         SoloMode soloMode = new SoloMode(player);
         GameController gameController = new GameController(soloMode);
-        RemoteView remoteView = new RemoteView(player.getUser(), gameController, client);
+        NetworkRemoteView remoteView = new NetworkRemoteView(player.getUser(), gameController, client);
         client.bindRemoteView(remoteView);
         soloMode.notifyGameSetup();
         LOGGER.log(Level.INFO, "Solo mode game setup done");
@@ -136,9 +136,9 @@ public class Server {
 
     public void resumeGame(ClientStatus reconnectingClient) {
         ClientStatus oldClientStatus = accounts.get(reconnectingClient.getNickname());
-        RemoteView oldRemoteView = oldClientStatus.getRemoteView();
+        NetworkRemoteView oldRemoteView = oldClientStatus.getRemoteView();
         //ClientStatus newClientStatus = new ClientStatus(client.getClientSocket(), client.getInputStream(), client.getOutputStream());
-        RemoteView newRemoteView = new RemoteView(oldRemoteView, reconnectingClient);
+        NetworkRemoteView newRemoteView = new NetworkRemoteView(oldRemoteView, reconnectingClient);
         reconnectingClient.bindRemoteView(newRemoteView);
         //accounts.remove(client.getNickname());
         accounts.put(reconnectingClient.getNickname(), reconnectingClient);

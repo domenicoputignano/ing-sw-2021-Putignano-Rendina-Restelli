@@ -1,6 +1,8 @@
 package it.polimi.ingsw;
 
+import it.polimi.ingsw.Client.OfflineClient;
 import it.polimi.ingsw.Network.Client;
+import it.polimi.ingsw.Network.NetworkClient;
 import it.polimi.ingsw.Network.Server;
 import java.io.IOException;
 import java.util.Locale;
@@ -17,9 +19,11 @@ public class MaestriDelRinascimento {
 
         if(parsedChoice == null){
             System.out.println("Wrong arguments specification, type: \n" +
-                    "-cli to start client in cli mode \n" +
-                    "-gui to start client in gui mode \n" +
-                    "-server to start the server");
+                    "cli to start client in cli mode \n" +
+                    "gui to start client in gui mode \n" +
+                    "server to start the server \n"+
+                    "local to start an offline solo mode with gui \n"+
+                    "local cli to start an offline solo mode with cli");
             return;
         }
 
@@ -36,6 +40,12 @@ public class MaestriDelRinascimento {
                 startServer();
                 break;
             }
+            case "LOCAL" : {
+                if(args.length == 2 && args[1].equalsIgnoreCase("cli")) {
+                    startOfflineClient(false);
+                } else startOfflineClient(true);
+                break;
+            }
         }
 
     }
@@ -50,13 +60,13 @@ public class MaestriDelRinascimento {
     }
 
     public static void startClient(boolean startAsGui){
-        Client client = new Client("127.0.0.1", 1234);
-        try{
-            client.start(startAsGui);
-        } catch (IOException e){
-            LOGGER.log(Level.SEVERE, "Unable to start client");
-        }
+        Client client = new NetworkClient("127.0.0.1", 1234);
+        client.start(startAsGui);
     }
 
+    public static void startOfflineClient(boolean startAsGui) {
+        OfflineClient client = new OfflineClient();
+        client.start(startAsGui);
+    }
 }
 

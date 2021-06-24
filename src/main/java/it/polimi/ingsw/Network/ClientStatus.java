@@ -19,7 +19,7 @@ import java.util.logging.Logger;
 public class ClientStatus implements Runnable {
 
     private Server server;
-    private RemoteView remoteView;
+    private NetworkRemoteView remoteView;
     private boolean isActive;
     private ObjectOutputStream outputStreamToClient;
     private ObjectInputStream inputFromClient;
@@ -119,7 +119,7 @@ public class ClientStatus implements Runnable {
     }
 
 
-    public void bindRemoteView(RemoteView remoteView) {
+    public void bindRemoteView(NetworkRemoteView remoteView) {
         this.remoteView = remoteView;
         this.connectionState = ConnectionStates.INGAME;
     }
@@ -128,7 +128,7 @@ public class ClientStatus implements Runnable {
         return isActive;
     }
 
-    public RemoteView getRemoteView() { return remoteView; }
+    public NetworkRemoteView getRemoteView() { return remoteView; }
 
 
     public void nicknameChoice(UsernameChoiceMessage messageFromClient) {
