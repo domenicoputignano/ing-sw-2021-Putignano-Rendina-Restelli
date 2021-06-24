@@ -9,6 +9,7 @@ import it.polimi.ingsw.Model.*;
 import it.polimi.ingsw.Model.MarketTray.Coin;
 import it.polimi.ingsw.Model.MarketTray.Marble;
 import it.polimi.ingsw.Network.ClientStatus;
+import it.polimi.ingsw.Network.NetworkRemoteView;
 import it.polimi.ingsw.Network.RemoteView;
 import it.polimi.ingsw.Utils.*;
 import it.polimi.ingsw.Utils.Messages.ClientMessages.*;
@@ -73,8 +74,8 @@ class TurnControllerTest {
         GameController gameController = new GameController(game);
         ClientStatus clientStatus = mock(ClientStatus.class);
 
-        RemoteView spyRemoteView = spy(new RemoteView(first.getUser(),gameController,clientStatus));
-        RemoteView spyRemoteView2 = spy(new RemoteView(second.getUser(),gameController, clientStatus));
+        NetworkRemoteView spyRemoteView = spy(new NetworkRemoteView(first.getUser(),gameController,clientStatus));
+        NetworkRemoteView spyRemoteView2 = spy(new NetworkRemoteView(second.getUser(),gameController, clientStatus));
 
         TurnController turnController = new TurnController(gameSpy,first);
 
@@ -106,7 +107,7 @@ class TurnControllerTest {
         TurnController turnController = new TurnController(gameSpy,first);
         ClientStatus clientStatus = mock(ClientStatus.class);
         GameController gameController = new GameController(game);
-        RemoteView spyRemoteView = spy(new RemoteView(first.getUser(),gameController,clientStatus));
+        NetworkRemoteView spyRemoteView = spy(new NetworkRemoteView(first.getUser(),gameController,clientStatus));
         turnController.handleEndTurnMessage(new EndTurnMessage(),spyRemoteView);
         verify(gameSpy, times(1)).nextTurn();
     }
@@ -129,7 +130,7 @@ class TurnControllerTest {
         TurnController turnController = new TurnController(gameSpy,first);
         ClientStatus clientStatus = mock(ClientStatus.class);
         GameController gameController = new GameController(game);
-        RemoteView spyRemoteView = spy(new RemoteView(first.getUser(),gameController,clientStatus));
+        RemoteView spyRemoteView = spy(new NetworkRemoteView(first.getUser(),gameController,clientStatus));
         turnController.handleEndTurnMessage(new EndTurnMessage(),spyRemoteView);
         verify(gameSpy, times(0)).nextTurn();
     }
@@ -153,7 +154,7 @@ class TurnControllerTest {
         TurnController turnController = new TurnController(gameSpy,first);
         ClientStatus clientStatus = mock(ClientStatus.class);
         GameController gameController = new GameController(game);
-        RemoteView spyRemoteView = spy(new RemoteView(first.getUser(),gameController,clientStatus));
+        RemoteView spyRemoteView = spy(new NetworkRemoteView(first.getUser(),gameController,clientStatus));
 
         MoveResourcesMessage message = new MoveResourcesMessage();
         MoveActionInterface moveAction = new MoveFromNormalToNormalAction(1,2);
@@ -186,7 +187,7 @@ class TurnControllerTest {
         TurnController turnController = new TurnController(gameSpy,first);
         ClientStatus clientStatus = mock(ClientStatus.class);
         GameController gameController = new GameController(game);
-        RemoteView spyRemoteView = spy(new RemoteView(first.getUser(),gameController,clientStatus));
+        RemoteView spyRemoteView = spy(new NetworkRemoteView(first.getUser(),gameController,clientStatus));
 
         LeaderActionMessage message = new LeaderActionMessage();
         message.setIndex(1);
@@ -216,7 +217,7 @@ class TurnControllerTest {
         TurnController turnController = new TurnController(gameSpy,first);
         ClientStatus clientStatus = mock(ClientStatus.class);
         GameController gameController = new GameController(game);
-        RemoteView spyRemoteView = spy(new RemoteView(first.getUser(),gameController,clientStatus));
+        RemoteView spyRemoteView = spy(new NetworkRemoteView(first.getUser(),gameController,clientStatus));
 
         TakeResourcesFromMarketMessage message = new TakeResourcesFromMarketMessage();
         message.setIndex(1);
@@ -250,7 +251,7 @@ class TurnControllerTest {
         TurnController turnController = new TurnController(gameSpy,first);
         ClientStatus clientStatus = mock(ClientStatus.class);
         GameController gameController = new GameController(game);
-        RemoteView spyRemoteView = spy(new RemoteView(first.getUser(),gameController,clientStatus));
+        RemoteView spyRemoteView = spy(new NetworkRemoteView(first.getUser(),gameController,clientStatus));
 
         ActivateProductionMessage message = new ActivateProductionMessage();
         ActiveProductions productions = new ActiveProductions();

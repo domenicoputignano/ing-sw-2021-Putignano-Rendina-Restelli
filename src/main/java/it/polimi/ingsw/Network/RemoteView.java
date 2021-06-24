@@ -12,51 +12,25 @@ import it.polimi.ingsw.Utils.Messages.ServerMessages.ServerMessage;
 
 import java.util.logging.Logger;
 
-public class RemoteView implements Observer<ServerMessage> {
+public abstract class RemoteView implements Observer<ServerMessage> {
 
-    private final Logger LOGGER = Logger.getLogger(RemoteView.class.getName());
-    private final User user;
-    private final Game game;
-    private final GameController gameController;
-    private final ClientStatus clientStatus;
+    protected final Logger LOGGER = Logger.getLogger(RemoteView.class.getName());
+    protected final User user;
+    protected final Game game;
+    protected final GameController gameController;
 
-    public RemoteView(User user, GameController gameController, ClientStatus clientStatus) {
+
+    protected RemoteView(User user, GameController gameController) {
         this.user = user;
         this.gameController = gameController;
         this.game = gameController.getModel();
-        this.clientStatus = clientStatus;
         game.addObserver(this);
     }
 
-    public RemoteView(RemoteView oldRemoteView, ClientStatus clientStatus) {
-        this.user = oldRemoteView.user;
-        this.user.setActive(true);
-        this.gameController = oldRemoteView.gameController;
-        this.game = gameController.getModel();
-        this.clientStatus = clientStatus;
-        game.addObserver(this);
-    }
-
-
-    public void sendError(ErrorMessage errorMessage) {
-        clientStatus.send(errorMessage);
-     }
+    public abstract void sendError(ErrorMessage errorMessage);
+    public abstract void update(ServerMessage message);
 
     public void handleClientMessage(GameControllerHandleable message) {  message.handleMessage(gameController, this); }
-
-    public void handlePlayerDisconnection() {
-        user.setActive(false);
-        game.removeObserver(this);
-        gameController.handlePlayerDisconnection(this.user);
-    }
-
-    public void handlePlayerReconnection(User reconnectingUser) {
-        gameController.handlePlayerReconnection(reconnectingUser);
-    }
-
-    public void update(ServerMessage message) {
-        clientStatus.send(message);
-    }
 
     public Player getPlayer() {
         return game.getPlayer(user);
