@@ -142,7 +142,7 @@
          </image>
       </ImageView>
       <Text fx:id="takeResourcesText" layoutX="460.0" layoutY="120.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Take Resources from Market" />
-      <HBox fx:id="convertMarbleButtons1" layoutX="544.0" layoutY="282.0" prefHeight="70.0" prefWidth="110.0" spacing="10.0">
+      <HBox fx:id="convertMarbleButtons1" layoutX="544.0" layoutY="282.0" prefHeight="70.0" prefWidth="110.0" spacing="10.0" visible="false">
          <children>
             <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleFirstConvertMarbleChoice" prefHeight="50.0" prefWidth="50.0" stylesheets="@../css/button.css" textAlignment="CENTER">
                <VBox.margin>
