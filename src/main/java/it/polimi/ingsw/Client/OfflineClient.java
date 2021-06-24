@@ -11,11 +11,14 @@ import it.polimi.ingsw.Network.Client;
 import it.polimi.ingsw.Utils.Messages.ClientMessages.ClientMessage;
 import it.polimi.ingsw.Utils.Messages.ClientMessages.GameControllerHandleable;
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.logging.Level;
 
 public class OfflineClient extends Client {
 
     private OfflineRemoteView clientView;
+    private final ExecutorService executor = Executors.newSingleThreadExecutor();
 
     @Override
     public void start(boolean startAsGui) {
@@ -34,13 +37,15 @@ public class OfflineClient extends Client {
                 LOGGER.log(Level.SEVERE, "Error detected in application launch");
             }
         }
-        else
+        else {
             ui = new CLI(this);
+            ui.setSoloMode(true);
+        }
         soloModeGame.notifyGameSetup();
     }
 
     @Override
     public void sendMessage(ClientMessage message) {
-        clientView.handleClientMessage((GameControllerHandleable) message);
+        executor.submit(() -> clientView.handleClientMessage((GameControllerHandleable) message));
     }
 }

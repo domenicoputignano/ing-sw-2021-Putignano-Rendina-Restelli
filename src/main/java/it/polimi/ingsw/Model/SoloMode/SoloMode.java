@@ -108,7 +108,7 @@ public class SoloMode extends Game {
     public ReducedGame getReducedVersion() {
         List<ReducedPlayer> players = playerList.stream().map(Player::getReducedVersion).collect(Collectors.toList());
         ReducedMarketTray marketTray = this.marketTray.getReducedVersion();
-        return new ReducedSoloMode(players, decks, marketTray, tokens);
+        return new ReducedSoloMode(players, decks, marketTray, tokens, lorenzoIlMagnifico.getBlackCross());
     }
 
     public Token lorenzoPlays() {

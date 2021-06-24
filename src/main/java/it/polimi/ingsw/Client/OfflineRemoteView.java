@@ -6,6 +6,7 @@ import it.polimi.ingsw.Network.RemoteView;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.Errors.ErrorMessage;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.ServerMessage;
 
+import java.util.concurrent.ExecutorService;
 import java.util.logging.Level;
 
 public class OfflineRemoteView extends RemoteView {
@@ -24,7 +25,7 @@ public class OfflineRemoteView extends RemoteView {
 
     @Override
     public void update(ServerMessage message) {
-        LOGGER.log(Level.INFO, "Message received");
+        LOGGER.log(Level.INFO, "Message received of type "+message.getClass().getName());
         message.handleMessage(client);
     }
 }

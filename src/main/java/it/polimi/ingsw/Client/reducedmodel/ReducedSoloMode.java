@@ -18,9 +18,10 @@ public class ReducedSoloMode extends ReducedGame {
     }
 
 
-    public ReducedSoloMode(List<ReducedPlayer> players, List<Deck> decks, ReducedMarketTray marketTray, Stack<Token> tokens) {
+    public ReducedSoloMode(List<ReducedPlayer> players, List<Deck> decks, ReducedMarketTray marketTray, Stack<Token> tokens, int blackCross) {
         super(players,decks,marketTray, true);
         this.tokens = tokens;
+        this.blackCross = blackCross;
     }
 
     public void nextTurn(LorenzoPlayedUpdate message) {
