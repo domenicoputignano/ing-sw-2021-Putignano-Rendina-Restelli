@@ -1,16 +1,23 @@
 package it.polimi.ingsw.Commons;
 
 import java.io.Serializable;
-import java.util.Arrays;
 import java.util.Objects;
 import java.util.Stack;
 
+/**
+ * This class represents a slot of the {@link it.polimi.ingsw.Model.PersonalBoard}.
+ * It permits to stack Development Cards on it.
+ * It implements {@link Serializable} interface in order to be sent throught he network.
+ */
 public class Slot implements Cloneable, Serializable {
 
+    /**
+     * The data structure where Development Cards are stacked.
+     */
     private final Stack<DevelopmentCard> developmentCardStack;
 
     public Slot() {
-        developmentCardStack = new Stack<DevelopmentCard>();
+        developmentCardStack = new Stack<>();
     }
 
     private Slot(Slot initialSlot) {
@@ -18,14 +25,24 @@ public class Slot implements Cloneable, Serializable {
         developmentCardStack.addAll(initialSlot.developmentCardStack);
     }
 
+    /**
+     * @return the {@link DevelopmentCard} on top of the slot.
+     */
     public DevelopmentCard peekTopCard() {
         return developmentCardStack.peek();
     }
 
+    /**
+     * Puts a {@link DevelopmentCard} on top of the slot.
+     * @param developmentCard the card to put on top.
+     */
     public void putCardOnTop(DevelopmentCard developmentCard) {
         developmentCardStack.push(developmentCard);
     }
 
+    /**
+     * @return the num of cards stacked on the slot.
+     */
     public int getNumOfStackedCards() {
         return developmentCardStack.size();
     }
@@ -38,8 +55,10 @@ public class Slot implements Cloneable, Serializable {
         return new Slot(this);
     }
 
-    public int getVictoryPointsSlot()
-    {
+    /**
+     * @return the overall number of victory points of the Development Cards stacked on this slot.
+     */
+    public int getVictoryPointsSlot() {
         return developmentCardStack.stream().map(DevelopmentCard::getVictoryPoints).reduce(0,Integer::sum);
     }
     @Override

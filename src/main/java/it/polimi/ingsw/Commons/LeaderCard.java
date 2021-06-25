@@ -12,10 +12,17 @@ public class LeaderCard implements Serializable {
      * The unique ID identifying the card.
      */
     private final String ID;
-
+    /**
+     * The {@link LeaderEffect} associated to this card.
+     */
     private final LeaderEffect leaderEffect;
-
+    /**
+     * The {@link ResourceType} types and occurrences needed to activate this card.
+     */
     private final Map<ResourceType, Integer> requirementsResources;
+    /**
+     * The {@link DevelopmentCard} types and occurrences needed to activate this card.
+     */
     private final List<CardType> requirementsCards;
     /**
      * The activation status of the card.
@@ -63,8 +70,9 @@ public class LeaderCard implements Serializable {
         this.isActive = true;
     }
 
-
-
+    /**
+     * @return a string representation of the card using ASCII escape codes to render colors.
+     */
 
     @Override
     public String toString() {
@@ -99,6 +107,9 @@ public class LeaderCard implements Serializable {
                 '}'+ ANSI_Color.RESET;
     }
 
+    /**
+     * @return a string representing the activation status of this card.
+     */
     private String activation() {
         if(isActive) return "active";
         else return "inactive";

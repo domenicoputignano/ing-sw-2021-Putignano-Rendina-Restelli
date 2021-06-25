@@ -11,7 +11,13 @@ import java.util.concurrent.atomic.AtomicBoolean;
  */
 public class User implements Serializable {
 
+    /**
+     * The unique nickname associated to user, chosen during the configuration phase of the game.
+     */
     private final String nickname;
+    /**
+     * A flag representing if the user is currently playing.
+     */
     private final AtomicBoolean isActive;
 
     public User(String nickname) {
