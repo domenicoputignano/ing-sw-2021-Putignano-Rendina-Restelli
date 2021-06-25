@@ -52,8 +52,6 @@ public abstract class Game extends Observable<ServerMessage> implements Observer
             }
         }
         this.turn = new Turn(this,inkwell);
-        //DISTRIBUZIONE RISORSE A SCELTA E SCELTA CARTE LEADER PASSANDO IN RESOURCECHOICE E LEADER CHOICE
-        //Inviare notifica alle view interessate per le risorse a scelta
     }
 
 

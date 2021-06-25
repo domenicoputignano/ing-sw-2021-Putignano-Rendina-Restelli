@@ -80,7 +80,6 @@ public class GameController {
     public synchronized void handlePlayerReconnection(User reconnectingUser){
         if(model.getGameState() == GameState.PAUSED) gameCleaner.cancel();
         turnController.handlePlayerReconnection(reconnectingUser);
-
     }
 
     public synchronized void handlePlayerDisconnection(User disconnectingUser, NetworkRemoteView remoteView) {
@@ -129,20 +128,18 @@ public class GameController {
     private boolean checkPlayerResourceChoice(ResourceChoiceMessage message, Player sender){
         if(sender.getPosition()==2 || sender.getPosition()==3) return message.getChosenResources().size() == 1;
         if(sender.getPosition()==4) {
-            //return isValidFourthPlayerPositioning(message.getChosenResources());
             return message.getChosenResources().size()==2;
         }
         return true;
     }
 
-    private boolean isValidFourthPlayerPositioning(List<Pair<ResourceType,Integer>> resourceDestination) {
+    public boolean isValidFourthPlayerPositioning(List<Pair<ResourceType,Integer>> resourceDestination) {
         if(resourceDestination.get(0).getKey() == resourceDestination.get(1).getKey()) {
             if(resourceDestination.stream().map(Pair::getValue).anyMatch(x -> x.equals(1))) return false;
-            if(!resourceDestination.get(0).getValue().equals(resourceDestination.get(1).getValue())) return false;
+            return resourceDestination.get(0).getValue().equals(resourceDestination.get(1).getValue());
         } else {
-            if(resourceDestination.stream().map(Pair::getValue).allMatch(x -> x.equals(1)||x.equals(2)||x.equals(3))) {
-                return false;
-            }
+            if(resourceDestination.get(0).getValue().equals(resourceDestination.get(1).getValue())) return false;
+            if(resourceDestination.stream().map(Pair::getValue).anyMatch(x -> x > 3||x < 1)) return false;
         }
         return true;
     }

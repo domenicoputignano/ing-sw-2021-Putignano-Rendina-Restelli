@@ -36,11 +36,11 @@ public class NetworkClient extends Client {
     public void start(boolean startAsGui) {
         try {
             socket = new Socket(ip, port);
-        System.out.println("Connection established");
-        socketOutObj = new ObjectOutputStream(socket.getOutputStream());
-        socketOutObj.flush();
-        socketInObj = new ObjectInputStream(socket.getInputStream());
-        socket.setSoTimeout(5000);
+            System.out.println("Connection established");
+            socketOutObj = new ObjectOutputStream(socket.getOutputStream());
+            socketOutObj.flush();
+            socketInObj = new ObjectInputStream(socket.getInputStream());
+            socket.setSoTimeout(5000);
         if(startAsGui) {
             ui = new Gui(this);
             new Thread(GUIApp::launchGUI).start();
