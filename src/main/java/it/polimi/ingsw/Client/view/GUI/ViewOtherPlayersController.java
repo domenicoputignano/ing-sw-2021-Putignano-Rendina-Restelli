@@ -11,22 +11,45 @@ import javafx.stage.Stage;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Class that represents the controller of the ViewOtherPlayers page of the game
+ * In this page, which is shown as a popup, the user can choose to view the PlayerBoard
+ * of a player in the game in the case of MultiMode
+ */
 public class ViewOtherPlayersController extends Controller{
+    /**
+     * Attribute that represents the central pane of the page
+     */
     @FXML
     public AnchorPane anchorViewOtherPlayers;
 
+    /**
+     * Attribute that represents the textField where the title of the page is shown
+     */
     @FXML
     public Text ViewOtherPlayersText;
-
+    /**
+     * Attribute that represents the button to close the popup of the page
+     */
     @FXML
     public Button closeView;
 
+    /**
+     * Attributes that represent the buttons associated to each player in the game
+     */
     @FXML
     public Button player1,player2,player3;
 
-    private static final String CURSOR = "/gui/img/cursor.png";
+    /**
+     * attribute that represent the list of the players in the game
+     */
     List<ReducedPlayer> playerList ;
 
+    /**
+     * Main method that initializes the scene within the stage
+     * It takes care of setting the background of the scene
+     * and the font of the texts and buttons
+     */
     @FXML
     @Override
     public void initialize() {
@@ -64,6 +87,10 @@ public class ViewOtherPlayersController extends Controller{
         }
     }
 
+    /**
+     * method used to close the popup page over the main stage
+     * It is performed when closeView button is pressed
+     */
     @FXML
     public void handleCloseChooseAction()
     {
@@ -71,6 +98,10 @@ public class ViewOtherPlayersController extends Controller{
         stage.close();
     }
 
+    /**
+     * method used to view the playerBoard of the first player in list
+     * It is performed when player1 button is pressed
+     */
     @FXML
     public void handleViewPlayer1()
     {
@@ -78,6 +109,10 @@ public class ViewOtherPlayersController extends Controller{
         ((PlayerBoardController)GUIApp.controller).initializePersonalBoard(playerList.get(0));
         handleCloseChooseAction();
     }
+    /**
+     * method used to view the playerBoard of the second player in list
+     * It is performed when player2 button is pressed
+     */
     @FXML
     public void handleViewPlayer2()
     {
@@ -85,6 +120,10 @@ public class ViewOtherPlayersController extends Controller{
         ((PlayerBoardController)GUIApp.controller).initializePersonalBoard(playerList.get(1));
         handleCloseChooseAction();
     }
+    /**
+     * method used to view the playerBoard of the third player in list
+     * It is performed when player3 button is pressed
+     */
     @FXML
     public void handleViewPlayer3()
     {

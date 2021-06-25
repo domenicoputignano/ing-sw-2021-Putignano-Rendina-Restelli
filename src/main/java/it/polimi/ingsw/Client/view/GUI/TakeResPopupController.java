@@ -14,19 +14,39 @@ import javafx.stage.Stage;
 
 import java.util.List;
 
+/**
+ * Class that represents the controller of the TakeResourcesPopup page of the game
+ * In this page, which is shown as a popup, the user can see the update popup following
+ * a successful Take resources from Market action
+ */
 public class TakeResPopupController extends Controller{
+    /**
+     * Attribute that represents the central pane of the page
+     */
     @FXML
     public AnchorPane takeRespopup;
 
+    /**
+     * Attributes that represent the textFields where the message of popup is shown
+     */
     @FXML
     public Text takeResPopupText1,takeResPopupText2;
-
+    /**
+     * Attributes that represent the imageView of the resources obtained after user performed action
+     */
     @FXML
     public ImageView res1,res2,res3,res4;
-
+    /**
+     * Attribute that represents the button to confirm the view of the popup and close it
+     */
     @FXML
     public Button okButton;
 
+    /**
+     * Main method that initializes the scene within the stage
+     * It takes care of setting the background of the scene
+     * and the font of the texts and buttons
+     */
     @FXML
     @Override
     public void initialize() {
@@ -43,6 +63,13 @@ public class TakeResPopupController extends Controller{
         okButton.setStyle("-fx-text-fill: rgb(35, 25, 22);");
     }
 
+    /**
+     *method used to set images on the popup of the resources obtained after
+     * successfully performing the action
+     * @param message update message containing the information obtained
+     *                after successfully performing the action
+     * @see TakeResourcesFromMarketUpdate
+     */
     public void setImages(TakeResourcesFromMarketUpdate message)
     {
         List<ResourceType> earnedResources = message.getEarnedResources();
@@ -59,7 +86,10 @@ public class TakeResPopupController extends Controller{
             res4.setImage(new Image(ResourceLocator.retrieveResourceTypeImage(earnedResources.get(3))));
         else if(message.getFaithPoints()>0) res4.setImage(new Image("/gui/img/faith.png"));
     }
-
+    /**
+     * method used to confirm the view of the popup and close it
+     * It is performed when okButton button is pressed
+     */
     @FXML
     void handleOkButton()
     {

@@ -74,8 +74,8 @@ public class TakeResourcesFromMarket implements AbstractTurnPhase {
     /**
      * Sets effect for white marbles as indicated
      * @param turn in which the action is performed
-     * @param marbles
-     * @param whiteEffects
+     * @param marbles the list of marbles containing some white marbles to convert.
+     * @param whiteEffects the list containing, for each white marble, the index of the convert marble leader card to active.
      */
     private void convertWhiteMarbles(Turn turn, List<Marble> marbles, List<Integer> whiteEffects) {
         List<ResourceType> whiteMarbleEffects = turn.getPlayer().getActiveEffects().stream().filter(x -> x.getEffect()==Effect.CMARBLE).
@@ -95,6 +95,11 @@ public class TakeResourcesFromMarket implements AbstractTurnPhase {
         }
     }
 
+    /**
+     * Converts each marble obtained to the corresponding {@link ResourceType}.
+     * @param marbles the list of the marbles obtained.
+     * @param whereToPutMarbles the list containing the indications on where to put each marble.
+     */
     private void convertMarblesToResources(List<Marble> marbles, List<Pair<ReducedMarble,MarbleDestination>> whereToPutMarbles) {
         for(Marble p : marbles) {
             if (p.getColor() == ColorMarble.RED)
@@ -109,6 +114,12 @@ public class TakeResourcesFromMarket implements AbstractTurnPhase {
         }
     }
 
+    /**
+     * Method used to convert the Resource Type associated to a convert marble leader card to the
+     * correspondent {@link WhiteMarbleEffect} instance of the Strategy pattern.
+     * @param type of the convert marble.
+     * @return the instance of the Strategy pattern used to convert white marbles.
+     */
     private WhiteMarbleEffect convertTypeToMarbleEffect(ResourceType type) {
         if(type == ResourceType.coin) return new Coin();
         if(type == ResourceType.servant) return new Servant();
@@ -117,6 +128,12 @@ public class TakeResourcesFromMarket implements AbstractTurnPhase {
         else return null;
     }
 
+    /**
+     * Performs the positioning of the resources obtained from the marbles into the {@link Warehouse} as
+     * indicated in the previous phases of the action. If the positioning action fails, the resource is
+     * added to the pending resources.
+     * @param playerWarehouse where to position the resources.
+     */
     private void handlePositioning(Warehouse playerWarehouse) {
         for(int i = 0; i < whereToPutResources.size(); ) {
             try {
@@ -152,21 +169,42 @@ public class TakeResourcesFromMarket implements AbstractTurnPhase {
         concludeTurnPhase(turn);
     }
 
-    public boolean checkPendingResourcesPositioning(List<ResourceType> resourcesToPut)
-    {
+    /**
+     * Checks whether the player has correctly indicated all the resources to put when he has to some resources
+     * to settle.
+     * @param resourcesToPut indicated by the client.
+     * @return the check validity.
+     */
+    public boolean checkPendingResourcesPositioning(List<ResourceType> resourcesToPut) {
         return resourcesToPut.containsAll(pendingResources) && pendingResources.containsAll(resourcesToPut);
     }
 
-    private void moveCurrPlayerMarker(Turn turn)
-    {
+    /**
+     * Moves the current player's faith marker by the number of faith points obtained during the action.
+     * @param turn in which the action is performed.
+     */
+    private void moveCurrPlayerMarker(Turn turn) {
         turn.getPlayer().getPersonalBoard().moveMarker(turn.getPlayer(), faith);
     }
 
+    /**
+     * Concludes the action moving the other players on their faith track by
+     * @param turn in which the action is performed.
+     */
     public void concludeTurnPhase(Turn turn) {
         turn.getGame().moveOtherPlayers(turn.getPlayer(), discardedResources);
     }
 
 
+    /**
+     * Performs the positioning of a resource type in the player's Warehouse as indicated in the previous phases
+     * of the action.
+     * @param playerWarehouse where to put the resources.
+     * @param i the index of the resource to place in whereToPutResources list.
+     * @throws DepotOutOfBoundsException if a resource is put in a full depot.
+     * @throws IncompatibleResourceTypeException if the type of a resource is incompatible to the current configuration of the warehouse.
+     * @throws DepotNotFoundException if a resource is added to a depot that not exists in player's warehouse.
+     */
     private void performPositioning(Warehouse playerWarehouse, int i) throws DepotOutOfBoundsException, IncompatibleResourceTypeException, DepotNotFoundException {
         switch(whereToPutResources.get(i).getValue()) {
             case DEPOT1:
@@ -187,12 +225,24 @@ public class TakeResourcesFromMarket implements AbstractTurnPhase {
         }
     }
 
-    private List<ResourceType> getEarnedResources()
-    {
+    /**
+     * Filters all the resources obtained from the marbles to get only the resources that the player
+     * wants to keep.
+     * @return the resources that the player wants to keep.
+     */
+    private List<ResourceType> getEarnedResources() {
         return whereToPutResources.stream().filter(x -> x.getValue()!=MarbleDestination.DISCARD).
                 map(Pair::getKey).collect(Collectors.toList());
     }
 
+    /**
+     * Checks whether the client has correctly indicated how to convert each white marble.
+     * Client has to indicate how to convert each white marble only if he has two convert marble leader effects active.
+     * @param turn in which the action is performed.
+     * @param whiteEffects the list containing, for each white marble, the index of the convert marble leader card to active.
+     * @param requestedMarbles the list of the marbles requested by the client.
+     * @return the check validity.
+     */
     public boolean checkValidWhiteEffects(Turn turn, List<Integer> whiteEffects, List<ReducedMarble> requestedMarbles)
     {
         List<ResourceType> whiteMarbleEffects = turn.getPlayer().getActiveEffects().stream().filter(x -> x.getEffect()==Effect.CMARBLE).
