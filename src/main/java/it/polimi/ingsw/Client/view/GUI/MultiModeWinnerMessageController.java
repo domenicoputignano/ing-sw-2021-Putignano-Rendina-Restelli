@@ -8,19 +8,42 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.scene.text.Text;
 
+/**
+ * Class that represents the controller of the MultiModeWinnerMessage page of the game
+ * In this page, which is shown as a popup, the user can view the ranking of the match after
+ * it has finished and can view the winner of the match
+ * Finally he closes the game
+ */
 public class MultiModeWinnerMessageController extends Controller{
+    /**
+     * Attribute that represents the central pane of the page
+     */
     @FXML
     public AnchorPane popupPane;
-
+    /**
+     * Attribute that represents the button to close the popup of the page
+     */
     @FXML
     public Button closeButton;
 
+    /**
+     * Attribute that represents the text where the winner of the game is shown
+     */
     @FXML
     public Text winnerText;
 
+    /**
+     * Attribute that represents the text where the players of the match are shown on the rank
+     *
+     */
     @FXML
     public Text scorePlayer1,scorePlayer2,scorePlayer3,scorePlayer4;
 
+    /**
+     * Main method that initializes the scene within the stage
+     * It takes care of setting the background of the scene
+     * and the font of the texts and buttons
+     */
     @Override
     public void initialize(){
         popupPane.setBackground(new Background(new BackgroundImage(new Image("/gui/img/exit_tab.png"),
@@ -43,6 +66,12 @@ public class MultiModeWinnerMessageController extends Controller{
         this.client = GUIApp.client;
     }
 
+    /**
+     * method used to set the rank of the game showing the score for each player
+     * @param message message that contains the game ranking
+     * consisting of a list of pairs that contains the player and his score
+     * @see RankMessage
+     */
     public void setRank(RankMessage message){
         if(message.getRank().get(0).getKey().equals(client.getUser())){
             winnerText.setText("You WON!");
@@ -54,6 +83,12 @@ public class MultiModeWinnerMessageController extends Controller{
 
     }
 
+    /**
+     * method used to set text of the players in rank
+     * @param message message that contains the game ranking
+     * consisting of a list of pairs that contains the player and his score
+     * @see RankMessage
+     */
     private void setText(RankMessage message)
     {
         scorePlayer1.setVisible(true);
@@ -72,7 +107,9 @@ public class MultiModeWinnerMessageController extends Controller{
         }
     }
 
-
+    /**
+     * method used to close the popup and end the game
+     */
     public void handleCloseButton(){
         System.exit(0);
     }

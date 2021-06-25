@@ -7,22 +7,37 @@ import javafx.scene.layout.*;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+/**
+ * Class that represents the controller of the ViewDashBoard page of the game
+ * In this page the user not in turn is able to view the decks and the MarketTray
+ * of the game to check their status
+ */
 public class ViewDashBoardController extends Controller{
-
+    /**
+     * Attribute that represents the central pane of the page
+     */
     @FXML
     public AnchorPane anchorViewDashBoard;
-
+    /**
+     * Attribute that represents the textField where the title of the page is shown
+     */
     @FXML
     public Text viewDashboardText;
-
+    /**
+     * Attribute that represents the button to close the popup of the page
+     */
     @FXML
     public Button closeViewDashboard;
-
+    /**
+     * attributes that represent the buttons associated with the view of the decks and the marketTray
+     */
     @FXML
     public Button marketTray,decks;
-
-    private static final String CURSOR = "/gui/img/cursor.png";
-
+    /**
+     * Main method that initializes the scene within the stage
+     * It takes care of setting the background of the scene
+     * and the font of the texts and buttons
+     */
     @FXML
     @Override
     public void initialize() {
@@ -42,14 +57,20 @@ public class ViewDashBoardController extends Controller{
         setFont(decks,35);
         decks.setStyle("-fx-text-fill: rgb(35, 25, 22);");
     }
-
+    /**
+     * method used to close the popup page over the main stage
+     * It is performed when closeViewDashboard button is pressed
+     */
     @FXML
     public void handleCloseViewDashboard()
     {
         Stage stage = (Stage) closeViewDashboard.getScene().getWindow();
         stage.close();
     }
-
+    /**
+     * method used to show the MarketTray of the game
+     * It is performed when marketTray button is pressed
+     */
     @FXML
     public void handleViewMarketTray()
     {
@@ -82,6 +103,10 @@ public class ViewDashBoardController extends Controller{
         ((TakeResourcesController)GUIApp.controller).takeResourcesText.setX(60);
     }
 
+    /**
+     * method used to show the decks in the game
+     * It is performed when decks button is pressed
+     */
     @FXML
     public void handleViewDecks(){
         Stage stage = (Stage) closeViewDashboard.getScene().getWindow();
