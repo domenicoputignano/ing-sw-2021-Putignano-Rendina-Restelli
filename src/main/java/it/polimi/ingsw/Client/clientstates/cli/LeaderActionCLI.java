@@ -69,6 +69,13 @@ public class LeaderActionCLI extends AbstractLeaderAction {
                 System.out.printf("Invalid chosen index, please select again index between [1 - %d] : ", client.getGame().getCurrPlayer().getNumOfNotActiveLeaderCards());
             }
         } while(indexNotInRange(chosenIndex));
+        if(client.getGame().getPlayer(client.getUser()).getNumOfNotActiveLeaderCards() == 1) {
+            if(client.getGame().getPlayer(client.getUser()).getAvailableLeaderCards().size() > 1 &&
+                    client.getGame().getPlayer(client.getUser()).getAvailableLeaderCards().get(0).isActive() &&
+                    !client.getGame().getPlayer(client.getUser()).getAvailableLeaderCards().get(1).isActive())
+                chosenIndex = 2;
+            else chosenIndex = 1;
+        }
         return chosenIndex;
     }
 
