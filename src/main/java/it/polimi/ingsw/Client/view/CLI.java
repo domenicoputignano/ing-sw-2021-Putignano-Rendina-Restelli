@@ -286,11 +286,7 @@ public class CLI extends UI {
     }
 
     public synchronized void render(BlackCrossMoveUpdate message) {
-        if(message.isVaticanReportTriggered()) {
-            System.out.println("Pay attention! Lorenzo has just activated a Vatican Report!");
-        } else {
-            System.out.println("Lorenzo reached "+message.getBlackCross()+"° position!");
-        }
+        System.out.println("Lorenzo reached "+message.getBlackCross()+"° position!");
     }
 
     public synchronized void render(BuyDevCardPerformedUpdate message) {
@@ -346,8 +342,7 @@ public class CLI extends UI {
 
     @Override
     public synchronized void render(LorenzoActivatedVaticanReportUpdate message){
-        System.out.println("Lorenzo il Magnifico activated a Vatican Report, your faith track has been updated as follows ");
-        printFaithTrack(message.getUserPersonalBoard());
+        System.out.println("Lorenzo il Magnifico activated a Vatican Report, your favor tile has been "+message.getResultingStateFavorTile());
     }
 
     @Override
@@ -371,7 +366,7 @@ public class CLI extends UI {
     }
 
     @Override
-    public void render(LastTurnMessage message){
+    public synchronized void render(LastTurnMessage message){
         String haveToPlayMessage;
         if(client.getUserPosition() > client.getGame().getPlayer(message.getTriggeringUser()).getPosition()){
             haveToPlayMessage = "You don't have played this turn yet";
@@ -388,7 +383,7 @@ public class CLI extends UI {
     }
 
     @Override
-    public void render(RankMessage message){
+    public synchronized void render(RankMessage message){
         System.out.println("Final rank");
         System.out.println("USER                                          POINTS");
         for(Pair<User,Integer> userPoint : message.getRank()) {
@@ -397,7 +392,7 @@ public class CLI extends UI {
     }
 
     @Override
-    public void render(SoloModeMatchWinnerMessage message){
+    public synchronized void render(SoloModeMatchWinnerMessage message){
         System.out.println("Match ended because "+message.getConclusionEvent().eventTrigger());
         if(message.hasPlayerWon()) {
             System.out.println("You win!\nYour score is: "+message.getVictoryPoints());
@@ -433,7 +428,7 @@ public class CLI extends UI {
     }
 
 
-    public void showLeaderCards(ReducedPersonalBoard playerBoard) {
+    public synchronized void showLeaderCards(ReducedPersonalBoard playerBoard) {
         for (LeaderCard card : playerBoard.getAvailableLeaderCards()) {
             System.out.printf("Card n.%d\t", playerBoard.getAvailableLeaderCards().indexOf(card) + 1);
             if(card.isActive()) {
@@ -446,7 +441,7 @@ public class CLI extends UI {
     }
 
 
-    public void showDepots(User user) {
+    public synchronized void showDepots(User user) {
         int index = 1;
         for (ReducedDepot depot : client.getGame().getPlayer(user).getPersonalBoard().getWarehouse().getNormalDepots()) {
             System.out.print("Depot " + index + ": " + depot + "\n");
@@ -547,7 +542,7 @@ public class CLI extends UI {
         clientState = newClientState;
     }
 
-    public void printDecks() {
+    public synchronized void printDecks() {
         System.out.println(".---------------------------..---------------------------..---------------------------..---------------------------.");
         System.out.println("|" + client.getGame().getDeckTopCardAsASCII(3, ColorCard.green, 1) + "||" + client.getGame().getDeckTopCardAsASCII(3, ColorCard.blue, 1) + "||" + client.getGame().getDeckTopCardAsASCII(3, ColorCard.yellow, 1) + "||" + client.getGame().getDeckTopCardAsASCII(3, ColorCard.purple, 1) + "|");
         System.out.println("|" + client.getGame().getDeckTopCardAsASCII(3, ColorCard.green, 2) + "||" + client.getGame().getDeckTopCardAsASCII(3, ColorCard.blue, 2) + "||" + client.getGame().getDeckTopCardAsASCII(3, ColorCard.yellow, 2) + "||" + client.getGame().getDeckTopCardAsASCII(3, ColorCard.purple, 2) + "|");
@@ -580,7 +575,7 @@ public class CLI extends UI {
         System.out.println("'---------------------------''---------------------------''---------------------------''---------------------------'");
     }
 
-    public void printSlots(ReducedPersonalBoard playerBoard) {
+    public synchronized void printSlots(ReducedPersonalBoard playerBoard) {
         System.out.println("           SLOT 1                      SLOT 2                         SLOT 3           ");
         System.out.println(".---------------------------..---------------------------..---------------------------.");
         System.out.println("|" + playerBoard.getSlotTopCardAsASCII(0, 1) + "||" + playerBoard.getSlotTopCardAsASCII(1, 1) + "||" + playerBoard.getSlotTopCardAsASCII(2, 1) + "|");
@@ -594,7 +589,7 @@ public class CLI extends UI {
         System.out.println("'---------------------------''---------------------------''---------------------------'");
     }
 
-    public void printFaithTrack(ReducedPersonalBoard playerBoard) {
+    public synchronized void printFaithTrack(ReducedPersonalBoard playerBoard) {
         System.out.print("                              ! Vatican Section  ");
         System.out.print("" + playerBoard.getFaithTrack().getFavorTile(0));
         System.out.print("                 !  Vatican Section       ");
@@ -616,11 +611,11 @@ public class CLI extends UI {
             System.out.println(" Lorenzo's position : "+((ReducedSoloMode)client.getGame()).getBlackCross());
     }
 
-    public void printWarehouse(ReducedPersonalBoard playerBoard) {
+    public synchronized void printWarehouse(ReducedPersonalBoard playerBoard) {
         System.out.println(playerBoard.getWarehouse());
     }
 
-    public void printOwnedDevelopmentCard(ReducedPersonalBoard playerBoard) {
+    public synchronized void printOwnedDevelopmentCard(ReducedPersonalBoard playerBoard) {
         if(playerBoard.getDevelopmentCardsInfo().size() > 0) {
             System.out.println("Development cards owned");
             playerBoard.getDevelopmentCardsInfo().forEach(x -> {
@@ -630,7 +625,7 @@ public class CLI extends UI {
         }
     }
 
-    public void printPersonalBoard(ReducedPersonalBoard playerBoard) {
+    public synchronized void printPersonalBoard(ReducedPersonalBoard playerBoard) {
         printFaithTrack(playerBoard);
         printSlots(playerBoard);
         printOwnedDevelopmentCard(playerBoard);
