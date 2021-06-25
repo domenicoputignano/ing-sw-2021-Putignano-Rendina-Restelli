@@ -1,5 +1,6 @@
 package it.polimi.ingsw.Utils;
 
+import it.polimi.ingsw.Commons.ColorCard;
 import it.polimi.ingsw.Commons.ColorMarble;
 import it.polimi.ingsw.Commons.ResourceType;
 
@@ -36,6 +37,14 @@ public enum ANSI_Color {
             if(color == ColorMarble.GREY) return GREY.escape();
             if(color == ColorMarble.PURPLE) return PURPLE.escape();
             if(color == ColorMarble.YELLOW) return YELLOW.escape();
+            else return "";
+        }
+
+        public static String escape(ColorCard color) {
+            if(color == ColorCard.green) return GREEN.escape();
+            if(color == ColorCard.blue) return BLUE.escape();
+            if(color == ColorCard.yellow) return YELLOW.escape();
+            if(color == ColorCard.purple) return PURPLE.escape();
             else return "";
         }
 }

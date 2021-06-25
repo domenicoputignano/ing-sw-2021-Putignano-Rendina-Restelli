@@ -32,47 +32,47 @@ public abstract class ReducedGame implements Serializable {
 
 
     //Overloading methods to perform updates with different messages from server
-    public void performUpdate(ActivateProductionUpdate message) {
+    public synchronized void performUpdate(ActivateProductionUpdate message) {
         updatePersonalBoard(message);
     }
 
-    public void performUpdate(BuyDevCardPerformedUpdate message) {
+    public synchronized void performUpdate(BuyDevCardPerformedUpdate message) {
         updatePersonalBoard(message);
         decks = message.getResultingDecks();
     }
 
-    public void performUpdate(TakeResourcesFromMarketUpdate message) {
+    public synchronized void performUpdate(TakeResourcesFromMarketUpdate message) {
         updatePersonalBoard(message);
         marketTray = message.getResultingMarketTray();
     }
 
-    public void performUpdate(ServerAsksForPositioning message) {
+    public synchronized void performUpdate(ServerAsksForPositioning message) {
         updatePersonalBoard(message);
         marketTray = message.getResultingMarketTray();
     }
 
-    public ReducedPlayer getPlayer(User user) {
+    public synchronized ReducedPlayer getPlayer(User user) {
         return players.stream().filter(x -> x.getNickname().equals(user)).
                 findFirst().orElseGet(() -> new ReducedPlayer(null, null, 0));
     }
 
 
 
-    public void updatePersonalBoard(UpdateMessage message) {
+    public synchronized void updatePersonalBoard(UpdateMessage message) {
         getPlayer(message.getUser()).updatePersonalBoard(message.getUserPersonalBoard());
     }
 
 
-    public ReducedPlayer getCurrPlayer() {
+    public synchronized ReducedPlayer getCurrPlayer() {
         return currPlayer;
     }
 
-    public List<Deck> getDecks() {
+    public synchronized List<Deck> getDecks() {
         return decks;
     }
 
 
-    public ReducedMarketTray getMarketTray() {
+    public synchronized ReducedMarketTray getMarketTray() {
         return marketTray;
     }
 
@@ -83,7 +83,7 @@ public abstract class ReducedGame implements Serializable {
         else return "                           ";
     }
 
-    public boolean isAnyCardPresentInDeck(int level, ColorCard color){
+    public synchronized boolean isAnyCardPresentInDeck(int level, ColorCard color){
         return decks.stream().anyMatch(x -> x.getCardType().getLevel()==level && x.getCardType().getColor()==color && !x.isEmpty());
     }
 

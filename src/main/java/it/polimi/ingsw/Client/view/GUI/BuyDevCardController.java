@@ -264,7 +264,6 @@ public class BuyDevCardController extends Controller implements PaymentControlle
         setSelectedCardImage(developmentCard);
 
         if(Checker.checkResources(buyDevCardAction.computeActualCost(developmentCard),client.getGame().getPlayer(client.getUser()).getPersonalBoard())){
-        //if(Checker.checkResources(developmentCard.getCost(),client.getGame().getPlayer(client.getUser()).getPersonalBoard())) {
             setFeasiblePurchase();
             isCardBuyable = true;
         } else {

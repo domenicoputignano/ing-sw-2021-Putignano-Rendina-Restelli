@@ -13,7 +13,7 @@ public class ReducedMultiPlayerMode extends ReducedGame {
         this.currPlayer = currPlayer;
     }
 
-    public void nextTurn(NewTurnUpdate message) {
+    public synchronized void nextTurn(NewTurnUpdate message) {
         currPlayer = this.getPlayer(message.getCurrentUser());
     }
 

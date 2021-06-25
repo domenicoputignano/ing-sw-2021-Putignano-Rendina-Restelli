@@ -103,4 +103,10 @@ public class ReducedPersonalBoard implements Serializable {
         return faithTrack;
     }
 
+    public List<CardType> getDevelopmentCardsInfo() {
+        List<DevelopmentCard> cards = new ArrayList<>();
+        Arrays.stream(slots).forEach(x -> cards.addAll(x.getDevelopmentCardStack()));
+        return cards.stream().map(DevelopmentCard::getType).collect(Collectors.toList());
+    }
+
 }

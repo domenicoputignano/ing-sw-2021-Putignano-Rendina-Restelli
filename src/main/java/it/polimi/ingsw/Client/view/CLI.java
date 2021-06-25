@@ -616,17 +616,28 @@ public class CLI extends UI {
             System.out.println(" Lorenzo's position : "+((ReducedSoloMode)client.getGame()).getBlackCross());
     }
 
+    public void printWarehouse(ReducedPersonalBoard playerBoard) {
+        System.out.println(playerBoard.getWarehouse());
+    }
+
+    public void printOwnedDevelopmentCard(ReducedPersonalBoard playerBoard) {
+        if(playerBoard.getDevelopmentCardsInfo().size() > 0) {
+            System.out.println("Development cards owned");
+            playerBoard.getDevelopmentCardsInfo().forEach(x -> {
+                System.out.println(""+ANSI_Color.escape(x.getColor())+x.getColor().toString().toUpperCase()+"\tlv."+x.getLevel()+ANSI_Color.RESET);
+            });
+            System.out.println();
+        }
+    }
 
     public void printPersonalBoard(ReducedPersonalBoard playerBoard) {
         printFaithTrack(playerBoard);
         printSlots(playerBoard);
+        printOwnedDevelopmentCard(playerBoard);
         printWarehouse(playerBoard);
         showLeaderCards(playerBoard);
     }
 
-    public void printWarehouse(ReducedPersonalBoard playerBoard) {
-        System.out.println(playerBoard.getWarehouse());
-    }
 
 
 }
