@@ -14,10 +14,10 @@ import java.util.logging.Logger;
 
 public abstract class RemoteView implements Observer<ServerMessage> {
 
-    protected final Logger LOGGER = Logger.getLogger(RemoteView.class.getName());
-    protected final User user;
-    protected final Game game;
-    protected final GameController gameController;
+    protected Logger LOGGER = Logger.getLogger(RemoteView.class.getName());
+    protected User user;
+    protected Game game;
+    protected GameController gameController;
 
 
     protected RemoteView(User user, GameController gameController) {

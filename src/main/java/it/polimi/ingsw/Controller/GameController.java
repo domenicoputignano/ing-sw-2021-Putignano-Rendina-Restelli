@@ -5,6 +5,7 @@ import it.polimi.ingsw.Commons.User;
 import it.polimi.ingsw.Model.Game;
 import it.polimi.ingsw.Model.GameState;
 import it.polimi.ingsw.Model.Player;
+import it.polimi.ingsw.Network.NetworkRemoteView;
 import it.polimi.ingsw.Network.RemoteView;
 import it.polimi.ingsw.Utils.Messages.ClientMessages.*;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.Errors.ActionError;
@@ -13,8 +14,12 @@ import it.polimi.ingsw.Utils.Messages.ServerMessages.Updates.NewTurnUpdate;
 import it.polimi.ingsw.Utils.Pair;
 
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 
 public class GameController {
@@ -23,6 +28,7 @@ public class GameController {
     private final TurnController turnController;
     private final AtomicInteger receivedLeaderChoices = new AtomicInteger(0);
     private final AtomicInteger receivedResourceChoices = new AtomicInteger(0);
+    private Timer gameCleaner;
 
     public GameController(Game game) {
         this.model = game;
@@ -72,10 +78,12 @@ public class GameController {
     }
 
     public synchronized void handlePlayerReconnection(User reconnectingUser){
+        if(model.getGameState() == GameState.PAUSED) gameCleaner.cancel();
         turnController.handlePlayerReconnection(reconnectingUser);
+
     }
 
-    public synchronized void handlePlayerDisconnection(User disconnectingUser) {
+    public synchronized void handlePlayerDisconnection(User disconnectingUser, NetworkRemoteView remoteView) {
         if(model.getGameState() == GameState.INITIALCHOICES) {
             if(model.getPlayer(disconnectingUser).getLeaderCards().size() > 2) {
                 model.getPlayer(disconnectingUser).performInitialLeaderChoice(model,4,3);
@@ -88,13 +96,21 @@ public class GameController {
             startFirstTurn();
         } else if(model.getGameState() == GameState.GAMEFLOW)
             turnController.handlePlayerDisconnection(disconnectingUser);
+        if(model.getGameState() == GameState.PAUSED) {
+            List<User> usersToBeRemoved = model.getPlayerList().stream().map(Player::getUser).collect(Collectors.toList());
+            gameCleaner = new Timer();
+            gameCleaner.schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    LOGGER.log(Level.INFO, "Match is being deleted");
+                    remoteView.deleteMatch(usersToBeRemoved);
+                }
+            }, 10000);
+        }
     }
 
     private boolean checkAllLeaderChoicesDone(AtomicInteger leaderChoicesDone) {
-        if(leaderChoicesDone.get() == model.getNumOfPlayers()){
-            return true;
-        }
-        return false;
+        return leaderChoicesDone.get() == model.getNumOfPlayers();
     }
 
     private boolean checkAllChoicesDone(AtomicInteger resourceChoiceDone) {

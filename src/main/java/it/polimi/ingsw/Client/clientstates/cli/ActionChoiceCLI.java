@@ -41,9 +41,9 @@ public class ActionChoiceCLI extends AbstractActionChoice {
                 System.out.println("Choose between Activate Production (A)," +
                         " Buy (B), Take Resources (T), Leader Action (L), Move Resources (M) " +
                         " ");
-                if(!client.getGame().isSoloMode()) {
-                    System.out.println("You can type (PB) to see other players' board, (MARKET) to see market tray or (DECKS) to see development cards");
-                }
+            }
+            if(!client.getGame().isSoloMode()) {
+                System.out.println("You can type (PB) to see other players' board, (MARKET) to see market tray or (DECKS) to see development cards");
             }
             String choice = input.next().toUpperCase();
             switch(choice) {
