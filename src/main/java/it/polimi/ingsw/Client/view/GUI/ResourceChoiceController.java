@@ -14,59 +14,69 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static it.polimi.ingsw.Client.view.UI.fromStringToResourceType;
-
+/**
+ * Class that represents the controller of the ResourceChoice page of the game
+ * On this page the user, except player 1, will have to choose one or two resources of
+ * his choice based on his position in the game
+ */
 
 public class ResourceChoiceController extends Controller{
+    /**
+     * Attribute that represents the textField where the title of the page is shown
+     */
     @FXML
     public TextField chooseResourceText;
-
+    /**
+     * Attribute that represents the button to clean up the choices made
+     */
     @FXML
     public Button clearButton;
-
+    /**
+     * Attribute that represents the button to confirm the choices and go on
+     */
     @FXML
     public Button okButton,okButton1;
 
+    /**
+     * Attributes that represent the textFields used to show the resources
+     */
     @FXML
-    public TextField coinText;
-
+    public TextField coinText,stoneText,shieldText,servantText;
+    /**
+     * Attributes that represent the textFields used to count the chosen resources
+     */
     @FXML
-    public TextField stoneText;
+    public TextField numCoin,numShield,numStone,numServant;
 
+    /**
+     * Attribute that represents the textField where an error is shown in case the user
+     * selects resources in an invalid way
+     */
     @FXML
-    public TextField shieldText;
-
-    @FXML
-    public TextField servantText;
-
-    @FXML
-    public TextField numCoin;
-
-    @FXML
-    public TextField numShield;
-
-    @FXML
-    public TextField numStone;
-
-    @FXML
-    public TextField numServant;
-
-    @FXML
-    public TextField errorResources;
-
-    @FXML
-    public TextField errorMismatch;
-
+    public TextField errorResources,errorMismatch;
+    /**
+     * attributes that represent the buttons used to
+     * increase or decrease the number of resources chosen
+     */
     @FXML
     public Button minusButton1,minusButton2,minusButton3,minusButton4,plusButton1,plusButton2,plusButton3,plusButton4;
-
+    /**
+     * attributes that represent the images associated with each resource
+     */
     @FXML
     public ImageView resource1Img,resource2Img,resource3Img,resource4Img,resource1Imgpl4;
-
+    /**
+     * attributes that represent the buttons that indicate
+     * in which depot to insert the chosen resources
+     */
     @FXML
     public Button buttonDepot1,buttonDepot2,buttonDepot3;
     @FXML
     public Button buttonDepot1pl4,buttonDepot2pl4,buttonDepot3pl4;
 
+    /**
+     * attributes used to count the number of resources chosen for each resource
+     */
     int playerNumber;
     int maxResources;
     int resources = 0;
@@ -74,10 +84,17 @@ public class ResourceChoiceController extends Controller{
     int shield = 0;
     int servant = 0;
     int stone = 0;
-
+    /**
+     * attributes used to manage which buttons were clicked and which were not
+     */
     private boolean buttonDepot11 = false,buttonDepot21 = false,buttonDepot31 = false;
     private boolean buttonDepot12 = false,buttonDepot22 = false,buttonDepot32 = false;
 
+    /**
+     * Main method that initializes the scene within the stage
+     * It takes care of setting the background of the scene
+     * and the font of the texts and buttons
+     */
     @FXML
     public void initialize() {
         super.initialize();
@@ -146,6 +163,10 @@ public class ResourceChoiceController extends Controller{
         numStone.setText("" + stone);
     }
 
+    /**
+     * method used to clear all choises made
+     * It is performed when clearButton is pressed
+     */
     @FXML
     void clearResources()
     {
@@ -161,6 +182,10 @@ public class ResourceChoiceController extends Controller{
         errorResources.setText("");
     }
 
+    /**
+     * method used to increase the number of coins chosen
+     * It is performed when plusButton1 is pressed
+     */
     @FXML
     void plusCoin()
     {
@@ -172,6 +197,10 @@ public class ResourceChoiceController extends Controller{
         }
         else errorResources.setText("You can select maximum "+maxResources+" resources !");
     }
+    /**
+     * method used to increase the number of servants chosen
+     * It is performed when plusButton2 is pressed
+     */
     @FXML
     void plusServant()
     {
@@ -183,6 +212,10 @@ public class ResourceChoiceController extends Controller{
         }
         else errorResources.setText("You can select maximum "+maxResources+" resources !");
     }
+    /**
+     * method used to increase the number of shields chosen
+     * It is performed when plusButton3 is pressed
+     */
     @FXML
     void plusShield() {
         if (resources + 1 <= maxResources) {
@@ -192,6 +225,10 @@ public class ResourceChoiceController extends Controller{
         }
         else errorResources.setText("You can select maximum "+maxResources+" resources !");
     }
+    /**
+     * method used to increase the number of stones chosen
+     * It is performed when plusButton4 is pressed
+     */
     @FXML
     void plusStone()
     {
@@ -202,6 +239,10 @@ public class ResourceChoiceController extends Controller{
         }
         else errorResources.setText("You can select maximum "+maxResources+" resources !");
     }
+    /**
+     * method used to decrease the number of stones chosen
+     * It is performed when minusButton4 is pressed
+     */
     @FXML
     void minusStone()
     {
@@ -212,6 +253,10 @@ public class ResourceChoiceController extends Controller{
             numStone.setText("" + stone);
         }
     }
+    /**
+     * method used to decrease the number of servants chosen
+     * It is performed when minusButton3 is pressed
+     */
     @FXML
     void minusServant()
     {
@@ -222,6 +267,10 @@ public class ResourceChoiceController extends Controller{
             numServant.setText("" + servant);
         }
     }
+    /**
+     * method used to decrease the number of shields chosen
+     * It is performed when minusButton2 is pressed
+     */
     @FXML
     void minusShield()
     {
@@ -232,6 +281,10 @@ public class ResourceChoiceController extends Controller{
             numShield.setText("" + shield);
         }
     }
+    /**
+     * method used to decrease the number of coins chosen
+     * It is performed when minusButton1 is pressed
+     */
     @FXML
     void minusCoin()
     {
@@ -242,6 +295,10 @@ public class ResourceChoiceController extends Controller{
             numCoin.setText("" + coin);
         }
     }
+    /**
+     * method used to confirm all choises made
+     * It is performed when okButton is pressed
+     */
     @FXML
     void handleOkChoice()
     {
@@ -252,6 +309,9 @@ public class ResourceChoiceController extends Controller{
         else setInvisible();
     }
 
+    /**
+     * method used to set Invisible all buttons and texts in the page
+     */
     void setInvisible()
     {
         chooseResourceText.setText("Choose where to put resource");
@@ -304,6 +364,10 @@ public class ResourceChoiceController extends Controller{
         }
 
     }
+
+    /**
+     * method used to clean the parameters that take into account the choices made
+     */
     void clearSelect()
     {
         buttonDepot11=false;
@@ -317,6 +381,9 @@ public class ResourceChoiceController extends Controller{
         buttonDepot3.setStyle("-fx-background-size: 100%;");
 
     }
+    /**
+     * method used to clean the parameters that take into account the choices made for player 4
+     */
     void clearSelectpl4()
     {
         buttonDepot12=false;
@@ -327,6 +394,10 @@ public class ResourceChoiceController extends Controller{
         buttonDepot3pl4.setStyle("-fx-background-size: 100%;");
 
     }
+
+    /**
+     * method used to select depot1 as the target of the first resource
+     */
     public void selectedButtonDepot11()
     {
         clearSelect();
@@ -335,6 +406,9 @@ public class ResourceChoiceController extends Controller{
         buttonDepot1.setStyle("-fx-background-size: 75% auto;");
         buttonDepot1pl4.setStyle("-fx-background-size: 100% auto;");
     }
+    /**
+     * method used to select depot2 as the target of the first resource
+     */
     public void selectedButtonDepot21()
     {
         clearSelect();
@@ -343,6 +417,9 @@ public class ResourceChoiceController extends Controller{
         buttonDepot2.setStyle("-fx-background-size: 75% auto;");
         buttonDepot2pl4.setStyle("-fx-background-size: 100% auto;");
     }
+    /**
+     * method used to select depot3 as the target of the first resource
+     */
     public void selectedButtonDepot31()
     {
         clearSelect();
@@ -352,6 +429,9 @@ public class ResourceChoiceController extends Controller{
         buttonDepot3.setStyle("-fx-background-size: 75% auto;");
 
     }
+    /**
+     * method used to select depot1 as the target of the second resource
+     */
     public void selectedButtonDepot12()
     {
         clearSelectpl4();
@@ -360,6 +440,9 @@ public class ResourceChoiceController extends Controller{
         buttonDepot12 = true;
         buttonDepot1pl4.setStyle("-fx-background-size: 75% auto;");
     }
+    /**
+     * method used to select depot2 as the target of the second resource
+     */
     public void selectedButtonDepot22()
     {
         clearSelectpl4();
@@ -369,6 +452,9 @@ public class ResourceChoiceController extends Controller{
         buttonDepot2pl4.setStyle("-fx-background-size: 75% auto;");
 
     }
+    /**
+     * method used to select depot3 as the target of the second resource
+     */
     public void selectedButtonDepot32()
     {
         clearSelectpl4();
@@ -378,6 +464,11 @@ public class ResourceChoiceController extends Controller{
         buttonDepot3pl4.setStyle("-fx-background-size: 75% auto;");
     }
 
+    /**
+     * method used to track how many times each resource is selected
+     * @param times number of times a resource has been selected
+     * @return
+     */
     private List<String> getResourcesSelectedTimes(int times) {
         List<String> result = new ArrayList<>();
         if(coin == times) result.add("coin");
@@ -388,7 +479,10 @@ public class ResourceChoiceController extends Controller{
     }
 
 
-
+    /** method used to get url to resource images
+     * @param resource resource of which you want to get the url of the associated image
+     * @return url of the image
+     */
     private String getURLImageResource(String resource) {
         if(resource.equals("coin")) return "/gui/img/resources/coin.png";
         if(resource.equals("servant")) return "/gui/img/resources/servant.png";
@@ -404,9 +498,10 @@ public class ResourceChoiceController extends Controller{
         else return 0;
     }
 
-
-
-
+    /**
+     * method used to submit the choices made in the first phase and move on to the phase
+     * of choosing the destination for each resource
+     */
     @FXML
     void submitInitialResourceChoice() {
         List<Pair<ResourceType,Integer>> resourcesWithDepotDestination = new ArrayList<>();
@@ -433,6 +528,9 @@ public class ResourceChoiceController extends Controller{
         chooseResourceText.setText("Setup completed!  You are the "+client.getGame().getPlayer(client.getUser()).getPosition()+"° player");
     }
 
+    /**
+     * method used to clean pane
+     */
     private void cleanPane() {
         clearButton.setVisible(false);
         okButton.setVisible(false);

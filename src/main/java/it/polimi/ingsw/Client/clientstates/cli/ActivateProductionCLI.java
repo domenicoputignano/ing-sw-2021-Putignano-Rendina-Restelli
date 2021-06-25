@@ -103,7 +103,6 @@ public class ActivateProductionCLI extends AbstractActivateProduction {
             doneSelection = false;
             do {
                 if(i==2){
-
                     System.out.print("Slot 2: ");
                     try {
                         String choice = input.next();
@@ -139,27 +138,30 @@ public class ActivateProductionCLI extends AbstractActivateProduction {
             } while(!doneSelection);
         }
         if(listExtraProductionEffect().size() == 1) {
-            System.out.printf("One extra production of type %s available, do you want to activate it? (yes/no) ", getExtraProductionType(0));
-            answer = input.next();
+            do {
+                System.out.printf("One extra production of type %s available, do you want to activate it? (yes/no) ", getExtraProductionType(0));
+                answer = input.next();
+            } while(!isValidChoice(answer));
             requiredProduction.setExtraSlot1(answer.equalsIgnoreCase("yes"));
             requiredProduction.setExtraSlot2(false);
         }
         if(listExtraProductionEffect().size() == 2) {
-            System.out.printf("Two extra productions available, one of type: %s, do you want to activate it? (yes/no) ", getExtraProductionType(0));
-            answer = input.next();
+            do {
+                System.out.printf("Two extra productions available, one of type: %s, do you want to activate it? (yes/no) ", getExtraProductionType(0));
+                answer = input.next();
+            } while (!isValidChoice(answer));
             requiredProduction.setExtraSlot1(answer.equalsIgnoreCase("yes"));
-            System.out.printf("Second is of type: %s, do you want to activate it? (yes/no) ", getExtraProductionType(1));
-            answer = input.next();
+            do {
+                System.out.printf("Second is of type: %s, do you want to activate it? (yes/no) ", getExtraProductionType(1));
+                answer = input.next();
+            } while (!isValidChoice(answer));
             requiredProduction.setExtraSlot2(answer.equalsIgnoreCase("yes"));
         }
         messageToSend.setProductions(requiredProduction);
     }
 
-    private boolean parseValidChoice(String choice) {
-        if (choice.equalsIgnoreCase("yes") || choice.equalsIgnoreCase("no")) {
-            requiredProduction.setBasic(choice.equalsIgnoreCase("yes"));
-        } else throw new InputMismatchException();
-        return true;
+    private boolean isValidChoice(String choice) {
+        return choice.equalsIgnoreCase("yes") || choice.equalsIgnoreCase("no");
     }
 
 

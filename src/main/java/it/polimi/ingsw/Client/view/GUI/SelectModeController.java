@@ -6,8 +6,17 @@ import javafx.fxml.FXML;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 
+/**
+ * Class that represents the controller of the SelectMode page of the game
+ * On this page the user must choose the game mode between SoloMode and MultiplayerMode
+ */
 public class SelectModeController extends Controller {
 
+    /**
+     * Main method that initializes the scene within the stage
+     * It takes care of setting the background of the scene
+     * and the font of the texts and buttons
+     */
     @FXML
     public void initialize() {
         super.initialize();
@@ -20,13 +29,20 @@ public class SelectModeController extends Controller {
                 BackgroundPosition.CENTER,
                 bSize)));
     }
+    /**
+     * method used to manage the user's choice to MultiMode
+     * It is performed when the MultiPlayerMode button is pressed
+     */
     @FXML
     void handleMultiPlayButton()
     {
         clientState = new GameModeChoiceGUI(client,"multiplayer");
         clientState.manageUserInteraction();
     }
-
+    /**
+     * method used to manage the user's choice to SoloMode
+     * It is performed when the SoloMode button is pressed
+     */
     @FXML
     void handleSoloPlayButton()
     {

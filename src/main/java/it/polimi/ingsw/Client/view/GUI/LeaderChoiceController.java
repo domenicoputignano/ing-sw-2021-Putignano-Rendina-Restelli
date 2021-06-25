@@ -11,50 +11,56 @@ import javafx.scene.layout.*;
 
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * Class that represents the controller of the LeaderChoice page of the game
+ * On this page the user must choose two out of four leader cards in order to start the game
+ */
 public class LeaderChoiceController extends Controller{
+    /**
+     * Attribute that represents the textField where the title of the page is shown
+     */
     @FXML
     public TextField chooseCardText;
-
+    /**
+     * Attribute that represents the textField where an error is shown in case the user
+     * selects leader cards in an invalid way
+     */
     @FXML
-    public TextField errorSelectedResources;
-
+    public TextField errorSelectedResources,errorChoiceText;
+    /**
+     * Attribute that represents the button to press to choose the leader card
+     */
     @FXML
-    public Button leaderCard1;
-
+    public Button leaderCard1,leaderCard2,leaderCard3,leaderCard4;
+    /**
+     * Attribute that represents the image of the indicator arrow for leader card
+     */
     @FXML
-    public Button leaderCard2;
+    public ImageView indicator1,indicator2,indicator3,indicator4;
 
-    @FXML
-    public Button leaderCard3;
-
-    @FXML
-    public Button leaderCard4;
-
-    @FXML
-    public ImageView indicator1;
-
-    @FXML
-    public ImageView indicator2;
-
-    @FXML
-    public ImageView indicator3;
-
-    @FXML
-    public ImageView indicator4;
-
-    @FXML
-    public TextField errorChoiceText;
-
+    /**
+     * Attribute that represents the button to clean up the choices made
+     */
     @FXML
     public Button clearButton;
-
+    /**
+     * Attribute that represents the button to confirm the choices and go on
+     */
     @FXML
     public Button okButton;
 
+    /**
+     * Attributes used to set the choices made and to understand which ones he chose
+     */
     private int selectedCard = 0;
     private boolean card1 = false,card2 = false,card3 = false,card4 = false;
 
+    /**
+     * Main method that initializes the scene within the stage
+     * It takes care of setting the background of the scene
+     * ,the font of the texts and buttons,
+     * and the images on the scene
+     */
     @FXML
     public void initialize() {
         super.initialize();
@@ -83,7 +89,10 @@ public class LeaderChoiceController extends Controller{
         setFont(clearButton,22);
         setFont(okButton,20);
     }
-
+    /**
+     * method used to manage the user's choice to discard first leader card
+     * It is performed when leaderCard1 button is pressed
+     */
     @FXML
     void discardLeaderCard1()
     {
@@ -100,6 +109,10 @@ public class LeaderChoiceController extends Controller{
             else errorChoiceText.setText("ERROR: You can only select 2 leader cards");
         }
     }
+    /**
+     * method used to manage the user's choice to discard second leader card
+     * It is performed when leaderCard2 button is pressed
+     */
     @FXML
     void discardLeaderCard2()
     {
@@ -116,6 +129,10 @@ public class LeaderChoiceController extends Controller{
             else errorChoiceText.setText("ERROR: You can only select 2 leader cards");
         }
     }
+    /**
+     * method used to manage the user's choice to discard third leader card
+     * It is performed when leaderCard3 button is pressed
+     */
     @FXML
     void discardLeaderCard3()
     {
@@ -132,6 +149,10 @@ public class LeaderChoiceController extends Controller{
             else errorChoiceText.setText("ERROR: You can only select 2 leader cards");
         }
     }
+    /**
+     * method used to manage the user's choice to discard third leader card
+     * It is performed when leaderCard3 button is pressed
+     */
     @FXML
     void discardLeaderCard4()
     {
@@ -148,6 +169,10 @@ public class LeaderChoiceController extends Controller{
             else errorChoiceText.setText("ERROR: You can only select 2 Leader Cards");
         }
     }
+    /**
+     * method used to clear all choises made
+     * It is performed when clearButton is pressed
+     */
     @FXML
     void clearIndicator()
     {
@@ -173,6 +198,9 @@ public class LeaderChoiceController extends Controller{
         errorSelectedResources.clear();
     }
 
+    /**
+     * method used to set the card images based on those actually present in the model
+     */
     private void setLeaderCardImages() {
         leaderCard1.setStyle("-fx-background-image: url(" +
                 client.getGame().getPlayer(client.getUser()).getAvailableLeaderCards().get(0).toImage() + ")");
@@ -184,6 +212,10 @@ public class LeaderChoiceController extends Controller{
                 client.getGame().getPlayer(client.getUser()).getAvailableLeaderCards().get(3).toImage() + ")");
     }
 
+    /**
+     * method used to confirm all choises made
+     * It is performed when okButton is pressed
+     */
     @FXML
     void handleOkChoice()
     {
@@ -203,7 +235,11 @@ public class LeaderChoiceController extends Controller{
         }
         showWaitingSceneForFirstPlayer();
     }
-
+    /**
+     * method used to show a page with a message to player one that he will not have to
+     * choose the resources and therefore will have to wait for the choice of the resources
+     * of the other players
+     */
     private void showWaitingSceneForFirstPlayer() {
         if(client.getGame().getPlayer(client.getUser()).equals(client.getGame().getCurrPlayer())) {
             if(!client.getUI().isSoloMode()) {
@@ -214,7 +250,9 @@ public class LeaderChoiceController extends Controller{
         } else cleanPane();
     }
 
-
+    /**
+     * method used to clean Pane only for the first player to show him a message
+     */
     private void cleanPane() {
         leaderCard1.setVisible(false);
         leaderCard2.setVisible(false);

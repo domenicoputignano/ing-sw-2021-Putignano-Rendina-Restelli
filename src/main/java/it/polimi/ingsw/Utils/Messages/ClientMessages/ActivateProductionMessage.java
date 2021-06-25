@@ -57,7 +57,6 @@ public class ActivateProductionMessage implements TurnControllerHandleable {
         if(productions.isBasic() && (input1 == null || input2 == null || output == null)) return false;
         if(productions.isExtraSlot1() && (outputExtra1 == null)) return false;
         if(productions.isExtraSlot2() && (outputExtra2 == null)) return false;
-        // TODO : fare metodo per evitare le duplicazioni
         return areValidInstructions(howToTakeResources);
     }
 

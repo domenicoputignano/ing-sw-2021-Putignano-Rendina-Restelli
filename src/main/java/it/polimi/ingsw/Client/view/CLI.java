@@ -88,15 +88,19 @@ public class CLI extends UI {
                 }
             } while (resource == null);
             System.out.print("Choose the number: ");
-            int number;
+            int number = 0;
             boolean isRightNumber = false;
             do {
-                number = input.nextInt();
-                if (neededResources.get(resource) < number) {
-                    System.out.print("Error detected, select again number of occurrences you want to pick: ");
+                try {
+                    number = Integer.parseInt(input.next());
+                    if (neededResources.get(resource) < number) {
+                        throw new NumberFormatException();
+                    } else {
+                        isRightNumber = true;
+                    }
+                } catch (NumberFormatException e) {
+                    System.out.println("Error detected, select again number of occurrences");
                     isRightNumber = false;
-                } else {
-                    isRightNumber = true;
                 }
             } while (!isRightNumber);
             if (howToTakeResources.get(source).containsKey(resource)) {
@@ -423,7 +427,7 @@ public class CLI extends UI {
         if (source.equalsIgnoreCase("strongbox")) return ResourceSource.STRONGBOX;
         if (source.equalsIgnoreCase("extra")) return ResourceSource.EXTRA;
         else {
-            System.out.println("Error detected, please select again ");
+            System.out.println("Error detected, please select again, type (depot, strongbox or extra)");
             return null;
         }
     }
