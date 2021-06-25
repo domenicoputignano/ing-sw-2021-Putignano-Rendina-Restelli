@@ -25,7 +25,9 @@ public class Server {
     private final Set<ClientStatus> waitingConnections = new HashSet<>();
     private final ExecutorService pingSenders = Executors.newCachedThreadPool();
 
-    //username of players involved in one match (connected or not)
+    /**
+     * username of players involved in one match (connected or not)
+     */
     private final Map<String, ClientStatus> accounts = new HashMap<>();
 
     private boolean active = false;
@@ -153,6 +155,13 @@ public class Server {
 
     public synchronized void registerClientStatus(String nickname, ClientStatus clientStatus) {
         accounts.put(nickname,clientStatus);
+    }
+
+    public synchronized void deleteMatch(List<User> usersInAPausedMessage) {
+        usersInAPausedMessage.forEach((x) -> {
+            accounts.get(x.getNickname()).closeConnection();
+            accounts.remove(x.getNickname());
+        });
     }
 
 }

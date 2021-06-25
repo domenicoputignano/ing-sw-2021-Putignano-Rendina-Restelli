@@ -6,9 +6,11 @@ import it.polimi.ingsw.Controller.GameController;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.Errors.ErrorMessage;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.ServerMessage;
 
+import java.util.List;
+
 public class NetworkRemoteView extends RemoteView {
 
-    private final ClientStatus clientStatus;
+    private ClientStatus clientStatus;
 
     public NetworkRemoteView(User user, GameController gameController, ClientStatus clientStatus) {
         super(user, gameController);
@@ -32,11 +34,19 @@ public class NetworkRemoteView extends RemoteView {
     public void handlePlayerDisconnection() {
         user.setActive(false);
         game.removeObserver(this);
-        gameController.handlePlayerDisconnection(this.user);
+        gameController.handlePlayerDisconnection(this.user, this);
     }
 
     public void handlePlayerReconnection(User reconnectingUser) {
         gameController.handlePlayerReconnection(reconnectingUser);
+    }
+
+    public void deleteMatch(List<User> userInAPausedMatch) {
+        clientStatus.deleteMatch(userInAPausedMatch);
+        this.game = null;
+        this.gameController = null;
+        this.clientStatus = null;
+        this.user = null;
     }
 
     public void update(ServerMessage message) {

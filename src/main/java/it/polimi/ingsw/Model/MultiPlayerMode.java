@@ -7,13 +7,11 @@ import it.polimi.ingsw.Commons.StateFavorTiles;
 import it.polimi.ingsw.Commons.User;
 import it.polimi.ingsw.Model.ConclusionEvents.HitLastSpace;
 import it.polimi.ingsw.Model.ConclusionEvents.SeventhDevCardBought;
-import it.polimi.ingsw.Utils.Messages.ServerMessages.GameSetupMessage;
-import it.polimi.ingsw.Utils.Messages.ServerMessages.LastTurnMessage;
-import it.polimi.ingsw.Utils.Messages.ServerMessages.RankMessage;
+import it.polimi.ingsw.Network.Client;
+import it.polimi.ingsw.Utils.Messages.ServerMessages.*;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.Updates.ActivateVaticanReportUpdate;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.Updates.FaithMarkerUpdate;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.Updates.NewTurnUpdate;
-import it.polimi.ingsw.Utils.Messages.ServerMessages.UserDisconnectedMessage;
 import it.polimi.ingsw.Utils.Pair;
 
 import java.util.*;
@@ -163,6 +161,7 @@ public class MultiPlayerMode extends Game {
             currPlayer = getPlayer(reconnectingUser);
             turn = new Turn(turn.getGame(), currPlayer);
             notifyGameResumed(reconnectingUser);
+            notifyTurn(new NewTurnUpdate(currPlayer.getUser()));
         } else {
             LOGGER.log(Level.INFO, "Player reconnected while others are playing");
             if(gameState == GameState.GAMEFLOW) {

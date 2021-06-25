@@ -1,6 +1,7 @@
 package it.polimi.ingsw.Network;
 
 
+import it.polimi.ingsw.Commons.User;
 import it.polimi.ingsw.Utils.GameMode;
 import it.polimi.ingsw.Utils.Messages.ClientMessages.*;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.*;
@@ -11,6 +12,7 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.net.SocketException;
 import java.net.SocketTimeoutException;
+import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.logging.Level;
@@ -171,6 +173,22 @@ public class ClientStatus implements Runnable {
                 server.initializeGame(this);
             }
         }
+    }
+
+    public void closeConnection() {
+        try {
+            remoteView = null;
+            isActive = false;
+            outputStreamToClient.close();
+            inputFromClient.close();
+            socket.close();
+        } catch (IOException e) {
+            LOGGER.log(Level.INFO, "Unable to close connection");
+        }
+    }
+
+    public void deleteMatch(List<User> usersInAPausedMatch) {
+        server.deleteMatch(usersInAPausedMatch);
     }
 
     public String getNickname() {
