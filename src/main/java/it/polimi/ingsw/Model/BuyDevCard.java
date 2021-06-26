@@ -24,13 +24,12 @@ public class BuyDevCard implements AbstractTurnPhase {
      * resources required to buy it and calls methods from PaymentHandler class to make consistency check and perform
      * payment.
      *
-     * see @PaymentHandler for further details
+     * @see PaymentHandler for further details
      *
-     * @throws InvalidActionException
-     * @throws PaymentErrorException
-     * @throws ResourceMismatchException
-     * @throws NotEnoughResourcesException
-     *
+     * @throws InvalidActionException if the normal action has already been done for this turn.
+     * @throws PaymentErrorException if the payment of the resources needed by the card failed.
+     * @throws ResourceMismatchException if the player did a mistake while indicating where to take resources to buy the card.
+     * @throws NotEnoughResourcesException if the player doesn't have enough resources to buy the card.
      */
     public void buyDevCard(Turn turn, BuyDevCardMessage message) throws InvalidActionException, PaymentErrorException, ResourceMismatchException, NotEnoughResourcesException {
         if(turn.isDoneNormalAction())
