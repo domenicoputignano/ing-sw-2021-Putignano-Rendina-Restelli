@@ -49,6 +49,7 @@ public class NetworkClient extends Client {
             ui = new CLI(this);
         } catch (IOException e) {
             LOGGER.log(Level.SEVERE,"Unable to start the client");
+            return;
         }
         createListeningThread();
         createHeartBeat();
@@ -90,7 +91,7 @@ public class NetworkClient extends Client {
     }
 
 
-    private Thread createListeningThread() {
+    private void createListeningThread() {
         Thread t = new Thread(() -> {
             while (isActive) {
                 try {
@@ -109,7 +110,6 @@ public class NetworkClient extends Client {
             }
         });
         t.start();
-        return t;
     }
 
     public void closeConnection() {
