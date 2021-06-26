@@ -26,7 +26,7 @@ public class Server {
     private final ExecutorService pingSenders = Executors.newCachedThreadPool();
 
     /**
-     * username of players involved in one match (connected or not)
+     * Username of players involved in one match (connected or not)
      */
     private final Map<String, ClientStatus> accounts = new HashMap<>();
 
@@ -37,11 +37,19 @@ public class Server {
     }
 
 
+    /**
+     * Initializes a server reachable from remote hosts.
+     * @param PORT endpoint over which the server is listening for connections.
+     */
     public Server(int PORT) throws IOException {
         this.PORT = PORT;
         this.serverSocket = new ServerSocket(PORT);
     }
 
+    /**
+     * Method that runs infinitely until the server is shutdown.
+     * It accepts inbound connections, sets a timeout for them and creates a new thread that will handle it.
+     */
     public void start() {
         LOGGER.log(Level.INFO, "Server is ready to accept connections...");
         active = true;
@@ -58,9 +66,14 @@ public class Server {
         }
     }
 
+    /**
+     * Adds a remote host to the set of client that are waiting for a game to start.
+     * @param awaitingConnection client that waits for a game to start after nickname choice step.
+     */
     public synchronized void addWaitingPlayer(ClientStatus awaitingConnection) {
         waitingConnections.add(awaitingConnection);
     }
+
 
     public synchronized void lobby(ClientStatus clientStatus) {
         Set<ClientStatus> suitableConnections = getSuitableConnections(clientStatus.getNumOfPlayers());
@@ -71,14 +84,16 @@ public class Server {
         LOGGER.log(Level.INFO, "Waiting connections "+ waitingConnections);
     }
 
-    //method to detect if a player with the same nickname is already playing
+    /**
+     * Boolean method to detect if a player with the same nickname is already playing.
+     */
     public synchronized boolean isPlayerWithSameNicknamePlaying(String nickname) {
         if(accounts.containsKey(nickname)&&accounts.get(nickname).isActive()) {
             LOGGER.log(Level.INFO, "Player "+nickname+" is currently playing");
         }
-
         return accounts.containsKey(nickname) && accounts.get(nickname).isActive();
     }
+
 
     public boolean inactivePlayerAlreadyRegistered(String nickname) {
         return accounts.containsKey(nickname) && !accounts.get(nickname).isActive();
@@ -93,12 +108,19 @@ public class Server {
         return getSuitableConnections(numOfPlayersChosen).stream().map(ClientStatus::getNickname).collect(Collectors.toList());
     }
 
+    /**
+     * According to number of players chosen, it notifies remote hosts that a guest has just joined the lobby.
+     * In this way clients are able to know how many players miss to start the game.
+     */
     public synchronized void notifyLobbyJoin(int numOfPlayersChosen, String guest) {
         for(ClientStatus awaitingConnection : getSuitableConnections(numOfPlayersChosen)) {
             awaitingConnection.send(new JoinLobbyMessage(guest,getAwaitingGuests(numOfPlayersChosen), getNumOfMissingPlayers(numOfPlayersChosen)));
         }
     }
 
+    /**
+     * Returns a set of remote hosts that have chosen the same number of players for a game.
+     */
     private Set<ClientStatus> getSuitableConnections(int numOfPlayers) {
         return waitingConnections.stream().filter(x -> x.getNumOfPlayers()==numOfPlayers).collect(Collectors.toSet());
     }
@@ -107,6 +129,10 @@ public class Server {
         return new Player(client.getNickname());
     }
 
+    /**
+     * Initializes a multiplayer mode game.
+     * @param clients remote hosts involved in new game.
+     */
     public synchronized void initializeGame(Set<ClientStatus> clients) {
         List<Player> players = new ArrayList<>();
 
@@ -125,6 +151,10 @@ public class Server {
     }
 
 
+    /**
+     * Initializes a solo mode game.
+     * @param client remote host that plays in solo mode.
+     */
     public synchronized void initializeGame(ClientStatus client) {
         waitingConnections.remove(client);
         Player player = getClientAsPlayer(client);
@@ -136,6 +166,11 @@ public class Server {
         LOGGER.log(Level.INFO, "Solo mode game setup done");
     }
 
+    /**
+     * This method allows player reconnection. It basically creates a new {@link NetworkRemoteView} to a game instance already created
+     * and binds it with the client that is reconnecting.
+     * @param reconnectingClient remote host that wants to join after a disconnection.
+     */
     public void resumeGame(ClientStatus reconnectingClient) {
         ClientStatus oldClientStatus = accounts.get(reconnectingClient.getNickname());
         NetworkRemoteView oldRemoteView = oldClientStatus.getRemoteView();
@@ -148,14 +183,24 @@ public class Server {
     }
 
 
+    /**
+     * It removes a remote host if it disconnects without completing configuration.
+     * Nickname chosen is deleted and the {@link ClientStatus} won't be available for any game.
+     * @param clientNotSetup client that lost or closed the connection.
+     */
     public synchronized void removeNotSetupPlayer(ClientStatus clientNotSetup) {
         waitingConnections.remove(clientNotSetup);
         accounts.remove(clientNotSetup.getNickname());
     }
 
+    /**
+     * Adds a {@link ClientStatus} and its nickname to registered accounts.
+     * @param nickname unique nickname chosen by remote host.
+     */
     public synchronized void registerClientStatus(String nickname, ClientStatus clientStatus) {
         accounts.put(nickname,clientStatus);
     }
+
 
     public synchronized void deleteMatch(List<User> usersInAPausedMessage) {
         usersInAPausedMessage.forEach((x) -> {

@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 
 
 /**
- * The type activate production
+ * This class represents activate production action with all the method necessary to perform it.
  */
 public class ActivateProduction implements AbstractTurnPhase {
     private final Logger LOGGER = Logger.getLogger(ActivateProduction.class.getName());
@@ -50,15 +50,13 @@ public class ActivateProduction implements AbstractTurnPhase {
 
 
     /**
-     * This is the main method of the class that performs the action picking a
-     * @param turn in which the action is performed end an
-     * @param activateProductionMessage contains instruction on how to make it.
-     *
-     * Different kind of exception are thrown to inform the controller that will properly handle them.
-     * @throws InvalidActionException, in case of an attempt to do a normal action twice in the same turn
-     * @throws PaymentErrorException, in case of an error occurred while picking resources from warehouse
-     * @throws NotEnoughResourcesException, in case of lack of resources
-     * @throws ResourceMismatchException, if required resources are different from those indicated in the message.
+     * Performs an activate production action. In the first place, it checks if the player has enough
+     * resources to do the action, then it takes resources from player warehouse and it puts resulting resources
+     * in the strongbox.
+     * It doesn't expect any exception like: {@link DepotOutOfBoundsException}, {@link DepotNotFoundException} or {@link StrongboxOutOfBoundException}
+     * because the action requires several checks done before retrieving resources from warehouse.
+     * @param turn turn in which the action has to be performed.
+     * @param activateProductionMessage message containing instruction on how to do the action.
      */
 
     public void activateProduction(Turn turn, ActivateProductionMessage activateProductionMessage) throws InvalidActionException, PaymentErrorException, NotEnoughResourcesException, ResourceMismatchException {
@@ -66,7 +64,6 @@ public class ActivateProduction implements AbstractTurnPhase {
             throw new InvalidActionException();
         this.activateProductionMessage = activateProductionMessage;
         calculateResources(turn, activateProductionMessage.getProductions());
-        //check coerenza risorse da prendere e input indicati
         if(PaymentHandler.checkCostCoherence(activateProductionMessage.getHowToTakeResources(),inputResources)) {
             if (turn.getPlayer().getPersonalBoard().getWarehouse().checkResources(inputResources)) {
                 Warehouse playerWarehouse = turn.getPlayer().getPersonalBoard().getWarehouse();
@@ -86,11 +83,10 @@ public class ActivateProduction implements AbstractTurnPhase {
 
     }
 
+
     /**
-     * Builds input and output maps, based on
-     * @param requestedProductions productions chosen by player and
-     * @param turn in which action has to be performed
-     *
+     * Calculate the cost of all required productions.
+     * @param requestedProductions kind of productions required by player.
      */
     private void calculateResources(Turn turn, ActiveProductions requestedProductions) {
         PersonalBoard personalBoard = turn.getPlayer().getPersonalBoard();

@@ -6,7 +6,6 @@ import it.polimi.ingsw.Model.*;
 import it.polimi.ingsw.Network.RemoteView;
 import it.polimi.ingsw.Utils.Messages.ClientMessages.*;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.Errors.*;
-import it.polimi.ingsw.Utils.Messages.ServerMessages.Updates.NewTurnUpdate;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.Updates.ServerAsksForPositioning;
 
 
@@ -148,7 +147,7 @@ public class TurnController {
     /**
      * Dispatches a move action to the model.
      * If any exception is thrown, it establishes how the model will notify remote views.
-     * @param message message containing instruction on how to perform a move action
+     * @param message message containing instructions on how to perform a move action
      * @param sender remote view that forwards the message
      */
     public synchronized void handleMoveMessage(MoveResourcesMessage message, RemoteView sender) {
@@ -168,8 +167,8 @@ public class TurnController {
      * Dispatches a positioning action to the model. This can happen after that a {@link NeedPositioningException} is thrown while performing
      * a take resources from market, so the player has to settle his pending resources, that's why it checks if the model is in a take resources from market phase.
      * If any exception is thrown, it establishes how the model will notify remote views.
-     * @param message
-     * @param sender
+     * @param message message containing instructions on how to settle each resource.
+     * @param sender remote view that forwards the message.
      */
     public synchronized void handlePositioningMessage(PositioningMessage message, RemoteView sender) {
         if(isSenderTurn(sender.getPlayer())) {
@@ -199,7 +198,7 @@ public class TurnController {
     /**
      * Dispatches an end turn action to the model after being assured that a normal action has been done.
      * @param message message triggered by player when he wants to close the turn.
-     * @param sender
+     * @param sender remote view that forwards the message.
      */
     public synchronized void handleEndTurnMessage(EndTurnMessage message, RemoteView sender) {
         if(model.getTurn().isDoneNormalAction()){
