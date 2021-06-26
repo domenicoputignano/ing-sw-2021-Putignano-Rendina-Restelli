@@ -12,9 +12,7 @@ import it.polimi.ingsw.Utils.Messages.ServerMessages.Updates.ServerAsksForPositi
 
 /**
  * This class represents the link between player in turn and the game.
- * It allows him to perform all the actions.
- * All its methods basically call model methods and according to their response establish how the model
- * will notify all the players.
+ * This, together with {@link GameController}, represents the Controller of the MVC Architectural Pattern.
  */
 
 public class TurnController {
@@ -33,7 +31,13 @@ public class TurnController {
     }
 
 
-
+    /**
+     * Dispatches an action of buying development card type to the model. It only accepts messages from player involved in the turn and
+     * then makes an inspection of the message itself. After ensuring a sort of high level correctness,
+     * It establishes how the model will notify remote views about any error occurred.
+     * @param message message containing instruction on how to perform buy development card action.
+     * @param sender remote view that forwards the message.
+     */
     public synchronized void handleBuyDevCardMessage(BuyDevCardMessage message, RemoteView sender) {
         if (isSenderTurn(sender.getPlayer())) {
             if (message.isValidMessage()) {
@@ -56,6 +60,14 @@ public class TurnController {
         } else sender.sendError(new WrongTurnError(sender.getPlayer().getUser()));
     }
 
+    /**
+     * Dispatches an activate production action to the model. It only accepts messages from player involved in the turn and
+     * then makes an inspection of the message itself. After ensuring a sort of high level correctness,
+     * It catches exceptions if any error occurred and, in this case, it establishes how the model will
+     * notify remote views.
+     * @param message message containing instructions on how to perform an activate production action.
+     * @param sender  remote view that forwards the message.
+     */
     public synchronized void handleActivateProductionMessage(ActivateProductionMessage message, RemoteView sender) {
         if(isSenderTurn(sender.getPlayer())) {
             if (message.isValidMessage()) {
@@ -79,6 +91,16 @@ public class TurnController {
         } else sender.sendError(new WrongTurnError(sender.getPlayer().getUser()));
     }
 
+    /**
+     * Dispatches a take resources from market action to the model.
+     * If needed all the exceptional flows are caught and they are handled.
+     * It catches exceptions if any error occurred and, in this case, it establishes how the model will
+     * notify remote views.
+     * {@link NeedPositioningException} is handled in a different way because if it is thrown basically means that the model requires
+     * further action from the player.
+     * @param message message containing information on how to perform the action.
+     * @param sender remote view that forwards the message.
+     */
     public synchronized void handleTakeResourcesFromMarketMessage(TakeResourcesFromMarketMessage message, RemoteView sender) {
         if(isSenderTurn(sender.getPlayer())) {
             if (message.isValidMessage()) {
@@ -102,6 +124,12 @@ public class TurnController {
         } else sender.sendError(new WrongTurnError(sender.getPlayer().getUser()));
     }
 
+    /**
+     * Dispatches a leader action to the model after a message validity check.
+     * If any exception is thrown, it establishes how the model will notify remote views.
+     * @param message message containing instructions on how to perform the action.
+     * @param sender remote view that forwards the message.
+     */
     public synchronized void handleLeaderActionMessage(LeaderActionMessage message, RemoteView sender) {
         if(isSenderTurn(sender.getPlayer())) {
             if (message.isValidMessage()) {
@@ -117,6 +145,12 @@ public class TurnController {
         } else sender.sendError(new WrongTurnError(sender.getPlayer().getUser()));
     }
 
+    /**
+     * Dispatches a move action to the model.
+     * If any exception is thrown, it establishes how the model will notify remote views.
+     * @param message message containing instruction on how to perform a move action
+     * @param sender remote view that forwards the message
+     */
     public synchronized void handleMoveMessage(MoveResourcesMessage message, RemoteView sender) {
         if(isSenderTurn(sender.getPlayer())) {
             if (message.isValidMessage()) {
@@ -130,6 +164,13 @@ public class TurnController {
         } else sender.sendError(new WrongTurnError(sender.getPlayer().getUser()));
     }
 
+    /**
+     * Dispatches a positioning action to the model. This can happen after that a {@link NeedPositioningException} is thrown while performing
+     * a take resources from market, so the player has to settle his pending resources, that's why it checks if the model is in a take resources from market phase.
+     * If any exception is thrown, it establishes how the model will notify remote views.
+     * @param message
+     * @param sender
+     */
     public synchronized void handlePositioningMessage(PositioningMessage message, RemoteView sender) {
         if(isSenderTurn(sender.getPlayer())) {
             if (message.isValidMessage()) {
@@ -155,6 +196,11 @@ public class TurnController {
 
     }
 
+    /**
+     * Dispatches an end turn action to the model after being assured that a normal action has been done.
+     * @param message message triggered by player when he wants to close the turn.
+     * @param sender
+     */
     public synchronized void handleEndTurnMessage(EndTurnMessage message, RemoteView sender) {
         if(model.getTurn().isDoneNormalAction()){
             if(isSenderTurn(sender.getPlayer())) {
@@ -165,16 +211,28 @@ public class TurnController {
         } else sender.sendError(new ActionError(sender.getPlayer().getUser(), ActionError.Trigger.NORMALACTIONNOTDONEYET));
     }
 
+    /**
+     * This method alerts the model that an user is attempting to reconnect.
+     * @param reconnectingUser user that wants to join the same game.
+     */
     public synchronized void handlePlayerReconnection(User reconnectingUser) {
         model.handlePlayerReconnection(reconnectingUser);
         this.currPlayer = model.getCurrPlayer();
     }
 
+    /**
+     * This method alerts the model that an user has just disconnected.
+     * @param disconnectingUser user that lost the connection.
+     */
     public synchronized void handlePlayerDisconnection(User disconnectingUser) {
         model.handlePlayerDisconnection(model.getPlayer(disconnectingUser));
         this.currPlayer = model.getCurrPlayer();
     }
 
+
+    /**
+     * Boolean method the tells if the player how has just sent a message is the player in turn.
+     */
     private boolean isSenderTurn(Player sender) {
         return currPlayer.equals(sender);
     }
