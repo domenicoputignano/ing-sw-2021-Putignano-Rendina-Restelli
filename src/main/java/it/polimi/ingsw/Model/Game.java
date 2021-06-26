@@ -95,19 +95,25 @@ public abstract class Game extends Observable<ServerMessage> implements Observer
 
     protected abstract void notifyGameSetup();
 
+    /**
+     * Initializes all the decks of {@link DevelopmentCard} parsing them by a JSON resource file.
+     * Then shuffles them.
+     */
     private void initializeDecksDevCards() {
         String path = "/json/devCards.json";
         decks = new ArrayList<>();
         Gson gson = new Gson();
 
         JsonReader reader = new JsonReader(new InputStreamReader(Game.class.getResourceAsStream(path), StandardCharsets.UTF_8));
-        //JsonReader reader = new JsonReader(new InputStreamReader(Objects.requireNonNull(decks.getClass().getResourceAsStream(path)), StandardCharsets.UTF_8));
         Type listType = new TypeToken<List<Deck>>() {
         }.getType();
         decks = gson.fromJson(reader, listType);
         shuffleDecksDevCards();
     }
 
+    /**
+     * Initializes Leader Cards and then deals four of them to each player.
+     */
     private void dealLeaderCards() {
         List<LeaderCard> cards = initializeDeckLeaderCards();
         for (Player p : playerList) {
@@ -119,15 +125,24 @@ public abstract class Game extends Observable<ServerMessage> implements Observer
         }
     }
 
+    /**
+     * Proceeds to the next turn.
+     */
     public abstract void nextTurn();
 
-
+    /**
+     * Utility method used to shuffle every {@link Deck} before the start of every match.
+     */
     private void shuffleDecksDevCards() {
         for (Deck d : decks) {
             Collections.shuffle(d.getCards());
         }
     }
 
+    /**
+     * Initializes all Leader Cards parsing them from a JSON resource file.
+     * @return the list of Leader Cards initialized.
+     */
     private List<LeaderCard> initializeDeckLeaderCards() {
         String path = "/json/leaderCards.json";
         List<LeaderCard> cards = new ArrayList<>();
@@ -140,11 +155,13 @@ public abstract class Game extends Observable<ServerMessage> implements Observer
         return cards;
     }
 
-
     public abstract void activateVaticanReport(Player triggeringPlayer,int vatican_index);
 
-
-
+    /**
+     * Utility method used to check whether the deck of the specified {@link CardType} is empty.
+     * @param cardType the card type whose deck has to be checked.
+     * @return the check validity.
+     */
     public boolean isEmptyDeck(CardType cardType) {
         return this.decks.stream().anyMatch(x -> x.getCardType().equals(cardType) && x.getSize()<=0);
     }
@@ -157,6 +174,11 @@ public abstract class Game extends Observable<ServerMessage> implements Observer
 
     public void endGame(BlackCrossHitLastSpace event){}
 
+    /**
+     * Observer's update method implementation. The game is notified of a GameEvent and handles it by calling
+     * the handleEvent method to the event itself, which has a different implementation depending on the Game Event.
+     * @param event the game is notified of.
+     */
     @Override
     public void update(GameEvent event) {
         event.handleEvent(this);
