@@ -23,19 +23,58 @@ import java.nio.charset.StandardCharsets;
 import java.util.*;
 import java.util.stream.Collectors;
 
-
+/**
+ * This is the main class of the Model of the MVC Architectural Pattern.
+ * It represents a game, containing all the players playing in it and all the other parts of Maestri del Rinascimento board game.
+ * It receives orders from the Controllers and modifies itself, then he is responsible for the update of every remote view
+ * of each player in the match, which is realised through the Observable interface.
+ * It also is notified by parts of the model when specific events occur, for example when a Conclusion Event occurs.
+ * Finally this class is responsible for the setup of the game structures.
+ */
 
 public abstract class Game extends Observable<ServerMessage> implements Observer<GameEvent> {
+    /**
+     * The player who owns the inkwell will be the first to begin in the first turn.
+     */
     protected Player inkwell;
+    /**
+     * The player in turn.
+     */
     protected Player currPlayer;
+    /**
+     * The list of all the players that are playing in this match.
+     */
     protected List<Player> playerList;
+    /**
+     * The link between {@link User} and his identity as a {@link Player} in the game.
+     */
     protected Map<User,Player> users;
+    /**
+     * The twelve decks of {@link DevelopmentCard} of Maestri del Rinascimento board game.
+     */
     protected List<Deck> decks;
+    /**
+     * The state of the game.
+     */
     protected GameState gameState;
+    /**
+     * The turn logic of the game.
+     */
     protected Turn turn;
+    /**
+     * The Market Tray of Maestri del Rinascimento board game.
+     */
     protected MarketTray marketTray;
+    /**
+     * Random used to generate random sequences of objects.
+     */
     private Random rand = new Random();
 
+    /**
+     * Setups the game by initializing each part of the model.
+     * Also initializes the observer pattern structure, adding this class to the list of observers of every
+     * part of the model which has to notify specific {@link GameEvent}.
+     */
     public void setup(){
         this.marketTray = new MarketTray();
         this.users = new HashMap<User, Player>();
@@ -53,8 +92,6 @@ public abstract class Game extends Observable<ServerMessage> implements Observer
         }
         this.turn = new Turn(this,inkwell);
     }
-
-
 
     protected abstract void notifyGameSetup();
 
