@@ -16,7 +16,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-
+/**
+ * Take Resources From Market action is organized as follows: the current
+ * player selects the marbles he wants to take from the market, then he attempts to perform a first positioning
+ * phase. If he makes a mistake while positioning the resources the first time, they are placed in the pending
+ * resources. Afterwards he has a second opportunity to specify how to place the resources he failed to place.
+ * If he fails again, the remaining resources are automatically discarded and the other players move by the
+ * correspondent number of positions on their faith track.
+ */
 
 public class TakeResourcesFromMarket implements AbstractTurnPhase {
 
@@ -146,8 +153,13 @@ public class TakeResourcesFromMarket implements AbstractTurnPhase {
         }
     }
 
-
-    //metodo per gestire la seconda possibilità data al giocatore di posizionare le risorse nei depot
+    /**
+     * Method used to handle the positioning of the pending resources when the current player wrongly performed
+     * a first attempt to position them. If he makes any mistake, the remaining resources are automatically discarded
+     * and the other players move by the correspondent number of positions on their faith track.
+     * @param turn in which the action is performed.
+     * @param pairList the list containing, for each resource, the warehouse section where to position it.
+     */
     public void handlePositioning(Turn turn, List<Pair<ResourceType,MarbleDestination>> pairList) {
         List<ResourceType> discardedResourcesList = new ArrayList<>();
         Warehouse playerWarehouse = turn.getPlayer().getPersonalBoard().getWarehouse();
@@ -188,7 +200,8 @@ public class TakeResourcesFromMarket implements AbstractTurnPhase {
     }
 
     /**
-     * Concludes the action moving the other players on their faith track by
+     * Concludes the action moving the other players on their faith track by the number of resources discarded by
+     * the current player during this action.
      * @param turn in which the action is performed.
      */
     public void concludeTurnPhase(Turn turn) {
