@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="lorenzoPopup" prefHeight="380.0" prefWidth="570.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.Client.view.GUI.LorenzoPlayedPopupController">
+<AnchorPane fx:id="lorenzoPopup" prefHeight="380.0" prefWidth="570.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.Client.view.GUI.LorenzoPlayedPopupController">
     <children>
         <Text fx:id="title" layoutX="88.0" layoutY="82.0" text="Lorenzo played this token!" textAlignment="CENTER" wrappingWidth="333.0"/>
         <Button fx:id="okButton" layoutX="200.0" layoutY="310.0" mnemonicParsing="false" onAction="#handleOkButton" prefHeight="40.0" prefWidth="110.0" styleClass="okButton" stylesheets="@../css/button.css" text="OK"/>

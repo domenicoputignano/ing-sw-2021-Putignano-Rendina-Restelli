@@ -83,8 +83,6 @@ public class Gui extends UI{
             } else {
                 if(client.getUserPosition() > 1) {
                     Platform.runLater(() -> GUIApp.showScene("/gui/fxml/ResourceChoicePage.fxml"));
-                } else {
-                    // TODO MANDARE IN UNA SCHERMATA DI ATTESA
                 }
             }
         }
