@@ -17,35 +17,39 @@ import javafx.stage.StageStyle;
 import java.io.IOException;
 import java.util.Objects;
 
+/**
+ * Class that represents the controller of the ChooseAction page of the game
+ * On this page the user can choose which action to perform
+ * if he has not yet performed an action during his turn
+ */
 public class ChooseActionController extends Controller{
 
+    /**
+     * Attribute that represents the central pane of the page
+     */
     @FXML
     public AnchorPane anchorChoose;
-
+    /**
+     * Attribute that represents the title of the page
+     */
     @FXML
     public Text ChooseActionText;
-
+    /**
+     * Attribute that represents the button to close the popup of the page
+     */
     @FXML
     public Button closeChoose;
-
+    /**
+     * Attributes that represent the buttons to select the action that the user want to perform
+     */
     @FXML
-    public Button activateProd;
+    public Button activateProd,takeResources,buyDevCard,leaderAction;
 
-    @FXML
-    public Button takeResources;
-
-    @FXML
-    public Button buyDevCard;
-
-    @FXML
-    public Button leaderAction;
-
-    private static final String CURSOR = "/gui/img/cursor.png";
-
-    Stage leaderStage;
-    Stage activateProdStage;
-    Stage buyDevCardStage;
-    Stage takeResourcesStage;
+    /**
+     * Main method that initializes the scene within the stage
+     * It takes care of setting the background of the scene
+     * and the font of the texts and buttons
+     */
     @FXML
     @Override
     public void initialize() {
@@ -79,6 +83,10 @@ public class ChooseActionController extends Controller{
             leaderAction.setVisible(false);
 
     }
+    /**
+     * method used to close the popup page over the main stage
+     * It is performed when closeChoose button is pressed
+     */
 
     @FXML
     public void handleCloseChooseAction()
@@ -86,6 +94,10 @@ public class ChooseActionController extends Controller{
         Stage stage = (Stage) closeChoose.getScene().getWindow();
         stage.close();
     }
+    /**
+     * method used to choose the leader action to perform
+     * It is performed when leaderAction button is pressed
+     */
     @FXML
     public void handleLeaderAction()
     {
@@ -93,18 +105,30 @@ public class ChooseActionController extends Controller{
         stage.close();
         showPopup("/gui/fxml/LeaderActionPage.fxml", 1180, 750);
     }
+    /**
+     * method used to choose the Activate Production action to perform
+     * It is performed when activateProd button is pressed
+     */
     public void handleActivateProduction()
     {
         Stage stageChoose = (Stage) closeChoose.getScene().getWindow();
         stageChoose.close();
         showPopup("/gui/fxml/ActivateProductionPage.fxml", 1180, 750);
     }
+    /**
+     * method used to choose the Buy Development Card action to perform
+     * It is performed when buyDevCard button is pressed
+     */
     public void handleBuyDevCard()
     {
         Stage stage = (Stage) closeChoose.getScene().getWindow();
         stage.close();
         showPopup("/gui/fxml/BuyDevCardPage.fxml", 1180, 750);
     }
+    /**
+     * method used to choose the Take Resources from market action to perform
+     * It is performed when takeResources button is pressed
+     */
     public void handleTakeResources()
     {
         Stage stage = (Stage) closeChoose.getScene().getWindow();

@@ -13,29 +13,57 @@ import javafx.stage.Stage;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Class that represents the controller of the LeaderAction page of the game
+ * on this page the user can perform a leader action by activating (if required)
+ * or discarding a leader card
+ */
 public class LeaderActionController extends Controller{
+    /**
+     * Attribute that represents the central pane of the page
+     */
     @FXML
     public AnchorPane anchorLeader;
     @FXML
+    /**
+     * Attribute that represents the textField where the title of the page is shown
+     */
     public Text leaderActionText;
     @FXML
+    /**
+     * Attribute that represents the button to close the page
+     */
     public Button closeLeaderAction;
     @FXML
-    public Button active1;
+    /**
+     * Attributes that represents the buttons to activate leader card 1 and leader card 2
+     */
+    public Button active1,active2;
     @FXML
-    public Button active2;
+    /**
+     * Attributes that represents the buttons to discard leader card 1 and leader card 2
+     */
+    public Button discard1,discard2;
     @FXML
-    public Button discard1;
-    @FXML
-    public Button discard2;
-    @FXML
+    /**
+     * Attribute that represents the button that confirms the chosen leader action
+     */
     public Button okButton;
+    /**
+     * Attributes that represent the imageView of the two leader Cards owned
+     */
     @FXML
     public ImageView leaderCard1, leaderCard2;
 
 
     LeaderActionGUI leaderAction;
 
+    /**
+     * Main method that initializes the scene within the stage
+     * It takes care of setting the background of the scene
+     * ,the font of the texts and buttons,
+     * and the images on the scene
+     */
     @FXML
     @Override
     public void initialize() {
@@ -90,6 +118,11 @@ public class LeaderActionController extends Controller{
         leaderAction = new LeaderActionGUI(client);
     }
 
+
+    /**
+     * method used to close page of leader action over the main stage
+     * It is performed when closeLeaderAction button is pressed
+     */
     @FXML
     public void handleCloseChooseAction()
     {
@@ -97,6 +130,10 @@ public class LeaderActionController extends Controller{
         stage.close();
     }
 
+    /**
+     * method used to set discarded the first leader card
+     * It is performed when discard1 button is pressed
+     */
     @FXML
     public void handleDiscardFirstLeader() {
         clearSelection();
@@ -105,13 +142,20 @@ public class LeaderActionController extends Controller{
         editLeaderAction(leaderIndex, true);
     }
 
+    /**
+     * method used to set discarded the second leader card
+     * It is performed when discard2 button is pressed
+     */
     @FXML
     public void handleDiscardSecondLeader() {
         clearSelection();
         discard2.setStyle("-fx-background-size: 77% auto;");
         editLeaderAction(2, true);
     }
-
+    /**
+     * method used to set active the first leader card
+     * It is performed when active1 button is pressed
+     */
     @FXML
     public void handleFirstLeaderActivation() {
         clearSelection();
@@ -121,6 +165,10 @@ public class LeaderActionController extends Controller{
         editLeaderAction(leaderIndex, false);
     }
 
+    /**
+     * method used to manage correctly the index of leader card
+     * @return
+     */
     private int correctLeaderIndex(){
         if(client.getGame().getPlayer(client.getUser()).getAvailableLeaderCards().size() > 1 &&
                 client.getGame().getPlayer(client.getUser()).getAvailableLeaderCards().get(0).isActive() &&
@@ -129,6 +177,10 @@ public class LeaderActionController extends Controller{
         else return  1;
     }
 
+    /**
+     * method used to set active the second leader card
+     * It is performed when active2 button is pressed
+     */
     @FXML
     public void handleSecondLeaderActivation() {
         clearSelection();
@@ -136,6 +188,9 @@ public class LeaderActionController extends Controller{
         editLeaderAction(2, false);
     }
 
+    /**
+     * method used to send the leader's action message after taking the action
+     */
     @FXML
     public void sendLeaderActionMessage() {
         leaderAction.manageUserInteraction();
@@ -143,6 +198,9 @@ public class LeaderActionController extends Controller{
         stage.close();
     }
 
+    /**
+     * method used to manage the CSS style of the buttons
+     */
     @FXML
     void clearSelection() {
         active1.setStyle("-fx-background-size: 90% auto;");
@@ -151,7 +209,11 @@ public class LeaderActionController extends Controller{
         discard2.setStyle("-fx-background-size: 90% auto;");
     }
 
-
+    /**
+     * //TODO
+     * @param leaderIndex
+     * @param toDiscard
+     */
     private void editLeaderAction(int leaderIndex, boolean toDiscard) {
         if(client.getGame().getCurrPlayer().getNumOfNotActiveLeaderCards()==1) {
             leaderAction.setLeaderAction(toDiscard);

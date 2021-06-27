@@ -12,11 +12,24 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.util.Duration;
 
+/**
+ * Class that represents the controller of the Home page of the game
+ * this page is the game start page showing the game icon
+ * and a loading waiting for the game to start
+ */
 public class HomeController extends Controller{
-
+    /**
+     * attribute that represents the imageView of the
+     * loading waiting for the start of the game
+     */
     @FXML
     public ImageView loading;
 
+    /**
+     * Main method that initializes the scene within the stage
+     * It takes care of setting the background of the scene
+     * and the animated image of the loading
+     */
     @FXML
     public void initialize(){
         super.initialize();

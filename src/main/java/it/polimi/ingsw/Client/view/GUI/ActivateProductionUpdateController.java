@@ -10,35 +10,45 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.util.Map;
-
+/**
+ * Class that represents the controller of the ActivateVaticanReportPopup page of the game
+ * In this page, which is shown as a popup, the user can see the update popup following
+ * a successful Activate Production action
+ */
 public class ActivateProductionUpdateController extends Controller{
+    /**
+     * Attribute that represents the central pane of the page
+     */
     @FXML
     public AnchorPane popupPane;
-
+    /**
+     * attribute that represents the HBox containing the imageView
+     * relating to the resources obtained
+     */
     @FXML
     public HBox obtainedResources;
-
+    /**
+     * Attribute that represents the text where the message of popup is shown
+     */
     @FXML
     public Text textUpdate;
-
+    /**
+     * attributes representing the text relating
+     * to the number of resources obtained for each resource
+     */
     @FXML
-    public Text numCoinObtained;
-
-    @FXML
-    public Text numShieldObtained;
-
-    @FXML
-    public Text numServantObtained;
-
-    @FXML
-    public Text numStoneObtained;
-
-    @FXML
-    public Text numFaithObtained;
-
+    public Text numCoinObtained,numShieldObtained,numServantObtained,numStoneObtained,numFaithObtained;
+    /**
+     * Attribute that represents the button to confirm the view of the popup and close it
+     */
     @FXML
     public Button okButton;
 
+    /**
+     * Main method that initializes the scene within the stage
+     * It takes care of setting the background of the scene
+     * and the font of the texts and buttons
+     */
     @FXML
     @Override
     public void initialize() {
@@ -59,6 +69,13 @@ public class ActivateProductionUpdateController extends Controller{
         setFont(numFaithObtained, 25);
     }
 
+    /**
+     *method used to set the update message and to set the number
+     * of resources obtained for each resource
+     * @param message update message containing the information obtained
+     *      *                after successfully performing the action
+     * @see ActivateProductionUpdate
+     */
     public void setObtainedResources(ActivateProductionUpdate message){
         textUpdate.setText("You correctly activated productions and obtained\n the following resources:");
         Map<ResourceType, Integer> obtainedResources = message.getReceivedResources();
@@ -69,7 +86,10 @@ public class ActivateProductionUpdateController extends Controller{
         numStoneObtained.setText(obtainedResources.get(ResourceType.stone).toString());
         numFaithObtained.setText("" + message.getFaithPoints());
     }
-
+    /**
+     * method used to confirm the view of the popup and close it
+     * It is performed when okButton button is pressed
+     */
     @FXML
     public void handleOkButton(){
         Stage stage = (Stage) okButton.getScene().getWindow();

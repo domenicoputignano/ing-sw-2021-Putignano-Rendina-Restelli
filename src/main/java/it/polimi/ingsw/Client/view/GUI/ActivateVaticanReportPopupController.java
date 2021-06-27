@@ -16,19 +16,37 @@ import javafx.stage.Stage;
 
 import java.util.List;
 
+/**
+ * Class that represents the controller of the ActivateVaticanReportPopup page of the game
+ * In this page, which is shown as a popup, the user can see the update popup following
+ * a successful Activate Vatican Report action
+ */
 public class ActivateVaticanReportPopupController extends Controller{
+    /**
+     * Attribute that represents the central pane of the page
+     */
     @FXML
     public AnchorPane activateVaticanPopup;
-
+    /**
+     * Attributes that represent the text where the message of popup is shown
+     */
     @FXML
     public Text activateVaticanPopupText1,activateVaticanPopupText2;
-
+    /**
+     * Attribute that represents the imageView of the favor tile turned or discarded after user performed action
+     */
     @FXML
     public ImageView favorTile;
-
+    /**
+     * Attribute that represents the button to confirm the view of the popup and close it
+     */
     @FXML
     public Button okButton;
-
+    /**
+     * Main method that initializes the scene within the stage
+     * It takes care of setting the background of the scene
+     * and the font of the texts and buttons
+     */
     @FXML
     @Override
     public void initialize() {
@@ -46,6 +64,14 @@ public class ActivateVaticanReportPopupController extends Controller{
         this.client = GUIApp.client;
     }
 
+    /**
+     * Method used to set the text messages and the image of the favor tile
+     * turned over or discarded in the case of activation of the
+     * Report in the Vatican performed by a player
+     * @param message update message containing the information obtained
+     *                after successfully performing the action
+     * @see ActivateVaticanReportUpdate
+     */
     public void setPopup(ActivateVaticanReportUpdate message)
     {
         String state,triggeringUser;
@@ -75,6 +101,14 @@ public class ActivateVaticanReportPopupController extends Controller{
 
     }
 
+    /**
+     * Method used to set the text messages and the image of the favor tile
+     * turned over or discarded in the case of activation of the
+     * Report in the Vatican performed by Lorenzo il Magnifico
+     * @param message update message containing the information obtained
+     *                after Lorenzo il Magnifico successfully performing the action
+     * @see LorenzoActivatedVaticanReportUpdate
+     */
     public void setLorenzoActivationEffect(LorenzoActivatedVaticanReportUpdate message){
         String state;
         int section = message.getVatican_index();
@@ -98,7 +132,10 @@ public class ActivateVaticanReportPopupController extends Controller{
         activateVaticanPopupText1.setText("Lorenzo activated the Vatican report on section "+section+"!");
         activateVaticanPopupText2.setText("Your favorTile has been "+ state +" !");
     }
-
+    /**
+     * method used to confirm the view of the popup and close it
+     * It is performed when okButton button is pressed
+     */
     @FXML
     void handleOkButton()
     {

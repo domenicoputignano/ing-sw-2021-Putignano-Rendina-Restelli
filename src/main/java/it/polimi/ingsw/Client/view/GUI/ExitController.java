@@ -7,19 +7,34 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
+/**
+ * Class that represents the controller of the Exit page of the game
+ * In this page, which is shown as a popup, the user can log out of the game
+ * via the popup that is shown after pressing the exit button
+ */
 public class ExitController extends Controller {
+    /**
+     * Attributes that represent the buttons to log out or not log out the game
+     */
     @FXML
-    public Button exitYes;
+    public Button exitYes,exitNo;
 
-    @FXML
-    public Button exitNo;
-
+    /**
+     * Attribute that represents the central pane of the page
+     */
     @FXML
     public AnchorPane anchorExit;
-
+    /**
+     * Attributes that represent the textFields where the message of popup is shown
+     */
     @FXML
     public TextField exitText;
 
+    /**
+     * Main method that initializes the scene within the stage
+     * It takes care of setting the background of the scene
+     * and the font of the texts and buttons
+     */
     @FXML
     @Override
     public void initialize() {
@@ -38,13 +53,20 @@ public class ExitController extends Controller {
         setFont(exitYes,24);
     }
 
+    /**
+     * method used to confirm the user does not want to log out of the gamee
+     * It is performed when exitNo button is pressed
+     */
     @FXML
     void handleExitNoButton()
     {
         Stage stage = (Stage) exitNo.getScene().getWindow();
         stage.close();
     }
-
+    /**
+     * method used to confirm disconnection from the game
+     * It is performed when exitYes button is pressed
+     */
     @FXML
     void handleExitYesButton()
     {
