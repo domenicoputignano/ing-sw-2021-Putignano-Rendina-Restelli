@@ -210,15 +210,12 @@ public class LeaderActionController extends Controller{
     }
 
     /**
-     * //TODO
-     * @param leaderIndex
-     * @param toDiscard
+     * method used to adjust the index of the leader card to send in the leader action message
+     * @param leaderIndex the index of the card chosen by the player
+     * @param toDiscard if the card is to discard
      */
     private void editLeaderAction(int leaderIndex, boolean toDiscard) {
-        if(client.getGame().getCurrPlayer().getNumOfNotActiveLeaderCards()==1) {
-            leaderAction.setLeaderAction(toDiscard);
-            leaderAction.setLeaderIndex(leaderIndex);
-        } else if(client.getGame().getCurrPlayer().getNumOfNotActiveLeaderCards() == 2) {
+        if(client.getGame().getCurrPlayer().getNumOfNotActiveLeaderCards()>0) {
             leaderAction.setLeaderAction(toDiscard);
             leaderAction.setLeaderIndex(leaderIndex);
         }
