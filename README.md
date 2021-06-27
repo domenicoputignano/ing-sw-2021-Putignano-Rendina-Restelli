@@ -7,12 +7,12 @@
 
 **Group**: GC15
 
-####Team Members:
+#### Team Members:
 * [Domenico Putignano](https://github.com/domenicoputignano) 
 * [Piero Rendina](https://github.com/PieroRendina) 
 * [Andrea Restelli](https://github.com/andrearestelli)
 
-##Implemented features
+## Implemented features
 | Feature | Status |
 | ------- | ------ |
 | Complete rules | :heavy_check_mark: |
@@ -46,8 +46,58 @@ To run the server, type:
 java -jar MaestriDelRinascimento.jar server
 ```
 
+![Server ready](deliverables/screenshots/server_ready.PNG)
+
+#### Options
+If you want to edit some options, you can write them at the end of the previous command.
+The options available for the server are listed below.
+
+| Option | Description | Default value | 
+| ------ | ----- | ----- |
+| `-port:` | The port the server is listening on. | 1234 |
+### Client
+The game can be played with a GUI or through a CLI, you can choose what best fits your taste! <br>
+Furthermore you can play in solo mode on your local machine without connecting to the server.
+### GUI :video_game:
+To run the GUI, type:
+```bash
+java -jar MaestriDelRinascimento.jar gui
+```
+
+![gui_screen_1](deliverables/screenshots/gui_screen_1.PNG)
+
+### CLI :space_invader:
+First of all, if you are on Windows, run this command to allow the game to use ANSI codes to show its beautiful (and colorful) CLI interface:
+```
+REG ADD HKCU\CONSOLE /f /v VirtualTerminalLevel /t REG_DWORD /d 1
+```
+
+Then to run the CLI, type:
+```bash
+java -jar MaestriDelRinascimento.jar cli
+```
+![cli_screen_1](deliverables/screenshots/cli_screen_1.PNG) ![cli_screen_2](deliverables/screenshots/cli_screen_2.PNG)
 
 
+#### Options
+If you want to edit some options, you can write them at the end of the previous commands.
+The options available for the client are listed below.
+
+| Option | Description | Default value | 
+| ------ | ----- | ----- |
+| `-ip:` | The ip of the server the client has to connect to | 127.0.0.1 |
+| `-port:` | The port the server is listening on. | 1234 |
+
+### Local game :computer:
+To start a solo mode game without connecting to the server, type:
+```bash
+java -jar MaestriDelRinascimento.jar local
+```
+By default, the client is started with GUI.
+To play with CLI, type:
+```bash
+java -jar MaestriDelRinascimento.jar local cli
+```
 ## Test coverage details
 ![test_coverage](deliverables/screenshots/testcoverage-27-06.PNG)
 #### To run the tests, you can run this command:
