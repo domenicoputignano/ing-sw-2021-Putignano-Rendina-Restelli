@@ -26,12 +26,16 @@ public class Server {
     private final ExecutorService pingSenders = Executors.newCachedThreadPool();
 
     /**
-     * Username of players involved in one match (connected or not)
+     * Username of players involved in a match (connected or not)
      */
     private final Map<String, ClientStatus> accounts = new HashMap<>();
 
     private boolean active = false;
 
+    /**
+     * Method used to send pong messages back to clients.
+     * @param pingSend function that sends pong message.
+     */
     public void reply(Runnable pingSend) {
         pingSenders.submit(pingSend);
     }
@@ -48,7 +52,7 @@ public class Server {
 
     /**
      * Method that runs infinitely until the server is shutdown.
-     * It accepts inbound connections, sets a timeout for them and creates a new thread that will handle it.
+     * It accepts inbound connection, sets a timeout for it and creates a new thread that will handle it.
      */
     public void start() {
         LOGGER.log(Level.INFO, "Server is ready to accept connections...");
@@ -61,7 +65,6 @@ public class Server {
                 LOGGER.log(Level.INFO, "Connection established");
             } catch (IOException e) {
                 LOGGER.log(Level.INFO, "Unable to connect to client");
-                active = false;
             }
         }
     }
@@ -75,6 +78,14 @@ public class Server {
     }
 
 
+    /**
+     * The method handles decisions about wait or start a match, based on the number of players that are waiting.
+     * This works as follows: basically the first guest selects number of players for a multiplayer mode and then
+     * waits until number is reached, looking for clients that wants to play same kind of game.
+     * When required number is reached, the match starts and Client Status are removed from those who are waiting.
+     * Server supports multiple matches, so this process is repeated each time a client connects.
+     * @param clientStatus represents remote host that has just connected and selected a multiplayer mode.
+     */
     public synchronized void lobby(ClientStatus clientStatus) {
         Set<ClientStatus> suitableConnections = getSuitableConnections(clientStatus.getNumOfPlayers());
         if(suitableConnections.size() == clientStatus.getNumOfPlayers()) {
@@ -85,7 +96,8 @@ public class Server {
     }
 
     /**
-     * Boolean method to detect if a player with the same nickname is already playing.
+     * Boolean method to detect if a player is already playing.
+     * @param nickname nickname chosen by remote host.
      */
     public synchronized boolean isPlayerWithSameNicknamePlaying(String nickname) {
         if(accounts.containsKey(nickname)&&accounts.get(nickname).isActive()) {
@@ -95,15 +107,26 @@ public class Server {
     }
 
 
+    /**
+     * Boolean method to detect if a player has disconnected.
+     * @param nickname nickname chosen by remote host.
+     */
     public boolean inactivePlayerAlreadyRegistered(String nickname) {
         return accounts.containsKey(nickname) && !accounts.get(nickname).isActive();
     }
 
-
+    /**
+     * Returns the number of players that are needed to start a game.
+     * @param numOfPlayersChosen number of players that will play a game.
+     */
     public int getNumOfMissingPlayers(int numOfPlayersChosen) {
         return numOfPlayersChosen - getSuitableConnections(numOfPlayersChosen).size();
     }
 
+    /**
+     * Returns a list of nickname that are waiting for a game to start.
+     * @param numOfPlayersChosen number of players required to start a game.
+     */
     private List<String> getAwaitingGuests(int numOfPlayersChosen) {
         return getSuitableConnections(numOfPlayersChosen).stream().map(ClientStatus::getNickname).collect(Collectors.toList());
     }
@@ -119,7 +142,7 @@ public class Server {
     }
 
     /**
-     * Returns a set of remote hosts that have chosen the same number of players for a game.
+     * Returns a set of {@link ClientStatus} that have chosen the same number of players for a game.
      */
     private Set<ClientStatus> getSuitableConnections(int numOfPlayers) {
         return waitingConnections.stream().filter(x -> x.getNumOfPlayers()==numOfPlayers).collect(Collectors.toSet());
@@ -130,7 +153,7 @@ public class Server {
     }
 
     /**
-     * Initializes a multiplayer mode game.
+     * Initializes a multiplayer mode game and its controller.
      * @param clients remote hosts involved in new game.
      */
     public synchronized void initializeGame(Set<ClientStatus> clients) {
@@ -202,6 +225,10 @@ public class Server {
     }
 
 
+    /**
+     * It deletes a game after all players have disconnected.
+     * @param usersInAPausedMessage users involved a paused match.
+     */
     public synchronized void deleteMatch(List<User> usersInAPausedMessage) {
         usersInAPausedMessage.forEach((x) -> {
             accounts.get(x.getNickname()).closeConnection();

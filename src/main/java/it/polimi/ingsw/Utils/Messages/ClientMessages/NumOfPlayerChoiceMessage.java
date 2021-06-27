@@ -4,7 +4,6 @@ package it.polimi.ingsw.Utils.Messages.ClientMessages;
 import it.polimi.ingsw.Network.ClientStatus;
 
 
-import java.io.IOException;
 
 public class NumOfPlayerChoiceMessage implements ConfigurationMessage {
 
@@ -21,7 +20,7 @@ public class NumOfPlayerChoiceMessage implements ConfigurationMessage {
     }
 
     @Override
-    public void handleConfigurationMessage(ClientStatus clientStatus) throws IOException {
+    public void handleConfigurationMessage(ClientStatus clientStatus) {
         clientStatus.numOfPlayersChoice(this);
     }
 }
