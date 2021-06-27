@@ -15,8 +15,6 @@ import it.polimi.ingsw.Utils.Messages.ServerMessages.ServerMessage;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.Updates.NewTurnUpdate;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.Updates.UpdateMessage;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.InputStreamReader;
 import java.lang.reflect.Type;
 import java.nio.charset.StandardCharsets;
@@ -68,7 +66,7 @@ public abstract class Game extends Observable<ServerMessage> implements Observer
     /**
      * Random used to generate random sequences of objects.
      */
-    private Random rand = new Random();
+    private final Random rand = new Random();
 
     /**
      * Setups the game by initializing each part of the model.
@@ -77,7 +75,7 @@ public abstract class Game extends Observable<ServerMessage> implements Observer
      */
     public void setup(){
         this.marketTray = new MarketTray();
-        this.users = new HashMap<User, Player>();
+        this.users = new HashMap<>();
         this.initializeDecksDevCards();
         this.dealLeaderCards();
         for(Player p : this.playerList) {
@@ -104,7 +102,7 @@ public abstract class Game extends Observable<ServerMessage> implements Observer
         decks = new ArrayList<>();
         Gson gson = new Gson();
 
-        JsonReader reader = new JsonReader(new InputStreamReader(Game.class.getResourceAsStream(path), StandardCharsets.UTF_8));
+        JsonReader reader = new JsonReader(new InputStreamReader(Objects.requireNonNull(Game.class.getResourceAsStream(path)), StandardCharsets.UTF_8));
         Type listType = new TypeToken<List<Deck>>() {
         }.getType();
         decks = gson.fromJson(reader, listType);
@@ -148,7 +146,7 @@ public abstract class Game extends Observable<ServerMessage> implements Observer
         List<LeaderCard> cards = new ArrayList<>();
 
         Gson gson = new Gson();
-        JsonReader reader = new JsonReader(new InputStreamReader(Game.class.getResourceAsStream(path), StandardCharsets.UTF_8));
+        JsonReader reader = new JsonReader(new InputStreamReader(Objects.requireNonNull(Game.class.getResourceAsStream(path)), StandardCharsets.UTF_8));
 
         Type listType = new TypeToken<List<LeaderCard>>() {}.getType();
         cards = gson.fromJson(reader, listType);
@@ -166,12 +164,36 @@ public abstract class Game extends Observable<ServerMessage> implements Observer
         return this.decks.stream().anyMatch(x -> x.getCardType().equals(cardType) && x.getSize()<=0);
     }
 
+    /**
+     * Method called when the HitLastSpace {@link ConclusionEvent} has been triggered.
+     * {@link MultiPlayerMode} and {@link it.polimi.ingsw.Model.SoloMode.SoloMode} override this method with different
+     * effects according to game rules.
+     * @param event the event triggered.
+     */
     public abstract void endGame(HitLastSpace event);
 
+    /**
+     * Method called when the DevCardColorEnded {@link ConclusionEvent} has been triggered.
+     * Only {@link it.polimi.ingsw.Model.SoloMode.SoloMode} overrides this method since in {@link MultiPlayerMode}
+     * this event doesn't end the game.
+     * @param event the event triggered.
+     */
     public void endGame(DevCardColorEnded event){}
 
+    /**
+     * Method called when the SeventhCardBough {@link ConclusionEvent} has been triggered.
+     * {@link MultiPlayerMode} and {@link it.polimi.ingsw.Model.SoloMode.SoloMode} override this method with different
+     * effects according to game rules.
+     * @param event the event triggered.
+     */
     public abstract void endGame(SeventhDevCardBought event);
 
+    /**
+     * Method called when the BlackCrossHitLastSpace {@link ConclusionEvent} has been triggered.
+     * Only {@link it.polimi.ingsw.Model.SoloMode.SoloMode} overrides this method since in {@link MultiPlayerMode}
+     * this event can't occur.
+     * @param event the event triggered.
+     */
     public void endGame(BlackCrossHitLastSpace event){}
 
     /**
@@ -192,18 +214,24 @@ public abstract class Game extends Observable<ServerMessage> implements Observer
         return playerList;
     }
 
+    /**
+     * Moves all the players in game except for the given triggering player by the given number of spaces.
+     * @param triggeringPlayer the player who discarded the resources and doesn't have to be moved.
+     * @param discardedResources the number of spaces to move the players by.
+     */
     public abstract void moveOtherPlayers(Player triggeringPlayer, int discardedResources);
 
     public abstract void handlePlayerDisconnection(Player disconnectedPlayer);
 
     public abstract void handlePlayerReconnection(User reconnectingUser);
 
+    /**
+     * Notifies each remote view of the player in game when an update must be sent to client.
+     * @param message the update to send.
+     */
     public void notifyUpdate(UpdateMessage message) {
         notify(message);
     }
-
-
-    //TODO handleEvent method
 
     public void setTurn(Turn turn) {
         this.turn = turn;
@@ -219,45 +247,82 @@ public abstract class Game extends Observable<ServerMessage> implements Observer
 
     public List<Deck> getDecks() {
         return decks;
-        //TODO : DA MODIFICARE
     }
 
+    /**
+     * Searches a deck associated to the given card type and returns it.
+     * @param type the card type to search
+     * @return the deck, if found
+     */
     public Deck searchDeck(CardType type) {
         if(getDecks().stream().anyMatch(x -> x.getCardType().equals(type)))
             return decks.stream().filter(x -> x.getCardType().equals(type)).collect(Collectors.toList()).get(0);
         else return null;
     }
 
+    /**
+     * Proceeds to the given {@link GameState}.
+     * @param state the state to proceed to.
+     */
     public void nextState(GameState state) {  this.gameState = state; }
 
+    /**
+     * Notifies each remote view of the players in game when a new turn begins.
+     * @param message the update of the beginning of a new turn.
+     */
     public void notifyTurn(NewTurnUpdate message) {
         notify(message);
     }
 
+    /**
+     * Notifies each remote view of the players in game when a player reconnects to the game.
+     * @param savedUserInstance the saved user instance of the player that has reconnected.
+     */
     public void notifyGameResumed(User savedUserInstance) {
         notify(new GameResumedMessage(this.getReducedVersion(), savedUserInstance, currPlayer.getUser()));
     }
 
+    /**
+     * Notifies each remote view of the players in game when a player reconnects to the game.
+     * @param savedUserInstance the saved user instance of the player that has reconnected.
+     * @param userInTurn the player in turn to notify to the reconnecting player.
+     */
     public void notifyGameResumed(User savedUserInstance, User userInTurn) {
         notify(new GameResumedMessage(this.getReducedVersion(), savedUserInstance, userInTurn));
     }
 
+    /**
+     * @return the current {@link GameState} of the game.
+     */
     public GameState getGameState() {
         return gameState;
     }
 
-
+    /**
+     * @return the number of players in this game.
+     */
     public int getNumOfPlayers(){
         return playerList.size();
     }
 
-
+    /**
+     * Retrieves the player instance corresponding to the given {@link User}.
+     * @param user the user identity of the player to return.
+     * @return the player instance corresponding to the given User.
+     */
     public Player getPlayer(User user) {
         return users.get(user);
     }
 
+    /**
+     * @return a simplified version of this class that can be sent through the network to the client.
+     */
     public abstract ReducedGame getReducedVersion();
 
+    /**
+     * Notifies each remote view of the players in game when the current player makes a mistake.
+     * @param message the error message to notify.
+     */
     public void notifyError(ErrorMessage message) {
         notify(message);
     }
