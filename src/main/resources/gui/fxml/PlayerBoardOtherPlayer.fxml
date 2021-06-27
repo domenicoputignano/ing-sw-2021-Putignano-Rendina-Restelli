@@ -126,7 +126,7 @@
       <ImageView fx:id="resource2LeaderCard2" fitHeight="47.0" fitWidth="45.0" layoutX="946.0" layoutY="654.0" pickOnBounds="true" preserveRatio="true" />
       <TextField fx:id="username" alignment="TOP_LEFT" editable="false" focusTraversable="false" layoutX="434.0" layoutY="134.0" mouseTransparent="true" prefHeight="31.0" prefWidth="120.0" styleClass="username" stylesheets="@../css/text.css" />
       <Button fx:id="closePopup" layoutX="1019.0" layoutY="65.0" mnemonicParsing="false" onAction="#handleCloseViewOthers" prefHeight="81.0" prefWidth="84.0" styleClass="exit" stylesheets="@../css/button.css" />
-      <Text fx:id="active1" layoutX="918.0" layoutY="449.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Active" visible="false" />
-      <Text fx:id="active2" layoutX="918.0" layoutY="728.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Active" visible="false" />
+      <Text fx:id="active1" layoutX="918.0" layoutY="445.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Active" visible="false" />
+      <Text fx:id="active2" layoutX="918.0" layoutY="726.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Active" visible="false" />
    </children>
 </AnchorPane>

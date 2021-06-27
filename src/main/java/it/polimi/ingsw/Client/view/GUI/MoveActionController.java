@@ -18,45 +18,72 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.util.Arrays;
-
+/**
+ * Class that represents the controller of the Move Action page of the game
+ * on this page the user can perform the Move Resources action by choosing
+ * the type of move to be carried out and moving the resources of his choice
+ */
 public class MoveActionController extends Controller{
+    /**
+     * Attribute that represents the central pane of the page
+     */
     @FXML
     public AnchorPane anchorMoveAction;
-
+    /**
+     * Attribute that represents the text where the title of the page is shown
+     */
     @FXML
-    public Text moveActionText,typeOfMoveText;
-
+    public Text moveActionText,typeOfMoveText,extraDepotsText;
+    /**
+     * Attribute that represents the button to close the page
+     */
     @FXML
     public Button closeMoveAction;
-
+    /**
+     * Attributes that represent the buttons to select the type of Move that the player want to perform
+     */
     @FXML
     public Button depot1,depot2,depot3,fromNormalToNormal,fromNormalToExtra,fromExtraToNormal,
         resExtraDepot1,resExtraDepot2;
-
+    /**
+     * Attributes that represents the imageView of the resources owned within the depots
+     */
     @FXML
     public ImageView res1Depot1, res1Depot2, res2Depot2, res1Depot3, res2Depot3, res3Depot3;
-
+    /**
+     * Attributes that represents the imageView of the resources owned within the extra depots
+     */
     @FXML
-    public ImageView resourceExtraDepot1, resourceExtraDepot2, extraDepotPot1, extraDepotPot2;
+    public ImageView resourceExtraDepot1, resourceExtraDepot2, extraDepotPot1, extraDepotPot2,
+            resource1ExtraDepot1,resource2ExtraDepot1,resource1ExtraDepot2,resource2ExtraDepot2;;
 
-    @FXML
-    public Text extraDepotsText;
-
+    /**
+     * Attribute that represent the textField which takes into account the number of resources
+     * that the user want to move from/to the extra depots
+     */
     @FXML
     public TextField depotExtraOcc;
 
-    @FXML
-    public ImageView resource1ExtraDepot1,resource2ExtraDepot1,resource1ExtraDepot2,resource2ExtraDepot2;
-
+    /**
+     * attributes that represent the buttons to increase and decrease the number of resources
+     * that the user want to move from / to the extra depots
+     */
     @FXML
     public Button minusResourceExtra,plusResourceExtra,okButtonExtraDepotOcc;
-
+    /**
+     * attributes used to account for which depots can be selected during the action based on what has been selected
+     */
     boolean sourceAlreadySelected = false,isNormalToNormal = false,isExtraToNormal = false,isNormalToExtra = false;
     private int normalDepotIndexSource,normalDepotIndexDestination, extraDepotIndexSource, extraDepotIndexDestination;
     private int occ=1;
 
     private MoveResourcesGUI state;
-
+    /**
+     * Main method that initializes the scene within the stage
+     * It takes care of setting the background of the scene
+     * ,the font of the texts and buttons,
+     * and the images on the scene
+     */
     @FXML
     @Override
     public void initialize() {
@@ -93,6 +120,10 @@ public class MoveActionController extends Controller{
         initializeDepots();
     }
 
+    /**
+     * method used to initialize the images within the depots within the depots based
+     * on what you actually own
+     */
     private void initializeDepots(){
 
         // SETUP DEPOT 1
@@ -160,11 +191,20 @@ public class MoveActionController extends Controller{
 
     }
 
+    /**
+     * method used to set a generic image of the resources
+     * @param target imageView to be set with image related to the owned resource
+     * @param resourceType resource to be inserted into the imageView
+     */
     private void loadImageResource(ImageView target, ResourceType resourceType) {
         if(ResourceLocator.retrieveResourceTypeImage(resourceType) != null)
             target.setImage(new Image(ResourceLocator.retrieveResourceTypeImage(resourceType)));
     }
 
+    /**
+     * method used to close page of leader action over the main stage
+     * It is performed when closeMoveAction button is pressed
+     */
     @FXML
     public void handleCloseMoveAction()
     {
@@ -172,6 +212,10 @@ public class MoveActionController extends Controller{
         stage.close();
     }
 
+    /**
+     * method used to manage a Normal To Normal move resources
+     * It allows you to select depots and illuminate any destinations
+     */
     @FXML
     public void handleNormaltoNormal()
     {
@@ -188,6 +232,10 @@ public class MoveActionController extends Controller{
         isNormalToNormal = true;
     }
 
+    /**
+     * method used to manage a Normal To Extra move resources
+     * It allows you to select depots and illuminate any destinations
+     */
     @FXML
     public void handleNormaltoExtra()
     {
@@ -210,6 +258,12 @@ public class MoveActionController extends Controller{
         isNormalToExtra = true;
     }
 
+    /**
+     * method that allows to understand if a depot referred to a resource
+     * has associated an extra depot related to the same resource
+     * @param depot depot under consideration
+     * @return true if it exists, otherwise false
+     */
     private boolean hasExtraDepotOfType(int depot)
     {
         ResourceType typeToSearch = client.getGame().getPlayer(client.getUser()).
@@ -217,7 +271,10 @@ public class MoveActionController extends Controller{
         return Arrays.stream(client.getGame().getPlayer(client.getUser()).
                 getPersonalBoard().getWarehouse().getExtraDepots()).anyMatch(x->x!=null && x.getType() == typeToSearch);
     }
-
+    /**
+     * method used to manage a Extra To Normal move resources
+     * It allows you to select depots and illuminate any destinations
+     */
     @FXML
     public void handleExtratoNormal()
     {
@@ -237,7 +294,12 @@ public class MoveActionController extends Controller{
 
         isExtraToNormal = true;
     }
-
+    /**
+     * method that allows to understand if a extra depot referred to a resource
+     * has associated a depot related to the same resource
+     * @param extraDepot extradepot under consideration
+     * @return true if it exists, otherwise false
+     */
     private boolean hasNormalDepotOfType(int extraDepot){
         ResourceType typeToSearch = client.getGame().getPlayer(client.getUser()).
                 getPersonalBoard().getWarehouse().getExtraDepots()[extraDepot-1].getType();
@@ -245,6 +307,9 @@ public class MoveActionController extends Controller{
                 getPersonalBoard().getWarehouse().getNormalDepots()).anyMatch(x -> x.getType() == null || x.getType() == typeToSearch);
     }
 
+    /**
+     * method used to send the update message relating to the move  From Normal To Normal action
+     */
     private void sendFromNormalToNormalMessage()
     {
         MoveResourcesMessage messageToSend = new MoveResourcesMessage();
@@ -253,6 +318,9 @@ public class MoveActionController extends Controller{
         state.manageUserInteraction();
         handleCloseMoveAction();
     }
+    /**
+     * method used to send the update message relating to the move  From Normal To Extra action
+     */
     private void sendFromNormalToExtraMessage()
     {
         MoveResourcesMessage messageToSend = new MoveResourcesMessage();
@@ -261,6 +329,9 @@ public class MoveActionController extends Controller{
         state.manageUserInteraction();
         handleCloseMoveAction();
     }
+    /**
+     * method used to send the update message relating to the move  From Extra To Normal action
+     */
     private void sendFromExtraToNormalMessage()
     {
         MoveResourcesMessage messageToSend = new MoveResourcesMessage();
@@ -270,6 +341,10 @@ public class MoveActionController extends Controller{
         handleCloseMoveAction();
     }
 
+    /**
+     * method that allows you to check which destination depots are
+     * available after selecting depot 1 as the sender
+     */
     @FXML
     public void handleDepot1()
     {
@@ -290,6 +365,10 @@ public class MoveActionController extends Controller{
             }
         }
     }
+    /**
+     * method that allows you to check which destination depots are
+     * available after selecting depot 2 as the sender
+     */
     @FXML
     public void handleDepot2()
     {
@@ -310,6 +389,10 @@ public class MoveActionController extends Controller{
             }
         }
     }
+    /**
+     * method that allows you to check which destination depots are
+     * available after selecting depot 3 as the sender
+     */
     @FXML
     public void handleDepot3()
     {
@@ -330,6 +413,11 @@ public class MoveActionController extends Controller{
             }
         }
     }
+
+    /**
+     * method that allows you to manage what to light up after choosing a sender
+     * depot in a move normal to normal action
+     */
     private void nextStepSelectedSourceNormalToNormal()
     {
         sourceAlreadySelected = true;
@@ -356,6 +444,10 @@ public class MoveActionController extends Controller{
             }
         }
     }
+    /**
+     * method that allows you to manage what to light up after choosing a sender
+     * depot in a move normal to extra action
+     */
     private void nextStepSelectedSourceNormalToExtra() {
         sourceAlreadySelected = true;
         typeOfMoveText.setText("Select the extra depot destination :");
@@ -379,7 +471,10 @@ public class MoveActionController extends Controller{
             }
         }
     }
-
+    /**
+     * method that allows you to manage what to light up after choosing a sender
+     * depot in a move extra to normal action
+     */
     private void nextStepSelectedSourceExtraToNormal() {
         sourceAlreadySelected = true;
         typeOfMoveText.setText("Select the normal depot destination!");
@@ -411,6 +506,10 @@ public class MoveActionController extends Controller{
         }
     }
 
+    /**
+     * method to use to set the textField to the number of occurrences of resources
+     * to be moved from extra depots to normal depots
+     */
     private void setOccExtraToNormal(){
         ReducedDepot extraDepotSource = client.getGame().getPlayer(client.getUser()).
                 getPersonalBoard().getWarehouse().getExtraDepots()[extraDepotIndexSource-1];
@@ -426,7 +525,10 @@ public class MoveActionController extends Controller{
             sendFromExtraToNormalMessage();
         }
     }
-
+    /**
+     * method that allows you to check which destination depots are
+     * available after selecting extra depot 1 as the sender
+     */
     @FXML
     public void handleExtraDepot1()
     {
@@ -440,6 +542,10 @@ public class MoveActionController extends Controller{
             setOccFromNormalToExtra();
         }
     }
+    /**
+     * method that allows you to check which destination depots are
+     * available after selecting extra depot 2 as the sender
+     */
     @FXML
     public void handleExtraDepot2()
     {
@@ -453,7 +559,10 @@ public class MoveActionController extends Controller{
             setOccFromNormalToExtra();
         }
     }
-
+    /**
+     * method to use to set the textField to the number of occurrences of resources
+     * to be moved from normal depots to extra depots
+     */
     private void setOccFromNormalToExtra(){
         ReducedDepot normalDepotSource = client.getGame().getPlayer(client.getUser()).getPersonalBoard().getWarehouse().getNormalDepots()[normalDepotIndexSource-1];
 
@@ -468,7 +577,10 @@ public class MoveActionController extends Controller{
             sendFromNormalToExtraMessage();
         }
     }
-
+    /**
+     * method used to decrease the number of occurrences of resources to be moved to / from the extra depots
+     * It is performed when minusResourceExtra button is pressed
+     */
     @FXML
     public void minusDepotOcc()
     {
@@ -479,6 +591,11 @@ public class MoveActionController extends Controller{
         }
     }
 
+    /**
+     * method used to increase the number of occurrences of resources
+     * to be moved to / from the extra depots
+     * It is performed when plusResourceExtra button is pressed
+     */
     @FXML
     public void plusDepotOcc()
     {
@@ -503,6 +620,11 @@ public class MoveActionController extends Controller{
 
     }
 
+    /**
+     * method used to confirm the number of the resource that the user want to move from/to
+     * extra depots
+     * It is performed when okButtonExtraDepotOcc button is pressed
+     */
     @FXML
     public void handleOkButtonDepotOcc()
     {

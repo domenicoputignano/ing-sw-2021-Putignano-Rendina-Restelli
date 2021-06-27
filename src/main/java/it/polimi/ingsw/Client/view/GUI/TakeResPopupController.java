@@ -27,7 +27,7 @@ public class TakeResPopupController extends Controller{
     public AnchorPane takeRespopup;
 
     /**
-     * Attributes that represent the textFields where the message of popup is shown
+     * Attributes that represent the text where the message of popup is shown
      */
     @FXML
     public Text takeResPopupText1,takeResPopupText2;

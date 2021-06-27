@@ -13,9 +13,9 @@
     <center>
         <AnchorPane fx:id="center" prefHeight="470.0" prefWidth="950.0" BorderPane.alignment="CENTER">
             <children>
-                <ImageView fitHeight="527.0" fitWidth="471.0" layoutX="233.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                <ImageView fitHeight="400.0" fitWidth="419.0" layoutX="269.0" layoutY="100.0" pickOnBounds="true" preserveRatio="true">
                     <image>
-                        <Image url="@../img/home_bg.png" />
+                        <Image url="@../img/calamaio.png" />
                     </image>
                 </ImageView>
             <ImageView fx:id="loading" fitHeight="71.0" fitWidth="362.0" layoutX="269.0" layoutY="541.0" pickOnBounds="true" preserveRatio="true" />
