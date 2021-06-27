@@ -275,7 +275,7 @@ public abstract class Game extends Observable<ServerMessage> implements Observer
     }
 
     /**
-     * Notifies each remote view of the players in game when a player reconnects to the game.
+     * Notifies each remote view of the players in game when a player resumed a match.
      * @param savedUserInstance the saved user instance of the player that has reconnected.
      */
     public void notifyGameResumed(User savedUserInstance) {
@@ -283,7 +283,7 @@ public abstract class Game extends Observable<ServerMessage> implements Observer
     }
 
     /**
-     * Notifies each remote view of the players in game when a player reconnects to the game.
+     * Notifies each remote view of the players in game when a player resumed a match.
      * @param savedUserInstance the saved user instance of the player that has reconnected.
      * @param userInTurn the player in turn to notify to the reconnecting player.
      */
