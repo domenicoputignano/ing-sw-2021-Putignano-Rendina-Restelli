@@ -11,23 +11,48 @@ import it.polimi.ingsw.Utils.Messages.ServerMessages.GameSetupMessage;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * Since the project supports the possibility of playing an offline solo mode match, this abstract class
+ * has methods and attributes that a {@link NetworkClient} and {@link it.polimi.ingsw.Client.OfflineClient} has in common to run
+ * and display game.
+ */
 public abstract class Client {
 
-
-    protected ReducedGame game;
-    protected User user;
     protected final Logger LOGGER = Logger.getLogger(Client.class.getName());
+    /**
+     * Reduced game instance deployed client side.
+     */
+    protected ReducedGame game;
+    /**
+     * User bound to Client entity
+     */
+    protected User user;
+    /**
+     * User interface reference
+     */
     protected UI ui;
 
+    /**
+     * Abstract method that states how the client will start.
+     * @param startAsGui variable that establishes if user wants to play with GUI
+     */
     public abstract void start(boolean startAsGui);
+
 
     public abstract void sendMessage(ClientMessage message);
 
 
+    /**
+     * This initializes game instance.
+     */
     public void setupGame(GameSetupMessage message) {
         game = message.getGame();
     }
 
+    /**
+     * It makes a game setup after a player reconnection.
+     * @param message message containing information about the game.
+     */
     public void setupGame(GameResumedMessage message) {
             if(this.getUser()==null) {
                 LOGGER.log(Level.INFO, "Sono il client che si è riconnesso");
@@ -39,6 +64,19 @@ public abstract class Client {
             }
     }
 
+    /**
+     * It basically sets user inside the client.
+     */
+    public void bindUser(String nickname) {
+        user = new User(nickname);
+    }
+
+    /**
+     * Returns position associated to user instance of the client.
+     */
+    public int getUserPosition() { return game.getPlayer(user).getPosition(); }
+
+    public User getUser() { return user; }
 
     public UI getUI() {
         return ui;
@@ -48,12 +86,5 @@ public abstract class Client {
         return game;
     }
 
-    public void bindUser(String nickname) {
-        user = new User(nickname);
-    }
-
-    public int getUserPosition() { return game.getPlayer(user).getPosition(); }
-
-    public User getUser() { return user; }
 }
 
