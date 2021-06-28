@@ -13,7 +13,7 @@ import it.polimi.ingsw.Utils.Messages.ServerMessages.ServerMessage;
 import java.util.logging.Logger;
 
 /**
- * This abstract class represents View component in the MVC architectural pattern bound to a specific user.
+ * This abstract class represents View component in MVC architectural pattern bound to a specific user.
  * It is a {@link Game} observer and it gets notified whenever model changes.
  * It also as a reference to a {@link GameController} instance, in this way it forwards message handling to it.
  */

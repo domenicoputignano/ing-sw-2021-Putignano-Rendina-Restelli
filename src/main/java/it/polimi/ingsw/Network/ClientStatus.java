@@ -141,8 +141,8 @@ public class ClientStatus implements Runnable {
 
 
     /**
-     * This method is used when a game has been initialized by Server. When a remote host connects
-     * it hasn't any game instance yet, so after game creation a {@link NetworkRemoteView} is instantiated in the ClientStatus.
+     * This method is used when a game has been initialized by Server. When a client connects
+     * it hasn't any game instance yet, so after game creation a {@link NetworkRemoteView} is instantiated inside the ClientStatus.
      */
     public void bindRemoteView(NetworkRemoteView remoteView) {
         this.remoteView = remoteView;
@@ -153,7 +153,7 @@ public class ClientStatus implements Runnable {
     /**
      * It handles the first step in client configuration. It ensures that a valid nickname is chosen
      * and if required, it allows player reconnection.
-     * @param messageFromClient message containing nickname chosen by remote host.
+     * @param messageFromClient message containing nickname chosen by client.
      */
     public void nicknameChoice(UsernameChoiceMessage messageFromClient) {
         String nickname;
@@ -207,7 +207,7 @@ public class ClientStatus implements Runnable {
     }
 
     /**
-     * It closes communication with remote view after that a disconnection has been detected.
+     * It closes communication with remote view and client, after that a disconnection has been detected.
      */
     public void closeConnection() {
         try {
@@ -224,7 +224,7 @@ public class ClientStatus implements Runnable {
 
     /**
      * This method is triggered from {@link NetworkRemoteView} and it is called in order to clear a match that has been paused
-     * for a certain time after all player disconnection.
+     * for a certain time after all players disconnection.
      * @param usersInAPausedMatch list of users that the server has to delete.
      */
     public void deleteMatch(List<User> usersInAPausedMatch) {

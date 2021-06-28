@@ -52,7 +52,7 @@ public class Server {
 
     /**
      * Method that runs infinitely until the server is shutdown.
-     * It accepts inbound connection, sets a timeout for it and creates a new thread that will handle it.
+     * It accepts inbound connections, sets a timeout for them and creates a new thread that will handle each one of them.
      */
     public void start() {
         LOGGER.log(Level.INFO, "Server is ready to accept connections...");
@@ -96,7 +96,7 @@ public class Server {
     }
 
     /**
-     * Boolean method to detect if a player is already playing.
+     * Boolean method to detect if a player is already playing a game when it tries to reconnect.
      * @param nickname nickname chosen by remote host.
      */
     public synchronized boolean isPlayerWithSameNicknamePlaying(String nickname) {
@@ -108,7 +108,7 @@ public class Server {
 
 
     /**
-     * Boolean method to detect if a player has disconnected.
+     * Boolean method to detect if a player was playing a game and has disconnected from it.
      * @param nickname nickname chosen by remote host.
      */
     public boolean inactivePlayerAlreadyRegistered(String nickname) {

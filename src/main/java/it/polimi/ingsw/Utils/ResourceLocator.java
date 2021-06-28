@@ -4,7 +4,17 @@ import it.polimi.ingsw.Commons.ColorMarble;
 import it.polimi.ingsw.Commons.LeaderEffect;
 import it.polimi.ingsw.Commons.ResourceType;
 
+/**
+ * Final class created to find URLs, string used by {@link it.polimi.ingsw.Client.view.CLI} and
+ * {@link it.polimi.ingsw.Client.view.Gui} classes to display objects.
+ */
 public final class ResourceLocator {
+
+    /**
+     * Retrieves an url to an image file linked to a development card.
+     * @param ID development card identity.
+     * @return a string representing required url.
+     */
     public static String retrieveDevCardImage(String ID) {
         switch (ID) {
             case "1B-1" : return "gui/img/devCards/1B-1.png";
@@ -59,6 +69,11 @@ public final class ResourceLocator {
         }
     }
 
+    /**
+     * Retrieves an url to an image file linked to a leader card.
+     * @param ID leader card identity.
+     * @return a string representing required url.
+     */
     public static String retrieveLeaderCardImage(String ID){
         switch(ID) {
             case "SA-SE" : return "gui/img/leaderCards/SA-SE.png";
@@ -81,6 +96,10 @@ public final class ResourceLocator {
         }
     }
 
+    /**
+     * This method prints a leader card in Command Line Interface.
+     * @param ID leader card identity.
+     */
     public static void printLeaderCardASCII(String ID) {
         switch (ID) {
             case "SA-SE" : {
@@ -294,8 +313,9 @@ public final class ResourceLocator {
         }
     }
 
-
-
+    /**
+     * Returns a string representing a card row used to display it in Command Line Interface.
+     */
     public static String retrieveDevCardASCII(String ID, int row){
         switch (ID) {
             case "1B-1" : switch (row) {
@@ -687,6 +707,11 @@ public final class ResourceLocator {
 
     }
 
+    /**
+     * Retrieves an url to an image file linked to a specific resource type.
+     * @param resourceType to be displayed in GUI.
+     * @return a string representing required url.
+     */
     public static String retrieveResourceTypeImage(ResourceType resourceType){
         switch(resourceType){
             case shield : return "gui/img/resources/shield.png";
@@ -697,6 +722,11 @@ public final class ResourceLocator {
         }
     }
 
+    /**
+     * Retrieves an url to an image file linked to a specific {@link LeaderEffect}.
+     * @param effect leader effect to be displayed in GUI.
+     * @return a string representing required url.
+     */
     public static String retrieveLeaderEffect(LeaderEffect effect) {
         switch (effect.getEffect()) {
             case EXTRAPRODUCTION: switch (effect.getType()) {
@@ -712,6 +742,11 @@ public final class ResourceLocator {
         return "";
     }
 
+    /**
+     * Retrieves an url to an image file linked to a specific marble given its color.
+     * @param colorMarble color of the marble to be displayed in GUI.
+     * @return a string representing required url.
+     */
     public static String retrieveMarbleImage(ColorMarble colorMarble){
         switch (colorMarble) {
             case RED : return "gui/img/marbles/redMarble.png";

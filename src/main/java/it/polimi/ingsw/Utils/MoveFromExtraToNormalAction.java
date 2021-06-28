@@ -20,8 +20,8 @@ public class MoveFromExtraToNormalAction implements MoveActionInterface {
     }
 
     /**
-     * Forwards move action to the warehouse calling the correct method available in it.
-     * @param warehouse represents where the action has to be performed.
+     * Forwards move action to the warehouse calling correct method available in it.
+     * @param warehouse element of player board where resources can be placed and moved.
      * @return true if the action has been successfully performed.
      */
     @Override
@@ -34,7 +34,7 @@ public class MoveFromExtraToNormalAction implements MoveActionInterface {
     }
 
     /**
-     * Checks whether this move is correct concerning its indexes.
+     * Checks whether the move is correct performing indexes inspection.
      * @return the result of the check
      */
     @Override

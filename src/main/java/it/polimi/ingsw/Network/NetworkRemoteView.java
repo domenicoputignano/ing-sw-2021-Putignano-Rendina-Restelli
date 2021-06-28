@@ -10,7 +10,7 @@ import java.util.List;
 
 /**
  * Class that inherits from {@link RemoteView} and has also a reference to a {@link ClientStatus}
- * that allows messages receiving and sending, because Server side it has to communicate with remote host.
+ * that allows messages receiving and sending because server has to communicate with client.
  */
 public class NetworkRemoteView extends RemoteView {
 
@@ -38,7 +38,7 @@ public class NetworkRemoteView extends RemoteView {
     }
 
     /**
-     * Notifies a remote host that an error occurred.
+     * Notifies a player that an error occurred.
      * @param errorMessage message containing error details.
      */
     public void sendError(ErrorMessage errorMessage) {
@@ -46,8 +46,7 @@ public class NetworkRemoteView extends RemoteView {
     }
 
     /**
-     * Handles a player disconnection by removing itself as a model observer and notifying game
-     * controller.
+     * Handles a player disconnection by removing itself from model observers and notifying game controller.
      */
     public void handlePlayerDisconnection() {
         user.setActive(false);
@@ -63,6 +62,9 @@ public class NetworkRemoteView extends RemoteView {
         gameController.handlePlayerReconnection(reconnectingUser);
     }
 
+    /**
+     * Deletes a match given a list of disconnected users that were playing a game.
+     */
     public void deleteMatch(List<User> userInAPausedMatch) {
         clientStatus.deleteMatch(userInAPausedMatch);
         this.game = null;
@@ -72,7 +74,7 @@ public class NetworkRemoteView extends RemoteView {
     }
 
     /**
-     * Notifies a remote host that a change occurred.
+     * Notifies a player that a change occurred.
      * @param message message containing change details.
      */
     public void update(ServerMessage message) {

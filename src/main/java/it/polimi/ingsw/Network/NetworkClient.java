@@ -84,7 +84,7 @@ public class NetworkClient extends Client {
     }
 
     /**
-     * Method that sends a client message through the socket.
+     * Method that sends a {@link ClientMessage} through the socket.
      * @param message message that has to be sent.
      */
     public void sendMessage(ClientMessage message) {
@@ -117,7 +117,7 @@ public class NetworkClient extends Client {
     }
 
     /**
-     * Initializes a thread that will wait for an inbound message over the socket.
+     * Initializes a thread that will wait for an inbound messages over the socket.
      */
     private void createListeningThread() {
         Thread t = new Thread(() -> {
@@ -141,7 +141,7 @@ public class NetworkClient extends Client {
     }
 
     /**
-     * Closes the connection with the server.
+     * Closes the connection with remote host.
      */
     public void closeConnection() {
         try {

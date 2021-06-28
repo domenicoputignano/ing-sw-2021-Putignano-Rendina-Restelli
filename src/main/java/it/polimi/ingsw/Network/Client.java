@@ -50,7 +50,7 @@ public abstract class Client {
     }
 
     /**
-     * It makes a game setup after a player reconnection.
+     * It makes a game setup after a client reconnection.
      * @param message message containing information about the game.
      */
     public void setupGame(GameResumedMessage message) {
