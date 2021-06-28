@@ -414,7 +414,9 @@ public class Warehouse implements Cloneable {
     }
 
 
-    //TODO da eliminare
+    /**
+     * Unsafe getter method used for test purposes only.
+     */
     public ExtraDepot[] getterUnsafeExtraDepots() {
         return extraDepots;
     }
@@ -431,14 +433,16 @@ public class Warehouse implements Cloneable {
         return new ReducedWarehouse(reducedNormalDepots, reducedExtraDepots, reducedStrongbox, availableResources);
     }
 
-
-    //TODO rivedere questi metodi che servono per il testing
-
+    /**
+     * Unsafe getter method used for test purposes only.
+     */
     public Map<ResourceType, Integer> getAvailableResources() {
-        //TODO modificare in modo da esporre solo una copia
         return availableResources;
     }
 
+    /**
+     * @return for each Resource Type, the number of occurrences present in the strongbox.
+     */
     public List<Pair<ResourceType, Integer>> getResourcesInStrongbox() {
         List<Pair<ResourceType,Integer>> result = new ArrayList<>(4);
         strongbox.getResources().forEach((key,value) -> result.add(new Pair<>(key, value)));
