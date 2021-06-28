@@ -22,12 +22,10 @@ public class Gui extends UI{
     public void manageUserInteraction() {
 
     }
-
     @Override
-    public void changeClientState(AbstractClientState clientState) {
+    public void changeCliState(AbstractClientState clientState) {
 
     }
-
 
     @Override
     public void render(ServerAsksForNickname message) {

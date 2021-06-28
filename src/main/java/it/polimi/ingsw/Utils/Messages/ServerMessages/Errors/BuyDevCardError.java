@@ -1,6 +1,6 @@
 package it.polimi.ingsw.Utils.Messages.ServerMessages.Errors;
 
-import it.polimi.ingsw.Client.ClientStatesController;
+import it.polimi.ingsw.Client.CliStatesController;
 import it.polimi.ingsw.Commons.User;
 import it.polimi.ingsw.Network.Client;
 
@@ -32,7 +32,7 @@ public class BuyDevCardError extends ErrorMessage {
     public void handleMessage(Client handler) {
         if(handler.getUI().isReceiverAction(triggeringUser)) {
             handler.getUI().renderError(trigger.toString());
-            ClientStatesController.updateClientState(this, handler.getUI());
+            CliStatesController.updateCliState(this, handler.getUI());
         }
     }
 }

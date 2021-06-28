@@ -1,6 +1,6 @@
 package it.polimi.ingsw.Utils.Messages.ServerMessages.Updates;
 
-import it.polimi.ingsw.Client.ClientStatesController;
+import it.polimi.ingsw.Client.CliStatesController;
 import it.polimi.ingsw.Client.reducedmodel.ReducedPersonalBoard;
 import it.polimi.ingsw.Commons.User;
 import it.polimi.ingsw.Network.Client;
@@ -16,6 +16,6 @@ public class MoveUpdate extends UpdateMessage {
     public void handleMessage(Client handler) {
         handler.getGame().updatePersonalBoard(this);
         handler.getUI().render(this);
-        ClientStatesController.updateClientState(this, handler.getUI());
+        CliStatesController.updateCliState(this, handler.getUI());
     }
 }

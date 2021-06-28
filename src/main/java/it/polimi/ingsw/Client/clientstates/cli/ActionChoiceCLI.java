@@ -1,14 +1,10 @@
 package it.polimi.ingsw.Client.clientstates.cli;
 
 import it.polimi.ingsw.Client.clientstates.AbstractActionChoice;
-import it.polimi.ingsw.Client.reducedmodel.ReducedPlayer;
 import it.polimi.ingsw.Client.view.CLI;
-import it.polimi.ingsw.Commons.User;
 import it.polimi.ingsw.Network.Client;
 
 import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class ActionChoiceCLI extends AbstractActionChoice {
 
@@ -51,30 +47,30 @@ public class ActionChoiceCLI extends AbstractActionChoice {
                     if(normalActionAlreadyDone()) {
                         return normalActionAlreadyDoneMessage();
                     } else {
-                        cli.changeClientState(new ActivateProductionCLI(client));
+                        cli.changeCliState(new ActivateProductionCLI(client));
                         return true;
                     }
                 }
                 case "B" : {
                     if(normalActionAlreadyDone()) return normalActionAlreadyDoneMessage();
                     else {
-                        cli.changeClientState(new BuyDevCardCLI(client));
+                        cli.changeCliState(new BuyDevCardCLI(client));
                         return true;
                     }
                 }
                 case "T" : {
                     if(normalActionAlreadyDone()) return normalActionAlreadyDoneMessage();
                     else {
-                        cli.changeClientState(new TakeResourcesFromMarketCLI(client));
+                        cli.changeCliState(new TakeResourcesFromMarketCLI(client));
                         return true;
                     }
                 }
                 case "L" : {
-                    cli.changeClientState(new LeaderActionCLI(client));
+                    cli.changeCliState(new LeaderActionCLI(client));
                     return true;
                 }
                 case "M" : {
-                    cli.changeClientState(new MoveResourcesCLI(client));
+                    cli.changeCliState(new MoveResourcesCLI(client));
                     return true;
                 }
                 case "E" : {
@@ -83,7 +79,7 @@ public class ActionChoiceCLI extends AbstractActionChoice {
                         return false;
                     } else {
                         endTurn();
-                        cli.changeClientState(new WaitForTurnCLI(client));
+                        cli.changeCliState(new WaitForTurnCLI(client));
                         return true;
                     }
                 }

@@ -1,6 +1,6 @@
 package it.polimi.ingsw.Utils.Messages.ServerMessages.Updates;
 
-import it.polimi.ingsw.Client.ClientStatesController;
+import it.polimi.ingsw.Client.CliStatesController;
 import it.polimi.ingsw.Client.reducedmodel.ReducedPersonalBoard;
 import it.polimi.ingsw.Commons.User;
 import it.polimi.ingsw.Commons.ResourceType;
@@ -25,7 +25,7 @@ public class ActivateProductionUpdate extends UpdateMessage {
         client.getGame().performUpdate(this);
         client.getUI().render(this);
         if(client.getUI().isReceiverAction(user)) client.getUI().setNormalActionDone(true);
-        ClientStatesController.updateClientState(this, client.getUI());
+        CliStatesController.updateCliState(this, client.getUI());
 
     }
 

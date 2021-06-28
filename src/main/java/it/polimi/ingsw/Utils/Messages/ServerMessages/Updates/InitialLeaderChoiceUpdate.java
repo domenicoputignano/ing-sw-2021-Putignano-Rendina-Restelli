@@ -1,6 +1,6 @@
 package it.polimi.ingsw.Utils.Messages.ServerMessages.Updates;
 
-import it.polimi.ingsw.Client.ClientStatesController;
+import it.polimi.ingsw.Client.CliStatesController;
 import it.polimi.ingsw.Client.reducedmodel.ReducedPersonalBoard;
 import it.polimi.ingsw.Commons.User;
 import it.polimi.ingsw.Network.Client;
@@ -21,7 +21,7 @@ public class InitialLeaderChoiceUpdate extends UpdateMessage {
     public void handleMessage(Client client) {
         client.getGame().updatePersonalBoard(this);
         client.getUI().render(this);
-        ClientStatesController.updateClientState(this, client.getUI());
+        CliStatesController.updateCliState(this, client.getUI());
     }
 
 }

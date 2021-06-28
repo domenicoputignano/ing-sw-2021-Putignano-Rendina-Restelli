@@ -1,6 +1,6 @@
 package it.polimi.ingsw.Utils.Messages.ServerMessages.Updates;
 
-import it.polimi.ingsw.Client.ClientStatesController;
+import it.polimi.ingsw.Client.CliStatesController;
 import it.polimi.ingsw.Client.reducedmodel.ReducedMultiPlayerMode;
 import it.polimi.ingsw.Commons.User;
 import it.polimi.ingsw.Network.Client;
@@ -18,7 +18,7 @@ public class NewTurnUpdate implements ServerMessage {
     public void handleMessage(Client handler) {
         ((ReducedMultiPlayerMode) handler.getGame()).nextTurn(this);
         if(handler.getUI().isReceiverAction(currentUser)) handler.getUI().setNormalActionDone(false);
-        ClientStatesController.updateClientState(this, handler.getUI());
+        CliStatesController.updateCliState(this, handler.getUI());
         handler.getUI().render(this);
     }
 

@@ -1,6 +1,6 @@
 package it.polimi.ingsw.Utils.Messages.ServerMessages.Updates;
 
-import it.polimi.ingsw.Client.ClientStatesController;
+import it.polimi.ingsw.Client.CliStatesController;
 import it.polimi.ingsw.Client.reducedmodel.ReducedMarketTray;
 import it.polimi.ingsw.Client.reducedmodel.ReducedPersonalBoard;
 import it.polimi.ingsw.Commons.User;
@@ -25,7 +25,7 @@ public class ServerAsksForPositioning extends UpdateMessage {
         handler.getGame().performUpdate(this);
         handler.getUI().render(this);
         if(handler.getUI().isReceiverAction(user)) handler.getUI().setNormalActionDone(true);
-        ClientStatesController.updateClientState(this, handler.getUI());
+        CliStatesController.updateCliState(this, handler.getUI());
     }
 
     public ReducedMarketTray getResultingMarketTray() {

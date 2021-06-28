@@ -1,7 +1,7 @@
 package it.polimi.ingsw.Utils.Messages.ServerMessages;
 
 
-import it.polimi.ingsw.Client.ClientStatesController;
+import it.polimi.ingsw.Client.CliStatesController;
 import it.polimi.ingsw.Client.reducedmodel.ReducedGame;
 import it.polimi.ingsw.Network.Client;
 
@@ -23,6 +23,6 @@ public class GameSetupMessage implements ServerMessage {
     public void handleMessage(Client handler) {
         handler.setupGame(this);
         handler.getUI().render(this);
-        ClientStatesController.updateClientState(this, handler.getUI());
+        CliStatesController.updateCliState(this, handler.getUI());
     }
 }

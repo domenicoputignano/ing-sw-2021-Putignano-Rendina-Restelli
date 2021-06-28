@@ -1,10 +1,9 @@
 package it.polimi.ingsw.Utils.Messages.ServerMessages.Updates;
 
-import it.polimi.ingsw.Client.ClientStatesController;
+import it.polimi.ingsw.Client.CliStatesController;
 import it.polimi.ingsw.Client.reducedmodel.ReducedPersonalBoard;
 import it.polimi.ingsw.Client.reducedmodel.ReducedSoloMode;
 import it.polimi.ingsw.Commons.Deck;
-import it.polimi.ingsw.Commons.User;
 import it.polimi.ingsw.Model.SoloMode.Token;
 import it.polimi.ingsw.Network.Client;
 import it.polimi.ingsw.Utils.Messages.ServerMessages.ServerMessage;
@@ -32,7 +31,7 @@ public class LorenzoPlayedUpdate implements ServerMessage {
         ((ReducedSoloMode) handler.getGame()).nextTurn(this);
         handler.getUI().setNormalActionDone(false);
         handler.getUI().render(this);
-        ClientStatesController.updateClientState(this, handler.getUI());
+        CliStatesController.updateCliState(this, handler.getUI());
     }
 
     public ReducedPersonalBoard getUserPersonalBoard() {

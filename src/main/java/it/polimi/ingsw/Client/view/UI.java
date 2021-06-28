@@ -20,7 +20,7 @@ public abstract class UI {
 
     public abstract void manageUserInteraction();
 
-    public abstract void changeClientState(AbstractClientState clientState);
+    public abstract void changeCliState(AbstractClientState clientState);
 
 
     public boolean isCLI() {
@@ -31,7 +31,9 @@ public abstract class UI {
         return client;
     }
 
-    //Metodi tutti in overloading per gestire il render di qualsiasi messaggio in qualsiasi finestra
+    /**
+     * Overloading methods that display different kind of messages received from remote host.
+     */
     public abstract void render(ServerAsksForNickname message);
     public abstract void render(ServerAskForGameMode message);
     public abstract void render(ServerAskForNumOfPlayer message);

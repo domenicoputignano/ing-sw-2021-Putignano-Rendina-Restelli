@@ -4,7 +4,6 @@ import it.polimi.ingsw.Client.clientstates.AbstractNumOfPlayersChoice;
 import it.polimi.ingsw.Network.Client;
 import it.polimi.ingsw.Utils.Messages.ClientMessages.NumOfPlayerChoiceMessage;
 
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class NumOfPlayersChoiceCLI extends AbstractNumOfPlayersChoice {
@@ -31,7 +30,7 @@ public class NumOfPlayersChoiceCLI extends AbstractNumOfPlayersChoice {
         } while (numOfPlayers < 2);
         messageToSend = new NumOfPlayerChoiceMessage(numOfPlayers);
         client.sendMessage(messageToSend);
-        client.getUI().changeClientState(new LobbyCLI(client));
+        client.getUI().changeCliState(new LobbyCLI(client));
         client.getUI().getClientState().manageUserInteraction();
 
     }
