@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="genericPopup" prefHeight="380.0" prefWidth="570.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.Client.view.GUI.GenericPopupController">
+<AnchorPane fx:id="genericPopup" prefHeight="380.0" prefWidth="570.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.view.GUI.GenericPopupController">
     <children>
         <Text fx:id="title" layoutX="89.0" layoutY="170.0" textAlignment="CENTER" wrappingWidth="333.0" />
         <Button fx:id="okButton" layoutX="200.0" layoutY="310.0" mnemonicParsing="false" onAction="#handleOkButton" prefHeight="40.0" prefWidth="110.0" styleClass="okButton" stylesheets="@../css/button.css" text="OK" />

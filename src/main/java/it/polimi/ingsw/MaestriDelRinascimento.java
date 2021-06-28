@@ -1,9 +1,9 @@
 package it.polimi.ingsw;
 
-import it.polimi.ingsw.Client.OfflineClient;
-import it.polimi.ingsw.Network.Client;
-import it.polimi.ingsw.Network.NetworkClient;
-import it.polimi.ingsw.Network.Server;
+import it.polimi.ingsw.client.OfflineClient;
+import it.polimi.ingsw.network.Client;
+import it.polimi.ingsw.network.NetworkClient;
+import it.polimi.ingsw.network.Server;
 import java.io.IOException;
 import java.util.Locale;
 import java.util.logging.Level;

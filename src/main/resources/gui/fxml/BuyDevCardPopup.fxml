@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="buyDevCardPopupPane" prefHeight="380.0" prefWidth="570.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.Client.view.GUI.BuyDevCardPopupController">
+<AnchorPane fx:id="buyDevCardPopupPane" prefHeight="380.0" prefWidth="570.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.view.GUI.BuyDevCardPopupController">
     <children>
         <Text fx:id="textField" layoutX="94.0" layoutY="84.0" textAlignment="CENTER" wrappingWidth="333.0" />
         <Button fx:id="okButton" layoutX="206.0" layoutY="300.0" mnemonicParsing="false" onAction="#handleOkButton" prefHeight="40.0" prefWidth="110.0" styleClass="okButton" stylesheets="@../css/button.css" text="OK" />

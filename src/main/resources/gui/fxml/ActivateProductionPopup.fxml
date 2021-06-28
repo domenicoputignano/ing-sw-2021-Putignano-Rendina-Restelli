@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane fx:id="popupPane" prefHeight="400.0" prefWidth="425.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.Client.view.GUI.ActivateProductionUpdateController">
+<AnchorPane fx:id="popupPane" prefHeight="400.0" prefWidth="425.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.view.GUI.ActivateProductionUpdateController">
 
     <Text fx:id="textUpdate" layoutX="80.0" layoutY="85.0" textAlignment="CENTER" />
 

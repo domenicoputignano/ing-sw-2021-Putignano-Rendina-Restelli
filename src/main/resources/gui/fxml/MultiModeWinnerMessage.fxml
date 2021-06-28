@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="popupPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.Client.view.GUI.MultiModeWinnerMessageController">
+<AnchorPane fx:id="popupPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.view.GUI.MultiModeWinnerMessageController">
     <children>
         <Button fx:id="closeButton" layoutX="245.0" layoutY="395.0" mnemonicParsing="false" onAction="#handleCloseButton" prefHeight="62.0" prefWidth="179.0" styleClass="chooseYesNo" stylesheets="@../css/button.css" text="CLOSE" />
         <Text fx:id="winnerText" layoutX="160.0" layoutY="118.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="337.0" />

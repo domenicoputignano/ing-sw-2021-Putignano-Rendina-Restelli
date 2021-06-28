@@ -6,7 +6,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane fx:id="activateVaticanPopup" prefHeight="380.0" prefWidth="570.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.Client.view.GUI.ActivateVaticanReportPopupController">
+<AnchorPane fx:id="activateVaticanPopup" prefHeight="380.0" prefWidth="570.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.view.GUI.ActivateVaticanReportPopupController">
     <children>
         <Text fx:id="activateVaticanPopupText1" layoutX="109.0" layoutY="78.0" mouseTransparent="true" />
         <Text fx:id="activateVaticanPopupText2" layoutX="136.0" layoutY="102.0" mouseTransparent="true" />

@@ -5,7 +5,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane fx:id="anchorChoose" prefHeight="380.0" prefWidth="570.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.Client.view.GUI.ChooseActionController">
+<AnchorPane fx:id="anchorChoose" prefHeight="380.0" prefWidth="570.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.view.GUI.ChooseActionController">
     <children>
       <Button fx:id="closeChoose" layoutX="670.0" layoutY="20.0" mnemonicParsing="false" onAction="#handleCloseChooseAction" prefHeight="77.0" prefWidth="59.0" styleClass="button, exit" stylesheets="@../css/button.css" />
       <Text fx:id="ChooseActionText" layoutX="216.0" layoutY="102.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Select the action you want to perform :" wrappingWidth="522.8034210205078" />

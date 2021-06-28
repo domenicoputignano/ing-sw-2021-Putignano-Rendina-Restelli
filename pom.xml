@@ -118,7 +118,7 @@
           <version>0.0.4</version>
           <configuration>
             <mainClass>
-                it.polimi.ingsw.Client.view.GUI.GUIApp
+                it.polimi.ingsw.client.view.GUI.GUIApp
             </mainClass>
           </configuration>
         </plugin>

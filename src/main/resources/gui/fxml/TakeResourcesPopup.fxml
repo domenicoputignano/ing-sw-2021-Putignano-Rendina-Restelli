@@ -6,7 +6,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane fx:id="takeRespopup" prefHeight="380.0" prefWidth="570.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.Client.view.GUI.TakeResPopupController">
+<AnchorPane fx:id="takeRespopup" prefHeight="380.0" prefWidth="570.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.view.GUI.TakeResPopupController">
     <children>
        <Text fx:id="takeResPopupText1" layoutX="85.0" layoutY="71.0" mouseTransparent="true" text="You correctly took resources from Market ! " />
       <Text fx:id="takeResPopupText2" layoutX="112.0" layoutY="95.0" mouseTransparent="true" text="You got the following resources:" />

@@ -5,7 +5,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane fx:id="anchorViewDashBoard" prefHeight="380.0" prefWidth="570.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.Client.view.GUI.ViewDashBoardController">
+<AnchorPane fx:id="anchorViewDashBoard" prefHeight="380.0" prefWidth="570.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.view.GUI.ViewDashBoardController">
     <children>
         <Button fx:id="closeViewDashboard" layoutX="670.0" layoutY="20.0" mnemonicParsing="false" onAction="#handleCloseViewDashboard" prefHeight="77.0" prefWidth="59.0" styleClass="button, exit" stylesheets="@../css/button.css" />
         <Text fx:id="viewDashboardText" layoutX="216.0" layoutY="102.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Click a button to see a part of board:" wrappingWidth="522.8034210205078" />

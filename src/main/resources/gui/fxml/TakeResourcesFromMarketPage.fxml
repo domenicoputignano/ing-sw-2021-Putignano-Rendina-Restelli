@@ -15,7 +15,7 @@
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.layout.HBox?>
 
-<AnchorPane fx:id="anchorBuyDevCard" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.Client.view.GUI.TakeResourcesController">
+<AnchorPane fx:id="anchorBuyDevCard" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.view.GUI.TakeResourcesController">
     <children>
         <Button fx:id="closeTakeRes" layoutX="975.0" layoutY="50.0" mnemonicParsing="false" onAction="#handleCloseChooseAction" prefHeight="65.0" prefWidth="70.0" styleClass="button, exit" stylesheets="@../css/button.css" />
         <ImageView fx:id="marketTrayImage" fitHeight="446.0" fitWidth="320.0" layoutX="202.0" layoutY="131.0" pickOnBounds="true" preserveRatio="true">

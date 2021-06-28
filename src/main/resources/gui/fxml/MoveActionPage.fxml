@@ -6,7 +6,7 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane fx:id="anchorMoveAction" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.Client.view.GUI.MoveActionController">
+<AnchorPane fx:id="anchorMoveAction" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.view.GUI.MoveActionController">
     <children>
         <Button fx:id="closeMoveAction" layoutX="975.0" layoutY="50.0" mnemonicParsing="false" onAction="#handleCloseMoveAction" prefHeight="65.0" prefWidth="70.0" styleClass="exit" stylesheets="@../css/button.css" />
         <ImageView fitHeight="431.0" fitWidth="701.0" layoutX="200.0" layoutY="129.0" pickOnBounds="true" preserveRatio="true">
