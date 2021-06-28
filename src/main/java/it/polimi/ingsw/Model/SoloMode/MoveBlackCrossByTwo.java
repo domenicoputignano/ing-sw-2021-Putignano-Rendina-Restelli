@@ -1,6 +1,10 @@
 package it.polimi.ingsw.Model.SoloMode;
 
 public class MoveBlackCrossByTwo implements TokenEffect{
+    /**
+     * Moves Lorenzo il Magnifico forward by two positions on the Faith Track.
+     * @param lorenzoIlMagnifico the instance of Lorenzo il Magnifico.
+     */
     public void performTokenEffect(LorenzoIlMagnifico lorenzoIlMagnifico) {
         lorenzoIlMagnifico.moveBlackCross(2);
     }

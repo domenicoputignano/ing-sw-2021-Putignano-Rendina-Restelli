@@ -2,6 +2,11 @@ package it.polimi.ingsw.Model.SoloMode;
 
 
 public class MoveBlackCrossAndShuffle implements TokenEffect{
+    /**
+     * Moves Lorenzo il Magnifico forward by one space on the Faith Track.
+     * Then shuffles the token stack.
+     * @param lorenzoIlMagnifico the instance of Lorenzo il Magnifico.
+     */
     public void performTokenEffect(LorenzoIlMagnifico lorenzoIlMagnifico) {
         lorenzoIlMagnifico.moveAndShuffle();
     }

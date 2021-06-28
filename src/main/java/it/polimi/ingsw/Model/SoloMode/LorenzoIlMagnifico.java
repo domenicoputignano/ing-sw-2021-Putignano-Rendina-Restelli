@@ -11,13 +11,35 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-
+/**
+ * This class represents Lorenzo il Magnifico, who the player has to face in {@link SoloMode}.
+ * Every time the player passes the turn, Lorenzo performs his action by drawing a {@link Token}
+ * and performing the associated effect.
+ * Lorenzo can move on the faith track like any other player and can activate Vatican Reports.
+ */
 public class LorenzoIlMagnifico extends Observable<GameEvent> {
+    /**
+     * The marker of Lorenzo's position on the Faith Track.
+     */
     private int blackCross = 0;
+    /**
+     * The index of the last Vatican Report section passed by Lorenzo.
+     */
     private int passedSection = 0;
+    /**
+     * The player's {@link FaithTrack} instance.
+     */
     private final FaithTrack faithTrack;
+    /**
+     * The instance of the ongoing game.
+     */
     private final SoloMode soloGame;
 
+    /**
+     * Constructs an instance of Lorenzo il Magnifico from the given parameters.
+     * @param faithTrack the faith track of the player.
+     * @param soloGame the instance of the ongoing game.
+     */
     public LorenzoIlMagnifico(FaithTrack faithTrack, SoloMode soloGame)
     {
         this.faithTrack = faithTrack;
@@ -25,11 +47,10 @@ public class LorenzoIlMagnifico extends Observable<GameEvent> {
         this.addObserver(this.soloGame);
     }
 
-
     /**
-     * Moves Lorenzo's cross forward in player board.
+     * Moves Lorenzo's cross forward on player's Faith Track.
      * @param pos indicates number of cells that has been covered.
-     * @return true value if Lorenzo has activated a Vatican Report
+     * @return whether Lorenzo has activated a Vatican Report.
      */
     public boolean moveBlackCross(int pos) {
         boolean isAVaticanReportTriggered = false;
@@ -83,15 +104,24 @@ public class LorenzoIlMagnifico extends Observable<GameEvent> {
         }
     }
 
+    /**
+     * Moves black cross forward by one position, then refresh the stack of tokens.
+     */
     public void moveAndShuffle() {
         this.moveBlackCross(1);
         this.soloGame.refreshTokens();
     }
 
+    /**
+     * @return Lorenzo's position on the faith track.
+     */
     public int getBlackCross() {
         return blackCross;
     }
 
+    /**
+     * @return the index of the last Vatican Report section passed by Lorenzo.
+     */
     public int getPassedSection() {
         return passedSection;
     }

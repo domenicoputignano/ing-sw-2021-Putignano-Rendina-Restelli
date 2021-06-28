@@ -101,7 +101,7 @@ public class SoloMode extends Game {
 
     /**
      * Implementation of the method called when {@link DevCardColorEnded} conclusion event is reached.
-     * In Solo Mode when a dev card color ends, the player automatically looses.
+     * In Solo Mode when a dev card color ends, the player automatically loses.
      * @param event the event triggered.
      */
     @Override
@@ -111,7 +111,7 @@ public class SoloMode extends Game {
 
     /**
      * Implementation of the method called when {@link BlackCrossHitLastSpace} conclusion event is reached.
-     * In Solo Mode when Lorenzo il Maginifico reaches the last space, the player automatically looses.
+     * In Solo Mode when Lorenzo il Maginifico reaches the last space, the player automatically loses.
      * @param event the event triggered.
      */
     @Override

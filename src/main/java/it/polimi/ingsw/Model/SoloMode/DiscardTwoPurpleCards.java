@@ -3,6 +3,10 @@ package it.polimi.ingsw.Model.SoloMode;
 import it.polimi.ingsw.Commons.ColorCard;
 
 public class DiscardTwoPurpleCards implements TokenEffect{
+    /**
+     * Discards two purple cards from the decks.
+     * @param lorenzoIlMagnifico the instance of Lorenzo il Magnifico.
+     */
     public void performTokenEffect(LorenzoIlMagnifico lorenzoIlMagnifico) {
         lorenzoIlMagnifico.throwDevCards(ColorCard.purple);
     }
