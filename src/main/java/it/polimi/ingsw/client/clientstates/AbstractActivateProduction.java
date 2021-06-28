@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 
 /**
  * This abstract class deals with main action of the game consisting in activate productions and provides some
- * methods to make consistency
+ * methods to make consistency checks.
  */
 public abstract class AbstractActivateProduction extends AbstractClientState {
 

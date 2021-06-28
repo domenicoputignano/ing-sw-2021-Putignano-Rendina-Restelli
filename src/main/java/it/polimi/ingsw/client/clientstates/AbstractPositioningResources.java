@@ -6,7 +6,12 @@ import it.polimi.ingsw.utils.messages.clientMessages.PositioningMessage;
 
 import java.util.List;
 
+/**
+ * This class represents the generic ui state reached when the client fails to position some resources
+ * and the server sends a {@link it.polimi.ingsw.utils.messages.serverMessages.Updates.ServerAsksForPositioning}.
+ */
 public abstract class AbstractPositioningResources extends AbstractClientState {
+
 
     protected PositioningMessage messageToSend = new PositioningMessage();
     protected List<ResourceType> resourcesToSettle;
