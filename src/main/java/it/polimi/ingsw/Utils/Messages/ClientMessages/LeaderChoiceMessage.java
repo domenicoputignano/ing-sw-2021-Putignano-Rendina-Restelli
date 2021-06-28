@@ -4,18 +4,29 @@ import it.polimi.ingsw.Controller.GameController;
 import it.polimi.ingsw.Network.RemoteView;
 
 public class LeaderChoiceMessage implements GameControllerHandleable {
+    /**
+     * Index of the first card.
+     */
     private int leader1ToDiscard;
+    /**
+     * Index of the second card.
+     */
     private int leader2ToDiscard;
 
 
-    /* The constructor provides indexes of LeaderCard to discard, first one is bigger than second one
-    to accomplish correct deletion of cards */
+    /**
+     * Constructor provides indexes of leader cards to discard, first one is bigger than second one
+     * to accomplish correct cards deletions.
+     * */
     public LeaderChoiceMessage(int firstLeader, int secondLeader) {
         this.leader1ToDiscard = firstLeader;
         this.leader2ToDiscard = secondLeader;
         switchValue();
     }
 
+    /**
+     * Returns if the message is valid according to card indexes chosen.
+     */
     public boolean isValidMessage() {
         if(leader2ToDiscard == leader1ToDiscard) return false;
         if(leader2ToDiscard < 1 || leader2ToDiscard > 4 || leader1ToDiscard < 1 || leader1ToDiscard > 4) return false;
@@ -30,6 +41,11 @@ public class LeaderChoiceMessage implements GameControllerHandleable {
         return leader2ToDiscard;
     }
 
+    /**
+     * Calls right {@link GameController} method assigned to this message handling.
+     * @param gameController controller that will handle the message.
+     * @param sender remote view that has forwarded the message.
+     */
     public void handleMessage(GameController gameController, RemoteView sender) {
         gameController.handleLeaderChoiceMessage(this, sender);
     }
