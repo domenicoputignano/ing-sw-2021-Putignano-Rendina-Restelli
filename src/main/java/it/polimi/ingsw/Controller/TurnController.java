@@ -11,7 +11,7 @@ import it.polimi.ingsw.Utils.Messages.ServerMessages.Updates.ServerAsksForPositi
 
 /**
  * This class represents the link between player in turn and the game.
- * This, together with {@link GameController}, represents the Controller of the MVC Architectural Pattern.
+ * This, together with {@link GameController}, represents the Controller of the MVC Architectural pattern.
  */
 
 public class TurnController {
@@ -21,7 +21,7 @@ public class TurnController {
 
     /**
      * Constructor that initialize all the attributes.
-     * @param model, the instance of the match.
+     * @param model, instance of the game to which turn controller is related.
      * @param firstPlayer, player in turn at the beginning of the match.
      */
     public TurnController(Game model, Player firstPlayer) {
