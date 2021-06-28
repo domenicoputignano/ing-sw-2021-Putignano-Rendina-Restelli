@@ -23,55 +23,92 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Class that represents the controller of the PlayerBoard page of the game
+ * This page represents the user's main PlayerBoard, where he can make all
+ * the moves during his turn and see the boards of the other players when not in turn
+ */
 public class PlayerBoardController extends Controller {
+    /**
+     * Attribute that represents the HBox containing the Strongbox resources
+     */
     public HBox strongboxResources;
-    Stage actions;
-    Stage move;
-
+    /**
+     * Attributes that represent the imageView of the leader cards owned by the player
+     */
     @FXML
-    public ImageView leaderCard1;
-
+    public ImageView leaderCard1,leaderCard2;
+    /**
+     * Attributes that represent the buttons used to play during your turn
+     */
     @FXML
     public Button chooseAction,moveAction,endTurn,otherPlayers,viewDashboard,closePopup;
-
-    @FXML
-    public ImageView leaderCard2;
-    @FXML
-    private static final String CURSOR = "/gui/img/cursor.png";
-
+    /**
+     * Attributes used to set the images of the favorTiles and to set the faith within the FaithTrack
+     */
     public ImageView[] cells = new ImageView[25];
     public ImageView[] favorTiles = new ImageView[3];
-
+    /**
+     * Attributes that represent the imageViews of each cell of the FaithTrack
+     */
     @FXML
     public ImageView cell0,cell1,cell2,cell3,cell4,cell5,cell6,cell7,cell8,cell9,cell10
             ,cell11,cell12,cell13,cell14,cell15,cell16,cell17,cell18,cell19,cell20,cell21,
             cell22,cell23,cell24;
+    /**
+     * Attributes that represent the imageViews of each favorTile of the FaithTrack
+     */
     @FXML
     public ImageView favorTile1,favorTile2,favorTile3;
-
+    /**
+     * Attributes used to represent resources within extra Depot type leader cards
+     */
     @FXML
     public ImageView resource1LeaderCard1,resource2LeaderCard1,resource1LeaderCard2,resource2LeaderCard2;
-
+    /**
+     * Attributes that represent the imageViews of the cards held within the slots
+     */
     @FXML
     public ImageView slot1Card1,slot2Card1,slot3Card1,slot1Card2,slot2Card2,slot3Card2,slot1Card3,slot2Card3,slot3Card3;
-
+    /**
+     * Attributes used to represent the resources owned within the depots
+     */
     @FXML
     public ImageView depot1, depot21, depot22, depot31, depot32, depot33;
-
+    /**
+     * Attribute used to represent the textField containing the username
+     * of the user relative to the PlayerBoard
+     */
     @FXML
     public TextField username;
-
+    /**
+     * Attributes representing the text identifying that a leader card is active
+     */
     @FXML
     public Text active1,active2;
-
+    /**
+     * Attributes that represent the images that illuminate
+     * and that identify that a leader card is active
+     */
     @FXML
     public ImageView lightActive1,lightActive2,tokens;
-
+    /**
+     * Attributes that represent the text of the number of resources owned within
+     * the Strongbox for each resource
+     */
     @FXML
     Text numCoinStrongbox, numServantStrongbox, numShieldStrongbox, numStoneStrongbox;
-
+    /**
+     * Attribute that represents the player of which to show the playerBoard
+     * as this controller is used both to show the personal playerBoard and to show
+     * the playerBoard of other players
+     */
     ReducedPlayer playerToShow;
-
+    /**
+     * Main method that initializes the scene within the stage
+     * It takes care of setting the background of the scene
+     * and the font of the texts and buttons
+     */
     public void initialize() {
         lightActive1.setImage(new Image("/gui/img/activeLeaderCardLight.png"));
         lightActive2.setImage(new Image("/gui/img/activeLeaderCardLight.png"));
@@ -95,7 +132,9 @@ public class PlayerBoardController extends Controller {
 
         this.client = GUIApp.client;
     }
-
+    /**
+     * method used to initialize the images of the leader cards owned
+     */
     private void initializeLeaderCards()
     {
         if(playerToShow.getNumOfLeaderCards() > 0) {
@@ -115,7 +154,9 @@ public class PlayerBoardController extends Controller {
             }
         }
     }
-
+    /**
+     * method used to initialize the images of the faith and favorTiles within the FaitTrack
+     */
     private void initializeCells()
     {
         if(client.getGame().isSoloMode())
@@ -176,7 +217,9 @@ public class PlayerBoardController extends Controller {
             favorTiles[2].setImage(new Image("/gui/img/favorTile3.png"));
         else favorTiles[2].setImage(null);
     }
-
+    /**
+     * method used to initialize the images of the Development cards owned within the slots
+     */
     private void initializeSlots()
     {
         if(!playerToShow.getPersonalBoard().isEmptySlot(0)){
@@ -201,7 +244,9 @@ public class PlayerBoardController extends Controller {
                 slot3Card3.setImage(new Image(playerToShow.getPersonalBoard().getSlot(2).getDevelopmentCardStack().get(2).toImage()));
         }
     }
-
+    /**
+     * method used to initialize the images of the resources within the extra depots of the leader cards
+     */
     private void initializeExtraDepots()
     {
         List<LeaderCard> leaderCards = playerToShow.getAvailableLeaderCards();
@@ -237,7 +282,9 @@ public class PlayerBoardController extends Controller {
 
 
     }
-
+    /**
+     * method used to set the faith and the black cross within the Faith Track in the case of SoloMode
+     */
     private void initializeFaithTrackWithBlackCross()
     {
         clearFaithMarker();
@@ -250,18 +297,27 @@ public class PlayerBoardController extends Controller {
             cells[blackCross].setImage(new Image("/gui/img/blackCross.png"));
         }
     }
+
+    /**
+     * method used to initialize the faith marker
+     */
     private void initializeFaithMarker()
     {
         clearFaithMarker();
         cells[playerToShow.getPersonalBoard().getFaithTrack().getFaithMarker()].setImage(new Image("/gui/img/faith.png"));
     }
 
+    /**
+     * method used to clear the faith marker
+     */
     private void clearFaithMarker()
     {
         for(int i=0;i<25;i++)
             cells[i].setImage(null);
     }
-
+    /**
+     * method used to initialize the images of the resources within the depots
+     */
     private void initializeDepots(){
 
         // SETUP DEPOT 1
@@ -289,7 +345,10 @@ public class PlayerBoardController extends Controller {
             loadImageResource(depot31, playerToShow.getPersonalBoard().getWarehouse().getNormalDepots()[2].getType());
         }
     }
-
+    /**
+     * method used to initialize the images of the resources within the Strongbox and set the number
+     * of resources owned for each resource
+     */
     private void initializeStrongbox() {
         ReducedStrongbox strongbox = playerToShow.getPersonalBoard().getWarehouse().getStrongbox();
         numCoinStrongbox.setText(""+strongbox.getOccurrencesOfResource(ResourceType.coin));
@@ -298,30 +357,47 @@ public class PlayerBoardController extends Controller {
         numStoneStrongbox.setText(""+strongbox.getOccurrencesOfResource(ResourceType.stone));
     }
 
-
+    /**
+     * generic method used to set the image of a specific resource
+     * @param target imageView to be set
+     * @param resourceType type of resource to insert inside the imageView
+     */
     private void loadImageResource(ImageView target, ResourceType resourceType){
         target.setImage(new Image(ResourceLocator.retrieveResourceTypeImage(resourceType)));
     }
-
+    /**
+     * method used to select the type of action to perform
+     * It is performed when chooseAction button is pressed
+     */
     @FXML
     public void handleChooseActionButton()
     {
         showPopup("/gui/fxml/ChooseActionPage.fxml", 820, 520);
     }
+    /**
+     * method used to perform the Move action
+     * It is performed when chooseAction button is pressed
+     */
     @FXML
     public void handleMoveActionButton()
     {
         showPopup("/gui/fxml/MoveActionPage.fxml", 1180, 750);
     }
-
+    /**
+     * method used to End Turn
+     * It is performed when endTurn button is pressed
+     */
     @FXML
     public void handleEndTurn()
     {
         client.sendMessage(new EndTurnMessage());
     }
 
-
-
+    /**
+     * method used to initialize the playerBoard in the case of displaying the
+     * playerBoard of the other players or displaying one's own playerBoard
+     * @param player owner of the playerBoard
+     */
     public void initializePersonalBoard(ReducedPlayer player) {
         this.playerToShow = player;
         if(!playerToShow.getNickname().equals(client.getGame().getPlayer(client.getUser()).getNickname())) {
@@ -360,6 +436,9 @@ public class PlayerBoardController extends Controller {
         initializeExtraDepots();
     }
 
+    /**
+     * method used to make buttons visible to perform actions based on the type of playerBoard
+     */
     private void setAvailableActions() {
         if(!client.getGame().getCurrPlayer().equals(playerToShow)) {
             moveAction.setVisible(false);
@@ -376,20 +455,29 @@ public class PlayerBoardController extends Controller {
             viewDashboard.setVisible(false);
         }
     }
-
+    /**
+     * method used to close the popup page over the main stage and log out of the game
+     * It is performed when closePopup button is pressed
+     */
     @FXML
     public void handleCloseViewOthers()
     {
         Stage stage = (Stage) closePopup.getScene().getWindow();
         stage.close();
     }
-
+    /**
+     * method used to view the playerboard of the other players in the game
+     * It is performed when otherPlayers button is pressed
+     */
     @FXML
     public void handleViewOtherPlayers()
     {
         showPopup("/gui/fxml/ViewOtherPlayersPage.fxml", 820, 520);
     }
-
+    /**
+     * method used to view the Dashboard containing decks and MarketTray
+     * It is performed when viewDashboard button is pressed
+     */
     @FXML
     public void handleViewDashboard()
     {
