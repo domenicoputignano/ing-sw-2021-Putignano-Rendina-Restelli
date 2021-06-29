@@ -12,8 +12,13 @@ import java.util.List;
  */
 public abstract class AbstractPositioningResources extends AbstractClientState {
 
-
+    /**
+     * The message to send to the server containing how to position the resources.
+     */
     protected PositioningMessage messageToSend = new PositioningMessage();
+    /**
+     * The list of the resources to settle.
+     */
     protected List<ResourceType> resourcesToSettle;
 
     public AbstractPositioningResources(Client client, List<ResourceType> resourcesToSettle) {
