@@ -20,6 +20,11 @@ import java.util.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+/**
+ * Class that deals with user interaction through command line. It has some methods that support CLI state to manage
+ * player input due to high complexity of client messages. It uses client as a gateway thanks to which adapt what user see
+ * on the screen.
+ */
 public class CLI extends UI {
 
     private final Scanner input = new Scanner(System.in);
