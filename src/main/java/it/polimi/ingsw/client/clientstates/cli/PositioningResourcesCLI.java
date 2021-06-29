@@ -22,7 +22,7 @@ public class PositioningResourcesCLI extends AbstractPositioningResources {
     private final CLI cli;
 
     /**
-     * Initializes references to CLI and client.
+     * Initializes references to CLI and client. It also initializes the list of resources to settle.
      */
     public PositioningResourcesCLI(Client client, List<ResourceType> resourcesToSettle) {
         super(client, resourcesToSettle);

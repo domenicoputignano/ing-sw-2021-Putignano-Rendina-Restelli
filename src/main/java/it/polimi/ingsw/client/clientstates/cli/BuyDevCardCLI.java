@@ -11,7 +11,7 @@ import it.polimi.ingsw.network.Client;
 import java.util.Scanner;
 
 /**
- * This class represents the specific CLI state that is reached when the player in turn
+ * This class represents the CLI-specific state that is reached when the player in turn
  * wants to buy a {@link it.polimi.ingsw.commons.DevelopmentCard} during his turn.
  */
 public class BuyDevCardCLI extends AbstractBuyDevCard {

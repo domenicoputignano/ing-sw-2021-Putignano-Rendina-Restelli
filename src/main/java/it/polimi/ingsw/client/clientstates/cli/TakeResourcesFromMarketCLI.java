@@ -27,7 +27,7 @@ public class TakeResourcesFromMarketCLI extends AbstractTakeResourcesFromMarket 
     private final CLI cli;
 
     /**
-     * Initializes reference to CLI and client.
+     * Initializes references to CLI and client.
      */
     public TakeResourcesFromMarketCLI(Client client) {
         super(client);
