@@ -6,13 +6,21 @@ import it.polimi.ingsw.utils.ANSI_Color;
 import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Map;
-
+/**
+ * This class represents a simplified version of a Warehouse with respect to the server's class.
+ * It contains only the information required client side.
+ */
 public class ReducedWarehouse implements Serializable {
+    /**
+     * Attributes that represent the contents of the Warehouse
+     */
     private final ReducedDepot[] normalDepots;
     private final ReducedDepot[] extraDepots;
     private final ReducedStrongbox strongbox;
     private final Map<ResourceType, Integer> availableResources;
-
+    /**
+     * Initialize an instance by setting normalDepots ,extraDepots,strongbox, and availableResources of the Strongbox.
+     */
     public ReducedWarehouse(ReducedDepot[] normalDepots, ReducedDepot[] extraDepots, ReducedStrongbox strongbox, Map<ResourceType,Integer> availableResources){
         this.normalDepots = normalDepots;
         this.extraDepots = extraDepots;

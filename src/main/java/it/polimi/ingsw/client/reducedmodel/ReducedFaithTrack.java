@@ -3,12 +3,20 @@ package it.polimi.ingsw.client.reducedmodel;
 import it.polimi.ingsw.commons.StateFavorTiles;
 
 import java.io.Serializable;
-
+/**
+ * This class represents a simplified version of Faith Track with respect to the server's class.
+ * It contains only the information required client side.
+ */
 public class ReducedFaithTrack implements Serializable {
+    /**
+     * Attributes that represent the contents of the Faith Track
+     */
     private final int faithMarker;
     private final int victoryPoints[] = new int[25];
     private final StateFavorTiles[] favorTiles;
-
+    /**
+     * Initialize an instance by setting faithMarker and favorTiles of the Faith Track.
+     */
     public ReducedFaithTrack(int faithMarker, StateFavorTiles[] favorTiles) {
         this.faithMarker = faithMarker;
         this.favorTiles = favorTiles;
@@ -31,7 +39,9 @@ public class ReducedFaithTrack implements Serializable {
         }
         return resultBuilder.toString();
     }
-
+    /**
+     * Return representation of the cell used by command line interface.
+     */
     public String getFaithMarkerCell(int cellIndex) {
         if(cellIndex != faithMarker) return "     |";
         else {
