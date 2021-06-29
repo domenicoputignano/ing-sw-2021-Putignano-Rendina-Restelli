@@ -13,7 +13,7 @@ import java.util.Scanner;
 import static it.polimi.ingsw.client.view.UI.fromStringToResourceType;
 
 /**
- * This class represents the specific CLI state that is reached when the player in turn
+ * This class represents the CLI-specific state that is reached when the player in turn
  * wants to activate productions during his turn.
  */
 public class ActivateProductionCLI extends AbstractActivateProduction {

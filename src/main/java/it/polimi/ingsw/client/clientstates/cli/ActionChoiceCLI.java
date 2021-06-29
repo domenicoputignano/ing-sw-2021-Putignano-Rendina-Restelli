@@ -7,7 +7,7 @@ import it.polimi.ingsw.network.Client;
 import java.util.Scanner;
 
 /**
- * This class represents the specific CLI state that is reached when the player in turn
+ * This class represents the CLI-specific state that is reached when the player in turn
  * has to choose the action he wants to perform during his turn.
  */
 public class ActionChoiceCLI extends AbstractActionChoice {
@@ -20,7 +20,6 @@ public class ActionChoiceCLI extends AbstractActionChoice {
      * The CLI instance this state refers to.
      */
     private final CLI cli;
-
 
     /**
      * Initializes reference to CLI and client.

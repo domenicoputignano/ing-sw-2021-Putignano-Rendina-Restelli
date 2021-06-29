@@ -12,33 +12,59 @@ import it.polimi.ingsw.utils.Pair;
 
 import java.util.Scanner;
 
+/**
+ * This class represents the CLI-specific state that is reached when the client chooses to
+ * take resources from the {@link it.polimi.ingsw.model.marketTray.MarketTray} during his turn.
+ */
 public class TakeResourcesFromMarketCLI extends AbstractTakeResourcesFromMarket {
+    /**
+     * The Scanner used to receive inputs from user.
+     */
     private final Scanner input = new Scanner(System.in);
+    /**
+     * The CLI instance this state refers to.
+     */
     private final CLI cli;
 
+    /**
+     * Initializes reference to CLI and client.
+     */
     public TakeResourcesFromMarketCLI(Client client) {
         super(client);
         cli = (CLI) client.getUI();
     }
 
+    /**
+     * Main method of the class. It leads the interaction with the user during different phases of this action.
+     */
     @Override
     public void manageUserInteraction() {
         try {
+            // show the Market Tray
             cli.showMarketTray();
+            // if the player wants to go back, return to the action choice state
             cli.playerWantsToGoBack();
+            // asks if he wants to take a row or a column of marbles
             chooseRowColumn();
+            // asks the index of the row/column he wants to take
             chooseIndex();
+            // compute the selected marble from the chosen row/column of the market tray
             computeSelectedMarbles();
             System.out.println("You obtained these marbles: " + selectedMarbles);
+            // for each selected marble asks where to put it
             for (ReducedMarble marble : selectedMarbles) {
                 setupMarble(marble);
             }
+            // sends the message to the server
             client.sendMessage(message);
         } catch(BackToMenuException e) {
             cli.returnToMenu();
         }
     }
 
+    /**
+     * Method used to handle the user's choice between a row or a column of the Market Tray.
+     */
     private void chooseRowColumn() {
         System.out.println("You chose to take resources from Market. Now choose ROW|COL");
         boolean choiceOK = false;
@@ -57,6 +83,9 @@ public class TakeResourcesFromMarketCLI extends AbstractTakeResourcesFromMarket 
         } while (!choiceOK);
     }
 
+    /**
+     * Method used to handle the choice of the index of the row/column the user wants to take.
+     */
     private void chooseIndex() {
         System.out.println("You chose " + message.getPlayerChoice());
         //int choice;
@@ -98,6 +127,12 @@ public class TakeResourcesFromMarketCLI extends AbstractTakeResourcesFromMarket 
         }
     }
 
+    /**
+     * Method used to ask where the user wants to place the resource related to the given marble.
+     * If the marble is white and the user has two active convert marble effects he has to choice which one he wants
+     * to activate.
+     * @param marble the marble the user have to position.
+     */
     private void setupMarble(ReducedMarble marble) {
         if(marble.getColorMarble() == ColorMarble.WHITE){
             if(getConvertMarbleActiveEffects().size() == 1) {
@@ -130,6 +165,10 @@ public class TakeResourcesFromMarketCLI extends AbstractTakeResourcesFromMarket 
         }
     }
 
+    /**
+     * Method used to choose which convert marble effect the user wants to activate.
+     * @return the index of the convert marble effect chosen.
+     */
     private int chooseConvertMarbleEffect() {
         boolean choiceOK = false;
         int choice;

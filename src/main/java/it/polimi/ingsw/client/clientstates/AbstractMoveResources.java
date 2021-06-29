@@ -5,7 +5,7 @@ import it.polimi.ingsw.network.Client;
 import it.polimi.ingsw.utils.messages.clientMessages.MoveResourcesMessage;
 
 /**
- * This class represents the generic ui state that is reached when the clients wants to move the resources in his depots.
+ * This class represents the generic ui state that is reached when the client wants to move resources in his depots.
  */
 public abstract class AbstractMoveResources extends AbstractClientState {
 
