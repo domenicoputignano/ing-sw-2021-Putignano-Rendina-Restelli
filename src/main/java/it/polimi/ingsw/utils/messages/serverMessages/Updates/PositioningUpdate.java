@@ -8,7 +8,15 @@ import it.polimi.ingsw.network.Client;
 
 import java.util.List;
 
+/**
+ * Class representing an update sent after a resources placement has been correctly performed.
+ * A correct placement means that for each resource an available destination from {@link it.polimi.ingsw.utils.MarbleDestination}
+ * has been selected.
+ */
 public class PositioningUpdate extends UpdateMessage{
+    /**
+     * List of resources discarded if not correctly settled.
+     */
     private final List<ResourceType> discardedResources;
 
     public PositioningUpdate(User user, ReducedPersonalBoard reducedPersonalBoard, List<ResourceType> discardedResources) {
@@ -17,6 +25,10 @@ public class PositioningUpdate extends UpdateMessage{
         this.discardedResources = discardedResources;
     }
 
+    /**
+     * Method called by client in order to update its reduced model and show changes to player
+     * @param handler {@link Client} instance that manages the update itself.
+     */
     @Override
     public void handleMessage(Client handler) {
         if(handler.getUI().isReceiverAction(user)) handler.getUI().setNormalActionDone(true);

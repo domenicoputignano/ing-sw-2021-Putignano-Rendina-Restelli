@@ -17,6 +17,11 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
+/**
+ * Class that handles all aspects related to network server-side. Project is mainly based over distributed systems that
+ * are linked through socket and TCP protocol. It waits for client to connect and handles multiple matches. It has also enables
+ * client reconnection based on its identification through chosen nickname.
+ */
 public class Server {
     private final int PORT;
     private final ServerSocket serverSocket;
@@ -193,7 +198,7 @@ public class Server {
      * and binds it with the client that is reconnecting.
      * @param reconnectingClient remote host that wants to join after a disconnection.
      */
-    public void resumeGame(ClientStatus reconnectingClient) {
+    public synchronized void resumeGame(ClientStatus reconnectingClient) {
         ClientStatus oldClientStatus = accounts.get(reconnectingClient.getNickname());
         NetworkRemoteView oldRemoteView = oldClientStatus.getRemoteView();
         //ClientStatus newClientStatus = new ClientStatus(client.getClientSocket(), client.getInputStream(), client.getOutputStream());

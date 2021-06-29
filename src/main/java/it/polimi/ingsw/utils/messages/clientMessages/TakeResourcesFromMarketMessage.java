@@ -12,10 +12,25 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Class containing information on how to perform a {@link it.polimi.ingsw.model.TakeResourcesFromMarket} action.
+ */
 public class TakeResourcesFromMarketMessage implements TurnControllerHandleable {
+    /**
+     * List of {@link Pair}, each one links a marble instance to index of destination slot.
+     */
     private List<Pair<ReducedMarble, MarbleDestination>> whereToPutMarbles = new ArrayList<>();
+    /**
+     * Selects between a column or a row of market board.
+     */
     private MarketChoice playerChoice;
+    /**
+     * Row/Column index.
+     */
     private int index;
+    /**
+     * List containing possible effects linked to {@link it.polimi.ingsw.model.marketTray.WhiteMarble}.
+     */
     private List<Integer> whiteEffects = new ArrayList<>();
 
 
@@ -32,7 +47,10 @@ public class TakeResourcesFromMarketMessage implements TurnControllerHandleable 
     }
 
 
-
+    /**
+     * Adds a marble with index of depot in which settle resource .
+     * @param whereToPutMarble instance of {@link Pair} with
+     */
     public void addWhereToPutMarbles(Pair<ReducedMarble, MarbleDestination> whereToPutMarble) {
         this.whereToPutMarbles.add(whereToPutMarble);
     }
@@ -55,6 +73,9 @@ public class TakeResourcesFromMarketMessage implements TurnControllerHandleable 
         this.index = index;
     }
 
+    /**
+     * Method used to bind a convert marble effect to a white marble.
+     */
     public void addWhiteEffect(Integer choice) {
         this.whiteEffects.add(choice);
     }
@@ -63,6 +84,9 @@ public class TakeResourcesFromMarketMessage implements TurnControllerHandleable 
         this.whiteEffects = whiteEffects;
     }
 
+    /**
+     *
+     */
     public boolean isValidMessage()
     {
         if(playerChoice == null) return false;

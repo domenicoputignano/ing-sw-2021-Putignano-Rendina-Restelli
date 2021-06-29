@@ -18,9 +18,9 @@ public abstract class UI {
         this.client = client;
     }
 
-    public abstract void manageUserInteraction();
+    public void manageUserInteraction(){};
 
-    public abstract void changeCliState(AbstractClientState clientState);
+    public void changeCliState(AbstractClientState clientState){};
 
 
     public boolean isCLI() {
@@ -60,7 +60,6 @@ public abstract class UI {
     public abstract void render(SoloModeMatchWinnerMessage message);
     public abstract void render(LorenzoActivatedVaticanReportUpdate message);
     public abstract void renderError(String errorMessage);
-
     public boolean isReceiverAction(User sender) {
         return sender.equals(client.getUser());
     }

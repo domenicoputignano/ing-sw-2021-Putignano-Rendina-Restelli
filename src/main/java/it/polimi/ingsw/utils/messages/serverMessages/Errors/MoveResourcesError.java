@@ -4,8 +4,16 @@ import it.polimi.ingsw.client.CliStatesController;
 import it.polimi.ingsw.commons.User;
 import it.polimi.ingsw.network.Client;
 
+/**
+ * Class containing information about errors made by player who is attempting to settle pending resources coming
+ * from market tray in his depots.
+ */
 public class MoveResourcesError extends ErrorMessage {
     private final Trigger trigger;
+
+    /**
+     * Enum that describes error encountered.
+     */
     public enum Trigger
     {
         MOVE("Error occurred while performing your move action !");
@@ -27,6 +35,10 @@ public class MoveResourcesError extends ErrorMessage {
         this.trigger = trigger;
     }
 
+    /**
+     * Method called by {@link Client} to display error itself.
+     * @param handler Client instance that has to handle the message.
+     */
     @Override
     public void handleMessage(Client handler) {
         if(handler.getUI().isReceiverAction(triggeringUser)) {

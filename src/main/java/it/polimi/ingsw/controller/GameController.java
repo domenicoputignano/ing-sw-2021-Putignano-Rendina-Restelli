@@ -26,8 +26,7 @@ import java.util.stream.Collectors;
  * application, in fact, is based on MVC pattern, and in particular
  * Game Controller is called whenever a {@link GameControllerHandleable} message is received.
  * It handles initial choices done by players before starting the first turn.
- * Messages related to an action performed in a {@link it.polimi.ingsw.model.Turn} are forwared to {@link TurnController}.
- * modify the model itself.
+ * Messages related to an action performed in a {@link it.polimi.ingsw.model.Turn} are forwarded to {@link TurnController}.
  */
 public class GameController {
     private final Logger LOGGER = Logger.getLogger(GameController.class.getName());

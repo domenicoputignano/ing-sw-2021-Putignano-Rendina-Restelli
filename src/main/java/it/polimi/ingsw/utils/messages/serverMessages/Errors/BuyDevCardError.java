@@ -4,8 +4,16 @@ import it.polimi.ingsw.client.CliStatesController;
 import it.polimi.ingsw.commons.User;
 import it.polimi.ingsw.network.Client;
 
+/**
+ * Class containing details about
+ * errors that can occur while performing a {@link it.polimi.ingsw.model.BuyDevCard} action.
+ */
 public class BuyDevCardError extends ErrorMessage {
     private final Trigger trigger;
+
+    /**
+     * Enum representing a specific statement for each possible error.
+     */
     public enum Trigger {
         EMPTYDECK("Required deck is not available !"),
         NOTENOUGHRESOURCES("You don't have enough resources to buy the card !"),
@@ -28,6 +36,10 @@ public class BuyDevCardError extends ErrorMessage {
         this.trigger = trigger;
     }
 
+    /**
+     * Method used by {@link Client}  to display the error.
+     * @param handler Client instance that has to handle the message.
+     */
     @Override
     public void handleMessage(Client handler) {
         if(handler.getUI().isReceiverAction(triggeringUser)) {

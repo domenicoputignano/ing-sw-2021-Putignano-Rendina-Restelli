@@ -4,12 +4,19 @@ import it.polimi.ingsw.network.ClientStatus;
 
 import java.io.IOException;
 
+/**
+ * Class containing nickname chosen by user.
+ */
 public class UsernameChoiceMessage implements ConfigurationMessage {
     private String nickname;
 
 
+    /**
+     * Calls right method of {@link ClientStatus} in order to process message itself.
+     * @param clientStatus {@link ClientStatus} instance that will process message itself.
+     */
     @Override
-    public void handleConfigurationMessage(ClientStatus clientStatus) throws IOException {
+    public void handleConfigurationMessage(ClientStatus clientStatus) {
         clientStatus.nicknameChoice(this);
     }
 

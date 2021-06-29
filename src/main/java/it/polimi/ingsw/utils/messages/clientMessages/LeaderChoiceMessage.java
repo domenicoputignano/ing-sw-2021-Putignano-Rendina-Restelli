@@ -3,6 +3,9 @@ package it.polimi.ingsw.utils.messages.clientMessages;
 import it.polimi.ingsw.controller.GameController;
 import it.polimi.ingsw.network.RemoteView;
 
+/**
+ * Class containing information about how to perform initial leader choice.
+ */
 public class LeaderChoiceMessage implements GameControllerHandleable {
     /**
      * Index of the first card.

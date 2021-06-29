@@ -709,6 +709,7 @@ public class CLI extends UI {
         }
     }
 
+
     /**
      * Prints a player board on the console.
      */

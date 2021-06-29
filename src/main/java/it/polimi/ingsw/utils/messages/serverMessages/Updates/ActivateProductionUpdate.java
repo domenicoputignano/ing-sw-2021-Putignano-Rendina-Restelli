@@ -7,8 +7,17 @@ import it.polimi.ingsw.commons.ResourceType;
 import it.polimi.ingsw.network.Client;
 import java.util.Map;
 
+/**
+ * Class containing specific information about an activate production action successfully ended.
+ */
 public class ActivateProductionUpdate extends UpdateMessage {
+    /**
+     * Map containing for each resource, how many occurrences has been payed to activate production powers.
+     */
     private final Map<ResourceType, Integer> payedResources;
+    /**
+     * Map containing for each resource, how many occurrences has been gained from production powers.
+     */
     private final Map<ResourceType, Integer> receivedResources;
     private final int faithPoints;
 
@@ -20,6 +29,10 @@ public class ActivateProductionUpdate extends UpdateMessage {
         this.faithPoints = faithPoints;
     }
 
+    /**
+     * Method called by client in order to update its reduced model and show changes to player
+     * @param client {@link Client} instance that manages the update itself.
+     */
     @Override
     public void handleMessage(Client client) {
         client.getGame().performUpdate(this);

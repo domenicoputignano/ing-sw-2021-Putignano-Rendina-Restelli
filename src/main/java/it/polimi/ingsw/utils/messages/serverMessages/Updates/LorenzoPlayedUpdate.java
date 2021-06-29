@@ -11,11 +11,27 @@ import it.polimi.ingsw.utils.messages.serverMessages.ServerMessage;
 import java.util.List;
 import java.util.Stack;
 
+/**
+ * Class representing an update sent at the end of a turn while playing a solo mode game.
+ * It contains all attributes that could be edited by a {@link it.polimi.ingsw.model.soloMode.LorenzoIlMagnifico} move.
+ */
 public class LorenzoPlayedUpdate implements ServerMessage {
     private final ReducedPersonalBoard userPersonalBoard;
+    /**
+     * Token played at the end of the turn.
+     */
     private final Token playedToken;
+    /**
+     * Updated stack of playable tokens.
+     */
     private final Stack<Token> tokens;
+    /**
+     * Updated grid of development cards.
+     */
     private final List<Deck> decks;
+    /**
+     * Updated position of Lorenzo's cross.
+     */
     private final int blackCross;
 
     public LorenzoPlayedUpdate(ReducedPersonalBoard reducedPersonalBoard, Token playedToken, Stack<Token> tokens, List<Deck> decks, int blackCross) {
@@ -26,6 +42,10 @@ public class LorenzoPlayedUpdate implements ServerMessage {
         this.blackCross = blackCross;
     }
 
+    /**
+     * Method called by client in order to update its reduced model and show changes to player
+     * @param handler {@link Client} instance that manages the update itself.
+     */
     @Override
     public void handleMessage(Client handler) {
         ((ReducedSoloMode) handler.getGame()).nextTurn(this);

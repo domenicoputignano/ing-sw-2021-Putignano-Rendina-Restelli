@@ -42,7 +42,7 @@ public class ReducedMarble implements Serializable {
     }
 
     /**
-     * Return representation of the marble used by command line interface.
+     * Returns representation of the marble used by command line interface.
      */
     @Override
     public String toString() {

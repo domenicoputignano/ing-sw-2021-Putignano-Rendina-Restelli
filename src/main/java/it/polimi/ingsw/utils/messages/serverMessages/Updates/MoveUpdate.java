@@ -5,6 +5,9 @@ import it.polimi.ingsw.client.reducedmodel.ReducedPersonalBoard;
 import it.polimi.ingsw.commons.User;
 import it.polimi.ingsw.network.Client;
 
+/**
+ * Class representing an update sent after a
+ */
 public class MoveUpdate extends UpdateMessage {
 
     public MoveUpdate(User user, ReducedPersonalBoard reducedPersonalBoard){

@@ -6,12 +6,20 @@ import it.polimi.ingsw.commons.StateFavorTiles;
 import it.polimi.ingsw.commons.User;
 import it.polimi.ingsw.network.Client;
 
+/**
+ * Class consisting an update concerning {@link it.polimi.ingsw.model.gameEvents.ActivateVaticanReportEvent}.
+ */
 public class ActivateVaticanReportUpdate extends UpdateMessage {
 
-    //User that caused activation of Vatican Report by performing an action
+    /**
+     * User that caused activation of Vatican Report by performing an action
+     */
     private final User triggeringUser;
 
-    //resulting state of tile related to a specific Player that has to match with the destination of this messageToSend
+    /**
+     * Resulting tile state corresponding to vatican section on which a vatican report
+     * has been activated.
+     */
     private final StateFavorTiles state;
 
     private final int section;
@@ -23,7 +31,10 @@ public class ActivateVaticanReportUpdate extends UpdateMessage {
         this.state = state;
         this.section = section;
     }
-
+    /**
+     * Method called by client in order to update its reduced model and show changes to player
+     * @param client {@link Client} instance that manages the update itself.
+     */
     @Override
     public void handleMessage(Client client) {
         client.getGame().updatePersonalBoard(this);

@@ -13,9 +13,21 @@ import java.util.Map;
 
 import static it.polimi.ingsw.model.PaymentHandler.areValidInstructions;
 
+/**
+ * This class contains information regarding a {@link it.polimi.ingsw.model.BuyDevCard} action.
+ */
 public class BuyDevCardMessage implements TurnControllerHandleable {
+    /**
+     * Type of chosen development card.
+     */
     private CardType type;
+    /**
+     * Map containing instruction on how to get resources from player's warehouse.
+     */
     private Map<ResourceSource, EnumMap<ResourceType, Integer>> howToTakeResources = new HashMap<>();
+    /**
+     * Index of the slot where the card will be put.
+     */
     private int destinationSlot;
 
 
@@ -32,6 +44,10 @@ public class BuyDevCardMessage implements TurnControllerHandleable {
     }
 
 
+    /**
+     * Method that checks low level correctness of the message.
+     * @return true if check is successfully passed.
+     */
     public boolean isValidMessage()
     {
         if(type == null || type.getLevel() <=0 || type.getLevel() > 3 || type.getColor() == null)
@@ -55,10 +71,20 @@ public class BuyDevCardMessage implements TurnControllerHandleable {
     }
 
 
+    /**
+     * Calls right method of turn controller in order to process the message itself and perform the action required by player.
+     * @param turnController turn controller instance that process the message.
+     * @param sender remote view that forwards the message.
+     */
     public void handleMessage(TurnController turnController, RemoteView sender) {
         turnController.handleBuyDevCardMessage(this,sender);
     }
 
+    /**
+     * This method is called in order to forward message itself to turn controller.
+     * @param gameController game controller instance that will process the message.
+     * @param sender remote view that forwards the message.
+     */
     public void handleMessage(GameController gameController, RemoteView sender) {
         handleMessage(gameController.getTurnController(), sender);
     }

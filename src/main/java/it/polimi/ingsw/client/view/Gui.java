@@ -1,6 +1,5 @@
 package it.polimi.ingsw.client.view;
 
-import it.polimi.ingsw.client.clientstates.AbstractClientState;
 import it.polimi.ingsw.client.view.GUI.*;
 import it.polimi.ingsw.commons.User;
 import it.polimi.ingsw.network.Client;
@@ -12,19 +11,15 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * Gui class representing Graphical User Interface part of the project that can be used as an alternative to {@link CLI}
+ * for this reason the both inherit from {@link UI} abstract class.
+ * It contains several overloading methods whose task consists in submitting message render to {@link GUIApp} main thread.
+ */
 public class Gui extends UI{
 
     public Gui(Client client) {
         super(client);
-    }
-
-    @Override
-    public void manageUserInteraction() {
-
-    }
-    @Override
-    public void changeCliState(AbstractClientState clientState) {
-
     }
 
     @Override
