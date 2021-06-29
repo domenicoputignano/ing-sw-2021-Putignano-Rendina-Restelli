@@ -7,13 +7,31 @@ import it.polimi.ingsw.network.Client;
 import it.polimi.ingsw.utils.messages.serverMessages.*;
 import it.polimi.ingsw.utils.messages.serverMessages.Updates.*;
 
-
+/**
+ * UI stands for User Interface and it is an abstract class containing methods used by CLI and Gui
+ * related to users game experience.
+ */
 public abstract class UI {
+    /**
+     * Instance of client main class over which UI is running.
+     */
     protected Client client;
+    /**
+     * Represents a generic ui state where the client can be.
+     */
     protected AbstractClientState clientState;
-    protected boolean normalActionDone;
-    protected boolean soloMode;
+    /**
+     * Boolean attribute establishes if a normal action has been done during the turn.
+     */
+    protected boolean isNormalActionDone;
+    /**
+     * Boolean attribute establishes if user is playing a solo mode game.
+     */
+    protected boolean isSoloMode;
 
+    /**
+     * Constructor of the class that binds UI and Client to which it is related.
+     */
     protected UI(Client client) {
         this.client = client;
     }
@@ -21,7 +39,6 @@ public abstract class UI {
     public void manageUserInteraction(){};
 
     public void changeCliState(AbstractClientState clientState){};
-
 
     public boolean isCLI() {
         return this instanceof CLI;
@@ -64,6 +81,10 @@ public abstract class UI {
         return sender.equals(client.getUser());
     }
 
+    /**
+     * Boolean method to detect if user that has just joined a lobby corresponds
+     * to user of client that is displaying something through his UI.
+     */
     public boolean isGuestWhoHasJustJoined(String senderNickname) {
         return senderNickname.equals(client.getUser().getNickname());
     }
@@ -72,18 +93,23 @@ public abstract class UI {
         return clientState;
     }
 
+
     public boolean hasDoneNormalAction() {
-        return normalActionDone;
+        return isNormalActionDone;
     }
 
     public void setNormalActionDone(boolean normalActionDone) {
-        this.normalActionDone = normalActionDone;
+        this.isNormalActionDone = normalActionDone;
     }
 
     public boolean isSoloMode() {
-        return soloMode;
+        return isSoloMode;
     }
 
+    /**
+     * Returns one instance of resource type given a string typed by user.
+     * @return correct resource type.
+     */
     public static ResourceType fromStringToResourceType(String resource) {
         if(resource.equalsIgnoreCase("C")||resource.equalsIgnoreCase("coin")) return ResourceType.coin;
         if(resource.equalsIgnoreCase("SE")||resource.equalsIgnoreCase("servant")) return ResourceType.servant;
@@ -97,6 +123,6 @@ public abstract class UI {
 
 
     public void setSoloMode(boolean soloMode) {
-        this.soloMode = soloMode;
+        this.isSoloMode = soloMode;
     }
 }
