@@ -20,43 +20,64 @@ import javafx.stage.Stage;
 
 import java.util.List;
 import java.util.Objects;
-
+/**
+ * Class that represents the controller of the Take Resources from Market page of the game
+ * On this page the user can perform the action of Take Resources From Market obtaining up
+ * to a maximum of 4 resources by choosing to take 3 or 4 marbles based on the choice of column or row
+ */
 public class TakeResourcesController extends Controller{
+    /**
+     * Attribute that represents the central pane of the page
+     */
     @FXML
     public AnchorPane anchorBuyDevCard;
-
+    /**
+     * Attributes that represent the texts where the title of the page is shown
+     */
     @FXML
-    public Text takeResourcesText;
-
-    @FXML
-    public Text resourcesText;
-
+    public Text takeResourcesText,resourcesText;
+    /**
+     * Attribute that represents the button to close the page
+     */
     @FXML
     public Button closeTakeRes;
 
+    /**
+     * Attributes representing the imageViews of the lights
+     * that illuminate the selected row/column during the action
+     */
     @FXML
-    public ImageView light1rows,light2rows,light3rows;
-    @FXML
-    public ImageView light1columns,light2columns,light3columns,light4columns;
-
+    public ImageView light1rows,light2rows,light3rows,light1columns,light2columns,light3columns,light4columns;
+    /**
+     * Attributes that represent the imageViews of the marbles
+     * actually contained within the Market Tray
+     */
     @FXML
     public ImageView marble11,marble12,marble13,marble14,
                         marble21,marble22,marble23,marble24
                         ,marble31,marble32,marble33,marble34,slidingMarble;
-
+    /**
+     *Attributes that represent the imageViews that make up the MarketTray
+     */
     @FXML
     public ImageView marketTrayImage,resourceSupply,selResources1,selResources2,selResources3,selResources4,
                     selMarble1,selMarble2,selMarble3,selMarble4,indRes1,indRes2,indRes3,indRes4;
-
+    /**
+     * Attributes representing the buttons to select the row or column
+     */
     @FXML
-    public Button row1,row2,row3;
-    @FXML
-    public Button column1,column2,column3,column4;
-
+    public Button row1,row2,row3,column1,column2,column3,column4;
+    /**
+     * Attributes that represent the buttons to accept or reject
+     * the selected resources and to confirm the action
+     */
     @FXML
     public Button yesResources,noResources,okButton;
 
-
+    /**
+     * Attributes representing the buttons to select where
+     * to place each resource obtained from the choice of the row / column
+     */
     @FXML
     public Button sel1Depot1,sel1Depot2,sel1Depot3,
                 sel2Depot1,sel2Depot2,sel2Depot3,
@@ -67,13 +88,22 @@ public class TakeResourcesController extends Controller{
 
     @FXML
     public HBox convertMarbleButtons1, convertMarbleButtons2, convertMarbleButtons3, convertMarbleButtons4;
-
+    /**
+     * Attribute that represents the the destination for each marble
+     */
     private MarbleDestination marble1Choice, marble2Choice, marble3Choice, marble4Choice;
 
     private TakeResourcesFromMarketGUI state;
-
+    /**
+     * Attribute that represents the list of the selected marbles
+     */
     private List<ReducedMarble> chosenMarbles;
-
+    /**
+     * Main method that initializes the scene within the stage
+     * It takes care of setting the background of the scene
+     * ,the font of the texts and buttons,
+     * and the images on the scene
+     */
     @FXML
     @Override
     public void initialize() {
@@ -119,6 +149,9 @@ public class TakeResourcesController extends Controller{
         setFont(discard4,21);
     }
 
+    /**
+     * method to use to parse the choices made of the marbles
+     */
     private void parseWarehouseChoices(){
         List<ReducedMarble> marbles = state.getSelectedMarbles();
 
@@ -134,6 +167,9 @@ public class TakeResourcesController extends Controller{
 
     }
 
+    /**
+     * method to use to set the imageView of the selected resources
+     */
     private void setSelectedMarbles(){
         chosenMarbles = state.getSelectedMarbles();
         selMarble1.setImage(new Image(chosenMarbles.get(0).toImage()));
@@ -157,16 +193,32 @@ public class TakeResourcesController extends Controller{
         }
     }
 
+    /**
+     * method used to manage the cases of destination of the marbles for the red marble and for the white marble
+     * @param marble type of marble
+     * @return
+     */
     private boolean haveToChooseMarbleDestination(ReducedMarble marble){
         if(marble.getColorMarble() == ColorMarble.RED) return false;
         if(marble.getColorMarble() == ColorMarble.WHITE && state.getConvertMarbleActiveEffects().size() == 0) return false;
         else return true;
     }
 
+    /**
+     * method used to check that the player has to choose between two resources in the case
+     * of white marble due to two active Convert Marble effects
+     * @return true if the player has two active convert marble effects, false otherwise
+     */
     private boolean haveToChooseConvertMarbleEffect(){
         return state.getConvertMarbleActiveEffects().size() == 2;
     }
 
+    /**
+     * method used to set the resources associated with the white marbles based
+     * on the type of convert marble owned
+     * @param color color of the active convert marble
+     * @return
+     */
     private String getConvertedResources(ColorMarble color){
         switch (color){
             case RED: return "gui/img/faith.png";
@@ -183,7 +235,10 @@ public class TakeResourcesController extends Controller{
     }
 
 
-
+    /**
+     * method used to close page of Take Resources from Market over the main stage
+     * It is performed when closeTakeRes button is pressed
+     */
     @FXML
     public void handleCloseChooseAction()
     {
@@ -191,6 +246,9 @@ public class TakeResourcesController extends Controller{
         stage.close();
     }
 
+    /**
+     * method used to set images and resources in case row 1 is selected
+     */
     @FXML
     public void selectedRow1()
     {
@@ -202,6 +260,9 @@ public class TakeResourcesController extends Controller{
         state.setMarketChoice(MarketChoice.ROW, 1);
         setSelectedMarbles();
     }
+    /**
+     * method used to set images and resources in case row 2 is selected
+     */
     @FXML
     public void selectedRow2()
     {
@@ -213,6 +274,9 @@ public class TakeResourcesController extends Controller{
         state.setMarketChoice(MarketChoice.ROW, 2);
         setSelectedMarbles();
     }
+    /**
+     * method used to set images and resources in case row 3 is selected
+     */
     @FXML
     public void selectedRow3()
     {
@@ -224,6 +288,9 @@ public class TakeResourcesController extends Controller{
         state.setMarketChoice(MarketChoice.ROW, 3);
         setSelectedMarbles();
     }
+    /**
+     * method used to set images and resources in case column 1 is selected
+     */
     @FXML
     public void selectedColumn1()
     {
@@ -235,6 +302,9 @@ public class TakeResourcesController extends Controller{
         state.setMarketChoice(MarketChoice.COLUMN, 1);
         setSelectedMarbles();
     }
+    /**
+     * method used to set images and resources in case column 2 is selected
+     */
     @FXML
     public void selectedColumn2()
     {
@@ -246,6 +316,9 @@ public class TakeResourcesController extends Controller{
         state.setMarketChoice(MarketChoice.COLUMN, 2);
         setSelectedMarbles();
     }
+    /**
+     * method used to set images and resources in case column 3 is selected
+     */
     @FXML
     public void selectedColumn3()
     {
@@ -258,6 +331,9 @@ public class TakeResourcesController extends Controller{
         state.setMarketChoice(MarketChoice.COLUMN, 3);
         setSelectedMarbles();
     }
+    /**
+     * method used to set images and resources in case column 4 is selected
+     */
     @FXML
     public void selectedColumn4()
     {
@@ -270,6 +346,10 @@ public class TakeResourcesController extends Controller{
         state.setMarketChoice(MarketChoice.COLUMN, 4);
         setSelectedMarbles();
     }
+
+    /**
+     * method used to make some elements invisible after choosing the row / column
+     */
     public void setVisibleFalse()
     {
         light1columns.setVisible(false);
@@ -295,12 +375,17 @@ public class TakeResourcesController extends Controller{
         indRes3.setVisible(false);
         indRes4.setVisible(false);
     }
+
     @FXML
     public void handleNoResources()
     {
         setVisibleFalse();
     }
 
+    /**
+     * method used to handle the case in which you confirm that you want
+     * to get the resources of the selected row / column
+     */
     @FXML public void handleYesResources()
     {
         yesResources.setVisible(false);
@@ -322,6 +407,9 @@ public class TakeResourcesController extends Controller{
         }
     }
 
+    /**
+     * method used to reveal the choice of the 2 convert marbles made
+     */
     public void revealConvertMarbleChoice(){
         if(chosenMarbles.get(0).getColorMarble() == ColorMarble.WHITE){
             selResources1.setVisible(false);
@@ -345,6 +433,11 @@ public class TakeResourcesController extends Controller{
         }
     }
 
+    /**
+     * method used to set the choice buttons between the two convert marbles
+     * based on the available convert marble resources
+     * @param target Hbox containing the buttons of convert marble
+     */
     public void initializeConvertMarbleButtons(HBox target){
         target.getChildren().get(0).setStyle("-fx-background-image: url(" +
                 ResourceLocator.retrieveResourceTypeImage(state.getConvertMarbleActiveEffects().get(0)) + ") ; -fx-background-size: 90% auto");
@@ -352,6 +445,10 @@ public class TakeResourcesController extends Controller{
                 ResourceLocator.retrieveResourceTypeImage(state.getConvertMarbleActiveEffects().get(1)) + ") ; -fx-background-size: 90% auto");
     }
 
+    /**
+     * method used to set the buttons for choosing the destination
+     * of the resources selected in the row / column
+     */
     public void setPositionButton()
     {
         if(haveToChooseMarbleDestination(chosenMarbles.get(0))){
@@ -388,6 +485,9 @@ public class TakeResourcesController extends Controller{
 
     }
 
+    /**
+     * method used to set the imageView of the marbles actually present in the MarketTray
+     */
     private void setMarbleImages() {
         ReducedMarketTray marketTray = client.getGame().getMarketTray();
         marble11.setImage(new Image(marketTray.getMarble(1, 1).toImage()));
@@ -408,6 +508,10 @@ public class TakeResourcesController extends Controller{
         slidingMarble.setImage(new Image(marketTray.getSlidingMarble().toImage()));
     }
 
+    /**
+     * method used to make the positioning confirmation button visible for the resources obtained
+     * only after selecting all the destinations for each resource
+     */
     private void showOkButton(){
         if(marble1Choice != null && marble2Choice != null && marble3Choice != null && marble4Choice != null){
             okButton.setVisible(true);
@@ -418,6 +522,10 @@ public class TakeResourcesController extends Controller{
         }
     }
 
+    /**
+     * method used to manage the choice of convert marble for the first resource
+     * @param actionEvent marble to set
+     */
     @FXML
     public void handleFirstConvertMarbleChoice(ActionEvent actionEvent){
         HBox pressedHBox = ((HBox)((Button)actionEvent.getSource()).getParent());
@@ -440,7 +548,10 @@ public class TakeResourcesController extends Controller{
         }
         showOkButton();
     }
-
+    /**
+     * method used to manage the choice of convert marble for the second resource
+     * @param actionEvent marble to set
+     */
     @FXML
     public void handleSecondConvertMarbleChoice(ActionEvent actionEvent){
         HBox pressedHBox = ((HBox)((Button)actionEvent.getSource()).getParent());
@@ -464,11 +575,19 @@ public class TakeResourcesController extends Controller{
         showOkButton();
     }
 
+    /**
+     * method used to set the imageView of the specific convert marble
+     * @param target imageView to set
+     * @param index index of convert marble effect
+     */
     private void setupImageViewConvertedResource(ImageView target, int index){
         target.setVisible(true);
         target.setImage(new Image(Objects.requireNonNull(ResourceLocator.retrieveResourceTypeImage(state.getConvertMarbleActiveEffects().get(index)))));
     }
 
+    /**
+     * method used to manage the choice of depot 1 as the destination of the first resource
+     */
     @FXML
     public void selectedDepot1Marble1(){
         pressedButton(sel1Depot1);
@@ -479,7 +598,9 @@ public class TakeResourcesController extends Controller{
         marble1Choice = MarbleDestination.DEPOT1;
         showOkButton();
     }
-
+    /**
+     * method used to manage the choice of depot 2 as the destination of the first resource
+     */
     @FXML
     public void selectedDepot2Marble1(){
         pressedButton(sel1Depot2);
@@ -490,7 +611,9 @@ public class TakeResourcesController extends Controller{
         marble1Choice = MarbleDestination.DEPOT2;
         showOkButton();
     }
-
+    /**
+     * method used to manage the choice of depot 3 as the destination of the first resource
+     */
     @FXML
     public void selectedDepot3Marble1(){
         pressedButton(sel1Depot3);
@@ -501,7 +624,9 @@ public class TakeResourcesController extends Controller{
         marble1Choice = MarbleDestination.DEPOT3;
         showOkButton();
     }
-
+    /**
+     * method used to manage the choice of the extra depot as the destination of the first resource
+     */
     @FXML
     public void selectedExtraDepotMarble1(){
         pressedButton(sel1ExtraDepot);
@@ -512,7 +637,9 @@ public class TakeResourcesController extends Controller{
         marble1Choice = MarbleDestination.EXTRA;
         showOkButton();
     }
-
+    /**
+     * method used to manage the choice to discard the first resource
+     */
     @FXML
     public void selectedDiscardMarble1(){
         pressedButton(discard1);
@@ -523,7 +650,9 @@ public class TakeResourcesController extends Controller{
         marble1Choice = MarbleDestination.DISCARD;
         showOkButton();
     }
-
+    /**
+     * method used to manage the choice of depot 1 as the destination of the second resource
+     */
     @FXML
     public void selectedDepot1Marble2(){
         pressedButton(sel2Depot1);
@@ -534,7 +663,9 @@ public class TakeResourcesController extends Controller{
         marble2Choice = MarbleDestination.DEPOT1;
         showOkButton();
     }
-
+    /**
+     * method used to manage the choice of depot 2 as the destination of the second resource
+     */
     @FXML
     public void selectedDepot2Marble2(){
         pressedButton(sel2Depot2);
@@ -545,7 +676,9 @@ public class TakeResourcesController extends Controller{
         marble2Choice = MarbleDestination.DEPOT2;
         showOkButton();
     }
-
+    /**
+     * method used to manage the choice of depot 3 as the destination of the second resource
+     */
     @FXML
     public void selectedDepot3Marble2(){
         pressedButton(sel2Depot3);
@@ -556,7 +689,9 @@ public class TakeResourcesController extends Controller{
         marble2Choice = MarbleDestination.DEPOT3;
         showOkButton();
     }
-
+    /**
+     * method used to manage the choice of the extra depot as the destination of the second resource
+     */
     @FXML
     public void selectedExtraDepotMarble2(){
         pressedButton(sel2ExtraDepot);
@@ -567,7 +702,9 @@ public class TakeResourcesController extends Controller{
         marble2Choice = MarbleDestination.EXTRA;
         showOkButton();
     }
-
+    /**
+     * method used to manage the choice to discard the second resource
+     */
     @FXML
     public void selectedDiscardMarble2(){
         pressedButton(discard2);
@@ -578,7 +715,9 @@ public class TakeResourcesController extends Controller{
         marble2Choice = MarbleDestination.DISCARD;
         showOkButton();
     }
-
+    /**
+     * method used to manage the choice of depot 1 as the destination of the third resource
+     */
     @FXML
     public void selectedDepot1Marble3(){
         pressedButton(sel3Depot1);
@@ -589,7 +728,9 @@ public class TakeResourcesController extends Controller{
         marble3Choice = MarbleDestination.DEPOT1;
         showOkButton();
     }
-
+    /**
+     * method used to manage the choice of depot 2 as the destination of the third resource
+     */
     @FXML
     public void selectedDepot2Marble3(){
         pressedButton(sel3Depot2);
@@ -600,7 +741,9 @@ public class TakeResourcesController extends Controller{
         marble3Choice = MarbleDestination.DEPOT2;
         showOkButton();
     }
-
+    /**
+     * method used to manage the choice of depot 3 as the destination of the third resource
+     */
     @FXML
     public void selectedDepot3Marble3(){
         pressedButton(sel3Depot3);
@@ -611,7 +754,9 @@ public class TakeResourcesController extends Controller{
         marble3Choice = MarbleDestination.DEPOT3;
         showOkButton();
     }
-
+    /**
+     * method used to manage the choice of the extra depot as the destination of the third resource
+     */
     @FXML
     public void selectedExtraDepotMarble3(){
         pressedButton(sel3ExtraDepot);
@@ -622,7 +767,9 @@ public class TakeResourcesController extends Controller{
         marble3Choice = MarbleDestination.EXTRA;
         showOkButton();
     }
-
+    /**
+     * method used to manage the choice to discard the third resource
+     */
     @FXML
     public void selectedDiscardMarble3(){
         pressedButton(discard3);
@@ -633,7 +780,9 @@ public class TakeResourcesController extends Controller{
         marble3Choice = MarbleDestination.DISCARD;
         showOkButton();
     }
-
+    /**
+     * method used to manage the choice of depot 1 as the destination of the fourt resource
+     */
     @FXML
     public void selectedDepot1Marble4(){
         pressedButton(sel4Depot1);
@@ -644,7 +793,9 @@ public class TakeResourcesController extends Controller{
         marble4Choice = MarbleDestination.DEPOT1;
         showOkButton();
     }
-
+    /**
+     * method used to manage the choice of depot 2 as the destination of the fourt resource
+     */
     @FXML
     public void selectedDepot2Marble4(){
         pressedButton(sel4Depot2);
@@ -655,7 +806,9 @@ public class TakeResourcesController extends Controller{
         marble4Choice = MarbleDestination.DEPOT2;
         showOkButton();
     }
-
+    /**
+     * method used to manage the choice of depot 3 as the destination of the fourt resource
+     */
     @FXML
     public void selectedDepot3Marble4(){
         pressedButton(sel4Depot3);
@@ -666,7 +819,9 @@ public class TakeResourcesController extends Controller{
         marble4Choice = MarbleDestination.DEPOT3;
         showOkButton();
     }
-
+    /**
+     * method used to manage the choice of the extra depot as the destination of the fourth resource
+     */
     @FXML
     public void selectedExtraDepotMarble4(){
         pressedButton(sel4ExtraDepot);
@@ -677,7 +832,9 @@ public class TakeResourcesController extends Controller{
         marble4Choice = MarbleDestination.EXTRA;
         showOkButton();
     }
-
+    /**
+     * method used to manage the choice to discard the fourth resource
+     */
     @FXML
     public void selectedDiscardMarble4(){
         pressedButton(discard4);
@@ -689,6 +846,10 @@ public class TakeResourcesController extends Controller{
         showOkButton();
     }
 
+    /**
+     * method used to manage the confirmation of the action carried out
+     * It is performed when okButton is pressed
+     */
     @FXML
     public void handleOkChoice()
     {
@@ -697,10 +858,17 @@ public class TakeResourcesController extends Controller{
         handleCloseChooseAction();
     }
 
+    /**
+     * method used to set the CSS of the generic button pressed
+     * @param target button to set
+     */
     private void pressedButton(Button target){
         target.setStyle("-fx-background-size: 75% auto;");
     }
-
+    /**
+     * method used to clear the CSS of the generic selected button
+     * @param target button to set
+     */
     private void clearButtonSelection(Button target){
         target.setStyle("-fx-background-size: 100% auto");
     }

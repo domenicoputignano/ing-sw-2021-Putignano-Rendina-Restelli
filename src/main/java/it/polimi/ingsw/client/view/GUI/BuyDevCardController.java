@@ -19,46 +19,75 @@ import javafx.stage.Stage;
 
 import java.util.*;
 import java.util.stream.Collectors;
-
+/**
+     * Class that represents the controller of the Buy Development Card page of the game
+ * on this page the user can perform the Buy Development Card action choosing the card
+ * you want to buy from one of the possible decks if you have the resources to buy it
+ */
 public class BuyDevCardController extends Controller implements PaymentController {
+    /**
+     * Attribute that represents the central pane of the page
+     */
     @FXML
     public AnchorPane anchorBuyDevCard;
-
+    /**
+     * Attribute that represents the text where the title of the page is shown
+     */
     @FXML
-    public Text buyDevCardText;
-
+    public Text buyDevCardText,selectHowPickResourcesText;
+    /**
+     * Attribute that represents the text where the type of deck is shown
+     */
     @FXML
     public Text green,yellow,purple,blue,level1,level2,level3;
-
+    /**
+     * Attribute that represents the button to close the page
+     */
     @FXML
     public Button closeBuyDevCard;
-
+    /**
+     * Attributes that represent the buttons to select the top Card of
+     * each deck and eventually purchase it
+     */
     @FXML
     public Button green3,green2,green1,blue3,blue2,blue1,yellow1,yellow2,yellow3,purple1,purple2,purple3;
-
+    /**
+     *Attributes that represent the text identifying the resources to be paid once
+     * the card to be purchased has been selected
+     */
     @FXML
     public Text errorDevText,resDepot1Text,resDepot2Text,resDepot3Text,resStronbox1Text,resStronbox2Text,resStronbox3Text,resExtra1Text,resExtra2Text,resExtra3Text;
-
+    /**
+     * Attribute representing the imageView of the card selected by the decks
+     */
     @FXML
     public ImageView selectedCard;
-
+    /**
+     * Attributes representing the buttons to purchase the card
+     * and confirm the payment after selecting the card
+     */
     @FXML
     public Button  buyCard,toPayment, concludeAction;
-
+    /**
+     * Attributes that represent the imagViews of the cards below the top card of the specific deck
+     */
     @FXML
     public ImageView deck1,deck2,deck3,deck4,deck5,deck6,deck7,deck8,deck9,deck10,deck11,deck12;
-
+    /**
+     * Attributes that represent the resource imagView that represent the cost of a card after selecting it
+     */
     @FXML
     public ImageView resource1Cost,resource2Cost,resource3Cost;
 
-    @FXML
-    public Text selectHowPickResourcesText;
 
     @FXML
     public Button plusDepotRes1,plusExtraRes1,plusStrRes1,minusDepotRes1,minusStrRes1,minusExtraRes1,
             plusDepotRes2,plusExtraRes2,plusStrRes2,minusDepotRes2,minusStrRes2,minusExtraRes2,
             plusDepotRes3,plusExtraRes3,plusStrRes3,minusDepotRes3,minusStrRes3,minusExtraRes3;
-
+    /**
+     * Attributes that represent the buttons used to increase or decrease
+     * the number of resources to be paid for each resource
+     */
     @FXML
     public TextField textField1,textField2,textField3,textField4,textField5,textField6,textField7,textField8,textField9;
     public ToggleGroup availableSlot;
@@ -74,7 +103,12 @@ public class BuyDevCardController extends Controller implements PaymentControlle
     Map<ResourceSource, EnumMap<ResourceType,Integer>> paymentInstruction = new HashMap<>();
     BuyDevCardGUI buyDevCardAction;
 
-
+    /**
+     * Main method that initializes the scene within the stage
+     * It takes care of setting the background of the scene
+     * ,the font of the texts and buttons,
+     * and the images on the scene
+     */
     @FXML
     @Override
     public void initialize() {
@@ -149,6 +183,9 @@ public class BuyDevCardController extends Controller implements PaymentControlle
         initializeDecksImages();
     }
 
+    /**
+     * method used to set the images of the top cards of the decks actually present
+     */
     private void initializeDecksImages(){
 
         if(client.getGame().isAnyCardPresentInDeck(3, ColorCard.green)) {
@@ -205,10 +242,19 @@ public class BuyDevCardController extends Controller implements PaymentControlle
 
     }
 
+    /**
+     * method used to set the image of the selected card of the decks
+     * @param developmentCard selected card image to show
+     */
     private void setSelectedCardImage(DevelopmentCard developmentCard){
         selectedCard.setImage(new Image(developmentCard.toImage()));
     }
 
+    /**
+     * method used to set the visibility of the button to be able to buy
+     * the card if you have the resources and the text that indicates whether you have them or not
+     * @param toDisplay string to show
+     */
     private void setDevelopmentCardTextOK(String toDisplay){
         errorDevText.setText(toDisplay);
         errorDevText.setVisible(true);
@@ -216,6 +262,11 @@ public class BuyDevCardController extends Controller implements PaymentControlle
             buyCard.setVisible(true);
     }
 
+    /**
+     * method used to set the visibility of the button to be able to buy
+     *  the card if you have the resources and the text indicating that
+     *  you have the necessary resources to purchase it
+     */
     private void setFeasiblePurchase(){
         if(isCardBuyable) {
         setDevelopmentCardTextOK("You have \nenough resources \nto purchase \nselected card");
@@ -224,11 +275,18 @@ public class BuyDevCardController extends Controller implements PaymentControlle
         } else buyCard.setVisible(false);
     }
 
+    /**
+     * method used to set an error message
+     * @param error type of error
+     */
     public void maxOccurrencesSet(String error){
         errorDevText.setText(error);
         errorDevText.setVisible(true);
     }
 
+    /**
+     * method used to check if you have the necessary resources to purchase the level 3 green card
+     */
     @FXML
     public void checkIfCanBuyCard3Green() {
         developmentCard = client.getGame().getDeckTopCard(3,ColorCard.green);
@@ -243,7 +301,9 @@ public class BuyDevCardController extends Controller implements PaymentControlle
         }
         setFeasiblePurchase();
     }
-
+    /**
+     * method used to check if you have the necessary resources to purchase the level 2 green card
+     */
     @FXML
     public void checkIfCanBuyCard2Green() {
         developmentCard = client.getGame().getDeckTopCard(2,ColorCard.green);
@@ -257,7 +317,9 @@ public class BuyDevCardController extends Controller implements PaymentControlle
         }
         setFeasiblePurchase();
     }
-
+    /**
+     * method used to check if you have the necessary resources to purchase the level 1 green card
+     */
     @FXML
     public void checkIfCanBuyCard1Green() {
         developmentCard = client.getGame().getDeckTopCard(1,ColorCard.green);
@@ -272,7 +334,9 @@ public class BuyDevCardController extends Controller implements PaymentControlle
         }
         setFeasiblePurchase();
     }
-
+    /**
+     * method used to check if you have the necessary resources to purchase the level 3 blue card
+     */
     @FXML
     public void checkIfCanBuyCard3Blue() {
         developmentCard = client.getGame().getDeckTopCard(3,ColorCard.blue);
@@ -286,7 +350,9 @@ public class BuyDevCardController extends Controller implements PaymentControlle
         }
         setFeasiblePurchase();
     }
-
+    /**
+     * method used to check if you have the necessary resources to purchase the level 2 blue card
+     */
     @FXML
     public void checkIfCanBuyCard2Blue() {
         developmentCard = client.getGame().getDeckTopCard(2,ColorCard.blue);
@@ -300,7 +366,9 @@ public class BuyDevCardController extends Controller implements PaymentControlle
         }
         setFeasiblePurchase();
     }
-
+    /**
+     * method used to check if you have the necessary resources to purchase the level 1 blue card
+     */
     @FXML
     public void checkIfCanBuyCard1Blue() {
         developmentCard = client.getGame().getDeckTopCard(1,ColorCard.blue);
@@ -314,7 +382,9 @@ public class BuyDevCardController extends Controller implements PaymentControlle
         }
         setFeasiblePurchase();
     }
-
+    /**
+     * method used to check if you have the necessary resources to purchase the level 3 yellow card
+     */
     @FXML
     public void checkIfCanBuyCard3Yellow() {
         developmentCard = client.getGame().getDeckTopCard(3,ColorCard.yellow);
@@ -331,7 +401,9 @@ public class BuyDevCardController extends Controller implements PaymentControlle
         }
         setFeasiblePurchase();
     }
-
+    /**
+     * method used to check if you have the necessary resources to purchase the level 2 yellow card
+     */
     @FXML
     public void checkIfCanBuyCard2Yellow() {
         developmentCard = client.getGame().getDeckTopCard(2,ColorCard.yellow);
@@ -346,7 +418,9 @@ public class BuyDevCardController extends Controller implements PaymentControlle
         }
         setFeasiblePurchase();
     }
-
+    /**
+     * method used to check if you have the necessary resources to purchase the level 1 yellow card
+     */
     @FXML
     public void checkIfCanBuyCard1Yellow() {
         developmentCard = client.getGame().getDeckTopCard(1,ColorCard.yellow);
@@ -361,7 +435,9 @@ public class BuyDevCardController extends Controller implements PaymentControlle
         }
         setFeasiblePurchase();
     }
-
+    /**
+     * method used to check if you have the necessary resources to purchase the level 3 purple card
+     */
     @FXML
     public void checkIfCanBuyCard3Purple() {
         developmentCard = client.getGame().getDeckTopCard(3,ColorCard.purple);
@@ -376,7 +452,9 @@ public class BuyDevCardController extends Controller implements PaymentControlle
         }
         setFeasiblePurchase();
     }
-
+    /**
+     * method used to check if you have the necessary resources to purchase the level 2 purple card
+     */
     @FXML
     public void checkIfCanBuyCard2Purple() {
         developmentCard = client.getGame().getDeckTopCard(2,ColorCard.purple);
@@ -393,7 +471,9 @@ public class BuyDevCardController extends Controller implements PaymentControlle
         }
         setFeasiblePurchase();
     }
-
+    /**
+     * method used to check if you have the necessary resources to purchase the level 1 purple card
+     */
     @FXML
     public void checkIfCanBuyCard1Purple() {
         developmentCard = client.getGame().getDeckTopCard(1,ColorCard.purple);
@@ -409,7 +489,9 @@ public class BuyDevCardController extends Controller implements PaymentControlle
         setFeasiblePurchase();
     }
 
-
+    /**
+     * method used to make page elements invisible in order to load other elements on the same page
+     */
     @FXML
     public void setInvisible() {
         green3.setVisible(false);
@@ -447,13 +529,22 @@ public class BuyDevCardController extends Controller implements PaymentControlle
         yellow.setVisible(false);
         slotBox.setVisible(false);
     }
-
+    /**
+     * method used to close page of Buy Development Card over the main stage
+     * It is performed when closeBuyDevCard button is pressed
+     */
     @FXML
     public void handleCloseChooseAction()
     {
         Stage stage = (Stage) closeBuyDevCard.getScene().getWindow();
         stage.close();
     }
+
+    /**
+     * method used to manage the purchase of the selected card after
+     * clicking on the button to purchase it
+     * It is performed when buyCard button is pressed
+     */
     @FXML
     public void handleOkBuyDevCard()
     {
@@ -471,6 +562,9 @@ public class BuyDevCardController extends Controller implements PaymentControlle
         }
     }
 
+    /**
+     * method used to manage which slot to insert the card into after purchasing it
+     */
     @FXML
     public void handleSlotSelection() {
         RadioButton slot = (RadioButton) availableSlot.getSelectedToggle();
@@ -487,14 +581,18 @@ public class BuyDevCardController extends Controller implements PaymentControlle
         }
     }
 
-
+    /**
+     * method used to go to the card payment page
+     */
     @FXML
     public void goToPayment() {
         switchToHowToTakeResourcesPhase();
     }
 
 
-
+    /**
+     * method used to make card payments visible and where to get the resources from
+     */
     public void switchToHowToTakeResourcesPhase()
     {
         errorDevText.setVisible(false);
@@ -507,8 +605,9 @@ public class BuyDevCardController extends Controller implements PaymentControlle
     }
 
 
-
-
+    /**
+     * method used to make visible where to get the resources for the first cost resource
+     */
     public void setVisibleFirstResource() {
         resource1Cost.setImage(new Image(ResourceLocator.retrieveResourceTypeImage(neededResources.get(0).getKey())));
         resource1Cost.setVisible(true);
@@ -530,7 +629,9 @@ public class BuyDevCardController extends Controller implements PaymentControlle
         textField1.setText("0");
         textField2.setText("0");
     }
-
+    /**
+     * method used to make visible where to get the resources for the second cost resource
+     */
     public void setVisibleSecondResource() {
         resource2Cost.setImage(new Image(ResourceLocator.retrieveResourceTypeImage(neededResources.get(1).getKey())));
         resource2Cost.setVisible(true);
@@ -552,7 +653,9 @@ public class BuyDevCardController extends Controller implements PaymentControlle
         textField4.setText("0");
         textField5.setText("0");
     }
-
+    /**
+     * method used to make visible where to get the resources for the third cost resource
+     */
     public void setVisibleThirdResource() {
         resource3Cost.setImage(new Image(ResourceLocator.retrieveResourceTypeImage(neededResources.get(2).getKey())));
         resource3Cost.setVisible(true);
@@ -575,39 +678,54 @@ public class BuyDevCardController extends Controller implements PaymentControlle
         textField8.setText("0");
     }
 
+    /**
+     * method used to decrement the resource pick counter from depots for the first resource
+     */
     @FXML
     public void minusFirstResourceFromDepot() {
         makeTextInvisible(errorDevText);
         firstCurrentValueDepot--;
         if(!addToCostList(neededResources,1, 1, firstCurrentValueDepot, textField1)) firstCurrentValueDepot++;
     }
-
+    /**
+     * method used to decrement the resource pick counter from depots for the second resource
+     */
     @FXML
     public void minusSecondResourceFromDepot() {
         makeTextInvisible(errorDevText);
         secondCurrentValueDepot--;
         if(!addToCostList(neededResources,2, 1, secondCurrentValueDepot, textField4)) secondCurrentValueDepot++;
     }
-
+    /**
+     * method used to decrement the resource pick counter from depots for the third resource
+     */
     @FXML
     public void minusThirdResourceFromDepot() {
         makeTextInvisible(errorDevText);
         thirdCurrentValueDepot--;
         if(!addToCostList(neededResources,3,1, thirdCurrentValueDepot, textField7)) thirdCurrentValueDepot++;
     }
-
+    /**
+     * method used to decrement the resource pick counter from Strongbox for the first resource
+     */
     @FXML
     public void minusFirstResourceFromStrongbox() {
         makeTextInvisible(errorDevText);
         firstCurrentValueStrongbox--;
         if(!addToCostList(neededResources,1,1, firstCurrentValueStrongbox, textField2)) firstCurrentValueStrongbox++;
     }
+    /**
+     * method used to decrement the resource pick counter from Strongbox for the second resource
+     */
     @FXML
     public void minusSecondResourceFromStrongbox() {
         makeTextInvisible(errorDevText);
         secondCurrentValueStrongbox--;
         if(!addToCostList(neededResources,2,1, secondCurrentValueStrongbox, textField5)) secondCurrentValueStrongbox++;
     }
+    /**
+     * method used to decrement the resource pick counter from Strongbox for the third resource
+     */
     @FXML
     public void minusThirdResourceFromStrongbox() {
         makeTextInvisible(errorDevText);
@@ -616,76 +734,100 @@ public class BuyDevCardController extends Controller implements PaymentControlle
     }
 
 
-
+    /**
+     * method used to increment the resource selection counter from depots for the first resource
+     */
     @FXML
     public void plusFirstResourceFromDepot() {
         firstCurrentValueDepot++;
         if(!editedCostList(neededResources,1, 1, firstCurrentValueDepot, textField1)) firstCurrentValueDepot--;
     }
 
-
+    /**
+     * method used to increment the resource selection counter from depots for the second resource
+     */
     @FXML
     public void plusSecondResourceFromDepot(){
         secondCurrentValueDepot++;
         if(!editedCostList(neededResources,2, 1, secondCurrentValueDepot, textField4)) secondCurrentValueDepot--;
     }
-
+    /**
+     * method used to increment the resource selection counter from depots for the third resource
+     */
     @FXML
     public void plusThirdResourceFromDepot(){
         thirdCurrentValueDepot++;
         if(!editedCostList(neededResources,3, 1, thirdCurrentValueDepot, textField7)) thirdCurrentValueDepot--;
     }
-
+    /**
+     * method used to increment the resource selection counter from Strongbox for the first resource
+     */
     @FXML
     public void plusFirstResourceFromStrongbox() {
         firstCurrentValueStrongbox++;
         if(!editedCostList(neededResources,1, 1, firstCurrentValueStrongbox, textField2)) firstCurrentValueStrongbox--;
     }
-
+    /**
+     * method used to increment the resource selection counter from Strongbox for the second resource
+     */
     @FXML
     public void plusSecondResourceFromStrongbox(){
         secondCurrentValueStrongbox++;
         if(!editedCostList(neededResources,2, 1,secondCurrentValueStrongbox , textField5)) secondCurrentValueStrongbox--;
     }
-
+    /**
+     * method used to increment the resource selection counter from Strongbox for the third resource
+     */
     @FXML
     public void plusThirdResourceFromStrongbox(){
         thirdCurrentValueStrongbox++;
         if(!editedCostList(neededResources,3, 1, thirdCurrentValueStrongbox, textField8)) thirdCurrentValueStrongbox--;
     }
-
+    /**
+     * method used to increment the resource selection counter from Extra depot for the first resource
+     */
     @FXML
     public void plusFirstResourceFromExtra() {
         firstCurrentValueExtra++;
         if(!editedCostList(neededResources,1, 1, firstCurrentValueExtra, textField3)) firstCurrentValueExtra--;
     }
-
+    /**
+     * method used to increment the resource selection counter from Extra depot for the second resource
+     */
     @FXML
     public void plusSecondResourceFromExtra() {
         secondCurrentValueExtra++;
         if(!editedCostList(neededResources,2, 1, secondCurrentValueExtra, textField6)) secondCurrentValueExtra--;
     }
-
+    /**
+     * method used to increment the resource selection counter from Extra depot for the third resource
+     */
     @FXML
     public void plusThirdResourceFromExtra() {
         thirdCurrentValueExtra++;
         if(!editedCostList(neededResources,3, 1, thirdCurrentValueExtra, textField9)) thirdCurrentValueExtra--;
     }
-
+    /**
+     * method used to decrement the resource pick counter from Extra depot for the first resource
+     */
     @FXML
     public void minusFirstResourceFromExtra() {
         makeTextInvisible(errorDevText);
         firstCurrentValueExtra--;
         if(!addToCostList(neededResources,1, 1, firstCurrentValueExtra, textField3)) firstCurrentValueExtra++;
     }
-
+    /**
+     * method used to decrement the resource pick counter from Extra depot for the second resource
+     */
     @FXML
     public void minusSecondResourceFromExtra() {
         makeTextInvisible(errorDevText);
         secondCurrentValueExtra--;
         if(!addToCostList(neededResources,2,1,secondCurrentValueExtra, textField6)) secondCurrentValueExtra++;
     }
-
+    /**
+     * method used to decrement the resource pick counter from Extra depot for the third resource
+     */
     @FXML
     public void minusThirdResourceFromExtra() {
         makeTextInvisible(errorDevText);
@@ -710,8 +852,9 @@ public class BuyDevCardController extends Controller implements PaymentControlle
     int thirdCurrentValueExtra = 0;
 
 
-
-
+    /**
+     * method used to manage the conclusion of the action
+     */
     @FXML
     public void handleActionConclusion() {
         paymentInstruction = initializeMap();
@@ -728,11 +871,17 @@ public class BuyDevCardController extends Controller implements PaymentControlle
         closeAction(concludeAction);
     }
 
-
+    /**
+     * method used to make the payment button visible after choosing where
+     * to place all the resources
+     */
     public void showFinishButton() {
         concludeAction.setVisible(isPaymentDone(neededResources));
     }
 
+    /**
+     * method used to hide the error message
+     */
     @Override
     public void hideError() {
         errorDevText.setVisible(false);
