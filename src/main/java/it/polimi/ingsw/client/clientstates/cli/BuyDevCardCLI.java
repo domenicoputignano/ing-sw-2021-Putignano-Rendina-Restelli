@@ -10,34 +10,53 @@ import it.polimi.ingsw.network.Client;
 
 import java.util.Scanner;
 
+/**
+ * This class represents the specific CLI state that is reached when the player in turn
+ * wants to buy a {@link it.polimi.ingsw.commons.DevelopmentCard} during his turn.
+ */
 public class BuyDevCardCLI extends AbstractBuyDevCard {
+    /**
+     * The Scanner used to receive inputs from user.
+     */
     private final Scanner input = new Scanner(System.in);
+    /**
+     * The CLI instance this state refers to.
+     */
     private final CLI cli;
 
-
+    /**
+     * Initializes references to CLI and client.
+     */
     public BuyDevCardCLI(Client client) {
         super(client);
         cli = (CLI)client.getUI();
     }
 
+    /**
+     * Main method of the class. It leads the interaction with the user during different phases of this action.
+     */
     @Override
     public void manageUserInteraction() {
         try {
             System.out.println("Decks are shown below");
+            // show decks
             cli.printDecks();
+            // if the player wants to go back, return to the action choice state
             cli.playerWantsToGoBack();
-            boolean doneSelection = false;
             try {
+                // asks to the user the level and the color of the card he wants to buy
                 chooseCardType();
+                // computes the actual cost of the selected card applying the available sales
                 computeActualCost(takeDeckFromCardType(messageToSend.getType()));
-                if (checkCostRequiredCardType(actualCost)) {
-                    doneSelection = true;
-                } else {
+                if (!checkCostRequiredCardType(actualCost)) {
                     System.out.println("You don't have enough resources to buy this card! Choose another one");
                     throw new InterruptedActionException();
                 }
+                // asks where the user wants to position the card
                 chooseSlotDestination();
+                // asks instructions on how to take resources needed to buy the selected card
                 messageToSend.setHowToTakeResources(cli.askInstructionsOnHowToTakeResources(actualCost));
+                // sends the compiled message to the server
                 client.sendMessage(messageToSend);
             } catch (InterruptedActionException e) {
                 cli.returnToActionBeginning(new BuyDevCardCLI(this.client));
@@ -47,6 +66,10 @@ public class BuyDevCardCLI extends AbstractBuyDevCard {
         }
     }
 
+    /**
+     * Method which handles the choice of the slot where the user wants to put the card.
+     * @throws InterruptedActionException thrown when the user can't position the selected card.
+     */
     private void chooseSlotDestination() throws InterruptedActionException {
         System.out.println("Which slot do you want to put the card on? [1-3]");
         int choice;
@@ -73,6 +96,9 @@ public class BuyDevCardCLI extends AbstractBuyDevCard {
         } while (!slotDestinationChoiceOK);
     }
 
+    /**
+     * Method which handles the choice of level and color of the card the player wants to buy.
+     */
     private void chooseCardType() {
         System.out.println("Which type of card do you want to buy? (level|color) ");
         String choice;
@@ -98,6 +124,11 @@ public class BuyDevCardCLI extends AbstractBuyDevCard {
         } while (!cardTypeChoiceOK);
     }
 
+    /**
+     * Utility method used to parse from the given choice a valid {@link CardType}.
+     * @param choice user's choice.
+     * @return a valid {@link CardType} corresponding to the user's choice.
+     */
     private CardType parseChoiceCardType(String choice) {
         switch (choice) {
             case "1|blue" : return new CardType(1, ColorCard.blue);
