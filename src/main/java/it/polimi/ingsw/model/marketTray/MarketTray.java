@@ -82,7 +82,6 @@ public class MarketTray {
     public List<Marble> peekMarbles(MarketChoice marketChoice, int index) {
         List<Marble> marbles = new ArrayList<>();
         if(marketChoice==MarketChoice.ROW) {
-            //TODO : MODIFICARE CON DELLE COPIE
             marbles.addAll(Arrays.asList(availableMarbles[index]));
         } else {
             for(int i = 0; i < availableMarbles.length; i++) {
