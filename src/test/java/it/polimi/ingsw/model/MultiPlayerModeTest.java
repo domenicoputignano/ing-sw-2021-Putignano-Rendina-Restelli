@@ -3,12 +3,18 @@ package it.polimi.ingsw.model;
 import it.polimi.ingsw.commons.*;
 import it.polimi.ingsw.exceptions.DepotOutOfBoundsException;
 import it.polimi.ingsw.exceptions.IncompatibleResourceTypeException;
+import it.polimi.ingsw.model.gameEvents.BlackCrossHitLastSpace;
+import it.polimi.ingsw.model.gameEvents.DevCardColorEnded;
+import it.polimi.ingsw.model.gameEvents.HitLastSpace;
+import it.polimi.ingsw.model.gameEvents.SeventhDevCardBought;
+import it.polimi.ingsw.model.soloMode.SoloMode;
 import it.polimi.ingsw.utils.Pair;
 import org.junit.jupiter.api.Test;
 
 import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
 
 class MultiPlayerModeTest {
 
@@ -40,7 +46,6 @@ class MultiPlayerModeTest {
 
     @Test
     void activateVaticanReport() {
-        //TODO: MODIFICARE SETTER
         playerList.add(new Player("Piero"));
         playerList.add(new Player("Domenico"));
         playerList.add(new Player("Andrea"));
@@ -67,6 +72,36 @@ class MultiPlayerModeTest {
         playerList.get(1).getUser().setActive(false);
         playerList.get(2).getUser().setActive(false);
         System.out.println(multiPlayerMode.nextPlayer(multiPlayerMode.getCurrPlayer()));
+    }
+
+    @Test
+    void conclusionEvents(){
+        Player first = spy(new Player("Andrea"));
+        Player second = spy(new Player("Piero"));
+        Player third = spy(new Player("Domenico"));
+        List<Player> players = new ArrayList<>();
+        players.add(first);
+        players.add(second);
+        players.add(third);
+
+        MultiPlayerMode game = new MultiPlayerMode(players);
+        MultiPlayerMode gameSpy = spy(game);
+
+        HitLastSpace hitLastSpaceEvent = new HitLastSpace();
+        gameSpy.endGame(hitLastSpaceEvent);
+        verify(gameSpy, times(1)).endGame(hitLastSpaceEvent);
+
+        SeventhDevCardBought seventhDevCardBoughtEvent = new SeventhDevCardBought();
+        gameSpy.endGame(seventhDevCardBoughtEvent);
+        verify(gameSpy, times(1)).endGame(seventhDevCardBoughtEvent);
+
+        BlackCrossHitLastSpace blackCrossHitLastSpaceEvent = new BlackCrossHitLastSpace();
+        gameSpy.endGame(blackCrossHitLastSpaceEvent);
+        verify(gameSpy, times(1)).endGame(blackCrossHitLastSpaceEvent);
+
+        DevCardColorEnded devCardColorEndedEvent = new DevCardColorEnded();
+        gameSpy.endGame(devCardColorEndedEvent);
+        verify(gameSpy, times(1)).endGame(devCardColorEndedEvent);
     }
 
     @Test
