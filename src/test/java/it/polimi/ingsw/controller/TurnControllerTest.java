@@ -2,9 +2,7 @@ package it.polimi.ingsw.controller;
 
 import it.polimi.ingsw.client.reducedmodel.ReducedMarble;
 import it.polimi.ingsw.commons.*;
-import it.polimi.ingsw.exceptions.DepotOutOfBoundsException;
-import it.polimi.ingsw.exceptions.IncompatibleResourceTypeException;
-import it.polimi.ingsw.exceptions.MoveResourcesException;
+import it.polimi.ingsw.exceptions.*;
 import it.polimi.ingsw.model.*;
 import it.polimi.ingsw.model.marketTray.Marble;
 import it.polimi.ingsw.model.marketTray.StandardMarble;
@@ -16,14 +14,14 @@ import it.polimi.ingsw.network.RemoteView;
 import it.polimi.ingsw.utils.*;
 import it.polimi.ingsw.utils.messages.clientMessages.*;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
+
 
 class TurnControllerTest {
 
@@ -38,6 +36,7 @@ class TurnControllerTest {
         genericMap.put(ResourceType.servant, 0);
         genericMap.put(ResourceType.stone, 0);
     }
+
 
     @Test
     void handleBuyDevCardMessageTest() {
@@ -127,26 +126,26 @@ class TurnControllerTest {
     @Test
     void handleEndTurnMessageTest() {
         List<Player> players = new ArrayList<>();
-        Player first = spy(new Player("Piero"));
-        Player second = spy(new Player("Andrea"));
-        Player third = spy(new Player("Domenico"));
-        players.add(first);
-        players.add(second);
-        players.add(third);
+        players.add(spy(new Player("Piero")));
+        players.add(spy(new Player("Andrea")));
+        players.add(spy(new Player("Domenico")));
 
         MultiPlayerMode game = new MultiPlayerMode(players);
-        game.setTurn(spy(new Turn(game, first)));
+        game.setTurn(spy(new Turn(game, players.get(0))));
         game.nextState(GameState.GAMEFLOW);
         game.getTurn().normalActionDone();
 
         MultiPlayerMode gameSpy = spy(game);
-        TurnController turnController = new TurnController(gameSpy,first);
+        TurnController turnController = new TurnController(gameSpy,players.get(0));
         ClientStatus clientStatus = mock(ClientStatus.class);
         GameController gameController = new GameController(game);
-        NetworkRemoteView spyRemoteView = spy(new NetworkRemoteView(first.getUser(),gameController,clientStatus));
-        turnController.handleEndTurnMessage(new EndTurnMessage(),spyRemoteView);
+        NetworkRemoteView inTurnView = spy(new NetworkRemoteView(players.get(0).getUser(),gameController,clientStatus));
+        NetworkRemoteView notInTurnView = spy(new NetworkRemoteView(players.get(1).getUser(), gameController, clientStatus));
+        turnController.handleEndTurnMessage(new EndTurnMessage(), notInTurnView);
+        turnController.handleEndTurnMessage(new EndTurnMessage(), inTurnView);
         verify(gameSpy, times(1)).nextTurn();
     }
+
 
     @Test
     void handlePositioningTest(){
@@ -303,126 +302,379 @@ class TurnControllerTest {
         verify(gameSpy.getCurrPlayer(),times(1)).moveResources(gameSpy, moveAction);
     }
 
-
     @Test
-    void handleLeaderActionTest() {
-
+    void handleMoveMessageFaults() throws MoveResourcesException {
         List<Player> players = new ArrayList<>();
-        Player first = spy(new Player("Piero"));
-        Player second = spy(new Player("Andrea"));
-        Player third = spy(new Player("Domenico"));
-        players.add(first);
-        players.add(second);
-        players.add(third);
-
-        MultiPlayerMode game = new MultiPlayerMode(players);
-        game.setTurn(spy(new Turn(game, first)));
+        players.add(spy(new Player("Piero")));
+        players.add(spy(new Player("Andrea")));
+        players.add(spy(new Player("Domenico")));
+        MultiPlayerMode game = spy(new MultiPlayerMode(players));
         game.nextState(GameState.GAMEFLOW);
-
-        MultiPlayerMode gameSpy = spy(game);
-        TurnController turnController = new TurnController(gameSpy,first);
-        ClientStatus clientStatus = mock(ClientStatus.class);
         GameController gameController = new GameController(game);
-        RemoteView spyRemoteView = spy(new NetworkRemoteView(first.getUser(),gameController,clientStatus));
 
-        LeaderActionMessage message = new LeaderActionMessage();
-        message.setIndex(1);
-        LeaderActionMessage messageSpy = spy(message);
-        turnController.handleLeaderActionMessage(messageSpy, spyRemoteView);
 
-        verify(gameSpy.getTurn(), times(1)).setTurnState(TurnState.ActionType.LEADERACTION);
-        verify(gameSpy.getTurn(), times(1)).getTurnPhase();
+        game.setTurn(spy(new Turn(game,players.get(0))));
+        TurnController turnController = new TurnController(game, players.get(0));
+        RemoteView firstPlayerView = spy(new NetworkRemoteView(players.get(0).getUser(),gameController,mock(ClientStatus.class)));
+        RemoteView secondPlayerView = spy(new NetworkRemoteView(players.get(1).getUser(),gameController,mock(ClientStatus.class)));
 
+        MoveResourcesMessage message = new MoveResourcesMessage();
+        MoveActionInterface moveAction = new MoveFromNormalToNormalAction(1,2);
+        message.setMoveAction(moveAction);
+
+        MoveResourcesMessage wrongMessage = new MoveResourcesMessage();
+        wrongMessage.setMoveAction(new MoveFromNormalToNormalAction(0,4));
+
+        turnController.handleMoveMessage(message, firstPlayerView);
+        turnController.handleMoveMessage(wrongMessage, firstPlayerView);
+        turnController.handleMoveMessage(message, secondPlayerView);
+
+
+        verify(game.getCurrPlayer(),times(1)).moveResources(game, moveAction);
     }
 
-    @Test
-    void handleTakeResourcesFromMarketTest() {
-        List<Player> players = new ArrayList<>();
-        Player first = spy(new Player("Piero"));
-        Player second = spy(new Player("Andrea"));
-        Player third = spy(new Player("Domenico"));
-        players.add(first);
-        players.add(second);
-        players.add(third);
-
-        MultiPlayerMode game = new MultiPlayerMode(players);
-        game.setTurn(spy(new Turn(game, first)));
-        game.nextState(GameState.GAMEFLOW);
-
-        MultiPlayerMode gameSpy = spy(game);
-        TurnController turnController = new TurnController(gameSpy,first);
-        ClientStatus clientStatus = mock(ClientStatus.class);
-        GameController gameController = new GameController(game);
-        RemoteView spyRemoteView = spy(new NetworkRemoteView(first.getUser(),gameController,clientStatus));
-
-        TakeResourcesFromMarketMessage message = new TakeResourcesFromMarketMessage();
-        message.setIndex(1);
-        message.setPlayerChoice(MarketChoice.COLUMN);
-        message.addWhereToPutMarbles(new Pair<>(new ReducedMarble(ColorMarble.BLUE),MarbleDestination.DEPOT1));
-        message.addWhereToPutMarbles(new Pair<>(new ReducedMarble(ColorMarble.YELLOW),MarbleDestination.DEPOT2));
-        message.addWhereToPutMarbles(new Pair<>(new ReducedMarble(ColorMarble.PURPLE),MarbleDestination.DEPOT3));
-
-        TakeResourcesFromMarketMessage messageSpy = spy(message);
-        turnController.handleTakeResourcesFromMarketMessage(messageSpy,spyRemoteView);
-
-        verify(messageSpy, times(1)).isValidMessage();
-        assertTrue(messageSpy.isValidMessage());
-    }
 
     @Test
-    void handleActivateProductionTest() throws DepotOutOfBoundsException, IncompatibleResourceTypeException {
+    void handlingActivateNotOwnedProductionPowers() throws DepotOutOfBoundsException, IncompatibleResourceTypeException {
 
         List<Player> players = new ArrayList<>();
-        Player first = spy(new Player("Piero"));
-        Player second = spy(new Player("Andrea"));
-        Player third = spy(new Player("Domenico"));
-        players.add(first);
-        players.add(second);
-        players.add(third);
-        MultiPlayerMode game = new MultiPlayerMode(players);
-        game.setTurn(spy(new Turn(game, first)));
-        game.nextState(GameState.GAMEFLOW);
-        MultiPlayerMode gameSpy = spy(game);
 
-        TurnController turnController = new TurnController(gameSpy,first);
-        ClientStatus clientStatus = mock(ClientStatus.class);
+        players.add(spy(new Player("Piero")));
+        players.add(spy(new Player("Andrea")));
+        players.add(spy(new Player("Domenico")));
+        MultiPlayerMode game = spy(new MultiPlayerMode(players));
+        game.nextState(GameState.GAMEFLOW);
         GameController gameController = new GameController(game);
-        RemoteView spyRemoteView = spy(new NetworkRemoteView(first.getUser(),gameController,clientStatus));
+
+        players.get(0).getPersonalBoard().getWarehouse().addResourcesToDepot(2, ResourceType.coin, 2);
+        game.setTurn(spy(new Turn(game,players.get(0))));
+        TurnController turnController = new TurnController(game, players.get(0));
 
         ActivateProductionMessage message = new ActivateProductionMessage();
         ActiveProductions productions = new ActiveProductions();
-        productions.setSlot1(true);
+        productions.setBasic(true);
         message.setProductions(productions);
+
+        message.setInput1(ResourceType.coin);
+        message.setInput2(ResourceType.coin);
+        message.setOutput(ResourceType.stone);
 
         Map<ResourceSource, EnumMap<ResourceType, Integer>> howToTakeResources = new HashMap<>();
         EnumMap<ResourceType,Integer> strongBox = new EnumMap<>(ResourceType.class);
         EnumMap<ResourceType,Integer> depot = new EnumMap<>(ResourceType.class);
         EnumMap<ResourceType,Integer> extraDepot = new EnumMap<>(ResourceType.class);
-        depot.put(ResourceType.coin, 1);
         howToTakeResources.put(ResourceSource.STRONGBOX, strongBox);
         howToTakeResources.put(ResourceSource.DEPOT, depot);
+        howToTakeResources.get(ResourceSource.DEPOT).put(ResourceType.shield,2);
         howToTakeResources.put(ResourceSource.EXTRA, extraDepot);
 
         message.setHowToTakeResources(howToTakeResources);
 
-        ActivateProductionMessage messageSpy = spy(message);
-
-        first.getPersonalBoard().getWarehouse().addResourcesToDepot(1, ResourceType.coin, 1);
-        genericMap.put(ResourceType.coin,1);
-
-        ProductionRule rule = new ProductionRule(genericMap,genericMap,1);
-
-        DevelopmentCard card = new DevelopmentCard(genericMap, 1, ColorCard.green, 3, rule);
-
-        DevelopmentCard spyCard = spy(card);
-
-        first.getPersonalBoard().putCardOnTop(spyCard,1);
-        turnController.handleActivateProductionMessage(messageSpy, spyRemoteView);
-        verify(gameSpy, atLeastOnce()).getTurn();
-        verify(gameSpy.getTurn(), atLeastOnce()).setTurnState(TurnState.ActionType.ACTIVATEPRODUCTION);
-        verify(gameSpy.getTurn(), times(1)).getTurnPhase();
-        verify(gameSpy.getTurn(), times(1)).normalActionDone();
+        RemoteView playerInTurnView = spy(new NetworkRemoteView(players.get(0).getUser(), gameController, mock(ClientStatus.class)));
+        turnController.handleActivateProductionMessage(message,playerInTurnView);
+        //Verification that allows to check how many times is tried Activate Production method.
+        verify(game.getTurn(), times(1)).getTurnPhase();
     }
+
+    @Test
+    void activateProductionPaymentError() throws DepotOutOfBoundsException, IncompatibleResourceTypeException {
+        List<Player> players = new ArrayList<>();
+
+        players.add(spy(new Player("Piero")));
+        players.add(spy(new Player("Andrea")));
+        players.add(spy(new Player("Domenico")));
+        MultiPlayerMode game = spy(new MultiPlayerMode(players));
+        game.nextState(GameState.GAMEFLOW);
+        GameController gameController = new GameController(game);
+
+        players.get(0).getPersonalBoard().getWarehouse().addResourcesToDepot(2, ResourceType.coin, 2);
+        game.setTurn(spy(new Turn(game,players.get(0))));
+        TurnController turnController = new TurnController(game, players.get(0));
+
+        ActivateProductionMessage message = new ActivateProductionMessage();
+        ActiveProductions productions = new ActiveProductions();
+        productions.setBasic(true);
+        message.setProductions(productions);
+
+        message.setInput1(ResourceType.coin);
+        message.setInput2(ResourceType.coin);
+        message.setOutput(ResourceType.stone);
+
+        Map<ResourceSource, EnumMap<ResourceType, Integer>> howToTakeResources = new HashMap<>();
+        EnumMap<ResourceType,Integer> strongBox = new EnumMap<>(ResourceType.class);
+        EnumMap<ResourceType,Integer> depot = new EnumMap<>(ResourceType.class);
+        EnumMap<ResourceType,Integer> extraDepot = new EnumMap<>(ResourceType.class);
+        howToTakeResources.put(ResourceSource.STRONGBOX, strongBox);
+        howToTakeResources.put(ResourceSource.DEPOT, depot);
+        howToTakeResources.get(ResourceSource.STRONGBOX).put(ResourceType.coin,2);
+        howToTakeResources.put(ResourceSource.EXTRA, extraDepot);
+
+        message.setHowToTakeResources(howToTakeResources);
+
+        RemoteView playerInTurnView = spy(new NetworkRemoteView(players.get(0).getUser(), gameController, mock(ClientStatus.class)));
+        turnController.handleActivateProductionMessage(message,playerInTurnView);
+        //Verification that allows to check how many times is tried Activate Production method.
+        verify(game.getTurn(), times(1)).getTurnPhase();
+    }
+
+    @Test
+    void handleLeaderActionTest() {
+        List<Player> players = new ArrayList<>();
+
+        players.add(spy(new Player("Piero")));
+        players.add(spy(new Player("Andrea")));
+        players.add(spy(new Player("Domenico")));
+        MultiPlayerMode game = spy(new MultiPlayerMode(players));
+        game.nextState(GameState.GAMEFLOW);
+        GameController gameController = new GameController(game);
+
+        game.setTurn(spy(new Turn(game,players.get(0))));
+        TurnController turnController = new TurnController(game, players.get(0));
+
+        RemoteView playerInTurnView = spy(new NetworkRemoteView(players.get(0).getUser(),gameController, mock(ClientStatus.class)));
+
+        LeaderActionMessage message = new LeaderActionMessage();
+        message.setIndex(1);
+        LeaderActionMessage messageSpy = spy(message);
+        turnController.handleLeaderActionMessage(messageSpy, playerInTurnView);
+
+        verify(game.getTurn(), times(1)).setTurnState(TurnState.ActionType.LEADERACTION);
+        verify(game.getTurn(), times(1)).getTurnPhase();
+
+    }
+
+    @Test
+    void leaderActionFaults() {
+        List<Player> players = new ArrayList<>();
+
+        players.add(spy(new Player("Piero")));
+        players.add(spy(new Player("Andrea")));
+        players.add(spy(new Player("Domenico")));
+        MultiPlayerMode game = spy(new MultiPlayerMode(players));
+        GameController gameController = new GameController(game);
+        game.setTurn(spy(new Turn(game,players.get(0))));
+        TurnController turnController = new TurnController(game,players.get(0));
+        RemoteView playerInTurnView = spy(new NetworkRemoteView(players.get(0).getUser(),gameController,mock(ClientStatus.class)));
+        RemoteView notInTurnPlayerView = spy(new NetworkRemoteView(players.get(1).getUser(),gameController,mock(ClientStatus.class)));
+
+        players.get(0).activateLeaderCard(1);
+
+        LeaderActionMessage message = new LeaderActionMessage();
+        message.setIndex(5);
+        turnController.handleLeaderActionMessage(message, playerInTurnView);
+
+        LeaderActionMessage messageRelatedToAnAlreadyDoneAction = new LeaderActionMessage();
+        message.setIndex(2);
+
+        turnController.handleLeaderActionMessage(messageRelatedToAnAlreadyDoneAction, playerInTurnView);
+        turnController.handleLeaderActionMessage(message, playerInTurnView);
+        turnController.handleLeaderActionMessage(message, notInTurnPlayerView);
+        verify(game.getTurn(), times(1)).setTurnState(TurnState.ActionType.LEADERACTION);
+        verify(game.getTurn(), times(1)).getTurnPhase();
+
+    }
+
+
+    @Test
+    void handleTakeResourceFromMarketTest() {
+        List<Player> players = new ArrayList<>();
+
+        players.add(spy(new Player("Piero")));
+        players.add(spy(new Player("Andrea")));
+        players.add(spy(new Player("Domenico")));
+        MultiPlayerMode game = spy(new MultiPlayerMode(players));
+
+
+        GameController gameController = new GameController(game);
+
+        game.setTurn(spy(new Turn(game,players.get(0))));
+
+        List<ReducedMarble> selectedMarbles = Arrays.stream(game.getMarketTray().getAvailableMarbles()[0]).
+                map(Marble::getReducedVersion).collect(Collectors.toList());
+        List<ReducedMarble> secondMarbleSelection = Arrays.stream(game.getMarketTray().getAvailableMarbles()[1]).
+                map(Marble::getReducedVersion).collect(Collectors.toList());
+        TakeResourcesFromMarketMessage rightMessage = new TakeResourcesFromMarketMessage();
+        TakeResourcesFromMarketMessage wrongMessage = new TakeResourcesFromMarketMessage();
+        TakeResourcesFromMarketMessage wrongCompiledMessage = new TakeResourcesFromMarketMessage();
+
+        wrongCompiledMessage.setPlayerChoice(MarketChoice.ROW,2);
+
+        wrongMessage.setIndex(2);
+        wrongMessage.setPlayerChoice(MarketChoice.ROW);
+        rightMessage.setIndex(1);
+        rightMessage.setPlayerChoice(MarketChoice.ROW);
+
+
+        selectedMarbles.forEach(x -> rightMessage.addWhereToPutMarbles(new Pair<>(x, MarbleDestination.DISCARD)));
+        secondMarbleSelection.forEach(x -> wrongMessage.addWhereToPutMarbles(new Pair<>(x, MarbleDestination.DISCARD)));
+
+
+        TurnController turnController = new TurnController(game,players.get(0));
+        NetworkRemoteView playerInTurnView = new NetworkRemoteView(players.get(0).getUser(), gameController, mock(ClientStatus.class));
+        NetworkRemoteView playerNotInTurnView = new NetworkRemoteView(players.get(1).getUser(), gameController, mock(ClientStatus.class));
+
+        turnController.handleTakeResourcesFromMarketMessage(wrongCompiledMessage, playerInTurnView);
+        turnController.handleTakeResourcesFromMarketMessage(wrongMessage, playerNotInTurnView);
+        turnController.handleTakeResourcesFromMarketMessage(rightMessage, playerInTurnView);
+        turnController.handleTakeResourcesFromMarketMessage(rightMessage, playerInTurnView);
+        turnController.handleTakeResourcesFromMarketMessage(wrongMessage, playerInTurnView);
+        verify(game.getTurn(), atLeastOnce()).getTurnPhase();
+
+    }
+
+    @Test
+    void activateProductionResourceMissing() throws DepotOutOfBoundsException, IncompatibleResourceTypeException {
+        List<Player> players = new ArrayList<>();
+
+        players.add(spy(new Player("Piero")));
+        players.add(spy(new Player("Andrea")));
+        players.add(spy(new Player("Domenico")));
+        MultiPlayerMode game = spy(new MultiPlayerMode(players));
+        game.nextState(GameState.GAMEFLOW);
+        GameController gameController = new GameController(game);
+
+        players.get(0).getPersonalBoard().getWarehouse().addResourcesToDepot(1, ResourceType.coin, 1);
+        game.setTurn(spy(new Turn(game,players.get(0))));
+        TurnController turnController = new TurnController(game, players.get(0));
+
+        ActivateProductionMessage message = new ActivateProductionMessage();
+        ActiveProductions productions = new ActiveProductions();
+        productions.setBasic(true);
+        message.setProductions(productions);
+
+        message.setInput1(ResourceType.coin);
+        message.setInput2(ResourceType.coin);
+        message.setOutput(ResourceType.stone);
+
+        Map<ResourceSource, EnumMap<ResourceType, Integer>> howToTakeResources = new HashMap<>();
+        EnumMap<ResourceType,Integer> strongBox = new EnumMap<>(ResourceType.class);
+        EnumMap<ResourceType,Integer> depot = new EnumMap<>(ResourceType.class);
+        EnumMap<ResourceType,Integer> extraDepot = new EnumMap<>(ResourceType.class);
+        howToTakeResources.put(ResourceSource.STRONGBOX, strongBox);
+        howToTakeResources.put(ResourceSource.DEPOT, depot);
+        howToTakeResources.get(ResourceSource.DEPOT).put(ResourceType.coin,2);
+        howToTakeResources.put(ResourceSource.EXTRA, extraDepot);
+
+        message.setHowToTakeResources(howToTakeResources);
+
+        RemoteView playerInTurnView = spy(new NetworkRemoteView(players.get(0).getUser(), gameController, mock(ClientStatus.class)));
+        turnController.handleActivateProductionMessage(message,playerInTurnView);
+        //Verification that allows to check how many times is tried Activate Production method.
+        verify(game.getTurn(), times(1)).getTurnPhase();
+    }
+
+
+    @Test
+    void activateProductionResourceMismatch() throws DepotOutOfBoundsException, IncompatibleResourceTypeException {
+
+        List<Player> players = new ArrayList<>();
+
+        players.add(spy(new Player("Piero")));
+        players.add(spy(new Player("Andrea")));
+        players.add(spy(new Player("Domenico")));
+        MultiPlayerMode game = spy(new MultiPlayerMode(players));
+        game.nextState(GameState.GAMEFLOW);
+        GameController gameController = new GameController(game);
+
+        game.setTurn(spy(new Turn(game, players.get(0))));
+        game.nextState(GameState.GAMEFLOW);
+
+        MultiPlayerMode gameSpy = spy(game);
+        TurnController turnController = new TurnController(gameSpy,players.get(0));
+        ActivateProductionMessage message = new ActivateProductionMessage();
+
+        ActivateProductionMessage badlyFormattedMessage = new ActivateProductionMessage();
+
+        players.get(0).getPersonalBoard().getWarehouse().addResourcesToDepot(2, ResourceType.coin, 2);
+        ActiveProductions productions = new ActiveProductions();
+        productions.setBasic(true);
+        message.setProductions(productions);
+        badlyFormattedMessage.setProductions(productions);
+        message.setInput1(ResourceType.coin);
+        message.setInput2(ResourceType.coin);
+        message.setOutput(ResourceType.stone);
+
+        badlyFormattedMessage.setInput1(ResourceType.coin);
+        badlyFormattedMessage.setInput2(ResourceType.coin);
+
+
+        Map<ResourceSource, EnumMap<ResourceType, Integer>> howToTakeResources = new HashMap<>();
+        EnumMap<ResourceType,Integer> strongBox = new EnumMap<>(ResourceType.class);
+        EnumMap<ResourceType,Integer> depot = new EnumMap<>(ResourceType.class);
+        EnumMap<ResourceType,Integer> extraDepot = new EnumMap<>(ResourceType.class);
+        howToTakeResources.put(ResourceSource.STRONGBOX, strongBox);
+        howToTakeResources.put(ResourceSource.DEPOT, depot);
+        howToTakeResources.get(ResourceSource.DEPOT).put(ResourceType.coin,2);
+        howToTakeResources.put(ResourceSource.EXTRA, extraDepot);
+
+        message.setHowToTakeResources(howToTakeResources);
+
+        RemoteView playerInTurnView = spy(new NetworkRemoteView(players.get(0).getUser(), gameController, mock(ClientStatus.class)));
+        RemoteView playerNotInTurnView = spy(new NetworkRemoteView(players.get(1).getUser(), gameController, mock(ClientStatus.class)));
+        turnController.handleActivateProductionMessage(message,playerInTurnView);
+        turnController.handleActivateProductionMessage(message,playerNotInTurnView);
+        turnController.handleActivateProductionMessage(badlyFormattedMessage,playerInTurnView);
+        turnController.handleActivateProductionMessage(message,playerInTurnView);
+
+        //Verification that allows to check how many times is tried Activate Production method.
+        verify(game.getTurn(), times(2)).getTurnPhase();
+
+
+    }
+
+    @Test
+    void handlingActivateProductionPowers() throws DepotOutOfBoundsException, IncompatibleResourceTypeException {
+        List<Player> players = new ArrayList<>();
+
+        players.add(spy(new Player("Piero")));
+        players.add(spy(new Player("Andrea")));
+        players.add(spy(new Player("Domenico")));
+        MultiPlayerMode game = spy(new MultiPlayerMode(players));
+        game.nextState(GameState.GAMEFLOW);
+        GameController gameController = new GameController(game);
+
+        players.get(0).getPersonalBoard().getWarehouse().addResourcesToDepot(2, ResourceType.coin, 2);
+        game.setTurn(spy(new Turn(game,players.get(0))));
+        TurnController turnController = new TurnController(game, players.get(0));
+
+        ActivateProductionMessage message = new ActivateProductionMessage();
+
+        ActivateProductionMessage badlyFormattedMessage = new ActivateProductionMessage();
+
+        ActiveProductions productions = new ActiveProductions();
+        productions.setBasic(true);
+        productions.setSlot1(true);
+        message.setProductions(productions);
+        badlyFormattedMessage.setProductions(productions);
+        message.setInput1(ResourceType.coin);
+        message.setInput2(ResourceType.coin);
+        message.setOutput(ResourceType.stone);
+
+        badlyFormattedMessage.setInput1(ResourceType.coin);
+        badlyFormattedMessage.setInput2(ResourceType.coin);
+
+
+        Map<ResourceSource, EnumMap<ResourceType, Integer>> howToTakeResources = new HashMap<>();
+        EnumMap<ResourceType,Integer> strongBox = new EnumMap<>(ResourceType.class);
+        EnumMap<ResourceType,Integer> depot = new EnumMap<>(ResourceType.class);
+        EnumMap<ResourceType,Integer> extraDepot = new EnumMap<>(ResourceType.class);
+        howToTakeResources.put(ResourceSource.STRONGBOX, strongBox);
+        howToTakeResources.put(ResourceSource.DEPOT, depot);
+        howToTakeResources.get(ResourceSource.DEPOT).put(ResourceType.coin,2);
+        howToTakeResources.put(ResourceSource.EXTRA, extraDepot);
+
+        message.setHowToTakeResources(howToTakeResources);
+
+        RemoteView playerInTurnView = spy(new NetworkRemoteView(players.get(0).getUser(), gameController, mock(ClientStatus.class)));
+        turnController.handleActivateProductionMessage(message,playerInTurnView);
+
+        //Verification that allows to check how many times is tried Activate Production method.
+        verify(game.getTurn(), times(0)).getTurnPhase();
+
+
+    }
+
+
 
 
 }

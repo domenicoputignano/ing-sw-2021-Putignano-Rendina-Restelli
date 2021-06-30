@@ -125,7 +125,7 @@ public class TurnController {
 
     /**
      * Dispatches a leader action to the model after a message validity check.
-     * If any exception is thrown, it establishes how the model will notify remote views.
+     * If any exception is thrown,, it establishes how the model will notify remote views.
      * @param message message containing instructions on how to perform the action.
      * @param sender remote view that forwards the message.
      */
@@ -176,7 +176,7 @@ public class TurnController {
                 if (model.getTurn().getActionType() == TurnState.ActionType.TAKERESOURCESFROMMARKET) {
                     TakeResourcesFromMarket turnInstance = (TakeResourcesFromMarket) model.getTurn().getTurnPhase();
 
-                    //check if Resources contained in positioning Message match with left resources in TakeResourcesFromMarket
+                    //check if resources contained in positioning Message match with left resources in TakeResourcesFromMarket
                     if (turnInstance.checkPendingResourcesPositioning(message.getResourcesToPut())) {
                             turnInstance.handlePositioning(model.getTurn(), message.getWhereToPutResources());
                     } else {

@@ -92,10 +92,11 @@ public class Warehouse implements Cloneable {
      * @throws DepotOutOfBoundsException if this addition is not compliant with normal depot size
      * @throws IncompatibleResourceTypeException if we're attempting to add a type of resource different from the one that is already stored.
      */
-    /* -1 perché gli indici dati dalla CLI partono da 1*/
+
     public void addResourcesToDepot(int depotIndex, ResourceType type, int num) throws DepotOutOfBoundsException, IncompatibleResourceTypeException {
         if(!isValidEditing(type,depotIndex))
             throw new IncompatibleResourceTypeException();
+        /* -1 because indexes starts from 1*/
         NormalDepot d = this.normalDepots[depotIndex - 1];
         if(d.getOcc() == 0) {
             d.setType(type);

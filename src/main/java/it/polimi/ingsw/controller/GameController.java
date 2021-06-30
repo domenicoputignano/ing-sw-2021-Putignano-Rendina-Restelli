@@ -158,8 +158,8 @@ public class GameController {
      */
     private void startFirstTurn() {
         if (checkAllChoicesDone(receivedResourceChoices)) {
+            model.nextState(GameState.GAMEFLOW);
             if(model.getNumOfPlayers()>1) {
-                model.nextState(GameState.GAMEFLOW);
                 model.notifyTurn(new NewTurnUpdate(model.getCurrPlayer().getUser()));
             }
         }

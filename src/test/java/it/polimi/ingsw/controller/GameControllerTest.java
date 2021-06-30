@@ -152,15 +152,30 @@ class GameControllerTest {
         SoloMode game = spy(new SoloMode(soloModePlayer));
         GameController gameController = new GameController(game);
         User piero = new User("Piero");
-        gameController.handlePlayerDisconnection(piero, mock(NetworkRemoteView.class));
+        NetworkRemoteView playerRemoteView = new NetworkRemoteView(piero, gameController, mock(ClientStatus.class));
+        gameController.handleLeaderChoiceMessage(new LeaderChoiceMessage(4,3),playerRemoteView);
+        gameController.handlePlayerDisconnection(piero, playerRemoteView);
         gameController.handlePlayerReconnection(piero);
-        gameController.handlePlayerDisconnection(piero, mock(NetworkRemoteView.class));
+        gameController.handlePlayerDisconnection(piero, playerRemoteView);
         verify(game, times(2)).nextState(GameState.PAUSED);
-        verify(game, times(1)).nextState(GameState.GAMEFLOW);
     }
 
-
-
-
+    /**
+     * Test used to check client disconnection while performing initial choices.
+     */
+    @Test
+    void disconnectionDuringMultiplayerModeChoices() {
+        players.add(spy(new Player("Domenico")));
+        players.add(spy(new Player("Andrea")));
+        MultiPlayerMode game = spy(new MultiPlayerMode(players));
+        GameController gameController = new GameController(game);
+        NetworkRemoteView firstPlayerView = new NetworkRemoteView(players.get(0).getUser(),gameController,mock(ClientStatus.class));
+        NetworkRemoteView secondPlayerView = new NetworkRemoteView(players.get(1).getUser(),gameController,mock(ClientStatus.class));
+        gameController.handleLeaderChoiceMessage(new LeaderChoiceMessage(4,3), firstPlayerView);
+        gameController.handleLeaderChoiceMessage(new LeaderChoiceMessage(4,3), secondPlayerView);
+        gameController.handlePlayerDisconnection(players.get(1).getUser(),secondPlayerView);
+        verify(game,atLeastOnce()).handlePlayerDisconnection(players.get(1));
+        assertEquals(GameState.GAMEFLOW, game.getGameState());
+    }
 
 }
