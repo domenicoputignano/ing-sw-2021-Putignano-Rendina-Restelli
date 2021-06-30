@@ -7,6 +7,9 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Class representing a physical leader card, that can be either activated or discarded by player during a turn.
+ */
 public class LeaderCard implements Serializable {
     /**
      * The unique ID identifying the card.
