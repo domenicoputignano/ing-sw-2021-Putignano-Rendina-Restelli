@@ -22,42 +22,65 @@ import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
-
+/**
+ * Class that represents the controller of the Activate Production page of the game
+ * on this page the user can choose which and how many productions to activate
+ * by selecting the productions on the top cards of the slots and possibly the basic production
+ */
 public class ActivateProductionController extends Controller implements PaymentController {
-
+    /**
+     * Attribute that represents the central pane of the page
+     */
     @FXML
     public AnchorPane anchorActivateProd;
-
+    /**
+     * Attribute that represents the text where the title of the page is shown
+     */
     @FXML
     public Text activateProdText;
-
+    /**
+     * Attribute that represents the button to close the page
+     */
     @FXML
     public Button closeActivateProd;
-
+    /**
+     * Attributes that represent the buttons related to the activation
+     * of the production of the slots and of the base production
+     */
     @FXML
     public Button slot1,slot2,slot3,basicProduction, firstExtraSlot, secondExtraSlot;
-
+    /**
+     * Attributes representing the buttons to increase
+     * and decrease the payment occurrences for each resource
+     */
     @FXML
     public Button plusFirstResourceDepot, plusSecondResourceDepot, plusThirdResourceDepot, plusFourthResourceDepot;
     public Button plusFirstResourceStrongbox, plusSecondResourceStrongbox, plusThirdResourceStrongbox, plusFourthResourceStrongbox;
     public Button plusFirstResourceExtra, plusSecondResourceExtra, plusThirdResourceExtra, plusFourthResourceExtra;
-
-
     public Button minusFirstResourceDepot, minusSecondResourceDepot, minusThirdResourceDepot, minusFourthResourceDepot;
     public Button minusFirstResourceStrongbox, minusSecondResourceStrongbox, minusThirdResourceStrongbox, minusFourthResourceStrongbox;
     public Button minusFirstResourceExtra, minusSecondResourceExtra, minusThirdResourceExtra, minusFourthResourceExtra;
-
+    /**
+     * Attribute that represents the button to go to the payment phase of the resources
+     */
     public Button nextStep;
-
+    /**
+     * Attribute that represents the background imageView of the cards in the slots
+     */
     public ImageView slotsBackground;
-
+    /**
+     * Attributes representing the textFields indicating the payment
+     * occurrences for each resource
+     */
     @FXML
     public TextField firstDepotOcc, secondDepotOcc, thirdDepotOcc, fourthDepotOcc;
     public TextField firstStrongboxOcc, secondStrongboxOcc, thirdStrongboxOcc, fourthStrongboxOcc;
     public TextField firstExtraOcc, secondExtraOcc,thirdExtraOcc,fourthExtraOcc;
 
 
-
+    /**
+     * Attribute that represents the button to conclude the action
+     */
     public Button concludeAction;
 
     private ActivateProductionGUI activateProductionAction;
@@ -69,7 +92,9 @@ public class ActivateProductionController extends Controller implements PaymentC
     public HBox costs;
     public Text firstCost, secondCost, thirdCost, fourthCost;
     public ImageView firstCostImg, secondCostImg, thirdCostImg, fourthCostImg;
-
+    /**
+     * Attributes that represents the button to choose the input resources to the base production
+     */
     public Button coinInput, servantInput, shieldInput, stoneInput, coinOutput, servantOutput, shieldOutput, stoneOutput;
     public Button coinInputSecond, servantInputSecond, shieldInputSecond, stoneInputSecond;
     public Button clear;
@@ -77,14 +102,18 @@ public class ActivateProductionController extends Controller implements PaymentC
     public Label firstInputLabel, secondInputLabel, outputLabel;
 
     public Text errorText;
-
+    /**
+     * Attributes that represent the imageView of the resources to pay
+     */
     public ImageView firstResourceImage, secondResourceImage, thirdResourceImage, fourthResourceImage;
 
 
 
     private boolean basicHasToBeDone, firstExtraHasToBeDone, secondExtraHasToBeDone;
 
-
+    /**
+     * Attributes representing the occurrences of payment resources for each resource
+     */
     int firstCurrentValueDepot = 0;
     int secondCurrentValueDepot = 0;
     int thirdCurrentValueDepot = 0;
@@ -104,6 +133,10 @@ public class ActivateProductionController extends Controller implements PaymentC
 
 
     public HBox extraProductions;
+    /**
+     * Attributes that represent the textFields that indicate
+     * the payment resources of the productions
+     */
     public TextField firstResourceDepot;
     public TextField secondResourceDepot;
     public TextField thirdResourceDepot;
@@ -117,7 +150,12 @@ public class ActivateProductionController extends Controller implements PaymentC
     public TextField thirdResourceExtra;
     public TextField fourthResourceExtra;
 
-
+    /**
+     * Main method that initializes the scene within the stage
+     * It takes care of setting the background of the scene
+     * ,the font of the texts and buttons,
+     * and the images on the scene
+     */
     @FXML
     @Override
     public void initialize() {
@@ -139,7 +177,9 @@ public class ActivateProductionController extends Controller implements PaymentC
         initializeInputOutput();
     }
 
-
+    /**
+     * method used to set font for all texts
+     */
     private void setText() {
         setFont(firstDepotOcc, 18);
         setFont(secondDepotOcc, 18);
@@ -182,6 +222,9 @@ public class ActivateProductionController extends Controller implements PaymentC
         setFont(errorText, 30);
     }
 
+    /**
+     * method used to initialize the card images inside the slots
+     */
     private void initializeSlotsImages()
     {
         initializeSlotImage(0);
@@ -201,6 +244,10 @@ public class ActivateProductionController extends Controller implements PaymentC
         }
     }
 
+    /**
+     * method used to initialize the card image at the top of the considered slot
+     * @param slotIndex index of slot considered
+     */
     private void initializeSlotImage(int slotIndex) {
         switch (slotIndex) {
             case(0) : {
@@ -235,6 +282,10 @@ public class ActivateProductionController extends Controller implements PaymentC
         }
     }
 
+    /**
+     * method used to initialize the images of the buttons
+     * indicating the input and output resources of the base production
+     */
     private void initializeInputOutput() {
         coinInput.setStyle("-fx-background-image: url("+ResourceLocator.retrieveResourceTypeImage(ResourceType.coin)+")");
         servantInput.setStyle("-fx-background-image: url("+ResourceLocator.retrieveResourceTypeImage(ResourceType.servant)+")");
@@ -247,6 +298,9 @@ public class ActivateProductionController extends Controller implements PaymentC
 
     }
 
+    /**
+     * method used to move to the next payment scene
+     */
     private void nextScene() {
         activateProdText.setTranslateX(-180);
         if(basicHasToBeDone) {
@@ -274,7 +328,9 @@ public class ActivateProductionController extends Controller implements PaymentC
         } else concludeProductionsSelection();
     }
 
-
+    /**
+     * method used to manage the choice of base production
+     */
     @FXML
     public void handleBasicSelection() {
         basicHasToBeDone = true;
@@ -283,7 +339,9 @@ public class ActivateProductionController extends Controller implements PaymentC
         nextStep.setVisible(true);
     }
 
-
+    /**
+     * method used to clear all the choices made
+     */
     @FXML
     public void clearSelection() {
         deselect(input);
@@ -292,6 +350,9 @@ public class ActivateProductionController extends Controller implements PaymentC
         activateProductionAction.clearBasicChoices();
     }
 
+    /**
+     * method used to select coin as the first choice of input for basic production
+     */
     @FXML
     public void coinInputChosen() {
         deselect(input);
@@ -300,7 +361,9 @@ public class ActivateProductionController extends Controller implements PaymentC
         if(activateProductionAction.isBasicSettingDone()) basicHasToBeDone = false;
         nextScene();
     }
-
+    /**
+     * method used to select coin as the second choice of input for basic production
+     */
     @FXML
     public void coinInputSecondChosen() {
         deselect(inputSecond);
@@ -309,7 +372,9 @@ public class ActivateProductionController extends Controller implements PaymentC
         if(activateProductionAction.isBasicSettingDone()) basicHasToBeDone = false;
         nextScene();
     }
-
+    /**
+     * method used to select servant as the first choice of input for basic production
+     */
     @FXML
     public void servantInputChosen() {
         deselect(input);
@@ -318,7 +383,9 @@ public class ActivateProductionController extends Controller implements PaymentC
         if(activateProductionAction.isBasicSettingDone()) basicHasToBeDone = false;
         nextScene();
     }
-
+    /**
+     * method used to select servant as the second choice of input for basic production
+     */
     @FXML
     public void servantInputSecondChosen() {
         deselect(inputSecond);
@@ -327,7 +394,9 @@ public class ActivateProductionController extends Controller implements PaymentC
         if(activateProductionAction.isBasicSettingDone()) basicHasToBeDone = false;
         nextScene();
     }
-
+    /**
+     * method used to select shield as the first choice of input for basic production
+     */
     @FXML
     public void shieldInputChosen() {
         deselect(input);
@@ -336,7 +405,9 @@ public class ActivateProductionController extends Controller implements PaymentC
         if(activateProductionAction.isBasicSettingDone()) basicHasToBeDone = false;
         nextScene();
     }
-
+    /**
+     * method used to select shield as the second choice of input for basic production
+     */
     @FXML
     public void shieldInputSecondChosen() {
         deselect(inputSecond);
@@ -345,7 +416,9 @@ public class ActivateProductionController extends Controller implements PaymentC
         if(activateProductionAction.isBasicSettingDone()) basicHasToBeDone = false;
         nextScene();
     }
-
+    /**
+     * method used to select stone as the first choice of input for basic production
+     */
     @FXML
     public void stoneInputChosen() {
         deselect(input);
@@ -354,7 +427,9 @@ public class ActivateProductionController extends Controller implements PaymentC
         if(activateProductionAction.isBasicSettingDone()) basicHasToBeDone = false;
         nextScene();
     }
-
+    /**
+     * method used to select stone as the second choice of input for basic production
+     */
     @FXML
     public void stoneInputSecondChosen(){
         deselect(inputSecond);
@@ -364,6 +439,9 @@ public class ActivateProductionController extends Controller implements PaymentC
         nextScene();
     }
 
+    /**
+     * method used to select the coin as the output for the basic production
+     */
     @FXML
     public void coinOutputChosen() {
         deselect(output);
@@ -382,7 +460,9 @@ public class ActivateProductionController extends Controller implements PaymentC
         }
         nextScene();
     }
-
+    /**
+     * method used to select the servant as the output for the basic production
+     */
     @FXML
     public void servantOutputChosen(){
         deselect(output);
@@ -401,6 +481,9 @@ public class ActivateProductionController extends Controller implements PaymentC
         }
         nextScene();
     }
+    /**
+     * method used to select the shield as the output for the basic production
+     */
     @FXML
     public void shieldOutputChosen() {
         deselect(output);
@@ -419,6 +502,9 @@ public class ActivateProductionController extends Controller implements PaymentC
         }
         nextScene();
     }
+    /**
+     * method used to select the stone as the output for the basic production
+     */
     @FXML
     public void stoneOutputChosen() {
         deselect(output);
@@ -439,7 +525,10 @@ public class ActivateProductionController extends Controller implements PaymentC
     }
 
 
-
+    /**
+     * method used to manage the selection of the first slot for production activation
+     * It is performed when slot1 button is pressed
+     */
     @FXML
     public void handleFirstSlotSelection() {
         hideError();
@@ -453,7 +542,10 @@ public class ActivateProductionController extends Controller implements PaymentC
             showErrorInSlotsSelection();
         }
     }
-
+    /**
+     * method used to manage the selection of the second slot for production activation
+     * It is performed when slot2 button is pressed
+     */
     @FXML
     public void handleSecondSlotSelection() {
         hideError();
@@ -467,7 +559,10 @@ public class ActivateProductionController extends Controller implements PaymentC
             showErrorInSlotsSelection();
         }
     }
-
+    /**
+     * method used to manage the selection of the third slot for production activation
+     * It is performed when slot3 button is pressed
+     */
     @FXML
     public void handleThirdSlotSelection() {
         hideError();
@@ -481,7 +576,10 @@ public class ActivateProductionController extends Controller implements PaymentC
             showErrorInSlotsSelection();
         }
     }
-
+    /**
+     * method used to manage the selection of the first extra slot for production activation
+     * It is performed when firstExtraSlot button is pressed
+     */
     @FXML
     public void firstExtraProductionSelected() {
         activateProductionAction.setExtra(1);
@@ -491,7 +589,10 @@ public class ActivateProductionController extends Controller implements PaymentC
                 getCompatibleLeaderEffect(Effect.EXTRAPRODUCTION).get(0).getLeaderEffect().toImage()+");");
         nextStep.setVisible(true);
     }
-
+    /**
+     * method used to manage the selection of the second extra slot for production activation
+     * It is performed when secondExtraSlot button is pressed
+     */
     @FXML
     public void secondExtraProductionSelected() {
         activateProductionAction.setExtra(2);
@@ -502,19 +603,26 @@ public class ActivateProductionController extends Controller implements PaymentC
         nextStep.setVisible(true);
     }
 
-
+    /**
+     * method used to show an error in the selection
+     */
     private void showErrorInSlotsSelection() {
         setActivateProdText("You can't activate this production because the slot is empty");
     }
 
+    /**
+     * method used to dynamically set the title of the page that is shown
+     * @param text text to show
+     */
     private void setActivateProdText(String text) {
         activateProdText.setText(text);
         activateProdText.setVisible(true);
     }
 
 
-
-
+    /**
+     * method used to clean the Pane in order to load the new page
+     */
     public void cleanPane() {
         plusFirstResourceDepot.setVisible(false);
         plusFirstResourceStrongbox.setVisible(false);
@@ -593,7 +701,10 @@ public class ActivateProductionController extends Controller implements PaymentC
     }
 
 
-
+    /**
+     * method used to set and make visible the first payment resource
+     * for the activation of production
+     */
     @Override
     public void setVisibleFirstResource() {
         firstResourceImage.setImage(new Image(ResourceLocator.retrieveResourceTypeImage(requiredResources.get(0).getKey())));
@@ -620,7 +731,10 @@ public class ActivateProductionController extends Controller implements PaymentC
             firstResourceExtra.setVisible(true);
         }
     }
-
+    /**
+     * method used to set and make visible the second payment resource
+     * for the activation of production
+     */
     @Override
     public void setVisibleSecondResource() {
         secondResourceImage.setImage(new Image(ResourceLocator.retrieveResourceTypeImage(requiredResources.get(1).getKey())));
@@ -646,7 +760,10 @@ public class ActivateProductionController extends Controller implements PaymentC
             secondResourceExtra.setVisible(true);
         }
     }
-
+    /**
+     * method used to set and make visible the third payment resource
+     * for the activation of production
+     */
     @Override
     public void setVisibleThirdResource() {
         thirdResourceImage.setImage(new Image(ResourceLocator.retrieveResourceTypeImage(requiredResources.get(2).getKey())));
@@ -675,7 +792,10 @@ public class ActivateProductionController extends Controller implements PaymentC
             setVisibleFourthResource();
         }
     }
-
+    /**
+     * method used to set and make visible the fourth payment resource
+     * for the activation of production
+     */
     private void setVisibleFourthResource() {
         fourthResourceImage.setImage(new Image(ResourceLocator.retrieveResourceTypeImage(requiredResources.get(3).getKey())));
         fourthResourceImage.setVisible(true);
@@ -702,7 +822,10 @@ public class ActivateProductionController extends Controller implements PaymentC
         }
     }
 
-
+    /**
+     * method used to decrement the number
+     * of occurrences for the first payment resource from the depot
+     */
     @FXML
     public void minusFirstResourceFromDepot() {
         makeTextInvisible(errorText);
@@ -710,32 +833,50 @@ public class ActivateProductionController extends Controller implements PaymentC
         if(!addToCostList(requiredResources,1, 1, firstCurrentValueDepot, firstDepotOcc)) firstCurrentValueDepot++;
     }
 
+    /**
+     * method used to decrement the number
+     * of occurrences for the second payment resource from the depot
+     */
     @FXML
     public void minusSecondResourceFromDepot() {
         makeTextInvisible(errorText);
         secondCurrentValueDepot--;
         if(!addToCostList(requiredResources,2, 1, secondCurrentValueDepot, secondDepotOcc)) secondCurrentValueDepot++;
     }
-
+    /**
+     * method used to decrement the number
+     * of occurrences for the third payment resource from the depot
+     */
     @FXML
     public void minusThirdResourceFromDepot() {
         makeTextInvisible(errorText);
         thirdCurrentValueDepot--;
         if(!addToCostList(requiredResources,3,1, thirdCurrentValueDepot, thirdDepotOcc)) thirdCurrentValueDepot++;
     }
-
+    /**
+     * method used to decrement the number
+     * of occurrences for the first payment resource from the Strongbox
+     */
     @FXML
     public void minusFirstResourceFromStrongbox() {
         makeTextInvisible(errorText);
         firstCurrentValueStrongbox--;
         if(!addToCostList(requiredResources,1,1, firstCurrentValueStrongbox, firstStrongboxOcc)) firstCurrentValueStrongbox++;
     }
+    /**
+     * method used to decrement the number
+     * of occurrences for the second payment resource from the Strongbox
+     */
     @FXML
     public void minusSecondResourceFromStrongbox() {
         makeTextInvisible(errorText);
         secondCurrentValueStrongbox--;
         if(!addToCostList(requiredResources,2,1, secondCurrentValueStrongbox, secondStrongboxOcc)) secondCurrentValueStrongbox++;
     }
+    /**
+     * method used to decrement the number
+     * of occurrences for the third payment resource from the Strongbox
+     */
     @FXML
     public void minusThirdResourceFromStrongbox() {
         makeTextInvisible(errorText);
@@ -744,76 +885,112 @@ public class ActivateProductionController extends Controller implements PaymentC
     }
 
 
-
+    /**
+     * method used to increment the number
+     * of occurrences for the first payment resource from the depot
+     */
     @FXML
     public void plusFirstResourceFromDepot() {
         firstCurrentValueDepot++;
         if(!editedCostList(requiredResources,1, 1, firstCurrentValueDepot, firstDepotOcc)) firstCurrentValueDepot--;
     }
 
-
+    /**
+     * method used to increment the number
+     * of occurrences for the second payment resource from the depot
+     */
     @FXML
     public void plusSecondResourceFromDepot(){
         secondCurrentValueDepot++;
         if(!editedCostList(requiredResources,2, 1, secondCurrentValueDepot, secondDepotOcc)) secondCurrentValueDepot--;
     }
-
+    /**
+     * method used to increment the number
+     * of occurrences for the third payment resource from the depot
+     */
     @FXML
     public void plusThirdResourceFromDepot(){
         thirdCurrentValueDepot++;
         if(!editedCostList(requiredResources,3, 1, thirdCurrentValueDepot, thirdDepotOcc)) thirdCurrentValueDepot--;
     }
-
+    /**
+     * method used to increment the number
+     * of occurrences for the first payment resource from the Strongbox
+     */
     @FXML
     public void plusFirstResourceFromStrongbox() {
         firstCurrentValueStrongbox++;
         if(!editedCostList(requiredResources,1, 1, firstCurrentValueStrongbox, firstStrongboxOcc)) firstCurrentValueStrongbox--;
     }
-
+    /**
+     * method used to increment the number
+     * of occurrences for the second payment resource from the Strongbox
+     */
     @FXML
     public void plusSecondResourceFromStrongbox(){
         secondCurrentValueStrongbox++;
         if(!editedCostList(requiredResources,2, 1,secondCurrentValueStrongbox , secondStrongboxOcc)) secondCurrentValueStrongbox--;
     }
-
+    /**
+     * method used to increment the number
+     * of occurrences for the third payment resource from the Strongbox
+     */
     @FXML
     public void plusThirdResourceFromStrongbox(){
         thirdCurrentValueStrongbox++;
         if(!editedCostList(requiredResources,3, 1, thirdCurrentValueStrongbox,thirdStrongboxOcc)) thirdCurrentValueStrongbox--;
     }
-
+    /**
+     * method used to increment the number
+     * of occurrences for the first payment resource from the extra depot
+     */
     @FXML
     public void plusFirstResourceFromExtra() {
         firstCurrentValueExtra++;
         if(!editedCostList(requiredResources,1, 1, firstCurrentValueExtra, firstExtraOcc)) firstCurrentValueExtra--;
     }
-
+    /**
+     * method used to increment the number
+     * of occurrences for the second payment resource from the extra depot
+     */
     @FXML
     public void plusSecondResourceFromExtra() {
         secondCurrentValueExtra++;
         if(!editedCostList(requiredResources,2, 1, secondCurrentValueExtra, secondExtraOcc)) secondCurrentValueExtra--;
     }
-
+    /**
+     * method used to increment the number
+     * of occurrences for the third payment resource from the extra depot
+     */
     @FXML
     public void plusThirdResourceFromExtra() {
         thirdCurrentValueExtra++;
         if(!editedCostList(requiredResources,3, 1, thirdCurrentValueExtra, thirdExtraOcc)) thirdCurrentValueExtra--;
     }
-
+    /**
+     * method used to decrement the number
+     * of occurrences for the first payment resource from the extra depot
+     */
     @FXML
     public void minusFirstResourceFromExtra() {
         makeTextInvisible(errorText);
         firstCurrentValueExtra--;
         if(!addToCostList(requiredResources,1, 1, firstCurrentValueExtra, firstExtraOcc)) firstCurrentValueExtra++;
     }
-
+    /**
+     * method used to decrement the number
+     * of occurrences for the second payment resource from the extra depot
+     */
     @FXML
     public void minusSecondResourceFromExtra() {
         makeTextInvisible(errorText);
         secondCurrentValueExtra--;
         if(!addToCostList(requiredResources,2,1,secondCurrentValueExtra, secondExtraOcc)) secondCurrentValueExtra++;
     }
-
+    /**
+     * method used to decrement the number
+     * of occurrences for the third payment resource from the extra depot
+     */
     @FXML
     public void minusThirdResourceFromExtra() {
         makeTextInvisible(errorText);
@@ -821,43 +998,63 @@ public class ActivateProductionController extends Controller implements PaymentC
         if (!addToCostList(requiredResources,3,1,thirdCurrentValueExtra, thirdExtraOcc)) thirdCurrentValueExtra++;
     }
 
-
-
-    /*Aggiunti successivamente*/
-
+    /**
+     * method used to decrement the number
+     * of occurrences for the fourth payment resource from the depot
+     */
     public void minusFourthResourceDepot() {
         makeTextInvisible(errorText);
         fourthCurrentValueDepot--;
         if (!addToCostList(requiredResources,4,1,fourthCurrentValueDepot, fourthDepotOcc)) fourthCurrentValueDepot++;
     }
-
+    /**
+     * method used to decrement the number
+     * of occurrences for the fourth payment resource from the Strongbox
+     */
     public void minusFourthResourceStrongbox() {
         makeTextInvisible(errorText);
         fourthCurrentValueStrongbox--;
         if (!addToCostList(requiredResources,4,1,fourthCurrentValueStrongbox, fourthStrongboxOcc)) fourthCurrentValueStrongbox++;
     }
+    /**
+     * method used to decrement the number
+     * of occurrences for the fourth payment resource from the extra depot
+     */
     public void minusFourthResourceExtra() {
         makeTextInvisible(errorText);
         fourthCurrentValueExtra--;
         if (!addToCostList(requiredResources,4,1,fourthCurrentValueExtra, fourthExtraOcc)) fourthCurrentValueExtra++;
     }
-
+    /**
+     * method used to increment the number
+     * of occurrences for the fourth payment resource from the depot
+     */
     public void plusFourthResourceDepot() {
         fourthCurrentValueDepot++;
         if(!editedCostList(requiredResources,4, 1, fourthCurrentValueDepot, fourthDepotOcc)) fourthCurrentValueDepot--;
     }
-
+    /**
+     * method used to increment the number
+     * of occurrences for the fourth payment resource from the Stronbox
+     */
     public void plusFourthResourceStrongbox() {
         fourthCurrentValueExtra++;
         if(!editedCostList(requiredResources,4, 1, fourthCurrentValueStrongbox, fourthStrongboxOcc)) fourthCurrentValueStrongbox--;
     }
-
+    /**
+     * method used to increment the number
+     * of occurrences for the fourth payment resource from the extra depot
+     */
     public void plusFourthResourceExtra() {
         fourthCurrentValueExtra++;
         if(!editedCostList(requiredResources,4, 1, fourthCurrentValueExtra, fourthExtraOcc)) fourthCurrentValueExtra--;
     }
 
-
+    /**
+     * method used to conclude the selection of the productions made and
+     * move on to the payment of resources
+     * It is performed when toPayment button is pressed
+     */
     @FXML
     public void concludeProductionsSelection() {
         cleanPane();
@@ -874,8 +1071,10 @@ public class ActivateProductionController extends Controller implements PaymentC
     }
 
 
-
-
+    /**
+     * method used to handle the case where the base production or the
+     * extra production has been selected before moving on to payment
+     */
     @FXML
     public void ifBasicShowInputOrElseCheckExtra() {
         cleanPane();
@@ -883,13 +1082,19 @@ public class ActivateProductionController extends Controller implements PaymentC
     }
 
 
-
+    /**
+     * method used to set the page title according to the requested action
+     * @param output text to show
+     */
     private void showActionRequired(String output) {
         activateProdText.setText(output);
         activateProdText.setVisible(true);
     }
 
-
+    /**
+     * method used to close page of Buy Development Card over the main stage
+     * It is performed when closeActivateProd button is pressed
+     */
     @FXML
     public void handleCloseChooseAction()
     {
@@ -898,24 +1103,37 @@ public class ActivateProductionController extends Controller implements PaymentC
     }
 
 
-
+    /**
+     * method used to terminate the action and make the payment
+     * It is performed when concludeAction button is pressed
+     */
     @Override
     public void showFinishButton() {
         concludeAction.setVisible(isPaymentDone(requiredResources));
     }
 
+    /**
+     * method used to hide the error
+     */
     @Override
     public void hideError() {
         errorText.setVisible(false);
     }
 
+    /**
+     * method used to set the maximum number of payment occurrences that each resource can have
+     * @param error error string to show if you go further with occurrences
+     */
     @Override
     public void maxOccurrencesSet(String error) {
         errorText.setText(error);
         errorText.setVisible(true);
     }
 
-
+    /**
+     * method used to set the CSS of the pressed buttons
+     * @param button considered
+     */
     private void buttonSelection(Button button) {
         button.setStyle("-fx-border-color: rgb(231,156,48);-fx-border-width: 5;");
     }
@@ -932,7 +1150,9 @@ public class ActivateProductionController extends Controller implements PaymentC
         buttons.forEach(x -> x.setStyle("-fx-background-size: 97% auto"));
     }
 
-
+    /**
+     * method used to conclude the action and actually activate the production made
+     */
     public void handleActionConclusion() {
         Map<ResourceSource, EnumMap<ResourceType, Integer>> paymentInstructions = initializeMap();
         for(int i = 0; i < requiredResources.size(); i++) {
