@@ -2,10 +2,13 @@ package it.polimi.ingsw.controller;
 
 import it.polimi.ingsw.client.reducedmodel.ReducedMarble;
 import it.polimi.ingsw.commons.*;
-
-import it.polimi.ingsw.exceptions.*;
+import it.polimi.ingsw.exceptions.DepotOutOfBoundsException;
+import it.polimi.ingsw.exceptions.IncompatibleResourceTypeException;
+import it.polimi.ingsw.exceptions.MoveResourcesException;
 import it.polimi.ingsw.model.*;
-
+import it.polimi.ingsw.model.marketTray.Marble;
+import it.polimi.ingsw.model.marketTray.StandardMarble;
+import it.polimi.ingsw.model.marketTray.WhiteMarble;
 import it.polimi.ingsw.network.ClientStatus;
 import it.polimi.ingsw.network.NetworkRemoteView;
 import it.polimi.ingsw.network.RemoteView;
@@ -14,15 +17,16 @@ import it.polimi.ingsw.utils.messages.clientMessages.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-
 import java.util.*;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.*;
 
 class TurnControllerTest {
 
 
-    Map<ResourceType,Integer> genericMap = new EnumMap<ResourceType, Integer>(ResourceType.class);
+    Map<ResourceType,Integer> genericMap = new EnumMap<>(ResourceType.class);
 
 
     @BeforeEach
@@ -105,6 +109,106 @@ class TurnControllerTest {
         NetworkRemoteView spyRemoteView = spy(new NetworkRemoteView(first.getUser(),gameController,clientStatus));
         turnController.handleEndTurnMessage(new EndTurnMessage(),spyRemoteView);
         verify(gameSpy, times(1)).nextTurn();
+    }
+
+    @Test
+    void handlePositioningTest(){
+        List<Player> players = new ArrayList<>();
+        Player first = spy(new Player("Piero"));
+        Player second = spy(new Player("Andrea"));
+        Player third = spy(new Player("Domenico"));
+        players.add(first);
+        players.add(second);
+        players.add(third);
+
+        MultiPlayerMode game = new MultiPlayerMode(players);
+        game.setTurn(new Turn(game, first));
+        game.nextState(GameState.GAMEFLOW);
+
+        TakeResourcesFromMarketMessage takeResourcesFromMarketMessage = new TakeResourcesFromMarketMessage();
+        takeResourcesFromMarketMessage.setPlayerChoice(MarketChoice.ROW, 2);
+
+        Marble[] marbles = game.getMarketTray().getAvailableMarbles()[1];
+        marbles[0] = new StandardMarble(ColorMarble.BLUE, ResourceType.shield);
+        marbles[1] = new StandardMarble(ColorMarble.BLUE, ResourceType.shield);
+        marbles[2] = new WhiteMarble();
+        marbles[3] = new WhiteMarble();
+
+        takeResourcesFromMarketMessage.addWhereToPutMarbles(new Pair<>(marbles[0].getReducedVersion(),MarbleDestination.EXTRA));
+        takeResourcesFromMarketMessage.addWhereToPutMarbles(new Pair<>(marbles[1].getReducedVersion(),MarbleDestination.EXTRA));
+        takeResourcesFromMarketMessage.addWhereToPutMarbles(new Pair<>(marbles[2].getReducedVersion(),MarbleDestination.NOTNEEDED));
+        takeResourcesFromMarketMessage.addWhereToPutMarbles(new Pair<>(marbles[3].getReducedVersion(),MarbleDestination.NOTNEEDED));
+
+        TurnController turnController = new TurnController(game,first);
+        ClientStatus clientStatus = mock(ClientStatus.class);
+        GameController gameController = new GameController(game);
+        RemoteView spyRemoteView = spy(new NetworkRemoteView(first.getUser(),gameController,clientStatus));
+        turnController.handleTakeResourcesFromMarketMessage(takeResourcesFromMarketMessage, spyRemoteView);
+
+        PositioningMessage positioningMessage = new PositioningMessage();
+        List<Pair<ResourceType, MarbleDestination>> whereToPutResources = new ArrayList<>();
+        whereToPutResources.add(new Pair<>(ResourceType.shield, MarbleDestination.DEPOT3));
+        whereToPutResources.add(new Pair<>(ResourceType.shield, MarbleDestination.DEPOT3));
+        positioningMessage.setWhereToPutResources(whereToPutResources);
+
+        turnController.handlePositioningMessage(positioningMessage, spyRemoteView);
+
+        assertEquals(2, (int) first.getPersonalBoard().getWarehouse().getAvailableResources().get(ResourceType.shield));
+    }
+
+    @Test
+    void secondPositioningFailedTest(){
+        List<Player> players = new ArrayList<>();
+        Player first = new Player("Piero");
+        Player second = new Player("Andrea");
+        Player third = new Player("Domenico");
+        players.add(first);
+        players.add(second);
+        players.add(third);
+
+        MultiPlayerMode game = new MultiPlayerMode(players);
+        game.setTurn(new Turn(game, first));
+        game.nextState(GameState.GAMEFLOW);
+
+        TakeResourcesFromMarketMessage takeResourcesFromMarketMessage = new TakeResourcesFromMarketMessage();
+        takeResourcesFromMarketMessage.setPlayerChoice(MarketChoice.ROW, 2);
+
+        Marble[] marbles = game.getMarketTray().getAvailableMarbles()[1];
+        marbles[0] = new StandardMarble(ColorMarble.BLUE, ResourceType.shield);
+        marbles[1] = new StandardMarble(ColorMarble.BLUE, ResourceType.shield);
+        marbles[2] = new WhiteMarble();
+        marbles[3] = new WhiteMarble();
+
+        takeResourcesFromMarketMessage.addWhereToPutMarbles(new Pair<>(marbles[0].getReducedVersion(),MarbleDestination.EXTRA));
+        takeResourcesFromMarketMessage.addWhereToPutMarbles(new Pair<>(marbles[1].getReducedVersion(),MarbleDestination.EXTRA));
+        takeResourcesFromMarketMessage.addWhereToPutMarbles(new Pair<>(marbles[2].getReducedVersion(),MarbleDestination.NOTNEEDED));
+        takeResourcesFromMarketMessage.addWhereToPutMarbles(new Pair<>(marbles[3].getReducedVersion(),MarbleDestination.NOTNEEDED));
+
+        TurnController turnController = new TurnController(game,first);
+        ClientStatus clientStatus = mock(ClientStatus.class);
+        GameController gameController = new GameController(game);
+        RemoteView spyRemoteView = spy(new NetworkRemoteView(first.getUser(),gameController,clientStatus));
+        turnController.handleTakeResourcesFromMarketMessage(takeResourcesFromMarketMessage, spyRemoteView);
+
+        PositioningMessage positioningMessage = new PositioningMessage();
+        List<Pair<ResourceType, MarbleDestination>> whereToPutResources = new ArrayList<>();
+        whereToPutResources.add(new Pair<>(ResourceType.shield, MarbleDestination.EXTRA));
+        whereToPutResources.add(new Pair<>(ResourceType.shield, MarbleDestination.EXTRA));
+        positioningMessage.setWhereToPutResources(whereToPutResources);
+
+        turnController.handlePositioningMessage(positioningMessage, spyRemoteView);
+
+        assertEquals(0, (int) first.getPersonalBoard().getWarehouse().getAvailableResources().get(ResourceType.shield));
+        if(game.getPlayer(second.getUser()).getPosition() == 2){
+            assertEquals(2, second.getPersonalBoard().getFaithTrack().getFaithMarker());
+        } else if (game.getPlayer(second.getUser()).getPosition() == 3) {
+            assertEquals(3, second.getPersonalBoard().getFaithTrack().getFaithMarker());
+        }
+        if(game.getPlayer(third.getUser()).getPosition() == 2){
+            assertEquals(2, third.getPersonalBoard().getFaithTrack().getFaithMarker());
+        } else if (game.getPlayer(third.getUser()).getPosition() == 3) {
+            assertEquals(3, third.getPersonalBoard().getFaithTrack().getFaithMarker());
+        }
     }
 
     @Test
