@@ -1038,7 +1038,7 @@ public class ActivateProductionController extends Controller implements PaymentC
      * of occurrences for the fourth payment resource from the Stronbox
      */
     public void plusFourthResourceStrongbox() {
-        fourthCurrentValueExtra++;
+        fourthCurrentValueStrongbox++;
         if(!editedCostList(requiredResources,4, 1, fourthCurrentValueStrongbox, fourthStrongboxOcc)) fourthCurrentValueStrongbox--;
     }
     /**
