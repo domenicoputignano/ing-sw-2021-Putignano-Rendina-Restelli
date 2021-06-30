@@ -53,8 +53,7 @@ public class WaitForTurnCLI extends AbstractWaitForTurn {
         waiterThread = new Thread(()-> {
             while(!waiterThread.isInterrupted()){
                 try{
-                    System.out.println("You have to wait until your turn will start," +
-                            " you can see player's board by typing (PB), market tray (M) or decks (D)");
+                    cli.printOtherPossibleActions();
                     while(!input.ready()) {
                         Thread.sleep(50);
                     }

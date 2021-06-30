@@ -32,7 +32,7 @@ public class ActionChoiceCLI extends AbstractActionChoice {
     /**
      * Main method of the class. It runs until an action that requires a specific interaction with user to be performed
      * is selected. It requires being synchronized over a static variable to avoid that thread related to {@link WaitForTurnCLI}
-     * and thread that handles this interaction read simultaneously for System.in.
+     * and thread that handles this interaction read simultaneously from System.in.
      */
     @Override
     public void manageUserInteraction() {
@@ -54,7 +54,6 @@ public class ActionChoiceCLI extends AbstractActionChoice {
     private boolean actionChoice() {
         System.out.println("Here is your personal board");
         cli.printPersonalBoard(client.getGame().getPlayer(client.getUser()).getPersonalBoard());
-            //Logger.getLogger(this.getClass().getName()).log(Level.INFO, "Sono nella action choice e sto leggendo da input");
             if(normalActionAlreadyDone()) {
                 System.out.println("Choose between Leader Action (L), Move Resources (M) and End Turn (E) ");
             } else {
@@ -62,9 +61,7 @@ public class ActionChoiceCLI extends AbstractActionChoice {
                         " Buy (B), Take Resources (T), Leader Action (L), Move Resources (M) " +
                         " ");
             }
-            if(!client.getGame().isSoloMode()) {
-                System.out.println("You can type (PB) to see other players' board, (MARKET) to see market tray or (DECKS) to see development cards");
-            }
+            cli.printOtherPossibleActions();
             String choice = input.next().toUpperCase();
             switch(choice) {
                 case "A" : {

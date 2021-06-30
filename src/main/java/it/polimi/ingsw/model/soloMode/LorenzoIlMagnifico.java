@@ -58,12 +58,12 @@ public class LorenzoIlMagnifico extends Observable<GameEvent> {
             this.blackCross++;
             if(faithTrack.isPopeSpace(passedSection,blackCross)){
                 if(faithTrack.getStateFavorTile(passedSection) == StateFavorTiles.FACEDOWN) {
-                    isAVaticanReportTriggered = true;// attiva rapporto in vaticano
+                    isAVaticanReportTriggered = true;
                     notify(new LorenzoActivatedAVaticanReport(passedSection));
                 }
             }
             if(this.blackCross >= faithTrack.getPopeSpace(passedSection)){
-                if(passedSection < 2)// controllo se ho sorpassato la vaticanReportSection attuale
+                if(passedSection < 2) //check if current vatican section has been overcame.
                     this.passedSection++;
             }
             if(blackCross >= 24) {

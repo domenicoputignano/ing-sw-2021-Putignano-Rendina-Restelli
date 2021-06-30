@@ -4,8 +4,10 @@ package it.polimi.ingsw.controller;
 import it.polimi.ingsw.commons.ResourceType;
 import it.polimi.ingsw.commons.User;
 import it.polimi.ingsw.model.Game;
+import it.polimi.ingsw.model.GameState;
 import it.polimi.ingsw.model.MultiPlayerMode;
 import it.polimi.ingsw.model.Player;
+import it.polimi.ingsw.model.soloMode.SoloMode;
 import it.polimi.ingsw.network.ClientStatus;
 import it.polimi.ingsw.network.NetworkRemoteView;
 import it.polimi.ingsw.network.RemoteView;
@@ -18,8 +20,7 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 
@@ -126,6 +127,9 @@ class GameControllerTest {
         assertTrue(message.isValidMessage());
     }
 
+    /**
+     * Verifies if game controller calls right methods over turn controller.
+     */
     @Test
     void playerConnectionHandlingTest() {
         players.add(spy(new Player("Domenico")));
@@ -137,5 +141,26 @@ class GameControllerTest {
         gameController.handlePlayerReconnection(domenico);
         verify(game, times(1)).handlePlayerReconnection(domenico);
     }
+
+    /**
+     * This methods tests game controller method through making assumptions on how many times
+     * a solo mode game changes its state.
+     */
+    @Test
+    void soloModeConnectionsHandling() {
+        Player soloModePlayer = spy(new Player("Piero"));
+        SoloMode game = spy(new SoloMode(soloModePlayer));
+        GameController gameController = new GameController(game);
+        User piero = new User("Piero");
+        gameController.handlePlayerDisconnection(piero, mock(NetworkRemoteView.class));
+        gameController.handlePlayerReconnection(piero);
+        gameController.handlePlayerDisconnection(piero, mock(NetworkRemoteView.class));
+        verify(game, times(2)).nextState(GameState.PAUSED);
+        verify(game, times(1)).nextState(GameState.GAMEFLOW);
+    }
+
+
+
+
 
 }

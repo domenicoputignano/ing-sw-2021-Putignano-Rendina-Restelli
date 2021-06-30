@@ -253,11 +253,17 @@ public class CLI extends UI {
 
     }
     public synchronized  void render(FaithMarkerUpdate message) {
-        if (isReceiverAction(message.getUser()) && !isReceiverAction(message.getTriggeringUser())) {
-            System.out.printf("User " + message.getTriggeringUser() + " has performed action" +
-                    " involving faith track, you got %d faith points\n", message.getPoints());
+        if(message.getPoints()>0) {
+            if (isReceiverAction(message.getUser()) && !isReceiverAction(message.getTriggeringUser())) {
+                System.out.printf("User " + message.getTriggeringUser() + " has performed action" +
+                        " involving faith track, you got %d faith point(s)\n", message.getPoints());
+            } else {
+                if(isReceiverAction(message.getUser()) && isReceiverAction(message.getTriggeringUser())) {
+                    System.out.println("Your action involved faith track, other players got "+message.getPoints()+" " +
+                            "faith point(s)!");
+                }
+            }
         }
-        //printFaithTrack(message.getUserPersonalBoard());
     }
     public synchronized void render(MoveUpdate message) {
         if (isReceiverAction(message.getUser())) {
@@ -564,6 +570,14 @@ public class CLI extends UI {
         String choice = input.next();
         if (choice.equalsIgnoreCase("esc")) {
             throw new BackToMenuException();
+        }
+    }
+
+    public void printOtherPossibleActions() {
+        if(client.getGame().isSoloMode()) {
+            System.out.println("You can type (MARKET) to see market tray or (DECKS) to see development cards");
+        } else {
+            System.out.println("You can type (PB) to see other players' board, (MARKET) to see market tray or (DECKS) to see development cards");
         }
     }
 

@@ -77,6 +77,7 @@ public class SoloMode extends Game {
     @Override
     public void handlePlayerDisconnection(Player disconnectedPlayer) {
         //TODO sospendere il gioco.
+        nextState(GameState.PAUSED);
     }
 
     /**
@@ -232,6 +233,7 @@ public class SoloMode extends Game {
      */
     @Override
     public void handlePlayerReconnection(User reconnectingUser) {
+        nextState(GameState.GAMEFLOW);
         notifyGameResumed(reconnectingUser);
         if(turn.isDoneNormalAction()) {
             nextTurn();
