@@ -34,7 +34,6 @@ public class ReducedMarketTray implements Serializable {
     public List<ReducedMarble> peekMarbles(MarketChoice marketChoice, int index){
         List<ReducedMarble> marbles = new ArrayList<>();
         if(marketChoice==MarketChoice.ROW) {
-            //TODO : MODIFICARE CON DELLE COPIE
             marbles.addAll(Arrays.asList(availableMarbles[index]));
         } else {
             for (ReducedMarble[] availableMarble : availableMarbles) {

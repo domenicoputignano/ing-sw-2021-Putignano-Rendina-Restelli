@@ -1,9 +1,12 @@
 package it.polimi.ingsw.model.soloMode;
 
 import it.polimi.ingsw.client.reducedmodel.ReducedMarble;
+import it.polimi.ingsw.client.reducedmodel.ReducedPlayer;
+import it.polimi.ingsw.client.reducedmodel.ReducedSoloMode;
 import it.polimi.ingsw.commons.*;
 import it.polimi.ingsw.exceptions.*;
 import it.polimi.ingsw.model.*;
+import it.polimi.ingsw.model.gameEvents.*;
 import it.polimi.ingsw.model.marketTray.Marble;
 import it.polimi.ingsw.utils.MarbleDestination;
 import it.polimi.ingsw.utils.MarketChoice;
@@ -16,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
 
 class SoloModeTest {
 
@@ -45,10 +49,10 @@ class SoloModeTest {
         SoloMode game = new SoloMode(playerList.get(0));
         game.setup();
         game.refreshTokens();
-        assertTrue(game.getTokens().size()==7);
+        assertEquals(7, game.getTokens().size());
     }
 
-    @Test
+    @RepeatedTest(10)
     void lorenzoPlaysBaseCase() {
         playerList.add(new Player("Pippo"));
         SoloMode game = new SoloMode(playerList.get(0));
@@ -60,20 +64,71 @@ class SoloModeTest {
         TokenEffect topTokenEffect = game.peekToken().getTokenEffect();
         System.out.println(topTokenEffect);
         game.lorenzoPlays();
-        if(topTokenEffect instanceof DiscardTwoGreenCards) assertTrue(game.getDecks().get(0).getCards().size()==2);
-        else if(topTokenEffect instanceof DiscardTwoPurpleCards) assertTrue(game.getDecks().get(1).getCards().size()==2);
-        else if(topTokenEffect instanceof DiscardTwoBlueCards) assertTrue(game.getDecks().get(2).getCards().size()==2);
-        else if(topTokenEffect instanceof DiscardTwoYellowCards) assertTrue(game.getDecks().get(3).getCards().size()==2);
+        if(topTokenEffect instanceof DiscardTwoGreenCards) assertEquals(2, game.getDecks().get(0).getCards().size());
+        else if(topTokenEffect instanceof DiscardTwoPurpleCards)
+            assertEquals(2, game.getDecks().get(1).getCards().size());
+        else if(topTokenEffect instanceof DiscardTwoBlueCards) assertEquals(2, game.getDecks().get(2).getCards().size());
+        else if(topTokenEffect instanceof DiscardTwoYellowCards)
+            assertEquals(2, game.getDecks().get(3).getCards().size());
         else if(topTokenEffect instanceof MoveBlackCrossAndShuffle)
         {
-           assertEquals(game.getLorenzoIlMagnifico().getBlackCross(),startBlackCross+1);
-           assertEquals(game.getLorenzoIlMagnifico().getPassedSection(),startPassedSection+1);
-            assertTrue(game.getTokens().size()==7);
+            assertEquals(game.getLorenzoIlMagnifico().getBlackCross(),startBlackCross+1);
+            assertEquals(game.getLorenzoIlMagnifico().getPassedSection(),startPassedSection+1);
+            assertEquals(7, game.getTokens().size());
         }
         else{
             assertEquals(game.getLorenzoIlMagnifico().getBlackCross(),startBlackCross+2);
             assertEquals(game.getLorenzoIlMagnifico().getPassedSection(),startPassedSection+1);
         }
+
+    }
+
+    @Test
+    void nextTurn(){
+        playerList.add(new Player("Pippo"));
+        SoloMode game = new SoloMode(playerList.get(0));
+        TokenEffect topTokenEffect = game.peekToken().getTokenEffect();
+        game.nextTurn();
+        if(topTokenEffect instanceof MoveBlackCrossAndShuffle){
+            assertEquals(1,game.getLorenzoIlMagnifico().getBlackCross());
+            assertEquals(7, game.getTokens().size());
+        } else {
+            assertEquals(6, game.getTokens().size());
+        }
+        assertEquals("Pippo", game.getCurrPlayer().getUser().getNickname());
+    }
+
+    @Test
+    void moveOtherPlayers(){
+        playerList.add(new Player("Pippo"));
+        SoloMode game = new SoloMode(playerList.get(0));
+        game.moveOtherPlayers(game.getCurrPlayer(), 3);
+        assertEquals(3, game.getLorenzoIlMagnifico().getBlackCross());
+    }
+
+    @Test
+    void conclusionEvents(){
+        Player player = spy(new Player("Andrea"));
+
+        SoloMode game = new SoloMode(player);
+        SoloMode gameSpy = spy(game);
+
+        HitLastSpace hitLastSpaceEvent = new HitLastSpace();
+        gameSpy.endGame(hitLastSpaceEvent);
+        verify(gameSpy, times(1)).concludeGame(true, hitLastSpaceEvent);
+
+        SeventhDevCardBought seventhDevCardBoughtEvent = new SeventhDevCardBought();
+        gameSpy.endGame(seventhDevCardBoughtEvent);
+        verify(gameSpy, times(1)).concludeGame(true, seventhDevCardBoughtEvent);
+
+        BlackCrossHitLastSpace blackCrossHitLastSpaceEvent = new BlackCrossHitLastSpace();
+        gameSpy.endGame(blackCrossHitLastSpaceEvent);
+        verify(gameSpy, times(1)).concludeGame(false, blackCrossHitLastSpaceEvent);
+
+        DevCardColorEnded devCardColorEndedEvent = new DevCardColorEnded();
+        gameSpy.endGame(devCardColorEndedEvent);
+        verify(gameSpy, times(1)).concludeGame(false, devCardColorEndedEvent);
+
 
     }
 
