@@ -9,12 +9,14 @@ import it.polimi.ingsw.model.*;
 import it.polimi.ingsw.model.marketTray.Marble;
 import it.polimi.ingsw.model.marketTray.StandardMarble;
 import it.polimi.ingsw.model.marketTray.WhiteMarble;
+import it.polimi.ingsw.model.soloMode.SoloMode;
 import it.polimi.ingsw.network.ClientStatus;
 import it.polimi.ingsw.network.NetworkRemoteView;
 import it.polimi.ingsw.network.RemoteView;
 import it.polimi.ingsw.utils.*;
 import it.polimi.ingsw.utils.messages.clientMessages.*;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 
 import java.util.*;
@@ -86,6 +88,41 @@ class TurnControllerTest {
         verify(game.getTurn(), times(1)).getTurnPhase();
     }
 
+    @Test
+    void buyDevelopmentCard(){
+        Player player = new Player("Andrea");
+        SoloMode soloMode = new SoloMode(player);
+        soloMode.nextState(GameState.GAMEFLOW);
+
+        Map<ResourceType, Integer> initialResources = new EnumMap<>(ResourceType.class);
+        initialResources.put(ResourceType.stone, 10);
+        initialResources.put(ResourceType.shield, 10);
+        initialResources.put(ResourceType.coin, 10);
+        initialResources.put(ResourceType.servant, 10);
+        player.getPersonalBoard().getWarehouse().addResourcesToStrongbox(initialResources);
+
+        BuyDevCardMessage message = new BuyDevCardMessage();
+        message.setType(new CardType(1, ColorCard.blue));
+        message.setDestinationSlot(1);
+
+        DevelopmentCard cardToBuy = soloMode.searchDeck(new CardType(1, ColorCard.blue)).getTop();
+        EnumMap<ResourceType, Integer> cost = new EnumMap<>(cardToBuy.getCost());
+        Map<ResourceSource, EnumMap<ResourceType, Integer>> howToTakeResources = new EnumMap<>(ResourceSource.class);
+        howToTakeResources.put(ResourceSource.STRONGBOX, cost);
+        howToTakeResources.put(ResourceSource.DEPOT, new EnumMap<>(ResourceType.class));
+        howToTakeResources.put(ResourceSource.EXTRA, new EnumMap<>(ResourceType.class));
+        message.setHowToTakeResources(howToTakeResources);
+
+        TurnController turnController = new TurnController(soloMode, player);
+        ClientStatus clientStatus = mock(ClientStatus.class);
+        GameController gameController = new GameController(soloMode);
+        RemoteView spyRemoteView = spy(new NetworkRemoteView(player.getUser(),gameController,clientStatus));
+        turnController.handleBuyDevCardMessage(message, spyRemoteView);
+
+        cost.keySet().forEach(x -> assertEquals(10 - cost.get(x),
+                player.getPersonalBoard().getWarehouse().getAvailableResources().get(x))) ;
+
+    }
 
     @Test
     void handleEndTurnMessageTest() {

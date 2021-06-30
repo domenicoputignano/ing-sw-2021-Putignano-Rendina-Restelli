@@ -48,8 +48,7 @@ public class BuyDevCardMessage implements TurnControllerHandleable {
      * Method that checks low level correctness of the message.
      * @return true if check is successfully passed.
      */
-    public boolean isValidMessage()
-    {
+    public boolean isValidMessage() {
         if(type == null || type.getLevel() <=0 || type.getLevel() > 3 || type.getColor() == null)
             return false;
         if(destinationSlot <= 0 || destinationSlot > 3)

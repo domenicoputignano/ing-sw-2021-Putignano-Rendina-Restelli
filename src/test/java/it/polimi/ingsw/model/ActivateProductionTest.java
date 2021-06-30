@@ -1,15 +1,13 @@
 package it.polimi.ingsw.model;
 
-import it.polimi.ingsw.commons.ResourceType;
+import it.polimi.ingsw.commons.*;
 import it.polimi.ingsw.exceptions.*;
-import it.polimi.ingsw.commons.ColorCard;
-import it.polimi.ingsw.commons.DevelopmentCard;
-import it.polimi.ingsw.commons.Effect;
 import it.polimi.ingsw.utils.messages.clientMessages.*;
 import it.polimi.ingsw.utils.Pair;
 import it.polimi.ingsw.utils.ResourceSource;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 import java.util.*;
 
@@ -49,6 +47,79 @@ class ActivateProductionTest {
         Strongbox = new EnumMap<ResourceType, Integer>(ResourceType.class);
         Depot = new EnumMap<ResourceType, Integer>(ResourceType.class);
         ExtraDepot = new EnumMap<ResourceType, Integer>(ResourceType.class);
+    }
+
+    /**
+     * Activates the production only on third 3 and checks if the results are correct.
+     */
+    @Test
+    void activateProductionOnSlot3() throws DepotOutOfBoundsException, IncompatibleResourceTypeException, PaymentErrorException, InvalidActionException, NotEnoughResourcesException, ResourceMismatchException {
+        ActivateProductionMessage activateProductionMessage = new ActivateProductionMessage();
+        ActiveProductions activeProductions = new ActiveProductions();
+        activeProductions.setSlot3(true);
+
+        activateProductionMessage.setProductions(activeProductions);
+        //Resources that have to be taken
+        Depot.put(ResourceType.shield,1);
+
+        howToTakeResources.put(ResourceSource.DEPOT, Depot);
+        howToTakeResources.put(ResourceSource.STRONGBOX, Strongbox);
+        howToTakeResources.put(ResourceSource.EXTRA, ExtraDepot);
+
+        activateProductionMessage.setHowToTakeResources(howToTakeResources);
+
+        EnumMap<ResourceType, Integer> devCard1Cost = new EnumMap<ResourceType, Integer>(map);
+        devCard1Cost.put(ResourceType.shield,2);
+
+        EnumMap<ResourceType, Integer> devCard1Input = new EnumMap<ResourceType, Integer>(map);
+        devCard1Input.put(ResourceType.shield,1);
+
+        EnumMap<ResourceType,Integer> devCard1Output = new EnumMap<ResourceType, Integer>(map);
+        devCard1Output.put(ResourceType.stone,1);
+        devCard1Output.put(ResourceType.shield,1);
+
+        ProductionRule cardTrade1 = new ProductionRule();
+        cardTrade1.setOutputFaith(0);
+        cardTrade1.setInputResources(devCard1Input);
+        cardTrade1.setOutputResources(devCard1Output);
+
+        DevelopmentCard card = new DevelopmentCard(devCard1Cost, 1, ColorCard.green, 1, cardTrade1);
+        turn.getPlayer().getPersonalBoard().putCardOnTop(card,3);
+
+        EnumMap<ResourceType,Integer> expected = new EnumMap<>(ResourceType.class);
+
+        turn.getPlayer().getPersonalBoard().getWarehouse().addResourcesToDepot(3, ResourceType.shield, 1);
+
+        turn.setTurnState(TurnState.ActionType.ACTIVATEPRODUCTION);
+
+        expected.put(ResourceType.coin,0);
+        expected.put(ResourceType.servant,0);
+        expected.put(ResourceType.shield,1);
+        expected.put(ResourceType.stone,1);
+
+        ActivateProduction action = (ActivateProduction)turn.getTurnPhase();
+        System.out.println("Available resources "+turn.getPlayer().getPersonalBoard().getWarehouse().getAvailableResources());
+
+        //Does concretely selected productions
+        turn.getTurnPhase().activateProduction(turn, activateProductionMessage);
+
+        System.out.println("Input resources "+action.getInputResources());
+        System.out.println("Output Resources "+action.getOutputResources());
+
+        NormalDepot emptyDepot1 = new NormalDepot(0, null, 1);
+        NormalDepot emptyDepot2 = new NormalDepot(0, null, 2);
+        NormalDepot emptyDepot3 = new NormalDepot(0, null, 3);
+
+        assertEquals(emptyDepot1, turn.getPlayer().getPersonalBoard().getWarehouse().getNormalDepots().get(0));
+        assertEquals(emptyDepot2, turn.getPlayer().getPersonalBoard().getWarehouse().getNormalDepots().get(1));
+        assertEquals(emptyDepot3, turn.getPlayer().getPersonalBoard().getWarehouse().getNormalDepots().get(2));
+
+        assertEquals(expected,turn.getPlayer().getPersonalBoard().getWarehouse().getAvailableResources());
+
+        List<Pair<ResourceType,Integer>> result = new ArrayList<>(4);
+        expected.forEach((key,value) -> result.add(new Pair<>(key, value)));
+
+        assertEquals(result, turn.getPlayer().getPersonalBoard().getWarehouse().getResourcesInStrongbox());
     }
 
     @Test
@@ -162,8 +233,15 @@ class ActivateProductionTest {
     }
 
 
-    @Test
+    @RepeatedTest(5)
     void activateProductionLeaderEffect() throws DepotOutOfBoundsException, IncompatibleResourceTypeException, InvalidActionException, PaymentErrorException, NotEnoughResourcesException, ResourceMismatchException {
+
+        LeaderCard leaderCard1 = new LeaderCard(new LeaderEffect(Effect.EXTRAPRODUCTION, ResourceType.shield), null, null, 2);
+        LeaderCard leaderCard2 = new LeaderCard(new LeaderEffect(Effect.EXTRAPRODUCTION, ResourceType.coin), null, null, 2);
+
+        multiPlayerMode.getCurrPlayer().getLeaderCards().clear();
+        multiPlayerMode.getCurrPlayer().getLeaderCards().add(leaderCard1);
+        multiPlayerMode.getCurrPlayer().getLeaderCards().add(leaderCard2);
 
         expected.put(ResourceType.coin,0);
         expected.put(ResourceType.servant,0);

@@ -8,7 +8,7 @@ import it.polimi.ingsw.commons.ResourceType;
  * Enum that allows colors usage in command line interface.
  */
 public enum ANSI_Color {
-    GREY("\u001B[37m"),
+    GREY("\u001b[38;5;240m"),
     YELLOW("\u001B[33m"),
     GREEN("\u001B[32m"),
     BLUE("\u001B[34m"),
