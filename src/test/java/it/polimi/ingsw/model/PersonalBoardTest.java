@@ -11,7 +11,10 @@ import org.junit.jupiter.api.Test;
 import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
-
+/**
+ * Test class that tests the correct functioning of the PersonalBoard class
+ * and its functionalities
+ */
 class PersonalBoardTest {
 
     Player player = new Player("Ernesto");
@@ -30,6 +33,10 @@ class PersonalBoardTest {
 
     }
 
+    /**
+     * test method that tests the correct functioning of the peek
+     * the card at the top of the indicated slot
+     */
     @Test
     void peekTopCard(){
 
@@ -44,7 +51,9 @@ class PersonalBoardTest {
         assertEquals(developmentCard1, personalBoard.peekTopCard(1));
     }
 
-
+    /**
+     * test method that tests that the slot is compatible
+     */
     @Test
     void isCompatibleSlot() {
         developmentCard1Cost.put(ResourceType.coin, 0);
@@ -63,6 +72,9 @@ class PersonalBoardTest {
         assertTrue(player.getPersonalBoard().isCompatibleSlot(2, 1));
     }
 
+    /**
+     * test method that tests if the production activation request is valid
+     */
     @Test
     void isValidRequestedProduction() {
         developmentCard1Cost.put(ResourceType.coin, 0);
@@ -104,6 +116,9 @@ class PersonalBoardTest {
 
     }
 
+    /**
+     * test method that tests if the requirements of the leader cards are valid
+     */
     @Test
     void checkLeaderRequirements() throws DepotOutOfBoundsException, IncompatibleResourceTypeException {
         developmentCard1Cost.put(ResourceType.coin, 0);
@@ -142,6 +157,9 @@ class PersonalBoardTest {
 
     }
 
+    /**
+     * test method that tests a reduced version of the personal board
+     */
     @Test
     void getReducedVersionTest() throws DepotOutOfBoundsException, IncompatibleResourceTypeException, DepotNotFoundException {
         Map<ResourceType,Integer> developmentCard2Cost = new EnumMap<ResourceType, Integer>(ResourceType.class);
