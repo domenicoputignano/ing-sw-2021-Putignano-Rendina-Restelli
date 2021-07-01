@@ -5,14 +5,23 @@ import it.polimi.ingsw.exceptions.DepotOutOfBoundsException;
 import it.polimi.ingsw.exceptions.IncompatibleResourceTypeException;
 import it.polimi.ingsw.commons.ResourceType;
 import it.polimi.ingsw.model.Warehouse;
+import it.polimi.ingsw.utils.messages.clientMessages.ActivateProductionMessage;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Test class whose task is to check all possible outcomes for a move message requiring a move between a {@link it.polimi.ingsw.model.ExtraDepot}
+ * and a {@link it.polimi.ingsw.model.NormalDepot}.
+ */
 class MoveFromExtraToNormalActionTest {
 
     MoveFromExtraToNormalAction message;
 
+
+    /**
+     * Checks move execution and its outcome.
+     */
     @Test
     void handleMove() throws DepotOutOfBoundsException, IncompatibleResourceTypeException, DepotNotFoundException {
         Warehouse warehouse = new Warehouse();
@@ -29,6 +38,9 @@ class MoveFromExtraToNormalActionTest {
         assertFalse(message.handleMove(warehouse));
     }
 
+    /**
+     * Checks move validity.
+     */
     @Test
     void isValidMove() {
         message = new MoveFromExtraToNormalAction(1, 2, 1);

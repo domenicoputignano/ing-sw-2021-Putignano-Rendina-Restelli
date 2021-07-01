@@ -23,6 +23,10 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 
+/**
+ * Class that deals with TurnController methods' tests. Its task is to verify correct method invocations
+ * because underlying method results has been already test in model related package.
+ */
 class TurnControllerTest {
 
 
@@ -38,6 +42,10 @@ class TurnControllerTest {
     }
 
 
+    /**
+     * Test of a standard buy development card action, ensuring that methods concerning action itself
+     * are called once.
+     */
     @Test
     void handleBuyDevCardMessageTest() {
         List<Player> players = new ArrayList<>();
@@ -84,9 +92,13 @@ class TurnControllerTest {
 
 
         verify(messageSpy, times(1)).isValidMessage();
+        //number of times the action is tried.
         verify(game.getTurn(), times(1)).getTurnPhase();
     }
 
+    /**
+     * Test that covers development card purchase and checks final occurrences in strongbox.
+     */
     @Test
     void buyDevelopmentCard(){
         Player player = new Player("Andrea");
@@ -123,6 +135,9 @@ class TurnControllerTest {
 
     }
 
+    /**
+     * Test end turn message ensuring that nextTurn method of model is called once.
+     */
     @Test
     void handleEndTurnMessageTest() {
         List<Player> players = new ArrayList<>();
@@ -147,8 +162,11 @@ class TurnControllerTest {
     }
 
 
+    /**
+     * Checks how many resources require a placement after a take resources from market action.
+     */
     @Test
-    void handlePositioningTest(){
+    void requiredPositioningTest(){
         List<Player> players = new ArrayList<>();
         Player first = spy(new Player("Piero"));
         Player second = spy(new Player("Andrea"));
@@ -192,6 +210,9 @@ class TurnControllerTest {
         assertEquals(2, (int) first.getPersonalBoard().getWarehouse().getAvailableResources().get(ResourceType.shield));
     }
 
+    /**
+     * Checks outcome of a positioning action failed twice.
+     */
     @Test
     void secondPositioningFailedTest(){
         List<Player> players = new ArrayList<>();
@@ -247,6 +268,9 @@ class TurnControllerTest {
         }
     }
 
+    /**
+     * Covers case of an EndTurnMessage sent by a player not in turn.
+     */
     @Test
     void handleEndTurnMessageTestKO() {
         List<Player> players = new ArrayList<>();
@@ -270,7 +294,9 @@ class TurnControllerTest {
         verify(gameSpy, times(0)).nextTurn();
     }
 
-
+    /**
+     * Covers a basic move resources action.
+     */
     @Test
     void handleMoveMessageTest() throws MoveResourcesException {
         List<Player> players = new ArrayList<>();
@@ -302,6 +328,9 @@ class TurnControllerTest {
         verify(gameSpy.getCurrPlayer(),times(1)).moveResources(gameSpy, moveAction);
     }
 
+    /**
+     * Covers error found in move action due to badly formatted message and wrong sender.
+     */
     @Test
     void handleMoveMessageFaults() throws MoveResourcesException {
         List<Player> players = new ArrayList<>();
@@ -334,6 +363,9 @@ class TurnControllerTest {
     }
 
 
+    /**
+     * Covers error while attempting to activate a production power not available for the player.
+     */
     @Test
     void handlingActivateNotOwnedProductionPowers() throws DepotOutOfBoundsException, IncompatibleResourceTypeException {
 
@@ -376,6 +408,9 @@ class TurnControllerTest {
         verify(game.getTurn(), times(1)).getTurnPhase();
     }
 
+    /**
+     * Covers payment error catch caused by player that selected wrong resource source to take his resources.
+     */
     @Test
     void activateProductionPaymentError() throws DepotOutOfBoundsException, IncompatibleResourceTypeException {
         List<Player> players = new ArrayList<>();
@@ -417,6 +452,9 @@ class TurnControllerTest {
         verify(game.getTurn(), times(1)).getTurnPhase();
     }
 
+    /**
+     * Simple leader action test.
+     */
     @Test
     void handleLeaderActionTest() {
         List<Player> players = new ArrayList<>();
@@ -443,6 +481,9 @@ class TurnControllerTest {
 
     }
 
+    /**
+     * Covers all possible errors found performing a leader action.
+     */
     @Test
     void leaderActionFaults() {
         List<Player> players = new ArrayList<>();
@@ -475,6 +516,9 @@ class TurnControllerTest {
     }
 
 
+    /**
+     * Covers a take resources from market action with all possible outcomes.
+     */
     @Test
     void handleTakeResourceFromMarketTest() {
         List<Player> players = new ArrayList<>();
@@ -522,6 +566,9 @@ class TurnControllerTest {
 
     }
 
+    /**
+     * Checks error in activate production action done by a player having not enough resources.
+     */
     @Test
     void activateProductionResourceMissing() throws DepotOutOfBoundsException, IncompatibleResourceTypeException {
         List<Player> players = new ArrayList<>();
@@ -563,7 +610,9 @@ class TurnControllerTest {
         verify(game.getTurn(), times(1)).getTurnPhase();
     }
 
-
+    /**
+     * Checks error consisting in a wrong selection of resources to be taken from warehouse.
+     */
     @Test
     void activateProductionResourceMismatch() throws DepotOutOfBoundsException, IncompatibleResourceTypeException {
 
@@ -622,6 +671,9 @@ class TurnControllerTest {
 
     }
 
+    /**
+     * Checks a standard activate production action.
+     */
     @Test
     void handlingActivateProductionPowers() throws DepotOutOfBoundsException, IncompatibleResourceTypeException {
         List<Player> players = new ArrayList<>();

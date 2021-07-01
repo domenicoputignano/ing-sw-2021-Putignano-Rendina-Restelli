@@ -9,6 +9,10 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.util.ArrayList;
 import java.util.List;
 
+
+/**
+ * Test class whose task is to check all possible outcomes for a {@link TakeResourcesFromMarketMessage} validity.
+ */
 class TakeResourcesFromMarketMessageTest {
     TakeResourcesFromMarketMessage message = new TakeResourcesFromMarketMessage();
 

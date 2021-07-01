@@ -9,10 +9,18 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+
+/**
+ * Test class whose task is to check all possible outcomes for a move message requiring a move between a {@link it.polimi.ingsw.model.NormalDepot}
+ * and a {@link it.polimi.ingsw.model.NormalDepot}.
+ */
 class MoveFromNormalToNormalActionTest {
 
     MoveFromNormalToNormalAction message;
 
+    /**
+     * Checks move execution and its outcome.
+     */
     @Test
     void handleMove() throws DepotOutOfBoundsException, IncompatibleResourceTypeException, DepotNotFoundException {
         Warehouse warehouse = new Warehouse();
@@ -29,6 +37,9 @@ class MoveFromNormalToNormalActionTest {
         assertFalse(message.handleMove(warehouse));
     }
 
+    /**
+     * Checks move validity.
+     */
     @Test
     void isValidMove() {
         message = new MoveFromNormalToNormalAction(1, 2);

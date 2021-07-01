@@ -11,6 +11,8 @@ import it.polimi.ingsw.utils.messages.serverMessages.Updates.ServerAsksForPositi
 
 /**
  * This class represents the link between player in turn and the game.
+ * Its main aim is to ensure messages correctness and filter those related to the game not coming from
+ * player in turn, in order to avoid trivial calls over the model.
  * This, together with {@link GameController}, represents the Controller of the MVC Architectural pattern.
  */
 

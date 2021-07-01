@@ -4,7 +4,9 @@ import org.junit.jupiter.api.Test;
 import it.polimi.ingsw.utils.messages.clientMessages.*;
 import static org.junit.jupiter.api.Assertions.*;
 
-
+/**
+ * Test class whose task is to check all possible outcomes for {@link LeaderActionMessage} validity.
+ */
 class LeaderActionMessageTest {
 
     LeaderActionMessage message1 = new LeaderActionMessage();

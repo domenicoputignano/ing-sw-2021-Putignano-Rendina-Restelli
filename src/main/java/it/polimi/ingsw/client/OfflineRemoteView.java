@@ -10,7 +10,7 @@ import java.util.logging.Level;
 
 /**
  * Class that inherits from {@link RemoteView} and implements the offline version of that class.
- * This lass receives {@link it.polimi.ingsw.Utils.Messages.ServerMessages.ServerMessage} from the {@link it.polimi.ingsw.Model.Game}
+ * This class receives {@link it.polimi.ingsw.utils.messages.serverMessages.ServerMessage} from the {@link it.polimi.ingsw.model.Game}
  * and forwards them to the {@link OfflineClient} which handles them.
  */
 public class OfflineRemoteView extends RemoteView {

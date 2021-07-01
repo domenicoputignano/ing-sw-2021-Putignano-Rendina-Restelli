@@ -9,6 +9,9 @@ import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Test class whose task is to check all possible outcomes for {@link ActivateProductionMessage} validity.
+ */
 class ActivateProductionMessageTest {
 
     ActivateProductionMessage activateProductionMessage = new ActivateProductionMessage();

@@ -23,13 +23,20 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-
+/**
+ * Class that deals with {@link GameController} testing. It used mocks and spies in order to check
+ * number of methods' calls.
+ */
 class GameControllerTest {
     List<Player> players = new ArrayList<>();
     List<Pair<ResourceType,Integer>> resources = new ArrayList<>();
     List<Pair<ResourceType, Integer>> fourthPlayerResources = new ArrayList<>();
     List<Pair<ResourceType, Integer>> wronglyChosenResources = new ArrayList<>();
 
+
+    /**
+     * Tests performInitialResourceChoice calls over player that is attempting to perform it.
+     */
     @Test
     void handleResourceChoiceMessage() {
         players.add(spy(new Player("Emilio")));
@@ -81,6 +88,10 @@ class GameControllerTest {
 
     }
 
+    /**
+     * Test focused over initial resources positioning for the fourth player, due to the fact
+     * that he is the only one that can make a mistake performing this action.
+     */
     @Test
     void fourthPlayerPositioningValidity() {
         List<Pair<ResourceType, Integer>> resourcesWrongForIndex = new ArrayList<>();
@@ -107,6 +118,9 @@ class GameControllerTest {
         assertTrue(gameController.isValidFourthPlayerPositioning(correctResources));
     }
 
+    /**
+     * Tests if initial leader choice action with a correct and a badly formatted message.
+     */
     @Test
     void handleLeaderChoiceMessage() {
         players.add(spy(new Player("Piero")));
@@ -128,7 +142,7 @@ class GameControllerTest {
     }
 
     /**
-     * Verifies if game controller calls right methods over turn controller.
+     * Verifies if game controller calls handlePlayerReconnection method of game.
      */
     @Test
     void playerConnectionHandlingTest() {

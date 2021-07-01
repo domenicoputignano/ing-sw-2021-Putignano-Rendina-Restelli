@@ -10,6 +10,9 @@ import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Test class whose task is to check all possible outcomes for {@link BuyDevCardMessage} validity.
+ */
 class BuyDevCardMessageTest {
     BuyDevCardMessage buyDevCardMessage = new BuyDevCardMessage();
 
