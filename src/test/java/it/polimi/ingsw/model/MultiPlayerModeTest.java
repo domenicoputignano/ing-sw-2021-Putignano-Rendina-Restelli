@@ -7,7 +7,6 @@ import it.polimi.ingsw.model.gameEvents.BlackCrossHitLastSpace;
 import it.polimi.ingsw.model.gameEvents.DevCardColorEnded;
 import it.polimi.ingsw.model.gameEvents.HitLastSpace;
 import it.polimi.ingsw.model.gameEvents.SeventhDevCardBought;
-import it.polimi.ingsw.model.soloMode.SoloMode;
 import it.polimi.ingsw.utils.Pair;
 import org.junit.jupiter.api.Test;
 
@@ -16,6 +15,9 @@ import java.util.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
+/**
+ * Class that collects all tests of multiplayer mode game.
+ */
 class MultiPlayerModeTest {
 
 
@@ -26,7 +28,9 @@ class MultiPlayerModeTest {
         return playerList;
     }
 
-
+    /**
+     * Checks correct initialization of all main game objects.
+     */
     @Test
     void setup() {
         playerList.add(new Player("Piero"));
@@ -44,6 +48,9 @@ class MultiPlayerModeTest {
         }
     }
 
+    /**
+     * Covers and checks outcome of a vatican report activation triggered by player in turn.
+     */
     @Test
     void activateVaticanReport() {
         playerList.add(new Player("Piero"));
@@ -60,6 +67,9 @@ class MultiPlayerModeTest {
         assertEquals(StateFavorTiles.DISCARDED, multiPlayerMode.getPlayerList().get(2).getPersonalBoard().getFaithTrack().getSections()[0].getState());
     }
 
+    /**
+     * Tests recursive method that calculate new player in turn.
+     */
     @Test
     void nextPlayer()
     {
@@ -74,6 +84,9 @@ class MultiPlayerModeTest {
         System.out.println(multiPlayerMode.nextPlayer(multiPlayerMode.getCurrPlayer()));
     }
 
+    /**
+     * Covers method called when a conclusion event is triggered.
+     */
     @Test
     void conclusionEvents(){
         Player first = spy(new Player("Andrea"));
@@ -104,6 +117,9 @@ class MultiPlayerModeTest {
         verify(gameSpy, times(1)).endGame(devCardColorEndedEvent);
     }
 
+    /**
+     * Tests ending game phase with computed final rank.
+     */
     @Test
     void concludeGame() throws DepotOutOfBoundsException, IncompatibleResourceTypeException {
         playerList.add(new Player("Piero"));

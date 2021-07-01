@@ -13,9 +13,16 @@ import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Class containing tests concerning a leader action.
+ */
 class LeaderActionTest {
 
     MultiPlayerMode multiPlayerMode;
+
+    /**
+     * Initializes a multiplayer mode game instance.
+     */
     @BeforeEach
     void initialization()
     {
@@ -31,8 +38,12 @@ class LeaderActionTest {
             p.getLeaderCards().remove(2);
         }
     }
+
+    /**
+     * Tests leader card discard and checks faith track update.
+     */
     @Test
-    void leaderActionDiscardLeaderCard() throws InvalidActionException, LeaderStatusException, LeaderRequirementsException{
+    void leaderActionDiscardLeaderCard() throws LeaderStatusException, LeaderRequirementsException{
         LeaderActionMessage leaderActionMessage = new LeaderActionMessage();
         leaderActionMessage.setIndex(1);
         leaderActionMessage.setToDiscard(true);
@@ -43,8 +54,12 @@ class LeaderActionTest {
         assertEquals(1, multiPlayerMode.getTurn().getPlayer().getLeaderCards().size());
         assertEquals(start+9,multiPlayerMode.getTurn().getPlayer().getPersonalBoard().getFaithTrack().getFaithMarker());
     }
+
+    /**
+     * Tests a failed leader action attempted over a card already active.
+     */
     @Test
-    void leaderActionDiscardActiveLeaderCard() throws LeaderStatusException, LeaderRequirementsException {
+    void leaderActionDiscardActiveLeaderCard() {
         LeaderActionMessage leaderActionMessage = new LeaderActionMessage();
         leaderActionMessage.setIndex(1);
         leaderActionMessage.setToDiscard(true);
@@ -58,6 +73,9 @@ class LeaderActionTest {
         assertEquals(start+8,multiPlayerMode.getTurn().getPlayer().getPersonalBoard().getFaithTrack().getFaithMarker());
     }
 
+    /**
+     * Tests a standard leader activation when all requirements are satisfied.
+     */
     @Test
     void leaderActionOk() throws DepotOutOfBoundsException, IncompatibleResourceTypeException, LeaderStatusException, LeaderRequirementsException {
         LeaderActionMessage leaderActionMessage = new LeaderActionMessage();
@@ -82,36 +100,11 @@ class LeaderActionTest {
         assertFalse(multiPlayerMode.getTurn().getPlayer().getLeaderCards().get(1).isActive());
     }
 
-    /*@Test
-    void leaderActionOkRequirementsCards() throws DepotOutOfBoundsException, IncompatibleResourceTypeException, LeaderStatusException, LeaderRequirementsException {
-        LeaderActionMessage leaderActionMessage = new LeaderActionMessage();
-        leaderActionMessage.setIndex(1);
-        leaderActionMessage.setToDiscard(false);
-        multiPlayerMode.getTurn().getPlayer().getPersonalBoard().getWarehouse().addResourcesToDepot(1,ResourceType.coin,1);
-        multiPlayerMode.getTurn().getPlayer().getPersonalBoard().getWarehouse().addResourcesToDepot(2,ResourceType.shield,2);
-        multiPlayerMode.getTurn().getPlayer().getPersonalBoard().getWarehouse().addResourcesToDepot(3,ResourceType.servant,3);
-        Map<ResourceType,Integer> strongboxResources = new EnumMap<ResourceType, Integer>(ResourceType.class);
-        strongboxResources.put(ResourceType.coin,6);
-        strongboxResources.put(ResourceType.servant,6);
-        strongboxResources.put(ResourceType.stone,6);
-        strongboxResources.put(ResourceType.shield,6);
-        multiPlayerMode.getTurn().getPlayer().getPersonalBoard().getWarehouse().addResourcesToStrongbox(strongboxResources);
-
-        multiPlayerMode.getTurn().setTurnState(TurnState.ActionType.BUYDEVCARD);
-        BuyDevCardMessage buyDevCardMessage = new BuyDevCardMessage();
-
-
-        multiPlayerMode.getTurn().setTurnState(TurnState.ActionType.LEADERACTION);
-        if(multiPlayerMode.getCurrPlayer().getLeaderCards().get(0).getRequirementsCards().size()>0)
-            assertThrows(LeaderRequirementsException.class,()-> multiPlayerMode.getTurn().getTurnPhase().leaderAction(multiPlayerMode.getTurn(),leaderActionMessage));
-        else {
-            multiPlayerMode.getTurn().getTurnPhase().leaderAction(multiPlayerMode.getTurn(),leaderActionMessage);
-            assertTrue(multiPlayerMode.getTurn().getPlayer().getLeaderCards().get(0).isActive());
-        }
-        assertFalse(multiPlayerMode.getTurn().getPlayer().getLeaderCards().get(1).isActive());
-    }*/
+    /**
+     * Covers a failed leader action due to requirements not satisfied.
+     */
     @Test
-    void leaderActionKo() throws DepotOutOfBoundsException, IncompatibleResourceTypeException, LeaderStatusException, LeaderRequirementsException {
+    void leaderActionKo() throws DepotOutOfBoundsException, IncompatibleResourceTypeException {
         LeaderActionMessage leaderActionMessage = new LeaderActionMessage();
         leaderActionMessage.setIndex(1);
         leaderActionMessage.setToDiscard(false);

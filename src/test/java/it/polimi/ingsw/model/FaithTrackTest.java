@@ -14,7 +14,7 @@ class FaithTrackTest {
     FaithTrack faithTrack = personalBoard.getFaithTrack();
 
     /**
-     * test method that tests the correct functioning of the Faith Track initialization
+     * Test method that tests the correct functioning of the Faith Track initialization
      */
     @Test
     void initialization(){
@@ -25,7 +25,7 @@ class FaithTrackTest {
     }
 
     /**
-     * test method that tests the correct functioning of the movement action of the faith
+     * Test method that tests the correct functioning of the movement action of the faith
      */
     @Test
     void moveMarker() {
@@ -36,7 +36,7 @@ class FaithTrackTest {
     }
 
     /**
-     * test method that tests the correct calculation of Victory Points
+     * Test method that tests the correct calculation of Victory Points
      */
     @Test
     void calcVictoryPoints(){

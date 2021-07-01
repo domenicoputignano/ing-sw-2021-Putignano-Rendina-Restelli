@@ -13,6 +13,9 @@ import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Class that tests an activate production action.
+ */
 class ActivateProductionTest {
 
     MultiPlayerMode multiPlayerMode;
@@ -27,6 +30,9 @@ class ActivateProductionTest {
     //map of expected Resources in Strongbox
     EnumMap<ResourceType,Integer> expected = new EnumMap<ResourceType, Integer>(ResourceType.class);
 
+    /**
+     * Initializes a game instance.
+     */
     @BeforeEach
     void initializeGame() {
         //initialization of the Game
@@ -50,7 +56,7 @@ class ActivateProductionTest {
     }
 
     /**
-     * Activates the production only on third 3 and checks if the results are correct.
+     * Activates the production only on third slot and checks if the results are correct.
      */
     @Test
     void activateProductionOnSlot3() throws DepotOutOfBoundsException, IncompatibleResourceTypeException, PaymentErrorException, InvalidActionException, NotEnoughResourcesException, ResourceMismatchException {
@@ -122,6 +128,9 @@ class ActivateProductionTest {
         assertEquals(result, turn.getPlayer().getPersonalBoard().getWarehouse().getResourcesInStrongbox());
     }
 
+    /**
+     * Tests a standard activate production and checks resulting warehouse.
+     */
     @Test
     void activateProduction() throws DepotOutOfBoundsException, IncompatibleResourceTypeException, InvalidActionException, PaymentErrorException, NotEnoughResourcesException, ResourceMismatchException {
 
@@ -161,7 +170,7 @@ class ActivateProductionTest {
         EnumMap<ResourceType, Integer> devCard2Input = new EnumMap<>(map);
         devCard1Input.put(ResourceType.coin, 1);
 
-        EnumMap<ResourceType,Integer> devCard1Output = new EnumMap<ResourceType, Integer>(map);
+        EnumMap<ResourceType,Integer> devCard1Output = new EnumMap<>(map);
         devCard1Output.put(ResourceType.stone,1);
         devCard1Output.put(ResourceType.shield,1);
 
@@ -211,8 +220,6 @@ class ActivateProductionTest {
         //Does concretely selected productions
         turn.getTurnPhase().activateProduction(turn, activateProductionMessage);
 
-        System.out.println("Input resources "+action.getInputResources());
-        System.out.println("Output Resources "+action.getOutputResources());
 
         NormalDepot emptyDepot1 = new NormalDepot(0, null, 1);
         NormalDepot emptyDepot2 = new NormalDepot(0, null, 2);
@@ -233,6 +240,9 @@ class ActivateProductionTest {
     }
 
 
+    /**
+     * Tests extra production powers effects.
+     */
     @RepeatedTest(5)
     void activateProductionLeaderEffect() throws DepotOutOfBoundsException, IncompatibleResourceTypeException, InvalidActionException, PaymentErrorException, NotEnoughResourcesException, ResourceMismatchException {
 
@@ -320,7 +330,6 @@ class ActivateProductionTest {
 
 
         assertEquals(result, turn.getPlayer().getPersonalBoard().getWarehouse().getResourcesInStrongbox());
-        //assertEquals(2, turn.getPlayer().getPersonalBoard().getFaithTrack().getFaithMarker());
 
 }
 

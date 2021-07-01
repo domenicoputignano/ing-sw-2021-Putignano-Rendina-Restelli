@@ -13,11 +13,16 @@ import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+
+/**
+ * Class that test a buy development card action.
+ */
 class BuyDevCardTest {
 
-
-
-
+    /**
+     * Test that covers a standard development card purchase and if it is performed according to decks state
+     * checks resulting warehouse and slot.
+     */
     @Test
     void buyDevCard() throws InvalidActionException, PaymentErrorException, NotEnoughResourcesException, ResourceMismatchException {
         List<Player> players = new ArrayList<Player>();
@@ -110,8 +115,6 @@ class BuyDevCardTest {
         DevelopmentCard card = multiPlayerMode.getDecks().get(0).getTop();
 
         if(multiPlayerMode.getDecks().get(0).getTop().equals(card1)) {
-            System.out.println(1);
-            //TODO ricontrollare metodo dello strongbox
             turn.getTurnPhase().buyDevCard(turn, buyDevCardMessage);
             assertTrue(turn.isDoneNormalAction());
             assertEquals(turn.getPlayer().getPersonalBoard().peekTopCard(1), card1);
