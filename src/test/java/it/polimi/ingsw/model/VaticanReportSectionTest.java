@@ -7,6 +7,9 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class VaticanReportSectionTest {
 
+    /**
+     * Method to test the correct initialization of the related class.
+     */
     @Test
     void initializationTest(){
         VaticanReportSection vaticanReportSection = new VaticanReportSection(3, 6, 2);

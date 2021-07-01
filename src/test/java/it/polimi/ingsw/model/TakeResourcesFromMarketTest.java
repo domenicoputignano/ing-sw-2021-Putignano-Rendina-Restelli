@@ -199,7 +199,10 @@ class TakeResourcesFromMarketTest {
         assertTrue(takeResourcesFromMarket.checkValidWhiteEffects(multiPlayerMode.getTurn(), message.getWhiteEffects(), requestedMarbles));
     }
 
-    //TODO cambiare il test
+    /**
+     * Method to test the correct behaviour of the method to check if the white effects indicated by the client are
+     * valid. This test is repeated 5 times because it is not deterministic.
+     */
     @RepeatedTest(5)
     void checkValidWhiteEffectsKo() throws InvalidActionException, WhiteEffectMismatchException {
         TakeResourcesFromMarketMessage message = new TakeResourcesFromMarketMessage();
@@ -225,6 +228,10 @@ class TakeResourcesFromMarketTest {
         }
     }
 
+    /**
+     * Method to test the correct behaviour of the method to handle the positioning of resources after having taken
+     * some resources from the market. This test is repeated 10 times because it is not deterministic.
+     */
     @RepeatedTest(10)
     void handlePositioning() throws DepotOutOfBoundsException, IncompatibleResourceTypeException, InvalidActionException, WhiteEffectMismatchException, NeedPositioningException {
         List<Marble> marbles;
