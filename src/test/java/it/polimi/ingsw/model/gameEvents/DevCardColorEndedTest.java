@@ -6,9 +6,13 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
-
+/**
+ * Test class that tests the activation event of the Development Card Color Ended
+ */
 class DevCardColorEndedTest {
-
+    /**
+     * test method for handling the event
+     */
     @Test
     void handleEvent() {
         Player player = new Player("pippo");
@@ -18,7 +22,9 @@ class DevCardColorEndedTest {
         devCardColorEnded.handleEvent(spyGame);
         verify(spyGame,times(1)).endGame(devCardColorEnded);
     }
-
+    /**
+     * test method for event Trigger
+     */
     @Test
     void eventTrigger() {
         DevCardColorEnded devCardColorEnded = new DevCardColorEnded();

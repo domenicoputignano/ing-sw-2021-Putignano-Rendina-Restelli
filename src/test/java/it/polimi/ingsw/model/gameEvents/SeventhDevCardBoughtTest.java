@@ -6,9 +6,13 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
-
+/**
+ * Test class that tests the activation event of the Seventh Development Card Bought
+ */
 class SeventhDevCardBoughtTest {
-
+    /**
+     * test method for handling the event
+     */
     @Test
     void handleEvent() {
         Player player = new Player("pippo");
@@ -18,7 +22,9 @@ class SeventhDevCardBoughtTest {
         seventhDevCardBought.handleEvent(spyGame);
         verify(spyGame,times(1)).endGame(seventhDevCardBought);
     }
-
+    /**
+     * test method for event Trigger
+     */
     @Test
     void eventTrigger() {
         SeventhDevCardBought seventhDevCardBought = new SeventhDevCardBought();

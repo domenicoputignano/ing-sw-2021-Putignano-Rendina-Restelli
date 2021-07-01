@@ -6,9 +6,13 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
-
+/**
+ * Test class that tests the activation event of the faith Hit Last Space
+ */
 class HitLastSpaceTest {
-
+    /**
+     * test method for handling the event
+     */
     @Test
     void handleEvent() {
         Player player = new Player("pippo");
@@ -18,7 +22,9 @@ class HitLastSpaceTest {
         hitLastSpace.handleEvent(spyGame);
         verify(spyGame,times(1)).endGame(hitLastSpace);
     }
-
+    /**
+     * test method for event Trigger
+     */
     @Test
     void eventTrigger() {
         HitLastSpace hitLastSpace = new HitLastSpace();

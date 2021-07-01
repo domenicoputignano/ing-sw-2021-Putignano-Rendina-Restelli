@@ -21,6 +21,9 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
+/**
+ * Test class that tests the game in SoloMode with all its associated actions
+ */
 class SoloModeTest {
 
     List<Player> playerList = new ArrayList<>();
@@ -28,6 +31,9 @@ class SoloModeTest {
         return playerList;
     }
 
+    /**
+     * test method that tests the correct setup of the game in SoloMode
+     */
     @Test
     void setup() {
         playerList.add(new Player("Pippo"));
@@ -43,6 +49,9 @@ class SoloModeTest {
         }
     }
 
+    /**
+     * test method that tests the correct refresh of the Tokens
+     */
     @Test
     void refreshTokens() {
         playerList.add(new Player("Pippo"));
@@ -52,6 +61,10 @@ class SoloModeTest {
         assertEquals(7, game.getTokens().size());
     }
 
+    /**
+     * test method that tests the correctness of the action performed
+     * by Lorenzo in the base case
+     */
     @RepeatedTest(10)
     void lorenzoPlaysBaseCase() {
         playerList.add(new Player("Pippo"));
@@ -83,6 +96,10 @@ class SoloModeTest {
 
     }
 
+    /**
+     * test method that tests the correct functioning
+     * of the action of passing the turn to the next player
+     */
     @Test
     void nextTurn(){
         playerList.add(new Player("Pippo"));
@@ -98,6 +115,10 @@ class SoloModeTest {
         assertEquals("Pippo", game.getCurrPlayer().getUser().getNickname());
     }
 
+    /**
+     * test method that tests the correct functioning of the movement of the black cross
+     * in the event that the player discards resources
+     */
     @Test
     void moveOtherPlayers(){
         playerList.add(new Player("Pippo"));
@@ -106,6 +127,9 @@ class SoloModeTest {
         assertEquals(3, game.getLorenzoIlMagnifico().getBlackCross());
     }
 
+    /**
+     * test method that tests the correct functioning in the event that triggers a Conclusion event
+     */
     @Test
     void conclusionEvents(){
         Player player = spy(new Player("Andrea"));
@@ -132,6 +156,10 @@ class SoloModeTest {
 
     }
 
+    /**
+     * test method that tests the correct functioning in the event
+     * that Lorenzo plays and triggers a Conclusion event
+     */
     @Test
     void lorenzoPlaysEndGameCase() {
         playerList.add(new Player("Pippo"));
@@ -166,6 +194,10 @@ class SoloModeTest {
         }
     }
 
+    /**
+     * test method that verifies the correct functioning
+     * of the activation of the Vatican Report
+     */
     @Test
     void activateVaticanReport()
     {
@@ -176,7 +208,10 @@ class SoloModeTest {
         game.getCurrPlayer().getPersonalBoard().moveMarker(game.getCurrPlayer(), 8);
         assertEquals(StateFavorTiles.FACEUP, game.getCurrPlayer().getPersonalBoard().getFaithTrack().getSections()[0].getState());
     }
-
+    /**
+     * test method that verifies the correct functioning
+     * of the activation of the Vatican Report by Lorenzo il Magnifico
+     */
     @RepeatedTest(1)
     void activateVaticanReportByLorenzoIlMagnifico() {
         playerList.add(new Player("Pippo"));
@@ -187,6 +222,9 @@ class SoloModeTest {
         assertEquals(StateFavorTiles.DISCARDED, game.getCurrPlayer().getPersonalBoard().getFaithTrack().getSections()[0].getState());
     }
 
+    /**
+     * test method that verifies the correct functioning of the Take Resources From Market action
+     */
     @RepeatedTest(10)
     void takeResourcesFromMarketGamePlay() throws InvalidActionException, WhiteEffectMismatchException, NeedPositioningException {
         playerList.add(new Player("Pippo"));
@@ -225,7 +263,9 @@ class SoloModeTest {
         TakeResourcesFromMarket takeResourcesFromMarket = (TakeResourcesFromMarket) game.getTurn().getTurnPhase();
         assertTrue(takeResourcesFromMarket.checkValidWhiteEffects(game.getTurn(), message.getWhiteEffects(),message.getRequestedMarbles()));
     }
-
+    /**
+     * test method that verifies the correct functioning of the Leader action
+     */
     @Test
     void LeaderAction() throws InvalidActionException, LeaderStatusException, LeaderRequirementsException {
         playerList.add(new Player("Pippo"));

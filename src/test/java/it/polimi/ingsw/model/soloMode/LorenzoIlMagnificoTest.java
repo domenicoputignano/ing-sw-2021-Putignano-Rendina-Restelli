@@ -5,11 +5,16 @@ import it.polimi.ingsw.model.Player;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
-
+/**
+ * Test class that tests the actions performed by Lorenzo il Magnifico
+ */
 class LorenzoIlMagnificoTest {
     Player player;
     SoloMode game;
 
+    /**
+     * test method that tests the correct execution of the movement of the black cross
+     */
     @Test
     void moveBlackCross() {
         Player player = new Player("Pippo");
@@ -23,6 +28,10 @@ class LorenzoIlMagnificoTest {
         assertEquals(2, faithTrack.getPassedSection());
     }
 
+    /**
+     * test method that tests the correct execution of the movement
+     * of the black cross and the shuffling of the tokens
+     */
     @Test
     void moveAndShuffle() {
         Player player = new Player("Pippo");

@@ -6,15 +6,26 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Test class that tests the methods of the MarketTray class
+ */
 public class MarketTrayTest {
 
     MarketTray marketTray = new MarketTray();
+
+    /**
+     * Test method that checks that the attributes of the MarketTray class are not null
+     */
     @Test
     void attributesNotNull()
     {
         assertNotNull(marketTray.getAvailableMarbles());
         assertNotNull(marketTray.getSlidingMarble());
     }
+
+    /**
+     * Test method that checks that the number of white marbles is correct
+     */
     @Test
     void whiteMarblesNumber()
     {
@@ -29,6 +40,10 @@ public class MarketTrayTest {
             count++;
         assertEquals(4,count);
     }
+
+    /**
+     * Test method that checks that the number of red marbles is correct
+     */
     @Test
     void redMarblesNumber()
     {
@@ -43,6 +58,9 @@ public class MarketTrayTest {
             count++;
         assertEquals(1,count);
     }
+    /**
+     * Test method that checks that the number of grey marbles is correct
+     */
     @Test
     void greyMarblesNumber()
     {
@@ -57,6 +75,9 @@ public class MarketTrayTest {
             count++;
         assertEquals(2,count);
     }
+    /**
+     * Test method that checks that the number of purple marbles is correct
+     */
     @Test
     void purpleMarblesNumber()
     {
@@ -71,6 +92,9 @@ public class MarketTrayTest {
             count++;
         assertEquals(2,count);
     }
+    /**
+     * Test method that checks that the number of yellow marbles is correct
+     */
     @Test
     void yellowMarblesNumber()
     {
@@ -85,6 +109,9 @@ public class MarketTrayTest {
             count++;
         assertEquals(2,count);
     }
+    /**
+     * Test method that checks that the number of blue marbles is correct
+     */
     @Test
     void blueMarblesNumber()
     {
@@ -99,6 +126,10 @@ public class MarketTrayTest {
             count++;
         assertEquals(2,count);
     }
+
+    /**
+     * Test method that checks the selection of the row from the MarketTray
+     */
     @Test
     void takeMarblesRow() {
         marketTray.takeMarbles(MarketChoice.ROW,1);
@@ -110,6 +141,10 @@ public class MarketTrayTest {
         greyMarblesNumber();
         attributesNotNull();
     }
+
+    /**
+     * Test method that checks the selection of the column from the MarketTray
+     */
     @Test
     void takeMarblesColumn() {
         marketTray.takeMarbles(MarketChoice.COLUMN,2);
@@ -121,12 +156,20 @@ public class MarketTrayTest {
         greyMarblesNumber();
         attributesNotNull();
     }
+    /**
+     * Test method that checks the correct return of the selected resources
+     * on the specific row of the MarketTray
+     */
     @Test
     void checkReturnValueRow()
     {
         Marble a[] = marketTray.getAvailableMarbles()[1].clone();
         assertArrayEquals(a,marketTray.takeMarbles(MarketChoice.ROW,1).toArray());
     }
+    /**
+     * Test method that checks the correct return of the selected resources
+     * on the specific column of the MarketTray
+     */
     @Test
     void checkReturnValueColumn()
     {
@@ -136,6 +179,10 @@ public class MarketTrayTest {
         a[2] = marketTray.getAvailableMarbles()[2][2];
         assertArrayEquals(a,marketTray.takeMarbles(MarketChoice.COLUMN,2).toArray());
     }
+
+    /**
+     * Test method that checks the correct sliding of the MarketTray rows
+     */
     @Test
     void checkSlidingRow()
     {
@@ -148,6 +195,10 @@ public class MarketTrayTest {
         assertEquals(marketTray.getAvailableMarbles()[1][1],a[2]);
         assertEquals(marketTray.getAvailableMarbles()[1][2],a[3]);
     }
+
+    /**
+     * Test method that checks the correct sliding of the MarketTray columns
+     */
     @Test
     void checkSlidingColumn()
     {

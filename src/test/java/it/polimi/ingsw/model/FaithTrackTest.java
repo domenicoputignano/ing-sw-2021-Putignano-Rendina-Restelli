@@ -4,13 +4,18 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Test class that tests the correct functioning of the Faith Track class and its functionalities
+ */
 class FaithTrackTest {
 
     Player owner = new Player("Proprietario");
     PersonalBoard personalBoard = new PersonalBoard(owner);
     FaithTrack faithTrack = personalBoard.getFaithTrack();
 
-
+    /**
+     * test method that tests the correct functioning of the Faith Track initialization
+     */
     @Test
     void initialization(){
         assertEquals(0, faithTrack.getFaithMarker());
@@ -19,6 +24,9 @@ class FaithTrackTest {
 
     }
 
+    /**
+     * test method that tests the correct functioning of the movement action of the faith
+     */
     @Test
     void moveMarker() {
         int start = faithTrack.getFaithMarker();
@@ -27,14 +35,12 @@ class FaithTrackTest {
         assertEquals(2, faithTrack.getPassedSection());
     }
 
+    /**
+     * test method that tests the correct calculation of Victory Points
+     */
     @Test
     void calcVictoryPoints(){
         faithTrack.moveMarker(owner, 22);
         assertEquals(16, faithTrack.calcVictoryPoints());
-    }
-
-    @Test
-    void activeVaticanReport() {
-
     }
 }

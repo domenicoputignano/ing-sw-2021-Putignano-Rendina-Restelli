@@ -4,6 +4,9 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Test class that tests the activation event of the Move Black Cross By Two in SoloMode
+ */
 class MoveBlackCrossByTwoTest {
     @Test
     void renderTokenImage() {

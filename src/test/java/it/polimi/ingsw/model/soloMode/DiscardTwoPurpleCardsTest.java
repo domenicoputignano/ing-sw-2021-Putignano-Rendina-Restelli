@@ -3,7 +3,9 @@ package it.polimi.ingsw.model.soloMode;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
-
+/**
+ * Test class that tests the activation event of the Discard Two Purple Cards in SoloMode
+ */
 class DiscardTwoPurpleCardsTest {
 
     @Test
