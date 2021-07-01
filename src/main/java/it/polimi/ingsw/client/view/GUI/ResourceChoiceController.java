@@ -373,9 +373,6 @@ public class ResourceChoiceController extends Controller{
         buttonDepot11=false;
         buttonDepot21=false;
         buttonDepot31=false;
-        buttonDepot12=false;
-        buttonDepot22=false;
-        buttonDepot32=false;
         buttonDepot1.setStyle("-fx-background-size: 100%;");
         buttonDepot2.setStyle("-fx-background-size: 100%;");
         buttonDepot3.setStyle("-fx-background-size: 100%;");
