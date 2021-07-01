@@ -18,9 +18,16 @@ import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Class whose task is testing take resources from market methods.
+ */
 class TakeResourcesFromMarketTest {
 
     MultiPlayerMode multiPlayerMode;
+
+    /**
+     * Initialization of a game instance.
+     */
     @BeforeEach
     void initialization()
     {
@@ -36,6 +43,10 @@ class TakeResourcesFromMarketTest {
             p.getLeaderCards().remove(2);
         }
     }
+
+    /**
+     * Covers a generic take resources from market action performed and checks resulting depots.
+     */
     @Test
     void takeResourcesFromMarket() throws InvalidActionException, WhiteEffectMismatchException, NeedPositioningException {
         List<Marble> marbles;
@@ -75,6 +86,10 @@ class TakeResourcesFromMarketTest {
         assertTrue(expectedPairList.containsAll(takeResourcesFromMarket.getWhereToPutResources()) && takeResourcesFromMarket.getWhereToPutResources().containsAll(expectedPairList));
     }
 
+    /**
+     * Covers a take resource from market action with a leader effect that allows to convert white marbles
+     * and checks resulting depots.
+     */
     @RepeatedTest(5)
     void singleConvertMarbleEffectActive() throws WhiteEffectMismatchException, InvalidActionException, NeedPositioningException {
         List<Marble> marbles;
@@ -114,7 +129,9 @@ class TakeResourcesFromMarketTest {
         }
     }
 
-
+    /**
+     * Covers exception throwing in case of a mismatch between white marble and number of conversions to perform.
+     */
     @Test
     void takeResourcesFromMarketWhiteEffectMismatchException() {
         List<Marble> marbles;
@@ -140,6 +157,9 @@ class TakeResourcesFromMarketTest {
         assertThrows(WhiteEffectMismatchException.class,()->multiPlayerMode.getTurn().getTurnPhase().takeResourcesFromMarket(multiPlayerMode.getTurn(),takeResourcesFromMarketMessage));
     }
 
+    /**
+     * Covers a take resources from market attempted in turn for which a normal action has been already done.
+     */
     @Test
     void takeResourcesFromMarketException()
     {
@@ -150,6 +170,9 @@ class TakeResourcesFromMarketTest {
         assertThrows(InvalidActionException.class,()->multiPlayerMode.getTurn().getTurnPhase().takeResourcesFromMarket(multiPlayerMode.getTurn(),takeResourcesFromMarketMessage));
     }
 
+    /**
+     * Covers a specific take resources from market with all white marble effect correctly selected.
+     */
     @RepeatedTest(5)
     void checkValidWhiteEffectsOk() {
         TakeResourcesFromMarketMessage message = new TakeResourcesFromMarketMessage();

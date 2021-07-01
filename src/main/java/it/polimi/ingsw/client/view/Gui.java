@@ -378,4 +378,12 @@ public class Gui extends UI{
             ((ErrorPopupController) GUIApp.controller).setErrorText(errorMessage);
         });
     }
+
+    @Override
+    public void notifyCloseApplicationRequired() {
+        Platform.runLater(() -> {
+            GUIApp.controller.showPopup("/gui/fxml/ClosingPopup.fxml", 500,400);
+            ((GenericPopupController)GUIApp.controller).setText("Connection lost, restart the application to reconnect ");
+        });
+    }
 }

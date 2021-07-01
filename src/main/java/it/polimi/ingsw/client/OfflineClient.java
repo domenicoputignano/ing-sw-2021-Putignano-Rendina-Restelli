@@ -49,8 +49,10 @@ public class OfflineClient extends Client {
             new Thread(GUIApp::launchGUI).start();
             try {
                 GUIApp.waitForGameSetup(this);
+                Thread.sleep(2000);
             } catch (InterruptedException e) {
                 LOGGER.log(Level.SEVERE, "Error detected in application launch");
+                Thread.currentThread().interrupt();
             }
         }
         else {

@@ -13,10 +13,16 @@ import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Class whose task is to test all player related methods.
+ */
 class PlayerTest {
 
     Player player = new Player("pippo");
 
+    /**
+     * Initializes a player instance.
+     */
     @BeforeEach
     void initialization(){
 
@@ -39,6 +45,9 @@ class PlayerTest {
         assertEquals("pippo", player.getUser().getNickname());
     }
 
+    /**
+     * Covers outcomes of leader activation.
+     */
     @Test
     void activateLeaderCard() {
 
@@ -56,6 +65,9 @@ class PlayerTest {
         assertNotNull(player.getPersonalBoard().getWarehouse().getExtraDepots().get(0));
     }
 
+    /**
+     * Covers leader discard and checks his faith track positions.
+     */
     @Test
     void discardLeaderCard() {
         int initialPosition = player.getPersonalBoard().getFaithTrack().getFaithMarker();
@@ -81,30 +93,27 @@ class PlayerTest {
         assertEquals("foo", playerFoo.getUser().getNickname());
     }
 
-    @Test
-    void getLeaderCards() {
-    }
-
-    @Test
-    void getPosition() {
-    }
-
-    @Test
-    void getPersonalBoard() {
-    }
-
+    /**
+     * Covers personal board initialization.
+     */
     @Test
     void initializePersonalBoard() {
         Player player3 = new Player("player3");
         assertNotNull(player3.getPersonalBoard());
     }
 
+    /**
+     * Covers position setting.
+     */
     @Test
     void setPosition() {
         player.setPosition(3);
         assertEquals(3, player.getPosition());
     }
 
+    /**
+     * Method to cover active leader effect computation.
+     */
     @Test
     void getActiveEffects() {
         LeaderCard toActive1 = player.getLeaderCards().get(0);
@@ -121,6 +130,9 @@ class PlayerTest {
         assertEquals(expectedActiveEffects, player.getActiveEffects());
     }
 
+    /**
+     * Method that checks player's point computation.
+     */
     @Test
     void calcVictoryPointsPlayer() throws DepotOutOfBoundsException, IncompatibleResourceTypeException {
         Warehouse warehouse = player.getPersonalBoard().getWarehouse();

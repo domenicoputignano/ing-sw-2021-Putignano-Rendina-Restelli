@@ -62,4 +62,12 @@ public class GenericPopupController extends Controller{
         Stage stage = (Stage) okButton.getScene().getWindow();
         stage.close();
     }
+
+    /**
+     * Method used to close application when it's required.
+     */
+    @FXML
+    void handleCloseApplication() {
+        System.exit(0);
+    }
 }

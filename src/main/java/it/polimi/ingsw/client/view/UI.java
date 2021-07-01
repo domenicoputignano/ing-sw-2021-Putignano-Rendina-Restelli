@@ -82,6 +82,12 @@ public abstract class UI {
     }
 
     /**
+     * Method to notify player after a disconnection in order to let him know that
+     * the application should be restarted.
+     */
+    public abstract void notifyCloseApplicationRequired();
+
+    /**
      * Boolean method to detect if user that has just joined a lobby corresponds
      * to user of client that is displaying something through his UI.
      */

@@ -8,10 +8,16 @@ import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Class to test a production rule and its changes.
+ */
 class ProductionRuleTest {
 
     ProductionRule productionRule = new ProductionRule();
 
+    /**
+     * Checks correct initialization of production rule itself.
+     */
     @Test
     void initialize(){
         Map<ResourceType, Integer> input = new EnumMap<ResourceType, Integer>(ResourceType.class);
@@ -35,7 +41,9 @@ class ProductionRuleTest {
     }
 
 
-
+    /**
+     * Covers input resources setter.
+     */
     @Test
     void setInputResources() {
         Map<ResourceType, Integer> input = new EnumMap<ResourceType, Integer>(ResourceType.class);
@@ -47,6 +55,9 @@ class ProductionRuleTest {
         assertEquals(input, productionRule.getInputResources());
     }
 
+    /**
+     * Covers output resources setter.
+     */
     @Test
     void setOutputResources() {
         Map<ResourceType, Integer> output = new EnumMap<ResourceType, Integer>(ResourceType.class);
@@ -58,6 +69,9 @@ class ProductionRuleTest {
         assertEquals(output, productionRule.getOutputResources());
     }
 
+    /**
+     * Setter of faith points.
+     */
     @Test
     void setOutputFaith() {
         int num = 3;

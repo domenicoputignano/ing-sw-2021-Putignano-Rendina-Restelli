@@ -92,9 +92,7 @@ public class NetworkClient extends Client {
                 socketOutObj.writeObject(message);
                 socketOutObj.flush();
             }
-            //LOGGER.log(Level.INFO, "Message sent ");
         } catch (IOException e) {
-            //System.out.println(e.getMessage());
             LOGGER.log(Level.SEVERE, "Error: unable to process message sending");
         }
     }
@@ -130,6 +128,7 @@ public class NetworkClient extends Client {
                     isActive = false;
                     LOGGER.log(Level.SEVERE, "Client disconnected!");
                     closeConnection();
+                    ui.notifyCloseApplicationRequired();
                 } catch (ClassNotFoundException e) {
                     isActive = false;
                     LOGGER.log(Level.SEVERE, "Error occurred in receiving thread");

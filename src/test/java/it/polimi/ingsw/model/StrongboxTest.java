@@ -8,14 +8,24 @@ import java.util.EnumMap;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Class to test strongbox instance.
+ */
 public class StrongboxTest {
     Strongbox strongbox = new Strongbox();
 
+    /**
+     * Covers initialization
+     */
     @Test
     void emptyInizialization()
     {
         assertTrue(strongbox.getResources().keySet().stream().allMatch((key) -> strongbox.getResources().get(key)==0));
     }
+
+    /**
+     * Perform addition to available resources in the strongbox and checks the result.
+     */
     @Test
     void addResources() {
         EnumMap<ResourceType,Integer> resources = ((EnumMap<ResourceType, Integer>) strongbox.getResources()).clone();
@@ -27,6 +37,10 @@ public class StrongboxTest {
         strongbox.addResources(resourcesToAdd);
         assertTrue(strongbox.getResources().keySet().stream().allMatch((key) -> resources.get(key)+resourcesToAdd.get(key)==strongbox.getResources().get(key)));
     }
+
+    /**
+     * Checks map merging done while taking resources from strongbox.
+     */
     @Test
     void takeResources() throws StrongboxOutOfBoundException {
         EnumMap<ResourceType,Integer> resourcesToAdd = new EnumMap<ResourceType, Integer>(ResourceType.class);
@@ -44,6 +58,10 @@ public class StrongboxTest {
         strongbox.takeResources(resourcesToTake);
         assertTrue(strongbox.getResources().keySet().stream().allMatch((key) -> resources.get(key)-resourcesToTake.get(key)==strongbox.getResources().get(key)));
     }
+
+    /**
+     * Test of a failed attempt to take resources from strongbox.
+     */
     @Test
     void takeResourcesException()
     {

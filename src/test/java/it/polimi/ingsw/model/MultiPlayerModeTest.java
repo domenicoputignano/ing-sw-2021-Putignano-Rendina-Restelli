@@ -101,19 +101,20 @@ class MultiPlayerModeTest {
         MultiPlayerMode gameSpy = spy(game);
 
         HitLastSpace hitLastSpaceEvent = new HitLastSpace();
-        gameSpy.endGame(hitLastSpaceEvent);
+        gameSpy.update(hitLastSpaceEvent);
+        //gameSpy.endGame(hitLastSpaceEvent);
         verify(gameSpy, times(1)).endGame(hitLastSpaceEvent);
 
         SeventhDevCardBought seventhDevCardBoughtEvent = new SeventhDevCardBought();
-        gameSpy.endGame(seventhDevCardBoughtEvent);
+        gameSpy.update(seventhDevCardBoughtEvent);
         verify(gameSpy, times(1)).endGame(seventhDevCardBoughtEvent);
 
         BlackCrossHitLastSpace blackCrossHitLastSpaceEvent = new BlackCrossHitLastSpace();
-        gameSpy.endGame(blackCrossHitLastSpaceEvent);
+        gameSpy.update(blackCrossHitLastSpaceEvent);
         verify(gameSpy, times(1)).endGame(blackCrossHitLastSpaceEvent);
 
         DevCardColorEnded devCardColorEndedEvent = new DevCardColorEnded();
-        gameSpy.endGame(devCardColorEndedEvent);
+        gameSpy.update(devCardColorEndedEvent);
         verify(gameSpy, times(1)).endGame(devCardColorEndedEvent);
     }
 

@@ -428,6 +428,15 @@ public class CLI extends UI {
     }
 
     /**
+     * Alerts player that a disconnection occurred so it's necessary restart the application.
+     */
+    @Override
+    public synchronized void notifyCloseApplicationRequired() {
+        System.out.println("Connection lost, restart your application to reconnect.");
+        System.exit(0);
+    }
+
+    /**
      * Submits to CLI executor interaction with the player during a certain CLI state.
      */
     @Override
@@ -452,7 +461,7 @@ public class CLI extends UI {
 
     /**
      * Prints to console leader cards owned by a certain player.
-     * @param playerBoard
+     * @param playerBoard player board instance whose cards have to be displayed.
      */
     public synchronized void showLeaderCards(ReducedPersonalBoard playerBoard) {
         for (LeaderCard card : playerBoard.getAvailableLeaderCards()) {

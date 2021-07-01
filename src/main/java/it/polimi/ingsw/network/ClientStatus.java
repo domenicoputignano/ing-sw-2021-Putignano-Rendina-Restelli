@@ -63,7 +63,6 @@ public class ClientStatus implements Runnable {
             outputStreamToClient.flush();
         } catch (IOException e) {
             e.printStackTrace(System.out);
-            //TODO modificare come se trovassimo una disconnessione
             LOGGER.log(Level.SEVERE, "Disconnection detected while sending a message");
             isActive = false;
         }
@@ -74,7 +73,7 @@ public class ClientStatus implements Runnable {
      * Method that runs until the connection is open.
      * It receives all the messages sent from remote host and forwards them to remote view, if required.
      * According to the state of connection, it handles {@link SocketTimeoutException} and {@link IOException}
-     * if the connection with the remote host goes lost.
+     * if the connection with client goes lost.
      */
     public void run(){
         try {
@@ -90,7 +89,6 @@ public class ClientStatus implements Runnable {
                     });
                 }
                 else {
-                    //LOGGER.log(Level.INFO, ""+message.getClass().getName());
                     try {
                         if (connectionState == ConnectionStates.CONFIGURATION) {
                             ((ConfigurationMessage)message).handleConfigurationMessage(this);
