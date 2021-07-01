@@ -64,7 +64,7 @@ To run the GUI, type:
 java -jar MaestriDelRinascimento.jar gui
 ```
 
-![gui_screen_1](deliverables/screenshots/gui_screen_1.PNG)
+![gui_screen_1](deliverables/screenshots/gui_screen1.PNG) ![gui_screen_2](deliverables/screenshots/gui_screen2.JPG)
 
 ### CLI :space_invader:
 First of all, if you are on Windows, run this command to allow the game to use ANSI codes to show its beautiful (and colorful) CLI interface:

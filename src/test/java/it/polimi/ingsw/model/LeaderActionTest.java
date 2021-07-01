@@ -4,6 +4,7 @@ import it.polimi.ingsw.commons.ResourceType;
 import it.polimi.ingsw.exceptions.*;
 import it.polimi.ingsw.utils.messages.clientMessages.*;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -75,8 +76,9 @@ class LeaderActionTest {
 
     /**
      * Tests a standard leader activation when all requirements are satisfied.
+     * This test is repeated 10 times because it is not deterministic.
      */
-    @Test
+    @RepeatedTest(10)
     void leaderActionOk() throws DepotOutOfBoundsException, IncompatibleResourceTypeException, LeaderStatusException, LeaderRequirementsException {
         LeaderActionMessage leaderActionMessage = new LeaderActionMessage();
         leaderActionMessage.setIndex(1);
