@@ -115,7 +115,7 @@
       <Button fx:id="clear" alignment="CENTER" layoutX="650" layoutY="568.0" mnemonicParsing="false" onAction="#clearSelection" prefHeight="69.0" prefWidth="137.0" styleClass="okButton" stylesheets="@../css/button.css" text="Clear" visible="false" />
       <Button fx:id="concludeAction" contentDisplay="CENTER" layoutX="842.0" layoutY="568.0" mnemonicParsing="false" onAction="#handleActionConclusion" prefHeight="69.0" prefWidth="137.0" styleClass="okButton, exit" stylesheets="@../css/button.css" text="Finish" visible="false" />
       <Button fx:id="toPayment" alignment="CENTER" layoutX="842.0" layoutY="568.0" mnemonicParsing="false" onAction="#concludeProductionsSelection" prefHeight="69.0" prefWidth="137.0" styleClass="okButton" stylesheets="@../css/button.css" text="To Payment" visible="false" />
-      <Text fx:id="errorText" layoutX="810.0" layoutY="429.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="137.5999999999999" />
+      <Text fx:id="errorText" layoutX="850.0" layoutY="530.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="137.5999999999999" />
       <ImageView fx:id="firstResourceImage" fitHeight="60.0" fitWidth="60.0" layoutX="223.0" layoutY="185.0" pickOnBounds="true" preserveRatio="true" visible="false">
       </ImageView>
       <ImageView fx:id="secondResourceImage" fitHeight="60.0" fitWidth="60.0" layoutX="608.0" layoutY="186.0" pickOnBounds="true" preserveRatio="true" visible="false">

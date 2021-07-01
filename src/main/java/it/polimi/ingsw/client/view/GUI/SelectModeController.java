@@ -19,9 +19,13 @@ public class SelectModeController extends Controller {
     @FXML
     public void initialize() {
         super.initialize();
-
+        BackgroundSize bSizeTop = new BackgroundSize(BackgroundSize.AUTO,BackgroundSize.AUTO, false,false,true,true);
         BackgroundSize bSize = new BackgroundSize(80,80, true, true, true, true);
-
+        top.setBackground(new Background(new BackgroundImage(new Image("/gui/img/bottom.png"),
+                BackgroundRepeat.NO_REPEAT,
+                BackgroundRepeat.NO_REPEAT,
+                BackgroundPosition.CENTER,
+                bSizeTop)));
         center.setBackground(new Background(new BackgroundImage(new Image("/gui/img/background.jpg"),
                 BackgroundRepeat.NO_REPEAT,
                 BackgroundRepeat.NO_REPEAT,
