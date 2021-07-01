@@ -27,8 +27,8 @@ public class WhiteMarble extends Marble {
 
 
     /**
-     * @return
-     * @throws NoSuchResourceTypeException
+     * Method that converts the marble to the associated resource depending on the runtime effect associated.
+     * @return the resource type the marble has been converted to.
      */
     public ResourceType addResources() throws NoSuchResourceTypeException {
         if(effect!=null) return effect.add();

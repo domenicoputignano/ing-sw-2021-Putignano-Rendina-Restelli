@@ -14,12 +14,19 @@ import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Test class that tests the correct functioning of the Warehouse class and its functionalities.
+ */
 class WarehouseTest {
     Warehouse warehouse = new Warehouse();
-    Map<ResourceType,Integer> resource = new EnumMap<ResourceType, Integer>(ResourceType.class);
-    Map<ResourceType,Integer> startingresource = new EnumMap<ResourceType, Integer>(ResourceType.class);
+    Map<ResourceType,Integer> resource = new EnumMap<>(ResourceType.class);
+    Map<ResourceType,Integer> startingresource = new EnumMap<>(ResourceType.class);
 
 
+    /**
+     * Test method that tests the correct functionality of the method to check that a player has enough resources in order
+     * to perform an action.
+     */
     @Test
     void checkResources() throws DepotOutOfBoundsException, IncompatibleResourceTypeException {
         resource.put(ResourceType.coin, 3);
@@ -40,8 +47,11 @@ class WarehouseTest {
 
     }
 
-
-
+    /**
+     * Test method that tests the correct behaviour of the checkNormalDepotPositioning method of the related class.
+     * It is executed 3 times with different parameters in order to have some form of randomness.
+     * @param index the nummber of resources to position
+     */
     @ParameterizedTest
     @ValueSource (ints = {1,2,3})
     void checkNormalDepotPositioning(int index) throws DepotOutOfBoundsException, IncompatibleResourceTypeException {
@@ -52,6 +62,10 @@ class WarehouseTest {
         else assertTrue(warehouse.checkMoveFromNormalDepotToNormalDepot(index,1));
     }
 
+    /**
+     * Test method that tests the correct behaviour of the method used to move resources from an extra depot
+     * to a normal depot.
+     */
     @Test
     void moveFromExtraDepotToNormalDepot() throws DepotOutOfBoundsException, IncompatibleResourceTypeException, DepotNotFoundException {
         warehouse.addResourcesToDepot(1, ResourceType.shield, 1);
@@ -77,6 +91,10 @@ class WarehouseTest {
         }
     }
 
+    /**
+     * Test method that tests the correct behaviour of the method used to move resources from a normal depot
+     * to an extra depot.
+     */
     @Test
     void moveFromNormalDepotToExtraDepot() throws DepotOutOfBoundsException, IncompatibleResourceTypeException {
         warehouse.addResourcesToDepot(1, ResourceType.shield, 1);
@@ -100,7 +118,10 @@ class WarehouseTest {
         }
     }
 
-
+    /**
+     * Test method that tests the correct behaviour of the method used to move resources from a normal depot
+     * to a normal depot.
+     */
     @Test
     void moveFromNormalDepotToNormalDepot() throws DepotOutOfBoundsException, IncompatibleResourceTypeException {
         warehouse.addResourcesToDepot(1, ResourceType.shield, 1);
@@ -125,7 +146,11 @@ class WarehouseTest {
         System.out.println(warehouse.getNormalDepots().get(i));
     }
 
-
+    /**
+     * Method to test the correct behaviour of the method to check if a move from a normal depot to an extra depot
+     * can be performed. It is executed 3 times with different parameters in order to have some form of randomness.
+     * @param type the resource type to associate with the extra depot to create.
+     */
     @ParameterizedTest
     @EnumSource(ResourceType.class)
     void checkMoveFromNormalDepotToExtraDepot(ResourceType type) throws DepotOutOfBoundsException, IncompatibleResourceTypeException {
@@ -138,6 +163,11 @@ class WarehouseTest {
             assertFalse(warehouse.checkMoveFromNormalDepotToExtraDepot(1,1,1));
     }
 
+    /**
+     * Method to test the correct behaviour of the method to check if a move from an extra depot to a normal depot
+     * can be performed. It is executed 3 times with different parameters in order to have some form of randomness.
+     * @param type the resource type to associate with the extra depot to create.
+     */
     @ParameterizedTest
     @EnumSource(ResourceType.class)
     void checkMoveFromExtraDepotToNormalDepot(ResourceType type) throws DepotOutOfBoundsException, IncompatibleResourceTypeException, DepotNotFoundException {
@@ -154,6 +184,9 @@ class WarehouseTest {
 
     }
 
+    /**
+     * Method to test the correct behaviour of the method used to take resources from a normal depot.
+     */
     @Test
     void takeResourceFromNormalDepot() throws DepotOutOfBoundsException, IncompatibleResourceTypeException, DepotNotFoundException {
         warehouse.addResourcesToDepot(3, ResourceType.shield, 3);
@@ -165,6 +198,11 @@ class WarehouseTest {
         assertEquals(warehouse.getNormalDepots(),expected);
     }
 
+    /**
+     * Method to test the correct behaviour of the method to add resources to an extra depot.
+     * It is executed 3 times with different parameters in order to have some form of randomness.
+     * @param type the resource type to associate with the extra depot to create.
+     */
     @ParameterizedTest
     @EnumSource(ResourceType.class)
     void addResourcesToExtraDepot(ResourceType type) throws DepotOutOfBoundsException, DepotNotFoundException {
@@ -183,6 +221,9 @@ class WarehouseTest {
         }
     }
 
+    /**
+     * Method to test the correct computation of the victory points gained from the warehouse.
+     */
     @Test
     void calcVictoryPointsWarehouse() throws DepotOutOfBoundsException, IncompatibleResourceTypeException {
         warehouse.addResourcesToDepot(3, ResourceType.shield, 3);
@@ -195,15 +236,5 @@ class WarehouseTest {
         warehouse.addResourcesToStrongbox(startingresource);
         int victoryPoints = warehouse.calcVictoryPointsWarehouse();
         assertEquals(3,victoryPoints);
-    }
-
-    @Test
-    void checkIsValidEditing() {
-
-    }
-
-    @Test
-    void updateAvailableResources() throws DepotOutOfBoundsException {
-        //TODO
     }
 }
