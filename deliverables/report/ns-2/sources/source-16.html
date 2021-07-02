@@ -1,0 +1,91 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > Depot</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+    @import "../../.css/highlight-idea.css";
+  </style>
+  <script type="text/javascript" src="../../.js/highlight.pack.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">it.polimi.ingsw.model</a>
+</div>
+
+<h1>Coverage Summary for Class: Depot (it.polimi.ingsw.model)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">Depot</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package it.polimi.ingsw.model;
+<i class="no-highlight">2</i>&nbsp;
+<i class="no-highlight">3</i>&nbsp;import it.polimi.ingsw.client.reducedmodel.ReducedDepot;
+<i class="no-highlight">4</i>&nbsp;import it.polimi.ingsw.commons.ResourceType;
+<i class="no-highlight">5</i>&nbsp;import it.polimi.ingsw.exceptions.DepotOutOfBoundsException;
+<i class="no-highlight">6</i>&nbsp;
+<i class="no-highlight">7</i>&nbsp;/**
+<i class="no-highlight">8</i>&nbsp; * This interface represents a generic depot of Maestri del Rinascimento board game.
+<i class="no-highlight">9</i>&nbsp; * A depot can stock {@link ResourceType} occurrences. The resources contained in a depot must be only
+<i class="no-highlight">10</i>&nbsp; * of the {@link ResourceType} associated with the depot itself. A depot has a limited size.
+<i class="no-highlight">11</i>&nbsp; * There are two types of Depots : {@link NormalDepot} and {@link ExtraDepot}.
+<i class="no-highlight">12</i>&nbsp; * This interface condenses the common methods of both implementations.
+<i class="no-highlight">13</i>&nbsp; */
+<i class="no-highlight">14</i>&nbsp;
+<i class="no-highlight">15</i>&nbsp;public interface Depot {
+<i class="no-highlight">16</i>&nbsp;    void add(int num) throws DepotOutOfBoundsException;
+<i class="no-highlight">17</i>&nbsp;    void take(int num) throws DepotOutOfBoundsException;
+<i class="no-highlight">18</i>&nbsp;    ResourceType getType();
+<i class="no-highlight">19</i>&nbsp;    int getOcc();
+<i class="no-highlight">20</i>&nbsp;    int getSize();
+<i class="no-highlight">21</i>&nbsp;    ReducedDepot getReducedVersion();
+<i class="no-highlight">22</i>&nbsp;}
+</div>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+        var codeBlock = document.getElementById('sourceCode');
+
+        if (codeBlock) {
+            hljs.highlightBlock(codeBlock);
+        }
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2021-07-02 11:43</div>
+</div>
+</body>
+</html>

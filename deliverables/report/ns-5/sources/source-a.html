@@ -1,0 +1,95 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > TokenEffect</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+    @import "../../.css/highlight-idea.css";
+  </style>
+  <script type="text/javascript" src="../../.js/highlight.pack.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">it.polimi.ingsw.model.soloMode</a>
+</div>
+
+<h1>Coverage Summary for Class: TokenEffect (it.polimi.ingsw.model.soloMode)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">TokenEffect</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package it.polimi.ingsw.model.soloMode;
+<i class="no-highlight">2</i>&nbsp;
+<i class="no-highlight">3</i>&nbsp;import java.io.Serializable;
+<i class="no-highlight">4</i>&nbsp;
+<i class="no-highlight">5</i>&nbsp;/**
+<i class="no-highlight">6</i>&nbsp; * All the possible token effects implement this interface and override each method depending on
+<i class="no-highlight">7</i>&nbsp; * the different type of token.
+<i class="no-highlight">8</i>&nbsp; * It implements {@link Serializable} in order to be sent through the network.
+<i class="no-highlight">9</i>&nbsp; */
+<i class="no-highlight">10</i>&nbsp;public interface TokenEffect extends Serializable {
+<i class="no-highlight">11</i>&nbsp;    /**
+<i class="no-highlight">12</i>&nbsp;     * Performs the effect of the token.
+<i class="no-highlight">13</i>&nbsp;     * @param lorenzoIlMagnifico the instance of Lorenzo il Magnifico.
+<i class="no-highlight">14</i>&nbsp;     */
+<i class="no-highlight">15</i>&nbsp;    void performTokenEffect(LorenzoIlMagnifico lorenzoIlMagnifico);
+<i class="no-highlight">16</i>&nbsp;
+<i class="no-highlight">17</i>&nbsp;    /**
+<i class="no-highlight">18</i>&nbsp;     * @return a string description of this effect.
+<i class="no-highlight">19</i>&nbsp;     */
+<i class="no-highlight">20</i>&nbsp;    String renderTokenEffect();
+<i class="no-highlight">21</i>&nbsp;
+<i class="no-highlight">22</i>&nbsp;    /**
+<i class="no-highlight">23</i>&nbsp;     * @return the url string of the image of this token effect.
+<i class="no-highlight">24</i>&nbsp;     */
+<i class="no-highlight">25</i>&nbsp;    String renderTokenImage();
+<i class="no-highlight">26</i>&nbsp;}
+</div>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+        var codeBlock = document.getElementById('sourceCode');
+
+        if (codeBlock) {
+            hljs.highlightBlock(codeBlock);
+        }
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2021-07-02 11:43</div>
+</div>
+</body>
+</html>

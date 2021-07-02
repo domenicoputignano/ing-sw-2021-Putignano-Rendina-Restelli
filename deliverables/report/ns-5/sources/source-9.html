@@ -1,0 +1,152 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > Token</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+    @import "../../.css/highlight-idea.css";
+  </style>
+  <script type="text/javascript" src="../../.js/highlight.pack.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">it.polimi.ingsw.model.soloMode</a>
+</div>
+
+<h1>Coverage Summary for Class: Token (it.polimi.ingsw.model.soloMode)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Token</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    75%
+  </span>
+  <span class="absValue">
+    (3/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    80%
+  </span>
+  <span class="absValue">
+    (4/5)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package it.polimi.ingsw.model.soloMode;
+<i class="no-highlight">2</i>&nbsp;
+<i class="no-highlight">3</i>&nbsp;import java.io.Serializable;
+<i class="no-highlight">4</i>&nbsp;
+<i class="no-highlight">5</i>&nbsp;/**
+<i class="no-highlight">6</i>&nbsp; * This class represents the tokens played by Lorenzo il Magnifico in {@link SoloMode}.
+<i class="no-highlight">7</i>&nbsp; * It implements {@link Serializable} in order to be sent through the network.
+<i class="no-highlight">8</i>&nbsp; */
+<i class="no-highlight">9</i>&nbsp;public class Token implements Serializable {
+<i class="no-highlight">10</i>&nbsp;    /**
+<i class="no-highlight">11</i>&nbsp;     * The {@link TokenEffect} associated with this token.
+<i class="no-highlight">12</i>&nbsp;     */
+<i class="no-highlight">13</i>&nbsp;    private final TokenEffect tokenEffect;
+<i class="no-highlight">14</i>&nbsp;
+<i class="no-highlight">15</i>&nbsp;    /**
+<i class="no-highlight">16</i>&nbsp;     * Constructs a token with the given token effect.
+<i class="no-highlight">17</i>&nbsp;     * @param tokenEffect the token effect of the token to construct.
+<i class="no-highlight">18</i>&nbsp;     */
+<b class="fc"><i class="no-highlight">19</i>&nbsp;    public Token(TokenEffect tokenEffect) {</b>
+<b class="fc"><i class="no-highlight">20</i>&nbsp;        this.tokenEffect = tokenEffect;</b>
+<i class="no-highlight">21</i>&nbsp;    }
+<i class="no-highlight">22</i>&nbsp;
+<i class="no-highlight">23</i>&nbsp;    /**
+<i class="no-highlight">24</i>&nbsp;     * Performs the effect of this token by calling the proper method on the associated
+<i class="no-highlight">25</i>&nbsp;     * {@link TokenEffect} instance.
+<i class="no-highlight">26</i>&nbsp;     * @param lorenzoIlMagnifico the instance of Lorenzo il Magnifico.
+<i class="no-highlight">27</i>&nbsp;     */
+<i class="no-highlight">28</i>&nbsp;    public void performEffect(LorenzoIlMagnifico lorenzoIlMagnifico) {
+<b class="fc"><i class="no-highlight">29</i>&nbsp;        tokenEffect.performTokenEffect(lorenzoIlMagnifico);</b>
+<i class="no-highlight">30</i>&nbsp;    }
+<i class="no-highlight">31</i>&nbsp;
+<i class="no-highlight">32</i>&nbsp;    /**
+<i class="no-highlight">33</i>&nbsp;     * @return the effect of this token as a string.
+<i class="no-highlight">34</i>&nbsp;     */
+<i class="no-highlight">35</i>&nbsp;    @Override
+<i class="no-highlight">36</i>&nbsp;    public String toString() {
+<b class="nc"><i class="no-highlight">37</i>&nbsp;        return  &quot;{tokenEffect=&quot; + tokenEffect +</b>
+<i class="no-highlight">38</i>&nbsp;                &#39;}&#39;;
+<i class="no-highlight">39</i>&nbsp;    }
+<i class="no-highlight">40</i>&nbsp;
+<i class="no-highlight">41</i>&nbsp;    /**
+<i class="no-highlight">42</i>&nbsp;     * @return the token effect associated with this token.
+<i class="no-highlight">43</i>&nbsp;     */
+<i class="no-highlight">44</i>&nbsp;    public TokenEffect getTokenEffect() {
+<b class="fc"><i class="no-highlight">45</i>&nbsp;        return tokenEffect;</b>
+<i class="no-highlight">46</i>&nbsp;    }
+<i class="no-highlight">47</i>&nbsp;}
+</div>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+        var codeBlock = document.getElementById('sourceCode');
+
+        if (codeBlock) {
+            hljs.highlightBlock(codeBlock);
+        }
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2021-07-02 11:43</div>
+</div>
+</body>
+</html>

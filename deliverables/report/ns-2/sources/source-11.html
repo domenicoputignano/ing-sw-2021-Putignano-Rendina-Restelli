@@ -1,0 +1,413 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > TakeResourcesFromMarket</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+    @import "../../.css/highlight-idea.css";
+  </style>
+  <script type="text/javascript" src="../../.js/highlight.pack.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">it.polimi.ingsw.model</a>
+</div>
+
+<h1>Coverage Summary for Class: TakeResourcesFromMarket (it.polimi.ingsw.model)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">TakeResourcesFromMarket</td>
+<td class="coverageStat">
+  <span class="percent">
+    93,8%
+  </span>
+  <span class="absValue">
+    (15/16)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    95,8%
+  </span>
+  <span class="absValue">
+    (92/96)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">TakeResourcesFromMarket$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    94,1%
+  </span>
+  <span class="absValue">
+    (16/17)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    95,9%
+  </span>
+  <span class="absValue">
+    (93/97)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package it.polimi.ingsw.model;
+<i class="no-highlight">2</i>&nbsp;
+<i class="no-highlight">3</i>&nbsp;import it.polimi.ingsw.client.reducedmodel.ReducedMarble;
+<i class="no-highlight">4</i>&nbsp;import it.polimi.ingsw.commons.ColorMarble;
+<i class="no-highlight">5</i>&nbsp;import it.polimi.ingsw.commons.LeaderEffect;
+<i class="no-highlight">6</i>&nbsp;import it.polimi.ingsw.commons.ResourceType;
+<i class="no-highlight">7</i>&nbsp;import it.polimi.ingsw.exceptions.*;
+<i class="no-highlight">8</i>&nbsp;import it.polimi.ingsw.commons.Effect;
+<i class="no-highlight">9</i>&nbsp;import it.polimi.ingsw.model.marketTray.*;
+<i class="no-highlight">10</i>&nbsp;import it.polimi.ingsw.utils.MarbleDestination;
+<i class="no-highlight">11</i>&nbsp;import it.polimi.ingsw.utils.messages.serverMessages.Updates.PositioningUpdate;
+<i class="no-highlight">12</i>&nbsp;import it.polimi.ingsw.utils.messages.serverMessages.Updates.TakeResourcesFromMarketUpdate;
+<i class="no-highlight">13</i>&nbsp;import it.polimi.ingsw.utils.Pair;
+<i class="no-highlight">14</i>&nbsp;import it.polimi.ingsw.utils.messages.clientMessages.*;
+<i class="no-highlight">15</i>&nbsp;import java.util.ArrayList;
+<i class="no-highlight">16</i>&nbsp;import java.util.List;
+<i class="no-highlight">17</i>&nbsp;import java.util.stream.Collectors;
+<i class="no-highlight">18</i>&nbsp;
+<i class="no-highlight">19</i>&nbsp;/**
+<i class="no-highlight">20</i>&nbsp; * Take Resources From Market action is organized as follows: the current
+<i class="no-highlight">21</i>&nbsp; * player selects the marbles he wants to take from the market, then he attempts to perform a first positioning
+<i class="no-highlight">22</i>&nbsp; * phase. If he makes a mistake while positioning the resources the first time, they are placed in the pending
+<i class="no-highlight">23</i>&nbsp; * resources. Afterwards he has a second opportunity to specify how to place the resources he failed to place.
+<i class="no-highlight">24</i>&nbsp; * If he fails again, the remaining resources are automatically discarded and the other players move by the
+<i class="no-highlight">25</i>&nbsp; * correspondent number of positions on their faith track.
+<i class="no-highlight">26</i>&nbsp; */
+<i class="no-highlight">27</i>&nbsp;
+<b class="fc"><i class="no-highlight">28</i>&nbsp;public class TakeResourcesFromMarket implements AbstractTurnPhase {</b>
+<i class="no-highlight">29</i>&nbsp;
+<i class="no-highlight">30</i>&nbsp;    /**
+<i class="no-highlight">31</i>&nbsp;     * Each resource associated to the marble and taken from the market has a possible destination
+<i class="no-highlight">32</i>&nbsp;     */
+<b class="fc"><i class="no-highlight">33</i>&nbsp;    private List&lt;Pair&lt;ResourceType, MarbleDestination&gt;&gt; whereToPutResources = new ArrayList&lt;&gt;();</b>
+<i class="no-highlight">34</i>&nbsp;    /**
+<i class="no-highlight">35</i>&nbsp;     * Resources wrongly positioned while taking resources from market
+<i class="no-highlight">36</i>&nbsp;     */
+<b class="fc"><i class="no-highlight">37</i>&nbsp;    private List&lt;ResourceType&gt; pendingResources = new ArrayList&lt;&gt;();</b>
+<b class="fc"><i class="no-highlight">38</i>&nbsp;    private int faith = 0;</b>
+<b class="fc"><i class="no-highlight">39</i>&nbsp;    private int discardedResources = 0;</b>
+<i class="no-highlight">40</i>&nbsp;
+<i class="no-highlight">41</i>&nbsp;    /**
+<i class="no-highlight">42</i>&nbsp;     * This is the main method of the class. It makes consistency check to avoid corruption.
+<i class="no-highlight">43</i>&nbsp;     * @param turn represents the turn in which the action is being performed.
+<i class="no-highlight">44</i>&nbsp;     * @param takeResourcesFromMarketMessage message containing all the instructions coming from the player
+<i class="no-highlight">45</i>&nbsp;     * @throws InvalidActionException if a normal action has been already performed in the turn.
+<i class="no-highlight">46</i>&nbsp;     * @throws WhiteEffectMismatchException if the player has selected a wrong number of effects or selected ones don&#39;t match with player&#39;s leader effects.
+<i class="no-highlight">47</i>&nbsp;     * @throws NeedPositioningException if a certain resource cannot be placed in warehouse and required further actions from the player.
+<i class="no-highlight">48</i>&nbsp;     */
+<i class="no-highlight">49</i>&nbsp;    @Override
+<i class="no-highlight">50</i>&nbsp;    public void takeResourcesFromMarket(Turn turn, TakeResourcesFromMarketMessage takeResourcesFromMarketMessage) throws InvalidActionException, WhiteEffectMismatchException, NeedPositioningException {
+<b class="fc"><i class="no-highlight">51</i>&nbsp;        if(turn.isDoneNormalAction())</b>
+<b class="fc"><i class="no-highlight">52</i>&nbsp;            throw new InvalidActionException();</b>
+<b class="fc"><i class="no-highlight">53</i>&nbsp;        if(checkValidWhiteEffects(turn,takeResourcesFromMarketMessage.getWhiteEffects(), takeResourcesFromMarketMessage.getRequestedMarbles())) {</b>
+<i class="no-highlight">54</i>&nbsp;
+<b class="fc"><i class="no-highlight">55</i>&nbsp;            List&lt;Marble&gt; obtainedMarbles = turn.getGame().getMarketTray().</b>
+<b class="fc"><i class="no-highlight">56</i>&nbsp;                    takeMarbles(takeResourcesFromMarketMessage.getPlayerChoice(), takeResourcesFromMarketMessage.getIndex()-1);</b>
+<i class="no-highlight">57</i>&nbsp;
+<i class="no-highlight">58</i>&nbsp;            //perform convert marble effect
+<b class="fc"><i class="no-highlight">59</i>&nbsp;            convertWhiteMarbles(turn, obtainedMarbles, takeResourcesFromMarketMessage.getWhiteEffects());</b>
+<i class="no-highlight">60</i>&nbsp;
+<i class="no-highlight">61</i>&nbsp;            //convert a List of Pair&lt;Marble,MarbleDestination&gt; in a List of Pair&lt;ResourceType,MarbleDestination&gt;
+<b class="fc"><i class="no-highlight">62</i>&nbsp;            convertMarblesToResources(obtainedMarbles, takeResourcesFromMarketMessage.getWhereToPutMarbles());</b>
+<i class="no-highlight">63</i>&nbsp;
+<b class="fc"><i class="no-highlight">64</i>&nbsp;            handlePositioning(turn.getPlayer().getPersonalBoard().getWarehouse());</b>
+<b class="fc"><i class="no-highlight">65</i>&nbsp;            turn.getGame().getMarketTray().clearWhiteMarbleEffect();</b>
+<b class="fc"><i class="no-highlight">66</i>&nbsp;            moveCurrPlayerMarker(turn);</b>
+<b class="fc"><i class="no-highlight">67</i>&nbsp;            if(pendingResources.size()&gt;0)</b>
+<b class="fc"><i class="no-highlight">68</i>&nbsp;                throw new NeedPositioningException(pendingResources);</b>
+<i class="no-highlight">69</i>&nbsp;            else {
+<b class="fc"><i class="no-highlight">70</i>&nbsp;                turn.normalActionDone();</b>
+<b class="fc"><i class="no-highlight">71</i>&nbsp;                turn.getGame().notifyUpdate(new TakeResourcesFromMarketUpdate(turn.getPlayer().getUser(),</b>
+<b class="fc"><i class="no-highlight">72</i>&nbsp;                        turn.getPlayer().getReducedPersonalBoard(),</b>
+<b class="fc"><i class="no-highlight">73</i>&nbsp;                        turn.getGame().getMarketTray().getReducedVersion(),</b>
+<b class="fc"><i class="no-highlight">74</i>&nbsp;                        getEarnedResources(),faith));</b>
+<b class="fc"><i class="no-highlight">75</i>&nbsp;                concludeTurnPhase(turn);</b>
+<i class="no-highlight">76</i>&nbsp;            }
+<b class="fc"><i class="no-highlight">77</i>&nbsp;        } else throw new WhiteEffectMismatchException();</b>
+<i class="no-highlight">78</i>&nbsp;    }
+<i class="no-highlight">79</i>&nbsp;
+<i class="no-highlight">80</i>&nbsp;
+<i class="no-highlight">81</i>&nbsp;    /**
+<i class="no-highlight">82</i>&nbsp;     * Sets effect for white marbles as indicated
+<i class="no-highlight">83</i>&nbsp;     * @param turn in which the action is performed
+<i class="no-highlight">84</i>&nbsp;     * @param marbles the list of marbles containing some white marbles to convert.
+<i class="no-highlight">85</i>&nbsp;     * @param whiteEffects the list containing, for each white marble, the index of the convert marble leader card to active.
+<i class="no-highlight">86</i>&nbsp;     */
+<i class="no-highlight">87</i>&nbsp;    private void convertWhiteMarbles(Turn turn, List&lt;Marble&gt; marbles, List&lt;Integer&gt; whiteEffects) {
+<b class="pc"><i class="no-highlight">88</i>&nbsp;        List&lt;ResourceType&gt; whiteMarbleEffects = turn.getPlayer().getActiveEffects().stream().filter(x -&gt; x.getEffect()==Effect.CMARBLE).</b>
+<b class="fc"><i class="no-highlight">89</i>&nbsp;                map(LeaderEffect::getType).collect(Collectors.toList());</b>
+<b class="fc"><i class="no-highlight">90</i>&nbsp;        int i = 0;</b>
+<b class="fc"><i class="no-highlight">91</i>&nbsp;        for(Marble m : marbles) {</b>
+<b class="fc"><i class="no-highlight">92</i>&nbsp;            if(m.getColor()== ColorMarble.WHITE) {</b>
+<b class="fc"><i class="no-highlight">93</i>&nbsp;                if(whiteMarbleEffects.size()==1) {</b>
+<b class="fc"><i class="no-highlight">94</i>&nbsp;                    WhiteMarble y = (WhiteMarble) m;</b>
+<b class="fc"><i class="no-highlight">95</i>&nbsp;                    y.setEffect(convertTypeToMarbleEffect(whiteMarbleEffects.get(0)));</b>
+<b class="fc"><i class="no-highlight">96</i>&nbsp;                } else if(whiteMarbleEffects.size() == 2) {</b>
+<b class="fc"><i class="no-highlight">97</i>&nbsp;                    WhiteMarble y = (WhiteMarble) m;</b>
+<b class="fc"><i class="no-highlight">98</i>&nbsp;                    y.setEffect(convertTypeToMarbleEffect(whiteMarbleEffects.get(whiteEffects.get(i)-1)));</b>
+<b class="fc"><i class="no-highlight">99</i>&nbsp;                    i++;</b>
+<i class="no-highlight">100</i>&nbsp;                }
+<i class="no-highlight">101</i>&nbsp;            }
+<b class="fc"><i class="no-highlight">102</i>&nbsp;        }</b>
+<i class="no-highlight">103</i>&nbsp;    }
+<i class="no-highlight">104</i>&nbsp;
+<i class="no-highlight">105</i>&nbsp;    /**
+<i class="no-highlight">106</i>&nbsp;     * Converts each marble obtained to the corresponding {@link ResourceType}.
+<i class="no-highlight">107</i>&nbsp;     * @param marbles the list of the marbles obtained.
+<i class="no-highlight">108</i>&nbsp;     * @param whereToPutMarbles the list containing the indications on where to put each marble.
+<i class="no-highlight">109</i>&nbsp;     */
+<i class="no-highlight">110</i>&nbsp;    private void convertMarblesToResources(List&lt;Marble&gt; marbles, List&lt;Pair&lt;ReducedMarble,MarbleDestination&gt;&gt; whereToPutMarbles) {
+<b class="fc"><i class="no-highlight">111</i>&nbsp;        for(Marble p : marbles) {</b>
+<b class="fc"><i class="no-highlight">112</i>&nbsp;            if (p.getColor() == ColorMarble.RED)</b>
+<b class="fc"><i class="no-highlight">113</i>&nbsp;                faith++;</b>
+<b class="fc"><i class="no-highlight">114</i>&nbsp;        }</b>
+<i class="no-highlight">115</i>&nbsp;        ResourceType resourceType;
+<b class="fc"><i class="no-highlight">116</i>&nbsp;        for(int i = 0; i &lt; marbles.size(); i++) {</b>
+<i class="no-highlight">117</i>&nbsp;            try {
+<b class="fc"><i class="no-highlight">118</i>&nbsp;                resourceType = marbles.get(i).addResources();</b>
+<b class="fc"><i class="no-highlight">119</i>&nbsp;                whereToPutResources.add(new Pair&lt;&gt;(resourceType, whereToPutMarbles.get(i).getValue()));</b>
+<b class="fc"><i class="no-highlight">120</i>&nbsp;            } catch (NoSuchResourceTypeException ignored) {}</b>
+<i class="no-highlight">121</i>&nbsp;        }
+<i class="no-highlight">122</i>&nbsp;    }
+<i class="no-highlight">123</i>&nbsp;
+<i class="no-highlight">124</i>&nbsp;    /**
+<i class="no-highlight">125</i>&nbsp;     * Method used to convert the Resource Type associated to a convert marble leader card to the
+<i class="no-highlight">126</i>&nbsp;     * correspondent {@link WhiteMarbleEffect} instance of the Strategy pattern.
+<i class="no-highlight">127</i>&nbsp;     * @param type of the convert marble.
+<i class="no-highlight">128</i>&nbsp;     * @return the instance of the Strategy pattern used to convert white marbles.
+<i class="no-highlight">129</i>&nbsp;     */
+<i class="no-highlight">130</i>&nbsp;    private WhiteMarbleEffect convertTypeToMarbleEffect(ResourceType type) {
+<b class="fc"><i class="no-highlight">131</i>&nbsp;        if(type == ResourceType.coin) return new Coin();</b>
+<b class="pc"><i class="no-highlight">132</i>&nbsp;        if(type == ResourceType.servant) return new Servant();</b>
+<b class="fc"><i class="no-highlight">133</i>&nbsp;        if(type == ResourceType.shield) return new Shield();</b>
+<b class="pc"><i class="no-highlight">134</i>&nbsp;        if(type == ResourceType.stone) return new Stone();</b>
+<b class="nc"><i class="no-highlight">135</i>&nbsp;        else return null;</b>
+<i class="no-highlight">136</i>&nbsp;    }
+<i class="no-highlight">137</i>&nbsp;
+<i class="no-highlight">138</i>&nbsp;    /**
+<i class="no-highlight">139</i>&nbsp;     * Performs the positioning of the resources obtained from the marbles into the {@link Warehouse} as
+<i class="no-highlight">140</i>&nbsp;     * indicated in the previous phases of the action. If the positioning action fails, the resource is
+<i class="no-highlight">141</i>&nbsp;     * added to the pending resources.
+<i class="no-highlight">142</i>&nbsp;     * @param playerWarehouse where to position the resources.
+<i class="no-highlight">143</i>&nbsp;     */
+<i class="no-highlight">144</i>&nbsp;    private void handlePositioning(Warehouse playerWarehouse) {
+<b class="fc"><i class="no-highlight">145</i>&nbsp;        for(int i = 0; i &lt; whereToPutResources.size(); ) {</b>
+<i class="no-highlight">146</i>&nbsp;            try {
+<b class="fc"><i class="no-highlight">147</i>&nbsp;                performPositioning(playerWarehouse, i);</b>
+<b class="fc"><i class="no-highlight">148</i>&nbsp;            } catch (DepotOutOfBoundsException | DepotNotFoundException | IncompatibleResourceTypeException e) {</b>
+<b class="fc"><i class="no-highlight">149</i>&nbsp;                pendingResources.add(whereToPutResources.get(i).getKey());</b>
+<i class="no-highlight">150</i>&nbsp;            } finally {
+<b class="fc"><i class="no-highlight">151</i>&nbsp;                i++;</b>
+<b class="fc"><i class="no-highlight">152</i>&nbsp;            }</b>
+<i class="no-highlight">153</i>&nbsp;        }
+<i class="no-highlight">154</i>&nbsp;    }
+<i class="no-highlight">155</i>&nbsp;
+<i class="no-highlight">156</i>&nbsp;    /**
+<i class="no-highlight">157</i>&nbsp;     * Method used to handle the positioning of the pending resources when the current player wrongly performed
+<i class="no-highlight">158</i>&nbsp;     * a first attempt to position them. If he makes any mistake, the remaining resources are automatically discarded
+<i class="no-highlight">159</i>&nbsp;     * and the other players move by the correspondent number of positions on their faith track.
+<i class="no-highlight">160</i>&nbsp;     * @param turn in which the action is performed.
+<i class="no-highlight">161</i>&nbsp;     * @param pairList the list containing, for each resource, the warehouse section where to position it.
+<i class="no-highlight">162</i>&nbsp;     */
+<i class="no-highlight">163</i>&nbsp;    public void handlePositioning(Turn turn, List&lt;Pair&lt;ResourceType,MarbleDestination&gt;&gt; pairList) {
+<b class="fc"><i class="no-highlight">164</i>&nbsp;        List&lt;ResourceType&gt; discardedResourcesList = new ArrayList&lt;&gt;();</b>
+<b class="fc"><i class="no-highlight">165</i>&nbsp;        Warehouse playerWarehouse = turn.getPlayer().getPersonalBoard().getWarehouse();</b>
+<b class="fc"><i class="no-highlight">166</i>&nbsp;        whereToPutResources = pairList;</b>
+<b class="fc"><i class="no-highlight">167</i>&nbsp;        for(int i = 0; i &lt; whereToPutResources.size(); ) {</b>
+<i class="no-highlight">168</i>&nbsp;            try {
+<b class="fc"><i class="no-highlight">169</i>&nbsp;                performPositioning(playerWarehouse, i);</b>
+<b class="fc"><i class="no-highlight">170</i>&nbsp;            } catch (DepotOutOfBoundsException | DepotNotFoundException | IncompatibleResourceTypeException e) {</b>
+<b class="fc"><i class="no-highlight">171</i>&nbsp;                discardedResources++;</b>
+<b class="fc"><i class="no-highlight">172</i>&nbsp;                discardedResourcesList.add(whereToPutResources.get(i).getKey());</b>
+<i class="no-highlight">173</i>&nbsp;            } finally {
+<b class="fc"><i class="no-highlight">174</i>&nbsp;                i++;</b>
+<b class="fc"><i class="no-highlight">175</i>&nbsp;            }</b>
+<i class="no-highlight">176</i>&nbsp;        }
+<b class="fc"><i class="no-highlight">177</i>&nbsp;        pendingResources.clear();</b>
+<b class="fc"><i class="no-highlight">178</i>&nbsp;        turn.normalActionDone();</b>
+<b class="fc"><i class="no-highlight">179</i>&nbsp;        turn.getGame().notifyUpdate(new PositioningUpdate(turn.getPlayer().getUser(),</b>
+<b class="fc"><i class="no-highlight">180</i>&nbsp;                turn.getPlayer().getReducedPersonalBoard(), discardedResourcesList));</b>
+<b class="fc"><i class="no-highlight">181</i>&nbsp;        concludeTurnPhase(turn);</b>
+<i class="no-highlight">182</i>&nbsp;    }
+<i class="no-highlight">183</i>&nbsp;
+<i class="no-highlight">184</i>&nbsp;    /**
+<i class="no-highlight">185</i>&nbsp;     * Checks whether the player has correctly indicated all the resources to put when he has to some resources
+<i class="no-highlight">186</i>&nbsp;     * to settle.
+<i class="no-highlight">187</i>&nbsp;     * @param resourcesToPut indicated by the client.
+<i class="no-highlight">188</i>&nbsp;     * @return the check validity.
+<i class="no-highlight">189</i>&nbsp;     */
+<i class="no-highlight">190</i>&nbsp;    public boolean checkPendingResourcesPositioning(List&lt;ResourceType&gt; resourcesToPut) {
+<b class="pc"><i class="no-highlight">191</i>&nbsp;        return resourcesToPut.containsAll(pendingResources) &amp;&amp; pendingResources.containsAll(resourcesToPut);</b>
+<i class="no-highlight">192</i>&nbsp;    }
+<i class="no-highlight">193</i>&nbsp;
+<i class="no-highlight">194</i>&nbsp;    /**
+<i class="no-highlight">195</i>&nbsp;     * Moves the current player&#39;s faith marker by the number of faith points obtained during the action.
+<i class="no-highlight">196</i>&nbsp;     * @param turn in which the action is performed.
+<i class="no-highlight">197</i>&nbsp;     */
+<i class="no-highlight">198</i>&nbsp;    private void moveCurrPlayerMarker(Turn turn) {
+<b class="fc"><i class="no-highlight">199</i>&nbsp;        turn.getPlayer().getPersonalBoard().moveMarker(turn.getPlayer(), faith);</b>
+<i class="no-highlight">200</i>&nbsp;    }
+<i class="no-highlight">201</i>&nbsp;
+<i class="no-highlight">202</i>&nbsp;    /**
+<i class="no-highlight">203</i>&nbsp;     * Concludes the action moving the other players on their faith track by the number of resources discarded by
+<i class="no-highlight">204</i>&nbsp;     * the current player during this action.
+<i class="no-highlight">205</i>&nbsp;     * @param turn in which the action is performed.
+<i class="no-highlight">206</i>&nbsp;     */
+<i class="no-highlight">207</i>&nbsp;    public void concludeTurnPhase(Turn turn) {
+<b class="fc"><i class="no-highlight">208</i>&nbsp;        turn.getGame().moveOtherPlayers(turn.getPlayer(), discardedResources);</b>
+<i class="no-highlight">209</i>&nbsp;    }
+<i class="no-highlight">210</i>&nbsp;
+<i class="no-highlight">211</i>&nbsp;
+<i class="no-highlight">212</i>&nbsp;    /**
+<i class="no-highlight">213</i>&nbsp;     * Performs the positioning of a resource type in the player&#39;s Warehouse as indicated in the previous phases
+<i class="no-highlight">214</i>&nbsp;     * of the action.
+<i class="no-highlight">215</i>&nbsp;     * @param playerWarehouse where to put the resources.
+<i class="no-highlight">216</i>&nbsp;     * @param i the index of the resource to place in whereToPutResources list.
+<i class="no-highlight">217</i>&nbsp;     * @throws DepotOutOfBoundsException if a resource is put in a full depot.
+<i class="no-highlight">218</i>&nbsp;     * @throws IncompatibleResourceTypeException if the type of a resource is incompatible to the current configuration of the warehouse.
+<i class="no-highlight">219</i>&nbsp;     * @throws DepotNotFoundException if a resource is added to a depot that not exists in player&#39;s warehouse.
+<i class="no-highlight">220</i>&nbsp;     */
+<i class="no-highlight">221</i>&nbsp;    private void performPositioning(Warehouse playerWarehouse, int i) throws DepotOutOfBoundsException, IncompatibleResourceTypeException, DepotNotFoundException {
+<b class="pc"><i class="no-highlight">222</i>&nbsp;        switch(whereToPutResources.get(i).getValue()) {</b>
+<i class="no-highlight">223</i>&nbsp;            case DEPOT1:
+<b class="fc"><i class="no-highlight">224</i>&nbsp;                    playerWarehouse.addResourcesToDepot(1, whereToPutResources.get(i).getKey(), 1);</b>
+<b class="fc"><i class="no-highlight">225</i>&nbsp;                    break;</b>
+<i class="no-highlight">226</i>&nbsp;            case DEPOT2:
+<b class="fc"><i class="no-highlight">227</i>&nbsp;                    playerWarehouse.addResourcesToDepot(2, whereToPutResources.get(i).getKey(), 1);</b>
+<b class="nc"><i class="no-highlight">228</i>&nbsp;                    break;</b>
+<i class="no-highlight">229</i>&nbsp;            case DEPOT3:
+<b class="fc"><i class="no-highlight">230</i>&nbsp;                    playerWarehouse.addResourcesToDepot(3, whereToPutResources.get(i).getKey(), 1);</b>
+<b class="fc"><i class="no-highlight">231</i>&nbsp;                    break;</b>
+<i class="no-highlight">232</i>&nbsp;            case EXTRA:
+<b class="fc"><i class="no-highlight">233</i>&nbsp;                    playerWarehouse.addResourcesToExtraDepot(whereToPutResources.get(i).getKey(),1);</b>
+<b class="nc"><i class="no-highlight">234</i>&nbsp;                    break;</b>
+<b class="fc"><i class="no-highlight">235</i>&nbsp;            case DISCARD: discardedResources++;</b>
+<b class="fc"><i class="no-highlight">236</i>&nbsp;                break;</b>
+<i class="no-highlight">237</i>&nbsp;            default:
+<i class="no-highlight">238</i>&nbsp;        }
+<i class="no-highlight">239</i>&nbsp;    }
+<i class="no-highlight">240</i>&nbsp;
+<i class="no-highlight">241</i>&nbsp;    /**
+<i class="no-highlight">242</i>&nbsp;     * Filters all the resources obtained from the marbles to get only the resources that the player
+<i class="no-highlight">243</i>&nbsp;     * wants to keep.
+<i class="no-highlight">244</i>&nbsp;     * @return the resources that the player wants to keep.
+<i class="no-highlight">245</i>&nbsp;     */
+<i class="no-highlight">246</i>&nbsp;    private List&lt;ResourceType&gt; getEarnedResources() {
+<b class="fc"><i class="no-highlight">247</i>&nbsp;        return whereToPutResources.stream().filter(x -&gt; x.getValue()!=MarbleDestination.DISCARD).</b>
+<b class="fc"><i class="no-highlight">248</i>&nbsp;                map(Pair::getKey).collect(Collectors.toList());</b>
+<i class="no-highlight">249</i>&nbsp;    }
+<i class="no-highlight">250</i>&nbsp;
+<i class="no-highlight">251</i>&nbsp;    /**
+<i class="no-highlight">252</i>&nbsp;     * Checks whether the client has correctly indicated how to convert each white marble.
+<i class="no-highlight">253</i>&nbsp;     * Client has to indicate how to convert each white marble only if he has two convert marble leader effects active.
+<i class="no-highlight">254</i>&nbsp;     * @param turn in which the action is performed.
+<i class="no-highlight">255</i>&nbsp;     * @param whiteEffects the list containing, for each white marble, the index of the convert marble leader card to active.
+<i class="no-highlight">256</i>&nbsp;     * @param requestedMarbles the list of the marbles requested by the client.
+<i class="no-highlight">257</i>&nbsp;     * @return the check validity.
+<i class="no-highlight">258</i>&nbsp;     */
+<i class="no-highlight">259</i>&nbsp;    public boolean checkValidWhiteEffects(Turn turn, List&lt;Integer&gt; whiteEffects, List&lt;ReducedMarble&gt; requestedMarbles)
+<i class="no-highlight">260</i>&nbsp;    {
+<b class="pc"><i class="no-highlight">261</i>&nbsp;        List&lt;ResourceType&gt; whiteMarbleEffects = turn.getPlayer().getActiveEffects().stream().filter(x -&gt; x.getEffect()==Effect.CMARBLE).</b>
+<b class="fc"><i class="no-highlight">262</i>&nbsp;                map(LeaderEffect::getType).collect(Collectors.toList());</b>
+<b class="fc"><i class="no-highlight">263</i>&nbsp;        if(whiteMarbleEffects.size()==2)</b>
+<i class="no-highlight">264</i>&nbsp;        {
+<b class="fc"><i class="no-highlight">265</i>&nbsp;            if(whiteEffects.size()!=requestedMarbles.stream().filter(x -&gt; x.getColorMarble() == ColorMarble.WHITE).count())</b>
+<b class="fc"><i class="no-highlight">266</i>&nbsp;                return false;</b>
+<i class="no-highlight">267</i>&nbsp;        }
+<b class="fc"><i class="no-highlight">268</i>&nbsp;        return true;</b>
+<i class="no-highlight">269</i>&nbsp;    }
+<i class="no-highlight">270</i>&nbsp;
+<i class="no-highlight">271</i>&nbsp;    public List&lt;Pair&lt;ResourceType, MarbleDestination&gt;&gt; getWhereToPutResources() {
+<b class="fc"><i class="no-highlight">272</i>&nbsp;        return whereToPutResources;</b>
+<i class="no-highlight">273</i>&nbsp;    }
+<i class="no-highlight">274</i>&nbsp;
+<i class="no-highlight">275</i>&nbsp;    public int getFaith() {
+<b class="nc"><i class="no-highlight">276</i>&nbsp;        return faith;</b>
+<i class="no-highlight">277</i>&nbsp;    }
+<i class="no-highlight">278</i>&nbsp;
+<i class="no-highlight">279</i>&nbsp;    public List&lt;ResourceType&gt; getPendingResources() {
+<b class="fc"><i class="no-highlight">280</i>&nbsp;        return pendingResources;</b>
+<i class="no-highlight">281</i>&nbsp;    }
+<i class="no-highlight">282</i>&nbsp;}
+</div>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+        var codeBlock = document.getElementById('sourceCode');
+
+        if (codeBlock) {
+            hljs.highlightBlock(codeBlock);
+        }
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2021-07-02 11:43</div>
+</div>
+</body>
+</html>

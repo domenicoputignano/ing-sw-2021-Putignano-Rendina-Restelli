@@ -1,0 +1,254 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > ActivateProduction</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+    @import "../../.css/highlight-idea.css";
+  </style>
+  <script type="text/javascript" src="../../.js/highlight.pack.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">it.polimi.ingsw.model</a>
+</div>
+
+<h1>Coverage Summary for Class: ActivateProduction (it.polimi.ingsw.model)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ActivateProduction</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (6/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    96,7%
+  </span>
+  <span class="absValue">
+    (59/61)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package it.polimi.ingsw.model;
+<i class="no-highlight">2</i>&nbsp;
+<i class="no-highlight">3</i>&nbsp;import it.polimi.ingsw.commons.ResourceType;
+<i class="no-highlight">4</i>&nbsp;import it.polimi.ingsw.exceptions.*;
+<i class="no-highlight">5</i>&nbsp;import it.polimi.ingsw.commons.Effect;
+<i class="no-highlight">6</i>&nbsp;import it.polimi.ingsw.utils.messages.clientMessages.*;
+<i class="no-highlight">7</i>&nbsp;import it.polimi.ingsw.utils.messages.serverMessages.Updates.ActivateProductionUpdate;
+<i class="no-highlight">8</i>&nbsp;
+<i class="no-highlight">9</i>&nbsp;import java.util.EnumMap;
+<i class="no-highlight">10</i>&nbsp;import java.util.Map;
+<i class="no-highlight">11</i>&nbsp;import java.util.logging.Level;
+<i class="no-highlight">12</i>&nbsp;import java.util.logging.Logger;
+<i class="no-highlight">13</i>&nbsp;import java.util.stream.Collectors;
+<i class="no-highlight">14</i>&nbsp;
+<i class="no-highlight">15</i>&nbsp;
+<i class="no-highlight">16</i>&nbsp;/**
+<i class="no-highlight">17</i>&nbsp; * This class represents activate production action with all the method necessary to perform it.
+<i class="no-highlight">18</i>&nbsp; */
+<i class="no-highlight">19</i>&nbsp;public class ActivateProduction implements AbstractTurnPhase {
+<b class="fc"><i class="no-highlight">20</i>&nbsp;    private final Logger LOGGER = Logger.getLogger(ActivateProduction.class.getName());</b>
+<i class="no-highlight">21</i>&nbsp;    private ActivateProductionMessage activateProductionMessage;
+<i class="no-highlight">22</i>&nbsp;
+<i class="no-highlight">23</i>&nbsp;    /**
+<i class="no-highlight">24</i>&nbsp;     * Resources that player pays to perform productions.
+<i class="no-highlight">25</i>&nbsp;     */
+<i class="no-highlight">26</i>&nbsp;    private final Map&lt;ResourceType, Integer&gt; inputResources;
+<i class="no-highlight">27</i>&nbsp;
+<i class="no-highlight">28</i>&nbsp;    /**
+<i class="no-highlight">29</i>&nbsp;     * Resources that player gets from productions.
+<i class="no-highlight">30</i>&nbsp;     */
+<i class="no-highlight">31</i>&nbsp;    private final Map&lt;ResourceType, Integer&gt; outputResources;
+<i class="no-highlight">32</i>&nbsp;
+<i class="no-highlight">33</i>&nbsp;    /**
+<i class="no-highlight">34</i>&nbsp;     * Number of faith points gained from productions.
+<i class="no-highlight">35</i>&nbsp;     */
+<b class="fc"><i class="no-highlight">36</i>&nbsp;    private int faith = 0;</b>
+<i class="no-highlight">37</i>&nbsp;
+<i class="no-highlight">38</i>&nbsp;
+<i class="no-highlight">39</i>&nbsp;    /**
+<i class="no-highlight">40</i>&nbsp;     * Constructor sets up properly maps.
+<i class="no-highlight">41</i>&nbsp;     */
+<b class="fc"><i class="no-highlight">42</i>&nbsp;    public ActivateProduction() {</b>
+<b class="fc"><i class="no-highlight">43</i>&nbsp;        inputResources = new EnumMap&lt;&gt;(ResourceType.class);</b>
+<b class="fc"><i class="no-highlight">44</i>&nbsp;        inputResources.put(ResourceType.coin, 0);</b>
+<b class="fc"><i class="no-highlight">45</i>&nbsp;        inputResources.put(ResourceType.servant, 0);</b>
+<b class="fc"><i class="no-highlight">46</i>&nbsp;        inputResources.put(ResourceType.shield, 0);</b>
+<b class="fc"><i class="no-highlight">47</i>&nbsp;        inputResources.put(ResourceType.stone, 0);</b>
+<b class="fc"><i class="no-highlight">48</i>&nbsp;        outputResources = new EnumMap&lt;&gt;(inputResources);</b>
+<i class="no-highlight">49</i>&nbsp;    }
+<i class="no-highlight">50</i>&nbsp;
+<i class="no-highlight">51</i>&nbsp;
+<i class="no-highlight">52</i>&nbsp;    /**
+<i class="no-highlight">53</i>&nbsp;     * Performs an activate production action. In the first place, it checks if the player has enough
+<i class="no-highlight">54</i>&nbsp;     * resources to do the action, then it takes resources from player warehouse and it puts resulting resources
+<i class="no-highlight">55</i>&nbsp;     * in the strongbox.
+<i class="no-highlight">56</i>&nbsp;     * It doesn&#39;t expect any exception like: {@link DepotOutOfBoundsException}, {@link DepotNotFoundException} or {@link StrongboxOutOfBoundException}
+<i class="no-highlight">57</i>&nbsp;     * because the action requires several checks done before retrieving resources from warehouse.
+<i class="no-highlight">58</i>&nbsp;     * @param turn turn in which the action has to be performed.
+<i class="no-highlight">59</i>&nbsp;     * @param activateProductionMessage message containing instruction on how to do the action.
+<i class="no-highlight">60</i>&nbsp;     */
+<i class="no-highlight">61</i>&nbsp;
+<i class="no-highlight">62</i>&nbsp;    public void activateProduction(Turn turn, ActivateProductionMessage activateProductionMessage) throws InvalidActionException, PaymentErrorException, NotEnoughResourcesException, ResourceMismatchException {
+<b class="fc"><i class="no-highlight">63</i>&nbsp;        if(turn.isDoneNormalAction())</b>
+<b class="fc"><i class="no-highlight">64</i>&nbsp;            throw new InvalidActionException();</b>
+<b class="fc"><i class="no-highlight">65</i>&nbsp;        this.activateProductionMessage = activateProductionMessage;</b>
+<b class="fc"><i class="no-highlight">66</i>&nbsp;        calculateResources(turn, activateProductionMessage.getProductions());</b>
+<b class="fc"><i class="no-highlight">67</i>&nbsp;        if(PaymentHandler.checkCostCoherence(activateProductionMessage.getHowToTakeResources(),inputResources)) {</b>
+<b class="fc"><i class="no-highlight">68</i>&nbsp;            if (turn.getPlayer().getPersonalBoard().getWarehouse().checkResources(inputResources)) {</b>
+<b class="fc"><i class="no-highlight">69</i>&nbsp;                Warehouse playerWarehouse = turn.getPlayer().getPersonalBoard().getWarehouse();</b>
+<i class="no-highlight">70</i>&nbsp;                try {
+<b class="fc"><i class="no-highlight">71</i>&nbsp;                    PaymentHandler.performPayment(playerWarehouse, activateProductionMessage.getHowToTakeResources(), turn);</b>
+<b class="fc"><i class="no-highlight">72</i>&nbsp;                    playerWarehouse.addResourcesToStrongbox(outputResources);</b>
+<b class="fc"><i class="no-highlight">73</i>&nbsp;                    turn.getPlayer().getPersonalBoard().moveMarker(turn.getPlayer(),faith);</b>
+<b class="fc"><i class="no-highlight">74</i>&nbsp;                    turn.normalActionDone();</b>
+<b class="fc"><i class="no-highlight">75</i>&nbsp;                    turn.getGame().notifyUpdate(new ActivateProductionUpdate(turn.getPlayer().getUser(), turn.getPlayer().getReducedPersonalBoard(),</b>
+<i class="no-highlight">76</i>&nbsp;                            inputResources, outputResources, faith));
+<i class="no-highlight">77</i>&nbsp;                }
+<b class="nc"><i class="no-highlight">78</i>&nbsp;                catch (DepotOutOfBoundsException | DepotNotFoundException | StrongboxOutOfBoundException e) {</b>
+<b class="nc"><i class="no-highlight">79</i>&nbsp;                    LOGGER.log(Level.SEVERE, &quot;Critical error detected: exception not expected thrown!&quot;);</b>
+<b class="fc"><i class="no-highlight">80</i>&nbsp;                }</b>
+<b class="fc"><i class="no-highlight">81</i>&nbsp;            } else  throw new NotEnoughResourcesException();</b>
+<b class="fc"><i class="no-highlight">82</i>&nbsp;        } else  throw new ResourceMismatchException();</b>
+<i class="no-highlight">83</i>&nbsp;
+<i class="no-highlight">84</i>&nbsp;    }
+<i class="no-highlight">85</i>&nbsp;
+<i class="no-highlight">86</i>&nbsp;
+<i class="no-highlight">87</i>&nbsp;    /**
+<i class="no-highlight">88</i>&nbsp;     * Calculate the cost of all required productions.
+<i class="no-highlight">89</i>&nbsp;     * @param requestedProductions kind of productions required by player.
+<i class="no-highlight">90</i>&nbsp;     */
+<i class="no-highlight">91</i>&nbsp;    private void calculateResources(Turn turn, ActiveProductions requestedProductions) {
+<b class="fc"><i class="no-highlight">92</i>&nbsp;        PersonalBoard personalBoard = turn.getPlayer().getPersonalBoard();</b>
+<i class="no-highlight">93</i>&nbsp;
+<b class="fc"><i class="no-highlight">94</i>&nbsp;        if(requestedProductions.isSlot1()) {</b>
+<b class="fc"><i class="no-highlight">95</i>&nbsp;            personalBoard.peekTopCard(1).getTrade().getInputResources().forEach((key, value) -&gt; inputResources.merge(key,value,Integer::sum));</b>
+<b class="fc"><i class="no-highlight">96</i>&nbsp;            personalBoard.peekTopCard(1).getTrade().getOutputResources().forEach((key, value) -&gt; outputResources.merge(key,value,Integer::sum));</b>
+<b class="fc"><i class="no-highlight">97</i>&nbsp;            faith += personalBoard.peekTopCard(1).getTrade().getOutputFaith();</b>
+<i class="no-highlight">98</i>&nbsp;        }
+<b class="fc"><i class="no-highlight">99</i>&nbsp;        if(requestedProductions.isSlot2()) {</b>
+<b class="fc"><i class="no-highlight">100</i>&nbsp;            personalBoard.peekTopCard(2).getTrade().getInputResources().forEach((key, value) -&gt; inputResources.merge(key,value,Integer::sum));</b>
+<b class="fc"><i class="no-highlight">101</i>&nbsp;            personalBoard.peekTopCard(2).getTrade().getOutputResources().forEach((key, value) -&gt; outputResources.merge(key,value,Integer::sum));</b>
+<b class="fc"><i class="no-highlight">102</i>&nbsp;            faith += personalBoard.peekTopCard(2).getTrade().getOutputFaith();</b>
+<i class="no-highlight">103</i>&nbsp;        }
+<b class="fc"><i class="no-highlight">104</i>&nbsp;        if(requestedProductions.isSlot3()) {</b>
+<b class="fc"><i class="no-highlight">105</i>&nbsp;            personalBoard.peekTopCard(3).getTrade().getInputResources().forEach((key, value) -&gt; inputResources.merge(key,value,Integer::sum));</b>
+<b class="fc"><i class="no-highlight">106</i>&nbsp;            personalBoard.peekTopCard(3).getTrade().getOutputResources().forEach((key, value) -&gt; outputResources.merge(key,value,Integer::sum));</b>
+<b class="fc"><i class="no-highlight">107</i>&nbsp;            faith += personalBoard.peekTopCard(3).getTrade().getOutputFaith();</b>
+<i class="no-highlight">108</i>&nbsp;        }
+<b class="fc"><i class="no-highlight">109</i>&nbsp;        if(requestedProductions.isBasic()) {</b>
+<b class="fc"><i class="no-highlight">110</i>&nbsp;            inputResources.put(activateProductionMessage.getInput1(), inputResources.get(activateProductionMessage.getInput1())+1);</b>
+<b class="fc"><i class="no-highlight">111</i>&nbsp;            inputResources.put(activateProductionMessage.getInput2(), inputResources.get(activateProductionMessage.getInput2())+1);</b>
+<b class="fc"><i class="no-highlight">112</i>&nbsp;            outputResources.put(activateProductionMessage.getOutput(), outputResources.get(activateProductionMessage.getOutput())+1);</b>
+<i class="no-highlight">113</i>&nbsp;        }
+<b class="pc"><i class="no-highlight">114</i>&nbsp;        if(requestedProductions.isExtraSlot1()|| requestedProductions.isExtraSlot2())</b>
+<b class="fc"><i class="no-highlight">115</i>&nbsp;            performExtraProductionEffect(turn,requestedProductions);</b>
+<i class="no-highlight">116</i>&nbsp;    }
+<i class="no-highlight">117</i>&nbsp;
+<i class="no-highlight">118</i>&nbsp;
+<i class="no-highlight">119</i>&nbsp;    /**
+<i class="no-highlight">120</i>&nbsp;     * Adds to input and output resources occurrences of resources coming from an extra production effect
+<i class="no-highlight">121</i>&nbsp;     */
+<i class="no-highlight">122</i>&nbsp;    private void performExtraProductionEffect(Turn turn, ActiveProductions requestedProductions) {
+<b class="pc"><i class="no-highlight">123</i>&nbsp;        if(requestedProductions.isExtraSlot1()) {</b>
+<b class="pc"><i class="no-highlight">124</i>&nbsp;            ResourceType extraType1 = turn.getPlayer().getActiveEffects().stream().filter(x -&gt; x.getEffect() == Effect.EXTRAPRODUCTION).collect(Collectors.toList()).</b>
+<b class="fc"><i class="no-highlight">125</i>&nbsp;                    get(0).getType();</b>
+<b class="fc"><i class="no-highlight">126</i>&nbsp;            ResourceType extraOutput1 = activateProductionMessage.getOutputExtra1();</b>
+<b class="fc"><i class="no-highlight">127</i>&nbsp;            inputResources.put(extraType1, inputResources.get(extraType1)+1);</b>
+<b class="fc"><i class="no-highlight">128</i>&nbsp;            outputResources.put(extraOutput1, outputResources.get(extraOutput1)+1);</b>
+<b class="fc"><i class="no-highlight">129</i>&nbsp;            faith++;</b>
+<i class="no-highlight">130</i>&nbsp;        }
+<b class="pc"><i class="no-highlight">131</i>&nbsp;        if(requestedProductions.isExtraSlot2()) {</b>
+<b class="pc"><i class="no-highlight">132</i>&nbsp;            ResourceType extraType2 = turn.getPlayer().getActiveEffects().stream().filter(x -&gt; x.getEffect() == Effect.EXTRAPRODUCTION).collect(Collectors.toList()).</b>
+<b class="fc"><i class="no-highlight">133</i>&nbsp;                    get(1).getType();</b>
+<b class="fc"><i class="no-highlight">134</i>&nbsp;            ResourceType extraOutput2 = activateProductionMessage.getOutputExtra2();</b>
+<b class="fc"><i class="no-highlight">135</i>&nbsp;            inputResources.put(extraType2, inputResources.get(extraType2)+1);</b>
+<b class="fc"><i class="no-highlight">136</i>&nbsp;            outputResources.put(extraOutput2, outputResources.get(extraOutput2)+1);</b>
+<b class="fc"><i class="no-highlight">137</i>&nbsp;            faith++;</b>
+<i class="no-highlight">138</i>&nbsp;        }
+<i class="no-highlight">139</i>&nbsp;    }
+<i class="no-highlight">140</i>&nbsp;
+<i class="no-highlight">141</i>&nbsp;
+<i class="no-highlight">142</i>&nbsp;    public Map&lt;ResourceType, Integer&gt; getInputResources() {
+<b class="fc"><i class="no-highlight">143</i>&nbsp;        return inputResources;</b>
+<i class="no-highlight">144</i>&nbsp;    }
+<i class="no-highlight">145</i>&nbsp;
+<i class="no-highlight">146</i>&nbsp;    public Map&lt;ResourceType, Integer&gt; getOutputResources() {
+<b class="fc"><i class="no-highlight">147</i>&nbsp;        return outputResources;</b>
+<i class="no-highlight">148</i>&nbsp;    }
+<i class="no-highlight">149</i>&nbsp;}
+</div>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+        var codeBlock = document.getElementById('sourceCode');
+
+        if (codeBlock) {
+            hljs.highlightBlock(codeBlock);
+        }
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2021-07-02 11:43</div>
+</div>
+</body>
+</html>

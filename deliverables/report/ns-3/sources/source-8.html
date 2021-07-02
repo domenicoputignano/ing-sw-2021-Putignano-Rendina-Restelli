@@ -1,0 +1,95 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > GameEvent</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+    @import "../../.css/highlight-idea.css";
+  </style>
+  <script type="text/javascript" src="../../.js/highlight.pack.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">it.polimi.ingsw.model.gameEvents</a>
+</div>
+
+<h1>Coverage Summary for Class: GameEvent (it.polimi.ingsw.model.gameEvents)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">GameEvent</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package it.polimi.ingsw.model.gameEvents;
+<i class="no-highlight">2</i>&nbsp;
+<i class="no-highlight">3</i>&nbsp;import it.polimi.ingsw.model.Game;
+<i class="no-highlight">4</i>&nbsp;
+<i class="no-highlight">5</i>&nbsp;import java.io.Serializable;
+<i class="no-highlight">6</i>&nbsp;
+<i class="no-highlight">7</i>&nbsp;/**
+<i class="no-highlight">8</i>&nbsp; * This interface is implements by al the possible events which can occur during the game.
+<i class="no-highlight">9</i>&nbsp; * Parts of the model notifies the central class {@link Game} when an event occurs and it
+<i class="no-highlight">10</i>&nbsp; * handles it by calling the method on these classes.
+<i class="no-highlight">11</i>&nbsp; * It implements {@link Serializable} interface in order to be sent through the network.
+<i class="no-highlight">12</i>&nbsp; */
+<i class="no-highlight">13</i>&nbsp;public interface GameEvent extends Serializable {
+<i class="no-highlight">14</i>&nbsp;
+<i class="no-highlight">15</i>&nbsp;    /**
+<i class="no-highlight">16</i>&nbsp;     * The method which is called by {@link Game} class in order to handle the event.
+<i class="no-highlight">17</i>&nbsp;     * Each event overrides it.
+<i class="no-highlight">18</i>&nbsp;     * @param game the game instance.
+<i class="no-highlight">19</i>&nbsp;     */
+<i class="no-highlight">20</i>&nbsp;    void handleEvent(Game game);
+<i class="no-highlight">21</i>&nbsp;
+<i class="no-highlight">22</i>&nbsp;    /**
+<i class="no-highlight">23</i>&nbsp;     * @return the event trigger as a string.
+<i class="no-highlight">24</i>&nbsp;     */
+<i class="no-highlight">25</i>&nbsp;    String eventTrigger();
+<i class="no-highlight">26</i>&nbsp;}
+</div>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+        var codeBlock = document.getElementById('sourceCode');
+
+        if (codeBlock) {
+            hljs.highlightBlock(codeBlock);
+        }
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2021-07-02 11:43</div>
+</div>
+</body>
+</html>

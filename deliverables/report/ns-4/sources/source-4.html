@@ -1,0 +1,132 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > RedMarble</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+    @import "../../.css/highlight-idea.css";
+  </style>
+  <script type="text/javascript" src="../../.js/highlight.pack.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">it.polimi.ingsw.model.marketTray</a>
+</div>
+
+<h1>Coverage Summary for Class: RedMarble (it.polimi.ingsw.model.marketTray)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">RedMarble</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/3)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package it.polimi.ingsw.model.marketTray;
+<i class="no-highlight">2</i>&nbsp;
+<i class="no-highlight">3</i>&nbsp;import it.polimi.ingsw.commons.ColorMarble;
+<i class="no-highlight">4</i>&nbsp;import it.polimi.ingsw.exceptions.NoSuchResourceTypeException;
+<i class="no-highlight">5</i>&nbsp;import it.polimi.ingsw.commons.ResourceType;
+<i class="no-highlight">6</i>&nbsp;
+<i class="no-highlight">7</i>&nbsp;/**
+<i class="no-highlight">8</i>&nbsp; * This class inherit from abstract class Marble because it&#39;s present in the market board.
+<i class="no-highlight">9</i>&nbsp; * It&#39;s characterized by red color and it hasn&#39;t any resource associated but it brings with it one faith point.
+<i class="no-highlight">10</i>&nbsp; */
+<i class="no-highlight">11</i>&nbsp;public class RedMarble extends Marble {
+<i class="no-highlight">12</i>&nbsp;
+<b class="fc"><i class="no-highlight">13</i>&nbsp;    public RedMarble() {</b>
+<b class="fc"><i class="no-highlight">14</i>&nbsp;        this.colorMarble = ColorMarble.RED;</b>
+<i class="no-highlight">15</i>&nbsp;    }
+<i class="no-highlight">16</i>&nbsp;
+<i class="no-highlight">17</i>&nbsp;    /**
+<i class="no-highlight">18</i>&nbsp;     * Implements the effect of this marble over player warehouse.
+<i class="no-highlight">19</i>&nbsp;     * @throws NoSuchResourceTypeException because there&#39;s no standard resource associated
+<i class="no-highlight">20</i>&nbsp;     */
+<i class="no-highlight">21</i>&nbsp;    @Override
+<i class="no-highlight">22</i>&nbsp;    public ResourceType addResources() throws NoSuchResourceTypeException {
+<b class="fc"><i class="no-highlight">23</i>&nbsp;        return super.addResources();</b>
+<i class="no-highlight">24</i>&nbsp;    }
+<i class="no-highlight">25</i>&nbsp;
+<i class="no-highlight">26</i>&nbsp;
+<i class="no-highlight">27</i>&nbsp;}
+</div>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+        var codeBlock = document.getElementById('sourceCode');
+
+        if (codeBlock) {
+            hljs.highlightBlock(codeBlock);
+        }
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2021-07-02 11:43</div>
+</div>
+</body>
+</html>

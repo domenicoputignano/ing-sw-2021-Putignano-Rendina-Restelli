@@ -1,0 +1,261 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > PaymentHandler</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+    @import "../../.css/highlight-idea.css";
+  </style>
+  <script type="text/javascript" src="../../.js/highlight.pack.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">it.polimi.ingsw.model</a>
+</div>
+
+<h1>Coverage Summary for Class: PaymentHandler (it.polimi.ingsw.model)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">PaymentHandler</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    90,9%
+  </span>
+  <span class="absValue">
+    (10/11)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    88,4%
+  </span>
+  <span class="absValue">
+    (38/43)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package it.polimi.ingsw.model;
+<i class="no-highlight">2</i>&nbsp;
+<i class="no-highlight">3</i>&nbsp;import it.polimi.ingsw.commons.ResourceType;
+<i class="no-highlight">4</i>&nbsp;import it.polimi.ingsw.exceptions.DepotNotFoundException;
+<i class="no-highlight">5</i>&nbsp;import it.polimi.ingsw.exceptions.DepotOutOfBoundsException;
+<i class="no-highlight">6</i>&nbsp;import it.polimi.ingsw.exceptions.PaymentErrorException;
+<i class="no-highlight">7</i>&nbsp;import it.polimi.ingsw.exceptions.StrongboxOutOfBoundException;
+<i class="no-highlight">8</i>&nbsp;import it.polimi.ingsw.utils.ResourceSource;
+<i class="no-highlight">9</i>&nbsp;
+<i class="no-highlight">10</i>&nbsp;import java.util.EnumMap;
+<i class="no-highlight">11</i>&nbsp;import java.util.Map;
+<i class="no-highlight">12</i>&nbsp;
+<i class="no-highlight">13</i>&nbsp;/**
+<i class="no-highlight">14</i>&nbsp; * This is a final class whose methods are used when a player has to pay something like a development card or a set of productions.
+<i class="no-highlight">15</i>&nbsp; */
+<b class="nc"><i class="no-highlight">16</i>&nbsp;public final class PaymentHandler {</b>
+<i class="no-highlight">17</i>&nbsp;
+<i class="no-highlight">18</i>&nbsp;    /**
+<i class="no-highlight">19</i>&nbsp;     * Main method of the class. Starting from instructions sent by player, it checks whether they are compatible with
+<i class="no-highlight">20</i>&nbsp;     * player&#39;s warehouse. If all checks are passed, the payment is performed as required.
+<i class="no-highlight">21</i>&nbsp;     * @param warehouse player warehouse from which resources have to be taken.
+<i class="no-highlight">22</i>&nbsp;     * @param howToTakeResources instructions sent by client side.
+<i class="no-highlight">23</i>&nbsp;     * @param turn turn in which the player is trying to do the payment.
+<i class="no-highlight">24</i>&nbsp;     * @throws PaymentErrorException if at least one check fails.
+<i class="no-highlight">25</i>&nbsp;     */
+<i class="no-highlight">26</i>&nbsp;    public static void performPayment(Warehouse warehouse, Map&lt;ResourceSource, EnumMap&lt;ResourceType, Integer&gt;&gt; howToTakeResources, Turn turn) throws DepotOutOfBoundsException, DepotNotFoundException, StrongboxOutOfBoundException, PaymentErrorException {
+<b class="fc"><i class="no-highlight">27</i>&nbsp;        EnumMap&lt;ResourceType, Integer&gt; toTakeFromNormalDepot = howToTakeResources.get(ResourceSource.DEPOT).clone();</b>
+<b class="fc"><i class="no-highlight">28</i>&nbsp;        EnumMap&lt;ResourceType, Integer&gt; toTakeFromStrongBox = howToTakeResources.get(ResourceSource.STRONGBOX).clone();</b>
+<b class="fc"><i class="no-highlight">29</i>&nbsp;        EnumMap&lt;ResourceType, Integer&gt; toTakeFromExtraDepot = howToTakeResources.get(ResourceSource.EXTRA).clone();</b>
+<i class="no-highlight">30</i>&nbsp;
+<b class="fc"><i class="no-highlight">31</i>&nbsp;        boolean normalDepotsCheck = checkResourcesFromNormalDepots(warehouse,toTakeFromNormalDepot);</b>
+<b class="fc"><i class="no-highlight">32</i>&nbsp;        boolean extraDepotsCheck = checkResourcesFromExtraDepots(warehouse,toTakeFromExtraDepot);</b>
+<b class="fc"><i class="no-highlight">33</i>&nbsp;        boolean strongboxCheck = checkResourcesFromStrongBox(warehouse,toTakeFromStrongBox);</b>
+<b class="pc"><i class="no-highlight">34</i>&nbsp;        if(normalDepotsCheck &amp;&amp; extraDepotsCheck &amp;&amp; strongboxCheck) {</b>
+<b class="fc"><i class="no-highlight">35</i>&nbsp;                takeResourcesFromNormalDepots(warehouse,toTakeFromNormalDepot);</b>
+<b class="fc"><i class="no-highlight">36</i>&nbsp;                takeResourcesFromExtraDepots(warehouse, toTakeFromExtraDepot);</b>
+<b class="fc"><i class="no-highlight">37</i>&nbsp;                takeResourcesFromStrongbox(warehouse,toTakeFromStrongBox);</b>
+<i class="no-highlight">38</i>&nbsp;        } else {
+<b class="fc"><i class="no-highlight">39</i>&nbsp;            throw new PaymentErrorException();</b>
+<i class="no-highlight">40</i>&nbsp;        }
+<i class="no-highlight">41</i>&nbsp;    }
+<i class="no-highlight">42</i>&nbsp;
+<i class="no-highlight">43</i>&nbsp;
+<i class="no-highlight">44</i>&nbsp;    /**
+<i class="no-highlight">45</i>&nbsp;     * This method ensures that for each resource type, there is a normal depot with the required occurrences.
+<i class="no-highlight">46</i>&nbsp;     * @param warehouse warehouse involved into the check.
+<i class="no-highlight">47</i>&nbsp;     * @param resources map that specifies for each resource type how many occurrences are required.
+<i class="no-highlight">48</i>&nbsp;     * @return the result of the check
+<i class="no-highlight">49</i>&nbsp;     * @see Warehouse
+<i class="no-highlight">50</i>&nbsp;     */
+<i class="no-highlight">51</i>&nbsp;    private static boolean checkResourcesFromNormalDepots(Warehouse warehouse, Map&lt;ResourceType, Integer&gt; resources) {
+<b class="fc"><i class="no-highlight">52</i>&nbsp;        for(ResourceType resourceType : resources.keySet()) {</b>
+<b class="pc"><i class="no-highlight">53</i>&nbsp;            if(!warehouse.checkResourceFromNormalDepot(resourceType,resources.get(resourceType))) return false;</b>
+<b class="fc"><i class="no-highlight">54</i>&nbsp;        }</b>
+<b class="fc"><i class="no-highlight">55</i>&nbsp;        return true;</b>
+<i class="no-highlight">56</i>&nbsp;    }
+<i class="no-highlight">57</i>&nbsp;
+<i class="no-highlight">58</i>&nbsp;    /**
+<i class="no-highlight">59</i>&nbsp;     * This method ensures that for each resource type the strongbox has a number of occurrences
+<i class="no-highlight">60</i>&nbsp;     * type compatible with what is required.
+<i class="no-highlight">61</i>&nbsp;     * @param warehouse warehouse involved into the check.
+<i class="no-highlight">62</i>&nbsp;     * @param resources map that specifies for each resource type how many occurrences are required.
+<i class="no-highlight">63</i>&nbsp;     * @return the result of the check.
+<i class="no-highlight">64</i>&nbsp;     * @see Warehouse
+<i class="no-highlight">65</i>&nbsp;     */
+<i class="no-highlight">66</i>&nbsp;    private static boolean checkResourcesFromStrongBox(Warehouse warehouse, Map&lt;ResourceType, Integer&gt; resources) {
+<b class="fc"><i class="no-highlight">67</i>&nbsp;        for(ResourceType resourceType : resources.keySet()) {</b>
+<b class="fc"><i class="no-highlight">68</i>&nbsp;            if(!warehouse.checkResourceFromStrongBox(resourceType, resources.get(resourceType))) return false;</b>
+<b class="fc"><i class="no-highlight">69</i>&nbsp;        }</b>
+<b class="fc"><i class="no-highlight">70</i>&nbsp;        return true;</b>
+<i class="no-highlight">71</i>&nbsp;    }
+<i class="no-highlight">72</i>&nbsp;
+<i class="no-highlight">73</i>&nbsp;    /**
+<i class="no-highlight">74</i>&nbsp;     * This method ensures that for each resource type there is an extra depot with the required occurrences.
+<i class="no-highlight">75</i>&nbsp;     * @param warehouse warehouse involved into the check.
+<i class="no-highlight">76</i>&nbsp;     * @param resources map that specifies for each resource type how many occurrences are required.
+<i class="no-highlight">77</i>&nbsp;     * @return the result of the check.
+<i class="no-highlight">78</i>&nbsp;     * @see Warehouse
+<i class="no-highlight">79</i>&nbsp;     */
+<i class="no-highlight">80</i>&nbsp;    private static boolean checkResourcesFromExtraDepots(Warehouse warehouse, Map&lt;ResourceType, Integer&gt; resources) {
+<b class="pc"><i class="no-highlight">81</i>&nbsp;        for(ResourceType resourceType : resources.keySet()) {</b>
+<b class="nc"><i class="no-highlight">82</i>&nbsp;            if(!warehouse.checkResourceFromExtraDepot(resourceType, resources.get(resourceType))) return false;</b>
+<b class="nc"><i class="no-highlight">83</i>&nbsp;        }</b>
+<b class="fc"><i class="no-highlight">84</i>&nbsp;        return true;</b>
+<i class="no-highlight">85</i>&nbsp;    }
+<i class="no-highlight">86</i>&nbsp;
+<i class="no-highlight">87</i>&nbsp;    /**
+<i class="no-highlight">88</i>&nbsp;     * For each resource type picks required occurrences from a normal depot, see {@link Warehouse} for further details.
+<i class="no-highlight">89</i>&nbsp;     * @param warehouse player warehouse from which retrieve resources.
+<i class="no-highlight">90</i>&nbsp;     * @param resources that have to be taken from normal depots.
+<i class="no-highlight">91</i>&nbsp;     */
+<i class="no-highlight">92</i>&nbsp;    private static void takeResourcesFromNormalDepots(Warehouse warehouse, Map&lt;ResourceType, Integer&gt; resources) throws DepotNotFoundException, DepotOutOfBoundsException{
+<b class="fc"><i class="no-highlight">93</i>&nbsp;        for(ResourceType resourceType : resources.keySet()) {</b>
+<b class="fc"><i class="no-highlight">94</i>&nbsp;            warehouse.takeResourceFromNormalDepot(resourceType,resources.get(resourceType));</b>
+<b class="fc"><i class="no-highlight">95</i>&nbsp;        }</b>
+<i class="no-highlight">96</i>&nbsp;    }
+<i class="no-highlight">97</i>&nbsp;
+<i class="no-highlight">98</i>&nbsp;    /**
+<i class="no-highlight">99</i>&nbsp;     * Takes resources from extra depots, see {@link Warehouse} for further details.
+<i class="no-highlight">100</i>&nbsp;     * @param warehouse player warehouse from which retrieve resources.
+<i class="no-highlight">101</i>&nbsp;     * @param resources that have to be taken from the extra depots.
+<i class="no-highlight">102</i>&nbsp;     */
+<i class="no-highlight">103</i>&nbsp;    private static void takeResourcesFromExtraDepots(Warehouse warehouse, Map&lt;ResourceType, Integer&gt; resources) throws DepotOutOfBoundsException, DepotNotFoundException {
+<b class="pc"><i class="no-highlight">104</i>&nbsp;        for(ResourceType resourceType : resources.keySet()) {</b>
+<b class="nc"><i class="no-highlight">105</i>&nbsp;            warehouse.takeResourceFromExtraDepot(resourceType, resources.get(resourceType));</b>
+<b class="nc"><i class="no-highlight">106</i>&nbsp;        }</b>
+<i class="no-highlight">107</i>&nbsp;    }
+<i class="no-highlight">108</i>&nbsp;
+<i class="no-highlight">109</i>&nbsp;    /**
+<i class="no-highlight">110</i>&nbsp;     * Takes resources from the strongbox
+<i class="no-highlight">111</i>&nbsp;     * @param warehouse player warehouse from which retrieve resources.
+<i class="no-highlight">112</i>&nbsp;     * @param resources that have to be taken from the strongbox.
+<i class="no-highlight">113</i>&nbsp;     */
+<i class="no-highlight">114</i>&nbsp;    private static void takeResourcesFromStrongbox(Warehouse warehouse, Map&lt;ResourceType, Integer&gt; resources) throws StrongboxOutOfBoundException {
+<b class="fc"><i class="no-highlight">115</i>&nbsp;        warehouse.takeResourcesFromStrongbox(resources);</b>
+<i class="no-highlight">116</i>&nbsp;    }
+<i class="no-highlight">117</i>&nbsp;
+<i class="no-highlight">118</i>&nbsp;    /**
+<i class="no-highlight">119</i>&nbsp;     * Boolean method that checks if there is matching between instructions given client side and the actual cost an action.
+<i class="no-highlight">120</i>&nbsp;     */
+<i class="no-highlight">121</i>&nbsp;    public static boolean checkCostCoherence(Map&lt;ResourceSource,EnumMap&lt;ResourceType,Integer&gt;&gt; howToTakeResources, Map&lt;ResourceType,Integer&gt; expectedCost)
+<i class="no-highlight">122</i>&nbsp;    {
+<b class="fc"><i class="no-highlight">123</i>&nbsp;        return convertResource(howToTakeResources).equals(expectedCost);</b>
+<i class="no-highlight">124</i>&nbsp;    }
+<i class="no-highlight">125</i>&nbsp;
+<i class="no-highlight">126</i>&nbsp;
+<i class="no-highlight">127</i>&nbsp;    /**
+<i class="no-highlight">128</i>&nbsp;     * Boolean method that ensures that instructions given client side are correct.
+<i class="no-highlight">129</i>&nbsp;     * @param howToTakeResources map of maps that establish from where and how much resources the player wants to take from
+<i class="no-highlight">130</i>&nbsp;     *                           his normal depots, strongbox and extra depots.
+<i class="no-highlight">131</i>&nbsp;     * @return the result of the check
+<i class="no-highlight">132</i>&nbsp;     */
+<i class="no-highlight">133</i>&nbsp;    public static boolean areValidInstructions(Map&lt;ResourceSource, EnumMap&lt;ResourceType, Integer&gt;&gt; howToTakeResources) {
+<b class="fc"><i class="no-highlight">134</i>&nbsp;        if(howToTakeResources.size() != 3 || howToTakeResources.keySet().stream().anyMatch(x -&gt; howToTakeResources.get(x) == null) ||</b>
+<b class="pc"><i class="no-highlight">135</i>&nbsp;                howToTakeResources.keySet().stream().anyMatch(x -&gt; howToTakeResources.get(x).keySet().stream().anyMatch(y -&gt; howToTakeResources.get(x).get(y) &lt; 0)))</b>
+<b class="fc"><i class="no-highlight">136</i>&nbsp;            return false;</b>
+<b class="fc"><i class="no-highlight">137</i>&nbsp;        return true;</b>
+<i class="no-highlight">138</i>&nbsp;    }
+<i class="no-highlight">139</i>&nbsp;
+<i class="no-highlight">140</i>&nbsp;    /**
+<i class="no-highlight">141</i>&nbsp;     * Converts the input in a map that for each type of resource specifies the number of occurrences needed to perform an action.
+<i class="no-highlight">142</i>&nbsp;     * @param howToTakeResources map of maps that establish from where and how much resources the player wants to take from
+<i class="no-highlight">143</i>&nbsp;     *                           his normal depots, strongbox and extra depots.
+<i class="no-highlight">144</i>&nbsp;     * @return resulting map
+<i class="no-highlight">145</i>&nbsp;     */
+<i class="no-highlight">146</i>&nbsp;    private static Map&lt;ResourceType, Integer&gt; convertResource(Map&lt;ResourceSource,EnumMap&lt;ResourceType,Integer&gt;&gt; howToTakeResources) {
+<b class="fc"><i class="no-highlight">147</i>&nbsp;        Map&lt;ResourceType, Integer&gt; resourcesToTake = new EnumMap&lt;&gt;(ResourceType.class);</b>
+<b class="fc"><i class="no-highlight">148</i>&nbsp;        resourcesToTake.put(ResourceType.coin,0);</b>
+<b class="fc"><i class="no-highlight">149</i>&nbsp;        resourcesToTake.put(ResourceType.servant,0);</b>
+<b class="fc"><i class="no-highlight">150</i>&nbsp;        resourcesToTake.put(ResourceType.shield,0);</b>
+<b class="fc"><i class="no-highlight">151</i>&nbsp;        resourcesToTake.put(ResourceType.stone,0);</b>
+<b class="fc"><i class="no-highlight">152</i>&nbsp;        howToTakeResources.keySet().stream().forEach(x -&gt; howToTakeResources.get(x).forEach((key, value) -&gt; resourcesToTake.merge(key, value, Integer::sum)));</b>
+<b class="fc"><i class="no-highlight">153</i>&nbsp;        return resourcesToTake;</b>
+<i class="no-highlight">154</i>&nbsp;    }
+<i class="no-highlight">155</i>&nbsp;}
+<i class="no-highlight">156</i>&nbsp;
+</div>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+        var codeBlock = document.getElementById('sourceCode');
+
+        if (codeBlock) {
+            hljs.highlightBlock(codeBlock);
+        }
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2021-07-02 11:43</div>
+</div>
+</body>
+</html>

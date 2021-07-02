@@ -1,0 +1,181 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > BuyDevCard</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+    @import "../../.css/highlight-idea.css";
+  </style>
+  <script type="text/javascript" src="../../.js/highlight.pack.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">it.polimi.ingsw.model</a>
+</div>
+
+<h1>Coverage Summary for Class: BuyDevCard (it.polimi.ingsw.model)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">BuyDevCard</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    79,3%
+  </span>
+  <span class="absValue">
+    (23/29)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package it.polimi.ingsw.model;
+<i class="no-highlight">2</i>&nbsp;
+<i class="no-highlight">3</i>&nbsp;import it.polimi.ingsw.commons.*;
+<i class="no-highlight">4</i>&nbsp;import it.polimi.ingsw.exceptions.*;
+<i class="no-highlight">5</i>&nbsp;import it.polimi.ingsw.utils.messages.clientMessages.*;
+<i class="no-highlight">6</i>&nbsp;import it.polimi.ingsw.utils.messages.serverMessages.Updates.BuyDevCardPerformedUpdate;
+<i class="no-highlight">7</i>&nbsp;
+<i class="no-highlight">8</i>&nbsp;import java.util.*;
+<i class="no-highlight">9</i>&nbsp;import java.util.logging.Level;
+<i class="no-highlight">10</i>&nbsp;import java.util.logging.Logger;
+<i class="no-highlight">11</i>&nbsp;import java.util.stream.Collectors;
+<i class="no-highlight">12</i>&nbsp;
+<b class="fc"><i class="no-highlight">13</i>&nbsp;public class BuyDevCard implements AbstractTurnPhase {</b>
+<b class="fc"><i class="no-highlight">14</i>&nbsp;    private final Logger LOGGER = Logger.getLogger(BuyDevCard.class.getName());</b>
+<i class="no-highlight">15</i>&nbsp;
+<i class="no-highlight">16</i>&nbsp;    /**
+<i class="no-highlight">17</i>&nbsp;     * This map represents the cost a development card
+<i class="no-highlight">18</i>&nbsp;     */
+<b class="fc"><i class="no-highlight">19</i>&nbsp;    private Map&lt;ResourceType, Integer&gt; actualCost = new EnumMap&lt;&gt;(ResourceType.class);</b>
+<i class="no-highlight">20</i>&nbsp;
+<i class="no-highlight">21</i>&nbsp;
+<i class="no-highlight">22</i>&nbsp;    /**
+<i class="no-highlight">23</i>&nbsp;     * Main method of the class used to perform the action in the game. It retrieves chosen card from deck, calculate
+<i class="no-highlight">24</i>&nbsp;     * resources required to buy it and calls methods from PaymentHandler class to make consistency check and perform
+<i class="no-highlight">25</i>&nbsp;     * payment.
+<i class="no-highlight">26</i>&nbsp;     *
+<i class="no-highlight">27</i>&nbsp;     * @see PaymentHandler for further details
+<i class="no-highlight">28</i>&nbsp;     *
+<i class="no-highlight">29</i>&nbsp;     * @throws InvalidActionException if the normal action has already been done for this turn.
+<i class="no-highlight">30</i>&nbsp;     * @throws PaymentErrorException if the payment of the resources needed by the card failed.
+<i class="no-highlight">31</i>&nbsp;     * @throws ResourceMismatchException if the player did a mistake while indicating where to take resources to buy the card.
+<i class="no-highlight">32</i>&nbsp;     * @throws NotEnoughResourcesException if the player doesn&#39;t have enough resources to buy the card.
+<i class="no-highlight">33</i>&nbsp;     */
+<i class="no-highlight">34</i>&nbsp;    public void buyDevCard(Turn turn, BuyDevCardMessage message) throws InvalidActionException, PaymentErrorException, ResourceMismatchException, NotEnoughResourcesException {
+<b class="pc"><i class="no-highlight">35</i>&nbsp;        if(turn.isDoneNormalAction())</b>
+<b class="nc"><i class="no-highlight">36</i>&nbsp;            throw new InvalidActionException();</b>
+<b class="fc"><i class="no-highlight">37</i>&nbsp;        Deck requiredDeck = turn.getGame().searchDeck(message.getType());</b>
+<b class="pc"><i class="no-highlight">38</i>&nbsp;        if(requiredDeck != null) {</b>
+<b class="fc"><i class="no-highlight">39</i>&nbsp;            actualCost = new EnumMap&lt;&gt;(requiredDeck.getTop().getCost());</b>
+<b class="pc"><i class="no-highlight">40</i>&nbsp;            List&lt;LeaderEffect&gt; sales = turn.getPlayer().getActiveEffects().stream().filter(x -&gt; x.getEffect() == Effect.SALES).collect(Collectors.toList());</b>
+<b class="pc"><i class="no-highlight">41</i>&nbsp;            for (LeaderEffect effect : sales) {</b>
+<b class="nc"><i class="no-highlight">42</i>&nbsp;                if (actualCost.get(effect.getType()) &gt; 0) {</b>
+<b class="nc"><i class="no-highlight">43</i>&nbsp;                    actualCost.put(effect.getType(), actualCost.get(effect.getType()) - 1);</b>
+<i class="no-highlight">44</i>&nbsp;                }
+<b class="nc"><i class="no-highlight">45</i>&nbsp;            }</b>
+<b class="fc"><i class="no-highlight">46</i>&nbsp;            if (turn.getPlayer().getPersonalBoard().getWarehouse().checkResources(actualCost)) {</b>
+<b class="pc"><i class="no-highlight">47</i>&nbsp;                if(PaymentHandler.checkCostCoherence(message.getHowToTakeResources(),actualCost)) {</b>
+<b class="fc"><i class="no-highlight">48</i>&nbsp;                    Warehouse playerWarehouse = turn.getPlayer().getPersonalBoard().getWarehouse();</b>
+<i class="no-highlight">49</i>&nbsp;                    try {
+<b class="fc"><i class="no-highlight">50</i>&nbsp;                        PaymentHandler.performPayment(playerWarehouse, message.getHowToTakeResources(), turn);</b>
+<b class="fc"><i class="no-highlight">51</i>&nbsp;                        DevelopmentCard drawnCard = requiredDeck.draw();</b>
+<b class="fc"><i class="no-highlight">52</i>&nbsp;                        performPurchasingCard(drawnCard, turn.getPlayer().getPersonalBoard(), message.getDestinationSlot());</b>
+<b class="fc"><i class="no-highlight">53</i>&nbsp;                        turn.normalActionDone();</b>
+<b class="fc"><i class="no-highlight">54</i>&nbsp;                        turn.getGame().notifyUpdate(new BuyDevCardPerformedUpdate(turn.getPlayer().getUser(),</b>
+<b class="fc"><i class="no-highlight">55</i>&nbsp;                                turn.getPlayer().getReducedPersonalBoard(),</b>
+<b class="fc"><i class="no-highlight">56</i>&nbsp;                                turn.getGame().getDecks(),drawnCard));</b>
+<b class="nc"><i class="no-highlight">57</i>&nbsp;                    } catch (DepotOutOfBoundsException | DepotNotFoundException | StrongboxOutOfBoundException e) {</b>
+<b class="nc"><i class="no-highlight">58</i>&nbsp;                        LOGGER.log(Level.SEVERE, &quot;Critical error detected: exception not expected thrown! &quot;);</b>
+<b class="fc"><i class="no-highlight">59</i>&nbsp;                    }</b>
+<b class="fc"><i class="no-highlight">60</i>&nbsp;                } else throw new ResourceMismatchException();</b>
+<b class="fc"><i class="no-highlight">61</i>&nbsp;            } else throw new NotEnoughResourcesException();</b>
+<i class="no-highlight">62</i>&nbsp;        }
+<i class="no-highlight">63</i>&nbsp;    }
+<i class="no-highlight">64</i>&nbsp;
+<i class="no-highlight">65</i>&nbsp;
+<i class="no-highlight">66</i>&nbsp;    /**
+<i class="no-highlight">67</i>&nbsp;     * Put the card that has been just bought in the slot according to player indication
+<i class="no-highlight">68</i>&nbsp;     * @param developmentCard card bought by player
+<i class="no-highlight">69</i>&nbsp;     * @param personalBoard game board of player performing this action
+<i class="no-highlight">70</i>&nbsp;     * @param destinationSlot slot that will hold the card
+<i class="no-highlight">71</i>&nbsp;     */
+<i class="no-highlight">72</i>&nbsp;    private void performPurchasingCard(DevelopmentCard developmentCard, PersonalBoard personalBoard, int destinationSlot) {
+<b class="fc"><i class="no-highlight">73</i>&nbsp;        personalBoard.putCardOnTop(developmentCard,destinationSlot);</b>
+<i class="no-highlight">74</i>&nbsp;    }
+<i class="no-highlight">75</i>&nbsp;
+<i class="no-highlight">76</i>&nbsp;}
+</div>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+        var codeBlock = document.getElementById('sourceCode');
+
+        if (codeBlock) {
+            hljs.highlightBlock(codeBlock);
+        }
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2021-07-02 11:43</div>
+</div>
+</body>
+</html>
