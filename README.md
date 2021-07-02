@@ -64,10 +64,10 @@ To run the GUI, type:
 java -jar MaestriDelRinascimento.jar gui
 ```
 
-![gui_screen](deliverables/screenshots/gui_screen.PNG) 
+![gui_screen](deliverables/screenshots/gui_screen.png) 
 
 ### CLI :space_invader:
-First of all, if you are on Windows, run this command to allow the game to use ANSI codes to show its beautiful (and colorful) CLI interface:
+First of all, if you are on Windows, run this command to allow the game to use ANSI codes to show its colorful CLI interface:
 ```
 REG ADD HKCU\CONSOLE /f /v VirtualTerminalLevel /t REG_DWORD /d 1
 ```
@@ -99,7 +99,12 @@ To play with CLI, type:
 java -jar MaestriDelRinascimento.jar local cli
 ```
 ## Test coverage details
-![test_coverage](deliverables/screenshots/testcoverage-27-06.PNG)
+Unit tests have been performed mainly on Model and Controller components, since Client and Network would 
+have been difficult to test through the technologies used. Testing tools mainly used in this project are 
+[JUnit](https://junit.org/junit5/) and [Mockito](https://site.mockito.org/). <br>
+The coverage results achieved for Model and Controller packages are shown below.
+
+![test_coverage](deliverables/screenshots/testcoverage_final.PNG)
 #### To run the tests, you can run this command:
 ```
 mvn test
