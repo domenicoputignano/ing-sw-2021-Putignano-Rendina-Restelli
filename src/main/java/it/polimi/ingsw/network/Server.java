@@ -88,7 +88,7 @@ public class Server {
      * waits until number is reached, looking for clients that wants to play same kind of game.
      * When required number is reached, the match starts and Client Status are removed from those who are waiting.
      * Server supports multiple matches, so this process is repeated each time a client connects.
-     * @param clientStatus represents remote host that has just connected and selected a multiplayer mode.
+     * @param clientStatus represents client that has just connected and selected a multiplayer mode.
      */
     public synchronized void lobby(ClientStatus clientStatus) {
         Set<ClientStatus> suitableConnections = getSuitableConnections(clientStatus.getNumOfPlayers());
@@ -101,7 +101,7 @@ public class Server {
 
     /**
      * Boolean method to detect if a player is already playing a game when it tries to reconnect.
-     * @param nickname nickname chosen by remote host.
+     * @param nickname nickname chosen by client.
      */
     public synchronized boolean isPlayerWithSameNicknamePlaying(String nickname) {
         if(accounts.containsKey(nickname)&&accounts.get(nickname).isActive()) {
@@ -113,7 +113,7 @@ public class Server {
 
     /**
      * Boolean method to detect if a player was playing a game and has disconnected from it.
-     * @param nickname nickname chosen by remote host.
+     * @param nickname nickname chosen by client.
      */
     public boolean inactivePlayerAlreadyRegistered(String nickname) {
         return accounts.containsKey(nickname) && !accounts.get(nickname).isActive();
@@ -158,7 +158,7 @@ public class Server {
 
     /**
      * Initializes a multiplayer mode game and its controller.
-     * @param clients remote hosts involved in new game.
+     * @param clients connections involved in new game.
      */
     public synchronized void initializeGame(Set<ClientStatus> clients) {
         List<Player> players = new ArrayList<>();
@@ -180,7 +180,7 @@ public class Server {
 
     /**
      * Initializes a solo mode game.
-     * @param client remote host that plays in solo mode.
+     * @param client represents a user that plays in solo mode.
      */
     public synchronized void initializeGame(ClientStatus client) {
         waitingConnections.remove(client);
@@ -196,7 +196,7 @@ public class Server {
     /**
      * This method allows player reconnection. It basically creates a new {@link NetworkRemoteView} to a game instance already created
      * and binds it with the client that is reconnecting.
-     * @param reconnectingClient remote host that wants to join after a disconnection.
+     * @param reconnectingClient client that wants to join after a disconnection.
      */
     public synchronized void resumeGame(ClientStatus reconnectingClient) {
         ClientStatus oldClientStatus = accounts.get(reconnectingClient.getNickname());
@@ -222,7 +222,7 @@ public class Server {
 
     /**
      * Adds a {@link ClientStatus} and its nickname to registered accounts.
-     * @param nickname unique nickname chosen by remote host.
+     * @param nickname unique nickname chosen by client.
      */
     public synchronized void registerClientStatus(String nickname, ClientStatus clientStatus) {
         accounts.put(nickname,clientStatus);
