@@ -228,7 +228,7 @@ public class TakeResourcesController extends Controller{
             case YELLOW: return ResourceLocator.retrieveResourceTypeImage(ResourceType.coin);
             case WHITE: {
                 if(state.getConvertMarbleActiveEffects().size() == 1) return ResourceLocator.retrieveResourceTypeImage(state.getConvertMarbleActiveEffects().get(0));
-                else return "gui/img/marbles/whiteMarble.png"; // TODO aggiungere immagine nessuna conversione possibile
+                else return "gui/img/marbles/whiteMarble.png";
             }
             default: return "gui/img/marbles/whiteMarble.png"; // Resource not found
         }

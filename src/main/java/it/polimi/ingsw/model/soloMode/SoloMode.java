@@ -76,7 +76,6 @@ public class SoloMode extends Game {
 
     @Override
     public void handlePlayerDisconnection(Player disconnectedPlayer) {
-        //TODO sospendere il gioco.
         nextState(GameState.PAUSED);
     }
 

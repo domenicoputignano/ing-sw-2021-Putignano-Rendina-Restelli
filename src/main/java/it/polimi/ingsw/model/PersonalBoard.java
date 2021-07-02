@@ -140,7 +140,6 @@ public class PersonalBoard extends Observable<GameEvent> {
             if(requestedProductions.isSlot2()&&!(slots[1].getNumOfStackedCards()>0)) return false;
                 if(requestedProductions.isSlot3()&&!(slots[2].getNumOfStackedCards()>0)) return false;
                     if(requestedProductions.isExtraSlot1()&& owner.getActiveEffects().stream().noneMatch(x -> x.getEffect() == Effect.EXTRAPRODUCTION)) return false;
-                    //TODO verificare
                         if(requestedProductions.isExtraSlot2()&& !(owner.getActiveEffects().stream().filter(x -> x.getEffect() == Effect.EXTRAPRODUCTION).count() == 2)) return false;
                         return true;
     }

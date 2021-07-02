@@ -89,7 +89,6 @@ public class CliStatesController {
                         System.out.println("Waiting for players that are performing initial choices...");
                         ui.changeCliState(new WaitForTurnCLI(ui.getClient()));
                         ui.getClientState().manageUserInteraction();
-                        //TODO settare il client in attesa del completamento della configurazione
                     }
                 }
             }
@@ -187,7 +186,6 @@ public class CliStatesController {
         if(ui.isReceiverAction(message.getTriggeringUser())){
             if(ui.isCLI()){
                 AbstractClientState previousState = ui.getClientState();
-                //TODO fixare per bene, fixato con instance of (Es. errore durante la resource choice)
                 if(previousState instanceof WaitForTurnCLI){
                     ((WaitForTurnCLI) previousState).shutDownWaiterThread();
                     ui.changeCliState(new InitialResourceChoiceCLI(ui.getClient()));
