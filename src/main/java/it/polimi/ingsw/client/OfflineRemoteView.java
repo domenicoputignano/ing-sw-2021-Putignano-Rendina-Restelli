@@ -46,7 +46,6 @@ public class OfflineRemoteView extends RemoteView {
      */
     @Override
     public void update(ServerMessage message) {
-        LOGGER.log(Level.INFO, "Message received of type "+message.getClass().getName());
         message.handleMessage(client);
     }
 }
