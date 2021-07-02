@@ -91,18 +91,18 @@ public class MultiModeWinnerMessageController extends Controller{
     private void setText(RankMessage message)
     {
         scorePlayer1.setVisible(true);
-        scorePlayer1.setText("1. "+message.getRank().get(0).getKey().getNickname()+"\t\t   Score: " + message.getRank().get(0).getValue());
+        scorePlayer1.setText("1. "+message.getRank().get(0).getKey().getNickname()+"\t" + message.getRank().get(0).getValue());
         if(message.getRank().size() > 1){
             scorePlayer2.setVisible(true);
-            scorePlayer2.setText("2. "+message.getRank().get(1).getKey().getNickname()+"\t\t   Score: " + message.getRank().get(1).getValue());
+            scorePlayer2.setText("2. "+message.getRank().get(1).getKey().getNickname()+"\t" + message.getRank().get(1).getValue());
         }
         if(message.getRank().size() > 2){
             scorePlayer3.setVisible(true);
-            scorePlayer3.setText("3. "+message.getRank().get(2).getKey().getNickname()+"\t\t   Score: " + message.getRank().get(2).getValue());
+            scorePlayer3.setText("3. "+message.getRank().get(2).getKey().getNickname()+"\t" + message.getRank().get(2).getValue());
         }
         if(message.getRank().size() > 3){
             scorePlayer4.setVisible(true);
-            scorePlayer4.setText("4. "+message.getRank().get(3).getKey().getNickname()+"\t\t   Score: " + message.getRank().get(3).getValue());
+            scorePlayer4.setText("4. "+message.getRank().get(3).getKey().getNickname()+"\t" + message.getRank().get(3).getValue());
         }
     }
 
