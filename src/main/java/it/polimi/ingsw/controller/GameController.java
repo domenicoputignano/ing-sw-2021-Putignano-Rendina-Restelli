@@ -140,7 +140,7 @@ public class GameController {
                     LOGGER.log(Level.INFO, "Match is being deleted");
                     remoteView.deleteMatch(usersToBeRemoved);
                 }
-            }, 10000);
+            }, 20000);
         }
     }
 
