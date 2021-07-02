@@ -77,10 +77,10 @@ public class PlayerBoardController extends Controller {
     public ImageView depot1, depot21, depot22, depot31, depot32, depot33;
     /**
      * Attribute used to represent the textField containing the username
-     * of the user relative to the PlayerBoard
+     * of the user relative to the PlayerBoard and of the player in Turn
      */
     @FXML
-    public TextField username;
+    public TextField username,inTurn;
     /**
      * Attributes representing the text identifying that a leader card is active
      */
@@ -115,6 +115,7 @@ public class PlayerBoardController extends Controller {
         setFont(active1,15);
         setFont(active2,15);
         setFont(username,23);
+        setFont(inTurn,23);
         setFont(chooseAction,24);
         setFont(moveAction,24);
         setFont(endTurn,24);
@@ -405,6 +406,8 @@ public class PlayerBoardController extends Controller {
             moveAction.setVisible(false);
             endTurn.setVisible(false);
             otherPlayers.setVisible(false);
+            inTurn.setVisible(true);
+            inTurn.setText("In Turn: "+client.getGame().getCurrPlayer().getNickname());
             BackgroundSize bSize = new BackgroundSize(80, 80, true, true, true, true);
             center.setBackground(new Background(new BackgroundImage(new Image("/gui/img/exit_tab.png"),
                     BackgroundRepeat.NO_REPEAT,
@@ -445,6 +448,8 @@ public class PlayerBoardController extends Controller {
             chooseAction.setVisible(false);
             endTurn.setVisible(false);
             viewDashboard.setVisible(true);
+            inTurn.setVisible(true);
+            inTurn.setText("In Turn: "+client.getGame().getCurrPlayer().getNickname());
         } else {
             endTurn.setVisible(client.getUI().hasDoneNormalAction());
             if(client.getUI().hasDoneNormalAction() && client.getGame().getPlayer(client.getUser()).getNumOfNotActiveLeaderCards()==0)

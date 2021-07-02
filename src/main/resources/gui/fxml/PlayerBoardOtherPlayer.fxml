@@ -128,5 +128,6 @@
       <Button fx:id="closePopup" layoutX="1019.0" layoutY="65.0" mnemonicParsing="false" onAction="#handleCloseViewOthers" prefHeight="81.0" prefWidth="84.0" styleClass="exit" stylesheets="@../css/button.css" />
       <Text fx:id="active1" layoutX="918.0" layoutY="445.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Active" visible="false" />
       <Text fx:id="active2" layoutX="918.0" layoutY="726.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Active" visible="false" />
+      <TextField fx:id="inTurn" alignment="TOP_LEFT" editable="false" focusTraversable="false" layoutX="107.0" layoutY="712.0" mouseTransparent="true" prefHeight="31.0" prefWidth="224.0" styleClass="username" stylesheets="@../css/text.css" visible="false" />
    </children>
 </AnchorPane>

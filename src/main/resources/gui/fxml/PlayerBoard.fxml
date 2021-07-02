@@ -137,6 +137,7 @@
             <Text fx:id="active1" layoutX="826.0" layoutY="285.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Active" visible="false" />
             <Text fx:id="active2" layoutX="826.0" layoutY="563.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Active" visible="false" />
             <ImageView fx:id="tokens" fitHeight="59.0" fitWidth="149.0" layoutX="265.0" layoutY="546.0" pickOnBounds="true" preserveRatio="true" visible="false" />
+            <TextField fx:id="inTurn" alignment="TOP_LEFT" editable="false" focusTraversable="false" layoutX="16.0" layoutY="560.0" mouseTransparent="true" prefHeight="31.0" prefWidth="224.0" styleClass="username" stylesheets="@../css/text.css" visible="false" />
             </children>
         </AnchorPane>
     </center>
