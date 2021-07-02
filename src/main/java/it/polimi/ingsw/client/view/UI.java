@@ -10,6 +10,7 @@ import it.polimi.ingsw.utils.messages.serverMessages.Updates.*;
 /**
  * UI stands for User Interface and it is an abstract class containing methods used by CLI and Gui
  * related to users game experience.
+ * Overloading methods that display different kind of messages received from remote host.
  */
 public abstract class UI {
     /**
@@ -48,9 +49,6 @@ public abstract class UI {
         return client;
     }
 
-    /**
-     * Overloading methods that display different kind of messages received from remote host.
-     */
     public abstract void render(ServerAsksForNickname message);
     public abstract void render(ServerAskForGameMode message);
     public abstract void render(ServerAskForNumOfPlayer message);
