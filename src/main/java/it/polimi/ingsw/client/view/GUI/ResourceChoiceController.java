@@ -402,6 +402,7 @@ public class ResourceChoiceController extends Controller{
         buttonDepot12 = false;
         buttonDepot1.setStyle("-fx-background-size: 75% auto;");
         buttonDepot1pl4.setStyle("-fx-background-size: 100% auto;");
+        if(playerNumber==4) showOkButton1();
     }
     /**
      * method used to select depot2 as the target of the first resource
@@ -413,6 +414,7 @@ public class ResourceChoiceController extends Controller{
         buttonDepot22=false;
         buttonDepot2.setStyle("-fx-background-size: 75% auto;");
         buttonDepot2pl4.setStyle("-fx-background-size: 100% auto;");
+        if(playerNumber==4) showOkButton1();
     }
     /**
      * method used to select depot3 as the target of the first resource
@@ -424,7 +426,7 @@ public class ResourceChoiceController extends Controller{
         buttonDepot32=false;
         buttonDepot3pl4.setStyle("-fx-background-size: 100% auto;");
         buttonDepot3.setStyle("-fx-background-size: 75% auto;");
-
+        if(playerNumber==4) showOkButton1();
     }
     /**
      * method used to select depot1 as the target of the second resource
@@ -436,6 +438,7 @@ public class ResourceChoiceController extends Controller{
         buttonDepot1.setStyle("-fx-background-size: 100% auto;");
         buttonDepot12 = true;
         buttonDepot1pl4.setStyle("-fx-background-size: 75% auto;");
+        showOkButton1();
     }
     /**
      * method used to select depot2 as the target of the second resource
@@ -447,7 +450,7 @@ public class ResourceChoiceController extends Controller{
         buttonDepot2.setStyle("-fx-background-size: 100% auto;");
         buttonDepot22=true;
         buttonDepot2pl4.setStyle("-fx-background-size: 75% auto;");
-
+        showOkButton1();
     }
     /**
      * method used to select depot3 as the target of the second resource
@@ -459,6 +462,7 @@ public class ResourceChoiceController extends Controller{
         buttonDepot3.setStyle("-fx-background-size: 100% auto;");
         buttonDepot32=true;
         buttonDepot3pl4.setStyle("-fx-background-size: 75% auto;");
+        showOkButton1();
     }
 
     /**
@@ -495,6 +499,18 @@ public class ResourceChoiceController extends Controller{
         else return 0;
     }
 
+    private void showOkButton1()
+    {
+        int occ=0;
+        if(buttonDepot11) occ++;
+        if(buttonDepot21) occ++;
+        if(buttonDepot31) occ++;
+        if(buttonDepot12) occ++;
+        if(buttonDepot22) occ++;
+        if(buttonDepot32) occ++;
+        if(occ==2) okButton1.setVisible(true);
+        else okButton1.setVisible(false);
+    }
     /**
      * method used to submit the choices made in the first phase and move on to the phase
      * of choosing the destination for each resource
