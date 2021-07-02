@@ -55,12 +55,11 @@ public abstract class Client {
      */
     public void setupGame(GameResumedMessage message) {
             if(this.getUser()==null) {
-                LOGGER.log(Level.INFO, "Sono il client che si è riconnesso");
                 bindUser(message.getSavedUserInstance().getNickname());
                 game = message.getGame();
                 ui.setSoloMode(game.isSoloMode());
             } else {
-                LOGGER.log(Level.INFO, "Sono il client che stava già giocando");
+                LOGGER.log(Level.INFO, "User "+ message.getSavedUserInstance()+" connected again");
             }
     }
 

@@ -40,16 +40,22 @@ public class FaithTrack extends Observable<GameEvent> {
      * @param pos the number of positions to move the player by.
      */
     public void moveMarker(Player movingPlayer,int pos) {
-        for(int i=0; i<pos; i++){
-            this.faithMarker++; // moves the marker forward
-            if(sections[passedSection].isPopeSpace(this.faithMarker)){
-                this.activeVaticanReport(movingPlayer,passedSection);// actives a vatican report
-            }
-            if(this.faithMarker >= sections[passedSection].getPopeSpace()){
-                if(passedSection < 2) // checks if the current vatican section has been passed
-                   this.passedSection++;
-            }
-            if(this.faithMarker == 24) { // conclusion event reached
+        for(int i=0; i<pos; i++) {
+            if(this.faithMarker < 24) {
+                this.faithMarker++; // moves the marker forward
+                if(sections[passedSection].isPopeSpace(this.faithMarker)){
+                    this.activeVaticanReport(movingPlayer,passedSection);// actives a vatican report
+                }
+                if(this.faithMarker >= sections[passedSection].getPopeSpace()){
+                    if(passedSection < 2) // checks if the current vatican section has been passed
+                        this.passedSection++;
+                }
+                if(this.faithMarker == 24) { // conclusion event reached
+                    notify(new HitLastSpace());
+                    break;
+                }
+            } else {
+                //case when a player is already over the last cell.
                 notify(new HitLastSpace());
                 break;
             }
