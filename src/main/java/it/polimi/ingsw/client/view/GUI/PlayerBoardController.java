@@ -290,6 +290,7 @@ public class PlayerBoardController extends Controller {
     {
         clearFaithMarker();
         int faith = playerToShow.getPersonalBoard().getFaithTrack().getFaithMarker();
+        if(faith>24) faith=24;
         int blackCross = ((ReducedSoloMode) client.getGame()).getBlackCross();
         if(faith == blackCross)
             cells[faith].setImage(new Image("/gui/img/blackCross&Faith.png"));
@@ -305,7 +306,9 @@ public class PlayerBoardController extends Controller {
     private void initializeFaithMarker()
     {
         clearFaithMarker();
-        cells[playerToShow.getPersonalBoard().getFaithTrack().getFaithMarker()].setImage(new Image("/gui/img/faith.png"));
+        int faith=playerToShow.getPersonalBoard().getFaithTrack().getFaithMarker();
+        if(faith>24) faith=24;
+        cells[faith].setImage(new Image("/gui/img/faith.png"));
     }
 
     /**
