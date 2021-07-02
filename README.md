@@ -52,6 +52,10 @@ java -jar MaestriDelRinascimento.jar server
 If you want to edit some options, you can write them at the end of the previous command.
 The options available for the server are listed below.
 
+```bash
+java -jar MaestriDelRinascimento.jar server -port:Y
+```
+
 | Option | Description | Default value | 
 | ------ | ----- | ----- |
 | `-port:` | The port the server is listening on. | 1234 |
@@ -82,6 +86,10 @@ java -jar MaestriDelRinascimento.jar cli
 #### Options
 If you want to edit some options, you can write them at the end of the previous commands.
 The options available for the client are listed below.
+
+```bash
+java -jar MaestriDelRinascimento.jar gui -ip:X.X.X.X -port:Y
+```
 
 | Option | Description | Default value | 
 | ------ | ----- | ----- |
