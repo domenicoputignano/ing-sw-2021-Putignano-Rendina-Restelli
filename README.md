@@ -88,7 +88,7 @@ If you want to edit some options, you can write them at the end of the previous 
 The options available for the client are listed below.
 
 ```bash
-java -jar MaestriDelRinascimento.jar gui -ip:X.X.X.X -port:Y
+java -jar MaestriDelRinascimento.jar gui/cli -ip:X.X.X.X -port:Y
 ```
 
 | Option | Description | Default value | 
