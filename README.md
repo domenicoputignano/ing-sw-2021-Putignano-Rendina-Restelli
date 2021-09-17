@@ -7,9 +7,11 @@
 
 **Group**: GC15
 
+**Mark**: 30 cum laude
+
 #### Team Members:
-* [Domenico Putignano](https://github.com/domenicoputignano) 
-* [Piero Rendina](https://github.com/PieroRendina) 
+* [Domenico Putignano](https://github.com/domenicoputignano)
+* [Piero Rendina](https://github.com/PieroRendina)
 * [Andrea Restelli](https://github.com/andrearestelli)
 
 ## Implemented features
@@ -21,7 +23,7 @@
 | GUI | :heavy_check_mark: |
 | Multiple matches | :heavy_check_mark: |
 | Disconnection resilience | :heavy_check_mark: |
-| Local game | :heavy_check_mark: | 
+| Local game | :heavy_check_mark: |
 
 ## Requirements
 * [Java SE 11 or higher](https://docs.oracle.com/en/java/javase/11/)
@@ -56,7 +58,7 @@ The options available for the server are listed below.
 java -jar MaestriDelRinascimento.jar server -port:Y
 ```
 
-| Option | Description | Default value | 
+| Option | Description | Default value |
 | ------ | ----- | ----- |
 | `-port:` | The port the server is listening on. | 1234 |
 ### Client
@@ -68,7 +70,7 @@ To run the GUI, type:
 java -jar MaestriDelRinascimento.jar gui
 ```
 
-![gui_screen](deliverables/screenshots/gui_screen.png) 
+![gui_screen](deliverables/screenshots/gui_screen.png)
 
 ### CLI :space_invader:
 First of all, if you are on Windows, run this command to allow the game to use ANSI codes to show its colorful CLI interface:
@@ -91,7 +93,7 @@ The options available for the client are listed below.
 java -jar MaestriDelRinascimento.jar gui/cli -ip:X.X.X.X -port:Y
 ```
 
-| Option | Description | Default value | 
+| Option | Description | Default value |
 | ------ | ----- | ----- |
 | `-ip:` | The ip of the server the client has to connect to | 127.0.0.1 |
 | `-port:` | The port the server is listening on. | 1234 |
@@ -107,8 +109,8 @@ To play with CLI, type:
 java -jar MaestriDelRinascimento.jar local cli
 ```
 ## Test coverage details
-Unit tests have been performed mainly on Model and Controller components, since Client and Network would 
-have been difficult to test through the technologies used. Testing tools mainly used in this project are 
+Unit tests have been performed mainly on Model and Controller components, since Client and Network would
+have been difficult to test through the technologies used. Testing tools mainly used in this project are
 [JUnit](https://junit.org/junit5/) and [Mockito](https://site.mockito.org/). <br>
 The coverage results achieved for Model and Controller packages are shown below.
 
@@ -118,6 +120,8 @@ The coverage results achieved for Model and Controller packages are shown below.
 mvn test
 ```
 
+## License
 
+This project has been developed in collaboration with [Cranio Creations](http://www.craniocreations.it) under the supervision of [Polytechnic of Milan](https://www.polimi.it).
 
 ![Masters of Renaissance bottom logo](src/main/resources/gui/img/bottom.png)
